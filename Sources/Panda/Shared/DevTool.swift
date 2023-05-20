@@ -45,7 +45,7 @@ public extension DevTool {
     /// 是否是`iPhoneX`系列
     static var isIphoneXSeries: Bool {
         if #available(iOS 11, *) {
-            return max(Panda.size.safeAreaInsets.left, Panda.size.safeAreaInsets.bottom) > 0
+            return max(DevTool.safeAreaInsets.left, DevTool.safeAreaInsets.bottom) > 0
         }
         return false
     }
