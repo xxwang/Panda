@@ -3,3 +3,9 @@ public struct Panda {
 
     public init() {}
 }
+
+public extension Panda {
+    func sayHello() {
+        Log.info(text)
+    }
+}
