@@ -1,5 +1,5 @@
-import XCTest
 @testable import Panda
+import XCTest
 
 final class PandaTests: XCTestCase {
     func testExample() throws {

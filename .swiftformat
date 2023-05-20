@@ -1,0 +1,5 @@
+--swiftversion 5.8
+
+--disable blankLinesAroundMark
+--disable redundantInit
+--disable unusedArguments
