@@ -1,11 +1,11 @@
 public struct Panda {
-    public private(set) var text = "Hello, World!"
-
-    public init() {}
+    public static var size = SizeManager.self
+    public static var dev = DevTool.self
+    public static var log = Log.self
 }
 
 public extension Panda {
-    func sayHello() {
-        Log.info(text)
+    func eee() {
+        
     }
 }
