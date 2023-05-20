@@ -1,16 +1,16 @@
 //
 //  UIDevice+.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/21.
 //
 
-import UIKit
-import SystemConfiguration.CaptiveNetwork
-import CoreTelephony
-import Security
 import AdSupport
 import AVKit
+import CoreTelephony
+import Security
+import SystemConfiguration.CaptiveNetwork
+import UIKit
 
 // MARK: - 标识
 public extension UIDevice {
@@ -418,7 +418,7 @@ public extension UIDevice {
     }
 }
 
-//MARK: - 网络
+// MARK: - 网络
 public extension UIDevice {
     /// 获取连接wifi的名字和mac地址, 需要定位权限和添加Access WiFi information
     static var WifiNameWithMac: (wifiName: String?, macIP: String?) {
@@ -435,7 +435,7 @@ public extension UIDevice {
         }
         return (ssid, mac)
     }
-    
+
     /// 获取当前设备IP
     static var ipAddress: String? {
         var addresses = [String]()
@@ -465,7 +465,7 @@ public extension UIDevice {
             return nil
         }
     }
-    
+
     /// 获取连接wifi的ip地址, 需要定位权限和添加Access WiFi information
     static var wifiIP: String? {
         var address: String?

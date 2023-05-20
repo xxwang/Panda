@@ -1,6 +1,6 @@
 //
 //  DevTool.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/20.
 //
@@ -9,7 +9,7 @@ import UIKit
 
 public class DevTool {}
 
-//MARK: - 开发环境
+// MARK: - 开发环境
 public extension DevTool {
     /// 是否是模拟器
     static var isSimulator: Bool {
@@ -19,7 +19,7 @@ public extension DevTool {
             return false
         #endif
     }
-    
+
     /// 是否是调试模式
     static var isDebug: Bool {
         #if DEBUG
@@ -30,18 +30,18 @@ public extension DevTool {
     }
 }
 
-//MARK: - 设备
+// MARK: - 设备
 public extension DevTool {
     /// 是否是`iPad`
     static var isIPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
-    
+
     /// 是否是`iPhone`
     static var isIPhone: Bool {
         UIDevice.current.userInterfaceIdiom == .phone
     }
-    
+
     /// 是否是`iPhoneX`系列
     static var isIphoneXSeries: Bool {
         if #available(iOS 11, *) {
@@ -49,7 +49,7 @@ public extension DevTool {
         }
         return false
     }
-    
+
     /// 是否是横屏
     static var isLandscape: Bool {
         var isLand = false
@@ -66,8 +66,7 @@ public extension DevTool {
     }
 }
 
-
-//MARK: - 系统
+// MARK: - 系统
 public extension DevTool {
     /// 系统类型枚举
     enum OSType: String {

@@ -8,7 +8,6 @@
 import Foundation
 
 public extension Bool {
-    
     /// Bool转Int
     func toInt() -> Int {
         self ? 1 : 0

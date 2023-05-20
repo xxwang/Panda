@@ -1,13 +1,13 @@
 //
 //  NSMutableParagraphStyle+.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/21.
 //
 
 import UIKit
 
-//MARK: - Defaultable
+// MARK: - Defaultable
 extension NSMutableParagraphStyle: Defaultable {}
 public extension NSMutableParagraphStyle {
     typealias Associatedtype = NSMutableParagraphStyle

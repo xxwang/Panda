@@ -1,6 +1,6 @@
 //
 //  UIImageView+.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/21.
 //
@@ -107,9 +107,7 @@ public extension UIImageView {
     }
 }
 
-
-
-//MARK: - Defaultable
+// MARK: - Defaultable
 public extension UIImageView {
     typealias Associatedtype = UIImageView
 
@@ -148,4 +146,3 @@ public extension UIImageView {
         return self
     }
 }
-

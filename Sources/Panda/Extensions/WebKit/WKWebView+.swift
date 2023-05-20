@@ -46,7 +46,7 @@ public extension WKWebView {
     /// - Returns: `WKNavigation?`
     @discardableResult
     func load(_ url: URL?, headers: [String: Any]? = nil, timeout: TimeInterval? = nil) -> WKNavigation? {
-        guard let url else {return nil}
+        guard let url else { return nil }
 
         // cookie JS脚本代码
         let cookieSourceCode = "document.cookie = 'user=\("userValue")';"

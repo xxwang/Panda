@@ -78,7 +78,7 @@ public extension SizeManager {
     }
 }
 
-//MARK: - 设计图尺寸
+// MARK: - 设计图尺寸
 public extension SizeManager {
     /// 设计图对应的屏幕尺寸
     fileprivate static var sketchSize = CGSize(width: 375, height: 812)
@@ -88,8 +88,8 @@ public extension SizeManager {
     }
 }
 
-//MARK: - 计算比例
-fileprivate extension SizeManager {
+// MARK: - 计算比例
+private extension SizeManager {
     /// 宽度比例
     static var widthRatio: CGFloat {
         var sketchW: CGFloat = min(sketchSize.width, sketchSize.height)
@@ -136,8 +136,7 @@ fileprivate extension SizeManager {
 }
 
 // MARK: - 计算方法
-fileprivate extension SizeManager {
-    
+private extension SizeManager {
     /// 计算`宽度`
     static func fitWidth(from value: Any) -> CGFloat {
         widthRatio * toCGFloat(from: value)
@@ -162,7 +161,6 @@ fileprivate extension SizeManager {
     static func fitFont(from value: Any) -> CGFloat {
         DevTool.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
     }
-    
 }
 
 // MARK: - 屏幕适配(整形)

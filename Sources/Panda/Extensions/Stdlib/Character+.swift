@@ -8,7 +8,6 @@
 import Foundation
 
 public extension Character {
-    
     /// 从字符转换成Int
     func toInt() -> Int {
         var intValue = 0
@@ -19,7 +18,7 @@ public extension Character {
     }
 
     /// 从字符转换成字符串
-    func toString() -> String {String(self)}
+    func toString() -> String { String(self) }
 }
 
 public extension Character {

@@ -1,6 +1,6 @@
 //
 //  UISwitch+.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/21.
 //
@@ -17,7 +17,7 @@ public extension UISwitch {
     }
 }
 
-//MARK: - 链式语法
+// MARK: - 链式语法
 public extension UISwitch {
     /// 切换开关状态
     /// - Parameter animated:是否动画

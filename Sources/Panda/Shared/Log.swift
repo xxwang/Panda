@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - 输出调试
-public class Log {
+public enum Log {
     /// 日志等级
     enum Level: String {
         case debug = "[调试]"
@@ -65,6 +65,3 @@ extension Log {
         print("\(level.icon)\(level.rawValue)[\(dateStr)][\(fileName).\(line) => \(function)]: " + content)
     }
 }
-
-
-

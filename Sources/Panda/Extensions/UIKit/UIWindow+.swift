@@ -24,7 +24,7 @@ public extension UIWindow {
     /// 应用当前的`keyWindow`
     static var keyWindow: UIWindow? {
         if #available(iOS 13.0, *) {
-            return windows.filter { $0.isKeyWindow }.last
+            return windows.filter(\.isKeyWindow).last
         } else {
             if let window = UIApplication.shared.keyWindow { return window }
         }
