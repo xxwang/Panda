@@ -8,6 +8,25 @@
 import Dispatch
 import Foundation
 
+// MARK: - 队列判断
+public extension DispatchQueue {
+    /// 判断`当前队列`是否是`指定队列`
+    /// - Parameter queue: `指定队列`
+    /// - Returns:
+    static func isCurrent(_ queue: DispatchQueue) -> Bool {
+        let key = DispatchSpecificKey<Void>()
+        queue.setSpecific(key: key, value: ())
+        defer { queue.setSpecific(key: key, value: nil) }
+        return DispatchQueue.getSpecific(key: key) != nil
+    }
+
+    /// 判断`当前队列`是否是`主队列`
+    /// - Returns: `Bool`
+    static func isMainQueue() -> Bool {
+        isCurrent(.main)
+    }
+}
+
 // MARK: - 指定队列执行
 public extension DispatchQueue {
     /// 在主线程异步执行

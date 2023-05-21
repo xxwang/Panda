@@ -27,6 +27,15 @@ public extension SizeManager {
         }
         return .zero
     }
+
+    /// 顶部安全距离
+    static var safeDistanceTop: CGFloat { safeAreaInsets.top }
+    /// 底部安全距离
+    static var safeDistanceBottom: CGFloat { safeAreaInsets.bottom }
+    /// 左边安全距离
+    static var safeDistanceLeft: CGFloat { safeAreaInsets.left }
+    /// 右边安全距离
+    static var safeDistanceRight: CGFloat { safeAreaInsets.right }
 }
 
 // MARK: - 导航
@@ -44,37 +53,55 @@ public extension SizeManager {
     }
 
     /// 标题栏高度
-    static var titleBarHeight: CGFloat {
-        if DevTool.isIPad {
-            if DevTool.isLandscape {}
-            return 44
+    static var navigationBarHeight: CGFloat {
+        if DevTool.isIPad { // iPad
+            return 44 // 50
+        } else { // iPhone
+            if DevTool.isLandscape {
+                return 32
+            } else {
+                return 44
+            }
         }
-
-        if DevTool.isLandscape {}
-        return 44
     }
 
     /// 状态栏 + 标题栏
-    static var navigationBarHeight: CGFloat {
-        statusBarHeight + titleBarHeight
+    static var navigationFullHeight: CGFloat {
+        statusBarHeight + navigationBarHeight
     }
 }
 
 /// 标签栏
 public extension SizeManager {
     /// 按钮区域高度
-    static var tabBarItemHeight: CGFloat {
-        49
+    static var tabBarHeight: CGFloat {
+        if DevTool.isIPad { // iPad
+            return 49
+        } else { // iPhone
+            if DevTool.isLandscape {
+                return 31
+            } else {
+                return 49
+            }
+        }
     }
 
     /// 底部缩进高度
     static var indentHeight: CGFloat {
-        DevTool.isIphoneXSeries ? 34 : 0
+        if DevTool.isIPad { // iPad
+            return 16
+        } else { // iPhone
+            if DevTool.isLandscape {
+                return DevTool.isIPhoneXSeries ? 22 : 0
+            } else {
+                return DevTool.isIPhoneXSeries ? 34 : 0
+            }
+        }
     }
 
     /// 整个tabBar高度
-    static var tabBarHeight: CGFloat {
-        tabBarItemHeight + indentHeight
+    static var tabBarFullHeight: CGFloat {
+        tabBarHeight + indentHeight
     }
 }
 

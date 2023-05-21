@@ -27,11 +27,9 @@ public extension UIImageView {
     /// 修改图像的颜色
     /// - Parameter color:要修改成的颜色
     func image(with color: UIColor) {
-        /*
-         .automatic = 0 // 根据图片的使用环境和所处的绘图上下文自动调整渲染模式.
-         .alwaysOriginal = 1 // 始终绘制图片原始状态,不使用Tint Color.
-         .alwaysTemplate = 2 // 始终根据Tint Color绘制图片,忽略图片的颜色信息.
-         */
+        // .automatic 根据图片的使用环境和所处的绘图上下文自动调整渲染模式.
+        // .alwaysOriginal 始终绘制图片原始状态,不使用Tint Color.
+        // .alwaysTemplate 始终根据Tint Color绘制图片,忽略图片的颜色信息.
         image = image?.withRenderingMode(.alwaysTemplate)
         tintColor = color
     }
@@ -65,7 +63,7 @@ public extension UIImageView {
                 return
             }
 
-            DispatchQueue.mainAsync {
+            DispatchQueue.async_execute_on_main {
                 self.image = image
                 completionHandler?(image)
             }
@@ -75,9 +73,9 @@ public extension UIImageView {
     /// 加载本地`Gif`图片的名称
     /// - Parameter name:图片名称
     func loadGif(imageNamed: String) {
-        DispatchQueue.globalAsync {
+        DispatchQueue.async_execute_on_global {
             let image = UIImage.gif(name: imageNamed)
-            DispatchQueue.mainAsync {
+            DispatchQueue.async_execute_on_main {
                 self.image = image
             }
         }
@@ -86,9 +84,9 @@ public extension UIImageView {
     /// 加载`Asset`中的`Gif`图片
     /// - Parameter asset:`asset`中的图片名称
     func loadGif(asset: String) {
-        DispatchQueue.globalAsync {
+        DispatchQueue.async_execute_on_global {
             let image = UIImage.gif(asset: asset)
-            DispatchQueue.mainAsync {
+            DispatchQueue.async_execute_on_main {
                 self.image = image
             }
         }
@@ -98,9 +96,9 @@ public extension UIImageView {
     /// - Parameter url:`Gif`图片URL地址
     @available(iOS 9.0, *)
     func loadGif(url: String) {
-        DispatchQueue.globalAsync {
+        DispatchQueue.async_execute_on_global {
             let image = UIImage.gif(url: url)
-            DispatchQueue.mainAsync {
+            DispatchQueue.async_execute_on_main {
                 self.image = image
             }
         }

@@ -43,9 +43,9 @@ public extension DevTool {
     }
 
     /// 是否是`iPhoneX`系列
-    static var isIphoneXSeries: Bool {
+    static var isIPhoneXSeries: Bool {
         if #available(iOS 11, *) {
-            return max(DevTool.safeAreaInsets.left, DevTool.safeAreaInsets.bottom) > 0
+            return max(SizeManager.safeDistanceLeft, SizeManager.safeDistanceBottom) > 0
         }
         return false
     }
@@ -60,7 +60,7 @@ public extension DevTool {
         }
 
         if let window = UIWindow.mainWindow, isLand == false {
-            isLand = window.width > window.height
+            isLand = window.pd_width > window.pd_height
         }
         return isLand
     }
