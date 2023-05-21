@@ -15,40 +15,6 @@ public extension UIViewController {
     }
 }
 
-// MARK: - 方法
-public extension UIViewController {
-    /// 将`UIViewController`显示为弹出框(`Popover`样式显示)
-    /// - Parameters:
-    ///   - contentVC:要展示的内容控制器
-    ///   - sourcePoint:箭头位置(从哪里显示出来)
-    ///   - contentSize:内容大小
-    ///   - delegate:代理
-    ///   - animated:是否动画
-    ///   - completion:完成回调
-    func presentPopover(
-        _ contentVC: UIViewController,
-        sourcePoint: CGPoint,
-        contentSize: CGSize? = nil,
-        delegate: UIPopoverPresentationControllerDelegate? = nil,
-        animated: Bool = true,
-        completion: (() -> Void)? = nil
-    ) {
-        // 设置`modal`样式为`popover`
-        contentVC.modalPresentationStyle = .popover
-        if let contentSize {
-            contentVC.preferredContentSize = contentSize
-        }
-
-        // 设置`popoverPresentationController`
-        if let popoverPresentationController = contentVC.popoverPresentationController {
-            popoverPresentationController.sourceView = view
-            popoverPresentationController.sourceRect = CGRect(origin: sourcePoint, size: .zero)
-            popoverPresentationController.delegate = delegate
-        }
-        present(contentVC, animated: animated, completion: completion)
-    }
-}
-
 // MARK: - 子控制器
 public extension UIViewController {
     /// 将`UIViewController`添加为当前控制器`childViewController`
@@ -251,6 +217,40 @@ public extension UIViewController {
         } else if let _ = nav.presentingViewController {
             nav.dismiss(animated: animated, completion: nil)
         }
+    }
+}
+
+// MARK: - 方法
+public extension UIViewController {
+    /// 将`UIViewController`显示为弹出框(`Popover`样式显示)
+    /// - Parameters:
+    ///   - contentVC:要展示的内容控制器
+    ///   - sourcePoint:箭头位置(从哪里显示出来)
+    ///   - contentSize:内容大小
+    ///   - delegate:代理
+    ///   - animated:是否动画
+    ///   - completion:完成回调
+    func presentPopover(
+        _ contentVC: UIViewController,
+        sourcePoint: CGPoint,
+        contentSize: CGSize? = nil,
+        delegate: UIPopoverPresentationControllerDelegate? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
+        // 设置`modal`样式为`popover`
+        contentVC.modalPresentationStyle = .popover
+        if let contentSize {
+            contentVC.preferredContentSize = contentSize
+        }
+
+        // 设置`popoverPresentationController`
+        if let popoverPresentationController = contentVC.popoverPresentationController {
+            popoverPresentationController.sourceView = view
+            popoverPresentationController.sourceRect = CGRect(origin: sourcePoint, size: .zero)
+            popoverPresentationController.delegate = delegate
+        }
+        present(contentVC, animated: animated, completion: completion)
     }
 }
 

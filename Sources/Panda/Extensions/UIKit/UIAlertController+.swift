@@ -105,12 +105,7 @@ public extension UIAlertController {
     ///   - shake:是否震动
     ///   - deadline:消失时间
     ///   - completion:完成回调
-    func show(
-        animated: Bool = true,
-        shake: Bool = false,
-        deadline: TimeInterval? = nil,
-        completion: (() -> Void)? = nil
-    ) {
+    func show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
         // 弹起UIAlertController实例
         UIWindow.mainWindow?.rootViewController?.present(self, animated: animated, completion: completion)
         // 是否震动

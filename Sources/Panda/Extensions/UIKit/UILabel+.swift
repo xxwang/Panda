@@ -14,7 +14,7 @@ public extension UILabel {
     /// - Returns:`CGSize`
     func textSize(_ maxLineWidth: CGFloat = SizeManager.screenWidth) -> CGSize {
         if let attributedText {
-            return attributedText.strSize(maxLineWidth) ?? .zero
+            return attributedText.strSize(maxLineWidth)
         }
 
         if let text {
