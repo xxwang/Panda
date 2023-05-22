@@ -54,10 +54,10 @@ public extension SizeManager {
 
     /// 标题栏高度
     static var navigationBarHeight: CGFloat {
-        if DevTool.isIPad { // iPad
+        if EnvManager.isIPad { // iPad
             return 44 // 50
         } else { // iPhone
-            if DevTool.isLandscape {
+            if EnvManager.isLandscape {
                 return 32
             } else {
                 return 44
@@ -75,10 +75,10 @@ public extension SizeManager {
 public extension SizeManager {
     /// 按钮区域高度
     static var tabBarHeight: CGFloat {
-        if DevTool.isIPad { // iPad
+        if EnvManager.isIPad { // iPad
             return 49
         } else { // iPhone
-            if DevTool.isLandscape {
+            if EnvManager.isLandscape {
                 return 31
             } else {
                 return 49
@@ -88,13 +88,13 @@ public extension SizeManager {
 
     /// 底部缩进高度
     static var indentHeight: CGFloat {
-        if DevTool.isIPad { // iPad
+        if EnvManager.isIPad { // iPad
             return 16
         } else { // iPhone
-            if DevTool.isLandscape {
-                return DevTool.isIPhoneXSeries ? 22 : 0
+            if EnvManager.isLandscape {
+                return EnvManager.isIPhoneX ? 22 : 0
             } else {
-                return DevTool.isIPhoneXSeries ? 34 : 0
+                return EnvManager.isIPhoneX ? 34 : 0
             }
         }
     }
@@ -121,7 +121,7 @@ private extension SizeManager {
     static var widthRatio: CGFloat {
         var sketchW: CGFloat = min(sketchSize.width, sketchSize.height)
         var screenW: CGFloat = min(screenWidth, screenHeight)
-        if DevTool.isLandscape {
+        if EnvManager.isLandscape {
             sketchW = max(sketchSize.width, sketchSize.height)
             screenW = max(screenWidth, screenHeight)
         }
@@ -132,7 +132,7 @@ private extension SizeManager {
     static var heightRatio: CGFloat {
         var sketchH: CGFloat = max(sketchSize.width, sketchSize.height)
         var screenH: CGFloat = max(screenWidth, screenHeight)
-        if DevTool.isLandscape {
+        if EnvManager.isLandscape {
             sketchH = min(sketchSize.width, sketchSize.height)
             screenH = min(screenWidth, screenHeight)
         }
@@ -186,7 +186,7 @@ private extension SizeManager {
 
     /// 适配`字体大小`
     static func fitFont(from value: Any) -> CGFloat {
-        DevTool.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
+        EnvManager.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
     }
 }
 

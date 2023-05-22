@@ -257,9 +257,9 @@ private enum AssociateKeys {
 
 // MARK: - AssociatedAttributes
 extension UIButton: AssociatedAttributes {
-    internal typealias T = UIButton
+    public typealias T = UIButton
 
-    internal var callback: Callback? {
+    public var callback: Callback? {
         get { AssociatedObject.object(self, &AssociateKeys.CallbackKey) }
         set { AssociatedObject.associate(self, &AssociateKeys.CallbackKey, newValue) }
     }

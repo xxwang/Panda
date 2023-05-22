@@ -36,8 +36,8 @@ private enum AssociateKeys {
 
 // MARK: - AssociatedAttributes
 extension UISlider: AssociatedAttributes {
-    internal typealias T = Float
-    internal var callback: Callback? {
+    public typealias T = Float
+    public var callback: Callback? {
         get { AssociatedObject.object(self, &AssociateKeys.CallbackKey) }
         set { AssociatedObject.associate(self, &AssociateKeys.CallbackKey, newValue) }
     }

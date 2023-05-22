@@ -75,11 +75,10 @@ public extension UIEdgeInsets {
 }
 
 // MARK: - Defaultable
-extension UIEdgeInsets: Defaultable {}
 public extension UIEdgeInsets {
     typealias Associatedtype = UIEdgeInsets
 
-    @objc static func `default`() -> Associatedtype {
+    static func `default`() -> Associatedtype {
         UIEdgeInsets.zero
     }
 }

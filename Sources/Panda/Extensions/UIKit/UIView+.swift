@@ -167,7 +167,7 @@ public extension UIView {
     /// - Parameter color:颜色
     /// - Returns:`Self`
     @discardableResult
-    func pd_backgroundColor(_ backgroundColor: UIColor) -> Self {
+    @objc func pd_backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.backgroundColor = backgroundColor
         return self
     }
@@ -212,7 +212,7 @@ public extension UIView {
     /// - Parameter tintColor:tintColor description
     /// - Returns:`Self`
     @discardableResult
-    func pd_tintColor(_ tintColor: UIColor) -> Self {
+    @objc func pd_tintColor(_ tintColor: UIColor) -> Self {
         self.tintColor = tintColor
         return self
     }

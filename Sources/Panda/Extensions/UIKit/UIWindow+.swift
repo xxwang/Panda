@@ -62,7 +62,7 @@ public extension UIWindow {
     /// - Parameter isLandscape:是否是横屏
     static func changeOrientation(isLandscape: Bool) {
         if isLandscape { // 横屏
-            guard !DevTool.isLandscape else { return }
+            guard !EnvManager.isLandscape else { return }
             // 重置方向
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
             UIDevice.current.setValue(resetOrientationTargert, forKey: "orientation")
@@ -71,7 +71,7 @@ public extension UIWindow {
             UIDevice.current.setValue(orientationTarget, forKey: "orientation")
 
         } else { // 竖屏
-            guard DevTool.isLandscape else { return }
+            guard EnvManager.isLandscape else { return }
             // 重置方向
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
             UIDevice.current.setValue(resetOrientationTargert, forKey: "orientation")

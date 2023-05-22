@@ -1,5 +1,5 @@
 //
-//  DevTool.swift
+//  EnvManager.swift
 //
 //
 //  Created by 王斌 on 2023/5/20.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-public class DevTool {}
+public class EnvManager {}
 
 // MARK: - 开发环境
-public extension DevTool {
+public extension EnvManager {
     /// 是否是模拟器
     static var isSimulator: Bool {
         #if targetEnvironment(simulator)
@@ -31,7 +31,7 @@ public extension DevTool {
 }
 
 // MARK: - 设备
-public extension DevTool {
+public extension EnvManager {
     /// 是否是`iPad`
     static var isIPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
@@ -43,7 +43,7 @@ public extension DevTool {
     }
 
     /// 是否是`iPhoneX`系列
-    static var isIPhoneXSeries: Bool {
+    static var isIPhoneX: Bool {
         if #available(iOS 11, *) {
             return max(SizeManager.safeDistanceLeft, SizeManager.safeDistanceBottom) > 0
         }
@@ -67,7 +67,7 @@ public extension DevTool {
 }
 
 // MARK: - 系统
-public extension DevTool {
+public extension EnvManager {
     /// 系统类型枚举
     enum OSType: String {
         case macOS

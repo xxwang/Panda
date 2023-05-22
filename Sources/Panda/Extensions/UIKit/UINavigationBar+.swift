@@ -229,7 +229,7 @@ public extension UINavigationBar {
     /// - Parameter color: 颜色
     /// - Returns: `Self`
     @discardableResult
-    func pd_tintColor(_ color: UIColor) -> Self {
+    override func pd_tintColor(_ color: UIColor) -> Self {
         tintColor = color
         return self
     }
@@ -238,7 +238,7 @@ public extension UINavigationBar {
     /// - Parameter color:颜色
     /// - Returns:`Self`
     @discardableResult
-    func pd_backgroundColor(_ color: UIColor) -> Self {
+    override func pd_backgroundColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundColor = color
@@ -305,6 +305,7 @@ public extension UINavigationBar {
     /// 设置标题的的属性
     /// - Parameter attributes: 富文本属性
     /// - Returns: `Self`
+    @discardableResult
     func pd_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]) -> Self {
         titleTextAttributes = attributes
         return self
