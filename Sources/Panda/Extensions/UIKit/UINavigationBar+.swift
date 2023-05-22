@@ -7,6 +7,24 @@
 
 import UIKit
 
+public extension UINavigationBar {
+    static func fitAllNavigationBar() {
+        if #available(iOS 15.0, *) {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.shadowColor = UIColor.clear
+            navigationBarAppearance.backgroundEffect = nil
+            navigationBarAppearance.titleTextAttributes = [
+                .foregroundColor: UIColor.black,
+                .font: UIFont.systemFont(ofSize: 14, weight: .bold),
+            ]
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBar.appearance().standardAppearance
+        }
+    }
+}
+
 // MARK: - 方法
 public extension UINavigationBar {
     /// 设置导航条为透明
