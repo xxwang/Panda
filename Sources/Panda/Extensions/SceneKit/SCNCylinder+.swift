@@ -1,6 +1,6 @@
 //
 //  SCNCylinder+.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/22.
 //
@@ -15,7 +15,7 @@ public extension SCNCylinder {
     ///   - diameter:圆柱体的`圆形横截面`在其局部坐标空间的`x轴`和`z轴`尺寸中的`直径`
     ///   - height:圆柱体沿其局部坐标空间`y轴`的`高度`
     convenience init(diameter: CGFloat, height: CGFloat) {
-        self.init(radius: diameter / 2,height: height)
+        self.init(radius: diameter / 2, height: height)
     }
 
     /// 创建具有指定`半径`、`高度`和`材质`的`圆柱体几何体`
@@ -23,8 +23,8 @@ public extension SCNCylinder {
     ///   - radius:在其局部坐标空间的`x轴`和`z轴`尺寸中的`圆形横截面``半径`
     ///   - height:沿其局部坐标空间`y轴`的`高度`
     ///   - material:材质
-    convenience init(radius: CGFloat,height: CGFloat,material: SCNMaterial) {
-        self.init(radius: radius,height: height)
+    convenience init(radius: CGFloat, height: CGFloat, material: SCNMaterial) {
+        self.init(radius: radius, height: height)
         materials = [material]
     }
 
@@ -33,7 +33,7 @@ public extension SCNCylinder {
     ///   - diameter:圆柱体的`圆形横截面`在其局部坐标空间的`x轴`和`z轴`尺寸中的`直径`
     ///   - height:沿其局部坐标空间`y轴`的`高度`
     ///   - material:材质
-    convenience init(diameter: CGFloat,height: CGFloat,material: SCNMaterial) {
+    convenience init(diameter: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(radius: diameter / 2, height: height)
         materials = [material]
     }
@@ -43,7 +43,7 @@ public extension SCNCylinder {
     ///   - radius:在其局部坐标空间的`x轴`和`z轴`尺寸中的`圆形横截面半径`
     ///   - height:沿其局部坐标空间`y轴`的`高度`
     ///   - color:材质的颜色
-    convenience init(radius: CGFloat,height: CGFloat,color: UIColor) {
+    convenience init(radius: CGFloat, height: CGFloat, color: UIColor) {
         self.init(radius: radius, height: height)
         materials = [SCNMaterial(color: color)]
     }
@@ -53,7 +53,7 @@ public extension SCNCylinder {
     ///   - diameter:圆柱体的`圆形横截面`在其局部坐标空间的`x轴`和`z轴`尺寸中的`直径`
     ///   - height:圆柱体沿其局部坐标空间`y轴`的`高度`
     ///   - color:材质的颜色
-    convenience init(diameter: CGFloat,height: CGFloat,color: UIColor) {
+    convenience init(diameter: CGFloat, height: CGFloat, color: UIColor) {
         self.init(radius: diameter / 2, height: height)
         materials = [SCNMaterial(color: color)]
     }

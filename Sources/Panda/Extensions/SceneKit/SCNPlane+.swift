@@ -1,6 +1,6 @@
 //
 //  SCNPlane+.swift
-//  
+//
 //
 //  Created by 王斌 on 2023/5/22.
 //
@@ -21,7 +21,7 @@ public extension SCNPlane {
     ///   - width:沿其局部坐标空间`x轴`的`宽度`
     ///   - height:沿其局部坐标空间`y轴`的`高度`
     ///   - material:材质
-    convenience init(width: CGFloat,height: CGFloat,material: SCNMaterial) {
+    convenience init(width: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(width: width, height: height)
         materials = [material]
     }
@@ -40,7 +40,7 @@ public extension SCNPlane {
     ///   - width:沿其局部坐标空间`x轴`的`宽度`
     ///   - height:沿其局部坐标空间`y轴`的`高度`
     ///   - color:材质的颜色
-    convenience init(width: CGFloat,height: CGFloat,color: UIColor) {
+    convenience init(width: CGFloat, height: CGFloat, color: UIColor) {
         self.init(width: width, height: height)
         materials = [SCNMaterial(color: color)]
     }
