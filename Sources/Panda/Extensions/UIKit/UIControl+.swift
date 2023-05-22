@@ -7,6 +7,59 @@
 
 import UIKit
 
+// MARK: - 关联键
+private enum AssociateKeys {
+    static var CallbackKey = "UIControl" + "CallbackKey"
+    static var HitTimerKey = "UIControl" + "HitTimerKey"
+}
+
+// MARK: - 方法
+public extension UIControl {
+    /// 设置指定时长(单位:秒)内不可重复点击
+    /// - Parameter hitTime:时长
+    func doubleHit(time: Double = 1) {
+        doubleHit(hitTime: time)
+    }
+}
+
+// MARK: - 限制连续点击时间间隔
+private extension UIControl {
+    /// 重复点击限制时间
+    var hitTime: Double? {
+        get { AssociatedObject.object(self, &AssociateKeys.HitTimerKey) }
+        set { AssociatedObject.associate(self, &AssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
+    }
+
+    /// 点击回调
+    var callback: ((_ control: UIControl) -> Void)? {
+        get { AssociatedObject.object(self, &AssociateKeys.CallbackKey) }
+        set { AssociatedObject.associate(self, &AssociateKeys.CallbackKey, newValue) }
+    }
+
+    /// 设置指定时长(单位:秒)内不可重复点击
+    /// - Parameter hitTime:时长
+    func doubleHit(hitTime: Double) {
+        self.hitTime = hitTime
+        addTarget(self, action: #selector(preventDoubleHit), for: .touchUpInside)
+    }
+
+    /// 防止重复点击实现
+    /// - Parameter sender:被点击的`UIControl`
+    @objc func preventDoubleHit(_ sender: UIControl) {
+        isUserInteractionEnabled = false
+        DispatchQueue.delay_execute(hitTime ?? 1.0) { [weak self] in
+            guard let self else {return}
+            isUserInteractionEnabled = true
+        }
+    }
+
+    /// 事件处理方法
+    /// - Parameter sender:事件发起者
+    @objc func controlEventHandler(_ sender: UIControl) {
+        if let block = self.callback {block(sender)}
+    }
+}
+
 // MARK: - Defaultable
 public extension UIControl {
     typealias Associatedtype = UIControl
@@ -86,5 +139,23 @@ public extension UIControl {
     func pd_removeTarget(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
         removeTarget(target, action: action, for: event)
         return self
+    }
+    
+    /// 设置在指定时间内禁用多次点击
+    /// - Parameter hitTime:禁用时长
+    /// - Returns:`Self`
+    @discardableResult
+    func disableMultiTouch(_ hitTime: Double = 1) -> Self {
+        doubleHit(hitTime: hitTime)
+        return self
+    }
+    
+    /// 添加`UIControl`事件回调
+    /// - Parameters:
+    ///   - callback:事件回调
+    ///   - controlEvent:事件类型
+    func pd_callback(_ callback: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) {
+        self.callback = callback
+        addTarget(self, action: #selector(controlEventHandler(_:)), for: controlEvent)
     }
 }
