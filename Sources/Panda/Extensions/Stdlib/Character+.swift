@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - 类型转换
 public extension Character {
     /// 从字符转换成Int
     func toInt() -> Int {
@@ -21,6 +22,7 @@ public extension Character {
     func toString() -> String { String(self) }
 }
 
+// MARK: - 方法
 public extension Character {
     /// 随机产生一个字符`(a-z A-Z 0-9)`
     /// - Returns: 随机`Character`

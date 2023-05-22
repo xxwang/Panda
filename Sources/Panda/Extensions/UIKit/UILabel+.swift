@@ -90,15 +90,6 @@ public extension UILabel {
         return self
     }
 
-    /// 设置文本颜色(十六进制字符串)
-    /// - Parameter hex:十六进制字符串
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_textColor(_ hex: String) -> Self {
-        textColor = UIColor(hex: hex)
-        return self
-    }
-
     /// 设置字体的大小
     /// - Parameter font:字体的大小
     /// - Returns:`Self`
@@ -133,20 +124,8 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedFont(_ font: UIFont, for range: NSRange) -> Self {
-        let attribuedString = attributedText?.setFont(font, for: range)
+        let attribuedString = attributedText?.toMutableAttributedString().pd_font(font, for: range)
         attributedText = attribuedString
-        return self
-    }
-
-    /// 设置特定文字的字体
-    /// - Parameters:
-    ///   - font:字体
-    ///   - text:要设置字体的文字
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_attributedFont(_ font: UIFont, for text: String) -> Self {
-        let attributedString = attributedText?.setFont(font, for: text)
-        attributedText = attributedString
         return self
     }
 
@@ -157,19 +136,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedColor(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.setForegroundColor(color, for: range)
-        attributedText = attributedString
-        return self
-    }
-
-    /// 设置特定文字的颜色
-    /// - Parameters:
-    ///   - color:文字颜色
-    ///   - text:要设置颜色的文字
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_attributedColor(_ color: UIColor, for text: String) -> Self {
-        let attributedString = attributedText?.setForegroundColor(color, for: text)
+        let attributedString = attributedText?.toMutableAttributedString().pd_foregroundColor(color, for: range)
         attributedText = attributedString
         return self
     }
@@ -179,7 +146,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedLineSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.setLineSpacing(spacing, for: (text ?? "").fullNSRange())
+        let attributedString = attributedText?.toMutableAttributedString().pd_lineSpacing(spacing, for: (text ?? "").fullNSRange())
         attributedText = attributedString
         return self
     }
@@ -192,20 +159,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for range: NSRange) -> Self {
-        let attributedString = attributedText?.setUnderline(color, stytle: style, for: range)
-        attributedText = attributedString
-        return self
-    }
-
-    /// 设置特定文字的下划线
-    /// - Parameters:
-    ///   - color:下划线颜色
-    ///   - style:下划线样式
-    ///   - range:要设置下划线的文字
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for text: String) -> Self {
-        let attributedString = attributedText?.setUnderline(color, stytle: style, for: text)
+        let attributedString = attributedText?.toMutableAttributedString().pd_underline(color, stytle: style, for: range)
         attributedText = attributedString
         return self
     }
@@ -216,18 +170,7 @@ public extension UILabel {
     ///   - range:范围
     @discardableResult
     func pd_attributedDeleteLine(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.setDeleteline(color, for: range)
-        attributedText = attributedString
-        return self
-    }
-
-    /// 设置特定文字的删除线
-    /// - Parameters:
-    ///   - color:删除线颜色
-    ///   - range:要设置删除线的文字
-    @discardableResult
-    func pd_attributedDeleteLine(_ color: UIColor, for text: String) -> Self {
-        let attributedString = attributedText?.setDeleteline(color, for: text)
+        let attributedString = attributedText?.toMutableAttributedString().pd_strikethrough(color, for: range)
         attributedText = attributedString
         return self
     }
@@ -237,7 +180,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedFirstLineHeadIndent(_ indent: CGFloat) -> Self {
-        let attributedString = attributedText?.setFirstLineHeadIndent(indent)
+        let attributedString = attributedText?.toMutableAttributedString().pd_firstLineHeadIndent(indent)
         attributedText = attributedString
         return self
     }
@@ -249,19 +192,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedBliqueness(_ inclination: Float = 0, for range: NSRange) -> Self {
-        let attributedString = attributedText?.setObliqueness(inclination, for: range)
-        attributedText = attributedString
-        return self
-    }
-
-    /// 设置特定文字的倾斜
-    /// - Parameters:
-    ///   - inclination:倾斜度
-    ///   - text:特定文字
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_attributedObliqueness(_ inclination: Float = 0, for text: String) -> Self {
-        let attributedString = attributedText?.pd_obliqueness(inclination, for: text)
+        let attributedString = attributedText?.toMutableAttributedString().pd_obliqueness(inclination, for: range)
         attributedText = attributedString
         return self
     }
@@ -278,9 +209,7 @@ public extension UILabel {
         bounds: CGRect = .zero,
         index: Int = 0
     ) -> Self {
-        let attributedString = attributedText
-        let mAttributedString = NSMutableAttributedString(attributedString: attributedString!)
-        mAttributedString.image(image, bounds: bounds, index: index)
+        let mAttributedString = attributedText?.toMutableAttributedString().pd_image(image, bounds: bounds, index: index)
         attributedText = mAttributedString
         return self
     }

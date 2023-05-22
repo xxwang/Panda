@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - 方法
 public extension SignedInteger {
     /// 取`绝对值`
     func abs() -> Self {

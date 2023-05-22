@@ -48,7 +48,7 @@ private extension UIControl {
     @objc func preventDoubleHit(_ sender: UIControl) {
         isUserInteractionEnabled = false
         DispatchQueue.delay_execute(hitTime ?? 1.0) { [weak self] in
-            guard let self else {return}
+            guard let self else { return }
             isUserInteractionEnabled = true
         }
     }
@@ -56,7 +56,7 @@ private extension UIControl {
     /// 事件处理方法
     /// - Parameter sender:事件发起者
     @objc func controlEventHandler(_ sender: UIControl) {
-        if let block = self.callback {block(sender)}
+        if let block = callback { block(sender) }
     }
 }
 
@@ -140,7 +140,7 @@ public extension UIControl {
         removeTarget(target, action: action, for: event)
         return self
     }
-    
+
     /// 设置在指定时间内禁用多次点击
     /// - Parameter hitTime:禁用时长
     /// - Returns:`Self`
@@ -149,7 +149,7 @@ public extension UIControl {
         doubleHit(hitTime: hitTime)
         return self
     }
-    
+
     /// 添加`UIControl`事件回调
     /// - Parameters:
     ///   - callback:事件回调

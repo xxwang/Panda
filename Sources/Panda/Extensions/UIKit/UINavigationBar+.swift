@@ -7,6 +7,72 @@
 
 import UIKit
 
+// MARK: - 方法
+public extension UINavigationBar {
+    /// 设置导航条为透明
+    /// - Parameter tintColor:`tintColor`
+    func setupTransparent(with tintColor: UIColor = .white) {
+        pd_isTranslucent(true)
+            .pd_backgroundColor(.clear)
+            .pd_backgroundImage(UIImage())
+            .pd_barTintColor(.clear)
+            .pd_tintColor(tintColor)
+            .pd_shadowImage(UIImage())
+            .pd_titleTextAttributes([.foregroundColor: tintColor])
+    }
+
+    /// 设置导航条背景和文字颜色
+    /// - Parameters:
+    ///   - background:背景颜色
+    ///   - text:文字颜色
+    func setupColors(background: UIColor, text: UIColor) {
+        isTranslucent = false
+        backgroundColor = background
+        barTintColor = background
+        setBackgroundImage(UIImage(), for: .default)
+        tintColor = text
+        titleTextAttributes = [.foregroundColor: text]
+    }
+
+    /// 修改`statusBar`的背景颜色
+    /// - Parameter color:要设置的颜色
+    func setupStatusBarBackgroundColor(with color: UIColor) {
+        guard self.statusBar == nil else {
+            self.statusBar?.backgroundColor = color
+            return
+        }
+
+        let statusBar = UIView(frame: CGRect(
+            x: 0,
+            y: -SizeManager.statusBarHeight,
+            width: SizeManager.screenWidth,
+            height: SizeManager.screenHeight
+        )).pd_add2(self)
+        statusBar.backgroundColor = .clear
+        self.statusBar = statusBar
+    }
+
+    /// 移除`statusBar`
+    func clearStatusBar() {
+        statusBar?.removeFromSuperview()
+        statusBar = nil
+    }
+}
+
+// MARK: - 关联键
+private enum AssociateKeys {
+    static var StatusBarKey = "UINavigationBar" + "StatusBarKey"
+}
+
+// MARK: - 关联属性
+private extension UINavigationBar {
+    /// 通过 Runtime 的属性关联添加自定义 View
+    var statusBar: UIView? {
+        get { objc_getAssociatedObject(self, &AssociateKeys.StatusBarKey) as? UIView }
+        set { objc_setAssociatedObject(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+}
+
 // MARK: - Defaultable
 public extension UINavigationBar {
     typealias Associatedtype = UINavigationBar

@@ -79,15 +79,6 @@ public extension CALayer {
         return self
     }
 
-    /// 设置背景色 (十六进制字符串)
-    /// - Parameter hex:背景色 (十六进制字符串)
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_backgroundColor(_ hex: String) -> Self {
-        backgroundColor = UIColor(hex: hex).cgColor
-        return self
-    }
-
     /// 是否隐藏
     /// - Parameter isHidden:是否隐藏
     /// - Returns:`Self`
@@ -115,15 +106,6 @@ public extension CALayer {
         return self
     }
 
-    /// 设置边框颜色(十六进制颜色值)
-    /// - Parameter hex:边框颜色
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_borderColor(_ hex: String) -> Self {
-        borderColor = UIColor(hex: hex).cgColor
-        return self
-    }
-
     /// 是否开启光栅化
     /// - Parameter rasterize:是否开启光栅化
     /// - Returns:`Self`
@@ -148,15 +130,6 @@ public extension CALayer {
     @discardableResult
     func pd_shadowColor(_ color: UIColor) -> Self {
         shadowColor = color.cgColor
-        return self
-    }
-
-    /// 设置阴影颜色(十六进制颜色值)
-    /// - Parameter hex:阴影颜色
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_shadowColor(_ hex: String) -> Self {
-        shadowColor = UIColor(hex: hex).cgColor
         return self
     }
 

@@ -227,16 +227,6 @@ public extension UIView {
         return self
     }
 
-    /// 设置边框颜色
-    /// - Parameters:
-    ///   - hex:十六进制颜色值
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_borderColor(_ hex: String) -> Self {
-        layer.borderColor = UIColor(hex: hex).cgColor
-        return self
-    }
-
     /// 设置边框宽度
     /// - Parameters:
     ///   - width:边框宽度
@@ -271,15 +261,6 @@ public extension UIView {
     @discardableResult
     func pd_shadowColor(_ color: UIColor) -> Self {
         layer.shadowColor = color.cgColor
-        return self
-    }
-
-    /// 设置阴影颜色
-    /// - Parameter hex:十六进制颜色值
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_shadowColor(_ hex: String) -> Self {
-        layer.shadowColor = UIColor(hex: hex)?.cgColor
         return self
     }
 

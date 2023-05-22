@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - 类型转换
 public extension Bool {
     /// Bool转Int
     func toInt() -> Int {

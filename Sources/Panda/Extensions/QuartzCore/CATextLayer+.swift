@@ -65,15 +65,6 @@ public extension CATextLayer {
         return self
     }
 
-    /// 设置字体的颜色(十六进制)
-    /// - Parameter hex:十六进制字符串颜色
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_foregroundColor(_ hex: String) -> Self {
-        foregroundColor = UIColor(hex: hex).cgColor
-        return self
-    }
-
     /// 设置内容缩放
     /// - Parameter scale:内容缩放(默认:`UIScreen.main.scale`)
     /// - Returns:`Self`
