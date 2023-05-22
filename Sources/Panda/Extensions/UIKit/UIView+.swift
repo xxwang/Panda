@@ -7,6 +7,18 @@
 
 import UIKit
 
+// MARK: - 适配
+public extension UIView {
+    // 全局适配
+    @available(iOS 12.0, *)
+    static func fitAllView(userInterfaceStyle: UIUserInterfaceStyle) {
+        // 设置页面为高亮模式 不自动适应暗黑模式
+        if #available(iOS 13.0, *) {
+            UIView.appearance().overrideUserInterfaceStyle = .light
+        }
+    }
+}
+
 // MARK: - 属性`CGRect`
 public extension UIView {
     /// 控件位置/尺寸相关信息(origin坐标参照父级)
@@ -157,15 +169,6 @@ public extension UIView {
     @discardableResult
     func pd_backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.backgroundColor = backgroundColor
-        return self
-    }
-
-    /// 设置十六进制颜色
-    /// - Parameter hex:十六进制颜色
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_backgroundColor(_ hex: String) -> Self {
-        backgroundColor = UIColor(hex: hex)
         return self
     }
 

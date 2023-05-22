@@ -64,11 +64,10 @@ public extension UIViewController {
     ///   - animated:是否要动画
     func popLast(thenPush viewController: UIViewController, animated: Bool = true) {
         guard let navigationController else { return }
+
         // 栈中的控制器数组
         var viewControllers = navigationController.viewControllers
-        guard viewControllers.count >= 1 else {
-            return
-        }
+        guard viewControllers.count >= 1 else { return }
 
         viewControllers.removeLast()
         viewControllers.append(viewController)
@@ -84,9 +83,8 @@ public extension UIViewController {
         guard let navigationController else { return }
         if count < 1 { return }
 
-        let navViewControllers = navigationController.viewControllers
-
         // 如果要pop掉的数量大于或等于栈中的数量
+        let navViewControllers = navigationController.viewControllers
         if count >= navViewControllers.count {
             // 保留栈底控制器 + 要push的控制器
             if let firstViewController = navViewControllers.first {
@@ -103,30 +101,17 @@ public extension UIViewController {
         // 如果栈中控制器数量大于0就隐藏tabBar
         viewController.hidesBottomBarWhenPushed = vcs.count > 0
 
+        // 设置栈数组
         navigationController.setViewControllers(Array(vcs), animated: animated)
     }
 
-    /// pop回上一个界面
-    func popToPreviousVC() {
-        guard let nav = navigationController else { return }
-        if let index = nav.viewControllers.firstIndex(of: self), index > 0 {
-            let vc = nav.viewControllers[index - 1]
-            nav.popToViewController(vc, animated: true)
-        }
-    }
-
-    /// 获取`push`进来的`UIViewController`
+    /// 获取当前显示的控制器的前一个控制器
     /// - Returns:`UIViewController`
-    func previousPushVc() -> UIViewController? {
+    func previousViewController() -> UIViewController? {
         guard let nav = navigationController else { return nil }
-        if nav.viewControllers.count <= 1 {
-            return nil
-        }
-        if let index = nav.viewControllers.firstIndex(of: self), index > 0 {
-            let vc = nav.viewControllers[index - 1]
-            return vc
-        }
-        return nil
+        if nav.viewControllers.count <= 1 { return nil }
+        guard let index = nav.viewControllers.firstIndex(of: self), index > 0 else { return nil }
+        return nav.viewControllers[index - 1]
     }
 }
 
@@ -161,9 +146,7 @@ public extension UIViewController {
     /// - Returns:是否成功
     @discardableResult
     func popTo(aClass: AnyClass, animated: Bool = false) -> Bool {
-        guard let navigationController else {
-            return false
-        }
+        guard let navigationController else { return false }
 
         for viewController in navigationController.viewControllers.reversed() {
             if viewController.isMember(of: aClass) {
@@ -224,33 +207,34 @@ public extension UIViewController {
 public extension UIViewController {
     /// 将`UIViewController`显示为弹出框(`Popover`样式显示)
     /// - Parameters:
-    ///   - contentVC:要展示的内容控制器
-    ///   - sourcePoint:箭头位置(从哪里显示出来)
-    ///   - contentSize:内容大小
-    ///   - delegate:代理
-    ///   - animated:是否动画
-    ///   - completion:完成回调
+    ///   - contentViewController: 要展示的内容控制器
+    ///   - arrowPoint: 箭头位置(从哪里显示出来)
+    ///   - contentSize: 内容大小
+    ///   - delegate: 代理
+    ///   - animated: 是否动画
+    ///   - completion: 完成回调
     func presentPopover(
-        _ contentVC: UIViewController,
-        sourcePoint: CGPoint,
+        _ contentViewController: UIViewController,
+        arrowPoint: CGPoint,
         contentSize: CGSize? = nil,
         delegate: UIPopoverPresentationControllerDelegate? = nil,
         animated: Bool = true,
         completion: (() -> Void)? = nil
     ) {
         // 设置`modal`样式为`popover`
-        contentVC.modalPresentationStyle = .popover
+        contentViewController.modalPresentationStyle = .popover
         if let contentSize {
-            contentVC.preferredContentSize = contentSize
+            contentViewController.preferredContentSize = contentSize
         }
 
         // 设置`popoverPresentationController`
-        if let popoverPresentationController = contentVC.popoverPresentationController {
+        if let popoverPresentationController = contentViewController.popoverPresentationController {
             popoverPresentationController.sourceView = view
-            popoverPresentationController.sourceRect = CGRect(origin: sourcePoint, size: .zero)
+            popoverPresentationController.sourceRect = CGRect(origin: arrowPoint, size: .zero)
             popoverPresentationController.delegate = delegate
         }
-        present(contentVC, animated: animated, completion: completion)
+        // 弹出
+        present(contentViewController, animated: animated, completion: completion)
     }
 }
 

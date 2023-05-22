@@ -103,9 +103,8 @@ public extension UIButton {
         if let attText = currentAttributedTitle { // 使用属性文本计算
             return attText.strSize(maxLineWidth)
         } else { // 使用文本计算
-            return label.textSize(maxLineWidth)
+            return titleLabel?.textSize(maxLineWidth) ?? .zero
         }
-
         return .zero
     }
 }

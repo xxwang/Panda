@@ -116,19 +116,9 @@ public extension UIWindow {
     }
 }
 
-// MARK: - Defaultable
+// MARK: - rootViewController
 public extension UIWindow {
-    typealias Associatedtype = UIWindow
-
-    override class func `default`() -> Associatedtype {
-        let window = UIWindow(frame: SizeManager.screenBounds)
-        return window
-    }
-}
-
-// MARK: - 链式语法
-public extension UIWindow {
-    /// 设置`rootViewController`(如果设置之前已经存在`rootViewController`那么切换为新的`viewController`)
+    /// 动画方式设置`rootViewController`
     /// - Parameters:
     ///   - rootViewController: 要设置的`viewController`
     ///   - animated: 是否动画
@@ -136,14 +126,12 @@ public extension UIWindow {
     ///   - options: 动画选项
     ///   - competion: 完成回调
     /// - Returns: `Self`
-    @discardableResult
-    func pd_rootViewController(
-        with rootViewController: UIViewController,
-        animated: Bool = true,
-        duration: TimeInterval = 0.25,
-        options: UIView.AnimationOptions = .transitionFlipFromRight,
-        competion: (() -> Void)?
-    ) -> Self {
+    func setupRootViewController(with rootViewController: UIViewController,
+                                 animated: Bool = true,
+                                 duration: TimeInterval = 0.25,
+                                 options: UIView.AnimationOptions = .transitionFlipFromRight,
+                                 competion: (() -> Void)?)
+    {
         if animated { // 需要动画切换
             UIView.transition(with: self, duration: duration, options: options) {
                 let oldState = UIView.areAnimationsEnabled
@@ -157,6 +145,52 @@ public extension UIWindow {
             self.rootViewController = rootViewController
             competion?()
         }
-        return self
+    }
+
+    /// 转场方式设置`rootViewController`
+    /// - Parameters:
+    ///   - rootViewController: 要设置的`viewController`
+    ///   - animated: 是否动画
+    ///   - duration: 动画时长
+    ///   - animationType: 动画类型
+    ///   - animationSubtype: 动画子类型
+    ///   - timingFunction: 定时功能
+    ///   - competion: 完成回调
+    private func setupRootViewController(with rootViewController: UIViewController,
+                                         animated: Bool = true,
+                                         duration: TimeInterval = 0.25,
+                                         animationType: CATransitionType = .fade,
+                                         animationSubtype: CATransitionSubtype? = .fromRight,
+                                         timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
+                                         competion: (() -> Void)?)
+    {
+        let window = UIWindow.mainWindow
+        if animated {
+            // 转场动画
+            let animation = CATransition()
+            animation.type = animationType
+            animation.subtype = animationSubtype
+            animation.duration = duration
+            animation.timingFunction = timingFunction
+            animation.isRemovedOnCompletion = true
+            // 添加转场动画到window
+            window?.layer.add(animation, forKey: "animation")
+        }
+        window?.rootViewController = rootViewController
+
+        competion?()
     }
 }
+
+// MARK: - Defaultable
+public extension UIWindow {
+    typealias Associatedtype = UIWindow
+
+    override class func `default`() -> Associatedtype {
+        let window = UIWindow(frame: SizeManager.screenBounds)
+        return window
+    }
+}
+
+// MARK: - 链式语法
+public extension UIWindow {}

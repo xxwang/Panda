@@ -15,19 +15,9 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_font(_ font: UIFont, for range: NSRange? = nil) -> Self {
+    func pd_font(_ font: UIFont, for range: NSRange? = nil) -> Self {
         let range = range ?? fullNSRange()
-        return pd_m_addAttributes([NSAttributedString.Key.font: font], for: range)
-    }
-
-    /// 设置指定`字符串`的`字体`
-    /// - Parameters:
-    ///   - font:字体
-    ///   - text:特定文字
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_m_font(_ font: UIFont, for text: String) -> Self {
-        pd_m_addAttributes([NSAttributedString.Key.font: font], for: text)
+        return pd_addAttributes([NSAttributedString.Key.font: font], for: range)
     }
 
     /// 设置富文本文字的`字间距`
@@ -36,9 +26,9 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_wordSpacing(_ wordSpacing: CGFloat, for range: NSRange? = nil) -> Self {
+    func pd_wordSpacing(_ wordSpacing: CGFloat, for range: NSRange? = nil) -> Self {
         let range = range ?? fullNSRange()
-        pd_m_addAttributes([.kern: wordSpacing], range: range)
+        pd_addAttributes([.kern: wordSpacing], for: range)
         return self
     }
 
@@ -49,27 +39,13 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_lineSpacing(_ lineSpacing: CGFloat, alignment: NSTextAlignment = .left, for range: NSRange? = nil) -> Self {
+    func pd_lineSpacing(_ lineSpacing: CGFloat, alignment: NSTextAlignment = .left, for range: NSRange? = nil) -> Self {
         let range = range ?? fullNSRange()
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.alignment = alignment
-        return pd_m_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: range)
-    }
-
-    /// 设置指定`文字`的`行间距`
-    /// - Parameters:
-    ///   - lineSpacing:行间距
-    ///   - alignment:对齐方式
-    ///   - text:文本
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_m_lineSpacing(_ lineSpacing: CGFloat, alignment: NSTextAlignment = .left, for text: String) -> Self {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineSpacing
-        paragraphStyle.alignment = alignment
-        return pd_m_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: text)
+        return pd_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: range)
     }
 
     /// 设置`文字`的`颜色`
@@ -78,19 +54,9 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_foregroundColor(_ color: UIColor, for range: NSRange? = nil) -> Self {
+    func pd_foregroundColor(_ color: UIColor, for range: NSRange? = nil) -> Self {
         let range = range ?? fullNSRange()
-        return pd_m_addAttributes([NSAttributedString.Key.foregroundColor: color], for: range)
-    }
-
-    /// 设置指定`文字`的`颜色`
-    /// - Parameters:
-    ///   - color:文字颜色
-    ///   - range:文字
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_m_foregroundColor(_ color: UIColor, for text: String) -> Self {
-        pd_m_addAttributes([NSAttributedString.Key.foregroundColor: color], for: text)
+        return pd_addAttributes([NSAttributedString.Key.foregroundColor: color], for: range)
     }
 
     /// 设置`range`内`文字`的`下划线`
@@ -100,29 +66,14 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_underline(_ color: UIColor, stytle: NSUnderlineStyle = .single, for range: NSRange? = nil) -> Self {
+    func pd_underline(_ color: UIColor, stytle: NSUnderlineStyle = .single, for range: NSRange? = nil) -> Self {
         let range = range ?? fullNSRange()
 
         let lineStytle = NSNumber(value: Int8(stytle.rawValue))
-        return pd_m_addAttributes([
+        return pd_addAttributes([
             NSAttributedString.Key.underlineStyle: lineStytle,
             NSAttributedString.Key.underlineColor: color,
         ], for: range)
-    }
-
-    /// 设置指定`文字`的`下划线`
-    /// - Parameters:
-    ///   - color:下划线颜色
-    ///   - stytle:下划线样式
-    ///   - text:文本
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_m_underline(_ color: UIColor, stytle: NSUnderlineStyle = .single, for text: String) -> Self {
-        let lineStytle = NSNumber(value: Int8(stytle.rawValue))
-        return pd_m_addAttributes([
-            NSAttributedString.Key.underlineStyle: lineStytle,
-            NSAttributedString.Key.underlineColor: color,
-        ], for: text)
     }
 
     /// 设置`range`内文字的`删除线`
@@ -131,7 +82,7 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_strikethrough(_ color: UIColor, for range: NSRange? = nil) -> Self {
+    func pd_strikethrough(_ color: UIColor, for range: NSRange? = nil) -> Self {
         let lineStytle = NSNumber(value: Int8(NSUnderlineStyle.single.rawValue))
         var attributes = [NSAttributedString.Key: Any]()
         attributes[NSAttributedString.Key.strikethroughStyle] = lineStytle
@@ -143,37 +94,17 @@ public extension NSMutableAttributedString {
             attributes[NSAttributedString.Key.strikethroughStyle] = 0
         }
         let range = range ?? fullNSRange()
-        return pd_m_addAttributes(attributes, for: range)
-    }
-
-    /// 设置指定`文字`的`删除线`
-    /// - Parameters:
-    ///   - color:删除线颜色
-    ///   - text:文本
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_m_strikethrough(_ color: UIColor, for text: String) -> Self {
-        let lineStytle = NSNumber(value: Int8(NSUnderlineStyle.single.rawValue))
-        var attributes = [NSAttributedString.Key: Any]()
-        attributes[NSAttributedString.Key.strikethroughStyle] = lineStytle
-        attributes[NSAttributedString.Key.strikethroughColor] = color
-
-        if #available(iOS 10.3, *) {
-            attributes[NSAttributedString.Key.baselineOffset] = 0
-        } else {
-            attributes[NSAttributedString.Key.strikethroughStyle] = 0
-        }
-        return pd_m_addAttributes(attributes, for: text)
+        return pd_addAttributes(attributes, for: range)
     }
 
     /// 添加`首行文字缩进`
     /// - Parameter indent:缩进宽度
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_firstLineHeadIndent(_ indent: CGFloat) -> Self {
+    func pd_firstLineHeadIndent(_ indent: CGFloat) -> Self {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = indent
-        return pd_m_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: fullNSRange())
+        return pd_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: fullNSRange())
     }
 
     /// 设置`range`范围内`文字`的`倾斜`
@@ -182,19 +113,9 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_obliqueness(_ obliqueness: Float = 0, for range: NSRange? = nil) -> Self {
+    func pd_obliqueness(_ obliqueness: Float = 0, for range: NSRange? = nil) -> Self {
         let range = range ?? fullNSRange()
-        return pd_m_addAttributes([NSAttributedString.Key.obliqueness: obliqueness], for: range)
-    }
-
-    /// 设置指定`文字`的`倾斜`
-    /// - Parameters:
-    ///   - obliqueness:倾斜
-    ///   - text:文本
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_m_obliqueness(_ obliqueness: Float = 0, for text: String) -> Self {
-        pd_m_addAttributes([NSAttributedString.Key.obliqueness: obliqueness], for: text)
+        return pd_addAttributes([NSAttributedString.Key.obliqueness: obliqueness], for: range)
     }
 
     /// 插入`图片附件`到指定字符`index`,
@@ -204,7 +125,7 @@ public extension NSMutableAttributedString {
     ///   - index:图片的位置,默认插入到开头
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_image(_ image: String, bounds: CGRect = .zero, index: Int = 0) -> Self {
+    func pd_image(_ image: String, bounds: CGRect = .zero, index: Int = 0) -> Self {
         // NSTextAttachment可以将要插入的图片作为特殊字符处理
         let attch = NSTextAttachment()
         attch.image = UIImage.loadImage(image)
@@ -225,7 +146,7 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange) -> Self {
+    func pd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange) -> Self {
         for name in attributes.keys {
             addAttribute(name, value: attributes[name] ?? "", range: range)
         }
@@ -238,7 +159,7 @@ public extension NSMutableAttributedString {
     ///   - text:文本
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_addAttributes(_ attributes: [NSAttributedString.Key: Any], for text: String) -> Self {
+    func pd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for text: String) -> Self {
         let ranges = subNSRanges(with: [text])
         if !ranges.isEmpty {
             for name in attributes.keys {
@@ -257,12 +178,12 @@ public extension NSMutableAttributedString {
     ///   - options:匹配选项
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_addAttributes(_ attributes: [Key: Any], toRangesMatching pattern: String, options: NSRegularExpression.Options = []) -> Self {
+    func pd_addAttributes(_ attributes: [Key: Any], toRangesMatching pattern: String, options: NSRegularExpression.Options = []) -> Self {
         guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return self }
         let matches = pattern.matches(in: string, options: [], range: NSRange(0 ..< length))
 
         for match in matches {
-            pd_m_addAttributes(attributes, for: match.range)
+            pd_addAttributes(attributes, for: match.range)
         }
 
         return self
@@ -274,8 +195,8 @@ public extension NSMutableAttributedString {
     ///   - target:目标字符串
     /// - Returns:`Self`
     @discardableResult
-    func pd_m_addAttributes(_ attributes: [Key: Any], toOccurrencesOf target: some StringProtocol) -> Self {
+    func pd_addAttributes(_ attributes: [Key: Any], toOccurrencesOf target: some StringProtocol) -> Self {
         let pattern = "\\Q\(target)\\E"
-        return pd_m_addAttributes(attributes, toRangesMatching: pattern)
+        return pd_addAttributes(attributes, toRangesMatching: pattern)
     }
 }
