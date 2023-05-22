@@ -1,4 +1,4 @@
-
+import UIKit
 
 public enum Panda {
     public static var size = SizeManager.self
@@ -6,4 +6,8 @@ public enum Panda {
     public static var log = Log.self
 }
 
-public extension Panda {}
+public extension Panda {
+    func sayHello() {
+        Log.info("Hello Panda!")
+    }
+}
