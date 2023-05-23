@@ -12,7 +12,7 @@ public extension UILabel {
     /// 获取`UILabel`中`字符串`的CGSize
     /// - Parameter maxLineWidth:最大宽度
     /// - Returns:`CGSize`
-    func textSize(_ maxLineWidth: CGFloat = SizeManager.screenWidth) -> CGSize {
+    func textSize(_ maxLineWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
         if let attributedText {
             return attributedText.strSize(maxLineWidth)
         }

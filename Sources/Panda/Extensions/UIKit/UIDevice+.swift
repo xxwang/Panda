@@ -40,7 +40,7 @@ public extension UIDevice {
 public extension UIDevice {
     /// 当前设备是否越狱
     static var isBreak: Bool {
-        if EnvManager.isSimulator {
+        if EnvUtils.isSimulator {
             return false
         }
         let paths = ["/Applications/Cydia.app", "/private/var/lib/apt/",
@@ -199,7 +199,7 @@ public extension UIDevice {
     /// 数据业务对应的通信技术
     /// - Returns:通信技术
     static func currentRadioAccessTechnologys() -> [String]? {
-        guard !EnvManager.isSimulator else {
+        guard !EnvUtils.isSimulator else {
             return nil
         }
         // 获取并输出运营商信息
@@ -280,7 +280,7 @@ public extension UIDevice {
     /// 获取并输出运营商信息
     /// - Returns:运营商信息
     private static func getCarriers() -> [CTCarrier]? {
-        guard !EnvManager.isSimulator else {
+        guard !EnvUtils.isSimulator else {
             return nil
         }
         // 获取并输出运营商信息

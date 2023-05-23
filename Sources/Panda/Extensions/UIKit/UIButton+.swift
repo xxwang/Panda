@@ -239,7 +239,7 @@ public extension UIButton {
     /// 获取指定宽度下字符串的Size
     /// - Parameter maxLineWidth: 最大行宽度
     /// - Returns: 文字尺寸
-    func titleSize(with maxLineWidth: CGFloat = SizeManager.screenWidth) -> CGSize {
+    func titleSize(with maxLineWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
         if let attText = currentAttributedTitle { // 使用属性文本计算
             return attText.strSize(maxLineWidth)
         } else { // 使用文本计算
@@ -480,7 +480,7 @@ public extension UIButton {
     /// - Returns:`Self`
     @discardableResult
     func pd_setBackgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
-        let image = UIImage(color)
+        let image = UIImage(by: color)
         setBackgroundImage(image, for: state)
         return self
     }

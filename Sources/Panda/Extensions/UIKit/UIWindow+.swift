@@ -62,7 +62,7 @@ public extension UIWindow {
     /// - Parameter isLandscape:是否是横屏
     static func changeOrientation(isLandscape: Bool) {
         if isLandscape { // 横屏
-            guard !EnvManager.isLandscape else { return }
+            guard !EnvUtils.isLandscape else { return }
             // 重置方向
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
             UIDevice.current.setValue(resetOrientationTargert, forKey: "orientation")
@@ -71,7 +71,7 @@ public extension UIWindow {
             UIDevice.current.setValue(orientationTarget, forKey: "orientation")
 
         } else { // 竖屏
-            guard EnvManager.isLandscape else { return }
+            guard EnvUtils.isLandscape else { return }
             // 重置方向
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
             UIDevice.current.setValue(resetOrientationTargert, forKey: "orientation")
@@ -188,7 +188,7 @@ public extension UIWindow {
     typealias Associatedtype = UIWindow
 
     override class func `default`() -> Associatedtype {
-        let window = UIWindow(frame: SizeManager.screenBounds)
+        let window = UIWindow(frame: SizeUtils.screenBounds)
         return window
     }
 }

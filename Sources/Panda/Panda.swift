@@ -1,8 +1,8 @@
 import UIKit
 
 public class Panda {
-    public static var size = SizeManager.self
-    public static var dev = EnvManager.self
+    public static var size = SizeUtils.self
+    public static var dev = EnvUtils.self
     public static var log = Log.self
 }
 

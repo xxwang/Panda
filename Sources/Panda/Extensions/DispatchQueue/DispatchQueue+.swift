@@ -44,14 +44,6 @@ public extension DispatchQueue {
 
 // MARK: - GCD定时器
 public extension DispatchQueue {
-    /// `GCD延时`执行
-    /// - Parameters:
-    ///   - timeInterval:延迟的时间
-    ///   - handler: 要执行的任务(`主线程`)
-    static func delay_execute(_ timeInterval: TimeInterval, handler: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval, execute: handler)
-    }
-
     /// `GCD定时器``倒计时`⏳
     /// - Parameters:
     ///   - timeInterval: 间隔时间
@@ -92,6 +84,64 @@ public extension DispatchQueue {
         }
         timer.resume()
         return timer
+    }
+}
+
+// MARK: - 延时执行
+public extension DispatchQueue {
+    /// `防抖``延时`执行
+    /// - Parameters:
+    ///   - queue: 任务执行的队列
+    ///   - seconds: `延迟时间`
+    ///   - work: 要执行的任务
+    /// - Returns: `block`
+    static func debounce(_ queue: DispatchQueue = .main,
+                         delay timeInterval: TimeInterval,
+                         execute work: @escaping () -> Void) -> () -> Void
+    {
+        var lastFireTime = DispatchTime.now()
+        let deadline = { lastFireTime + timeInterval }
+        return {
+            queue.asyncAfter(deadline: deadline()) {
+                let now = DispatchTime.now()
+                if now >= deadline() {
+                    lastFireTime = now
+                    work()
+                }
+            }
+        }
+    }
+
+    /// `延时``异步`执行
+    /// - Parameters:
+    ///   - queue: 任务执行的队列
+    ///   - seconds: `延迟时间`
+    ///   - qos: 优化级
+    ///   - flags: 标识
+    ///   - work: 要执行的任务
+    static func delay_execute(_ queue: DispatchQueue = .main,
+                              delay timeInterval: TimeInterval,
+                              qos: DispatchQoS = .unspecified,
+                              flags: DispatchWorkItemFlags = [],
+                              execute work: @escaping () -> Void)
+    {
+        queue.asyncAfter(deadline: .now() + timeInterval, qos: qos, flags: flags, execute: work)
+    }
+
+    /// `延时`执行指定任务
+    /// - Parameters:
+    ///   - seconds: `延迟时间`
+    ///   - asyncTask: `异步执行`的`任务`
+    ///   - mainTask: `异步任务`完成之后执行的`主线程任务`
+    /// - Returns:`DispatchWorkItem`
+    static func delay_execute(delay timeInterval: TimeInterval,
+                              task: (() -> Void)? = nil,
+                              callback: (() -> Void)? = nil) -> DispatchWorkItem
+    {
+        let item = DispatchWorkItem(block: task ?? {})
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + timeInterval, execute: item)
+        if let callback { item.notify(queue: DispatchQueue.main, execute: callback) }
+        return item
     }
 }
 
