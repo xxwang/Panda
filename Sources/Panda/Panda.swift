@@ -1,6 +1,6 @@
 import UIKit
 
-public enum Panda {
+public class Panda {
     public static var size = SizeManager.self
     public static var dev = EnvManager.self
     public static var log = Log.self

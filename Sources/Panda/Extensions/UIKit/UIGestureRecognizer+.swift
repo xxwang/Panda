@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 关联键
-private enum AssociateKeys {
+private class AssociateKeys {
     static var FunctionNameKey = "UIGestureRecognizer" + "FunctionNameKey"
     static var CallbackKey = "UIGestureRecognizer" + "CallbackKey"
 }

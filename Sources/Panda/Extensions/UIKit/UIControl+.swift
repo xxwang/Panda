@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 关联键
-private enum AssociateKeys {
+private class AssociateKeys {
     static var CallbackKey = "UIControl" + "CallbackKey"
     static var HitTimerKey = "UIControl" + "HitTimerKey"
 }

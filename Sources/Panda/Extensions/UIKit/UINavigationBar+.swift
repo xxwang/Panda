@@ -78,7 +78,7 @@ public extension UINavigationBar {
 }
 
 // MARK: - 关联键
-private enum AssociateKeys {
+private class AssociateKeys {
     static var StatusBarKey = "UINavigationBar" + "StatusBarKey"
 }
 

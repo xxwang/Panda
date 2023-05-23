@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 关联属性`操作方法`
-public enum AssociatedObject {
+public class AssociatedObject {
     /// 设置关联属性
     static func associate(
         _ object: Any,

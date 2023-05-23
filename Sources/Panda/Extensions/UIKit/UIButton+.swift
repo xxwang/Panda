@@ -122,7 +122,7 @@ public extension UIButton {
 
 // MARK: - 按钮布局
 public extension UIButton {
-    enum LyoutStyle {
+    enum LayoutStyle {
         case imageTop
         case imageBottom
         case imageLeft
@@ -134,7 +134,7 @@ public extension UIButton {
     /// - Parameters:
     ///   - spacing:间距
     ///   - style:布局样式
-    func changeLayout(_ spacing: CGFloat, style: LyoutStyle) {
+    func changeLayout(_ spacing: CGFloat, style: LayoutStyle) {
         let imageRect: CGRect = imageView?.frame ?? .zero
         let titleRect: CGRect = titleLabel?.frame ?? .zero
         let buttonWidth: CGFloat = frame.size.width
@@ -250,7 +250,7 @@ public extension UIButton {
 }
 
 // MARK: - 关联键
-private enum AssociateKeys {
+private class AssociateKeys {
     static var CallbackKey = "UIButton" + "CallbackKey"
     static var ExpandSizeKey = "UIButton" + "ExpandSizeKey"
 }

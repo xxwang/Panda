@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - 输出调试
-public enum Log {
+public class Log {
     /// 日志等级
     enum Level: String {
         case debug = "[调试]"

@@ -58,7 +58,7 @@ public extension UIBarButtonItem {
 }
 
 // MARK: - 关联键
-private enum AssociateKeys {
+private class AssociateKeys {
     static var CallbackKey = "UIBarButtonItem" + "CallbackKey"
 }
 
