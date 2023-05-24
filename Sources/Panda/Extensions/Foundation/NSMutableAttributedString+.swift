@@ -7,8 +7,48 @@
 
 import UIKit
 
+//MARK: - 方法
+public extension NSMutableAttributedString {
+    /// `NSMutableAttributedString`转`NSAttributedString`
+    /// - Returns: `NSAttributedString`
+    func toImmutable() -> NSAttributedString {
+        self
+    }
+}
+
+// MARK: - Defaultable
+extension NSMutableAttributedString: Defaultable {}
+public extension NSMutableAttributedString {
+    typealias Associatedtype = NSMutableAttributedString
+
+    class func `default`() -> Associatedtype {
+        var mutableAttributedString = NSMutableAttributedString()
+        return mutableAttributedString
+    }
+}
+
 // MARK: - 链式语法
 public extension NSMutableAttributedString {
+    
+    /// 设置字符串`String`
+    /// - Parameters:
+    ///   - string:范围
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_string(_ string: String) -> Self {
+        return pd_attributedString(string.toAttributedString())
+    }
+    
+    /// 设置不可变字符串`NSAttributedString`
+    /// - Parameters:
+    ///   - attributedString:范围
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_attributedString(_ attributedString: NSAttributedString) -> Self {
+        self.setAttributedString(attributedString)
+        return self
+    }
+    
     /// 设置指定`range`内的`字体`
     /// - Parameters:
     ///   - font:字体

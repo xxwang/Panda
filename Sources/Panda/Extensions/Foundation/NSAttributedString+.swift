@@ -9,19 +9,19 @@ import UIKit
 
 // MARK: - 方法
 extension NSAttributedString {
+    /// `NSAttributedString`转`NSMutableAttributedString`
+    /// - Returns: `NSMutableAttributedString`
+    func toMutable() -> NSMutableAttributedString {
+        NSMutableAttributedString(attributedString: self)
+    }
+    
     /// `NSAttributedString`上的`属性字典`
     /// - Returns: `[NSAttributedString.Key: Any]`
     func attributes() -> [NSAttributedString.Key: Any] {
         guard length > 0 else { return [:] }
         return attributes(at: 0, effectiveRange: nil)
     }
-
-    /// `NSAttributedString`转`NSMutableAttributedString`
-    /// - Returns: `NSMutableAttributedString`
-    func toMutable() -> NSMutableAttributedString {
-        NSMutableAttributedString(attributedString: self)
-    }
-
+    
     /// 整个`NSAttributedString`的`NSRange`
     /// - Returns: `NSRange`
     func fullNSRange() -> NSRange {
