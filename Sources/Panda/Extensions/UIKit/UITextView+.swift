@@ -7,6 +7,15 @@
 
 import UIKit
 
+// MARK: - 方法
+public extension UITextView {
+    /// 清空内容
+    func clear() {
+        text = ""
+        attributedText = "".toAttributedString()
+    }
+}
+
 // MARK: - Defaultable
 public extension UITextView {
     typealias Associatedtype = UITextView
