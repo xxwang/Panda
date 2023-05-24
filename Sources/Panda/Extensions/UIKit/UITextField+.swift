@@ -62,9 +62,7 @@ public extension UITextField {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.attributes()
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder
-                .toMutableAttributedString()
-                .pd_addAttributes(attributes, for: holder.fullNSRange())
+            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
@@ -81,9 +79,7 @@ public extension UITextField {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.attributes()
             attributes[.font] = font
-            attributedPlaceholder = holder
-                .toMutableAttributedString()
-                .pd_addAttributes(attributes, for: holder.string.fullNSRange())
+            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.string.fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
@@ -103,9 +99,7 @@ public extension UITextField {
             var attributes = holder.attributes()
             attributes[.font] = font
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder
-                .toMutableAttributedString()
-                .pd_addAttributes(attributes, for: holder.fullNSRange())
+            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder

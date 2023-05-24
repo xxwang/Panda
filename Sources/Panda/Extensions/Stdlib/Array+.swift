@@ -313,7 +313,7 @@ public extension Array where Element: NSAttributedString {
     /// - Returns:`NSAttributedString`
     func joined(separator: NSAttributedString) -> NSAttributedString {
         guard let firstElement = first else {
-            return "".toMutableAttributedString()
+            return "".toMutable()
         }
         return dropFirst()
             .reduce(into: NSMutableAttributedString(attributedString: firstElement)) { result, element in

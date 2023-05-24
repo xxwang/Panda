@@ -124,7 +124,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedFont(_ font: UIFont, for range: NSRange) -> Self {
-        let attribuedString = attributedText?.toMutableAttributedString().pd_font(font, for: range)
+        let attribuedString = attributedText?.toMutable().pd_font(font, for: range)
         attributedText = attribuedString
         return self
     }
@@ -136,7 +136,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedColor(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutableAttributedString().pd_foregroundColor(color, for: range)
+        let attributedString = attributedText?.toMutable().pd_foregroundColor(color, for: range)
         attributedText = attributedString
         return self
     }
@@ -146,7 +146,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedLineSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutableAttributedString().pd_lineSpacing(spacing, for: (text ?? "").fullNSRange())
+        let attributedString = attributedText?.toMutable().pd_lineSpacing(spacing, for: (text ?? "").fullNSRange())
         attributedText = attributedString
         return self
     }
@@ -159,7 +159,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutableAttributedString().pd_underline(color, stytle: style, for: range)
+        let attributedString = attributedText?.toMutable().pd_underline(color, stytle: style, for: range)
         attributedText = attributedString
         return self
     }
@@ -170,7 +170,7 @@ public extension UILabel {
     ///   - range:范围
     @discardableResult
     func pd_attributedDeleteLine(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutableAttributedString().pd_strikethrough(color, for: range)
+        let attributedString = attributedText?.toMutable().pd_strikethrough(color, for: range)
         attributedText = attributedString
         return self
     }
@@ -180,7 +180,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedFirstLineHeadIndent(_ indent: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutableAttributedString().pd_firstLineHeadIndent(indent)
+        let attributedString = attributedText?.toMutable().pd_firstLineHeadIndent(indent)
         attributedText = attributedString
         return self
     }
@@ -192,7 +192,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedBliqueness(_ inclination: Float = 0, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutableAttributedString().pd_obliqueness(inclination, for: range)
+        let attributedString = attributedText?.toMutable().pd_obliqueness(inclination, for: range)
         attributedText = attributedString
         return self
     }
@@ -209,7 +209,7 @@ public extension UILabel {
         bounds: CGRect = .zero,
         index: Int = 0
     ) -> Self {
-        let mAttributedString = attributedText?.toMutableAttributedString().pd_image(image, bounds: bounds, index: index)
+        let mAttributedString = attributedText?.toMutable().pd_image(image, bounds: bounds, index: index)
         attributedText = mAttributedString
         return self
     }

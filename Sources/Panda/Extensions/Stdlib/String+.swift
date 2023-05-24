@@ -205,7 +205,7 @@ public extension String {
 
     /// 字符串转属性字符串
     /// - Returns: `NSMutableAttributedString`
-    func toMutableAttributedString() -> NSMutableAttributedString {
+    func toMutable() -> NSMutableAttributedString {
         NSMutableAttributedString(string: self)
     }
 }

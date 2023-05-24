@@ -37,7 +37,7 @@ public extension UserDefaults {
 public extension UserDefaults {
     /// 从`UserDefaults`中移除当前应用存储的所有数据
     /// - Returns: 是否成功
-    func clearAll() -> Bool {
+    func clearAll() {
         guard let bundleID = Bundle.main.bundleIdentifier else { return }
         UserDefaults.standard.removePersistentDomain(forName: bundleID)
     }
