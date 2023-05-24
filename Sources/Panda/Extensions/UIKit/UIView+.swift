@@ -19,6 +19,23 @@ public extension UIView {
     }
 }
 
+// MARK: - 截图
+public extension UIView {
+    /// 截取整个滚动视图的快照(截图)
+    @objc func captureScreenshot() -> UIImage? {
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            UIGraphicsEndImageContext()
+            return nil
+        }
+        layer.render(in: context)
+        let viewImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return viewImage
+    }
+}
+
 // MARK: - 属性`CGRect`
 public extension UIView {
     /// 控件位置/尺寸相关信息(origin坐标参照父级)
