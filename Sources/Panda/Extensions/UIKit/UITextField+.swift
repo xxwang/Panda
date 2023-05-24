@@ -61,6 +61,54 @@ public extension UITextField {
         text = ""
         attributedText = "".toMutable()
     }
+
+    /// 将工具栏添加到`UITextField`的`inputAccessoryView`
+    /// - Parameters:
+    ///   - items: 工具栏中的选项
+    ///   - height: 工具栏高度
+    /// - Returns: `UIToolbar`
+    @discardableResult
+    func addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
+        let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: SizeUtils.screenWidth, height: height)))
+        toolBar.setItems(items, animated: false)
+        inputAccessoryView = toolBar
+        return toolBar
+    }
+
+    /// 限制字数的输入
+    /// `- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;` 里面调用
+    /// - Parameters:
+    ///   - range:范围
+    ///   - text:输入的文字
+    ///   - maxCharacters:限制字数
+    ///   - regex:可输入内容(正则)
+    /// - Returns:返回是否可输入
+    func inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+        guard !text.isEmpty else { return true }
+        guard let oldContent = self.text else { return false }
+
+        if let _ = markedTextRange {
+            // 有高亮联想中
+            guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
+            // 无高亮
+            // 正则的判断
+            if let weakRegex = regex, !text.isMatchRegexp(weakRegex) { return false }
+            // 联想选中键盘
+            let allContent = oldContent.subString(to: range.location) + text
+            if allContent.count > maxCharacters {
+                let newContent = allContent.subString(to: maxCharacters)
+                self.text = newContent
+                return false
+            }
+        } else {
+            guard !text.isNineKeyBoard() else { return true }
+            // 正则的判断
+            if let weakRegex = regex, !text.isMatchRegexp(weakRegex) { return false }
+            // 如果数字大于指定位数,不能输入
+            guard oldContent.count + text.count <= maxCharacters else { return false }
+        }
+        return true
+    }
 }
 
 // MARK: - Defaultable
@@ -251,9 +299,7 @@ public extension UITextField {
     /// - Returns:`Self`
     @discardableResult
     func pd_leftPadding(_ padding: CGFloat) -> Self {
-        let leftView = UIView()
-        leftView.frame = CGRect(x: 0, y: 0, width: padding, height: frame.height)
-        self.leftView = leftView
+        leftView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         leftViewMode = .always
         return self
     }
@@ -263,32 +309,27 @@ public extension UITextField {
     /// - Returns:`Self`
     @discardableResult
     func pd_rightPadding(_ padding: CGFloat) -> Self {
-        let rightView = UIView()
-        rightView.frame = CGRect(x: 0, y: 0, width: padding, height: frame.height)
-        self.rightView = rightView
+        rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         rightViewMode = .always
         return self
     }
 
     /// 添加左边的`view`
     /// - Parameters:
-    ///   - view:要添加的view
+    ///   - leftView:要添加的view
     ///   - containerRect:容器大小
     ///   - contentRect:内容大小
     /// - Returns:`Self`
     @discardableResult
-    func pd_leftView(_ view: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
+    func pd_leftView(_ leftView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
         // 容器
-        let containerView = UIView()
-        containerView.frame = containerRect
-
+        let containerView = UIView(frame: containerRect)
         // 内容
-        if let contentRect { view?.frame = contentRect }
-
+        if let contentRect { leftView?.frame = contentRect }
         // 添加内容
-        if let view { containerView.addSubview(view) }
+        if let leftView { containerView.addSubview(leftView) }
 
-        leftView = leftView
+        self.leftView = containerView
         leftViewMode = .always
 
         return self
@@ -301,19 +342,47 @@ public extension UITextField {
     ///   - contentRect:内容大小
     /// - Returns:`Self`
     @discardableResult
-    func pd_rightView(_ view: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
+    func pd_rightView(_ rightView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
         // 容器
-        let containerView = UIView()
-        containerView.frame = containerRect
-
+        let containerView = UIView(frame: containerRect)
         // 内容
-        if let contentRect { view?.frame = contentRect }
-
+        if let contentRect { rightView?.frame = contentRect }
         // 添加内容
-        if let view { containerView.addSubview(view) }
-        rightView = containerView
+        if let rightView { containerView.addSubview(rightView) }
+
+        self.rightView = containerView
         rightViewMode = .always
 
+        return self
+    }
+
+    /// 添加输入框辅助视图
+    /// - Parameters:
+    ///   - view:要添加的view
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_inputAccessoryView(_ inputAccessoryView: UIView?) -> Self {
+        self.inputAccessoryView = inputAccessoryView
+        return self
+    }
+
+    /// 添加输入框视图
+    /// - Parameters:
+    ///   - view:要添加的view
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_inputView(_ inputView: UIView) -> Self {
+        self.inputView = inputView
+        return self
+    }
+
+    /// 将`UIToolbar`添加到`UITextField`的`inputAccessoryView`
+    /// - Parameters:
+    ///   - toobar: 工具栏
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_toolbar(_ toobar: UIToolbar) -> Self {
+        inputAccessoryView = toobar
         return self
     }
 }
