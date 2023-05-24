@@ -7,14 +7,222 @@
 
 import UIKit
 
-// MARK: - 适配
+// MARK: - 属性
 public extension UIView {
-    // 全局适配
-    @available(iOS 12.0, *)
-    static func fitAllView(userInterfaceStyle: UIUserInterfaceStyle) {
-        // 设置页面为高亮模式 不自动适应暗黑模式
-        if #available(iOS 13.0, *) {
-            UIView.appearance().overrideUserInterfaceStyle = .light
+    /// 当前视图布局的书写方向
+    var writingDirection: UIUserInterfaceLayoutDirection {
+        if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, *) {
+            return effectiveUserInterfaceLayoutDirection
+        } else { return .leftToRight }
+    }
+
+    /// view所在控制器
+    var controller: UIViewController? {
+        var nextResponder: UIResponder? = self
+        repeat {
+            nextResponder = nextResponder?.next
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+        } while nextResponder != nil
+        return nil
+    }
+
+    /// 查找一个视图的所有子视图
+    var allSubViews: [UIView] {
+        var subViews = [UIView]()
+        for subView in subviews {
+            subViews.append(subView)
+            if !subView.subviews.isEmpty { subViews += subView.allSubViews }
+        }
+        return subViews
+    }
+
+    /// view的边框颜色；可以从故事板上查看
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            guard let color = layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+        set {
+            guard let color = newValue else {
+                layer.borderColor = nil
+                return
+            }
+            // 修复React-Native冲突问题
+            guard String(describing: type(of: color)) != "__NSCFType" else { return }
+            layer.borderColor = color.cgColor
+        }
+    }
+
+    /// view的边框宽度；可以从故事板上查看
+    @IBInspectable var borderWidth: CGFloat {
+        get { layer.borderWidth }
+        set { layer.borderWidth = newValue }
+    }
+
+    /// view的角半径；可以从故事板上查看
+    @IBInspectable var cornerRadius: CGFloat {
+        get { layer.cornerRadius }
+        set {
+            layer.masksToBounds = true
+            layer.cornerRadius = abs(CGFloat(Int(newValue * 100)) / 100)
+        }
+    }
+
+    /// view的阴影颜色；可以从故事板上查看
+    @IBInspectable var shadowColor: UIColor? {
+        get {
+            guard let color = layer.shadowColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+        set { layer.shadowColor = newValue?.cgColor }
+    }
+
+    /// view的阴影偏移；可以从故事板上查看
+    @IBInspectable var shadowOffset: CGSize {
+        get { layer.shadowOffset }
+        set { layer.shadowOffset = newValue }
+    }
+
+    /// view的阴影不透明度；可以从故事板上查看
+    @IBInspectable var shadowOpacity: Float {
+        get { layer.shadowOpacity }
+        set { layer.shadowOpacity = newValue }
+    }
+
+    /// view阴影的半径；可以从故事板上查看
+    @IBInspectable var shadowRadius: CGFloat {
+        get { layer.shadowRadius }
+        set { layer.shadowRadius = newValue }
+    }
+
+    /// 是否使用蒙版(范围为view.bounds); 可以从故事板上查看
+    @IBInspectable var masksToBounds: Bool {
+        get { layer.masksToBounds }
+        set { layer.masksToBounds = newValue }
+    }
+}
+
+// MARK: - 方法
+public extension UIView {
+    /// 递归查找第一响应者
+    func findFirstResponder() -> UIView? {
+        if isFirstResponder { return self }
+        for subView in subviews {
+            if let firstResponder = subView.findFirstResponder() { return firstResponder }
+        }
+        return nil
+    }
+
+    /// `point`是否位置当前视图中
+    /// - Parameter point:位置点
+    /// - Returns:是否是视图内点击
+    func contains(_ point: CGPoint) -> Bool {
+        point.x > frame.minX && point.x < frame.maxX && point.y > frame.minY && point.y < frame.maxY
+    }
+
+    /// 判断当前视图是否包涵类型的子视图
+    /// - Parameter name: 要查询的类型
+    /// - Returns: 是否包涵
+    func contains<T: UIView>(withClass name: T.Type) -> Bool {
+        if isKind(of: T.self) { return true }
+        for subView in subviews {
+            if subView.contains(withClass: T.self) { return true }
+        }
+        return false
+    }
+
+    /// 查找`T`的父视图, 直到找到为止
+    /// - Parameter name: 要查找的类型
+    func findSuperview<T: UIView>(withClass name: T.Type) -> T? {
+        findSuperview(where: { $0 is T }) as? T
+    }
+
+    /// 查找符合条件的父视图
+    /// - Parameter predicate: 条件
+    func findSuperview(where predicate: (UIView?) -> Bool) -> UIView? {
+        if predicate(superview) { return superview }
+        return superview?.findSuperview(where: predicate)
+    }
+
+    /// 查找与`T`一样的子视图, 直到找到为止
+    /// - Parameter name: 要查找的类型
+    func findSubview<T: UIView>(withClass name: T.Type) -> T? {
+        findSubview(where: { $0 is T }) as? T
+    }
+
+    /// 查找符合条件的子视图
+    /// - Parameter predicate: 条件
+    func findSubview(where predicate: (UIView?) -> Bool) -> UIView? {
+        guard subviews.count > 0 else { return nil }
+        for subView in subviews {
+            if predicate(subView) { return subView }
+            return subView.findSubview(where: predicate)
+        }
+        return nil
+    }
+
+    /// 查找所有与`T`一样的子视图
+    /// - Parameter name: 要查找的类型
+    func findSubviews<T: UIView>(withClass name: T.Type) -> [T] {
+        findSubviews(where: { $0 is T }).map { view in view as! T }
+    }
+
+    /// 查找所有符合条件的子视图
+    /// - Parameter predicate: 条件
+    func findSubviews(where predicate: (UIView?) -> Bool) -> [UIView] {
+        guard subviews.count > 0 else { return [] }
+
+        var result: [UIView] = []
+        for subView in subviews {
+            if predicate(subView) { result.append(subView) }
+            result += subView.findSubviews(where: predicate)
+        }
+        return result
+    }
+
+    /// 添加子视图数组到self
+    /// - Parameter subviews:子视图数组
+    func addSubviews(_ subviews: [UIView]) { subviews.forEach { addSubview($0) }}
+
+    /// 移除所有的子视图
+    func removeSubviews() { subviews.forEach { $0.removeFromSuperview() }}
+
+    /// 移除`layer`
+    func removeLayer() {
+        layer.mask = nil
+        layer.borderWidth = 0
+    }
+
+    /// 隐藏键盘
+    func hiddenKeyboard() { endEditing(true) }
+
+    /// 强制更新布局(立即更新)
+    func relayout() {
+        // 标记视图,runloop的下一个周期调用layoutSubviews
+        setNeedsLayout()
+        // 如果这个视图有被setNeedsLayout方法标记的, 会立即执行layoutSubviews方法
+        layoutIfNeeded()
+    }
+}
+
+// MARK: debug
+public extension UIView {
+    /// 为当前视图的子视图添加边框及背景颜色(只在Debug环境生效)
+    /// - Parameters:
+    ///   - borderWidth:视图的边框宽度
+    ///   - borderColor:视图的边框颜色
+    ///   - backgroundColor:视图的背景色
+    func stressView(_ borderWidth: CGFloat = 1, borderColor: UIColor = .random, backgroundColor: UIColor = .random) {
+        guard Panda.dev.isDebug else { return }
+        guard subviews.count > 0 else { return }
+
+        for subview in subviews {
+            subview.layer.borderWidth = borderWidth
+            subview.layer.borderColor = borderColor.cgColor
+            subview.backgroundColor = backgroundColor
+            subview.stressView(borderWidth, borderColor: borderColor, backgroundColor: backgroundColor)
         }
     }
 }
@@ -36,7 +244,65 @@ public extension UIView {
     }
 }
 
-// MARK: - 属性`CGRect`
+// MARK: - Nib
+public extension UIView {
+    /// 从nib加载view
+    /// - Parameters:
+    ///   - name:nib名称
+    ///   - bundle:nib的bundle(默认为nil)
+    /// - Returns:从nib加载的view
+    class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
+        UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
+    }
+
+    /// 从nib加载特定类型的视图
+    /// - Parameters:
+    ///   - withClass:UIView类型
+    ///   - bundle:nib所在bundle
+    /// - Returns:UIView
+    class func loadFromNib<T: UIView>(withClass name: T.Type, bundle: Bundle? = nil) -> T {
+        let named = String(describing: name)
+        guard let view = UINib(nibName: named, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? T else {
+            fatalError("First element in xib file \(named) is not of type \(named)")
+        }
+        return view
+    }
+}
+
+// MARK: - 过渡动画效果
+public extension UIView {
+    /// view淡入效果(从透明到不透明)
+    /// - Parameters:
+    ///   - duration:以秒为单位的动画持续时间(默认值为1秒)
+    ///   - completion:完成回调,用于在动画完成时运行(默认为nil)
+    func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+        if isHidden { isHidden = false }
+        UIView.animate(withDuration: duration, animations: { self.alpha = 1 }, completion: completion)
+    }
+
+    /// view淡出效果(从不透明到透明)
+    /// - Parameters:
+    ///   - duration:以秒为单位的动画持续时间(默认值为1秒)
+    ///   - completion:完成回调,用于在动画完成时运行(默认为nil)
+    func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+        if isHidden { isHidden = false }
+        UIView.animate(withDuration: duration, animations: { self.alpha = 0 }, completion: completion)
+    }
+}
+
+// MARK: - 适配
+public extension UIView {
+    // 全局适配
+    @available(iOS 12.0, *)
+    static func fitAllView(userInterfaceStyle: UIUserInterfaceStyle) {
+        // 设置页面为高亮模式 不自动适应暗黑模式
+        if #available(iOS 13.0, *) {
+            UIView.appearance().overrideUserInterfaceStyle = .light
+        }
+    }
+}
+
+// MARK: - `CGRect`
 public extension UIView {
     /// 控件位置/尺寸相关信息(origin坐标参照父级)
     var pd_frame: CGRect {
@@ -195,6 +461,15 @@ public extension UIView {
     @discardableResult
     func pd_add2(_ superView: UIView) -> Self {
         superView.addSubview(self)
+        return self
+    }
+
+    /// 添加子控件数组到当前视图上
+    /// - Parameter subviews: 子控件数组
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_addSubviews(_ subviews: [UIView]) -> Self {
+        addSubviews(subviews)
         return self
     }
 

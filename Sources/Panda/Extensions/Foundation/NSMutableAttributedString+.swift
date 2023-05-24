@@ -9,7 +9,6 @@ import UIKit
 
 // MARK: - 链式语法
 public extension NSMutableAttributedString {
-
     /// 设置指定`range`内的`字体`
     /// - Parameters:
     ///   - font:字体
