@@ -204,6 +204,12 @@ public extension String {
     }
 
     /// 字符串转属性字符串
+    /// - Returns: `NSAttributedString`
+    func toAttribute() -> NSAttributedString {
+        NSAttributedString(string: self)
+    }
+
+    /// 字符串转可变属性字符串
     /// - Returns: `NSMutableAttributedString`
     func toMutable() -> NSMutableAttributedString {
         NSMutableAttributedString(string: self)

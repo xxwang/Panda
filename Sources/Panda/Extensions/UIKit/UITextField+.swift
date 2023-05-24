@@ -7,6 +7,62 @@
 
 import UIKit
 
+// MARK: - 属性
+public extension UITextField {
+    /// 内容是否为空
+    var isEmpty: Bool {
+        text == nil || text!.isEmpty
+    }
+
+    /// 返回去掉头尾空格及换行符的内容字符串
+    var trimmedText: String? {
+        text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// 检查内容是否为邮箱格式
+    var isValidEmail: Bool {
+        guard let text else { return false }
+        let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        return text.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+
+    /// 是否都是数字
+    var isValidDigits: Bool {
+        let digitsRegEx = "[0-9]*"
+        let digitsTest = NSPredicate(format: "SELF MATCHES %@", digitsRegEx)
+        return digitsTest.evaluate(with: text)
+    }
+
+    /// 左侧图标`tintColor`(前提是左侧`View`是`UIImage`)
+    @IBInspectable var leftViewTintColor: UIColor? {
+        get { if let icon = leftView as? UIImageView { return icon.tintColor } else { return nil }}
+        set {
+            guard let iconView = leftView as? UIImageView else { return }
+            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
+            iconView.tintColor = newValue
+        }
+    }
+
+    /// 右侧图标`tintColor`(前提是右侧`View`是`UIImage`)
+    @IBInspectable var rightViewTintColor: UIColor? {
+        get { if let icon = rightView as? UIImageView { return icon.tintColor } else { return nil }}
+        set {
+            guard let iconView = rightView as? UIImageView else { return }
+            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
+            iconView.tintColor = newValue
+        }
+    }
+}
+
+// MARK: - 方法
+public extension UITextField {
+    /// 清空内容
+    func clear() {
+        text = ""
+        attributedText = "".toMutable()
+    }
+}
+
 // MARK: - Defaultable
 public extension UITextField {
     typealias Associatedtype = UITextField
