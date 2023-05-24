@@ -173,7 +173,6 @@ public extension NSMutableAttributedString {
 
         // 创建带有图片的富文本
         let string = NSAttributedString(attachment: attch)
-
         // 将图片添加到富文本
         insert(string, at: index)
 
@@ -187,9 +186,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange) -> Self {
-        for name in attributes.keys {
-            addAttribute(name, value: attributes[name] ?? "", range: range)
-        }
+        for name in attributes.keys {addAttribute(name, value: attributes[name] ?? "", range: range)}
         return self
     }
 
@@ -203,9 +200,7 @@ public extension NSMutableAttributedString {
         let ranges = subNSRanges(with: [text])
         if !ranges.isEmpty {
             for name in attributes.keys {
-                for range in ranges {
-                    addAttribute(name, value: attributes[name] ?? "", range: range)
-                }
+                for range in ranges {addAttribute(name, value: attributes[name] ?? "", range: range)}
             }
         }
         return self
@@ -221,10 +216,7 @@ public extension NSMutableAttributedString {
     func pd_addAttributes(_ attributes: [Key: Any], toRangesMatching pattern: String, options: NSRegularExpression.Options = []) -> Self {
         guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return self }
         let matches = pattern.matches(in: string, options: [], range: NSRange(0 ..< length))
-
-        for match in matches {
-            pd_addAttributes(attributes, for: match.range)
-        }
+        for match in matches {pd_addAttributes(attributes, for: match.range)}
 
         return self
     }
