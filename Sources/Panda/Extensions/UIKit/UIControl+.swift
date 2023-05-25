@@ -26,14 +26,14 @@ public extension UIControl {
 private extension UIControl {
     /// 重复点击限制时间
     var hitTime: Double? {
-        get { AssociatedObject.object(self, &AssociateKeys.HitTimerKey) }
-        set { AssociatedObject.associate(self, &AssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
+        get { AssociatedObject.get(self, &AssociateKeys.HitTimerKey) }
+        set { AssociatedObject.set(self, &AssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
 
     /// 点击回调
     var callback: ((_ control: UIControl) -> Void)? {
-        get { AssociatedObject.object(self, &AssociateKeys.CallbackKey) }
-        set { AssociatedObject.associate(self, &AssociateKeys.CallbackKey, newValue) }
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) }
+        set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
     /// 设置指定时长(单位:秒)内不可重复点击

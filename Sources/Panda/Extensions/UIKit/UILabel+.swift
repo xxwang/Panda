@@ -7,19 +7,69 @@
 
 import UIKit
 
+// MARK: - 属性
+public extension UILabel {
+    /// 获取字体的大小
+    var fontSize: CGFloat {
+        let context = NSStringDrawingContext()
+        context.minimumScaleFactor = minimumScaleFactor
+        return font.pointSize * context.actualScaleFactor
+    }
+
+    /// 获取内容需要的高度(需要在`UILabel`宽度确定的情况下)
+    var requiredHeight: CGFloat {
+        UILabel.default()
+            .pd_frame(CGRect(x: 0, y: 0, width: frame.width, height: .greatestFiniteMagnitude))
+            .pd_lineBreakMode(.byWordWrapping)
+            .pd_font(font)
+            .pd_text(text)
+            .pd_attributedText(attributedText)
+            .pd_sizeToFit()
+            .pd_height
+    }
+
+    /// 获取`UILabel`的每一行字符串(需要`UILabel`具有宽度值)
+    var textLines: [String] {
+        (text ?? "").lines(pd_width, font: font!)
+    }
+
+    /// 获取`UILabel`第一行内容
+    var firstLineString: String? {
+        linesContent().1?.first
+    }
+
+    /// 判断`UILabel`中的内容是否被截断
+    var isTruncated: Bool {
+        guard let labelText = text else { return false }
+        // 计算理论上显示所有文字需要的尺寸
+        let theorySize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        // 计算文本大小
+        let labelTextSize = (labelText as NSString)
+            .boundingRect(
+                with: theorySize,
+                options: .usesLineFragmentOrigin,
+                attributes: [.font: font!],
+                context: nil
+            )
+
+        // 计算理论上需要的行数
+        let labelTextLines = Int(Foundation.ceil(labelTextSize.height / font.lineHeight))
+        // 实际可显示的行数
+        var labelShowLines = Int(Foundation.floor(bounds.size.height / font.lineHeight))
+        if numberOfLines != 0 { labelShowLines = min(labelShowLines, numberOfLines) }
+        // 比较两个行数来判断是否被截断
+        return labelTextLines > labelShowLines
+    }
+}
+
 // MARK: - 获取`UILabel`中内容大小
 public extension UILabel {
     /// 获取`UILabel`中`字符串`的CGSize
     /// - Parameter maxLineWidth:最大宽度
     /// - Returns:`CGSize`
     func textSize(_ maxLineWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
-        if let attributedText {
-            return attributedText.strSize(maxLineWidth)
-        }
-
-        if let text {
-            text.strSize(maxLineWidth, font: font) ?? .zero
-        }
+        if let attributedText { return attributedText.strSize(maxLineWidth) }
+        if let text { text.strSize(maxLineWidth, font: font) ?? .zero }
         return .zero
     }
 }
@@ -40,7 +90,7 @@ public extension UILabel {
     /// - Parameter text:文字内容
     /// - Returns:`Self`
     @discardableResult
-    func pd_text(_ text: String) -> Self {
+    func pd_text(_ text: String?) -> Self {
         self.text = text
         return self
     }
@@ -76,7 +126,7 @@ public extension UILabel {
     /// - Parameter attributedText:富文本文字
     /// - Returns:`Self`
     @discardableResult
-    func pd_attributedText(_ attributedText: NSAttributedString) -> Self {
+    func pd_attributedText(_ attributedText: NSAttributedString?) -> Self {
         self.attributedText = attributedText
         return self
     }
@@ -220,6 +270,14 @@ public extension UILabel {
     @discardableResult
     func pd_adjustsFontSizeToFitWidth(_ adjusts: Bool) -> Self {
         adjustsFontSizeToFitWidth = adjusts
+        return self
+    }
+
+    /// 根据内容调整尺寸
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_sizeToFit() -> Self {
+        sizeToFit()
         return self
     }
 }

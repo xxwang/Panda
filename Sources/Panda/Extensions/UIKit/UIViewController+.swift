@@ -238,6 +238,131 @@ public extension UIViewController {
     }
 }
 
+// MARK: - 类方法
+public extension UIViewController {
+    /// 从`UIStoryboard`中实例化`UIViewController`
+    /// - Parameters:
+    ///   - storyboard:`UIViewController`所在的`UIStoryboard`的名称
+    ///   - bundle:故事板所在的`Bundle`
+    ///   - identifier:`UIViewController`的`UIStoryboard`标识符
+    /// - Returns:从`UIStoryboard`实例化的`UIViewController`实例
+    class func instantiateViewController(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Self {
+        let viewControllerIdentifier = identifier ?? String(describing: self)
+        let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
+        guard let viewController = storyboard
+            .instantiateViewController(withIdentifier: viewControllerIdentifier) as? Self
+        else {
+            preconditionFailure(
+                "Unable to instantiate view controller with identifier \(viewControllerIdentifier) as type \(type(of: self))")
+        }
+        return viewController
+    }
+}
+
+// MARK: - Runtime
+@objc extension UIViewController {
+    // FIXME: - 需要完善
+    /// 交换方法
+    class func initializeHookMethod() {
+        super.initializeMethod()
+
+        if self == UIViewController.self {
+            let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
+            DispatchQueue.once(token: onceToken) {
+                // viewDidLoad
+                let oriSel = #selector(viewDidLoad)
+                let repSel = #selector(hook_viewDidLoad)
+                _ = self.hookInstanceMethod(of: oriSel, with: repSel)
+
+                // viewWillAppear
+                let oriSel1 = #selector(viewWillAppear(_:))
+                let repSel1 = #selector(hook_viewWillAppear(animated:))
+                _ = self.hookInstanceMethod(of: oriSel1, with: repSel1)
+
+                // viewWillDisappear
+                let oriSel2 = #selector(viewWillDisappear(_:))
+                let repSel2 = #selector(hook_viewWillDisappear(animated:))
+                _ = self.hookInstanceMethod(of: oriSel2, with: repSel2)
+
+                // present
+                let oriSelPresent = #selector(present(_:animated:completion:))
+                let repSelPresent = #selector(hook_present(_:animated:completion:))
+                _ = self.hookInstanceMethod(of: oriSelPresent, with: repSelPresent)
+            }
+        } else if self == UINavigationController.self {
+            let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
+            DispatchQueue.once(token: onceToken) {
+                // pushViewController
+                let oriSel = #selector(UINavigationController.pushViewController(_:animated:))
+                let repSel = #selector(UINavigationController.hook_pushViewController(_:animated:))
+                _ = self.hookInstanceMethod(of: oriSel, with: repSel)
+            }
+        }
+    }
+
+    // FIXME: - 需要完善
+    /// hook`viewDidLoad`
+    /// - Parameter animated:是否动画
+    private func hook_viewDidLoad(animated: Bool) {
+        // 需要注入的代码写在此处
+        hook_viewDidLoad(animated: animated)
+    }
+
+    // FIXME: - 需要完善
+    /// hook`viewWillAppear`
+    /// - Parameter animated:是否动画
+    private func hook_viewWillAppear(animated: Bool) {
+        // 需要注入的代码写在此处
+        hook_viewWillAppear(animated: animated)
+    }
+
+    // FIXME: - 需要完善
+    /// hook`viewWillDisappear`
+    /// - Parameter animated:是否动画
+    private func hook_viewWillDisappear(animated: Bool) {
+        // 需要注入的代码写在此处
+        hook_viewWillDisappear(animated: animated)
+    }
+
+    // FIXME: - 需要完善
+    /// hook`present`
+    /// - Parameters:
+    ///   - viewControllerToPresent:要`modal`的控制器
+    ///   - flag:是否动画
+    ///   - completion:完成回调
+    private func hook_present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if viewControllerToPresent.presentationController == nil {
+            viewControllerToPresent.presentationController?.presentedViewController.dismiss(animated: false, completion: nil)
+            print("viewControllerToPresent.presentationController 不能为 nil")
+            return
+        }
+        hook_present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+}
+
+// MARK: - UINavigationController
+@objc public extension UINavigationController {
+    // FIXME: - 需要完善
+    /// hook`pushViewController`
+    /// - Parameters:
+    ///   - viewController:要压入栈的控制器
+    ///   - animated:是否动画
+    func hook_pushViewController(_ viewController: UIViewController, animated: Bool) {
+        // 判断是否是根控制器
+        if viewControllers.count <= 1 {
+            Log.info("根控制器")
+        }
+
+        // 非栈顶控制器(要入栈的控制器不是栈顶控制器, 隐藏TabBar)
+        if !children.isEmpty {
+            viewController.hidesBottomBarWhenPushed = true
+        }
+
+        // push进入下一个控制器
+        hook_pushViewController(viewController, animated: animated)
+    }
+}
+
 // MARK: - Defaultable
 extension UIViewController: Defaultable {}
 public extension UIViewController {

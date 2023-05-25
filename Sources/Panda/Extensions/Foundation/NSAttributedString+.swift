@@ -14,14 +14,14 @@ extension NSAttributedString {
     func toMutable() -> NSMutableAttributedString {
         NSMutableAttributedString(attributedString: self)
     }
-    
+
     /// `NSAttributedString`上的`属性字典`
     /// - Returns: `[NSAttributedString.Key: Any]`
     func attributes() -> [NSAttributedString.Key: Any] {
         guard length > 0 else { return [:] }
         return attributes(at: 0, effectiveRange: nil)
     }
-    
+
     /// 整个`NSAttributedString`的`NSRange`
     /// - Returns: `NSRange`
     func fullNSRange() -> NSRange {
@@ -51,8 +51,7 @@ extension NSAttributedString {
                     } else {
                         subStrIndex += (subDivisionStr.lengthOfBytes(using: .unicode) / 2 + str.lengthOfBytes(using: .unicode) / 2)
                     }
-                    let newRange = NSRange(location: subStrIndex, length: str.count)
-                    ranges.append(newRange)
+                    ranges.append(NSRange(location: subStrIndex, length: str.count))
                 }
             }
         }

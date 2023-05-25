@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 关联属性`操作方法`
 public class AssociatedObject {
     /// 设置关联属性
-    static func associate(
+    static func set(
         _ object: Any,
         _ key: UnsafeRawPointer,
         _ value: some Any,
@@ -20,7 +20,7 @@ public class AssociatedObject {
     }
 
     /// 获取关联属性
-    static func object<T>(_ object: Any, _ key: UnsafeRawPointer) -> T? {
+    static func get<T>(_ object: Any, _ key: UnsafeRawPointer) -> T? {
         objc_getAssociatedObject(object, key) as? T
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - 方法
+// MARK: - 方法
 public extension NSMutableAttributedString {
     /// `NSMutableAttributedString`转`NSAttributedString`
     /// - Returns: `NSAttributedString`
@@ -22,42 +22,43 @@ public extension NSMutableAttributedString {
     typealias Associatedtype = NSMutableAttributedString
 
     class func `default`() -> Associatedtype {
-        var mutableAttributedString = NSMutableAttributedString()
-        return mutableAttributedString
+        NSMutableAttributedString()
     }
 }
 
 // MARK: - 链式语法
 public extension NSMutableAttributedString {
-    
     /// 设置字符串`String`
     /// - Parameters:
     ///   - string:范围
     /// - Returns:`Self`
     @discardableResult
     func pd_string(_ string: String) -> Self {
-        return pd_attributedString(string.toAttributedString())
+        pd_attributedString(string.toAttributedString())
     }
-    
+
     /// 设置不可变字符串`NSAttributedString`
     /// - Parameters:
     ///   - attributedString:范围
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedString(_ attributedString: NSAttributedString) -> Self {
-        self.setAttributedString(attributedString)
+        setAttributedString(attributedString)
         return self
     }
-    
+
     /// 设置指定`range`内的`字体`
     /// - Parameters:
     ///   - font:字体
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_font(_ font: UIFont, for range: NSRange? = nil) -> Self {
-        let range = range ?? fullNSRange()
-        return pd_addAttributes([NSAttributedString.Key.font: font], for: range)
+    func pd_font(_ font: UIFont?, for range: NSRange? = nil) -> Self {
+        if let font {
+            let range = range ?? fullNSRange()
+            return pd_addAttributes([NSAttributedString.Key.font: font], for: range)
+        }
+        return self
     }
 
     /// 设置富文本文字的`字间距`
@@ -185,8 +186,8 @@ public extension NSMutableAttributedString {
     ///   - range:范围
     /// - Returns:`Self`
     @discardableResult
-    func pd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange) -> Self {
-        for name in attributes.keys {addAttribute(name, value: attributes[name] ?? "", range: range)}
+    func pd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange? = nil) -> Self {
+        for name in attributes.keys { addAttribute(name, value: attributes[name] ?? "", range: range ?? fullNSRange()) }
         return self
     }
 
@@ -200,7 +201,7 @@ public extension NSMutableAttributedString {
         let ranges = subNSRanges(with: [text])
         if !ranges.isEmpty {
             for name in attributes.keys {
-                for range in ranges {addAttribute(name, value: attributes[name] ?? "", range: range)}
+                for range in ranges { addAttribute(name, value: attributes[name] ?? "", range: range) }
             }
         }
         return self
@@ -216,7 +217,7 @@ public extension NSMutableAttributedString {
     func pd_addAttributes(_ attributes: [Key: Any], toRangesMatching pattern: String, options: NSRegularExpression.Options = []) -> Self {
         guard let pattern = try? NSRegularExpression(pattern: pattern, options: options) else { return self }
         let matches = pattern.matches(in: string, options: [], range: NSRange(0 ..< length))
-        for match in matches {pd_addAttributes(attributes, for: match.range)}
+        for match in matches { pd_addAttributes(attributes, for: match.range) }
 
         return self
     }
@@ -230,5 +231,14 @@ public extension NSMutableAttributedString {
     func pd_addAttributes(_ attributes: [Key: Any], toOccurrencesOf target: some StringProtocol) -> Self {
         let pattern = "\\Q\(target)\\E"
         return pd_addAttributes(attributes, toRangesMatching: pattern)
+    }
+
+    /// 在可变属性字符串尾部追回新的属性字符串
+    /// - Parameter attributedString: 要追回的属性字符串
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_append(_ attributedString: NSAttributedString) -> Self {
+        append(attributedString)
+        return self
     }
 }

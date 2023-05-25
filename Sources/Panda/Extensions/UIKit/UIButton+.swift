@@ -260,8 +260,8 @@ extension UIButton: AssociatedAttributes {
     public typealias T = UIButton
 
     public var callback: Callback? {
-        get { AssociatedObject.object(self, &AssociateKeys.CallbackKey) }
-        set { AssociatedObject.associate(self, &AssociateKeys.CallbackKey, newValue) }
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) }
+        set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
     @objc internal func tapAction(_ button: UIButton) {

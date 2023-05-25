@@ -106,6 +106,7 @@ public extension NSObject {
 
 // MARK: - setValue
 @objc public extension NSObject {
+    // FIXME: - 需要完善
     /// 由于在`swift`中`initialize()`这个方法已经被废弃了,所以需要在`Appdelegate`中调用此方法
     class func initializeMethod() {
         if self != NSObject.self { return }
@@ -113,6 +114,7 @@ public extension NSObject {
         Self.hook_setValues()
     }
 
+    // FIXME: - 需要完善
     /// 交换设值方法
     private class func hook_setValues() {
         let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
@@ -135,22 +137,26 @@ public extension NSObject {
         }
     }
 
+    // FIXME: - 需要完善
     /// 如果键不存在会调用这个方法
     private func hook_setValue(_ value: Any?, forUndefinedKey key: String) {
         Log.warning("setValue(_:forUndefinedKey:), 未知键Key:\(key) 值:\(value ?? "")")
     }
 
+    // FIXME: - 需要完善
     /// 如果键不存在会调用这个方法
     private func hook_value(forUndefinedKey key: String) -> Any? {
         Log.warning("value(forUndefinedKey:), 未知键:\(key)")
         return nil
     }
 
+    // FIXME: - 需要完善
     /// 给一个非指针对象(如`NSInteger`)赋值 `nil`, 直接忽略
     private func hook_setNilValueForKey(_ key: String) {
         Log.warning("setNilValueForKey(_:), 不能给非指针对象(如NSInteger)赋值 nil 键:\(key)")
     }
 
+    // FIXME: - 需要完善
     /// 用于替换`setValuesForKeys(_:)`
     private func hook_setValuesForKeys(_ keyedValues: [String: Any]) {
         for (key, value) in keyedValues {

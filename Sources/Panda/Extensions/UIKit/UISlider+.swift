@@ -38,8 +38,8 @@ private class AssociateKeys {
 extension UISlider: AssociatedAttributes {
     public typealias T = Float
     public var callback: Callback? {
-        get { AssociatedObject.object(self, &AssociateKeys.CallbackKey) }
-        set { AssociatedObject.associate(self, &AssociateKeys.CallbackKey, newValue) }
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) }
+        set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
     /// 事件处理

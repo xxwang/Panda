@@ -76,7 +76,9 @@ public extension UITextField {
     }
 
     /// 限制字数的输入
-    /// `- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;` 里面调用
+    /// 调用位置
+    /// `func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool`
+    ///
     /// - Parameters:
     ///   - range:范围
     ///   - text:输入的文字

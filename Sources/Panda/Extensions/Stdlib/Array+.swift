@@ -27,22 +27,12 @@ public extension Array {
     }
 }
 
-// MARK: - Element == String
-public extension [String] {
-    /// 数组转字符转(数组的元素是 字符串),如:["1", "2", "3"] 连接器为 - ,那么转化后为 "1-2-3"
-    /// - Parameter separator:连接器
-    /// - Returns:转化后的字符串
-    func toString(separator: String = "") -> String {
-        joined(separator: separator)
-    }
-}
-
 // MARK: - 方法
 public extension Array {
     /// 安全的取某个索引的值
     /// - Parameter index:索引
     /// - Returns:对应 index 的 value
-    func indexValue(safe index: Index) -> Element? {
+    func value(of index: Index) -> Element? {
         indices.contains(index) ? self[index] : nil
     }
 
@@ -78,12 +68,12 @@ public extension Array {
 
     /// 交换指定位置的两个元素
     ///
-    ///     [1, 2, 3, 4, 5].safeSwap(from:3, to:0) -> [4, 2, 3, 1, 5]
-    ///     ["h", "e", "l", "l", "o"].safeSwap(from:1, to:0) -> ["e", "h", "l", "l", "o"]
+    ///     [1, 2, 3, 4, 5].swap(from:3, to:0) -> [4, 2, 3, 1, 5]
+    ///     ["h", "e", "l", "l", "o"].swap(from:1, to:0) -> ["e", "h", "l", "l", "o"]
     /// - Parameters:
     ///   - index:第一个元素位置
     ///   - otherIndex:第二个元素位置
-    mutating func safeSwap(from index: Index, to otherIndex: Index) {
+    mutating func swap(from index: Index, to otherIndex: Index) {
         guard index != otherIndex else { return }
         guard startIndex ..< endIndex ~= index else { return }
         guard startIndex ..< endIndex ~= otherIndex else { return }
@@ -111,6 +101,16 @@ public extension Array {
     }
 }
 
+// MARK: - Element == String
+public extension [String] {
+    /// 数组转字符转(数组的元素是 字符串),如:["1", "2", "3"] 连接器为 - ,那么转化后为 "1-2-3"
+    /// - Parameter separator:连接器
+    /// - Returns:转化后的字符串
+    func toString(separator: String = "") -> String {
+        joined(separator: separator)
+    }
+}
+
 // MARK: - Element:Equatable
 public extension Array where Element: Equatable {
     /// 获取数组中的指定元素的索引值
@@ -128,9 +128,7 @@ public extension Array where Element: Equatable {
     /// - Parameter item:元素
     /// - Returns:索引值
     func firstIndex(_ item: Element) -> Int? {
-        for (index, value) in enumerated() where value == item {
-            return index
-        }
+        for (index, value) in enumerated() where value == item { return index }
         return nil
     }
 
@@ -153,9 +151,7 @@ public extension Array where Element: Equatable {
     /// 删除数组中的指定元素
     /// - Parameter object:元素
     mutating func remove(_ object: Element) {
-        for idx in indexes(object).reversed() {
-            remove(at: idx)
-        }
+        for idx in indexes(object).reversed() { remove(at: idx) }
     }
 
     /// 删除数组的中的元素(可删除第一个出现的或者删除全部出现的)
@@ -173,9 +169,7 @@ public extension Array where Element: Equatable {
             }
         }
         // 倒序删除
-        for index in removeIndexs.reversed() {
-            remove(at: index)
-        }
+        for index in removeIndexs.reversed() { remove(at: index) }
         return self
     }
 
@@ -186,9 +180,7 @@ public extension Array where Element: Equatable {
     @discardableResult
     mutating func removeArray(_ elements: [Element], isRepeat: Bool = true) -> Array {
         for element in elements {
-            if contains(element) {
-                remove(element, isRepeat: isRepeat)
-            }
+            if contains(element) { remove(element, isRepeat: isRepeat) }
         }
         return self
     }
@@ -227,9 +219,7 @@ public extension Array where Element: Equatable {
     @discardableResult
     mutating func removeDuplicates() -> [Element] {
         self = reduce(into: [Element]()) {
-            if !$0.contains($1) {
-                $0.append($1)
-            }
+            if !$0.contains($1) { $0.append($1) }
         }
         return self
     }
@@ -242,9 +232,7 @@ public extension Array where Element: Equatable {
     /// - Returns:移除完成后的数组
     func withoutDuplicates() -> [Element] {
         reduce(into: [Element]()) {
-            if !$0.contains($1) {
-                $0.append($1)
-            }
+            if !$0.contains($1) { $0.append($1) }
         }
     }
 
@@ -280,14 +268,10 @@ public extension Array where Element: NSObjectProtocol {
         for i in 0 ..< count {
             if self[i].isEqual(object) {
                 removeIndexs.append(i)
-                if !isRepeat {
-                    break
-                }
+                if !isRepeat { break }
             }
         }
-        for index in removeIndexs.reversed() {
-            remove(at: index)
-        }
+        for index in removeIndexs.reversed() { remove(at: index) }
         return self
     }
 
@@ -312,9 +296,7 @@ public extension Array where Element: NSAttributedString {
     /// - Parameter separator:`NSAttributedString`类型分割符
     /// - Returns:`NSAttributedString`
     func joined(separator: NSAttributedString) -> NSAttributedString {
-        guard let firstElement = first else {
-            return "".toMutable()
-        }
+        guard let firstElement = first else { return "".toAttributedString() }
         return dropFirst()
             .reduce(into: NSMutableAttributedString(attributedString: firstElement)) { result, element in
                 result.append(separator)

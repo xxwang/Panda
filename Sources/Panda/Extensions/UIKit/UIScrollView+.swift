@@ -42,7 +42,7 @@ public extension UIScrollView {
 
 // MARK: - 截图
 public extension UIScrollView {
-    /// 截取整个滚动视图的快照(截图)
+    /// 获取`ScrollView`当前可见的部分的快照`截图`
     override func captureScreenshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
         defer { UIGraphicsEndImageContext() }
@@ -58,7 +58,7 @@ public extension UIScrollView {
         return image
     }
 
-    /// 获取`ScrollView`快照`截图`
+    /// 截取整个`ScrollView``contentSize`的快照(截图)
     /// - Parameter completion:完成回调
     func captureLongScreenshot(_ completion: @escaping (_ image: UIImage?) -> Void) {
         // 放一个假的封面
@@ -111,7 +111,7 @@ public extension UIScrollView {
             height: bounds.height
         )
 
-        DispatchQueue.delay_execute(0.3) {
+        DispatchQueue.delay_execute(delay: 0.3) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
                 self.screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)

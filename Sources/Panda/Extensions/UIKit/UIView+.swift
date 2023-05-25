@@ -620,7 +620,7 @@ public extension UIView {
     /// - Parameter frame:frame
     /// - Returns:`Self`
     @discardableResult
-    func frame(_ frame: CGRect) -> Self {
+    func pd_frame(_ frame: CGRect) -> Self {
         pd_frame = frame
         return self
     }
