@@ -7,11 +7,70 @@
 
 import UIKit
 
+/// 属性
+public extension UIApplication {
+    /// 获取`UIApplicationDelegate`
+    static var appDelegate: UIApplicationDelegate? {
+        let delegate = UIApplication.shared.delegate
+        return delegate
+    }
+
+    /// 获取`UIWindowSceneDelegate`
+    @available(iOS 13.0, *)
+    static var sceneDelegate: UIWindowSceneDelegate? {
+        for scene in UIApplication.shared.connectedScenes {
+            if let windowScene = scene as? UIWindowScene,
+               let windowSceneDelegate = windowScene.delegate as? UIWindowSceneDelegate
+            {
+                return windowSceneDelegate
+            }
+        }
+        return nil
+    }
+
+    /// 获取屏幕的方向
+    static var screenOrientation: UIInterfaceOrientation {
+        UIApplication.shared.statusBarOrientation
+    }
+
+    /// 网络状态是否可用
+    static var reachable: Bool {
+        NSData(contentsOf: URL(string: "https://www.baidu.com/")!) != nil
+    }
+
+    /// 消息推送是否可用
+    static var isAvailableOfPush: Bool {
+        let notOpen = UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType(rawValue: 0)
+        return !notOpen
+    }
+}
+
 // MARK: - 方法
 public extension UIApplication {
     /// 清理图标上的角标
     func clearApplicationIconBadge() {
         applicationIconBadgeNumber = 0
+    }
+}
+
+// MARK: - 商店
+public extension UIApplication {
+    /// app商店链接
+    /// - Parameter appID:应用在商店中的ID
+    /// - Returns:URL字符串
+    @discardableResult
+    static func appURL(with appID: String) -> String {
+        let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
+        return appStoreURL
+    }
+
+    /// app详情链接
+    /// - Parameter appID:应用在商店中的ID
+    /// - Returns:URL字符串
+    @discardableResult
+    static func appDetailURL(with appID: String) -> String {
+        let detailURL = "http://itunes.apple.com/cn/lookup?id=\(appID)"
+        return detailURL
     }
 }
 

@@ -92,3 +92,42 @@ public extension EnvUtils {
         #endif
     }
 }
+
+// MARK: - 应用运行环境
+public extension EnvUtils {
+    // MARK: - 应用程序运行环境枚举
+    enum RunEnv {
+        /// 应用程序正在调试模式下运行
+        case debug
+        /// 应用程序是从testFlight安装的
+        case testFlight
+        /// 应用程序是从应用商店安装的
+        case appStore
+    }
+
+    /// 当前应用程序的运行环境
+    static var currentRunEnv: RunEnv {
+        #if DEBUG
+            return .debug
+        #elseif targetEnvironment(simulator)
+            return .debug
+        #else
+            if let _ = Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") {
+                return .testFlight
+            }
+
+            guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {
+                return .debug
+            }
+
+            if appStoreReceiptURL.lastPathComponent.lowercased() == "sandboxreceipt" {
+                return .testFlight
+            }
+
+            if appStoreReceiptURL.path.lowercased().contains("simulator") {
+                return .debug
+            }
+            return .appStore
+        #endif
+    }
+}
