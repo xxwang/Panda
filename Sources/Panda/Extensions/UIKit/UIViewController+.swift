@@ -247,15 +247,14 @@ public extension UIViewController {
     ///   - identifier:`UIViewController`的`UIStoryboard`标识符
     /// - Returns:从`UIStoryboard`实例化的`UIViewController`实例
     class func instantiateViewController(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Self {
-        let viewControllerIdentifier = identifier ?? String(describing: self)
+        let identifier = identifier ?? String(describing: self)
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
-        guard let viewController = storyboard
-            .instantiateViewController(withIdentifier: viewControllerIdentifier) as? Self
-        else {
+        let instantiateViewController = storyboard.instantiateViewController(withIdentifier: identifier) as? Self
+        guard let instantiateViewController else {
             preconditionFailure(
-                "Unable to instantiate view controller with identifier \(viewControllerIdentifier) as type \(type(of: self))")
+                "Unable to instantiate view controller with identifier \(identifier) as type \(type(of: self))")
         }
-        return viewController
+        return instantiateViewController
     }
 }
 

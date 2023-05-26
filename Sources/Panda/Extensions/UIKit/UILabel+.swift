@@ -35,7 +35,7 @@ public extension UILabel {
 
     /// 获取`UILabel`第一行内容
     var firstLineString: String? {
-        linesContent().1?.first
+        linesContent().first
     }
 
     /// 判断`UILabel`中的内容是否被截断
@@ -62,6 +62,26 @@ public extension UILabel {
     }
 }
 
+// MARK: - 构造方法
+public extension UILabel {
+    /// 使用内容字符串来创建一个`UILabel`
+    /// - Parameter text:内容字符串
+    convenience init(text: String?) {
+        self.init()
+        self.text = text
+    }
+
+    /// 使用内容字符串和字体样式来创建一个`UILabel`
+    /// - Parameters:
+    ///   - text:内容字符串
+    ///   - style:字体样式
+    convenience init(text: String, style: UIFont.TextStyle) {
+        self.init()
+        font = UIFont.preferredFont(forTextStyle: style)
+        self.text = text
+    }
+}
+
 // MARK: - 获取`UILabel`中内容大小
 public extension UILabel {
     /// 获取`UILabel`中`字符串`的CGSize
@@ -71,6 +91,146 @@ public extension UILabel {
         if let attributedText { return attributedText.strSize(maxLineWidth) }
         if let text { text.strSize(maxLineWidth, font: font) ?? .zero }
         return .zero
+    }
+}
+
+// MARK: - 属性字符串
+public extension UILabel {
+    /// 设置图片/文字的混合内容
+    /// - Parameters:
+    ///   - text: 文本字符串
+    ///   - images: 图片数组
+    ///   - spacing: 间距
+    ///   - scale: 缩放比例
+    ///   - position: 图片插入位置
+    ///   - isOrgin: 是否使用图片原始大小
+    /// - Returns: `NSMutableAttributedString`
+    @discardableResult
+    func blend(_ text: String?,
+               images: [UIImage?] = [],
+               spacing: CGFloat = 5,
+               scale: CGFloat,
+               position: Int = 0,
+               isOrgin: Bool = false) -> NSMutableAttributedString
+    {
+        // 头部字符串
+        let headString = text?.subString(to: position) ?? ""
+        let attributedString = NSMutableAttributedString(string: headString)
+
+        for image in images {
+            guard let image else { continue }
+
+            // 计算图片宽高
+            let imageHeight = (isOrgin ? image.size.height : font.pointSize) * scale
+            let imageWidth = (image.size.width / image.size.height) * imageHeight
+            // 附件的Y坐标位置
+            let attachTop = (font.lineHeight - font.pointSize) / 2
+
+            // 使用图片附件创建属性字符串
+            let imageAttributedString = NSTextAttachment.default()
+                .pd_image(image)
+                .pd_bounds(CGRect(x: -3, y: -attachTop, width: imageWidth, height: imageHeight))
+                .toAttributedString()
+
+            // 将图片属性字符串追加到`attribuedString`
+            attributedString.append(imageAttributedString)
+            // 文字间距只对文字有效
+            attributedString.append(NSAttributedString(string: " "))
+        }
+
+        // 尾部字符串
+        let tailString = text?.subString(from: position) ?? ""
+        attributedString.append(NSAttributedString(string: tailString))
+
+        // 图文间距需要减去默认的空格宽度
+        let spaceW = " ".strSize(.greatestFiniteMagnitude, font: font).width
+        let range = NSRange(location: 0, length: images.count * 2)
+        attributedString.addAttribute(.kern, value: spacing - spaceW, range: range)
+
+        // 设置属性字符串到`UILabel`
+        attributedText = attributedString
+
+        return attributedString
+    }
+
+    /// 设置`text`属性
+    /// - Parameters:
+    ///   - text: 要设置的字符串
+    ///   - lineSpacing: 行间距
+    ///   - wordSpacing: 字间距
+    /// - Returns: `NSMutableAttributedString`
+    @discardableResult
+    func setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
+        // 段落样式
+        let style = NSMutableParagraphStyle.default()
+            .pd_lineBreakMode(.byCharWrapping)
+            .pd_alignment(.left)
+            .pd_lineSpacing(lineSpacing)
+            .pd_hyphenationFactor(1.0)
+            .pd_firstLineHeadIndent(0.0)
+            .pd_paragraphSpacingBefore(0.0)
+            .pd_headIndent(0)
+            .pd_tailIndent(0)
+
+        let attrString = text.toMutableAttributedString()
+            .pd_addAttributes([
+                .paragraphStyle: style,
+                .kern: wordSpacing,
+                .font: font ?? .systemFont(ofSize: 14),
+            ])
+        attributedText = attrString
+        return attrString
+    }
+
+    /// 获取`UILabel`的文本行数及每一行的内容
+    /// - Parameters:
+    ///   - labelWidth:`UILabel`的宽度
+    ///   - lineSpacing:行间距
+    ///   - wordSpacing:字间距
+    ///   - paragraphSpacing:段落间距
+    /// - Returns:行数及每行内容
+    func linesContent(_ labelWidth: CGFloat? = nil,
+                      lineSpacing: CGFloat = 0.0,
+                      wordSpacing: CGFloat = 0.0,
+                      paragraphSpacing: CGFloat = 0.0) -> [String]
+    {
+        guard let text, let font else { return [] }
+        // UILabel的宽度
+        let labelWidth: CGFloat = labelWidth ?? bounds.width
+
+        // 段落样式
+        let style = NSMutableParagraphStyle.default()
+            .pd_lineBreakMode(lineBreakMode)
+            .pd_alignment(textAlignment)
+            .pd_lineSpacing(lineSpacing)
+            .pd_paragraphSpacing(paragraphSpacing)
+        // 属性列表
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .paragraphStyle: style,
+            .kern: wordSpacing,
+        ]
+
+        // 创建属性字符串并设置属性
+        let attributedString = text.toMutableAttributedString().pd_addAttributes(attributes)
+        // 创建框架设置器
+        let frameSetter = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
+
+        let path = CGMutablePath()
+        // 2.5 是经验误差值
+        path.addRect(CGRect(x: 0, y: 0, width: labelWidth - 2.5, height: CGFloat(MAXFLOAT)))
+        let framef = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, nil)
+        // 从框架设置器中获取行内容(Element == CTLine)
+        let lines = CTFrameGetLines(framef) as NSArray
+
+        // 结果
+        var result = [String]()
+        // 获取每行内容
+        for line in lines {
+            let lineRange = CTLineGetStringRange(line as! CTLine)
+            result.append(text.subString(from: lineRange.location, length: lineRange.length))
+        }
+        return result
     }
 }
 
@@ -195,8 +355,18 @@ public extension UILabel {
     /// - Parameter spacing:行间距
     /// - Returns:`Self`
     @discardableResult
-    func pd_attributedLineSpacing(_ spacing: CGFloat) -> Self {
+    func pd_lineSpacing(_ spacing: CGFloat) -> Self {
         let attributedString = attributedText?.toMutable().pd_lineSpacing(spacing, for: (text ?? "").fullNSRange())
+        attributedText = attributedString
+        return self
+    }
+
+    /// 设置字间距
+    /// - Parameter spacing:字间距
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_wordSpacing(_ spacing: CGFloat) -> Self {
+        let attributedString = attributedText?.toMutable().pd_wordSpacing(spacing, for: (text ?? "").fullNSRange())
         attributedText = attributedString
         return self
     }
