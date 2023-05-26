@@ -141,7 +141,7 @@ public extension String {
 
     /// 转换为`Bool`
     func toBool() -> Bool {
-        let trimmed = trimmed().lowercased()
+        let trimmed = trim().lowercased()
         switch trimmed {
         case "1", "t", "true", "y", "yes": return true
         case "0", "f", "false", "n", "no": return false
@@ -261,6 +261,87 @@ public extension String {
     func toJSONObjects() -> [[String: Any]]? {
         guard let data = toData() else { return nil }
         return try? JSONSerialization.jsonObject(with: data) as? [[String: Any]]
+    }
+}
+
+// MARK: - Range
+public extension String {
+    /// 字符串的完整 `Range`
+    /// - Returns: `Range<String.Index>?`
+    func fullRange() -> Range<String.Index>? {
+        startIndex ..< endIndex
+    }
+
+    /// 将 `NSRange` 转换为 `Range<String.Index>`
+    /// - Parameter NSRange:要转换的`NSRange`
+    /// - Returns:在字符串中找到的 `NSRange` 的等效 `Range<String.Index>`
+    func range(_ nsRange: NSRange) -> Range<String.Index> {
+        guard let range = Range(nsRange, in: self) else { fatalError("Failed to find range \(nsRange) in \(self)") }
+        return range
+    }
+
+    /// 获取某个`子串`在`父串`中的范围->`Range`
+    /// - Parameter str:子串
+    /// - Returns:某个子串在父串中的范围
+    func range(_ subString: String) -> Range<String.Index>? {
+        range(of: subString)
+    }
+
+    /// 字符串的完整 `NSRange`
+    /// - Returns: `NSRange`
+    func fullNSRange() -> NSRange {
+        NSRange(startIndex ..< endIndex, in: self)
+    }
+
+    /// 将 `Range<String.Index>` 转换为 `NSRange`
+    /// - Parameter range:要转换的`Range<String.Index>`
+    /// - Returns:在字符串中找到的 `Range` 的等效 `NSRange`
+    func nsRange(_ range: Range<String.Index>) -> NSRange {
+        NSRange(range, in: self)
+    }
+
+    /// 获取指定字符串在属性字符串中的范围
+    /// - Parameter subStr:子串
+    /// - Returns:某个子串在父串中的范围
+    func subNSRange(_ subStr: String) -> NSRange {
+        guard let range = range(of: subStr) else {
+            return NSRange(location: 0, length: 0)
+        }
+        return NSRange(range, in: self)
+    }
+}
+
+// MARK: - 静态方法
+public extension String {
+    /// 给定长度的`乱数假文`字符串
+    /// - Parameters count:限制`乱数假文`字符数(默认为` 445 - 完整`的`乱数假文`)
+    /// - Returns:指定长度的`乱数假文`字符串
+    static func loremIpsum(of length: Int = 445) -> String {
+        guard length > 0 else { return "" }
+
+        // https://www.lipsum.com/
+        let loremIpsum = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        """
+        if loremIpsum.count > length {
+            return String(loremIpsum[loremIpsum.startIndex ..< loremIpsum.index(loremIpsum.startIndex, offsetBy: length)])
+        }
+        return loremIpsum
+    }
+
+    /// 给定长度的随机字符串
+    ///
+    ///     String.random(ofLength:18) -> "u7MMZYvGo9obcOcPj8"
+    /// - Parameters length:字符串中的字符数
+    /// - Returns:给定长度的随机字符串
+    static func random(of length: Int) -> String {
+        guard length > 0 else { return "" }
+        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var randomString = ""
+        for _ in 1 ... length {
+            randomString.append(base.randomElement()!)
+        }
+        return randomString
     }
 }
 
@@ -714,11 +795,7 @@ public extension String {
             }
             numberOfMatch = regex.numberOfMatches(in: str, options: NSRegularExpression.MatchingOptions.reportProgress, range: NSRange(location: 0, length: len))
 
-            if numberOfMatch > 0 {
-                return true
-            } else {
-                return false
-            }
+            if numberOfMatch > 0 { return true } else { return false }
         case 18:
             // 18位身份证
             year = Int(str.subString(from: 6, length: 4))!
@@ -757,6 +834,21 @@ public extension String {
                 return false
             }
         default:
+            return false
+        }
+    }
+
+    /// 是否是闰年
+    /// - Parameter year:年份
+    /// - Returns:返回是否是闰年
+    private func isLeapYear(year: Int) -> Bool {
+        if year % 400 == 0 {
+            return true
+        } else if year % 100 == 0 {
+            return false
+        } else if year % 4 == 0 {
+            return true
+        } else {
             return false
         }
     }
@@ -867,6 +959,92 @@ public extension String {
             return lowercased().hasSuffix(suffix.lowercased())
         }
         return hasSuffix(suffix)
+    }
+}
+
+// MARK: - 正则相关运算符
+/// 定义操作符
+infix operator =~: RegPrecedence
+precedencegroup RegPrecedence {
+    associativity: none
+    higherThan: AdditionPrecedence
+    lowerThan: MultiplicationPrecedence
+}
+
+/// 正则匹配操作符
+public func =~ (lhs: String, rhs: String) -> Bool {
+    lhs.regexp(rhs)
+}
+
+// MARK: - 正则
+public extension String {
+    /// 验证`字符串`是否匹配`正则表达式`匹配
+    /// - Parameters pattern:正则表达式
+    /// - Returns:如果字符串与模式匹配,则返回:`true`
+    func matches(pattern: String) -> Bool {
+        range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+
+    /// 验证`字符串`是否与`正则表达式`匹配
+    /// - Parameters:
+    ///   - regex:进行验证的正则表达式
+    ///   - options:要使用的匹配选项
+    /// - Returns:如果字符串与正则表达式匹配,则返回:`true`
+    func matches(regex: NSRegularExpression, options: NSRegularExpression.MatchingOptions = []) -> Bool {
+        let range = NSRange(startIndex ..< endIndex, in: self)
+        return regex.firstMatch(in: self, options: options, range: range) != nil
+    }
+
+    /// 正则校验
+    /// - Parameter pattern:要校验的正则表达式
+    /// - Returns:是否通过
+    func regexp(_ pattern: String) -> Bool {
+        let pred = NSPredicate(format: "SELF MATCHES %@", pattern)
+        return pred.evaluate(with: self)
+    }
+
+    /// 返回指定表达式的值
+    /// - Parameters:
+    ///   - pattern:正则表达式
+    ///   - count:匹配数量
+    func regexpText(_ pattern: String, count: Int = 1) -> [String]? {
+        guard let regx = try? NSRegularExpression(pattern: pattern, options: []),
+              let result = regx.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.count))
+        else { return nil }
+        var texts = [String]()
+        for idx in 1 ... count {
+            let text = toNSString().substring(with: result.range(at: idx))
+            texts.append(text)
+        }
+        return texts
+    }
+
+    /// 是否有与正则匹配的项
+    /// - Parameter pattern:正则表达式
+    /// - Returns:是否匹配
+    func isMatchRegexp(_ pattern: String) -> Bool {
+        guard let regx = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return false
+        }
+        let result = regx.matches(in: self, options: .reportProgress, range: NSRange(location: 0, length: utf16.count))
+        return !result.isEmpty
+    }
+
+    /// 获取匹配的`NSRange`
+    /// - Parameters:
+    ///   - pattern:匹配规则
+    /// - Returns:返回匹配的[NSRange]结果
+    func matchRange(_ pattern: String) -> [NSRange] {
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return []
+        }
+        let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: utf16.count))
+        guard !matches.isEmpty else {
+            return []
+        }
+        return matches.map { value in
+            value.range
+        }
     }
 }
 
@@ -1332,7 +1510,7 @@ public extension String {
     }
 }
 
-// MARK: - 沙盒
+// MARK: - 沙盒路径
 public extension String {
     /// `Support` 追加后的`目录 / 文件地址` `备份在 iCloud`
     func appendBySupport() -> String {
@@ -1361,11 +1539,14 @@ public extension String {
         createDirs(directory)
         return directory + "/\(self)"
     }
+}
 
+// MARK: - 沙盒URL
+public extension String {
     /// `Support` 追加后的`目录／文件地址` `备份在 iCloud`
     func urlBySupport() -> URL {
         var fileURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        _ = appendByDocument
+        _ = appendByDocument()
         fileURL = fileURL.appendingPathComponent(self)
         return fileURL
     }
@@ -1373,7 +1554,7 @@ public extension String {
     /// `Documents` 追加后的`目录／文件地址`
     func urlByDocument() -> URL {
         var fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        _ = appendByDocument
+        _ = appendByDocument()
         fileURL = fileURL.appendingPathComponent(self)
         return fileURL
     }
@@ -1381,19 +1562,20 @@ public extension String {
     /// `Cachees` 追加后的`目录／文件地址`
     func urlByCache() -> URL {
         var fileURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        _ = appendByCache
+        _ = appendByCache()
         fileURL = fileURL.appendingPathComponent(self)
         return fileURL
     }
+}
 
+// MARK: - 文件操作
+public extension String {
     /// 删除文件
     func removeFile() {
         if FileManager.default.fileExists(atPath: self) {
             do {
                 try FileManager.default.removeItem(atPath: self)
-            } catch {
-                debugPrint("文件删除失败!")
-            }
+            } catch { debugPrint("文件删除失败!") }
         }
     }
 
@@ -1406,9 +1588,7 @@ public extension String {
         if !FileManager.default.fileExists(atPath: dir) {
             do {
                 try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error)
-            }
+            } catch { print(error) }
         }
     }
 }
@@ -2106,53 +2286,6 @@ public extension String {
             })
             .map { (lhs: Character, _: Character) in lhs }
             .reversed())
-    }
-}
-
-// MARK: - Range
-public extension String {
-    /// 字符串的完整 `Range`
-    /// - Returns: `Range<String.Index>?`
-    func fullRange() -> Range<String.Index>? {
-        startIndex ..< endIndex
-    }
-
-    /// 将 `NSRange` 转换为 `Range<String.Index>`
-    /// - Parameter NSRange:要转换的`NSRange`
-    /// - Returns:在字符串中找到的 `NSRange` 的等效 `Range<String.Index>`
-    func range(_ nsRange: NSRange) -> Range<String.Index> {
-        guard let range = Range(nsRange, in: self) else { fatalError("Failed to find range \(nsRange) in \(self)") }
-        return range
-    }
-
-    /// 获取某个`子串`在`父串`中的范围->`Range`
-    /// - Parameter str:子串
-    /// - Returns:某个子串在父串中的范围
-    func range(_ subString: String) -> Range<String.Index>? {
-        range(of: subString)
-    }
-
-    /// 字符串的完整 `NSRange`
-    /// - Returns: `NSRange`
-    func fullNSRange() -> NSRange {
-        NSRange(startIndex ..< endIndex, in: self)
-    }
-
-    /// 将 `Range<String.Index>` 转换为 `NSRange`
-    /// - Parameter range:要转换的`Range<String.Index>`
-    /// - Returns:在字符串中找到的 `Range` 的等效 `NSRange`
-    func nsRange(_ range: Range<String.Index>) -> NSRange {
-        NSRange(range, in: self)
-    }
-
-    /// 获取指定字符串在属性字符串中的范围
-    /// - Parameter subStr:子串
-    /// - Returns:某个子串在父串中的范围
-    func subNSRange(_ subStr: String) -> NSRange {
-        guard let range = range(of: subStr) else {
-            return NSRange(location: 0, length: 0)
-        }
-        return NSRange(range, in: self)
     }
 }
 
