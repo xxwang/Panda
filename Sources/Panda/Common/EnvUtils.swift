@@ -106,7 +106,7 @@ public extension EnvUtils {
     }
 
     /// 当前应用程序的运行环境
-    static var currentRunEnv: RunEnv {
+    static var runEnv: RunEnv {
         #if DEBUG
             return .debug
         #elseif targetEnvironment(simulator)
