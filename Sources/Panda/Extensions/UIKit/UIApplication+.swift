@@ -5,7 +5,11 @@
 //  Created by 王斌 on 2023/5/22.
 //
 
+import CoreLocation
+import Foundation
+import StoreKit
 import UIKit
+import UserNotifications
 
 /// 属性
 public extension UIApplication {
@@ -43,18 +47,27 @@ public extension UIApplication {
     }
 }
 
-// MARK: - 方法
+// MARK: - 商店
 public extension UIApplication {
-    /// 清理图标上的角标
-    func clearApplicationIconBadge() {
-        applicationIconBadgeNumber = 0
+    /// 应用在商店中的链接地址
+    /// - Parameter appID: 应用在商店中的ID
+    /// - Returns: 地址字符串
+    func homeUrlInAppStore(with appID: String) -> String {
+        "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
+    }
+
+    /// 应用在商店中的详情链接地址
+    /// - Parameter appID: 应用在商店中的ID
+    /// - Returns: 地址字符串
+    func detailUrlInAppStore(with appID: String) -> String {
+        "http://itunes.apple.com/cn/lookup?id=\(appID)"
     }
 }
 
 // MARK: - 版本号
 public extension UIApplication {
     /// 判断当前版本是否为新版本
-    static var isNewVersion: Bool {
+    var isNewVersion: Bool {
         // 当前应用版本
         let currentVersion = Bundle.appVersion ?? "0.0.0"
         // 获取存储的版本
@@ -69,47 +82,42 @@ public extension UIApplication {
     /// 指定版本号与应用当前版本号进行比较
     /// - Parameter version:传进来的版本号码
     /// - Returns:返回对比加过,true:比当前的版本大,false:比当前的版本小
-    static func compareVersion(version: String) -> Bool {
+    func compareVersion(_ version: String) -> Bool {
         // 获取要比较的(主版本号、次版本号、补丁版本号)
-        let newVersionResult = appVersion(version: version)
-        guard newVersionResult.isSuccess else {
-            return false
-        }
+        let newVersion = splitAppVersion(version)
+        guard newVersion.isOk else { return false }
 
         // 获取当前应用的(主版本号、次版本号、补丁版本号)
-        let currentVersion = Bundle.appVersion ?? "0.0.0"
-        let currentVersionResult = appVersion(version: currentVersion)
-        guard currentVersionResult.isSuccess else {
-            return false
-        }
+        let currentVersion = splitAppVersion(Bundle.appVersion ?? "0.0.0")
+        guard currentVersion.isOk else { return false }
 
         // 主版本大于
-        if newVersionResult.versions.major > currentVersionResult.versions.major {
+        if newVersion.versions.major > currentVersion.versions.major {
             return true
         }
 
         // 主版本小于
-        if newVersionResult.versions.major < currentVersionResult.versions.major {
+        if newVersion.versions.major < currentVersion.versions.major {
             return false
         }
 
         // 次版本号大于
-        if newVersionResult.versions.minor > currentVersionResult.versions.minor {
+        if newVersion.versions.minor > currentVersion.versions.minor {
             return true
         }
 
         // 次版本号小于
-        if newVersionResult.versions.minor < currentVersionResult.versions.minor {
+        if newVersion.versions.minor < currentVersion.versions.minor {
             return false
         }
 
         // 补丁版本大于
-        if newVersionResult.versions.patch > currentVersionResult.versions.patch {
+        if newVersion.versions.patch > currentVersion.versions.patch {
             return true
         }
 
         // 补丁版本小于
-        if newVersionResult.versions.patch < currentVersionResult.versions.patch {
+        if newVersion.versions.patch < currentVersion.versions.patch {
             return false
         }
 
@@ -119,12 +127,12 @@ public extension UIApplication {
 
     /// 分割版本号
     /// - Parameter version:要分割的版本号
-    /// - Returns:(isSuccess:是否成功, versions:(major:主版本号, minor:次版本号, patch:补丁版本号))
-    static func appVersion(version: String) -> (isSuccess: Bool, versions: (major: Int, minor: Int, patch: Int)) {
+    /// - Returns:(isOk:是否成功, versions:(major:主版本号, minor:次版本号, patch:补丁版本号))
+    func splitAppVersion(_ version: String) -> (isOk: Bool, versions: (major: Int, minor: Int, patch: Int)) {
         // 获取(主版本号、次版本号、补丁版本号)字符串数组
         let versionNumbers = version.split(with: ".")
         if versionNumbers.count != 3 {
-            return (isSuccess: false, versions: (major: 0, minor: 0, patch: 0))
+            return (isOk: false, versions: (major: 0, minor: 0, patch: 0))
         }
 
         // 主版本号
@@ -139,28 +147,15 @@ public extension UIApplication {
         let patchString = versionNumbers[2]
         let patchNumber = patchString.toInt()
 
-        return (isSuccess: true, versions: (major: majorNumber, minor: minorNumber, patch: patchNumber))
+        return (isOk: true, versions: (major: majorNumber, minor: minorNumber, patch: patchNumber))
     }
 }
 
-// MARK: - 商店
+// MARK: - 方法
 public extension UIApplication {
-    /// app商店链接
-    /// - Parameter appID:应用在商店中的ID
-    /// - Returns:URL字符串
-    @discardableResult
-    static func appURL(with appID: String) -> String {
-        let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
-        return appStoreURL
-    }
-
-    /// app详情链接
-    /// - Parameter appID:应用在商店中的ID
-    /// - Returns:URL字符串
-    @discardableResult
-    static func appDetailURL(with appID: String) -> String {
-        let detailURL = "http://itunes.apple.com/cn/lookup?id=\(appID)"
-        return detailURL
+    /// 清理图标上的角标
+    func clearApplicationIconBadge() {
+        applicationIconBadgeNumber = 0
     }
 }
 
@@ -216,105 +211,53 @@ public extension UIApplication {
             isSuccess ? print("打开应用商店评分页成功!") : print("打开应用商店评分页失败!")
         }
     }
+}
 
-    /// 应用跳转
+public extension UIApplication {
+    /// 打开指定URL地址
     /// - Parameters:
-    ///   - vc:跳转时所在控制器
-    ///   - appID:app的id
-    static func updateApp(vc: UIViewController, appID: String) {
-        guard appID.count > 0 else {
-            return
-        }
-        let productView = SKStoreProductViewController()
-        // productView.delegate = (vc as! SKStoreProductViewControllerDelegate)
-        productView.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: appID], completionBlock: { result, _ in
-            if !result {
-                // 点击取消
-                productView.dismiss(animated: true, completion: nil)
+    ///   - url:要打开的URL地址
+    ///   - complete:完成回调
+    func openURL(_ url: URL, completion: @escaping (_ isOk: Bool) -> Void) {
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:]) { success in
+                completion(success)
             }
-        })
-        vc.showDetailViewController(productView, sender: vc)
-    }
-
-    /// 打开应用更新页面
-    /// - Parameters:
-    ///   - sourceVC:跳转时的来源控制器(需要遵守`SKStoreProductViewControllerDelegate`协议)
-    ///   - appID:用在AppStore中的ID(在Connect中创建应用后生成的ID)
-    static func updateApp(from sourceVC: some UIViewController & SKStoreProductViewControllerDelegate, appID: String) {
-        guard appID.count > 0 else {
-            return
+        } else {
+            completion(UIApplication.shared.openURL(url))
         }
-        let productVC = SKStoreProductViewController()
-        productVC.delegate = sourceVC
-        productVC.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: appID]) { isSuccess, error in
-            productVC.dismiss(animated: true)
-            if !isSuccess {
-                print(error?.localizedDescription ?? "")
-                return
-            }
-        }
-        sourceVC.showDetailViewController(productVC, sender: sourceVC)
-    }
-
-    /// 打开手机上安装的系统app
-    /// - Parameters:
-    ///   - app:系统App枚举
-    ///   - completion:完成回调
-    static func openSystemApp(_ app: CMSystemApp, completion: @escaping Callbacks.BoolResult) {
-        openURL(app.url, completion: completion)
-    }
-
-    /// 打开手机上安装的第三方App
-    /// - Parameters:
-    ///   - app:第三方app枚举
-    ///   - completion:完成回调
-    static func openOtherApp(_ app: CMOtherApp, completion: @escaping Callbacks.BoolResult) {
-        openURL(app.url, completion: completion)
     }
 
     /// 拨打电话操作
     /// - Parameters:
     ///   - phoneNumber:要拨打的电话号码
     ///   - completion:完成回调
-    static func call(with phoneNumber: String, completion: @escaping Callbacks.BoolResult) {
-        // 判断是否有效
-        guard let phoneNumberEncoding = ("tel://" + phoneNumber)
-            .addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
-            let url = URL(string: phoneNumberEncoding),
-            UIApplication.shared.canOpenURL(url)
-        else {
-            completion(false)
-            return
-        }
-        openURL(url, completion: completion)
+    func call(with phoneNumber: String, completion: @escaping (_ isOk: Bool) -> Void) {
+        let callAddress = ("tel://" + phoneNumber)
+        guard let url = URL(string: callAddress) else { completion(false); return }
+        guard UIApplication.shared.canOpenURL(url) else { completion(false); return }
+        UIApplication.shared.openURL(url, completion: completion)
     }
 
-    /// 打开指定URL地址
+    /// 在应用中打开指定应用在`AppStore`中的详情页面
     /// - Parameters:
-    ///   - url:要打开的URL地址
-    ///   - complete:完成回调
-    static func openURL(_ url: URL, completion: @escaping Callbacks.BoolResult) {
-        // iOS 10.0 以前
-        guard #available(iOS 10.0, *) else {
-            let success = UIApplication.shared.openURL(url)
-            if success {
-                print("10以前可以跳转")
-                completion(true)
-            } else {
-                print("10以前不能完成跳转")
-                completion(false)
-            }
-            return
-        }
-        // iOS 10.0 以后
-        UIApplication.shared.open(url, options: [:]) { success in
-            if success {
-                print("10以后可以跳转url")
-                completion(true)
-            } else {
-                print("10以后不能完成跳转")
-                completion(false)
+    ///   - controller: 是哪个控制器来弹出的
+    ///   - appID: 应用在商店中的ID
+    func openAppDetailViewController(from controller: some UIViewController & SKStoreProductViewControllerDelegate,
+                                     appID: String)
+    {
+        guard appID.count > 0 else { return }
+
+        // 商店产品页面
+        let productViewController = SKStoreProductViewController()
+        productViewController.delegate = controller
+        productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: appID]) { isOk, error in
+            if !isOk {
+                print(error?.localizedDescription ?? "")
+                productViewController.dismiss(animated: true)
+                return
             }
         }
+        controller.showDetailViewController(productViewController, sender: controller)
     }
 }
