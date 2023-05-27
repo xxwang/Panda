@@ -20,7 +20,7 @@ public extension UITabBarController {
 public extension UITabBarController {
     /// 查找项目中的`UITabBarController`
     static func findTabBarController() -> UITabBarController? {
-        guard let currentTabBarController = UIWindow.mainWindow?.rootViewController as? UITabBarController else {
+        guard let currentTabBarController = UIWindow.main?.rootViewController as? UITabBarController else {
             return nil
         }
         return currentTabBarController

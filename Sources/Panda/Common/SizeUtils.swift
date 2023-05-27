@@ -23,7 +23,7 @@ public extension SizeUtils {
     /// 屏幕安全区
     static var safeAreaInsets: UIEdgeInsets {
         if #available(iOS 11.0, *) {
-            return UIWindow.mainWindow?.safeAreaInsets ?? .zero
+            return UIWindow.main?.safeAreaInsets ?? .zero
         }
         return .zero
     }
@@ -43,7 +43,7 @@ public extension SizeUtils {
     /// 状态栏高度
     static var statusBarHeight: CGFloat {
         if #available(iOS 13.0, *) {
-            if let statusbar = UIWindow.mainWindow?.windowScene?.statusBarManager {
+            if let statusbar = UIWindow.main?.windowScene?.statusBarManager {
                 return statusbar.statusBarFrame.size.height
             }
         } else {

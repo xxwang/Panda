@@ -59,7 +59,7 @@ public extension EnvUtils {
             isLand = UIApplication.shared.statusBarOrientation.isLandscape
         }
 
-        if let window = UIWindow.mainWindow, isLand == false {
+        if let window = UIWindow.main, isLand == false {
             isLand = window.pd_width > window.pd_height
         }
         return isLand

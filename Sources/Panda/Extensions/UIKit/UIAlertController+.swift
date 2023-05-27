@@ -107,7 +107,7 @@ public extension UIAlertController {
     ///   - completion:完成回调
     func show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
         // 弹起UIAlertController实例
-        UIWindow.mainWindow?.rootViewController?.present(self, animated: animated, completion: completion)
+        UIWindow.main?.rootViewController?.present(self, animated: animated, completion: completion)
         // 是否震动
         if shake { AudioServicesPlayAlertSound(kSystemSoundID_Vibrate) }
 
@@ -115,7 +115,7 @@ public extension UIAlertController {
         guard let deadline else { return }
 
         // 根据deadline来让UIAlertController实例消失
-        DispatchQueue.delay_execute(deadline) { [weak self] in
+        DispatchQueue.delay_execute(delay: deadline) { [weak self] in
             guard let self else { return }
             dismiss(animated: animated, completion: nil)
         }

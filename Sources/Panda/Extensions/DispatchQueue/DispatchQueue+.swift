@@ -119,8 +119,8 @@ public extension DispatchQueue {
     ///   - qos: 优化级
     ///   - flags: 标识
     ///   - work: 要执行的任务
-    static func delay_execute(_ queue: DispatchQueue = .main,
-                              delay timeInterval: TimeInterval,
+    static func delay_execute(delay timeInterval: TimeInterval,
+                              queue: DispatchQueue = .main,
                               qos: DispatchQoS = .unspecified,
                               flags: DispatchWorkItemFlags = [],
                               execute work: @escaping () -> Void)

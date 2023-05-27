@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 应用Window
 public extension UIWindow {
     /// 获取一个有效的`UIWindow`
-    static var mainWindow: UIWindow? {
+    static var main: UIWindow? {
         var targetWindow: UIWindow?
         if let window = delegateWindow { targetWindow = window }
         if let window = keyWindow { targetWindow = window }
@@ -87,7 +87,7 @@ public extension UIWindow {
     /// 获取可用窗口的根控制器
     /// - Returns: `UIViewController?`
     static func rootViewController() -> UIViewController? {
-        UIWindow.mainWindow?.rootViewController
+        UIWindow.main?.rootViewController
     }
 
     /// 获取基准控制器的最顶层控制器
@@ -132,7 +132,7 @@ public extension UIWindow {
                                         options: UIView.AnimationOptions = .transitionFlipFromRight,
                                         competion: (() -> Void)?)
     {
-        guard let window = UIWindow.mainWindow else { return }
+        guard let window = UIWindow.main else { return }
         if animated { // 需要动画切换
             UIView.transition(with: window, duration: duration, options: options) {
                 let oldState = UIView.areAnimationsEnabled
@@ -165,7 +165,7 @@ public extension UIWindow {
                                         timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
                                         competion: (() -> Void)? = nil)
     {
-        guard let window = UIWindow.mainWindow else { return }
+        guard let window = UIWindow.main else { return }
         if animated {
             // 转场动画
             let animation = CATransition()

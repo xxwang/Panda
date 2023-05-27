@@ -29,19 +29,17 @@ public extension UIApplication {
     }
 
     /// 获取屏幕的方向
-    static var screenOrientation: UIInterfaceOrientation {
-        UIApplication.shared.statusBarOrientation
+    static var interfaceOrientation: UIInterfaceOrientation {
+        if #available(iOS 13, *) {
+            return UIWindow.main?.windowScene?.interfaceOrientation ?? .unknown
+        } else {
+            return UIApplication.shared.statusBarOrientation
+        }
     }
 
     /// 网络状态是否可用
     static var reachable: Bool {
         NSData(contentsOf: URL(string: "https://www.baidu.com/")!) != nil
-    }
-
-    /// 消息推送是否可用
-    static var isAvailableOfPush: Bool {
-        let notOpen = UIApplication.shared.currentUserNotificationSettings?.types == UIUserNotificationType(rawValue: 0)
-        return !notOpen
     }
 }
 
@@ -50,27 +48,6 @@ public extension UIApplication {
     /// 清理图标上的角标
     func clearApplicationIconBadge() {
         applicationIconBadgeNumber = 0
-    }
-}
-
-// MARK: - 商店
-public extension UIApplication {
-    /// app商店链接
-    /// - Parameter appID:应用在商店中的ID
-    /// - Returns:URL字符串
-    @discardableResult
-    static func appURL(with appID: String) -> String {
-        let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
-        return appStoreURL
-    }
-
-    /// app详情链接
-    /// - Parameter appID:应用在商店中的ID
-    /// - Returns:URL字符串
-    @discardableResult
-    static func appDetailURL(with appID: String) -> String {
-        let detailURL = "http://itunes.apple.com/cn/lookup?id=\(appID)"
-        return detailURL
     }
 }
 
@@ -163,6 +140,27 @@ public extension UIApplication {
         let patchNumber = patchString.toInt()
 
         return (isSuccess: true, versions: (major: majorNumber, minor: minorNumber, patch: patchNumber))
+    }
+}
+
+// MARK: - 商店
+public extension UIApplication {
+    /// app商店链接
+    /// - Parameter appID:应用在商店中的ID
+    /// - Returns:URL字符串
+    @discardableResult
+    static func appURL(with appID: String) -> String {
+        let appStoreURL = "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
+        return appStoreURL
+    }
+
+    /// app详情链接
+    /// - Parameter appID:应用在商店中的ID
+    /// - Returns:URL字符串
+    @discardableResult
+    static func appDetailURL(with appID: String) -> String {
+        let detailURL = "http://itunes.apple.com/cn/lookup?id=\(appID)"
+        return detailURL
     }
 }
 
