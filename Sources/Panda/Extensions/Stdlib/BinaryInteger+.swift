@@ -173,64 +173,44 @@ public extension BinaryInteger {
         Date(timeIntervalSince1970: TimeInterval(toDouble() / (isUnix ? 1.0 : 1000.0)))
     }
 
-    /// `Int`时间戳转日期字符串
+    /// 秒转换成播放时间条的格式
     /// - Parameters:
-    ///   - dateFormat:日期格式化样式
-    ///   - isUnix:是否是`Unix`时间戳格式(默认`true`)
-    /// - Returns:表示日期的字符串
-    func toDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss", isUnix: Bool = true) -> String {
-        let date = toDate(isUnix: isUnix)
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormat
-        return formatter.string(from: date)
-    }
+    ///   - component:格式类型`nil`为默认类型
+    /// - Returns:返回时间条
+    func toMediaTimeString(component: Calendar.Component? = nil) -> String {
+        if self <= 0 { return "00:00" }
 
-    /// `时间戳`与`当前时间`的`时间差`
-    /// - Parameter format:格式化样式`yyyy-MM-dd HH:mm:ss`
-    /// - Returns:日期字符串
-    func toNowDistance(_ format: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let date = Date(timeInterval: toDouble(), since: Date())
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: date)
-    }
-
-    /// `Int`时间戳转表示日期的字符串(`刚刚/x分钟前`)
-    /// - Parameter isUnix:是否是`Unix`时间戳格式(默认`true`)
-    /// - Returns:表示日期的字符串
-    func toTimeline(isUnix: Bool = true) -> String {
-        // 获取当前的时间戳
-        let currentTimeStamp = Date().timeIntervalSince1970
-        // 服务器时间戳(如果是毫秒 要除以1000)
-        var serverTimeStamp = TimeInterval(self)
-        if !isUnix {
-            serverTimeStamp /= 1000.0
-        }
-        // 时间差
-        let reduceTime: TimeInterval = currentTimeStamp - serverTimeStamp
-
-        if reduceTime < 60 {
-            return "刚刚"
+        // 秒
+        let second = toInt() % 60
+        if component == .second {
+            return String(format: "%02d", toInt())
         }
 
-        let mins = Int(reduceTime / 60)
-        if mins < 60 {
-            return "\(mins)分钟前"
+        // 分钟
+        var minute = Int(self / 60)
+        if component == .minute {
+            return String(format: "%02d:%02d", minute, second)
         }
 
-        let hours = Int(reduceTime / 3600)
-        if hours < 24 {
-            return "\(hours)小时前"
+        // 小时
+        var hour = 0
+        if minute >= 60 {
+            hour = Int(minute / 60)
+            minute = minute - hour * 60
         }
 
-        let days = Int(reduceTime / 3600 / 24)
-        if days < 30 {
-            return "\(days)天前"
+        if component == .hour {
+            return String(format: "%02d:%02d:%02d", hour, minute, second)
         }
 
-        let date = Date(timeIntervalSince1970: serverTimeStamp)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-        return formatter.string(from: date)
+        // normal 类型
+        if hour > 0 {
+            return String(format: "%02d:%02d:%02d", hour, minute, second)
+        }
+
+        if minute > 0 {
+            return String(format: "%02d:%02d", minute, second)
+        }
+        return String(format: "%02d", second)
     }
 }

@@ -1399,20 +1399,12 @@ public extension String {
     /// `格式日期字符串`成`日期对象`
     /// - Parameters format:日期格式
     /// - Returns:`Date?`
-    func toDate(withFormat format: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    func toDate(with format: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         dateFormatter.timeZone = .current
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: self)
-    }
-
-    /// `日期格式字符串`转`时间戳(秒)`
-    /// - Parameter format:日期格式
-    /// - Returns:`Double`(秒)
-    func toUnixTimestamp(withFormat format: String = "yyyy-MM-dd HH:mm:ss") -> Double {
-        let date = toDate(withFormat: format)
-        return date?.timeIntervalSince1970 ?? 0
     }
 }
 

@@ -49,7 +49,7 @@ public extension Array where Element: Encodable {
     /// 数组转`Data?`
     /// - Returns:`Data?`
     func toData() -> Data? {
-        toJSON()?.toData()
+        toJSONString()?.toData()
     }
 
     /// 数组转`JSON`字符串
@@ -61,6 +61,6 @@ public extension Array where Element: Encodable {
                 objects.append(object)
             }
         }
-        return objects.toJSONObjects()(prettify: true)
+        return objects.toJSONString()
     }
 }

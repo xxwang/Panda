@@ -13,26 +13,26 @@ public extension CAGradientLayer {
     /// 创建渐变图层(`CAGradientLayer`)
     /// - Parameters:
     ///   - frame:图层尺寸及位置信息
-    ///   - startPoint:渐变开始点
-    ///   - endPoint:渐变结束点
     ///   - colors:颜色位置数组
     ///   - locations:颜色数组中颜色对应的位置
     ///   - type:渐变类型
+    ///   - start:渐变开始点
+    ///   - end:渐变结束点
     convenience init(_ frame: CGRect = .zero,
-                     startPoint: CGPoint,
-                     endPoint: CGPoint,
                      colors: [UIColor],
                      locations: [CGFloat]? = nil,
-                     type: CAGradientLayerType = .axial)
+                     type: CAGradientLayerType = .axial,
+                     start: CGPoint,
+                     end: CGPoint)
     {
         self.init()
 
         pd_frame(frame)
-            .pd_startPoint(startPoint)
-            .pd_endPoint(endPoint)
             .pd_colors(colors)
             .pd_locations(locations ?? [])
             .pd_type(type)
+            .pd_start(start)
+            .pd_end(end)
     }
 }
 
@@ -74,7 +74,7 @@ public extension CAGradientLayer {
     /// - Parameter startPoint:渐变开始位置
     /// - Returns:`Self`
     @discardableResult
-    func pd_startPoint(_ startPoint: CGPoint = .zero) -> Self {
+    func pd_start(_ startPoint: CGPoint = .zero) -> Self {
         self.startPoint = startPoint
         return self
     }
@@ -83,7 +83,7 @@ public extension CAGradientLayer {
     /// - Parameter endPoint:渐变结束位置
     /// - Returns:`Self`
     @discardableResult
-    func pd_endPoint(_ endPoint: CGPoint = .zero) -> Self {
+    func pd_end(_ endPoint: CGPoint = .zero) -> Self {
         self.endPoint = endPoint
         return self
     }

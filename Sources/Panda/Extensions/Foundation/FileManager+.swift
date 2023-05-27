@@ -65,9 +65,7 @@ public extension FileManager {
     /// - Returns:文件名称
     static func fileName(_ path: String, suffix pathExtension: Bool = true) -> String {
         let fileName = (path as NSString).lastPathComponent
-        guard pathExtension else {
-            return (fileName as NSString).deletingPathExtension
-        }
+        guard pathExtension else { return (fileName as NSString).deletingPathExtension }
         return fileName
     }
 
@@ -159,9 +157,7 @@ public extension FileManager {
     ///   - path2:参与比较的第二个路径
     /// - Returns:`Bool`
     static func isEqual(path1: String, path2: String) -> Bool {
-        guard isExists(path1), isExists(path2) else {
-            return false
-        }
+        guard isExists(path1), isExists(path2) else { return false }
         return FileManager.default.contentsEqual(atPath: path1, andPath: path2)
     }
 
@@ -170,9 +166,7 @@ public extension FileManager {
     /// - Returns:结果
     @discardableResult
     static func createFolder(_ path: String) -> (isSuccess: Bool, error: String) {
-        if isExists(path) {
-            return (true, "文件已存在!")
-        }
+        if isExists(path) { return (true, "文件已存在!") }
         do {
             try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
             return (true, "创建成功!")
@@ -186,9 +180,7 @@ public extension FileManager {
     /// - Returns:结果信息
     @discardableResult
     static func removeFolder(_ path: String) -> (isSuccess: Bool, error: String) {
-        guard isExists(path) else {
-            return (true, "文件夹不存在!")
-        }
+        guard isExists(path) else { return (true, "文件夹不存在!") }
         do {
             try FileManager.default.removeItem(atPath: path)
             return (true, "删除成功!")
@@ -214,9 +206,7 @@ public extension FileManager {
     /// - Returns:结果信息
     @discardableResult
     static func removeFile(_ path: String) -> (isSuccess: Bool, error: String) {
-        guard isExists(path) else {
-            return (true, "文件不存在!")
-        }
+        guard isExists(path) else { return (true, "文件不存在!") }
 
         do {
             try FileManager.default.removeItem(atPath: path)
@@ -240,9 +230,7 @@ public extension FileManager {
                 fileURL = path.toURL()
             }
 
-            guard let fileURL else {
-                return false
-            }
+            guard let fileURL else { return false }
 
             let fileHandle = try FileHandle(forWritingTo: fileURL)
             let content = "\n" + "\(Date().toString()):" + string
@@ -264,17 +252,9 @@ public extension FileManager {
     /// - Returns:结果信息
     @discardableResult
     static func writeData(_ data: Data?, to path: String) -> (isSuccess: Bool, error: String) {
-        guard isExists(previousPath(path)) else {
-            return (false, "文件路径不存在!")
-        }
-
-        guard let data else {
-            return (false, "写入数据不能为空!")
-        }
-
-        guard let url = path.toURL(), path.isURL() else {
-            return (false, "写入路径错误!")
-        }
+        guard isExists(previousPath(path)) else { return (false, "文件路径不存在!") }
+        guard let data else { return (false, "写入数据不能为空!") }
+        guard let url = path.toURL(), path.isURL() else { return (false, "写入路径错误!") }
 
         do {
             try data.write(to: url, options: .atomic)
@@ -289,9 +269,7 @@ public extension FileManager {
     /// - Returns:`String?`
     @discardableResult
     static func readFile(_ path: String) -> String? {
-        guard isExists(path) else {
-            return nil
-        }
+        guard isExists(path) else { return nil }
         let data = FileManager.default.contents(atPath: path)
         return String(data: data!, encoding: String.Encoding.utf8)
     }
@@ -301,16 +279,12 @@ public extension FileManager {
     /// - Returns:结果信息
     @discardableResult
     static func readData(from path: String) -> (isSuccess: Bool, data: Data?, error: String) {
-        guard isExists(path),
-              let readHandler = FileHandle(forReadingAtPath: path)
-        else {
+        guard isExists(path), let readHandler = FileHandle(forReadingAtPath: path) else {
             return (false, nil, "文件路径不存在!")
         }
 
         let data = readHandler.readDataToEndOfFile()
-        if data.count == 0 {
-            return (false, nil, "读取文件失败!")
-        }
+        if data.count == 0 { return (false, nil, "读取文件失败!") }
         return (true, data, "")
     }
 
@@ -323,14 +297,12 @@ public extension FileManager {
     /// - Returns:结果信息
     @discardableResult
     static func copyItem(from fromPath: String, to toPath: String, isFile: Bool = true, isCover: Bool = true) -> (isSuccess: Bool, error: String) {
-        guard isExists(fromPath) else {
-            return (false, "文件路径不存在!")
-        }
+        guard isExists(fromPath) else { return (false, "文件路径不存在!") }
 
-        if !isExists(previousPath(toPath)),
-           isFile
-           ? !createFile(previousPath(toPath)).isSuccess
-        :!createFolder(toPath).isSuccess {
+        if !isExists(previousPath(toPath)), isFile
+            ? !createFile(previousPath(toPath)).isSuccess
+            : !createFolder(toPath).isSuccess
+        {
             return (false, "要拷贝到的路径不存在!")
         }
 
@@ -359,14 +331,13 @@ public extension FileManager {
     /// - Returns:结果信息
     @discardableResult
     static func moveItem(from fromPath: String, to toPath: String, isFile: Bool = true, isCover: Bool = true) -> (isSuccess: Bool, error: String) {
-        guard isExists(fromPath) else {
-            return (false, "要移动的文件不存在!")
-        }
+        guard isExists(fromPath) else { return (false, "要移动的文件不存在!") }
 
         if !isExists(previousPath(toPath)),
            isFile
            ? !createFile(toPath).isSuccess
-        :!createFolder(toPath).isSuccess {
+           : !createFolder(toPath).isSuccess
+        {
             return (false, "目标文件夹不存在!")
         }
 
