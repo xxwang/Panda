@@ -7,7 +7,10 @@
 
 import UIKit
 
-public class EnvUtils {}
+public class EnvUtils {
+    static let shared = EnvUtils()
+    private init() {}
+}
 
 // MARK: - 开发环境
 public extension EnvUtils {

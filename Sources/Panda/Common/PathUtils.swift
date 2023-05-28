@@ -7,7 +7,10 @@
 
 import UIKit
 
-public class PathUtils {}
+public class PathUtils {
+    static let shared = PathUtils()
+    private init() {}
+}
 
 // MARK: - Path
 public extension PathUtils {
