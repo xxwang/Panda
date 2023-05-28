@@ -247,3 +247,74 @@ public extension UIApplication {
             }.show()
     }
 }
+
+// MARK: - 推送
+public extension UIApplication {
+    /// 注册APNs远程推送
+    /// - Parameter delegate:代理对象
+    static func registerAPNsWithDelegate(_ delegate: Any) {
+        if #available(iOS 10.0, *) {
+            let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+            let center = UNUserNotificationCenter.current()
+            center.delegate = (delegate as! UNUserNotificationCenterDelegate)
+            center.requestAuthorization(options: options) { (granted: Bool, error: Error?) in
+                if granted {
+                    print("远程推送注册成功!")
+                }
+            }
+            self.shared.registerForRemoteNotifications()
+        } else {
+            // 请求授权
+            let types: UIUserNotificationType = [.alert, .badge, .sound]
+            let settings = UIUserNotificationSettings(types: types, categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+            // 需要通过设备UDID,和bundleID,发送请求,获取deviceToken
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+
+    /// 添加本地通知
+    /// - Parameters:
+    ///   - trigger:触发器
+    ///   - content:内容
+    ///   - identifier:标识
+    ///   - categories:分类
+    ///   - repeats:是否重复
+    ///   - handler:处理回调
+    @available(iOS 10.0, *)
+    func addLocalUserNotification(
+        trigger: AnyObject,
+        content: UNMutableNotificationContent,
+        identifier: String,
+        categories: AnyObject,
+        repeats: Bool = true,
+        handler: ((UNUserNotificationCenter, UNNotificationRequest, Error?) -> Void)?
+    ) {
+        // 通知触发器
+        var notiTrigger: UNNotificationTrigger?
+        if let date = trigger as? Date { // 日期触发
+            var interval = date.timeIntervalSince1970 - Date().timeIntervalSince1970
+            interval = interval < 0 ? 1 : interval
+            notiTrigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: repeats)
+        } else if let components = trigger as? DateComponents { // 日历触发
+            notiTrigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
+        } else if let region = trigger as? CLCircularRegion { // 区域触发
+            notiTrigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
+        }
+
+        // 通知请求
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: notiTrigger)
+        // 通知中心
+        let center = UNUserNotificationCenter.current()
+
+        // 添加通知请求
+        center.add(request) { error in
+            // 回调结果
+            handler?(center, request, error)
+            if error == nil {
+                return
+            }
+            print("通知添加成功!")
+        }
+    }
+}
