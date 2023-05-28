@@ -161,70 +161,17 @@ public extension UIApplication {
 
 // MARK: - 打开操作
 public extension UIApplication {
-    /// 打开手机上的`设置App`并跳转至本App的权限界面(带提示窗)
-    /// - Parameters:
-    ///   - title:提示标题
-    ///   - message:提示内容
-    ///   - cancel:取消按钮标题
-    ///   - confirm:确认按钮标题
-    ///   - parent:来源控制器(谁来弹出提示窗)
-    static func openSettings(_ title: String?, message: String?, cancel: String = "取消", confirm: String = "设置", parent: UIViewController? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancleAction = UIAlertAction(title: cancel, style: .cancel, handler: nil)
-        alert.addAction(cancleAction)
-        let confirmAction = UIAlertAction(title: confirm, style: .default, handler: { _ in
-            // 打开系统设置App
-            self.openSettings()
-        })
-        alert.addAction(confirmAction)
-        if let root = parent {
-            root.present(alert, animated: true)
-            return
-        }
-        if let root = UIWindow.rootViewController() {
-            root.present(alert, animated: true)
-        }
-    }
-
-    /// 打开手机上的`设置App`并跳转至本App的权限界面
-    static func openSettings() {
-        guard let settingsAppURL = URL(string: UIApplication.openSettingsURLString) else {
-            return
-        }
-        if #available(iOS 10, *) {
-            UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.openURL(settingsAppURL)
-        }
-    }
-
-    /// 前往AppStore进行评价
-    /// - Parameter appID:应用在AppStore中的ID
-    static func evaluationInAppStore(_ appID: String) {
-        let appURLString = "https://itunes.apple.com/cn/app/id" + appID + "?mt=12"
-        guard let url = URL(string: appURLString), UIApplication.shared.canOpenURL(url) else {
-            return
-        }
-
-        // 打开评分页面
-        openURL(url) { isSuccess in
-            isSuccess ? print("打开应用商店评分页成功!") : print("打开应用商店评分页失败!")
-        }
-    }
-}
-
-public extension UIApplication {
     /// 打开指定URL地址
     /// - Parameters:
     ///   - url:要打开的URL地址
     ///   - complete:完成回调
-    func openURL(_ url: URL, completion: @escaping (_ isOk: Bool) -> Void) {
+    func openURL(_ url: URL, completion: ((_ isOk: Bool) -> Void)? = nil) {
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:]) { success in
-                completion(success)
+                completion?(success)
             }
         } else {
-            completion(UIApplication.shared.openURL(url))
+            completion?(UIApplication.shared.openURL(url))
         }
     }
 
@@ -236,7 +183,7 @@ public extension UIApplication {
         let callAddress = ("tel://" + phoneNumber)
         guard let url = URL(string: callAddress) else { completion(false); return }
         guard UIApplication.shared.canOpenURL(url) else { completion(false); return }
-        UIApplication.shared.openURL(url, completion: completion)
+        openURL(url, completion: completion)
     }
 
     /// 在应用中打开指定应用在`AppStore`中的详情页面
@@ -253,11 +200,50 @@ public extension UIApplication {
         productViewController.delegate = controller
         productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: appID]) { isOk, error in
             if !isOk {
-                print(error?.localizedDescription ?? "")
+                Log.error(error?.localizedDescription ?? "")
                 productViewController.dismiss(animated: true)
-                return
             }
         }
         controller.showDetailViewController(productViewController, sender: controller)
+    }
+
+    /// 打开应用在`AppStore`中的打分页面
+    /// - Parameter appID: 应用在商店中的ID
+    func openEvaluateInAppStore(_ appID: String) {
+        let urlString = "https://itunes.apple.com/cn/app/id\(appID)?mt=12"
+        guard let url = URL(string: urlString) else { return }
+        guard UIApplication.shared.canOpenURL(url) else { return }
+        openURL(url) { $0 ? Log.info("打开应用商店评分页成功!") : Log.error("打开应用商店评分页失败!") }
+    }
+
+    /// 打开`设置App`并跳转至当前App权限相关界面
+    func openSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        openURL(url) { $0 ? Log.info("打开设置App成功!") : Log.error("打开设置App失败!") }
+    }
+
+    /// 让用户自己决定是否打开`设置App`并跳转至当前App权限相关界面
+    /// - Parameters:
+    ///   - title:提示标题
+    ///   - message:提示内容
+    ///   - cancel:取消按钮标题
+    ///   - confirm:确认按钮标题
+    ///   - parent:来源控制器(谁来弹出提示窗)
+    func openSettings(_ title: String?,
+                      message: String?,
+                      cancel: String = "取消",
+                      confirm: String = "设置",
+                      parent: UIViewController? = nil)
+    {
+        UIAlertController.default()
+            .pd_title(title)
+            .pd_message(message)
+            .pd_addAction_(title: cancel, style: .cancel) { _ in
+                Log.info("取消!")
+            }
+            .pd_addAction_(title: confirm, style: .default) { _ in
+                // 打开系统设置App
+                self.openSettings()
+            }.show()
     }
 }
