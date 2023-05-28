@@ -20,7 +20,7 @@ private class AssociateKeys {
 public extension UITextView {
     /// 设置占位符
     var placeholder: String? {
-        get { AssociatedObject.get(self, &AssociateKeys.placeholder) }
+        get { AssociatedObject.get(self, &AssociateKeys.placeholder) as? String }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholder, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
             initPlaceholder(placeholder!)
@@ -36,14 +36,14 @@ public extension UITextView {
             constraintPlaceholder()
         }
         get {
-            AssociatedObject.get(self, &AssociateKeys.placeholdFont) ?? UIFont.systemFont(ofSize: 13)
+            (AssociatedObject.get(self, &AssociateKeys.placeholdFont) as? UIFont) ?? UIFont.systemFont(ofSize: 13)
         }
     }
 
     /// 占位文本的颜色
     var placeholderColor: UIColor? {
         get {
-            AssociatedObject.get(self, AssociateKeys.placeholdColor) ?? UIColor.lightGray
+            (AssociatedObject.get(self, AssociateKeys.placeholdColor) as? UIColor) ?? UIColor.lightGray
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholdColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -54,7 +54,7 @@ public extension UITextView {
     /// 设置占位文本的`Origin`
     var placeholderOrigin: CGPoint? {
         get {
-            AssociatedObject.get(self, AssociateKeys.placeholderOrigin) ?? CGPoint(x: 7, y: 7)
+            (AssociatedObject.get(self, AssociateKeys.placeholderOrigin) as? CGPoint) ?? CGPoint(x: 7, y: 7)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderOrigin, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -71,7 +71,7 @@ private extension UITextView {
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderLabel, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
-        get { AssociatedObject.get(self, AssociateKeys.placeholderLabel) }
+        get { AssociatedObject.get(self, AssociateKeys.placeholderLabel) as? UILabel }
     }
 
     /// 初始化占位符Label
@@ -205,7 +205,6 @@ public extension UITextView {
             .pd_append(linkAttributedString)
     }
 
-    // FIXME: - 待完成方法
     /// 转换特殊符号标签字段
     func resolveHashTags() {
         let nsText: NSString = text! as NSString
@@ -260,7 +259,6 @@ public extension UITextView {
         attributedText = m_attributedText
     }
 
-    // FIXME: - 待完成方法
     /// 过滤部多余的非数字和字符的部分
     /// - Parameter text:@hangge.123 -> @hangge
     /// - Returns:返回过滤后的字符串

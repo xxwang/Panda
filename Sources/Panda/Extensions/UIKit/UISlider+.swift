@@ -38,7 +38,7 @@ private class AssociateKeys {
 extension UISlider: AssociatedAttributes {
     public typealias T = Float
     public var callback: Callback? {
-        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) }
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? Callback }
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 

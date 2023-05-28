@@ -35,7 +35,6 @@ public extension UIImageView {
     }
 }
 
-// FIXME: - 待完善
 // MARK: - 加载图片
 public extension UIImageView {
     /// 从`URL`下载网络图片并设置到`UIImageView`
@@ -44,12 +43,11 @@ public extension UIImageView {
     ///   - contentMode:图片视图内容模式
     ///   - placeholder:占位图片
     ///   - completionHandler:完成回调
-    func download(
-        form url: URL,
-        contentMode: UIView.ContentMode = .scaleAspectFill,
-        placeholder: UIImage? = nil,
-        completionHandler: ((UIImage?) -> Void)? = nil
-    ) {
+    func loadImage(form url: URL,
+                   contentMode: UIView.ContentMode = .scaleAspectFill,
+                   placeholder: UIImage? = nil,
+                   completionHandler: ((UIImage?) -> Void)? = nil)
+    {
         image = placeholder
         self.contentMode = contentMode
 

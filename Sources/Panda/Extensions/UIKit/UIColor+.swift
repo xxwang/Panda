@@ -801,12 +801,7 @@ public extension UIColor {
                                           start: CGPoint,
                                           end: CGPoint) -> CAGradientLayer
     {
-        CAGradientLayer(CGRect(origin: .zero, size: size),
-                        colors: colors,
-                        locations: locations,
-                        type: .axial,
-                        start: start,
-                        end: end)
+        colors.createLinearGradientLayer(size, locations: locations, start: start, end: end)
     }
 
     /// 生成一个线性渐变图片`UIImage`

@@ -26,13 +26,13 @@ public extension UIControl {
 private extension UIControl {
     /// 重复点击限制时间
     var hitTime: Double? {
-        get { AssociatedObject.get(self, &AssociateKeys.HitTimerKey) }
+        get { AssociatedObject.get(self, &AssociateKeys.HitTimerKey) as? Double }
         set { AssociatedObject.set(self, &AssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
 
     /// 点击回调
     var callback: ((_ control: UIControl) -> Void)? {
-        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) }
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? ((_ control: UIControl) -> Void) }
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 

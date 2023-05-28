@@ -14,15 +14,15 @@ import UserNotifications
 /// 属性
 public extension UIApplication {
     /// 获取`UIApplicationDelegate`
-    static var appDelegate: UIApplicationDelegate? {
-        let delegate = UIApplication.shared.delegate
+    var appDelegate: UIApplicationDelegate? {
+        let delegate = delegate
         return delegate
     }
 
     /// 获取`UIWindowSceneDelegate`
     @available(iOS 13.0, *)
-    static var sceneDelegate: UIWindowSceneDelegate? {
-        for scene in UIApplication.shared.connectedScenes {
+    var sceneDelegate: UIWindowSceneDelegate? {
+        for scene in connectedScenes {
             if let windowScene = scene as? UIWindowScene,
                let windowSceneDelegate = windowScene.delegate as? UIWindowSceneDelegate
             {
@@ -33,11 +33,11 @@ public extension UIApplication {
     }
 
     /// 获取屏幕的方向
-    static var interfaceOrientation: UIInterfaceOrientation {
+    var interfaceOrientation: UIInterfaceOrientation {
         if #available(iOS 13, *) {
             return UIWindow.main?.windowScene?.interfaceOrientation ?? .unknown
         } else {
-            return UIApplication.shared.statusBarOrientation
+            return statusBarOrientation
         }
     }
 
@@ -167,11 +167,11 @@ public extension UIApplication {
     ///   - complete:完成回调
     func openURL(_ url: URL, completion: ((_ isOk: Bool) -> Void)? = nil) {
         if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:]) { success in
+            self.open(url, options: [:]) { success in
                 completion?(success)
             }
         } else {
-            completion?(UIApplication.shared.openURL(url))
+            completion?(openURL(url))
         }
     }
 
@@ -182,7 +182,7 @@ public extension UIApplication {
     func call(with phoneNumber: String, completion: @escaping (_ isOk: Bool) -> Void) {
         let callAddress = ("tel://" + phoneNumber)
         guard let url = URL(string: callAddress) else { completion(false); return }
-        guard UIApplication.shared.canOpenURL(url) else { completion(false); return }
+        guard canOpenURL(url) else { completion(false); return }
         openURL(url, completion: completion)
     }
 
@@ -248,29 +248,26 @@ public extension UIApplication {
     }
 }
 
-// FIXME: - 待完善
 // MARK: - 推送
 public extension UIApplication {
     /// 注册APNs远程推送
     /// - Parameter delegate:代理对象
-    static func registerAPNsWithDelegate(_ delegate: Any) {
+    func registerAPNsWithDelegate(_ delegate: Any) {
         if #available(iOS 10.0, *) {
             let options: UNAuthorizationOptions = [.alert, .badge, .sound]
             let center = UNUserNotificationCenter.current()
             center.delegate = (delegate as! UNUserNotificationCenterDelegate)
             center.requestAuthorization(options: options) { (granted: Bool, error: Error?) in
-                if granted {
-                    print("远程推送注册成功!")
-                }
+                Log.info("远程推送注册\(granted ? "成功" : "失败")!")
             }
-            self.shared.registerForRemoteNotifications()
+            self.registerForRemoteNotifications()
         } else {
             // 请求授权
             let types: UIUserNotificationType = [.alert, .badge, .sound]
             let settings = UIUserNotificationSettings(types: types, categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
+            registerUserNotificationSettings(settings)
             // 需要通过设备UDID,和bundleID,发送请求,获取deviceToken
-            UIApplication.shared.registerForRemoteNotifications()
+            registerForRemoteNotifications()
         }
     }
 
@@ -283,14 +280,13 @@ public extension UIApplication {
     ///   - repeats:是否重复
     ///   - handler:处理回调
     @available(iOS 10.0, *)
-    func addLocalUserNotification(
-        trigger: AnyObject,
-        content: UNMutableNotificationContent,
-        identifier: String,
-        categories: AnyObject,
-        repeats: Bool = true,
-        handler: ((UNUserNotificationCenter, UNNotificationRequest, Error?) -> Void)?
-    ) {
+    func addLocalUserNotification(trigger: AnyObject,
+                                  content: UNMutableNotificationContent,
+                                  identifier: String,
+                                  categories: AnyObject,
+                                  repeats: Bool = true,
+                                  handler: ((UNUserNotificationCenter, UNNotificationRequest, Error?) -> Void)?)
+    {
         // 通知触发器
         var notiTrigger: UNNotificationTrigger?
         if let date = trigger as? Date { // 日期触发

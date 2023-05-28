@@ -41,7 +41,7 @@ public extension UIGestureRecognizer {
 public extension UIGestureRecognizer {
     /// 手势响应方法
     @objc private func p_invoke() {
-        if let callback = AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? (_ gestureRecognizer: UIGestureRecognizer) -> Void {
+        if let callback = AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
             callback(self)
         }
     }

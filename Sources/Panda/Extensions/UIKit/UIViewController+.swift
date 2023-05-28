@@ -260,7 +260,6 @@ public extension UIViewController {
 
 // MARK: - Runtime
 @objc extension UIViewController {
-    // FIXME: - 需要完善
     /// 交换方法
     class func initializeHookMethod() {
         super.initializeMethod()
@@ -299,7 +298,6 @@ public extension UIViewController {
         }
     }
 
-    // FIXME: - 需要完善
     /// hook`viewDidLoad`
     /// - Parameter animated:是否动画
     private func hook_viewDidLoad(animated: Bool) {
@@ -307,7 +305,6 @@ public extension UIViewController {
         hook_viewDidLoad(animated: animated)
     }
 
-    // FIXME: - 需要完善
     /// hook`viewWillAppear`
     /// - Parameter animated:是否动画
     private func hook_viewWillAppear(animated: Bool) {
@@ -315,7 +312,6 @@ public extension UIViewController {
         hook_viewWillAppear(animated: animated)
     }
 
-    // FIXME: - 需要完善
     /// hook`viewWillDisappear`
     /// - Parameter animated:是否动画
     private func hook_viewWillDisappear(animated: Bool) {
@@ -323,7 +319,6 @@ public extension UIViewController {
         hook_viewWillDisappear(animated: animated)
     }
 
-    // FIXME: - 需要完善
     /// hook`present`
     /// - Parameters:
     ///   - viewControllerToPresent:要`modal`的控制器
@@ -341,7 +336,6 @@ public extension UIViewController {
 
 // MARK: - UINavigationController
 @objc public extension UINavigationController {
-    // FIXME: - 需要完善
     /// hook`pushViewController`
     /// - Parameters:
     ///   - viewController:要压入栈的控制器

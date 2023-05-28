@@ -244,7 +244,6 @@ public extension UIButton {
         } else { // 使用文本计算
             return titleLabel?.textSize(maxLineWidth) ?? .zero
         }
-        return .zero
     }
 }
 
@@ -259,7 +258,7 @@ extension UIButton: AssociatedAttributes {
     public typealias T = UIButton
 
     public var callback: Callback? {
-        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) }
+        get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? Callback }
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 

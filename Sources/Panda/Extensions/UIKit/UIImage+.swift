@@ -2150,7 +2150,7 @@ public extension UIImage {
     }
 
     private var saveBlock: ((Bool) -> Void)? {
-        get { AssociatedObject.get(self, AssociateKeys.SaveBlockKey!) as? (Bool) -> Void }
+        get { AssociatedObject.get(self, AssociateKeys.SaveBlockKey!) as? ((Bool) -> Void) }
         set {
             AssociatedObject.set(self, AssociateKeys.SaveBlockKey!, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
