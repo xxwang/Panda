@@ -123,10 +123,10 @@ public extension UIButton {
 // MARK: - 按钮布局
 public extension UIButton {
     enum LayoutStyle {
-        case imageTop
-        case imageBottom
-        case imageLeft
-        case imageRight
+        case top
+        case bottom
+        case left
+        case right
     }
 
     /// 按枚举将 btn 的 image 和 title 之间位置处理
@@ -142,7 +142,7 @@ public extension UIButton {
         let totalHeight = titleRect.size.height + spacing + imageRect.size.height
 
         switch style {
-        case .imageLeft:
+        case .left:
             titleEdgeInsets = UIEdgeInsets(
                 top: 0,
                 left: spacing / 2,
@@ -155,7 +155,7 @@ public extension UIButton {
                 bottom: 0,
                 right: spacing / 2
             )
-        case .imageRight:
+        case .right:
             titleEdgeInsets = UIEdgeInsets(
                 top: 0,
                 left: -(imageRect.size.width + spacing / 2),
@@ -168,7 +168,7 @@ public extension UIButton {
                 bottom: 0,
                 right: -(titleRect.size.width + spacing / 2)
             )
-        case .imageTop:
+        case .top:
             titleEdgeInsets = UIEdgeInsets(
                 top: (buttonHeight - totalHeight) / 2 + imageRect.size.height + spacing - titleRect.origin.y,
                 left: (buttonWidth / 2 - titleRect.origin.x - titleRect.size.width / 2) - (buttonWidth - titleRect.size.width) / 2,
@@ -181,7 +181,7 @@ public extension UIButton {
                 bottom: -((buttonHeight - totalHeight) / 2 - imageRect.origin.y),
                 right: -(buttonWidth / 2 - imageRect.origin.x - imageRect.size.width / 2)
             )
-        case .imageBottom:
+        case .bottom:
             titleEdgeInsets = UIEdgeInsets(
                 top: (buttonHeight - totalHeight) / 2 - titleRect.origin.y,
                 left: (buttonWidth / 2 - titleRect.origin.x - titleRect.size.width / 2) - (buttonWidth - titleRect.size.width) / 2,
@@ -203,10 +203,9 @@ public extension UIButton {
     ///   - spacing:标题文本和图像之间的间距
     func centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
         if imageAboveText {
-            guard
-                let imageSize = imageView?.image?.size,
-                let text = titleLabel?.text,
-                let font = titleLabel?.font else { return }
+            guard let imageSize = imageView?.image?.size else { return }
+            guard let text = titleLabel?.text else { return }
+            guard let font = titleLabel?.font else { return }
 
             let titleSize = text.size(withAttributes: [.font: font])
 
@@ -274,14 +273,14 @@ public extension UIButton {
     /// 扩大UIButton的点击区域,向四周扩展10像素的点击范围
     /// - Parameter size:向四周扩展像素的点击范围
     func expandSize(size: CGFloat = 10) {
-        objc_setAssociatedObject(self,
-                                 &AssociateKeys.ExpandSizeKey,
-                                 size,
-                                 objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+        AssociatedObject.set(self,
+                             &AssociateKeys.ExpandSizeKey,
+                             size,
+                             objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
 
     private func expandRect() -> CGRect {
-        let expandSize = objc_getAssociatedObject(self, &AssociateKeys.ExpandSizeKey)
+        let expandSize = AssociatedObject.get(self, &AssociateKeys.ExpandSizeKey)
         if expandSize != nil {
             return CGRect(
                 x: bounds.origin.x - (expandSize as! CGFloat),
@@ -480,7 +479,7 @@ public extension UIButton {
     /// - Returns:`Self`
     @discardableResult
     func pd_setBackgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
-        let image = UIImage(by: color)
+        let image = UIImage(with: color)
         setBackgroundImage(image, for: state)
         return self
     }

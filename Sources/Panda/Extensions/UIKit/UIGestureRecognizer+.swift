@@ -18,15 +18,15 @@ public extension UIGestureRecognizer {
     /// 功能名称(用于自定义`标识`)
     var functionName: String {
         get {
-            if let obj = objc_getAssociatedObject(self, &AssociateKeys.FunctionNameKey) as? String {
+            if let obj = AssociatedObject.get(self, &AssociateKeys.FunctionNameKey) as? String {
                 return obj
             }
             let string = String(describing: classForCoder)
-            objc_setAssociatedObject(self, &AssociateKeys.FunctionNameKey, string, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            AssociatedObject.set(self, &AssociateKeys.FunctionNameKey, string, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return string
         }
         set {
-            objc_setAssociatedObject(self, &AssociateKeys.FunctionNameKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            AssociatedObject.set(self, &AssociateKeys.FunctionNameKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
@@ -41,7 +41,7 @@ public extension UIGestureRecognizer {
 public extension UIGestureRecognizer {
     /// 手势响应方法
     @objc private func p_invoke() {
-        if let callback = objc_getAssociatedObject(self, &AssociateKeys.CallbackKey) as? (_ gestureRecognizer: UIGestureRecognizer) -> Void {
+        if let callback = AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? (_ gestureRecognizer: UIGestureRecognizer) -> Void {
             callback(self)
         }
     }
@@ -66,7 +66,7 @@ public extension UIGestureRecognizer {
     @discardableResult
     func pd_callback(_ callback: @escaping (_ gestureRecognizer: UIGestureRecognizer) -> Void) -> Self {
         addTarget(self, action: #selector(p_invoke))
-        objc_setAssociatedObject(self, &AssociateKeys.CallbackKey, callback, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        AssociatedObject.set(self, &AssociateKeys.CallbackKey, callback, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self
     }
 

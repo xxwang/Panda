@@ -255,7 +255,7 @@ public extension Date {
     ///   - format: 日期格式(默认 `yyyy-MM-dd HH:mm:ss`)
     ///   - isGMT: 是否是`格林尼治时区`
     /// - Returns: 日期字符串
-    func toString(withFormat dateFormat: String = "yyyy-MM-dd HH:mm:ss",
+    func toString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss",
                   isGMT: Bool = false) -> String
     {
         let dateFormatter = DateFormatter()

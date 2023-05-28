@@ -59,7 +59,7 @@ extension Log {
     ///   - line:行
     ///   - function:方法
     private static func log(level: Level, message: Any..., file: String, line: Int, function: String) {
-        let dateStr = Date.default().format("HH:mm:ss.SSS", isGMT: false)
+        let dateStr = Date.default().toString(with: "HH:mm:ss.SSS", isGMT: false)
         let fileName = file.toNSString().lastPathComponent.removingSuffix(".swift")
         let content = message.map { "\($0)" }.joined(separator: "")
         print("\(level.icon)\(level.rawValue)[\(dateStr)][\(fileName).\(line) => \(function)]: " + content)

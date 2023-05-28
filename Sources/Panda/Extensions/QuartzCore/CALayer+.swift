@@ -20,6 +20,18 @@ public extension CALayer {
         return image
     }
 
+    /// `CALayer`转`UIImage?`
+    /// - Parameters:
+    ///   - scale: 缩放比例
+    /// - Returns: `UIImage?`
+    func toImage(scale: CGFloat = 0.0) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, scale)
+        defer { UIGraphicsEndImageContext() }
+        guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
+        render(in: ctx)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+
     /// 图层转颜色(`UIColor`)
     /// - Returns: `UIColor?`
     func toUIColor() -> UIColor? {

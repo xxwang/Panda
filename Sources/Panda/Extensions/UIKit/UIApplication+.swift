@@ -248,6 +248,7 @@ public extension UIApplication {
     }
 }
 
+// FIXME: - 待完善
 // MARK: - 推送
 public extension UIApplication {
     /// 注册APNs远程推送

@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 属性
 public extension UIView {
     /// 当前视图布局的书写方向
-    var writingDirection: UIUserInterfaceLayoutDirection {
+    var writeDirection: UIUserInterfaceLayoutDirection {
         if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, *) {
             return effectiveUserInterfaceLayoutDirection
         } else { return .leftToRight }
@@ -101,6 +101,241 @@ public extension UIView {
     @IBInspectable var masksToBounds: Bool {
         get { layer.masksToBounds }
         set { layer.masksToBounds = newValue }
+    }
+}
+
+// MARK: - 圆角
+public extension UIView {
+    /// 设置圆角(⚠️前提:需要`frame`已确定)
+    /// - Parameters:
+    ///   - radius: 圆角半径
+    ///   - corners: 要设置的角
+    func roundCorners(radius: CGFloat, corners: UIRectCorner) {
+        let maskPath = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        layer.mask = shape
+    }
+}
+
+// MARK: - 阴影
+public extension UIView {
+    /// 将`阴影`添加到view上
+    ///
+    /// - Note:此方法仅适用于不透明的背景色,或者如果视图设置了`shadowPath`请参见参数`opacity`
+    /// - Parameters:
+    ///   - color: 阴影颜色(默认值为#137992)
+    ///   - radius: 阴影半径(默认值为3)
+    ///   - offset: 阴影偏移(默认为.zero)
+    ///   - opacity: 阴影不透明度(默认值为0.5),它还将受到`alpha`和`backgroundColor`的影响
+    func addShadow(
+        ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
+        radius: CGFloat = 3,
+        offset: CGSize = .zero,
+        opacity: Float = 0.5
+    ) {
+        layer.shadowColor = color.cgColor
+        layer.shadowOffset = offset
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+        layer.masksToBounds = false
+    }
+
+    /// 同时将`阴影`和`圆角`添加到view上(⚠️前提:需要`frame`已确定)
+    ///
+    /// - Note:提示:如果在异步布局(如:SnapKit布局)中使用,要在布局后先调用 layoutIfNeeded,再使用该方法
+    /// - Parameters:
+    ///   - superview: 父视图
+    ///   - conrners: 具体哪个圆角
+    ///   - radius: 圆角半径
+    ///   - shadowColor: 阴影的颜色
+    ///   - shadowOffset: 阴影的偏移度:CGSizeMake(X[正的右偏移,负的左偏移], Y[正的下偏移,负的上偏移])
+    ///   - shadowOpacity: 阴影的透明度
+    ///   - shadowRadius: 阴影半径,默认 3
+    func addCornerAndShadow(superview: UIView,
+                            conrners: UIRectCorner,
+                            radius: CGFloat = 3,
+                            shadowColor: UIColor,
+                            shadowOffset: CGSize,
+                            shadowOpacity: Float,
+                            shadowRadius: CGFloat = 3)
+    {
+        // 添加圆角
+        roundCorners(conrners, radius: radius)
+
+        // 设置阴影
+        let subLayer = CALayer()
+        let fixframe = frame
+        subLayer.frame = fixframe
+        subLayer.cornerRadius = shadowRadius
+        subLayer.backgroundColor = shadowColor.cgColor
+        subLayer.masksToBounds = false
+        // shadowColor阴影颜色
+        subLayer.shadowColor = shadowColor.cgColor
+        // shadowOffset阴影偏移,x向右偏移3,y向下偏移2,默认(0, -3),这个跟shadowRadius配合使用
+        subLayer.shadowOffset = shadowOffset
+        // 阴影透明度,默认0
+        subLayer.shadowOpacity = shadowOpacity
+        // 阴影半径,默认3
+        subLayer.shadowRadius = shadowRadius
+        superview.layer.insertSublayer(subLayer, below: layer)
+    }
+
+    /// 添加内阴影图层
+    /// - Parameters:
+    ///   - shadowColor: 阴影的颜色
+    ///   - shadowOffset: 阴影的偏移度:CGSizeMake(X[正的右偏移,负的左偏移], Y[正的下偏移,负的上偏移])
+    ///   - shadowOpacity: 阴影的不透明度
+    ///   - shadowRadius: 阴影半径,默认3
+    ///   - insetBySize: 内阴影偏移大小
+    func addInnerShadowLayer(shadowColor: UIColor,
+                             shadowOffset: CGSize = CGSize(width: 0, height: 0),
+                             shadowOpacity: Float = 0.5, shadowRadius: CGFloat = 3,
+                             insetBySize: CGSize = CGSize(width: -42, height: -42))
+    {
+        let shadowLayer = CAShapeLayer()
+        shadowLayer.frame = bounds
+        shadowLayer.shadowColor = shadowColor.cgColor
+        shadowLayer.shadowOffset = shadowOffset
+        shadowLayer.shadowOpacity = shadowOpacity
+        shadowLayer.shadowRadius = shadowRadius
+        shadowLayer.fillRule = .evenOdd
+        let path = CGMutablePath()
+        path.addRect(bounds.insetBy(dx: insetBySize.width, dy: insetBySize.height))
+
+        // let someInnerPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:innerPathRadius).cgPath
+        let someInnerPath = UIBezierPath(roundedRect: bounds, cornerRadius: shadowRadius).cgPath
+        path.addPath(someInnerPath)
+        path.closeSubpath()
+        shadowLayer.path = path
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = someInnerPath
+        shadowLayer.mask = maskLayer
+        layer.addSublayer(shadowLayer)
+    }
+}
+
+// MARK: - 边框
+public extension UIView {
+    /// 添加边框
+    /// - Parameters:
+    ///   - width:边框宽度
+    ///   - color:边框颜色
+    func addBorder(borderWidth: CGFloat, borderColor: UIColor) {
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
+    }
+
+    /// 添加顶部的 边框
+    /// - Parameters:
+    ///   - borderWidth:边框宽度
+    ///   - borderColor:边框颜色
+    func addBorderTop(borderWidth: CGFloat, borderColor: UIColor) {
+        addBorderUtility(x: 0, y: 0, width: frame.width, height: borderWidth, color: borderColor)
+    }
+
+    /// 添加底部的 边框
+    /// - Parameters:
+    ///   - borderWidth:边框宽度
+    ///   - borderColor:边框颜色
+    func addBorderBottom(borderWidth: CGFloat, borderColor: UIColor) {
+        addBorderUtility(x: 0, y: frame.height - borderWidth, width: frame.width, height: borderWidth, color: borderColor)
+    }
+
+    /// 添加左边的 边框
+    /// - Parameters:
+    ///   - borderWidth:边框宽度
+    ///   - borderColor:边框颜色
+    func addBorderLeft(borderWidth: CGFloat, borderColor: UIColor) {
+        addBorderUtility(x: 0, y: 0, width: borderWidth, height: frame.height, color: borderColor)
+    }
+
+    /// 添加右边的 边框
+    /// - Parameters:
+    ///   - borderWidth:边框宽度
+    ///   - borderColor:边框颜色
+    func addBorderRight(borderWidth: CGFloat, borderColor: UIColor) {
+        addBorderUtility(x: frame.width - borderWidth, y: 0, width: borderWidth, height: frame.height, color: borderColor)
+    }
+
+    /// 为`UIView`添加边框
+    /// - Parameters:
+    ///   - x: 边框`X`坐标
+    ///   - y: 边框`Y`坐标
+    ///   - width: 边框宽度
+    ///   - height: 边框高度
+    ///   - color: 边框颜色
+    private func addBorderUtility(x: CGFloat,
+                                  y: CGFloat,
+                                  width: CGFloat,
+                                  height: CGFloat,
+                                  color: UIColor)
+    {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: x, y: y, width: width, height: height)
+        layer.addSublayer(border)
+    }
+
+    /// 绘制圆环
+    /// - Parameters:
+    ///   - fillColor:内环的颜色
+    ///   - strokeColor:外环的颜色
+    ///   - strokeWidth:外环的宽度
+    func drawCircle(fillColor: UIColor, strokeColor: UIColor, strokeWidth: CGFloat) {
+        let ciecleRadius = bounds.width > bounds.height
+            ? bounds.height
+            : bounds.width
+        let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: ciecleRadius, height: ciecleRadius), cornerRadius: ciecleRadius / 2)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = fillColor.cgColor
+        shapeLayer.strokeColor = strokeColor.cgColor
+        shapeLayer.lineWidth = strokeWidth
+        layer.addSublayer(shapeLayer)
+    }
+
+    /// 绘制虚线
+    /// - Parameters:
+    ///   - strokeColor:虚线颜色
+    ///   - lineLength:每段虚线的长度
+    ///   - lineSpacing:每段虚线的间隔
+    ///   - isHorizontal:是否水平方向
+    func drawDashLine(strokeColor: UIColor, lineLength: Int = 4, lineSpacing: Int = 4, isHorizontal: Bool = true) {
+        // 线粗
+        let lineWidth = isHorizontal ? bounds.height : bounds.width
+
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.bounds = bounds
+        shapeLayer.anchorPoint = CGPoint(x: 0, y: 0)
+        shapeLayer.fillColor = UIColor.blue.cgColor
+        shapeLayer.strokeColor = strokeColor.cgColor
+
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        shapeLayer.lineDashPhase = 0
+        // 每一段虚线长度 和 每两段虚线之间的间隔
+        shapeLayer.lineDashPattern = [NSNumber(value: lineLength), NSNumber(value: lineSpacing)]
+        // 起点
+        let path = CGMutablePath()
+        if isHorizontal {
+            path.move(to: CGPoint(x: 0, y: lineWidth / 2))
+            // 终点
+            // 横向 y = lineWidth / 2
+            path.addLine(to: CGPoint(x: bounds.width, y: lineWidth / 2))
+        } else {
+            path.move(to: CGPoint(x: lineWidth / 2, y: 0))
+            // 终点
+            // 纵向 Y = view 的height
+            path.addLine(to: CGPoint(x: lineWidth / 2, y: bounds.height))
+        }
+        shapeLayer.path = path
+        layer.addSublayer(shapeLayer)
     }
 }
 
@@ -399,6 +634,128 @@ public extension UIView {
     }
 }
 
+// MARK: - 链式语法(frame相关设置)
+public extension UIView {
+    /// 设置 frame
+    /// - Parameter frame:frame
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_frame(_ frame: CGRect) -> Self {
+        pd_frame = frame
+        return self
+    }
+
+    /// 控件的origin
+    /// - Parameters:
+    ///   - origin:坐标
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_origin(_ origin: CGPoint) -> Self {
+        pd_origin = origin
+        return self
+    }
+
+    /// 控件左边(`minX`)
+    /// - Parameters:
+    ///   - x:左侧距离
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_x(_ x: CGFloat) -> Self {
+        pd_x = x
+        return self
+    }
+
+    /// 控件顶部(`minY`)
+    /// - Parameters:
+    ///   - y:顶部距离
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_y(_ y: CGFloat) -> Self {
+        pd_y = y
+        return self
+    }
+
+    /// 控件最大X(`maxX`)
+    /// - Parameters:
+    ///   - right:右侧距离
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_maxX(_ maxX: CGFloat) -> Self {
+        pd_maxX = maxX
+        return self
+    }
+
+    /// 控件最大Y(`maxY`)
+    /// - Parameters:
+    ///   - maxY:底部距离
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_maxY(_ maxY: CGFloat) -> Self {
+        pd_maxY = maxY
+        return self
+    }
+
+    /// 控件的尺寸
+    /// - Parameters:
+    ///   - size:尺寸
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_size(_ size: CGSize) -> Self {
+        pd_size = size
+        return self
+    }
+
+    /// 控件的宽度
+    /// - Parameters:
+    ///   - width:宽度
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_width(_ width: CGFloat) -> Self {
+        pd_width = width
+        return self
+    }
+
+    /// 控件的高度
+    /// - Parameters:
+    ///   - width:宽度
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_height(_ height: CGFloat) -> Self {
+        pd_height = height
+        return self
+    }
+
+    /// 控件中心点
+    /// - Parameters:
+    ///   - center:中心位置
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_center(_ center: CGPoint) -> Self {
+        pd_center = center
+        return self
+    }
+
+    /// 控件中心点X
+    /// - Parameters:
+    ///   - centerX:中心位置X
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_centerX(_ centerX: CGFloat) -> Self {
+        pd_centerX = centerX
+        return self
+    }
+
+    /// 控件中心点Y
+    /// - Parameters:
+    ///   - centerY:中心位置Y
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_centerY(_ centerY: CGFloat) -> Self {
+        pd_centerY = centerY
+        return self
+    }
+}
+
 // MARK: - 链式语法
 public extension UIView {
     /// 设置 tag 值
@@ -610,128 +967,6 @@ public extension UIView {
         layer.drawsAsynchronously = true
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
-        return self
-    }
-}
-
-// MARK: - 链式语法(frame相关设置)
-public extension UIView {
-    /// 设置 frame
-    /// - Parameter frame:frame
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_frame(_ frame: CGRect) -> Self {
-        pd_frame = frame
-        return self
-    }
-
-    /// 控件的origin
-    /// - Parameters:
-    ///   - origin:坐标
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_origin(_ origin: CGPoint) -> Self {
-        pd_origin = origin
-        return self
-    }
-
-    /// 控件左边(`minX`)
-    /// - Parameters:
-    ///   - x:左侧距离
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_x(_ x: CGFloat) -> Self {
-        pd_x = x
-        return self
-    }
-
-    /// 控件顶部(`minY`)
-    /// - Parameters:
-    ///   - y:顶部距离
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_y(_ y: CGFloat) -> Self {
-        pd_y = y
-        return self
-    }
-
-    /// 控件最大X(`maxX`)
-    /// - Parameters:
-    ///   - right:右侧距离
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_maxX(_ maxX: CGFloat) -> Self {
-        pd_maxX = maxX
-        return self
-    }
-
-    /// 控件最大Y(`maxY`)
-    /// - Parameters:
-    ///   - maxY:底部距离
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_maxY(_ maxY: CGFloat) -> Self {
-        pd_maxY = maxY
-        return self
-    }
-
-    /// 控件的尺寸
-    /// - Parameters:
-    ///   - size:尺寸
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_size(_ size: CGSize) -> Self {
-        pd_size = size
-        return self
-    }
-
-    /// 控件的宽度
-    /// - Parameters:
-    ///   - width:宽度
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_width(_ width: CGFloat) -> Self {
-        pd_width = width
-        return self
-    }
-
-    /// 控件的高度
-    /// - Parameters:
-    ///   - width:宽度
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_height(_ height: CGFloat) -> Self {
-        pd_height = height
-        return self
-    }
-
-    /// 控件中心点
-    /// - Parameters:
-    ///   - center:中心位置
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_center(_ center: CGPoint) -> Self {
-        pd_center = center
-        return self
-    }
-
-    /// 控件中心点X
-    /// - Parameters:
-    ///   - centerX:中心位置X
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_centerX(_ centerX: CGFloat) -> Self {
-        pd_centerX = centerX
-        return self
-    }
-
-    /// 控件中心点Y
-    /// - Parameters:
-    ///   - centerY:中心位置Y
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_centerY(_ centerY: CGFloat) -> Self {
-        pd_centerY = centerY
         return self
     }
 }

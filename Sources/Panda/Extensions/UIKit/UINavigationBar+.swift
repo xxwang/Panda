@@ -86,8 +86,8 @@ private class AssociateKeys {
 private extension UINavigationBar {
     /// 通过 Runtime 的属性关联添加自定义 View
     var statusBar: UIView? {
-        get { objc_getAssociatedObject(self, &AssociateKeys.StatusBarKey) as? UIView }
-        set { objc_setAssociatedObject(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+        get { AssociatedObject.get(self, &AssociateKeys.StatusBarKey) as? UIView }
+        set { AssociatedObject.set(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 

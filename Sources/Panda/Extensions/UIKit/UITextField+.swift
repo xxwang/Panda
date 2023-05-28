@@ -59,7 +59,7 @@ public extension UITextField {
     /// 清空内容
     func clear() {
         text = ""
-        attributedText = "".toMutable()
+        attributedText = "".toMutableAttributedString()
     }
 
     /// 将工具栏添加到`UITextField`的`inputAccessoryView`

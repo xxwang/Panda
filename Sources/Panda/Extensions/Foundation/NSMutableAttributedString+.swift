@@ -169,7 +169,7 @@ public extension NSMutableAttributedString {
     func pd_image(_ image: String, bounds: CGRect = .zero, index: Int = 0) -> Self {
         // NSTextAttachment可以将要插入的图片作为特殊字符处理
         let attch = NSTextAttachment()
-        attch.image = UIImage.loadImage(image)
+        attch.image = UIImage.loadImage(with: image)
         attch.bounds = bounds
 
         // 创建带有图片的富文本

@@ -83,3 +83,34 @@ public extension Data {
         Data(base64Encoded: self)
     }
 }
+
+// MARK: - 图片格式
+public extension Data {
+    // MARK: - 图片格式
+    enum ImageFormat: String {
+        case gif
+        case png
+        case jpeg
+        case tiff
+        case `default`
+    }
+
+    /// 获取资源格式
+    /// - Parameter data:资源
+    /// - Returns:格式
+    func checkImageFormat() -> ImageFormat {
+        let c = self[0]
+        switch c {
+        case 0xFF:
+            return .jpeg
+        case 0x89:
+            return .png
+        case 0x47:
+            return .gif
+        case 0x49, 0x4D:
+            return .tiff
+        default:
+            return .default
+        }
+    }
+}
