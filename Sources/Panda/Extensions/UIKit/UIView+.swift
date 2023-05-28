@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 // MARK: - 属性
 public extension UIView {
@@ -101,6 +102,144 @@ public extension UIView {
     @IBInspectable var masksToBounds: Bool {
         get { layer.masksToBounds }
         set { layer.masksToBounds = newValue }
+    }
+}
+
+// MARK: - transform
+public extension UIView {
+    enum AngleUnit {
+        /// 度
+        case degrees
+        /// 弧度
+        case radians
+    }
+
+    /// 按相对轴上的角度旋转视图
+    /// - Parameters:
+    ///   - angle:旋转视图的角度
+    ///   - type:旋转角度的类型
+    ///   - animated:设置为true以设置旋转动画(默认值为true)
+    ///   - duration:以秒为单位的动画持续时间(默认值为1秒)
+    ///   - completion:完成回调,用于在动画完成时运行(默认为nil)
+    func rotate(byAngle angle: CGFloat,
+                ofType type: AngleUnit,
+                animated: Bool = false,
+                duration: TimeInterval = 1,
+                completion: ((Bool) -> Void)? = nil)
+    {
+        let angleWithType = (type == .degrees) ? .pi * angle / 180.0 : angle
+        let aDuration = animated ? duration : 0
+        UIView.animate(withDuration: aDuration, delay: 0, options: .curveLinear, animations: { () in
+            self.transform = self.transform.rotated(by: angleWithType)
+        }, completion: completion)
+    }
+
+    /// 将视图旋转到固定轴上的角度
+    /// - Parameters:
+    ///   - angle:旋转视图的角度
+    ///   - type:旋转角度的类型
+    ///   - animated:设置为true以设置旋转动画(默认值为false)
+    ///   - duration:以秒为单位的动画持续时间(默认值为1秒)
+    ///   - completion:完成回调,用于在动画完成时运行(默认为nil)
+    func rotate(toAngle angle: CGFloat,
+                ofType type: AngleUnit,
+                animated: Bool = false,
+                duration: TimeInterval = 1,
+                completion: ((Bool) -> Void)? = nil)
+    {
+        let angleWithType = (type == .degrees) ? .pi * angle / 180.0 : angle
+        let aDuration = animated ? duration : 0
+        UIView.animate(withDuration: aDuration, animations: {
+            self.transform = self.transform.concatenating(CGAffineTransform(rotationAngle: angleWithType))
+        }, completion: completion)
+    }
+
+    /// 按偏移缩放视图
+    /// - Parameters:
+    ///   - offset:缩放偏移
+    ///   - animated:设置为true以设置缩放动画(默认值为false)
+    ///   - duration:以秒为单位的动画持续时间(默认值为1秒)
+    ///   - completion:完成回调,用于在动画完成时运行(默认为nil)
+    func scale(by offset: CGPoint,
+               animated: Bool = false,
+               duration: TimeInterval = 1,
+               completion: ((Bool) -> Void)? = nil)
+    {
+        if animated {
+            UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () in
+                self.transform = self.transform.scaledBy(x: offset.x, y: offset.y)
+            }, completion: completion)
+        } else {
+            transform = transform.scaledBy(x: offset.x, y: offset.y)
+            completion?(true)
+        }
+    }
+
+    /// 平面旋转
+    /// - Parameters:
+    ///   - angle:旋转多少度
+    ///   - isInverted:顺时针还是逆时针,默认是顺时针
+    func setRotation(_ angle: CGFloat, isInverted: Bool = false) {
+        transform = isInverted
+            ? CGAffineTransform(rotationAngle: angle).inverted()
+            : CGAffineTransform(rotationAngle: angle)
+    }
+
+    /// 沿X轴方向旋转多少度(3D旋转)
+    /// - Parameter angle:旋转角度,angle参数是旋转的角度,为弧度制 0-2π
+    func set3DRotationX(_ angle: CGFloat) {
+        // 初始化3D变换,获取默认值
+        // var transform = CATransform3DIdentity
+        // 透视 1/ -D,D越小,透视效果越明显,必须在有旋转效果的前提下,才会看到透视效果
+        // 当我们有垂直于z轴的旋转分量时,设置m34的值可以增加透视效果,也可以理解为景深效果
+        // transform.m34 = 1.0 / -1000.0
+        // 空间旋转,x,y,z决定了旋转围绕的中轴,取值为 (-1,1) 之间
+        // transform = CATransform3DRotate(transform, angle, 1.0, 0.0, 0.0)
+        // self.layer.transform = transform
+        layer.transform = CATransform3DMakeRotation(angle, 1.0, 0.0, 0.0)
+    }
+
+    /// 沿Y轴方向旋转多少度
+    /// - Parameter angle:旋转角度,angle参数是旋转的角度,为弧度制 0-2π
+    func set3DRotationY(_ angle: CGFloat) {
+        var transform = CATransform3DIdentity
+        transform.m34 = 1.0 / -1000.0
+        transform = CATransform3DRotate(transform, angle, 0.0, 1.0, 0.0)
+        layer.transform = transform
+    }
+
+    /// 沿Z轴方向旋转多少度
+    /// - Parameter angle:旋转角度,angle参数是旋转的角度,为弧度制 0-2π
+    func set3DRotationZ(_ angle: CGFloat) {
+        var transform = CATransform3DIdentity
+        transform.m34 = 1.0 / -1000.0
+        transform = CATransform3DRotate(transform, angle, 0.0, 0.0, 1.0)
+        layer.transform = transform
+    }
+
+    /// 沿 X、Y、Z轴方向同时旋转多少度(3D旋转)
+    /// - Parameters:
+    ///   - xAngle:x 轴的角度,旋转的角度,为弧度制 0-2π
+    ///   - yAngle:y 轴的角度,旋转的角度,为弧度制 0-2π
+    ///   - zAngle:z 轴的角度,旋转的角度,为弧度制 0-2π
+    func setRotation(xAngle: CGFloat, yAngle: CGFloat, zAngle: CGFloat) {
+        var transform = CATransform3DIdentity
+        transform.m34 = 1.0 / -1000.0
+        transform = CATransform3DRotate(transform, xAngle, 1.0, 0.0, 0.0)
+        transform = CATransform3DRotate(transform, yAngle, 0.0, 1.0, 0.0)
+        transform = CATransform3DRotate(transform, zAngle, 0.0, 0.0, 1.0)
+        layer.transform = transform
+    }
+
+    /// 设置x,y缩放
+    /// - Parameters:
+    ///   - x:x 放大的倍数
+    ///   - y:y 放大的倍数
+    func setScale(x: CGFloat, y: CGFloat) {
+        var transform = CATransform3DIdentity
+        transform.m34 = 1.0 / -1000.0
+        transform = CATransform3DScale(transform, x, y, 1)
+        layer.transform = transform
     }
 }
 
@@ -336,6 +475,450 @@ public extension UIView {
         }
         shapeLayer.path = path
         layer.addSublayer(shapeLayer)
+    }
+}
+
+// MARK: - 颜色渐变
+public extension UIView {
+    /// 设置线性渐变边框
+    /// - Parameters:
+    ///   - size: 大小
+    ///   - colors: 颜色数组
+    ///   - locations: 位置数组
+    ///   - start: 开始位置
+    ///   - end: 结束位置
+    ///   - borderWidth: 边框宽度
+    ///   - roundingCorners: 圆角方向
+    ///   - cornerRadii: 圆角半径
+    func setLinearGradientBorder(_ size: CGSize,
+                                 colors: [UIColor],
+                                 locations: [CGFloat] = [0, 1],
+                                 start: CGPoint,
+                                 end: CGPoint,
+                                 borderWidth: CGFloat = 1.0,
+                                 roundingCorners: UIRectCorner = .allCorners,
+                                 cornerRadii: CGFloat = 0)
+    {
+        let gradientLayer = colors.createLinearGradientLayer(size,
+                                                             locations: locations,
+                                                             start: start,
+                                                             end: end)
+
+        let maskLayer = CAShapeLayer.default()
+            .pd_lineWidth(borderWidth)
+            .pd_path(UIBezierPath(
+                roundedRect: gradientLayer.bounds,
+                byRoundingCorners: roundingCorners,
+                cornerRadii: CGSize(width: cornerRadii, height: cornerRadii)
+            ).cgPath)
+            .pd_fillColor(.clear)
+            .pd_strokeColor(.black)
+
+        gradientLayer.mask = maskLayer
+        layer.addSublayer(gradientLayer)
+    }
+
+    /// 添加线性渐变背景图层
+    /// - Parameters:
+    ///   - size:渐变大小
+    ///   - colors:渐变的颜色数组
+    ///   - locations:颜色位置
+    ///   - start: 开始位置
+    ///   - end: 结束位置
+    func setLinearGradientBackgroundLayer(_ size: CGSize,
+                                          colors: [UIColor],
+                                          locations: [CGFloat] = [0, 1],
+                                          start: CGPoint,
+                                          end: CGPoint)
+    {
+        let gradientLayer = colors.createLinearGradientLayer(size,
+                                                             locations: locations,
+                                                             start: start,
+                                                             end: end)
+        layer.insertSublayer(layer, at: 0)
+    }
+
+    /// 添加线性渐变背景颜色
+    /// - Parameters:
+    ///   - size:渐变大小
+    ///   - direction:渐变方向
+    ///   - locations:颜色位置
+    ///   - colors:渐变的颜色数组
+    func setLinearGradientBackgroundColor(_ size: CGSize,
+                                          colors: [UIColor],
+                                          locations: [CGFloat] = [0, 1],
+                                          start: CGPoint,
+                                          end: CGPoint)
+    {
+        let gradientColor = colors.createLinearGradientColor(size,
+                                                             locations: locations,
+                                                             start: start,
+                                                             end: end)
+        backgroundColor = gradientColor
+    }
+
+    /// 线性渐变动画
+    /// - Parameters:
+    ///   - size: 渐变大小
+    ///   - startColors: 开始颜色数组
+    ///   - endColors: 结束颜色数组
+    ///   - locations: 渐变位置
+    ///   - start: 开始位置
+    ///   - end: 结束位置
+    ///   - duration: 动画时长
+    func linearGradientColorAnimation(_ size: CGSize,
+                                      startColors: [UIColor],
+                                      endColors: [UIColor],
+                                      locations: [CGFloat],
+                                      start: CGPoint,
+                                      end: CGPoint,
+                                      duration: CFTimeInterval = 1.0)
+    {
+        let gradientLayer = startColors.createLinearGradientLayer(size,
+                                                                  locations: locations,
+                                                                  start: start,
+                                                                  end: end)
+        layer.insertSublayer(gradientLayer, at: 0)
+
+        // 执行动画
+        startLinearGradientColorAnimation(
+            gradientLayer,
+            startColors: startColors,
+            endColors: endColors,
+            duration: duration
+        )
+    }
+
+    ///  开始线性渐变动画
+    /// - Parameters:
+    ///   - gradientLayer:要执行动画的图层
+    ///   - startColors:开始颜色数组
+    ///   - endColors:结束颜色数组
+    ///   - duration:动画时长
+    private func startLinearGradientColorAnimation(_ gradientLayer: CAGradientLayer,
+                                                   startColors: [UIColor],
+                                                   endColors: [UIColor],
+                                                   duration: CFTimeInterval = 1.0)
+    {
+        let startColorArr = startColors.map(\.cgColor)
+        let endColorArr = endColors.map(\.cgColor)
+
+        // 添加渐变动画
+        let colorChangeAnimation = CABasicAnimation(keyPath: "colors")
+        // colorChangeAnimation.delegate = self
+        colorChangeAnimation.duration = duration
+        colorChangeAnimation.fromValue = startColorArr
+        colorChangeAnimation.toValue = endColorArr
+        colorChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
+        // 动画结束后保持最终的效果
+        colorChangeAnimation.isRemovedOnCompletion = false
+        gradientLayer.add(colorChangeAnimation, forKey: "colorChange")
+    }
+}
+
+// MARK: - 水印
+public extension UIView {
+    /// 为`UIView`添加文字水印
+    /// - Parameters:
+    ///   - text: 水印文字
+    ///   - textColor: 水印文字颜色
+    ///   - font: 水印文字大小
+    func addWatermark(
+        _ text: String,
+        textColor: UIColor = UIColor.black,
+        font: UIFont = UIFont.systemFont(ofSize: 12)
+    ) {
+        // 水印文字
+        let waterMark = text.toNSString()
+        // 水印文字大小
+        let textSize = waterMark.size(withAttributes: [NSAttributedString.Key.font: font])
+
+        // 多少行
+        let rowNum = NSInteger(bounds.height * 3.5 / 80)
+        // 多少列:自己的宽度 / (每个水印的宽度+间隔)
+        let colNum = NSInteger(bounds.width / text.strSize(bounds.width, font: font).width)
+
+        for i in 0 ..< rowNum {
+            for j in 0 ..< colNum {
+                let textLayer: CATextLayer = .init()
+                // textLayer.backgroundColor = UIColor.randomColor().cgColor
+                // 按当前屏幕分辨显示,否则会模糊
+                textLayer.contentsScale = UIScreen.main.scale
+                textLayer.font = font
+                textLayer.fontSize = font.pointSize
+                textLayer.foregroundColor = textColor.cgColor
+                textLayer.string = waterMark
+                textLayer.frame = CGRect(x: CGFloat(j) * (textSize.width + 30), y: CGFloat(i) * 60, width: textSize.width, height: textSize.height)
+                // 旋转文字
+                textLayer.transform = CATransform3DMakeRotation(CGFloat(Double.pi * 0.2), 0, 0, 3)
+                layer.addSublayer(textLayer)
+            }
+        }
+    }
+}
+
+// MARK: - 抖动效果
+public extension UIView {
+    enum ShakeDirection {
+        /// 左右抖动
+        case horizontal
+        /// 上下抖动
+        case vertical
+    }
+
+    enum ShakeAnimation {
+        /// 线性动画
+        case linear
+        /// easeIn动画
+        case easeIn
+        /// easeOut动画
+        case easeOut
+        ///  easeInOut动画
+        case easeInOut
+    }
+
+    /// 让`UIView`抖动
+    /// - Parameters:
+    ///   - shakeDirection: 抖动方向(水平或垂直)(默认为水平)
+    ///   - shakeAnimation: shake动画类型(默认为.easeOut)
+    ///   - duration: 以秒为单位的动画持续时间(默认值为1秒)
+    ///   - completion: 完成回调,用于在动画完成时运行(默认为nil)
+    func shake(shakeDirection: ShakeDirection = .horizontal,
+               shakeAnimation: ShakeAnimation = .easeOut,
+               duration: TimeInterval = 1,
+               completion: (() -> Void)? = nil)
+    {
+        CATransaction.begin()
+        let animation: CAKeyframeAnimation
+        switch shakeDirection {
+        case .horizontal:
+            animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        case .vertical:
+            animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
+        }
+
+        switch shakeAnimation {
+        case .linear:
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        case .easeIn:
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        case .easeOut:
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        case .easeInOut:
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        }
+        CATransaction.setCompletionBlock(completion)
+        animation.duration = duration
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0]
+        layer.add(animation, forKey: "shake")
+        CATransaction.commit()
+    }
+}
+
+// MARK: 手势
+public extension UIView {
+    /// 将数组中的手势添加到`UIView`
+    /// - Parameter gestureRecognizers: 手势数组
+    func addGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer]) {
+        isUserInteractionEnabled = true
+        for recognizer in gestureRecognizers {
+            addGestureRecognizer(recognizer)
+        }
+    }
+
+    /// 将数组中的手势从`UIView`中移除
+    /// - Parameter gestureRecognizers: 手势数组
+    func removeGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer]) {
+        for recognizer in gestureRecognizers {
+            removeGestureRecognizer(recognizer)
+        }
+    }
+
+    /// 删除所有手势识别器
+    func removeGestureRecognizers() {
+        gestureRecognizers?.forEach(removeGestureRecognizer)
+    }
+
+    /// 添加`UITapGestureRecognizer`(点击)
+    /// - Parameter action:事件处理
+    /// - Returns:`UITapGestureRecognizer`
+    @discardableResult
+    func addTapGestureRecognizer(
+        _ action: @escaping (_ gesture: UITapGestureRecognizer) -> Void
+    ) -> UITapGestureRecognizer {
+        let obj = UITapGestureRecognizer(target: nil, action: nil)
+        // 轻点次数
+        obj.numberOfTapsRequired = 1
+        // 手指个数
+        obj.numberOfTouchesRequired = 1
+        addCommonGestureRecognizer(obj)
+
+        obj.addCallback { recognizer in
+            action(recognizer)
+        }
+
+        return obj
+    }
+
+    /// 添加`UILongPressGestureRecognizer`(长按)
+    /// - Parameters:
+    ///   - action:事件处理
+    ///   - minimumPressDuration:最小长按时间
+    /// - Returns:`UILongPressGestureRecognizer`
+    @discardableResult
+    func addLongPressGestureRecognizer(
+        _ action: @escaping (_ gesture: UILongPressGestureRecognizer) -> Void,
+        for minimumPressDuration: TimeInterval
+    ) -> UILongPressGestureRecognizer {
+        let obj = UILongPressGestureRecognizer(target: nil, action: nil)
+        obj.minimumPressDuration = minimumPressDuration
+        addCommonGestureRecognizer(obj)
+
+        obj.addCallback { recognizer in
+            action(recognizer)
+        }
+        return obj
+    }
+
+    /// 添加`UIPanGestureRecognizer`(拖拽)
+    /// - Parameter action:事件处理
+    /// - Returns:`UIPanGestureRecognizer`
+    @discardableResult
+    func addPanGestureRecognizer(
+        _ action: @escaping (_ gesture: UIPanGestureRecognizer) -> Void
+    ) -> UIPanGestureRecognizer {
+        let obj = UIPanGestureRecognizer(target: nil, action: nil)
+        obj.minimumNumberOfTouches = 1
+        obj.maximumNumberOfTouches = 3
+        addCommonGestureRecognizer(obj)
+
+        obj.addCallback { recognizer in
+            if let sender = recognizer as? UIPanGestureRecognizer, let senderView = sender.view {
+                let translate: CGPoint = sender.translation(in: senderView.superview)
+                senderView.center = CGPoint(x: senderView.center.x + translate.x, y: senderView.center.y + translate.y)
+                sender.setTranslation(.zero, in: senderView.superview)
+                action(recognizer)
+            }
+        }
+        return obj
+    }
+
+    /// 添加`UIScreenEdgePanGestureRecognizer`(屏幕边缘拖拽)
+    /// - Parameters:
+    ///   - target:监听对象
+    ///   - action:事件处理
+    ///   - edgs:边缘
+    /// - Returns:`UIScreenEdgePanGestureRecognizer`
+    @discardableResult
+    func addScreenEdgePanGestureRecognizer(
+        _ target: Any?,
+        action: Selector?,
+        for edgs: UIRectEdge
+    ) -> UIScreenEdgePanGestureRecognizer {
+        let obj = UIScreenEdgePanGestureRecognizer(target: target, action: action)
+        obj.edges = edgs
+        addCommonGestureRecognizer(obj)
+        return obj
+    }
+
+    /// 添加`UIScreenEdgePanGestureRecognizer`(屏幕边缘拖拽)
+    /// - Parameters:
+    ///   - action:事件
+    ///   - edgs:边缘
+    /// - Returns:`UIScreenEdgePanGestureRecognizer`
+    @discardableResult
+    func addScreenEdgePanGestureRecognizer(
+        action: @escaping (_ gesture: UIScreenEdgePanGestureRecognizer) -> Void,
+        for edgs: UIRectEdge
+    ) -> UIScreenEdgePanGestureRecognizer {
+        let obj = UIScreenEdgePanGestureRecognizer(target: nil, action: nil)
+        obj.edges = edgs
+        addCommonGestureRecognizer(obj)
+        obj.addCallback { recognizer in
+            action(recognizer)
+        }
+        return obj
+    }
+
+    /// 添加`UISwipeGestureRecognizer`(轻扫)
+    /// - Parameters:
+    ///   - target:事件对象
+    ///   - action:事件处理
+    ///   - direction:轻扫方向
+    /// - Returns:`UISwipeGestureRecognizer`
+    @discardableResult
+    func addSwipeGestureRecognizer(
+        _ target: Any?,
+        action: Selector?,
+        for direction: UISwipeGestureRecognizer.Direction
+    ) -> UISwipeGestureRecognizer {
+        let obj = UISwipeGestureRecognizer(target: target, action: action)
+        obj.direction = direction
+        addCommonGestureRecognizer(obj)
+        return obj
+    }
+
+    /// 添加`UISwipeGestureRecognizer`(轻扫)
+    /// - Parameters:
+    ///   - action:事件处理
+    ///   - direction:轻扫方向
+    /// - Returns:`UISwipeGestureRecognizer`
+    func addSwipeGestureRecognizer(
+        _ action: @escaping (_ gesture: UISwipeGestureRecognizer) -> Void,
+        for direction: UISwipeGestureRecognizer.Direction
+    ) -> UISwipeGestureRecognizer {
+        let obj = UISwipeGestureRecognizer(target: nil, action: nil)
+        obj.direction = direction
+        addCommonGestureRecognizer(obj)
+        obj.addCallback { recognizer in
+            action(recognizer)
+        }
+        return obj
+    }
+
+    /// 添加`UIPinchGestureRecognizer`(捏合)
+    /// - Parameter action:事件处理
+    /// - Returns:`UIPinchGestureRecognizer`
+    func addPinchGestureRecognizer(_ action: @escaping (_ gesture: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
+        let obj = UIPinchGestureRecognizer(target: nil, action: nil)
+        addCommonGestureRecognizer(obj)
+        obj.addCallback { recognizer in
+            if let sender = recognizer as? UIPinchGestureRecognizer {
+                let location = recognizer.location(in: sender.view!.superview)
+                sender.view!.center = location
+                sender.view!.transform = sender.view!.transform.scaledBy(x: sender.scale, y: sender.scale)
+                sender.scale = 1.0
+                action(recognizer)
+            }
+        }
+        return obj
+    }
+
+    /// 添加`UIRotationGestureRecognizer`(旋转)
+    /// - Parameter action:事件处理
+    /// - Returns:`UIRotationGestureRecognizer`
+    @discardableResult
+    func addRotationGestureRecognizer(
+        _ action: @escaping (_ gesture: UIRotationGestureRecognizer) -> Void
+    ) -> UIRotationGestureRecognizer {
+        let obj = UIRotationGestureRecognizer(target: nil, action: nil)
+        addCommonGestureRecognizer(obj)
+        obj.addCallback { recognizer in
+            if let sender = recognizer as? UIRotationGestureRecognizer {
+                sender.view!.transform = sender.view!.transform.rotated(by: sender.rotation)
+                sender.rotation = 0.0
+                action(recognizer)
+            }
+        }
+        return obj
+    }
+
+    /// 添加手势到`UIView`上
+    /// - Parameter gestureRecognizer: 要添加的手势
+    private func addCommonGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+        isUserInteractionEnabled = true
+        isMultipleTouchEnabled = true
+        addGestureRecognizer(gestureRecognizer)
     }
 }
 

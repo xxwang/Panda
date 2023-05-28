@@ -15,24 +15,24 @@ public extension CAGradientLayer {
     ///   - frame:图层尺寸及位置信息
     ///   - colors:颜色位置数组
     ///   - locations:颜色数组中颜色对应的位置
-    ///   - type:渐变类型
     ///   - start:渐变开始点
     ///   - end:渐变结束点
+    ///   - type:渐变类型
     convenience init(_ frame: CGRect = .zero,
                      colors: [UIColor],
                      locations: [CGFloat]? = nil,
-                     type: CAGradientLayerType = .axial,
                      start: CGPoint,
-                     end: CGPoint)
+                     end: CGPoint,
+                     type: CAGradientLayerType = .axial)
     {
         self.init()
 
         pd_frame(frame)
             .pd_colors(colors)
             .pd_locations(locations ?? [])
-            .pd_type(type)
             .pd_start(start)
             .pd_end(end)
+            .pd_type(type)
     }
 }
 
