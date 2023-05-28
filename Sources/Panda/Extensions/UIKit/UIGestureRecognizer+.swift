@@ -64,7 +64,7 @@ public extension UIGestureRecognizer {
     /// - Parameter callback:响应回调
     /// - Returns: `Self`
     @discardableResult
-    func pd_callback(_ callback: @escaping (_ gestureRecognizer: UIGestureRecognizer) -> Void) -> Self {
+    func pd_callback(_ callback: @escaping (_ recognizer: UIGestureRecognizer) -> Void) -> Self {
         addTarget(self, action: #selector(p_invoke))
         AssociatedObject.set(self, &AssociateKeys.CallbackKey, callback, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self

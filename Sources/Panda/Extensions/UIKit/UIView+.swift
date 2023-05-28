@@ -290,14 +290,14 @@ public extension UIView {
     /// - Note:提示:如果在异步布局(如:SnapKit布局)中使用,要在布局后先调用 layoutIfNeeded,再使用该方法
     /// - Parameters:
     ///   - superview: 父视图
-    ///   - conrners: 具体哪个圆角
+    ///   - corners: 具体哪个圆角
     ///   - radius: 圆角半径
     ///   - shadowColor: 阴影的颜色
     ///   - shadowOffset: 阴影的偏移度:CGSizeMake(X[正的右偏移,负的左偏移], Y[正的下偏移,负的上偏移])
     ///   - shadowOpacity: 阴影的透明度
     ///   - shadowRadius: 阴影半径,默认 3
     func addCornerAndShadow(superview: UIView,
-                            conrners: UIRectCorner,
+                            corners: UIRectCorner,
                             radius: CGFloat = 3,
                             shadowColor: UIColor,
                             shadowOffset: CGSize,
@@ -305,7 +305,7 @@ public extension UIView {
                             shadowRadius: CGFloat = 3)
     {
         // 添加圆角
-        roundCorners(conrners, radius: radius)
+        roundCorners(radius: radius, corners: corners)
 
         // 设置阴影
         let subLayer = CALayer()
@@ -535,7 +535,7 @@ public extension UIView {
                                                              locations: locations,
                                                              start: start,
                                                              end: end)
-        layer.insertSublayer(layer, at: 0)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 
     /// 添加线性渐变背景颜色
@@ -753,8 +753,10 @@ public extension UIView {
         obj.numberOfTouchesRequired = 1
         addCommonGestureRecognizer(obj)
 
-        obj.addCallback { recognizer in
-            action(recognizer)
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UITapGestureRecognizer {
+                action(recognizer)
+            }
         }
 
         return obj
@@ -774,8 +776,10 @@ public extension UIView {
         obj.minimumPressDuration = minimumPressDuration
         addCommonGestureRecognizer(obj)
 
-        obj.addCallback { recognizer in
-            action(recognizer)
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UILongPressGestureRecognizer {
+                action(recognizer)
+            }
         }
         return obj
     }
@@ -792,11 +796,13 @@ public extension UIView {
         obj.maximumNumberOfTouches = 3
         addCommonGestureRecognizer(obj)
 
-        obj.addCallback { recognizer in
-            if let sender = recognizer as? UIPanGestureRecognizer, let senderView = sender.view {
-                let translate: CGPoint = sender.translation(in: senderView.superview)
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UIPanGestureRecognizer,
+               let senderView = recognizer.view
+            {
+                let translate: CGPoint = recognizer.translation(in: senderView.superview)
                 senderView.center = CGPoint(x: senderView.center.x + translate.x, y: senderView.center.y + translate.y)
-                sender.setTranslation(.zero, in: senderView.superview)
+                recognizer.setTranslation(.zero, in: senderView.superview)
                 action(recognizer)
             }
         }
@@ -834,8 +840,10 @@ public extension UIView {
         let obj = UIScreenEdgePanGestureRecognizer(target: nil, action: nil)
         obj.edges = edgs
         addCommonGestureRecognizer(obj)
-        obj.addCallback { recognizer in
-            action(recognizer)
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UIScreenEdgePanGestureRecognizer {
+                action(recognizer)
+            }
         }
         return obj
     }
@@ -870,8 +878,10 @@ public extension UIView {
         let obj = UISwipeGestureRecognizer(target: nil, action: nil)
         obj.direction = direction
         addCommonGestureRecognizer(obj)
-        obj.addCallback { recognizer in
-            action(recognizer)
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UISwipeGestureRecognizer {
+                action(recognizer)
+            }
         }
         return obj
     }
@@ -882,12 +892,15 @@ public extension UIView {
     func addPinchGestureRecognizer(_ action: @escaping (_ gesture: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
         let obj = UIPinchGestureRecognizer(target: nil, action: nil)
         addCommonGestureRecognizer(obj)
-        obj.addCallback { recognizer in
-            if let sender = recognizer as? UIPinchGestureRecognizer {
-                let location = recognizer.location(in: sender.view!.superview)
-                sender.view!.center = location
-                sender.view!.transform = sender.view!.transform.scaledBy(x: sender.scale, y: sender.scale)
-                sender.scale = 1.0
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UIPinchGestureRecognizer {
+                let location = recognizer.location(in: recognizer.view!.superview)
+                recognizer.view!.center = location
+                recognizer.view!.transform = recognizer.view!.transform.scaledBy(
+                    x: recognizer.scale,
+                    y: recognizer.scale
+                )
+                recognizer.scale = 1.0
                 action(recognizer)
             }
         }
@@ -903,10 +916,10 @@ public extension UIView {
     ) -> UIRotationGestureRecognizer {
         let obj = UIRotationGestureRecognizer(target: nil, action: nil)
         addCommonGestureRecognizer(obj)
-        obj.addCallback { recognizer in
-            if let sender = recognizer as? UIRotationGestureRecognizer {
-                sender.view!.transform = sender.view!.transform.rotated(by: sender.rotation)
-                sender.rotation = 0.0
+        obj.pd_callback { recognizer in
+            if let recognizer = recognizer as? UIRotationGestureRecognizer {
+                recognizer.view!.transform = recognizer.view!.transform.rotated(by: recognizer.rotation)
+                recognizer.rotation = 0.0
                 action(recognizer)
             }
         }
