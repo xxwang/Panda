@@ -82,7 +82,7 @@ public extension UIImage {
     convenience init(lightImage: UIImage?, darkImage: UIImage?) {
         if #available(iOS 13.0, *) {
             guard var lightImage else { self.init(); return }
-            guard var darkImage else { self.init(); return }
+            guard let darkImage else { self.init(); return }
             guard let config = lightImage.configuration else { self.init(); return }
 
             lightImage = lightImage.withConfiguration(
@@ -118,7 +118,7 @@ public extension UIImage {
     static func darkModeImage(_ lightImage: UIImage?, darkImage: UIImage?) -> UIImage? {
         if #available(iOS 13.0, *) {
             guard var lightImage else { return lightImage }
-            guard var darkImage else { return lightImage }
+            guard let darkImage else { return lightImage }
             guard let config = lightImage.configuration else { return lightImage }
 
             lightImage = lightImage.withConfiguration(

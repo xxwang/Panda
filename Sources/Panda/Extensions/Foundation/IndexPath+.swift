@@ -17,7 +17,6 @@ public extension IndexPath {
     /// 当前`IndexPath`的前一个
     func previousIndexPath(_ view: Any) -> IndexPath? {
         if let tableView = view as? UITableView {
-            var maxSectionNum = tableView.numberOfSections - 1
             if row > 0 {
                 return IndexPath(row: row - 1, section: section)
             } else if row == 0, section > 0 {
@@ -38,8 +37,8 @@ public extension IndexPath {
     /// 当前`IndexPath`的下一个
     func nextIndexPath(_ view: Any) -> IndexPath? {
         if let tableView = view as? UITableView {
-            var maxSectionIndex = tableView.numberOfSections - 1
-            var maxRowInSection = tableView.numberOfRows(inSection: section) - 1
+            let maxSectionIndex = tableView.numberOfSections - 1
+            let maxRowInSection = tableView.numberOfRows(inSection: section) - 1
 
             if row < maxRowInSection {
                 return IndexPath(row: row + 1, section: section)
@@ -47,8 +46,8 @@ public extension IndexPath {
                 return IndexPath(row: 0, section: section + 1)
             }
         } else if let collectionView = view as? UICollectionView {
-            var maxSectionIndex = collectionView.numberOfSections - 1
-            var maxItemInSection = collectionView.numberOfItems(inSection: section) - 1
+            let maxSectionIndex = collectionView.numberOfSections - 1
+            let maxItemInSection = collectionView.numberOfItems(inSection: section) - 1
 
             if row < maxItemInSection {
                 return IndexPath(item: item + 1, section: section)

@@ -243,6 +243,165 @@ public extension UIView {
     }
 }
 
+// MARK: - 布局
+public extension UIView {
+    /// 这个视图的第一个宽度约束
+    var widthConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .width, for: self)
+    }
+
+    /// 这个视图的第一个高度约束
+    var heightConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .height, for: self)
+    }
+
+    /// 这个视图的第一个头部约束
+    var leadingConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .leading, for: self)
+    }
+
+    /// 这个视图的第一个尾随约束
+    var trailingConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .trailing, for: self)
+    }
+
+    /// 这个视图的第一个顶部约束
+    var topConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .top, for: self)
+    }
+
+    /// 这个视图的第一个底部约束
+    var bottomConstraint: NSLayoutConstraint? {
+        findConstraint(attribute: .bottom, for: self)
+    }
+
+    /// 搜索约束,直到找到给定视图的约束
+    /// - Parameters:
+    ///   - attribute:要查找的属性
+    ///   - view:要查找的视图
+    /// - Returns:匹配约束
+    func findConstraint(attribute: NSLayoutConstraint.Attribute, for view: UIView) -> NSLayoutConstraint? {
+        let constraint = constraints.first {
+            ($0.firstAttribute == attribute && $0.firstItem as? UIView == view) ||
+                ($0.secondAttribute == attribute && $0.secondItem as? UIView == view)
+        }
+        return constraint ?? superview?.findConstraint(attribute: attribute, for: view)
+    }
+
+    /// 添加VFL格式约束
+    /// - Parameters:
+    ///   - withFormat:视觉格式语言
+    ///   - views:从索引0开始访问的视图数组(例如:[v0],[v1],[v2]…)
+    func addConstraints(withFormat: String, views: UIView...) {
+        var viewsDictionary: [String: UIView] = [:]
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            view.translatesAutoresizingMaskIntoConstraints = false
+            viewsDictionary[key] = view
+        }
+        addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: withFormat,
+            options: NSLayoutConstraint.FormatOptions(),
+            metrics: nil,
+            views: viewsDictionary
+        ))
+    }
+
+    /// 将view的各个边锚定到它的superview(填充至父view)
+    func fillToSuperview() {
+        translatesAutoresizingMaskIntoConstraints = false
+        if let superview {
+            let left = leftAnchor.constraint(equalTo: superview.leftAnchor)
+            let right = rightAnchor.constraint(equalTo: superview.rightAnchor)
+            let top = topAnchor.constraint(equalTo: superview.topAnchor)
+            let bottom = bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+            NSLayoutConstraint.activate([left, right, top, bottom])
+        }
+    }
+
+    /// 将中心X和Y锚定到当前视图的superview中
+    func anchorCenterSuperview() {
+        anchorCenterXToSuperview()
+        anchorCenterYToSuperview()
+    }
+
+    /// 将中心X固定到当前视图的superview中,并具有恒定的边距值
+    /// - Parameter constant:锚定约束的常量(默认值为0)
+    func anchorCenterXToSuperview(constant: CGFloat = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        if let anchor = superview?.centerXAnchor {
+            centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        }
+    }
+
+    /// 将中心Y固定到当前视图的superview中,并使用恒定的边距值
+    /// - Parameter withConstant:锚定约束的常数(默认值为0)
+    func anchorCenterYToSuperview(constant: CGFloat = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        if let anchor = superview?.centerYAnchor {
+            centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        }
+    }
+
+    /// 将当前view任意一侧的定位添加到指定的定位中,并返回新添加的约束
+    /// - Parameters:
+    ///   - top:当前视图的顶部锚定将被锚定到指定的锚定中
+    ///   - left:当前视图的左锚定将被锚定到指定的锚定中
+    ///   - bottom:当前视图的底部锚定将被锚定到指定的锚定中
+    ///   - right:当前视图的右锚定将被锚定到指定的锚定中
+    ///   - topConstant:当前视图的顶部锚定边距
+    ///   - leftConstant:当前视图的左锚定边距
+    ///   - bottomConstant:当前视图的底部锚定边距
+    ///   - rightConstant:当前视图的右定位边距
+    ///   - widthConstant:当前视图的宽度
+    ///   - heightConstant:当前视图的高度
+    /// - Returns:新添加的约束数组(如果适用)
+    @discardableResult
+    func anchor(top: NSLayoutYAxisAnchor? = nil,
+                left: NSLayoutXAxisAnchor? = nil,
+                bottom: NSLayoutYAxisAnchor? = nil,
+                right: NSLayoutXAxisAnchor? = nil,
+                topConstant: CGFloat = 0,
+                leftConstant: CGFloat = 0,
+                bottomConstant: CGFloat = 0,
+                rightConstant: CGFloat = 0,
+                widthConstant: CGFloat = 0,
+                heightConstant: CGFloat = 0) -> [NSLayoutConstraint]
+    {
+        translatesAutoresizingMaskIntoConstraints = false
+
+        var anchors = [NSLayoutConstraint]()
+
+        if let top {
+            anchors.append(topAnchor.constraint(equalTo: top, constant: topConstant))
+        }
+
+        if let left {
+            anchors.append(leftAnchor.constraint(equalTo: left, constant: leftConstant))
+        }
+
+        if let bottom {
+            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
+        }
+
+        if let right {
+            anchors.append(rightAnchor.constraint(equalTo: right, constant: -rightConstant))
+        }
+
+        if widthConstant > 0 {
+            anchors.append(widthAnchor.constraint(equalToConstant: widthConstant))
+        }
+
+        if heightConstant > 0 {
+            anchors.append(heightAnchor.constraint(equalToConstant: heightConstant))
+        }
+
+        anchors.forEach { $0.isActive = true }
+
+        return anchors
+    }
+}
+
 // MARK: - 圆角
 public extension UIView {
     /// 设置圆角(⚠️前提:需要`frame`已确定)
@@ -616,6 +775,202 @@ public extension UIView {
     }
 }
 
+// MARK: - 水波纹动画
+public extension UIView {
+    /// 开启水波纹动画(动画层数根据颜色数组变化)
+    /// - Parameters:
+    ///   - colors:颜色数组
+    ///   - scale:缩放
+    ///   - duration:动画时间
+    final func startWaterWaveAnimation(colors: [UIColor],
+                                       scale: CGFloat,
+                                       duration: TimeInterval)
+    {
+        if superview?.viewWithTag(3257) != nil { return }
+
+        let animationView = UIView(frame: frame)
+        animationView.tag = 3257
+        animationView.layer.cornerRadius = layer.cornerRadius
+        superview?.insertSubview(animationView, belowSubview: self)
+
+        let delay = Double(duration) / Double(colors.count)
+        for (index, color) in colors.enumerated() {
+            let delay = delay * Double(index)
+            setupAnimationView(animationView: animationView, color: color, scale: scale, delay: delay, duration: duration)
+        }
+    }
+
+    /// 设置动画视图
+    /// - Parameters:
+    ///   - animationView: 动画view
+    ///   - color: 颜色
+    ///   - scale: 缩放
+    ///   - delay: 延时
+    ///   - duration: 动画时长
+    private func setupAnimationView(animationView: UIView,
+                                    color: UIColor,
+                                    scale: CGFloat,
+                                    delay: CFTimeInterval,
+                                    duration: TimeInterval)
+    {
+        let waveView = UIView(frame: animationView.bounds)
+        waveView.backgroundColor = color
+        waveView.layer.cornerRadius = animationView.layer.cornerRadius
+        waveView.layer.masksToBounds = true
+        animationView.addSubview(waveView)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            let opacityAnimation = CABasicAnimation(keyPath: "opacity")
+            opacityAnimation.fromValue = 1
+            opacityAnimation.toValue = 0
+            opacityAnimation.duration = duration
+            opacityAnimation.repeatCount = MAXFLOAT
+            waveView.layer.add(opacityAnimation, forKey: "opacityAnimation")
+
+            let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+            scaleAnimation.fromValue = 1
+            scaleAnimation.toValue = scale
+            scaleAnimation.duration = duration
+            scaleAnimation.repeatCount = MAXFLOAT
+            waveView.layer.add(scaleAnimation, forKey: "scaleAnimation")
+        }
+    }
+
+    /// 停止水波纹动画
+    final func stopWaterWaveAnimation() {
+        if let view = superview?.viewWithTag(3257) {
+            view.removeFromSuperview()
+        }
+    }
+}
+
+// MARK: - 角标(徽章)
+public extension UIView {
+    /// 添加角标
+    /// - Parameter number:角标数字(0表示移除角标, ""空字符串表示 小红点无数字)
+    func setupBadge(_ number: String) {
+        var badgeLabel: UILabel? = viewWithTag(6202) as? UILabel
+        if number == "0" {
+            removeBadege()
+            return
+        }
+
+        if badgeLabel == nil {
+            badgeLabel = UILabel.default()
+                .pd_text(number)
+                .pd_textColor("#FFFFFF".toHexColor())
+                .pd_backgroundColor("#EE0565".toHexColor())
+                .pd_font(.system(.regular, size: 10))
+                .pd_textAlignment(.center)
+                .pd_tag(6202)
+                .pd_add2(self)
+        }
+
+        badgeLabel?
+            .pd_text((number.toInt()) > 99 ? "99+" : number)
+            .pd_cornerRadius(2.5)
+            .pd_masksToBounds(true)
+
+        badgeLabel?.translatesAutoresizingMaskIntoConstraints = false
+        if number.isEmpty {
+            // 宽度约束
+            let widthCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .width,
+                multiplier: 1,
+                constant: 5
+            )
+            // 高度约束
+            let heightCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .height,
+                multiplier: 1,
+                constant: 5
+            )
+            // 中心点X坐标约束
+            let centerXCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: self,
+                attribute: .right,
+                multiplier: 1,
+                constant: 0
+            )
+            // 中心点Y坐标约束
+            let centerYCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: self,
+                attribute: .top,
+                multiplier: 1,
+                constant: 0
+            )
+            addConstraints([widthCons, heightCons, centerXCons, centerYCons])
+        } else {
+            var textWidth = (badgeLabel?.textSize().width ?? 0) + 10
+            textWidth = max(textWidth, 16)
+
+            // 宽度约束
+            let widthCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .width,
+                multiplier: 1,
+                constant: textWidth
+            )
+            // 高度约束
+            let heightCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .height,
+                multiplier: 1,
+                constant: 16
+            )
+            // 中心点X坐标约束
+            let centerXCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: self,
+                attribute: .right,
+                multiplier: 1,
+                constant: 0
+            )
+            // 中心点Y坐标约束
+            let centerYCons = NSLayoutConstraint(
+                item: badgeLabel!,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: self,
+                attribute: .top,
+                multiplier: 1,
+                constant: 0
+            )
+            addConstraints([widthCons, heightCons, centerXCons, centerYCons])
+        }
+    }
+
+    /// 移除角标
+    func removeBadege() {
+        DispatchQueue.async_execute_on_main {
+            let badge = self.viewWithTag(6202)
+            badge?.removeFromSuperview()
+        }
+    }
+}
+
 // MARK: - 水印
 public extension UIView {
     /// 为`UIView`添加文字水印
@@ -932,6 +1287,210 @@ public extension UIView {
         isUserInteractionEnabled = true
         isMultipleTouchEnabled = true
         addGestureRecognizer(gestureRecognizer)
+    }
+}
+
+/*
+ 两部分组成:粒子发射引擎 和 粒子单元
+ 1、粒子发射引擎(CAEmitterLayer):负责粒子发射效果的宏观属性,例如粒子的发生速度、粒子的存活时间、粒子的发射位置等等
+ CAEmitterLayer的属性:
+ - emitterCells:CAEmitterCell对象的数组,用于把粒子投放到layer上
+ - birthRate:粒子产生速度,默认1个每秒
+ - lifetime:粒子纯在时间,默认1秒
+ - emitterPosition:发射器在xy平面的中心位置
+ - emitterZPosition:发射器在z平面的位置
+ - preservesDepth:是否开启三维效果
+ - velocity:粒子运动速度
+ - scale:粒子的缩放比例
+ - spin:自旋转速度
+ - seed:用于初始化随机数产生的种子
+ - emitterSize:发射器的尺寸
+ - emitterDepth:发射器的深度
+ - emitterShape:发射器的形状
+ - point:点的形状,粒子从一个点发出
+ - line:线的形状,粒子从一条线发出
+ - rectangle:矩形形状,粒子从一个矩形中发
+ - cuboid:立方体形状,会影响Z平面的效果
+ - circle:粒子发射器引擎为球圆形形状,粒子会在圆形范围发射
+ - sphere:粒子发射器引擎为球形形状
+ - emitterMode:发射器发射模式
+ - points 从发射器中发出
+ - outline 从发射器边缘发出
+ - surface 从发射器表面发出
+ - volume 从发射器中点发出
+ - renderMode:发射器渲染模式
+ - unordered:粒子无序出现,多个粒子单元发射器的粒子将混合
+ - oldestFirst:生命久的粒子会被渲染在最上层
+ - oldestLast:生命短的粒子会被渲染在最上层
+ - backToFront:粒子的渲染按照Z轴进行上下排序
+ - additive:粒子将被混合
+
+ 2、粒子单元(CAEmitterCell):用来设置具体单位粒子的属性,例如粒子的运动速度、粒子的形变与颜色等等
+ CAEmitterCell的属性:
+ - name:粒子的名字
+ - color:粒子的颜色
+ - enabled:粒子是否渲染
+ - contents:渲染粒子,是个CGImageRef的对象,即粒子要展示的图片
+ - contentsRect:渲染范围
+ - birthRate:粒子产生速度
+ - lifetime:生命周期
+ - lifetimeRange:生命周期增减范围
+ - velocity:粒子运动速度
+ - velocityRange:速度范围
+ - spin:粒子旋转速度
+ - spinrange:粒子旋转速度范围
+ - scale:缩放比例
+ - scaleRange:缩放比例范围
+ - scaleSpeed:缩放比例速度
+ - alphaRange::一个粒子的颜色alpha能改变的范围
+ - alphaSpeed::粒子透明度在生命周期内的改变速度
+ - redRange:一个粒子的颜色red能改变的范围
+ - redSpeed:粒子red在生命周期内的改变速度
+ - blueRange:一个粒子的颜色blue能改变的范围
+ - blueSpeed:粒子blue在生命周期内的改变速度
+ - greenRange:一个粒子的颜色green能改变的范围
+ - greenSpeed:粒子green在生命周期内的改变速度
+ - xAcceleration:粒子x方向的加速度分量
+ - yAcceleration:粒子y方向的加速度分量
+ - zAcceleration:粒子z方向的加速度分量
+ - emissionRange:粒子发射角度范围
+ - emissionLongitude:粒子在x-y平面的发射角度
+ - emissionLatitude:发射的z轴方向的发射角度
+ */
+// MARK: - 粒子发射器
+public extension UIView {
+    class EmitterStyle: NSObject {
+        /*------------------- 粒子发射器 -------------------*/
+        /// 开启三维效果
+        public var preservesDepth: Bool = true
+        /// 设置发射器位置
+        public var emitterPosition: CGPoint = .init(x: UIScreen.main.bounds.width / 2.0, y: UIScreen.main.bounds.height - 30)
+        /// 发射器的形状,默认 球型
+        public var emitterShape: CAEmitterLayerEmitterShape = .sphere
+
+        /*------------------- 粒子单元 -------------------*/
+        /// 缩放比例
+        public var cellScale: CGFloat = 0.7
+        /// 缩放比例范围
+        public var cellScaleRange: CGFloat = 0.3
+        /// 粒子存活的时间(指:粒子从创建出来展示在界面上到从界面上消失释放的整个过程)
+        public var cellEmitterLifetime: Float = 3
+        /// 生命周期增减范围
+        public var cellLifetimeRange: Float = 3
+        /// 设置例子每秒弹出的个数
+        public var cellEmitterBirthRate: Float = 10
+        /// 粒子的颜色
+        public var cellColor: UIColor = .white
+        /// 粒子旋转速度
+        public var cellSpin: CGFloat = .init(Double.pi / 2)
+        /// 粒子旋转速度范围
+        public var cellSpinRange: CGFloat = .init(Double.pi / 4)
+        /// 粒子运动速度
+        public var cellVelocity: CGFloat = 150
+        /// 速度范围
+        public var cellVelocityRange: CGFloat = 100
+        /// 设置粒子的方向
+        public var cellEmissionLongitude: CGFloat = .init(-Double.pi / 2)
+        /// 粒子发射角度范围
+        public var cellEmissionRange: CGFloat = .init(Double.pi / 5)
+
+        /// 粒子是否只发射一次
+        public var cellFireOnce: Bool = false
+    }
+
+    /// 启动 粒子发射器
+    /// - Parameters:
+    ///   - emitterImageNames:粒子单元图片名
+    ///   - style:发射器和粒子的样式
+    @discardableResult
+    func startEmitter(emitterImageNames: [String], style: EmitterStyle = EmitterStyle()) -> CAEmitterLayer {
+        // 创建发射器
+        let emitter = CAEmitterLayer()
+        emitter.backgroundColor = UIColor.brown.cgColor
+        // 设置发射器位置
+        emitter.emitterPosition = style.emitterPosition
+        // 是否开启三维效果
+        emitter.preservesDepth = style.preservesDepth
+        // 发射器的形状
+        // 创建例子,并且设置例子相关的属性
+        let cells = createEmitterCell(emitterImageNames: emitterImageNames, style: style)
+        // 将粒子设置到发射器中
+        emitter.emitterCells = cells
+        // 将发射器的Layer添加到父Layer中
+        layer.addSublayer(emitter)
+
+        DispatchQueue.delay_execute(delay: 1) {
+            guard style.cellFireOnce else { return }
+            emitter.birthRate = 0
+
+            DispatchQueue.delay_execute(delay: 1) {
+                self.stopEmitter()
+            }
+        }
+        return emitter
+    }
+
+    ///  停止 粒子发射器
+    func stopEmitter() {
+        _ = layer.sublayers?.filter {
+            $0.isKind(of: CAEmitterLayer.self)
+        }.map {
+            $0.removeFromSuperlayer()
+        }
+    }
+
+    /// 创建例子,并且设置例子相关的属性
+    /// - Parameters:
+    ///   - emitterImageNames:粒子单元图片名
+    ///   - style:发射器和粒子的样式
+    /// - Returns:粒子数组
+    private func createEmitterCell(emitterImageNames: [String], style: EmitterStyle) -> [CAEmitterCell] {
+        // 粒子单元数组
+        var cells: [CAEmitterCell] = []
+        for emitterImageName in emitterImageNames {
+            // 创建粒子,并且设置例子相关的属性
+            // 创建粒子 cell
+            let cell = CAEmitterCell()
+            // 设置粒子速度(velocity-velocityRange 到 velocity+velocityRange)
+            // 15.0 +- 200
+            // 初始速度
+            cell.velocity = style.cellVelocity
+            // 速度范围
+            cell.velocityRange = style.cellVelocityRange
+            // x 轴上的加速度
+            // cell.xAcceleration = 5.0
+            // y 轴上的加速度
+            // cell.yAcceleration = 30.0
+            // 创建粒子的大小
+            cell.scale = style.cellScale
+            cell.scaleRange = style.cellScaleRange
+            // 设置粒子的方向
+            cell.emissionLongitude = style.cellEmissionLongitude
+            // 周围发射角度
+            cell.emissionRange = style.cellEmissionRange
+            // 设置粒子旋转
+            // 粒子旋转速度
+            cell.spin = style.cellSpin
+            // 粒子旋转速度范围
+            cell.spinRange = style.cellSpinRange
+            // 设置粒子存活的时间
+            cell.lifetime = style.cellEmitterLifetime
+            // 生命周期增减范围
+            cell.lifetimeRange = style.cellLifetimeRange
+            // 设置粒子每秒弹出的个数
+            cell.birthRate = style.cellEmitterBirthRate
+            // 设置粒子展示的图片
+            cell.contents = UIImage(named: emitterImageName)?.cgImage
+            // 设置粒子的颜色
+            cell.color = style.cellColor.cgColor
+            // 粒子透明度能改变的范围
+            // cell.alphaRange = 0.3
+            // 粒子透明度在生命周期内的改变速度
+            // cell.alphaSpeed = 1
+            // 添加粒子单元到数组
+            cells.append(cell)
+        }
+        return cells
     }
 }
 

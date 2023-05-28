@@ -440,6 +440,7 @@ public extension UITextView {
     func scrollToTop() -> Self {
         let range = NSRange(location: 0, length: 1)
         scrollRangeToVisible(range)
+        return self
     }
 
     /// 滚动到文本视图的底部
@@ -448,6 +449,7 @@ public extension UITextView {
     func scrollToBottom() -> Self {
         let range = NSRange(location: (text as NSString).length - 1, length: 1)
         scrollRangeToVisible(range)
+        return self
     }
 
     /// 调整大小到内容的大小
@@ -459,5 +461,6 @@ public extension UITextView {
         textContainerInset = .zero
         textContainer.lineFragmentPadding = 0
         sizeToFit()
+        return self
     }
 }
