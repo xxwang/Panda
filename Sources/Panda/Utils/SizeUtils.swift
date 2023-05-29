@@ -54,7 +54,6 @@ public extension SizeUtils {
 
     /// 标题栏高度
     static var navigationBarHeight: CGFloat { 44 }
-
     /// 状态栏 + 标题栏
     static var navigationFullHeight: CGFloat { statusBarHeight + navigationBarHeight }
 }
@@ -64,7 +63,7 @@ public extension SizeUtils {
     /// 按钮区域高度
     static var tabBarHeight: CGFloat { 49 }
     /// 底部缩进高度
-    static var indentHeight: CGFloat {self.safeDistanceBottom}
+    static var indentHeight: CGFloat { safeDistanceBottom }
     /// 整个tabBar高度
     static var tabBarFullHeight: CGFloat { tabBarHeight + indentHeight }
 }
