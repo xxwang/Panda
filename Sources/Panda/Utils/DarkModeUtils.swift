@@ -1,10 +1,3 @@
-//
-//  DarkModeUtils.swift
-//
-//
-//  Created by 王斌 on 2023/5/29.
-//
-
 import UIKit
 
 /*
@@ -17,21 +10,27 @@ import UIKit
  2.1、浅色,UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.overrideUserInterfaceStyle = .light
  2.2、深色,UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.overrideUserInterfaceStyle = .dark
  */
-public class DarkModeUtils: NSObject {
+
+// MARK: - 关联键
+private class AssociateKeys {
     /// 智能换肤的时间区间的key
-    private static let CMSmartPeelingTimeIntervalKey = "CMSmartPeelingTimeIntervalKey"
+    static let SmartPeelingTimeIntervalKey = "SmartPeelingTimeIntervalKey"
     /// 跟随系统的key
-    private static let CMDarkToSystemKey = "CMDarkToSystemKey"
+    static let DarkToSystemKey = "DarkToSystemKey"
     /// 是否浅色模式的key
-    private static let CMLightDarkKey = "CMLightDarkKey"
+    static let LightDarkKey = "LightDarkKey"
     /// 智能换肤的key
-    private static let CMSmartPeelingKey = "CMSmartPeelingKey"
+    static let SmartPeelingKey = "SmartPeelingKey"
+}
+
+public class DarkModeUtils: NSObject {
+    
     /// 是否浅色
     public static var isLight: Bool {
         if isSmartPeeling {
             return isSmartPeelingTime() ? false : true
         }
-        if let value = UserDefaults.value(for: CMLightDarkKey) as? Bool {
+        if let value = UserDefaults.standard.value(forKey: AssociateKeys.LightDarkKey) as? Bool {
             return value
         }
         UserDefaults.resetStandardUserDefaults()
@@ -41,7 +40,7 @@ public class DarkModeUtils: NSObject {
     /// 是否跟随系统
     public static var isFollowSystem: Bool {
         if #available(iOS 13, *) {
-            if let value = UserDefaults.value(for: CMDarkToSystemKey) as? Bool {
+            if let value = UserDefaults.standard.value(forKey: AssociateKeys.DarkToSystemKey) as? Bool {
                 return value
             }
             return true
@@ -51,7 +50,7 @@ public class DarkModeUtils: NSObject {
 
     /// 默认不是智能换肤
     public static var isSmartPeeling: Bool {
-        if let value = UserDefaults.value(for: CMSmartPeelingKey) as? Bool {
+        if let value = UserDefaults.standard.value(forKey: AssociateKeys.SmartPeelingKey) as? Bool {
             return value
         }
         return false
@@ -60,13 +59,14 @@ public class DarkModeUtils: NSObject {
     /// 智能换肤的时间段:默认是:21:00~8:00
     public static var SmartPeelingTimeIntervalValue: String {
         get {
-            if let value = UserDefaults.value(for: CMSmartPeelingTimeIntervalKey) as? String {
+            if let value = UserDefaults.standard.value(forKey: AssociateKeys.SmartPeelingTimeIntervalKey) as? String {
                 return value
             }
             return "21:00~8:00"
         }
         set {
-            UserDefaults.save(newValue, for: CMSmartPeelingTimeIntervalKey)
+            UserDefaults.standard.set(newValue, forKey: AssociateKeys.SmartPeelingTimeIntervalKey)
+            UserDefaults.standard.synchronize()
         }
     }
 }
@@ -81,10 +81,10 @@ public extension DarkModeUtils {
     static func defaultDark() {
         if #available(iOS 13.0, *) {
             // 默认跟随系统暗黑模式开启监听
-            if DarkModeManager.isFollowSystem {
-                DarkModeManager.setDarkModeFollowSystem(isFollowSystem: true)
+            if DarkModeUtils.isFollowSystem {
+                DarkModeUtils.setDarkModeFollowSystem(isFollowSystem: true)
             } else {
-                UIWindow.mainWindow?.overrideUserInterfaceStyle = DarkModeManager.isLight ? .light : .dark
+                UIWindow.main?.overrideUserInterfaceStyle = DarkModeUtils.isLight ? .light : .dark
             }
         }
     }
@@ -93,15 +93,19 @@ public extension DarkModeUtils {
     static func setDarkModeFollowSystem(isFollowSystem: Bool) {
         if #available(iOS 13.0, *) {
             // 设置是否跟随系统
-            UserDefaults.save(isFollowSystem, for: CMDarkToSystemKey)
+            UserDefaults.standard.set(isFollowSystem, forKey: AssociateKeys.DarkToSystemKey)
+            
             let result = UITraitCollection.current.userInterfaceStyle == .light ? true : false
-            UserDefaults.save(result, for: CMLightDarkKey)
-            UserDefaults.save(false, for: CMSmartPeelingKey)
+            UserDefaults.standard.set(result, forKey: AssociateKeys.LightDarkKey)
+            UserDefaults.standard.set(false, forKey: AssociateKeys.SmartPeelingKey)
+            
+            UserDefaults.standard.synchronize()
+            
             // 设置模式的保存
             if isFollowSystem {
-                UIWindow.mainWindow?.overrideUserInterfaceStyle = .unspecified
+                UIWindow.main?.overrideUserInterfaceStyle = .unspecified
             } else {
-                UIWindow.mainWindow?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+                UIWindow.main?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
             }
         }
     }
@@ -110,19 +114,20 @@ public extension DarkModeUtils {
     static func setDarkModeCustom(isLight: Bool) {
         if #available(iOS 13.0, *) {
             // 只要设置了模式:就是黑或者白
-            UIWindow.mainWindow?.overrideUserInterfaceStyle = isLight ? .light : .dark
+            UIWindow.main?.overrideUserInterfaceStyle = isLight ? .light : .dark
             // 设置跟随系统和智能换肤:否
-            UserDefaults.save(false, for: CMDarkToSystemKey)
-            UserDefaults.save(false, for: CMSmartPeelingKey)
+            UserDefaults.standard.set(false, forKey: AssociateKeys.DarkToSystemKey)
+            UserDefaults.standard.set(false, forKey: AssociateKeys.SmartPeelingKey)
             // 黑白模式的设置
-            UserDefaults.save(isLight, for: CMLightDarkKey)
+            UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
         } else {
-            UserDefaults.save(false, for: CMSmartPeelingKey)
+            UserDefaults.standard.set(false, forKey: AssociateKeys.SmartPeelingKey)
             // 模式存储
-            UserDefaults.save(isLight, for: CMLightDarkKey)
+            UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
             // 通知模式更新
-            SkinManager.shared.updateSkin()
+            SkinUtils.shared.updateSkin()
         }
+        UserDefaults.standard.synchronize()
     }
 
     /// 智能换肤
@@ -130,20 +135,20 @@ public extension DarkModeUtils {
     static func setSmartPeelingDarkMode(isSmartPeeling: Bool) {
         if #available(iOS 13.0, *) {
             // 设置智能换肤
-            UserDefaults.save(isSmartPeeling, for: CMSmartPeelingKey)
+            UserDefaults.standard.set(isSmartPeeling, forKey: AssociateKeys.SmartPeelingKey)
             // 智能换肤根据时间段来设置:黑或者白
-            UIWindow.mainWindow?.overrideUserInterfaceStyle = isLight ? .light : .dark
+            UIWindow.main?.overrideUserInterfaceStyle = isLight ? .light : .dark
             // 设置跟随系统:否
-            UserDefaults.save(false, for: CMDarkToSystemKey)
-            UserDefaults.save(isLight, for: CMLightDarkKey)
+            UserDefaults.standard.set(false, forKey: AssociateKeys.DarkToSystemKey)
+            UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
         } else {
             // 模式存储
             // 设置智能换肤
-            UserDefaults.save(isSmartPeeling, for: CMSmartPeelingKey)
+            UserDefaults.standard.set(isSmartPeeling, forKey: AssociateKeys.SmartPeelingKey)
             // 设置跟随系统:否
-            UserDefaults.save(isLight, for: CMLightDarkKey)
+            UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
             // 通知模式更新
-            SkinManager.shared.updateSkin()
+            SkinUtils.shared.updateSkin()
         }
     }
 
@@ -151,28 +156,28 @@ public extension DarkModeUtils {
     static func setSmartPeelingTimeChange(startTime: String, endTime: String) {
         /// 是否是浅色
         var light = false
-        if DarkModeManager.isSmartPeelingTime(startTime: startTime, endTime: endTime), DarkModeManager.isLight {
+        if DarkModeUtils.isSmartPeelingTime(startTime: startTime, endTime: endTime), DarkModeUtils.isLight {
             light = false
         } else {
-            if !DarkModeManager.isLight {
+            if !DarkModeUtils.isLight {
                 light = true
             } else {
-                DarkModeManager.SmartPeelingTimeIntervalValue = startTime + "~" + endTime
+                DarkModeUtils.SmartPeelingTimeIntervalValue = startTime + "~" + endTime
                 return
             }
         }
-        DarkModeManager.SmartPeelingTimeIntervalValue = startTime + "~" + endTime
+        DarkModeUtils.SmartPeelingTimeIntervalValue = startTime + "~" + endTime
 
         if #available(iOS 13.0, *) {
             // 只要设置了模式:就是黑或者白
-            UIWindow.mainWindow?.overrideUserInterfaceStyle = light ? .light : .dark
+            UIWindow.main?.overrideUserInterfaceStyle = light ? .light : .dark
             // 黑白模式的设置
-            UserDefaults.save(light, for: CMLightDarkKey)
+            UserDefaults.standard.set(light, forKey: AssociateKeys.LightDarkKey)
         } else {
             // 模式存储
-            UserDefaults.save(light, for: CMLightDarkKey)
+            UserDefaults.standard.set(light, forKey: AssociateKeys.LightDarkKey)
             // 通知模式更新
-            SkinManager.shared.updateSkin()
+            SkinUtils.shared.updateSkin()
         }
     }
 }
@@ -187,21 +192,21 @@ public extension DarkModeUtils {
     static func darkModeColor(lightColor: UIColor, darkColor: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { traitCollection -> UIColor in
-                if DarkModeManager.isFollowSystem {
+                if DarkModeUtils.isFollowSystem {
                     if traitCollection.userInterfaceStyle == .light {
                         return lightColor
                     } else {
                         return darkColor
                     }
-                } else if DarkModeManager.isSmartPeeling {
+                } else if DarkModeUtils.isSmartPeeling {
                     return isSmartPeelingTime() ? darkColor : lightColor
                 } else {
-                    return DarkModeManager.isLight ? lightColor : darkColor
+                    return DarkModeUtils.isLight ? lightColor : darkColor
                 }
             }
         } else {
             // iOS 13 以下主题色的使用
-            if DarkModeManager.isLight {
+            if DarkModeUtils.isLight {
                 return lightColor
             }
             return darkColor
@@ -216,15 +221,22 @@ public extension DarkModeUtils {
         if startTime != nil, endTime != nil {
             timeIntervalValue = [startTime!, endTime!]
         } else {
-            timeIntervalValue = DarkModeManager.SmartPeelingTimeIntervalValue.split(with: "~")
+            timeIntervalValue = DarkModeUtils.SmartPeelingTimeIntervalValue.split(with: "~")
         }
         // 1、时间区间分隔为:开始时间 和 结束时间
         // 2、当前的时间转时间戳
-        let currentDate = Date()
+        let currentDate = Date.default()
         let currentTimeStamp = Int(currentDate.dateAsTimestamp())!
-        let dateString = currentDate.format("yyyy-MM-dd", isGMT: false)
-        let startTimeStamp = Int(Date.dateStringAsTimestamp(timesString: dateString + " " + timeIntervalValue[0], formatter: "yyyy-MM-dd HH:mm", isUnix: true))!
-        var endTimeStamp = Int(Date.dateStringAsTimestamp(timesString: dateString + " " + timeIntervalValue[1], formatter: "yyyy-MM-dd HH:mm", isUnix: true))!
+        let dateString = currentDate.toString(with:"yyyy-MM-dd", isGMT: false)
+        let startTimeStamp = (dateString + " " + timeIntervalValue[0])
+            .toDate(with: "yyyy-MM-dd HH:mm")?
+            .secondStamp()
+            .toInt() ?? 0
+        var endTimeStamp = (dateString + " " + timeIntervalValue[1])
+            .toDate(with: "yyyy-MM-dd HH:mm")?
+            .secondStamp()
+            .toInt() ?? 0
+        
         if startTimeStamp > endTimeStamp {
             endTimeStamp = endTimeStamp + 884_600
         }
