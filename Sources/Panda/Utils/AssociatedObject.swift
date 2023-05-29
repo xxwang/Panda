@@ -7,13 +7,6 @@
 
 import UIKit
 
-// MARK: - 关联属性(增加callback属性)`协议`
-public protocol AssociatedAttributes {
-    associatedtype T
-    typealias Callback = (T?) -> Void
-    var callback: Callback? { get set }
-}
-
 // MARK: - 关联属性`操作方法`
 public class AssociatedObject {
     /// 设置关联属性

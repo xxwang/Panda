@@ -885,8 +885,8 @@ public extension UIImage {
     func roundCorners(size: CGSize,
                       radius: CGFloat,
                       corners: UIRectCorner = .allCorners,
-                      borderWidth: CGFloat = 0,
-                      borderColor: UIColor? = nil,
+                      borderWidth: CGFloat,
+                      borderColor: UIColor?,
                       backgroundColor: UIColor? = nil,
                       completion: ((UIImage?) -> Void)? = nil) -> UIImage
     {

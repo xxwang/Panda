@@ -1605,7 +1605,7 @@ public extension UIView {
     ///   - borderColor:视图的边框颜色
     ///   - backgroundColor:视图的背景色
     func stressView(_ borderWidth: CGFloat = 1, borderColor: UIColor = .random, backgroundColor: UIColor = .random) {
-        guard Panda.dev.isDebug else { return }
+        guard EnvUtils.isDebug else { return }
         guard subviews.count > 0 else { return }
 
         for subview in subviews {
