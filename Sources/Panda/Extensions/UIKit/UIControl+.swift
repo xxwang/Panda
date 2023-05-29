@@ -124,7 +124,7 @@ public extension UIControl {
     ///   - events:事件的类型
     /// - Returns:`Self`
     @discardableResult
-    func pd_addTarget(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
+    func pd_action(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
         addTarget(target, action: action, for: event)
         return self
     }
@@ -136,7 +136,7 @@ public extension UIControl {
     ///   - events:事件的类型
     /// - Returns:`Self`
     @discardableResult
-    func pd_removeTarget(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
+    func pd_removeAction(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
         removeTarget(target, action: action, for: event)
         return self
     }
@@ -145,7 +145,7 @@ public extension UIControl {
     /// - Parameter hitTime:禁用时长
     /// - Returns:`Self`
     @discardableResult
-    func disableMultiTouch(_ hitTime: Double = 1) -> Self {
+    func pd_disableMultiTouch(_ hitTime: Double = 1) -> Self {
         doubleHit(hitTime: hitTime)
         return self
     }
@@ -154,8 +154,11 @@ public extension UIControl {
     /// - Parameters:
     ///   - callback:事件回调
     ///   - controlEvent:事件类型
-    func pd_callback(_ callback: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) {
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_callback(_ callback: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
         self.callback = callback
         addTarget(self, action: #selector(controlEventHandler(_:)), for: controlEvent)
+        return self
     }
 }

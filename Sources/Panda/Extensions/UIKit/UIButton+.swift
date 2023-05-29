@@ -469,7 +469,7 @@ public extension UIButton {
     /// - Parameter callback: 按钮点击回调
     /// - Returns: `Self`
     @discardableResult
-    func pd_tapCallback(_ callback: ((_ button: UIButton?) -> Void)?) -> Self {
+    func pd_callback(_ callback: ((_ button: UIButton?) -> Void)?) -> Self {
         self.callback = callback
         addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return self
