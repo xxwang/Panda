@@ -54,15 +54,7 @@ public extension SizeUtils {
 
     /// 标题栏高度
     static var navigationBarHeight: CGFloat {
-        if EnvUtils.isIPad { // iPad
-            return 44 // 50
-        } else { // iPhone
-            if EnvUtils.isLandscape {
-                return 32
-            } else {
-                return 44
-            }
-        }
+        44
     }
 
     /// 状态栏 + 标题栏
@@ -75,15 +67,7 @@ public extension SizeUtils {
 public extension SizeUtils {
     /// 按钮区域高度
     static var tabBarHeight: CGFloat {
-        if EnvUtils.isIPad { // iPad
-            return 49
-        } else { // iPhone
-            if EnvUtils.isLandscape {
-                return 31
-            } else {
-                return 49
-            }
-        }
+        49
     }
 
     /// 底部缩进高度
