@@ -11,7 +11,7 @@ import Photos
 import UIKit
 
 public class VideoUtils {
-    static let shared = VideoUtils()
+    public static let shared = VideoUtils()
     private init() {}
 }
 

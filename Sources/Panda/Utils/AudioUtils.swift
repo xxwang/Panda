@@ -10,7 +10,7 @@ import AVKit
 import UIKit
 
 public class AudioUtils {
-    static let shared = AudioUtils()
+    public static let shared = AudioUtils()
     private init() {}
 }
 
@@ -62,9 +62,9 @@ public extension AudioUtils {
     ///   - soundName: 音效文件名称
     ///   - isShake: 是否震动
     ///   - completion: 完成回调
-    static func playSound(with soundName: String?,
-                          isShake: Bool = false,
-                          completion: (() -> Void)? = nil)
+    func playSound(with soundName: String?,
+                   isShake: Bool = false,
+                   completion: (() -> Void)? = nil)
     {
         guard let soundName else { return }
         guard let soundURL = Bundle.main.url(forResource: soundName, withExtension: nil) else { return }
@@ -76,9 +76,9 @@ public extension AudioUtils {
     ///   - soundUrl: 音效`URL`地址
     ///   - isShake: 是否震动
     ///   - completion: 完成回调
-    static func playSound(with soundUrl: URL?,
-                          isShake: Bool = false,
-                          completion: (() -> Void)? = nil)
+    func playSound(with soundUrl: URL?,
+                   isShake: Bool = false,
+                   completion: (() -> Void)? = nil)
     {
         guard let soundUrl else { return }
         let soundCFURL = soundUrl as CFURL
@@ -92,9 +92,9 @@ public extension AudioUtils {
     ///   - soundID: 音效ID
     ///   - isShake: 是否震动
     ///   - completion: 完成回调
-    static func playSound(with soundID: SystemSoundID,
-                          isShake: Bool = false,
-                          completion: (() -> Void)? = nil)
+    func playSound(with soundID: SystemSoundID,
+                   isShake: Bool = false,
+                   completion: (() -> Void)? = nil)
     {
         if isShake {
             AudioServicesPlayAlertSoundWithCompletion(soundID) {

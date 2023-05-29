@@ -12,7 +12,8 @@ class StoreUtils: NSObject {
     private var goodsListResult: ((_ result: SKProductsResponse?) -> Void)?
 
     /// 单例属性
-    static let shared = StoreUtils()
+    public static let shared = StoreUtils()
+    override private init() {}
 
     deinit {
         SKPaymentQueue.default().remove(self)

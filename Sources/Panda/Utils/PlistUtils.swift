@@ -8,7 +8,7 @@
 import Foundation
 
 public class PlistUtils {
-    static let shared = PlistUtils()
+    public static let shared = PlistUtils()
     private init() {}
 }
 

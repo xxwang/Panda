@@ -37,7 +37,7 @@ public class SkinUtils {
     private var observers: NSHashTable<AnyObject> = NSHashTable.weakObjects()
 
     /// 单例
-    static let shared = SkinUtils()
+    public static let shared = SkinUtils()
     private init() {}
 }
 

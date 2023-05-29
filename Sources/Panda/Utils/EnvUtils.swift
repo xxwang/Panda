@@ -8,7 +8,7 @@
 import UIKit
 
 public class EnvUtils {
-    static let shared = EnvUtils()
+    public static let shared = EnvUtils()
     private init() {}
 }
 

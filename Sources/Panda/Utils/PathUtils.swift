@@ -8,7 +8,7 @@
 import UIKit
 
 public class PathUtils {
-    static let shared = PathUtils()
+    public static let shared = PathUtils()
     private init() {}
 }
 

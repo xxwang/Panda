@@ -8,7 +8,7 @@
 import UIKit
 
 public class QRCodeUtils {
-    static let shared = QRCodeUtils()
+    public static let shared = QRCodeUtils()
     private init() {}
 }
 

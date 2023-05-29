@@ -17,7 +17,7 @@ public class DocumentUtils: NSObject {
         return url != nil
     }
 
-    static let shared = DocumentUtils()
+    public static let shared = DocumentUtils()
     override private init() {}
 }
 
