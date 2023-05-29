@@ -371,7 +371,7 @@ public extension UIButton {
     /// - Parameter fontSize:字体大小
     /// - Returns:`Self`
     @discardableResult
-    func pd_setBoldSystemFont(_ fontSize: CGFloat) -> Self {
+    func pd_boldSystemFont(_ fontSize: CGFloat) -> Self {
         titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
         return self
     }
