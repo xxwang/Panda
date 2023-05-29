@@ -63,20 +63,8 @@ public extension SizeUtils {
 public extension SizeUtils {
     /// 按钮区域高度
     static var tabBarHeight: CGFloat { 49 }
-
     /// 底部缩进高度
-    static var indentHeight: CGFloat {
-        if EnvUtils.isIPad { // iPad
-            return 16
-        } else { // iPhone
-            if EnvUtils.isLandscape {
-                return EnvUtils.isIPhoneX ? 22 : 0
-            } else {
-                return EnvUtils.isIPhoneX ? 34 : 0
-            }
-        }
-    }
-
+    static var indentHeight: CGFloat {self.safeDistanceBottom}
     /// 整个tabBar高度
     static var tabBarFullHeight: CGFloat { tabBarHeight + indentHeight }
 }
