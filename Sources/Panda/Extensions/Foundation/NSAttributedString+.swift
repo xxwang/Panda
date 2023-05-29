@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - 方法
-extension NSAttributedString {
+public extension NSAttributedString {
     /// `NSAttributedString`转`NSMutableAttributedString`
     /// - Returns: `NSMutableAttributedString`
     func toMutable() -> NSMutableAttributedString {
