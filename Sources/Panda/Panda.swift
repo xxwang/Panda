@@ -1,7 +1,7 @@
 import UIKit
 
 public class Panda {
-    let text = "Panda!"
+    public private(set) var text = "Panda!"
 }
 
 public extension Panda {
