@@ -24,7 +24,6 @@ private class AssociateKeys {
 }
 
 public class DarkModeUtils: NSObject {
-    
     /// 是否浅色
     public static var isLight: Bool {
         if isSmartPeeling {
@@ -94,13 +93,13 @@ public extension DarkModeUtils {
         if #available(iOS 13.0, *) {
             // 设置是否跟随系统
             UserDefaults.standard.set(isFollowSystem, forKey: AssociateKeys.DarkToSystemKey)
-            
+
             let result = UITraitCollection.current.userInterfaceStyle == .light ? true : false
             UserDefaults.standard.set(result, forKey: AssociateKeys.LightDarkKey)
             UserDefaults.standard.set(false, forKey: AssociateKeys.SmartPeelingKey)
-            
+
             UserDefaults.standard.synchronize()
-            
+
             // 设置模式的保存
             if isFollowSystem {
                 UIWindow.main?.overrideUserInterfaceStyle = .unspecified
@@ -227,7 +226,7 @@ public extension DarkModeUtils {
         // 2、当前的时间转时间戳
         let currentDate = Date.default()
         let currentTimeStamp = Int(currentDate.dateAsTimestamp())!
-        let dateString = currentDate.toString(with:"yyyy-MM-dd", isGMT: false)
+        let dateString = currentDate.toString(with: "yyyy-MM-dd", isGMT: false)
         let startTimeStamp = (dateString + " " + timeIntervalValue[0])
             .toDate(with: "yyyy-MM-dd HH:mm")?
             .secondStamp()
@@ -236,7 +235,7 @@ public extension DarkModeUtils {
             .toDate(with: "yyyy-MM-dd HH:mm")?
             .secondStamp()
             .toInt() ?? 0
-        
+
         if startTimeStamp > endTimeStamp {
             endTimeStamp = endTimeStamp + 884_600
         }
