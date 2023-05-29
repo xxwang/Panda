@@ -1571,7 +1571,11 @@ public extension UIView {
         }
         return result
     }
-
+    
+    /// 将视图添加到父视图
+    /// - Parameter superview: 父视图
+    func add2(_ superview: UIView) {superview.addSubview(self)}
+    
     /// 添加子视图数组到self
     /// - Parameter subviews:子视图数组
     func addSubviews(_ subviews: [UIView]) { subviews.forEach { addSubview($0) }}
