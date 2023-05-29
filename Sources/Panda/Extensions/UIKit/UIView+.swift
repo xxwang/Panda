@@ -1073,18 +1073,18 @@ public extension UIView {
 // MARK: 手势
 public extension UIView {
     /// 将数组中的手势添加到`UIView`
-    /// - Parameter gestureRecognizers: 手势数组
-    func addGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer]) {
+    /// - Parameter recognizers: 手势数组
+    func addGestureRecognizers(_ recognizers: [UIGestureRecognizer]) {
         isUserInteractionEnabled = true
-        for recognizer in gestureRecognizers {
+        for recognizer in recognizers {
             addGestureRecognizer(recognizer)
         }
     }
 
     /// 将数组中的手势从`UIView`中移除
-    /// - Parameter gestureRecognizers: 手势数组
-    func removeGestureRecognizers(_ gestureRecognizers: [UIGestureRecognizer]) {
-        for recognizer in gestureRecognizers {
+    /// - Parameter recognizers: 手势数组
+    func removeGestureRecognizers(_ recognizers: [UIGestureRecognizer]) {
+        for recognizer in recognizers {
             removeGestureRecognizer(recognizer)
         }
     }
@@ -1099,7 +1099,7 @@ public extension UIView {
     /// - Returns:`UITapGestureRecognizer`
     @discardableResult
     func addTapGestureRecognizer(
-        _ action: @escaping (_ gesture: UITapGestureRecognizer) -> Void
+        _ action: @escaping (_ recognizer: UITapGestureRecognizer) -> Void
     ) -> UITapGestureRecognizer {
         let obj = UITapGestureRecognizer(target: nil, action: nil)
         // 轻点次数
@@ -1124,7 +1124,7 @@ public extension UIView {
     /// - Returns:`UILongPressGestureRecognizer`
     @discardableResult
     func addLongPressGestureRecognizer(
-        _ action: @escaping (_ gesture: UILongPressGestureRecognizer) -> Void,
+        _ action: @escaping (_ recognizer: UILongPressGestureRecognizer) -> Void,
         for minimumPressDuration: TimeInterval
     ) -> UILongPressGestureRecognizer {
         let obj = UILongPressGestureRecognizer(target: nil, action: nil)
@@ -1144,7 +1144,7 @@ public extension UIView {
     /// - Returns:`UIPanGestureRecognizer`
     @discardableResult
     func addPanGestureRecognizer(
-        _ action: @escaping (_ gesture: UIPanGestureRecognizer) -> Void
+        _ action: @escaping (_ recognizer: UIPanGestureRecognizer) -> Void
     ) -> UIPanGestureRecognizer {
         let obj = UIPanGestureRecognizer(target: nil, action: nil)
         obj.minimumNumberOfTouches = 1
@@ -1189,11 +1189,11 @@ public extension UIView {
     /// - Returns:`UIScreenEdgePanGestureRecognizer`
     @discardableResult
     func addScreenEdgePanGestureRecognizer(
-        action: @escaping (_ gesture: UIScreenEdgePanGestureRecognizer) -> Void,
-        for edgs: UIRectEdge
+        action: @escaping (_ recognizer: UIScreenEdgePanGestureRecognizer) -> Void,
+        for edge: UIRectEdge
     ) -> UIScreenEdgePanGestureRecognizer {
         let obj = UIScreenEdgePanGestureRecognizer(target: nil, action: nil)
-        obj.edges = edgs
+        obj.edges = edge
         addCommonGestureRecognizer(obj)
         obj.pd_callback { recognizer in
             if let recognizer = recognizer as? UIScreenEdgePanGestureRecognizer {
@@ -1227,7 +1227,7 @@ public extension UIView {
     ///   - direction:轻扫方向
     /// - Returns:`UISwipeGestureRecognizer`
     func addSwipeGestureRecognizer(
-        _ action: @escaping (_ gesture: UISwipeGestureRecognizer) -> Void,
+        _ action: @escaping (_ recognizer: UISwipeGestureRecognizer) -> Void,
         for direction: UISwipeGestureRecognizer.Direction
     ) -> UISwipeGestureRecognizer {
         let obj = UISwipeGestureRecognizer(target: nil, action: nil)
@@ -1244,7 +1244,7 @@ public extension UIView {
     /// 添加`UIPinchGestureRecognizer`(捏合)
     /// - Parameter action:事件处理
     /// - Returns:`UIPinchGestureRecognizer`
-    func addPinchGestureRecognizer(_ action: @escaping (_ gesture: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
+    func addPinchGestureRecognizer(_ action: @escaping (_ recognizer: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
         let obj = UIPinchGestureRecognizer(target: nil, action: nil)
         addCommonGestureRecognizer(obj)
         obj.pd_callback { recognizer in
@@ -1267,7 +1267,7 @@ public extension UIView {
     /// - Returns:`UIRotationGestureRecognizer`
     @discardableResult
     func addRotationGestureRecognizer(
-        _ action: @escaping (_ gesture: UIRotationGestureRecognizer) -> Void
+        _ action: @escaping (_ recognizer: UIRotationGestureRecognizer) -> Void
     ) -> UIRotationGestureRecognizer {
         let obj = UIRotationGestureRecognizer(target: nil, action: nil)
         addCommonGestureRecognizer(obj)
@@ -1283,10 +1283,10 @@ public extension UIView {
 
     /// 添加手势到`UIView`上
     /// - Parameter gestureRecognizer: 要添加的手势
-    private func addCommonGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+    private func addCommonGestureRecognizer(_ recognizer: UIGestureRecognizer) {
         isUserInteractionEnabled = true
         isMultipleTouchEnabled = true
-        addGestureRecognizer(gestureRecognizer)
+        addGestureRecognizer(recognizer)
     }
 }
 
@@ -1571,11 +1571,11 @@ public extension UIView {
         }
         return result
     }
-    
+
     /// 将视图添加到父视图
     /// - Parameter superview: 父视图
-    func add2(_ superview: UIView) {superview.addSubview(self)}
-    
+    func add2(_ superview: UIView) { superview.addSubview(self) }
+
     /// 添加子视图数组到self
     /// - Parameter subviews:子视图数组
     func addSubviews(_ subviews: [UIView]) { subviews.forEach { addSubview($0) }}
