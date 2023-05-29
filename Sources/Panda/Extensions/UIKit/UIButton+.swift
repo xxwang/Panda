@@ -353,7 +353,7 @@ public extension UIButton {
     /// - Parameter font:字体
     /// - Returns:`Self`
     @discardableResult
-    func pd_setFont(_ font: UIFont) -> Self {
+    func pd_font(_ font: UIFont) -> Self {
         titleLabel?.font = font
         return self
     }
@@ -362,7 +362,7 @@ public extension UIButton {
     /// - Parameter fontSize:字体大小
     /// - Returns:`Self`
     @discardableResult
-    func pd_setSystemFont(_ fontSize: CGFloat) -> Self {
+    func pd_systemFont(_ fontSize: CGFloat) -> Self {
         titleLabel?.font = .systemFont(ofSize: fontSize)
         return self
     }
