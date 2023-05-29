@@ -323,7 +323,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setTitle(_ text: String, for state: UIControl.State = .normal) -> Self {
+    func pd_title(_ text: String, for state: UIControl.State = .normal) -> Self {
         setTitle(text, for: state)
         return self
     }
@@ -333,7 +333,7 @@ public extension UIButton {
     ///   - title:属性文本标题
     ///   - state:状态
     /// - Returns:`Self`
-    func pd_setAttributedTitle(_ title: NSAttributedString?, for state: UIControl.State = .normal) -> Self {
+    func pd_attributedTitle(_ title: NSAttributedString?, for state: UIControl.State = .normal) -> Self {
         setAttributedTitle(title, for: state)
         return self
     }
@@ -344,7 +344,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setTitleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
+    func pd_titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
         setTitleColor(color, for: state)
         return self
     }
@@ -358,31 +358,13 @@ public extension UIButton {
         return self
     }
 
-    /// 设置系统字体
-    /// - Parameter fontSize:字体大小
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_systemFont(_ fontSize: CGFloat) -> Self {
-        titleLabel?.font = .systemFont(ofSize: fontSize)
-        return self
-    }
-
-    /// 设置系统粗体
-    /// - Parameter fontSize:字体大小
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_boldSystemFont(_ fontSize: CGFloat) -> Self {
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
-        return self
-    }
-
     /// 设置图片
     /// - Parameters:
     ///   - image:图片
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
+    func pd_image(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         setImage(image, for: state)
         return self
     }
@@ -394,7 +376,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
+    func pd_image(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
         setImage(image, for: state)
         return self
@@ -408,7 +390,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
+    func pd_image(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
         guard let path = Bundle(for: aClass).path(forResource: bundleName, ofType: "bundle") else {
             return self
         }
@@ -424,7 +406,7 @@ public extension UIButton {
     ///   - state: 状态
     /// - Returns: `Self`
     @discardableResult
-    func pd_setImage(_ color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0), for state: UIControl.State = .normal) -> Self {
+    func pd_image(_ color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0), for state: UIControl.State = .normal) -> Self {
         let image = UIImage(with: color, size: size)
         setImage(image, for: state)
         return self
@@ -436,7 +418,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setBackgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
+    func pd_backgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         setBackgroundImage(image, for: state)
         return self
     }
@@ -449,7 +431,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setBackgroundImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
+    func pd_backgroundImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
         guard let path = Bundle(for: aClass).path(forResource: bundleName, ofType: "bundle") else {
             return self
         }
@@ -465,7 +447,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setBackgroundImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
+    func pd_backgroundImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
         setBackgroundImage(image, for: state)
         return self
@@ -477,7 +459,7 @@ public extension UIButton {
     ///   - state:状态
     /// - Returns:`Self`
     @discardableResult
-    func pd_setBackgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
+    func pd_backgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(with: color)
         setBackgroundImage(image, for: state)
         return self
