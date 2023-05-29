@@ -46,29 +46,23 @@ public extension SizeUtils {
             if let statusbar = UIWindow.main?.windowScene?.statusBarManager {
                 return statusbar.statusBarFrame.size.height
             }
+            return 0
         } else {
             return UIApplication.shared.statusBarFrame.size.height
         }
-        return 0
     }
 
     /// 标题栏高度
-    static var navigationBarHeight: CGFloat {
-        44
-    }
+    static var navigationBarHeight: CGFloat { 44 }
 
     /// 状态栏 + 标题栏
-    static var navigationFullHeight: CGFloat {
-        statusBarHeight + navigationBarHeight
-    }
+    static var navigationFullHeight: CGFloat { statusBarHeight + navigationBarHeight }
 }
 
 /// 标签栏
 public extension SizeUtils {
     /// 按钮区域高度
-    static var tabBarHeight: CGFloat {
-        49
-    }
+    static var tabBarHeight: CGFloat { 49 }
 
     /// 底部缩进高度
     static var indentHeight: CGFloat {
@@ -84,9 +78,7 @@ public extension SizeUtils {
     }
 
     /// 整个tabBar高度
-    static var tabBarFullHeight: CGFloat {
-        tabBarHeight + indentHeight
-    }
+    static var tabBarFullHeight: CGFloat { tabBarHeight + indentHeight }
 }
 
 // MARK: - 设计图尺寸
@@ -94,9 +86,7 @@ public extension SizeUtils {
     /// 设计图对应的屏幕尺寸
     fileprivate static var sketchSize = CGSize(width: 375, height: 812)
     /// 设置设计图尺寸
-    static func setupSketch(size: CGSize) {
-        sketchSize = size
-    }
+    static func setupSketch(size: CGSize) { sketchSize = size }
 }
 
 // MARK: - 计算比例
@@ -127,21 +117,10 @@ private extension SizeUtils {
     /// - Parameter value: 要转换的数据
     /// - Returns: `CGFloat`格式
     static func toCGFloat(from value: Any) -> CGFloat {
-        if let value = value as? CGFloat {
-            return value
-        }
-
-        if let value = value as? Double {
-            return value
-        }
-
-        if let value = value as? Float {
-            return value.toCGFloat()
-        }
-
-        if let value = value as? Int {
-            return value.toCGFloat()
-        }
+        if let value = value as? CGFloat { return value }
+        if let value = value as? Double { return value }
+        if let value = value as? Float { return value.toCGFloat() }
+        if let value = value as? Int { return value.toCGFloat() }
         return 0
     }
 }
