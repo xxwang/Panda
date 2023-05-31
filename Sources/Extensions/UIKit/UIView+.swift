@@ -1759,7 +1759,7 @@ public extension UIView {
     }
 
     /// 以bounds为基准的中心点(只读)
-    var pd_self_center: CGPoint {
+    var pd_middle: CGPoint {
         CGPoint(x: pd_width / 2, y: pd_height / 2)
     }
 
