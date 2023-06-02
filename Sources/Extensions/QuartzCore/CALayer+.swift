@@ -300,7 +300,7 @@ public extension CALayer {
     duration: TimeInterval = 1.0,
     delay: TimeInterval = 0,
     repeatCount: Float = 1,
-    cc removedOnCompletion: Bool = true,
+    removedOnCompletion: Bool = true,
     option: CAMediaTimingFunctionName = .default) {
         baseKeyframeAnimation(
             keyPath: "transform.rotation",
