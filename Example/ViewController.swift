@@ -12,7 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Log.info("123123")
+        
+        Panda.sayHello()
+        
     }
 
 
