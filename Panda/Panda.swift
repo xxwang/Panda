@@ -1,11 +1,11 @@
 import UIKit
 
 public class Panda {
-    public private(set) var text = "Panda!"
+    private(set) static var text = "Panda!"
 }
 
 public extension Panda {
-    func sayHello() {
+    static func sayHello() {
         Log.info("Hello \(text)")
     }
 }
