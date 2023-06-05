@@ -79,13 +79,13 @@ public extension BinaryFloatingPoint {
 public extension BinaryFloatingPoint {
     /// `角度`转`弧度`(0-360) -> (0-2PI)
     /// - Returns: `Double`弧度
-    func degreesAsRadians() -> Double {
+    func toRadians() -> Double {
         toDouble() / 180.0 * Double.pi
     }
 
     /// `弧度`转`角度`(0-2PI) -> (0-360)
     /// - Returns: `Double`角度
-    func radiansAsDegrees() -> Double {
+    func toDegrees() -> Double {
         toDouble() * (180.0 / Double.pi)
     }
 }
