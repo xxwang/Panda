@@ -8,6 +8,19 @@
 import CoreGraphics
 import Foundation
 
+// MARK: - 属性
+public extension BinaryInteger {
+    /// 是否是奇数
+    var isOdd: Bool {
+        self % 2 != 0
+    }
+
+    /// 是否是偶数
+    var isEven: Bool {
+        self % 2 == 0
+    }
+}
+
 // MARK: - 类型转换
 public extension BinaryInteger {
     /// 转换为`Int`
