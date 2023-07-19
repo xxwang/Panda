@@ -53,9 +53,9 @@ public extension SizeUtils {
     }
 
     /// 标题栏高度
-    static var navigationBarHeight: CGFloat { 44 }
+    static var titleBarHeight: CGFloat { 44 }
     /// 状态栏 + 标题栏
-    static var navigationFullHeight: CGFloat { statusBarHeight + navigationBarHeight }
+    static var navigationFullHeight: CGFloat { statusBarHeight + titleBarHeight }
 }
 
 /// 标签栏

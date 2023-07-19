@@ -1593,11 +1593,15 @@ public extension UIView {
     func hiddenKeyboard() { endEditing(true) }
 
     /// 强制更新布局(立即更新)
-    func relayout() {
+    /// - Returns: Self
+    @discardableResult
+    func relayout() -> Self {
         // 标记视图,runloop的下一个周期调用layoutSubviews
         setNeedsLayout()
         // 如果这个视图有被setNeedsLayout方法标记的, 会立即执行layoutSubviews方法
         layoutIfNeeded()
+        
+        return self
     }
 }
 
