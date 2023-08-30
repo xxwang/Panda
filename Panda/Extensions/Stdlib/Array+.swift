@@ -7,6 +7,36 @@
 
 import UIKit
 
+// MARK: - 下标
+public extension Array {
+
+    /// 通过数组作为下标 获取/设置数据
+    ///
+    ///     let arr = [1,2,3,4,5,6]
+    ///     let data = arr[[1,2,3]] // 1,2,3
+    ///     arr[[1,2,3]] = [3,2,1] // [3,2,1,4,5,6]
+    ///
+    /// - Parameter input: 下标数组
+    /// - Returns: ArraySlice<Element>
+    subscript(input: [Int]) -> ArraySlice<Element> {
+        get {
+            var result = ArraySlice<Element>()
+            for i in input {
+                assert(i < self.count && i >= 0, "index out of range")
+                result.append(self[i])
+            }
+            return result
+        }
+        
+        set{
+            for (index, i ) in input.enumerated() {
+                assert(i < self.count && i >= 0, "index out of range")
+                self[i] = newValue[index]
+            }
+        }
+    }
+}
+
 // MARK: - Array
 public extension Array {
     /// 数组JSON格式的Data
