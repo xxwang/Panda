@@ -161,7 +161,7 @@ public extension UIColor {
         let red = components[0]
         let green = components[1]
         let blue = components[2]
-        return (red: red, green: green, blue: blue)
+        return (red: red * 255.0, green: green * 255.0, blue: blue * 255.0)
     }
 
     /// 获取颜色的`HSBA`组成(`CGFloat`元组)
