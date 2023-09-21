@@ -9,8 +9,9 @@ import UIKit
 
 // MARK: - 关联键
 private class AssociateKeys {
-    static var CallbackKey = "UIControl" + "CallbackKey"
-    static var HitTimerKey = "UIControl" + "HitTimerKey"
+    static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
+    static var HitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
+    
 }
 
 // MARK: - 方法

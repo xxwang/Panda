@@ -31,7 +31,7 @@ public extension UISlider {
 
 // MARK: - 关联键
 private class AssociateKeys {
-    static var CallbackKey = "UISlider" + "CallbackKey"
+    static var CallbackKey = UnsafeRawPointer(bitPattern: ("UISlider" + "CallbackKey").hashValue)
 }
 
 // MARK: - AssociatedAttributes

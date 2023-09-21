@@ -249,8 +249,8 @@ public extension UIButton {
 
 // MARK: - 关联键
 private class AssociateKeys {
-    static var CallbackKey = "UIButton" + "CallbackKey"
-    static var ExpandSizeKey = "UIButton" + "ExpandSizeKey"
+    static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIButton" + "CallbackKey").hashValue)
+    static var ExpandSizeKey = UnsafeRawPointer(bitPattern: ("UIButton" + "ExpandSizeKey").hashValue)
 }
 
 // MARK: - AssociatedAttributes

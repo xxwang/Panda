@@ -79,7 +79,7 @@ public extension UINavigationBar {
 
 // MARK: - 关联键
 private class AssociateKeys {
-    static var StatusBarKey = "UINavigationBar" + "StatusBarKey"
+    static var StatusBarKey = UnsafeRawPointer(bitPattern: ("UINavigationBar" + "StatusBarKey").hashValue)
 }
 
 // MARK: - 关联属性

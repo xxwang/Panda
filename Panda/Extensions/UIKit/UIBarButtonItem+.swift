@@ -59,7 +59,7 @@ public extension UIBarButtonItem {
 
 // MARK: - 关联键
 private class AssociateKeys {
-    static var CallbackKey = "UIBarButtonItem" + "CallbackKey"
+    static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIBarButtonItem" + "CallbackKey").hashValue)
 }
 
 // MARK: - AssociatedAttributes

@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - 关联键
 private class AssociateKeys {
-    static var FunctionNameKey = "UIGestureRecognizer" + "FunctionNameKey"
-    static var CallbackKey = "UIGestureRecognizer" + "CallbackKey"
+    static var FunctionNameKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "FunctionNameKey").hashValue)
+    static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIGestureRecognizer" + "CallbackKey").hashValue)
 }
 
 // MARK: - 属性
