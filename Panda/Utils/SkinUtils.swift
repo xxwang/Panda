@@ -7,15 +7,6 @@
 
 import UIKit
 
-// MARK: - `SkinProvider`协议
-public protocol SkinProvider: AnyObject {
-    /// 注册监听
-    func register<Observer: Skinable>(observer: Observer)
-    /// 移除监听
-    func remove<Observer: Skinable>(observer: Observer)
-    /// 更新主题
-    func updateSkin()
-}
 
 // MARK: - `Skinable`协议
 public protocol Skinable: AnyObject {
@@ -65,4 +56,15 @@ extension SkinUtils: SkinProvider {
                 .forEach { $0.apply() }
         }
     }
+}
+
+
+// MARK: - `SkinProvider`协议
+public protocol SkinProvider: AnyObject {
+    /// 注册监听
+    func register<Observer: Skinable>(observer: Observer)
+    /// 移除监听
+    func remove<Observer: Skinable>(observer: Observer)
+    /// 更新主题
+    func updateSkin()
 }
