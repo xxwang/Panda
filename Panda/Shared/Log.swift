@@ -15,6 +15,7 @@ public class Log {
         case info = "[信息]"
         case warning = "[警告]"
         case error = "[错误]"
+        case success = "[成功]"
 
         /// 图标
         var icon: String {
@@ -23,6 +24,7 @@ public class Log {
             case .info: return "🌸"
             case .warning: return "⚠️"
             case .error: return "❌"
+            case .success: return "✅"
             }
         }
     }
@@ -47,6 +49,11 @@ public extension Log {
     /// 错误
     static func error(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .error, message: message, file: file, line: line, function: function)
+    }
+    
+    /// 成功
+    static func success(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        log(level: .success, message: message, file: file, line: line, function: function)
     }
 }
 
