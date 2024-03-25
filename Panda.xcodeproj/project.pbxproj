@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		165178F52BB1A4A00032ADA8 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165178F42BB1A4A00032ADA8 /* Functions.swift */; };
 		169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409532ABC738800356736 /* StoryboardLoadable.swift */; };
 		169409FD2ABC738800356736 /* AssociatedAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409542ABC738800356736 /* AssociatedAttributes.swift */; };
 		169409FE2ABC738800356736 /* Emitterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409552ABC738800356736 /* Emitterable.swift */; };
@@ -192,6 +193,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		165178F42BB1A4A00032ADA8 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		169409532ABC738800356736 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		169409542ABC738800356736 /* AssociatedAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedAttributes.swift; sourceTree = "<group>"; };
 		169409552ABC738800356736 /* Emitterable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emitterable.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				1694095D2ABC738800356736 /* PlistUtils.swift */,
+				165178F42BB1A4A00032ADA8 /* Functions.swift */,
 				1694095E2ABC738800356736 /* EnvUtils.swift */,
 				1694095F2ABC738800356736 /* RuntimeUtils.swift */,
 				169409602ABC738800356736 /* AssociatedObject.swift */,
@@ -875,6 +878,7 @@
 				16940A0B2ABC738800356736 /* VideoUtils.swift in Sources */,
 				16940A132ABC738800356736 /* DocumentUtils.swift in Sources */,
 				16940A022ABC738800356736 /* Shared.swift in Sources */,
+				165178F52BB1A4A00032ADA8 /* Functions.swift in Sources */,
 				16940A832ABC738800356736 /* BidirectionalCollection+.swift in Sources */,
 				16940A232ABC738800356736 /* UICollectionViewCell+.swift in Sources */,
 				16940A262ABC738800356736 /* UIPageControl+.swift in Sources */,
