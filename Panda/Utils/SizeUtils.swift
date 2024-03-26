@@ -143,7 +143,7 @@ private extension SizeUtils {
 // MARK: - 屏幕适配(整形)
 public extension BinaryInteger {
     /// 适配宽度
-    var w: CGFloat { SizeUtils.fitMax(from: self) }
+    var w: CGFloat { SizeUtils.fitWidth(from: self) }
 
     /// 适配高度
     var h: CGFloat { SizeUtils.fitHeight(from: self) }
@@ -161,7 +161,7 @@ public extension BinaryInteger {
 // MARK: - 屏幕适配(浮点)
 public extension BinaryFloatingPoint {
     /// 适配宽度
-    var w: CGFloat { SizeUtils.fitMax(from: self) }
+    var w: CGFloat { SizeUtils.fitWidth(from: self) }
 
     /// 适配高度
     var h: CGFloat { SizeUtils.fitHeight(from: self) }
