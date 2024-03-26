@@ -11,7 +11,6 @@ import UIKit
 private class AssociateKeys {
     static var CallbackKey = UnsafeRawPointer(bitPattern: ("UIControl" + "CallbackKey").hashValue)
     static var HitTimerKey = UnsafeRawPointer(bitPattern: ("UIControl" + "HitTimerKey").hashValue)
-    
 }
 
 // MARK: - 方法

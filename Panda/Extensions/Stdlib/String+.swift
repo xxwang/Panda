@@ -1262,7 +1262,9 @@ public extension String {
             // 异常处理
             if decimalPlaces == 0 { return "0" } else {
                 var zero = ""
-                for _ in 0 ..< decimalPlaces { zero += zero }
+                for _ in 0 ..< decimalPlaces {
+                    zero += zero
+                }
                 return "0." + zero
             }
         }
@@ -1428,7 +1430,9 @@ public extension String {
         // 匹配字符串,返回结果集
         let res = dataDetector.matches(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSRange(location: 0, length: count))
         // 取出结果
-        for checkingRes in res { urls.append(toNSString().substring(with: checkingRes.range)) }
+        for checkingRes in res {
+            urls.append(toNSString().substring(with: checkingRes.range))
+        }
         return urls
     }
 
@@ -1923,8 +1927,12 @@ public extension String {
             return String($0).rangeOfCharacter(from: alphanumerics) != nil
         }
 
-        while filtered.lastCharacter() == "-" { filtered = String(filtered.dropLast()) }
-        while filtered.firstCharacter() == "-" { filtered = String(filtered.dropFirst()) }
+        while filtered.lastCharacter() == "-" {
+            filtered = String(filtered.dropLast())
+        }
+        while filtered.firstCharacter() == "-" {
+            filtered = String(filtered.dropFirst())
+        }
 
         return filtered.replacingOccurrences(of: "--", with: "-")
     }
@@ -2135,7 +2143,9 @@ public extension String {
             return self + string[string.startIndex ..< string.index(string.startIndex, offsetBy: padLength)]
         } else {
             var padding = string
-            while padding.count < padLength { padding.append(string) }
+            while padding.count < padLength {
+                padding.append(string)
+            }
             return self + padding[padding.startIndex ..< padding.index(padding.startIndex, offsetBy: padLength)]
         }
     }

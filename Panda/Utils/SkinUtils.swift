@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 // MARK: - `Skinable`协议
 public protocol Skinable: AnyObject {
     /// 在这个方法中更新主题(前提:遵守`Skinable`协议)
@@ -57,7 +56,6 @@ extension SkinUtils: SkinProvider {
         }
     }
 }
-
 
 // MARK: - `SkinProvider`协议
 public protocol SkinProvider: AnyObject {

@@ -72,7 +72,7 @@ extension UIBarButtonItem: AssociatedAttributes {
 
     /// 事件处理
     /// - Parameter event:事件发生者
-    @objc internal func eventHandler(_ event: UIBarButtonItem) {
+    @objc func eventHandler(_ event: UIBarButtonItem) {
         callback?(event)
     }
 }

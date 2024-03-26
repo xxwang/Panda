@@ -618,8 +618,12 @@ public extension UIColor {
 
         // 确保颜色值不会溢出
         var newHue = oldHue + hue
-        while newHue < 0.0 { newHue += 1.0 }
-        while newHue > 1.0 { newHue -= 1.0 }
+        while newHue < 0.0 {
+            newHue += 1.0
+        }
+        while newHue > 1.0 {
+            newHue -= 1.0
+        }
 
         let newBright: CGFloat = max(min(oldBright + brightness, 1.0), 0)
         let newSat: CGFloat = max(min(oldSat + saturation, 1.0), 0)

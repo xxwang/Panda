@@ -27,7 +27,9 @@ public extension UIBezierPath {
         self.init()
         if !points.isEmpty {
             move(to: points[0])
-            for point in points[1...] { addLine(to: point) }
+            for point in points[1...] {
+                addLine(to: point)
+            }
         }
     }
 
@@ -38,7 +40,9 @@ public extension UIBezierPath {
         guard points.count > 2 else { return nil }
         self.init()
         move(to: points[0])
-        for point in points[1...] { addLine(to: point) }
+        for point in points[1...] {
+            addLine(to: point)
+        }
         close()
     }
 

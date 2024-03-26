@@ -50,7 +50,7 @@ public extension Log {
     static func error(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .error, message: message, file: file, line: line, function: function)
     }
-    
+
     /// 成功
     static func success(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .success, message: message, file: file, line: line, function: function)

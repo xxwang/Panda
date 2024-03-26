@@ -1955,7 +1955,9 @@ public extension UIImage {
 
         let duration: Int = {
             var sum = 0
-            for val in delays { sum += val }
+            for val in delays {
+                sum += val
+            }
             return sum
         }()
 

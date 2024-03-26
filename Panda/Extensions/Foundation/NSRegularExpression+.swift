@@ -22,12 +22,11 @@ public extension NSRegularExpression {
                                         _ flags: NSRegularExpression.MatchingFlags,
                                         _ stop: inout Bool) -> Void)
     {
-        enumerateMatches(in: string, options: options, range: NSRange(range, in: string))
-            { result, flags, stop in
-                var shouldStop = false
-                block(result, flags, &shouldStop)
-                if shouldStop { stop.pointee = true }
-            }
+        enumerateMatches(in: string, options: options, range: NSRange(range, in: string)) { result, flags, stop in
+            var shouldStop = false
+            block(result, flags, &shouldStop)
+            if shouldStop { stop.pointee = true }
+        }
     }
 
     /// 返回所有符合`正则表达式`的匹配项

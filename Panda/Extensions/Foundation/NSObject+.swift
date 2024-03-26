@@ -110,7 +110,7 @@ public extension NSObject {
     class func initializeMethod() {
         if self != NSObject.self { return }
         // 设值方法交换
-        Self.hook_setValues()
+        hook_setValues()
     }
 
     /// 交换设值方法

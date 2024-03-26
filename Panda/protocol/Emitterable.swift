@@ -11,20 +11,18 @@ import UIKit
 public protocol Emitterable {}
 
 public extension Emitterable where Self: UIViewController {
-    
     /// 开始发射粒子
     /// - Parameters:
     ///   - position: 发射器位置
     ///   - images: 粒子图片
     func startEmitting(position: CGPoint, images: [UIImage?]) {
-        
         // 创建发射器
         let emitter = CAEmitterLayer()
         // 设置发射器位置
         emitter.emitterPosition = position
         // 开启三维效果
         emitter.preservesDepth = true
-        
+
         // 粒子数组
         var cells = [CAEmitterCell]()
         for image in images {
@@ -49,19 +47,19 @@ public extension Emitterable where Self: UIViewController {
             cell.birthRate = 20
             // 设置粒子图片
             cell.contents = image?.cgImage
-            
+
             cells.append(cell)
         }
         // 将粒子添加到发射器中
         emitter.emitterCells = cells
-        
+
         // 将发射器添加到父layer中
         view.layer.addSublayer(emitter)
     }
-    
+
     func stopEmitting() {
         view.layer.sublayers?
-            .filter({$0.isKind(of: CAEmitterLayer.self)})
-            .forEach({$0.removeFromSuperlayer()})
+            .filter { $0.isKind(of: CAEmitterLayer.self) }
+            .forEach { $0.removeFromSuperlayer() }
     }
 }

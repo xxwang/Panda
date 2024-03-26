@@ -93,7 +93,7 @@ extension StoreUtils: SKPaymentQueueDelegate {
 extension StoreUtils: SKPaymentTransactionObserver {
     /// 当交易队列中添加的每一笔交易状态发生变化时调用
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        transactions.forEach { transaction in
+        for transaction in transactions {
             switch transaction.transactionState {
             case .deferred: // 延时处理
                 break

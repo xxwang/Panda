@@ -262,7 +262,7 @@ extension UIButton: AssociatedAttributes {
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
-    @objc internal func tapAction(_ button: UIButton) {
+    @objc func tapAction(_ button: UIButton) {
         callback?(button)
     }
 }

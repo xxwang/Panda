@@ -9,7 +9,6 @@ import UIKit
 
 // MARK: - 下标
 public extension Array {
-
     /// 通过数组作为下标 获取/设置数据
     ///
     ///     let arr = [1,2,3,4,5,6]
@@ -22,15 +21,15 @@ public extension Array {
         get {
             var result = ArraySlice<Element>()
             for i in input {
-                assert(i < self.count && i >= 0, "index out of range")
+                assert(i < count && i >= 0, "index out of range")
                 result.append(self[i])
             }
             return result
         }
-        
-        set{
-            for (index, i ) in input.enumerated() {
-                assert(i < self.count && i >= 0, "index out of range")
+
+        set {
+            for (index, i) in input.enumerated() {
+                assert(i < count && i >= 0, "index out of range")
                 self[i] = newValue[index]
             }
         }
@@ -69,7 +68,9 @@ public extension Array {
     /// 把一个数组添加到当前数组中
     /// - Parameter elements:数组
     mutating func append(_ elements: [Element]) {
-        for element in elements { append(element) }
+        for element in elements {
+            append(element)
+        }
     }
 
     /// 找出数组中相邻元素(相邻元素放入数组中)
@@ -158,7 +159,9 @@ public extension Array where Element: Equatable {
     /// - Parameter item:元素
     /// - Returns:索引值
     func firstIndex(_ item: Element) -> Int? {
-        for (index, value) in enumerated() where value == item { return index }
+        for (index, value) in enumerated() where value == item {
+            return index
+        }
         return nil
     }
 
@@ -181,7 +184,9 @@ public extension Array where Element: Equatable {
     /// 删除数组中的指定元素
     /// - Parameter object:元素
     mutating func remove(_ object: Element) {
-        for idx in indexes(object).reversed() { remove(at: idx) }
+        for idx in indexes(object).reversed() {
+            remove(at: idx)
+        }
     }
 
     /// 删除数组的中的元素(可删除第一个出现的或者删除全部出现的)
@@ -199,7 +204,9 @@ public extension Array where Element: Equatable {
             }
         }
         // 倒序删除
-        for index in removeIndexs.reversed() { remove(at: index) }
+        for index in removeIndexs.reversed() {
+            remove(at: index)
+        }
         return self
     }
 
@@ -301,7 +308,9 @@ public extension Array where Element: NSObjectProtocol {
                 if !isRepeat { break }
             }
         }
-        for index in removeIndexs.reversed() { remove(at: index) }
+        for index in removeIndexs.reversed() {
+            remove(at: index)
+        }
         return self
     }
 

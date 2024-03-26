@@ -11,8 +11,6 @@ import UIKit
 public protocol StoryBoardLoadable {}
 
 public extension StoryBoardLoadable where Self: UIViewController {
-    
-    
     /// 加载UIMainStoryboard中的控制器
     /// - Parameters:
     ///   - name: 要加载的控制器(跟UIMainStoryboard中Identifier一致)
@@ -28,4 +26,3 @@ public extension StoryBoardLoadable where Self: UIViewController {
         return sb.instantiateViewController(withIdentifier: String(describing: name)) as? Self
     }
 }
-

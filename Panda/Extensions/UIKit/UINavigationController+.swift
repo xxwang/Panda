@@ -43,32 +43,30 @@ public extension UINavigationController {
             .pd_barTintColor(.clear)
             .pd_titleTextAttributes([.foregroundColor: tintColor])
     }
-    
-    
+
     /// 设置全局返回手势
     /// - Parameter isOpen: 是否开启
     func fullScreenBackGesture(_ isOpen: Bool) {
         if isOpen {
-            guard let popGestureRecognizer = self.interactivePopGestureRecognizer,
-                  let targets = popGestureRecognizer.value(forKey: "_targets") as? [NSObject] else {
+            guard let popGestureRecognizer = interactivePopGestureRecognizer,
+                  let targets = popGestureRecognizer.value(forKey: "_targets") as? [NSObject]
+            else {
                 return
             }
-            guard let targetObjc = targets.first else {return}
-            guard let target = targetObjc.value(forKey: "target") else {return}
+            guard let targetObjc = targets.first else { return }
+            guard let target = targetObjc.value(forKey: "target") else { return }
             let action = Selector(("handleNavigationTransition:"))
-            
+
             let panGR = UIPanGestureRecognizer(target: target, action: action)
             view.addGestureRecognizer(panGR)
         } else {
-            view.gestureRecognizers?.filter({ ges in
+            view.gestureRecognizers?.filter { ges in
                 ges is UIPanGestureRecognizer
-            }).forEach({ ges in
+            }.forEach { ges in
                 ges.remove()
-            })
+            }
         }
-        
     }
-    
 }
 
 // MARK: - Defaultable

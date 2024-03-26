@@ -16,7 +16,9 @@ public extension URL {
         guard let queryItems = components.queryItems else { return nil }
 
         var items: [String: String] = [:]
-        for queryItem in queryItems { items[queryItem.name] = queryItem.value }
+        for queryItem in queryItems {
+            items[queryItem.name] = queryItem.value
+        }
         return items
     }
 }
@@ -90,7 +92,9 @@ public extension URL {
     /// - Returns:`URL`
     func deletingAllPathComponents() -> URL {
         var url: URL = self
-        for _ in 0 ..< pathComponents.count - 1 { url.deleteLastPathComponent() }
+        for _ in 0 ..< pathComponents.count - 1 {
+            url.deleteLastPathComponent()
+        }
         return url
     }
 
@@ -101,7 +105,9 @@ public extension URL {
     ///     print(url) // prints "https://domain.com/"
     ///
     mutating func deleteAllPathComponents() {
-        for _ in 0 ..< pathComponents.count - 1 { deleteLastPathComponent() }
+        for _ in 0 ..< pathComponents.count - 1 {
+            deleteLastPathComponent()
+        }
     }
 
     /// 生成没有协议的新URL

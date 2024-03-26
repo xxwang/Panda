@@ -44,7 +44,7 @@ extension UISlider: AssociatedAttributes {
 
     /// 事件处理
     /// - Parameter event:事件发生者
-    @objc internal func sliderValueChanged(_ sender: UISlider) {
+    @objc func sliderValueChanged(_ sender: UISlider) {
         callback?(sender.value)
     }
 }
