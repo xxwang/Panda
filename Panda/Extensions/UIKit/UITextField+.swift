@@ -347,6 +347,11 @@ public extension UITextField {
     func pd_rightView(_ rightView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
         // 容器
         let containerView = UIView(frame: containerRect)
+        if let contentRect {
+            leftView?.frame = contentRect
+        } else {
+            leftView?.frame = leftView?.frame ?? .zero
+        }
         // 内容
         if let contentRect { rightView?.frame = contentRect }
         // 添加内容
