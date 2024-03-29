@@ -85,7 +85,7 @@ public extension BinaryInteger {
 
     /// 转换为`String`
     func toString() -> String {
-        String(toInt())
+        String(self)
     }
 
     /// 转换为`CGPoint`
