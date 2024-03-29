@@ -98,18 +98,20 @@ private extension UITextView {
 
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         let placeholderSize = placeholderLabel.textSize()
-        addConstraints([
+        
+        self.removeConstraints(self.constraints)
+        self.addConstraints([
             NSLayoutConstraint(item: placeholderLabel,
                                attribute: .width,
                                relatedBy: .equal,
-                               toItem: self,
+                               toItem: nil,
                                attribute: .width,
                                multiplier: 1,
                                constant: placeholderSize.width),
             NSLayoutConstraint(item: placeholderLabel,
                                attribute: .height,
                                relatedBy: .equal,
-                               toItem: self,
+                               toItem: nil,
                                attribute: .height,
                                multiplier: 1,
                                constant: placeholderSize.height),
@@ -119,13 +121,14 @@ private extension UITextView {
                                toItem: self,
                                attribute: .left,
                                multiplier: 1,
-                               constant: textContainer.lineFragmentPadding),
+                               constant: textContainer.lineFragmentPadding + self.textContainerInset.left),
             NSLayoutConstraint(item: placeholderLabel,
-                               attribute: .centerY,
+                               attribute: .top,
                                relatedBy: .equal,
                                toItem: self,
-                               attribute: .centerY,
-                               multiplier: 1, constant: 0),
+                               attribute: .top,
+                               multiplier: 1,
+                               constant:  self.textContainerInset.top),
         ])
     }
 
