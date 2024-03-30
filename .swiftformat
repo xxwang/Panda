@@ -5,3 +5,7 @@
 --disable unusedArguments
 --disable enumnamespaces
 --disable redundantReturn
+
+--disable redundantSelf
+--disable redundantStaticSelf
+--disable strongifiedSelf

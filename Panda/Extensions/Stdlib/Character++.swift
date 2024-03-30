@@ -12,13 +12,13 @@ public extension Character {
     /// 从`Character`转换成`Int`
     /// - Returns: `Int`
     func toInt() -> Int {
-        toString().toInt()
+        return self.toString().toInt()
     }
 
     /// 从`Character`转换成`String`
     /// - Returns: `String`
     func toString() -> String {
-        String(self)
+        return String(self)
     }
 }
 
@@ -27,6 +27,6 @@ public extension Character {
     /// 随机产生一个字符`(a-z A-Z 0-9)`
     /// - Returns: 随机`Character`
     static func random() -> Character {
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()!
+        return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".randomElement()!
     }
 }
