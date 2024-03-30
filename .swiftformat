@@ -4,3 +4,4 @@
 --disable redundantInit
 --disable unusedArguments
 --disable enumnamespaces
+--disable redundantReturn

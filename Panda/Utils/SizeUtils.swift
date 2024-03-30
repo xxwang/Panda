@@ -2,7 +2,7 @@
 //  SizeUtils.swift
 //
 //
-//  Created by 王斌 on 2023/5/20.
+//  Created by xxwang on 2023/5/20.
 //
 
 import UIKit

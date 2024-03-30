@@ -2,7 +2,7 @@
 //  BinaryInteger+.swift
 //
 //
-//  Created by 王斌 on 2023/5/22.
+//  Created by xxwang on 2023/5/22.
 //
 
 import CoreGraphics
@@ -75,6 +75,11 @@ public extension BinaryInteger {
 
     /// 转换为`Character?`
     func toCharacter() -> Character? {
+        Character(toString())
+    }
+
+    /// 从`整形`转换成`Character?`
+    func toASCIICharacter() -> Character? {
         guard let n = self as? Int,
               let scalar = UnicodeScalar(n)
         else {

@@ -2,7 +2,7 @@
 //  PandaEx.swift
 //
 //
-//  Created by 王斌 on 2023/5/20.
+//  Created by xxwang on 2023/5/20.
 //
 
 // MARK: - 包装类型(base为实例)

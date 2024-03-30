@@ -2,7 +2,7 @@
 //  UITextView+.swift
 //
 //
-//  Created by 王斌 on 2023/5/22.
+//  Created by xxwang on 2023/5/22.
 //
 
 import UIKit
@@ -98,9 +98,9 @@ private extension UITextView {
 
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         let placeholderSize = placeholderLabel.textSize()
-        
-        self.removeConstraints(self.constraints)
-        self.addConstraints([
+
+        removeConstraints(constraints)
+        addConstraints([
             NSLayoutConstraint(item: placeholderLabel,
                                attribute: .width,
                                relatedBy: .equal,
@@ -121,14 +121,14 @@ private extension UITextView {
                                toItem: self,
                                attribute: .left,
                                multiplier: 1,
-                               constant: textContainer.lineFragmentPadding + self.textContainerInset.left),
+                               constant: textContainer.lineFragmentPadding + textContainerInset.left),
             NSLayoutConstraint(item: placeholderLabel,
                                attribute: .top,
                                relatedBy: .equal,
                                toItem: self,
                                attribute: .top,
                                multiplier: 1,
-                               constant:  self.textContainerInset.top),
+                               constant: textContainerInset.top),
         ])
     }
 

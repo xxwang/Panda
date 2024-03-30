@@ -2,7 +2,7 @@
 //  UISlider+.swift
 //
 //
-//  Created by 王斌 on 2023/5/22.
+//  Created by xxwang on 2023/5/22.
 //
 
 import UIKit

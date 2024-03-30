@@ -1,28 +1,28 @@
 //
-//  Character+.swift
+//  Character++.swift
 //
 //
-//  Created by 王斌 on 2023/5/20.
+//  Created by xxwang on 2023/5/20.
 //
 
 import Foundation
 
 // MARK: - 类型转换
 public extension Character {
-    /// 从字符转换成Int
+    /// 从`Character`转换成`Int`
+    /// - Returns: `Int`
     func toInt() -> Int {
-        var intValue = 0
-        for scalar in String(self).unicodeScalars {
-            intValue = Int(scalar.value)
-        }
-        return intValue
+        toString().toInt()
     }
 
-    /// 从字符转换成字符串
-    func toString() -> String { String(self) }
+    /// 从`Character`转换成`String`
+    /// - Returns: `String`
+    func toString() -> String {
+        String(self)
+    }
 }
 
-// MARK: - 方法
+// MARK: - 静态方法
 public extension Character {
     /// 随机产生一个字符`(a-z A-Z 0-9)`
     /// - Returns: 随机`Character`

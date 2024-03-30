@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 public extension UIPickerView {
     typealias Associatedtype = UIPickerView
 
@@ -17,9 +16,7 @@ public extension UIPickerView {
     }
 }
 
-
 extension UIPickerView {
-    
     @discardableResult
     func pd_delegate(_ delegate: UIPickerViewDelegate) -> Self {
         self.delegate = delegate

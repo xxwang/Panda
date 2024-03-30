@@ -138,7 +138,7 @@
 		16940A7C2ABC738800356736 /* CATextLayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E32ABC738800356736 /* CATextLayer+.swift */; };
 		16940A7D2ABC738800356736 /* CATransform3D+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E42ABC738800356736 /* CATransform3D+.swift */; };
 		16940A7E2ABC738800356736 /* CAShapeLayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E52ABC738800356736 /* CAShapeLayer+.swift */; };
-		16940A7F2ABC738800356736 /* Character+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E72ABC738800356736 /* Character+.swift */; };
+		16940A7F2ABC738800356736 /* Character++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E72ABC738800356736 /* Character++.swift */; };
 		16940A802ABC738800356736 /* Range+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E82ABC738800356736 /* Range+.swift */; };
 		16940A812ABC738800356736 /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409E92ABC738800356736 /* Collection+.swift */; };
 		16940A822ABC738800356736 /* BinaryInteger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EA2ABC738800356736 /* BinaryInteger+.swift */; };
@@ -149,7 +149,7 @@
 		16940A872ABC738800356736 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EF2ABC738800356736 /* Array+.swift */; };
 		16940A882ABC738800356736 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F02ABC738800356736 /* Sequence+.swift */; };
 		16940A892ABC738800356736 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F12ABC738800356736 /* String+.swift */; };
-		16940A8A2ABC738800356736 /* Bool+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F22ABC738800356736 /* Bool+.swift */; };
+		16940A8A2ABC738800356736 /* Bool++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F22ABC738800356736 /* Bool++.swift */; };
 		16940A8B2ABC738800356736 /* RangeReplaceableCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */; };
 		16940A8C2ABC738800356736 /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F42ABC738800356736 /* Dictionary+.swift */; };
 		16940A8D2ABC738800356736 /* ClosedRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F52ABC738800356736 /* ClosedRange+.swift */; };
@@ -325,7 +325,7 @@
 		169409E32ABC738800356736 /* CATextLayer+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATextLayer+.swift"; sourceTree = "<group>"; };
 		169409E42ABC738800356736 /* CATransform3D+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CATransform3D+.swift"; sourceTree = "<group>"; };
 		169409E52ABC738800356736 /* CAShapeLayer+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+.swift"; sourceTree = "<group>"; };
-		169409E72ABC738800356736 /* Character+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Character+.swift"; sourceTree = "<group>"; };
+		169409E72ABC738800356736 /* Character++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Character++.swift"; sourceTree = "<group>"; };
 		169409E82ABC738800356736 /* Range+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Range+.swift"; sourceTree = "<group>"; };
 		169409E92ABC738800356736 /* Collection+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		169409EA2ABC738800356736 /* BinaryInteger+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+.swift"; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 		169409EF2ABC738800356736 /* Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		169409F02ABC738800356736 /* Sequence+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		169409F12ABC738800356736 /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		169409F22ABC738800356736 /* Bool+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool+.swift"; sourceTree = "<group>"; };
+		169409F22ABC738800356736 /* Bool++.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bool++.swift"; sourceTree = "<group>"; };
 		169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+.swift"; sourceTree = "<group>"; };
 		169409F42ABC738800356736 /* Dictionary+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
 		169409F52ABC738800356736 /* ClosedRange+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClosedRange+.swift"; sourceTree = "<group>"; };
@@ -647,7 +647,7 @@
 		169409E62ABC738800356736 /* Stdlib */ = {
 			isa = PBXGroup;
 			children = (
-				169409E72ABC738800356736 /* Character+.swift */,
+				169409E72ABC738800356736 /* Character++.swift */,
 				169409E82ABC738800356736 /* Range+.swift */,
 				169409E92ABC738800356736 /* Collection+.swift */,
 				169409EA2ABC738800356736 /* BinaryInteger+.swift */,
@@ -658,7 +658,7 @@
 				169409EF2ABC738800356736 /* Array+.swift */,
 				169409F02ABC738800356736 /* Sequence+.swift */,
 				169409F12ABC738800356736 /* String+.swift */,
-				169409F22ABC738800356736 /* Bool+.swift */,
+				169409F22ABC738800356736 /* Bool++.swift */,
 				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
 				169409F42ABC738800356736 /* Dictionary+.swift */,
 				169409F52ABC738800356736 /* ClosedRange+.swift */,
@@ -962,8 +962,8 @@
 				16940A2C2ABC738800356736 /* UISwitch+.swift in Sources */,
 				16940A412ABC738800356736 /* UIImage+.swift in Sources */,
 				16940A692ABC738800356736 /* NumberFormatter+.swift in Sources */,
-				16940A8A2ABC738800356736 /* Bool+.swift in Sources */,
-				16940A7F2ABC738800356736 /* Character+.swift in Sources */,
+				16940A8A2ABC738800356736 /* Bool++.swift in Sources */,
+				16940A7F2ABC738800356736 /* Character++.swift in Sources */,
 				16940A762ABC738800356736 /* CLVisit+.swift in Sources */,
 				16940A5B2ABC738800356736 /* NSObject+.swift in Sources */,
 				16940A2D2ABC738800356736 /* UISegmentedControl+.swift in Sources */,
