@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		165178F52BB1A4A00032ADA8 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165178F42BB1A4A00032ADA8 /* Functions.swift */; };
+		165E9BAF2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165E9BAE2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift */; };
 		169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409532ABC738800356736 /* StoryboardLoadable.swift */; };
 		169409FD2ABC738800356736 /* AssociatedAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409542ABC738800356736 /* AssociatedAttributes.swift */; };
 		169409FE2ABC738800356736 /* Emitterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409552ABC738800356736 /* Emitterable.swift */; };
@@ -195,6 +196,7 @@
 
 /* Begin PBXFileReference section */
 		165178F42BB1A4A00032ADA8 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		165E9BAE2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout++.swift"; sourceTree = "<group>"; };
 		169409532ABC738800356736 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		169409542ABC738800356736 /* AssociatedAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedAttributes.swift; sourceTree = "<group>"; };
 		169409552ABC738800356736 /* Emitterable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emitterable.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				169409A82ABC738800356736 /* UIColor+.swift */,
 				169409A92ABC738800356736 /* UINavigationBar+.swift */,
 				169409AA2ABC738800356736 /* UIScreen+.swift */,
+				165E9BAE2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				16940A512ABC738800356736 /* SCNBox+.swift in Sources */,
 				16940A8D2ABC738800356736 /* ClosedRange+.swift in Sources */,
 				16940A8F2ABC738800356736 /* Optional+.swift in Sources */,
+				165E9BAF2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift in Sources */,
 				16940A602ABC738800356736 /* NSPredicate+.swift in Sources */,
 				16940A562ABC738800356736 /* Measurement+.swift in Sources */,
 				16940A712ABC738800356736 /* SKSpriteNode+.swift in Sources */,
