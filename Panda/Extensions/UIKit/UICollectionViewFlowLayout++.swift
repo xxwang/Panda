@@ -9,10 +9,6 @@ import UIKit
 
 extension UICollectionViewFlowLayout {
     
-}
-
-extension UICollectionViewFlowLayout {
-    
     /// 设置滚动方向间距
     /// - Parameter spacing: 间距
     /// - Returns: `Self`
