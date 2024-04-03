@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class PDStatusBar: UIImageView {
+class PDStatusBar: UIImageView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         self.pd_isUserInteractionEnabled(true)

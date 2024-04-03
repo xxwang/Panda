@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class PDTableViewCell: UITableViewCell {
+ class PDTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -16,7 +16,7 @@ open class PDTableViewCell: UITableViewCell {
     }
 
     @available(*, unavailable)
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

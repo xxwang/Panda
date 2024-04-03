@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Panda
 
-open class PDTitleBar: UIImageView {
+ class PDTitleBar: UIImageView {
     /// 返回按钮点击回调
     private var backCallback: (() -> Void)?
 
@@ -37,11 +38,11 @@ open class PDTitleBar: UIImageView {
     }
 
     @available(*, unavailable)
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         if !self.titleLabel.isHidden {
@@ -65,7 +66,7 @@ private extension PDTitleBar {
     }
 }
 
-public extension PDTitleBar {
+extension PDTitleBar {
     /// 隐藏返回按钮
     /// - Parameter hidden: 是否隐藏
     /// - Returns: `Self`

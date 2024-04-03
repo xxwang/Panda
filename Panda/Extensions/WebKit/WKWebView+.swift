@@ -12,7 +12,7 @@ public extension WKWebView {
     typealias Associatedtype = WKWebView
 
     override class func `default`() -> Associatedtype {
-        let webView = WKWebView(frame: .zero, configuration: WKWebView.defaultConfig)
+        let webView = WKWebView(frame: .zero, configuration: WKWebView.defaultConfiguration)
         return webView
     }
 }
@@ -20,7 +20,7 @@ public extension WKWebView {
 // MARK: - 静态方法
 public extension WKWebView {
     /// `WKWebViewConfiguration`默认配置
-    static var defaultConfig: WKWebViewConfiguration {
+    static var defaultConfiguration: WKWebViewConfiguration {
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
         config.selectionGranularity = .dynamic

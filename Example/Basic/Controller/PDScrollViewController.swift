@@ -7,9 +7,9 @@
 
 import UIKit
 
-open class PDScrollViewController: PDViewController {
+ class PDScrollViewController: PDViewController {
     /// 滚动视图
-    open lazy var scrollView: UIScrollView = {
+     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView.default()
             .pd_delegate(self)
             .pd_showsHorizontalScrollIndicator(false)
@@ -18,12 +18,12 @@ open class PDScrollViewController: PDViewController {
     }()
 
     /// 内容视图
-    open lazy var contentView: UIView = {
+     lazy var contentView: UIView = {
         let view = UIView.default()
         return view
     }()
 
-    override open func viewDidLoad() {
+    override  func viewDidLoad() {
         super.viewDidLoad()
 
         // 添加到导航栏下面 确保导航栏阴影可以正常显示
@@ -44,7 +44,7 @@ open class PDScrollViewController: PDViewController {
 }
 
 // MARK: - 常用方法
-public extension PDScrollViewController {
+extension PDScrollViewController {
     /// 填充内容视图
     /// - Parameter scrollWhenNotFilled: 是否在未撑满时允许滚动
     func fill(scrollWhenNotFilled: Bool) {

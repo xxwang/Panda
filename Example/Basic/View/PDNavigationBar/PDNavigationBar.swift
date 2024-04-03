@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Panda
 
-open class PDNavigationBar: UIImageView {
+ class PDNavigationBar: UIImageView {
     // MARK: - 分割线
     private var separatorHeight: CGFloat = 0.5
     private var separatorColor = UIColor.black.alpha(0.05)
@@ -57,13 +58,13 @@ open class PDNavigationBar: UIImageView {
     }
 
     @available(*, unavailable)
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension PDNavigationBar {
-    override open func layoutSubviews() {
+    override  func layoutSubviews() {
         super.layoutSubviews()
 
         var navigationFullHeight: CGFloat = 0
@@ -93,7 +94,7 @@ extension PDNavigationBar {
 }
 
 // MARK: - 状态栏
-public extension PDNavigationBar {
+extension PDNavigationBar {
     /// 隐藏状态栏
     /// - Parameter isHidden: 是否隐藏
     /// - Returns: `Self`
@@ -133,7 +134,7 @@ public extension PDNavigationBar {
 }
 
 // MARK: - 标题栏
-public extension PDNavigationBar {
+extension PDNavigationBar {
     /// 隐藏标题栏
     /// - Parameter isHidden: 是否隐藏
     /// - Returns: `Self`
@@ -239,7 +240,7 @@ public extension PDNavigationBar {
 }
 
 // MARK: - 分隔线
-public extension PDNavigationBar {
+extension PDNavigationBar {
     /// 隐藏分隔线
     /// - Parameter isHidden: 是否隐藏
     /// - Returns: `Self`
@@ -271,7 +272,7 @@ public extension PDNavigationBar {
 }
 
 // MARK: - 导航栏
-public extension PDNavigationBar {
+extension PDNavigationBar {
     /// 隐藏导航栏
     /// - Parameter isHidden: 是否隐藏
     /// - Returns: `Self`
@@ -306,7 +307,7 @@ public extension PDNavigationBar {
 }
 
 // MARK: - 阴影
-public extension PDNavigationBar {
+extension PDNavigationBar {
     /// 阴影的显示及隐藏
     /// - Parameter isHidden: 是否隐藏
     /// - Returns: `Self`

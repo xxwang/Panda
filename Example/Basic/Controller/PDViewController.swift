@@ -7,12 +7,12 @@
 
 import UIKit
 
-open class PDViewController: UIViewController {
+ class PDViewController: UIViewController {
     /// 是否允许侧滑返回
-    public var canSideBack = true
+    var canSideBack = true
 
     /// 完整导航栏(状态栏 + 标题栏)
-    public lazy var navigationBar: PDNavigationBar = {
+    lazy var navigationBar: PDNavigationBar = {
         let navigationBar = PDNavigationBar()
             .backButtonImage("navbar_back_icon".toImage(), for: .normal)
             .backButtonImage("navbar_back_icon".toImage(), for: .highlighted)
@@ -34,16 +34,16 @@ open class PDViewController: UIViewController {
         return navigationBar
     }()
 
-    public init() {
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
-    public required init?(coder _: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override open func viewDidLoad() {
+    override  func viewDidLoad() {
         super.viewDidLoad()
 
         self.pd_backgroundColor(.white)
@@ -59,21 +59,21 @@ open class PDViewController: UIViewController {
 
 // MARK: - 生命周期
 extension PDViewController {
-    override open func viewWillAppear(_ animated: Bool) {
+    override  func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 
-    override open func viewWillDisappear(_ animated: Bool) {
+    override  func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
 
-    override open func viewDidAppear(_ animated: Bool) {
+    override  func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
-    override open func viewDidDisappear(_ animated: Bool) {
+    override  func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
 }
@@ -81,26 +81,26 @@ extension PDViewController {
 // MARK: - 控制器设置
 extension PDViewController {
     /// 屏幕是否可以旋转
-    override open var shouldAutorotate: Bool { false }
+    override  var shouldAutorotate: Bool { false }
 
     /// 屏幕方向
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
+    override  var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 
     /// 是否隐藏状态栏
-    override open var prefersStatusBarHidden: Bool { false }
+    override  var prefersStatusBarHidden: Bool { false }
 
     /// 状态栏样式
-    override open var preferredStatusBarStyle: UIStatusBarStyle { .default }
+    override  var preferredStatusBarStyle: UIStatusBarStyle { .default }
 
     /// 监听屏幕旋转
-    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override  func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
 // MARK: UIGestureRecognizerDelegate
 extension PDViewController: UIGestureRecognizerDelegate {
-    open func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
+     func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
         if (navigationController?.children.count ?? 0) > 1 { return canSideBack }
         return false
     }

@@ -8,27 +8,27 @@
 import UIKit
 import WebKit
 
-open class PDWebViewController: PDViewController {
+ class PDWebViewController: PDViewController {
     /// webView配置文件
-    lazy var webViewConfig: WKWebViewConfiguration = {
-        let config = WKWebView.defaultConfig
-        config.userContentController = WKUserContentController()
-        config.preferences = WKPreferences()
-        config.preferences.minimumFontSize = 12
-        config.preferences.javaScriptEnabled = true
-        config.preferences.javaScriptCanOpenWindowsAutomatically = false
-        return config
+    lazy var configuration: WKWebViewConfiguration = {
+        let configuration = WKWebView.defaultConfiguration
+        configuration.userContentController = WKUserContentController()
+        configuration.preferences = WKPreferences()
+        configuration.preferences.minimumFontSize = 12
+        configuration.preferences.javaScriptEnabled = true
+        configuration.preferences.javaScriptCanOpenWindowsAutomatically = false
+        return configuration
     }()
 
     /// web浏览器视图
     lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: view.bounds, configuration: webViewConfig)
+        let webView = WKWebView(frame: view.bounds, configuration: configuration)
             .pd_uiDelegate(self)
             .pd_navigationDelegate(self)
         return webView
     }()
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         self.webView.add2(self.view)
@@ -49,5 +49,5 @@ extension PDWebViewController: WKUIDelegate {}
 
 // MARK: - WKScriptMessageHandler
 extension PDWebViewController: WKScriptMessageHandler {
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {}
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {}
 }
