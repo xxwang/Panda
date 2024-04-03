@@ -268,13 +268,11 @@ public extension UIScrollView {
         isDirectionalLockEnabled = enabled
         return self
     }
-    
-    
-    @discardableResult
-    
+
     /// 设置是否滚动到顶部
     /// - Parameter scrollsToTop: 是否可以滚动到顶部
     /// - Returns: `Self`
+    @discardableResult
     func pd_scrollsToTop(_ scrollsToTop: Bool) -> Self {
         self.scrollsToTop = scrollsToTop
         return self

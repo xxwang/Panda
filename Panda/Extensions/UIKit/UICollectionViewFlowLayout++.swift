@@ -8,7 +8,6 @@
 import UIKit
 
 extension UICollectionViewFlowLayout {
-    
     /// 设置滚动方向间距
     /// - Parameter spacing: 间距
     /// - Returns: `Self`
@@ -17,7 +16,7 @@ extension UICollectionViewFlowLayout {
         self.minimumLineSpacing = spacing
         return self
     }
-    
+
     /// 设置垂直于滚动方向间距
     /// - Parameter spacing: 间距
     /// - Returns: `Self`
@@ -44,7 +43,7 @@ extension UICollectionViewFlowLayout {
         self.estimatedItemSize = size
         return self
     }
-    
+
     /// 设置滚动方向
     /// - Parameter scrollDirection: 滚动方向
     /// - Returns: `Self`
@@ -53,7 +52,7 @@ extension UICollectionViewFlowLayout {
         self.scrollDirection = scrollDirection
         return self
     }
-  
+
     /// 设置头部视图大小
     /// - Parameter size: 大小
     /// - Returns: `Self`
@@ -71,8 +70,7 @@ extension UICollectionViewFlowLayout {
         self.footerReferenceSize = size
         return self
     }
-    
-    
+
     @discardableResult
     /// 设置组的内间距
     /// - Parameter sectionInset: 内间距
@@ -81,7 +79,7 @@ extension UICollectionViewFlowLayout {
         self.sectionInset = sectionInset
         return self
     }
-    
+
     /// 设置布局参考
     /// - Parameter sectionInsetReference: 布局参考枚举
     /// - Returns: `Self`
@@ -90,7 +88,7 @@ extension UICollectionViewFlowLayout {
         self.sectionInsetReference = sectionInsetReference
         return self
     }
-    
+
     /// 设置组头是否悬停
     /// - Parameter sectionHeadersPinToVisibleBounds: 是否悬停
     /// - Returns: `Self`

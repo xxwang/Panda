@@ -21,6 +21,9 @@
 		1600374A2BBC5A100081FF6A /* PDCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160037492BBC5A100081FF6A /* PDCollectionReusableView.swift */; };
 		1600374D2BBC5A330081FF6A /* PDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1600374C2BBC5A330081FF6A /* PDViewModel.swift */; };
 		160037502BBC5A520081FF6A /* PDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1600374F2BBC5A520081FF6A /* PDModel.swift */; };
+		160037532BBD959E0081FF6A /* PDNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160037522BBD959E0081FF6A /* PDNavigationBar.swift */; };
+		160037552BBD96FA0081FF6A /* PDStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160037542BBD96FA0081FF6A /* PDStatusBar.swift */; };
+		160037572BBD97110081FF6A /* PDTitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160037562BBD97110081FF6A /* PDTitleBar.swift */; };
 		165178F52BB1A4A00032ADA8 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165178F42BB1A4A00032ADA8 /* Functions.swift */; };
 		165E9BAF2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165E9BAE2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift */; };
 		169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409532ABC738800356736 /* StoryboardLoadable.swift */; };
@@ -175,6 +178,8 @@
 		16940A922ABC738800356736 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409FB2ABC738800356736 /* Color+.swift */; };
 		16940A952ABC761700356736 /* Panda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E3E5F62A2A652700043401 /* Panda.framework */; };
 		16940A962ABC761700356736 /* Panda.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62E3E5F62A2A652700043401 /* Panda.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		16A3EBD42BBDAD1D00025F53 /* PDTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EBD32BBDAD1D00025F53 /* PDTestViewController.swift */; };
+		16A3EBD62BBDBCF600025F53 /* PDTest1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EBD52BBDBCF600025F53 /* PDTest1ViewController.swift */; };
 		1835A3BD2BB54B5C004A53B0 /* UIPickerView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */; };
 		62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6032A2A653D00043401 /* AppDelegate.swift */; };
 		62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6052A2A653D00043401 /* SceneDelegate.swift */; };
@@ -223,6 +228,9 @@
 		160037492BBC5A100081FF6A /* PDCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDCollectionReusableView.swift; sourceTree = "<group>"; };
 		1600374C2BBC5A330081FF6A /* PDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDViewModel.swift; sourceTree = "<group>"; };
 		1600374F2BBC5A520081FF6A /* PDModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDModel.swift; sourceTree = "<group>"; };
+		160037522BBD959E0081FF6A /* PDNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDNavigationBar.swift; sourceTree = "<group>"; };
+		160037542BBD96FA0081FF6A /* PDStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDStatusBar.swift; sourceTree = "<group>"; };
+		160037562BBD97110081FF6A /* PDTitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTitleBar.swift; sourceTree = "<group>"; };
 		165178F42BB1A4A00032ADA8 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		165E9BAE2BB85E5500A6B9C8 /* UICollectionViewFlowLayout++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout++.swift"; sourceTree = "<group>"; };
 		169409532ABC738800356736 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
@@ -375,6 +383,8 @@
 		169409F82ABC738800356736 /* Decodable+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
 		169409F92ABC738800356736 /* MutableCollection+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MutableCollection+.swift"; sourceTree = "<group>"; };
 		169409FB2ABC738800356736 /* Color+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		16A3EBD32BBDAD1D00025F53 /* PDTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTestViewController.swift; sourceTree = "<group>"; };
+		16A3EBD52BBDBCF600025F53 /* PDTest1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTest1ViewController.swift; sourceTree = "<group>"; };
 		1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPickerView+.swift"; sourceTree = "<group>"; };
 		62E3E5F62A2A652700043401 /* Panda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Panda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E3E6012A2A653D00043401 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,6 +446,7 @@
 		1600373E2BBC59980081FF6A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				160037512BBD95520081FF6A /* PDNavigationBar */,
 				1600373F2BBC59AB0081FF6A /* PDView.swift */,
 				160037412BBC59BC0081FF6A /* PDButton.swift */,
 				160037432BBC59D40081FF6A /* PDControl.swift */,
@@ -460,6 +471,16 @@
 				1600374F2BBC5A520081FF6A /* PDModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		160037512BBD95520081FF6A /* PDNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				160037522BBD959E0081FF6A /* PDNavigationBar.swift */,
+				160037562BBD97110081FF6A /* PDTitleBar.swift */,
+				160037542BBD96FA0081FF6A /* PDStatusBar.swift */,
+			);
+			path = PDNavigationBar;
 			sourceTree = "<group>";
 		};
 		169409522ABC738800356736 /* protocol */ = {
@@ -802,6 +823,8 @@
 				62E3E7532A2A6B0600043401 /* AppContext */,
 				62E3E7542A2A6B1F00043401 /* Other */,
 				62E3E6072A2A653D00043401 /* ViewController.swift */,
+				16A3EBD32BBDAD1D00025F53 /* PDTestViewController.swift */,
+				16A3EBD52BBDBCF600025F53 /* PDTest1ViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -993,6 +1016,7 @@
 				16940A782ABC738800356736 /* CLLocation+.swift in Sources */,
 				16940A1F2ABC738800356736 /* CGVector+.swift in Sources */,
 				16940A332ABC738800356736 /* UIView+.swift in Sources */,
+				160037572BBD97110081FF6A /* PDTitleBar.swift in Sources */,
 				160037462BBC59E70081FF6A /* PDTableViewCell.swift in Sources */,
 				16940A152ABC738800356736 /* SKProduct+.swift in Sources */,
 				16940A402ABC738800356736 /* UIDatePicker+.swift in Sources */,
@@ -1001,6 +1025,7 @@
 				16940A0D2ABC738800356736 /* BiometricAuthUtils.swift in Sources */,
 				1600374D2BBC5A330081FF6A /* PDViewModel.swift in Sources */,
 				16940A302ABC738800356736 /* UITextView+.swift in Sources */,
+				160037552BBD96FA0081FF6A /* PDStatusBar.swift in Sources */,
 				16940A6A2ABC738800356736 /* URLRequest+.swift in Sources */,
 				16940A432ABC738800356736 /* UITableView+.swift in Sources */,
 				16940A742ABC738800356736 /* MKPolyline+.swift in Sources */,
@@ -1012,6 +1037,7 @@
 				16940A272ABC738800356736 /* UIAlertController+.swift in Sources */,
 				16940A622ABC738800356736 /* NSMutableAttributedString+.swift in Sources */,
 				16940A482ABC738800356736 /* UIColor+.swift in Sources */,
+				160037532BBD959E0081FF6A /* PDNavigationBar.swift in Sources */,
 				16940A0C2ABC738800356736 /* QRCodeUtils.swift in Sources */,
 				160037382BBC59150081FF6A /* PDCollectionViewController.swift in Sources */,
 				16940A1B2ABC738800356736 /* CGAffineTransform+.swift in Sources */,
@@ -1113,8 +1139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16A3EBD42BBDAD1D00025F53 /* PDTestViewController.swift in Sources */,
 				62E3E6082A2A653D00043401 /* ViewController.swift in Sources */,
 				62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */,
+				16A3EBD62BBDBCF600025F53 /* PDTest1ViewController.swift in Sources */,
 				62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

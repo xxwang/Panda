@@ -7,6 +7,15 @@
 
 import UIKit
 
-class PDCollectionViewCell: UICollectionViewCell {
-    
+open class PDCollectionViewCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.pd_backgroundColor(.clear)
+    }
+
+    @available(*, unavailable)
+    public required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

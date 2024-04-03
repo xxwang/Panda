@@ -7,6 +7,4 @@
 
 import UIKit
 
-class PDModel: NSObject {
-
-}
+open class PDModel: NSObject {}

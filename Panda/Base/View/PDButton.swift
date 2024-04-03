@@ -7,14 +7,20 @@
 
 import UIKit
 
-class PDButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+open class PDButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-    */
 
+    @available(*, unavailable)
+    public required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    /// 取消按住高亮
+    override public var isHighlighted: Bool {
+        didSet {
+            super.isHighlighted = false
+        }
+    }
 }

@@ -7,6 +7,4 @@
 
 import UIKit
 
-class PDViewModel: NSObject {
-
-}
+open class PDViewModel: NSObject {}

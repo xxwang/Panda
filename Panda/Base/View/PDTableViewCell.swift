@@ -7,17 +7,16 @@
 
 import UIKit
 
-class PDTableViewCell: UITableViewCell {
+open class PDTableViewCell: UITableViewCell {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+        self.pd_selectionStyle(.none) // 选中样式
+            .pd_backgroundColor(.clear) // 背景颜色
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @available(*, unavailable)
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
 }

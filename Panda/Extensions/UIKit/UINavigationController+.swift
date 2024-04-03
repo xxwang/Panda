@@ -78,3 +78,25 @@ public extension UINavigationController {
         return item
     }
 }
+
+public extension UINavigationController {
+    /// 设置导航控制器代理
+    /// - Parameter delegate: 代理
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_delegate(_ delegate: UINavigationControllerDelegate) -> Self {
+        self.delegate = delegate
+        return self
+    }
+
+    /// 隐藏导航栏
+    /// - Parameters:
+    ///   - hidden: 是否隐藏
+    ///   - animated: 是否动画
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
+        self.setNavigationBarHidden(hidden, animated: animated)
+        return self
+    }
+}
