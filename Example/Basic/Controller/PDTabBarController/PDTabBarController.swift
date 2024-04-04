@@ -45,7 +45,7 @@ class PDTabBarController: UITabBarController {
 
         self.customTabBar
             .pd_isTranslucent(false)
-            .pd_backgroundColor(with: .gray.alpha(0.3))
+            .pd_backgroundColor(with: .clear)
             .pd_shadowImage(UIImage(with: .clear))
             .pd_titleFont(UIFont.boldSystemFont(ofSize: 12), state: .normal)
             .pd_titleFont(UIFont.systemFont(ofSize: 15), state: .selected)
@@ -152,5 +152,7 @@ extension PDTabBarController {
 
 // MARK: - PDTabBarDelegate
 extension PDTabBarController: PDTabBarDelegate {
-    func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {}
+    func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {
+        Log.info("123")
+    }
 }

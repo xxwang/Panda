@@ -124,13 +124,13 @@ public extension UIImageView {
         self.image = image
         return self
     }
-
-    /// 设置图片
-    /// - Parameter imageNamed:图片名称
+    
+    /// 设置高亮状态的图片
+    /// - Parameter image:图片
     /// - Returns:`Self`
     @discardableResult
-    func pd_image(_ imageNamed: String) -> Self {
-        image = UIImage(named: imageNamed)
+    func pd_highlightedImage(_ image: UIImage?) -> Self {
+        self.highlightedImage = image
         return self
     }
 

@@ -898,9 +898,9 @@
 			isa = PBXGroup;
 			children = (
 				16A3EC6E2BBE61A600025F53 /* PDTabBarController.swift */,
-				16A3EC722BBE628400025F53 /* PDTabBarViewModel.swift */,
 				16A3EC702BBE61C500025F53 /* PDTabBar.swift */,
 				16A3EC7F2BBE758E00025F53 /* PDTabBarButton.swift */,
+				16A3EC722BBE628400025F53 /* PDTabBarViewModel.swift */,
 			);
 			path = PDTabBarController;
 			sourceTree = "<group>";
