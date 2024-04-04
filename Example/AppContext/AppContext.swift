@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import Panda
 import SnapKit
-// import IQKeyboardManagerSwift
+ import IQKeyboardManagerSwift
 
 class AppContext {
     /// 是否允许旋转
@@ -22,7 +22,7 @@ class AppContext {
 
 extension AppContext {
     /// 应用启动时加载
-    func launch(_ application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+    @MainActor func launch(_ application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         // 清空桌面图标角标数量
         UIApplication.shared.applicationIconBadgeNumber = 0
 
@@ -51,25 +51,27 @@ extension AppContext {
 // MARK: - 第三方设置
 extension AppContext {
     /// 初始化第三方框架
-    private func initVendor() {
+    @MainActor private func initVendor() {
         // 设置键盘管理
         setupIQKeyboardManager()
     }
 
     /// 设置键盘管理
-    private func setupIQKeyboardManager() {
-//        // 初始化键盘管理
-//        let keyboardManager = IQKeyboardManager.shared
-//        // 控制整个功能是否启用.
-//        keyboardManager.enable = true
-//        // 控制点击背景是否收起键盘
-//        keyboardManager.shouldResignOnTouchOutside = true
-//        // 将右边Done改成完成
-//        keyboardManager.toolbarDoneBarButtonItemText = "完成"
-//        // 控制是否显示键盘上的工具条
-//        keyboardManager.enableAutoToolbar = true
-//        // 最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键,自动跳转到下一个输入框,最后一个输入框点击完成,自动收起键盘
-//        keyboardManager.toolbarManageBehaviour = .byPosition
+    @MainActor private func setupIQKeyboardManager() {
+        // 初始化键盘管理
+        let keyboardManager = IQKeyboardManager.shared
+        // 控制整个功能是否启用.
+        keyboardManager.enable = true
+        // 控制点击背景是否收起键盘
+        keyboardManager.resignOnTouchOutside = true
+        // 控制是否显示键盘上的工具条
+        keyboardManager.enableAutoToolbar = true
+        // 最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键,自动跳转到下一个输入框,最后一个输入框点击完成,自动收起键盘
+        keyboardManager.toolbarConfiguration.manageBehavior = .byPosition
+        // 将右边Done改成完成
+        keyboardManager.toolbarConfiguration.doneBarButtonConfiguration = IQBarButtonItemConfiguration(title: "完成")
+        
+        
     }
 }
 

@@ -152,6 +152,12 @@ extension PDTabBarController {
 
 // MARK: - PDTabBarDelegate
 extension PDTabBarController: PDTabBarDelegate {
+    func tabBarButtonClick(_ tabBar: PDTabBar, clicked index: Int) {
+        if selectedIndex == index {return}
+        
+        self.selectedIndex = index
+    }
+    
     func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {
         Log.info("123")
     }

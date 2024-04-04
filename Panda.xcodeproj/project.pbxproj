@@ -196,16 +196,15 @@
 		16A3EC762BBE745700025F53 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC752BBE745700025F53 /* SnapKit */; };
 		16A3EC782BBE745700025F53 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC772BBE745700025F53 /* SnapKit-Dynamic */; };
 		16A3EC7B2BBE74A500025F53 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC7A2BBE74A500025F53 /* ReactiveMoya */; };
-		16A3EC7E2BBE74F000025F53 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC7D2BBE74F000025F53 /* IQKeyboardManagerSwift */; };
 		16A3EC802BBE758E00025F53 /* PDTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC7F2BBE758E00025F53 /* PDTabBarButton.swift */; };
 		16A3EC872BBE84A600025F53 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC862BBE84A600025F53 /* HomeViewController.swift */; };
 		16A3EC892BBE84C800025F53 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC882BBE84C800025F53 /* CalendarViewController.swift */; };
 		16A3EC8B2BBE84D100025F53 /* SquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC8A2BBE84D100025F53 /* SquareViewController.swift */; };
 		16A3EC8D2BBE84DB00025F53 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC8C2BBE84DB00025F53 /* MineViewController.swift */; };
+		16A3EC902BBEAE4E00025F53 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC8F2BBEAE4E00025F53 /* IQKeyboardManagerSwift */; };
 		1835A3BD2BB54B5C004A53B0 /* UIPickerView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */; };
 		62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6032A2A653D00043401 /* AppDelegate.swift */; };
 		62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6052A2A653D00043401 /* SceneDelegate.swift */; };
-		62E3E6082A2A653D00043401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6072A2A653D00043401 /* ViewController.swift */; };
 		62E3E60B2A2A653D00043401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E3E6092A2A653D00043401 /* Main.storyboard */; };
 		62E3E60D2A2A653D00043401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E3E60C2A2A653D00043401 /* Assets.xcassets */; };
 		62E3E6102A2A653D00043401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E3E60E2A2A653D00043401 /* LaunchScreen.storyboard */; };
@@ -430,7 +429,6 @@
 		62E3E6012A2A653D00043401 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E3E6032A2A653D00043401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E3E6052A2A653D00043401 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		62E3E6072A2A653D00043401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		62E3E60A2A2A653D00043401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		62E3E60C2A2A653D00043401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62E3E60F2A2A653D00043401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -452,7 +450,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16A3EC7E2BBE74F000025F53 /* IQKeyboardManagerSwift in Frameworks */,
+				16A3EC902BBEAE4E00025F53 /* IQKeyboardManagerSwift in Frameworks */,
 				16940A952ABC761700356736 /* Panda.framework in Frameworks */,
 				16A3EC7B2BBE74A500025F53 /* ReactiveMoya in Frameworks */,
 				16A3EC762BBE745700025F53 /* SnapKit in Frameworks */,
@@ -777,7 +775,6 @@
 			isa = PBXGroup;
 			children = (
 				16A3EC812BBE846F00025F53 /* Module */,
-				62E3E6072A2A653D00043401 /* ViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1065,7 +1062,7 @@
 				16A3EC752BBE745700025F53 /* SnapKit */,
 				16A3EC772BBE745700025F53 /* SnapKit-Dynamic */,
 				16A3EC7A2BBE74A500025F53 /* ReactiveMoya */,
-				16A3EC7D2BBE74F000025F53 /* IQKeyboardManagerSwift */,
+				16A3EC8F2BBEAE4E00025F53 /* IQKeyboardManagerSwift */,
 			);
 			productName = Example;
 			productReference = 62E3E6012A2A653D00043401 /* Example.app */;
@@ -1102,7 +1099,7 @@
 			packageReferences = (
 				16A3EC742BBE745700025F53 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				16A3EC792BBE74A500025F53 /* XCRemoteSwiftPackageReference "Moya" */,
-				16A3EC7C2BBE74F000025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				16A3EC8E2BBEAE4E00025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 62E3E5DB2A2A650400043401 /* Products */;
 			projectDirPath = "";
@@ -1308,7 +1305,6 @@
 				16A3EC6A2BBE612800025F53 /* Colors.swift in Sources */,
 				16A3EC4F2BBDC8F500025F53 /* PDViewModel.swift in Sources */,
 				16A3EC802BBE758E00025F53 /* PDTabBarButton.swift in Sources */,
-				62E3E6082A2A653D00043401 /* ViewController.swift in Sources */,
 				16A3EC892BBE84C800025F53 /* CalendarViewController.swift in Sources */,
 				62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */,
 				62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */,
@@ -1678,7 +1674,7 @@
 				minimumVersion = 15.0.3;
 			};
 		};
-		16A3EC7C2BBE74F000025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		16A3EC8E2BBEAE4E00025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -1704,9 +1700,9 @@
 			package = 16A3EC792BBE74A500025F53 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = ReactiveMoya;
 		};
-		16A3EC7D2BBE74F000025F53 /* IQKeyboardManagerSwift */ = {
+		16A3EC8F2BBEAE4E00025F53 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 16A3EC7C2BBE74F000025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = 16A3EC8E2BBEAE4E00025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

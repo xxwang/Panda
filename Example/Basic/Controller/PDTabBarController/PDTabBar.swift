@@ -9,6 +9,7 @@ import Panda
 import UIKit
 
 protocol PDTabBarDelegate: NSObjectProtocol {
+    func tabBarButtonClick(_ tabBar: PDTabBar, clicked index: Int)
     func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect)
 }
 
@@ -122,6 +123,9 @@ extension PDTabBar {
         sender.select()
         // 记录点击按钮的索引
         viewModel.selectedIndex = sender.tag
+        
+        // 回调点击索引到控制器
+        self.customDelegate?.tabBarButtonClick(self, clicked: sender.tag)
     }
     
     // 获取所有标签按钮
