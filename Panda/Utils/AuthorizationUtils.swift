@@ -78,7 +78,7 @@ public enum AuthorizationUtils {
     /// 定位
     static func authorizeLocationWith(completion: @escaping (Bool) -> Void) {
         if CLLocationManager.locationServicesEnabled() == false {
-            Log.info("请打开定位功能!")
+            Logger.info("请打开定位功能!")
             completion(false)
             return
         }

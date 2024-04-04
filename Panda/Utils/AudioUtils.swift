@@ -49,7 +49,7 @@ public extension AudioUtils {
 
             return player
         } catch {
-            Log.debug(error.localizedDescription)
+            Logger.debug(error.localizedDescription)
             return nil
         }
     }

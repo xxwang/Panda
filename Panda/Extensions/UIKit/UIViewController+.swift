@@ -343,7 +343,7 @@ public extension UIViewController {
     func hook_pushViewController(_ viewController: UIViewController, animated: Bool) {
         // 判断是否是根控制器
         if viewControllers.count <= 1 {
-            Log.info("根控制器")
+            Logger.info("根控制器")
         }
 
         // 非栈顶控制器(要入栈的控制器不是栈顶控制器, 隐藏TabBar)

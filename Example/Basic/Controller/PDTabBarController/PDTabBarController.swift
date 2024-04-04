@@ -159,6 +159,6 @@ extension PDTabBarController: PDTabBarDelegate {
     }
     
     func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {
-        Log.info("123")
+        Logger.info("123")
     }
 }

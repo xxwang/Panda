@@ -146,7 +146,7 @@ public extension PhotoUtils {
                     if isSuccess {
                         self.saveImage2Album(image, albumName: albumName, completion: completion)
                     } else {
-                        Log.info(error?.localizedDescription ?? "")
+                        Logger.info(error?.localizedDescription ?? "")
                     }
                 }
                 return
@@ -166,7 +166,7 @@ public extension PhotoUtils {
                 if isSuccess {
                     completion?(.success)
                 } else {
-                    Log.info(error?.localizedDescription ?? "")
+                    Logger.info(error?.localizedDescription ?? "")
                     completion?(.error)
                 }
             }

@@ -200,7 +200,7 @@ public extension UIApplication {
         productViewController.delegate = controller
         productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: appID]) { isOk, error in
             if !isOk {
-                Log.error(error?.localizedDescription ?? "")
+                Logger.error(error?.localizedDescription ?? "")
                 productViewController.dismiss(animated: true)
             }
         }
@@ -213,13 +213,13 @@ public extension UIApplication {
         let urlString = "https://itunes.apple.com/cn/app/id\(appID)?mt=12"
         guard let url = URL(string: urlString) else { return }
         guard UIApplication.shared.canOpenURL(url) else { return }
-        openURL(url) { $0 ? Log.info("打开应用商店评分页成功!") : Log.error("打开应用商店评分页失败!") }
+        openURL(url) { $0 ? Logger.info("打开应用商店评分页成功!") : Logger.error("打开应用商店评分页失败!") }
     }
 
     /// 打开`设置App`并跳转至当前App权限相关界面
     func openSettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        openURL(url) { $0 ? Log.info("打开设置App成功!") : Log.error("打开设置App失败!") }
+        openURL(url) { $0 ? Logger.info("打开设置App成功!") : Logger.error("打开设置App失败!") }
     }
 
     /// 让用户自己决定是否打开`设置App`并跳转至当前App权限相关界面
@@ -239,7 +239,7 @@ public extension UIApplication {
             .pd_title(title)
             .pd_message(message)
             .pd_addAction_(title: cancel, style: .cancel) { _ in
-                Log.info("取消!")
+                Logger.info("取消!")
             }
             .pd_addAction_(title: confirm, style: .default) { _ in
                 // 打开系统设置App
@@ -258,7 +258,7 @@ public extension UIApplication {
             let center = UNUserNotificationCenter.current()
             center.delegate = (delegate as! UNUserNotificationCenterDelegate)
             center.requestAuthorization(options: options) { (granted: Bool, error: Error?) in
-                Log.info("远程推送注册\(granted ? "成功" : "失败")!")
+                Logger.info("远程推送注册\(granted ? "成功" : "失败")!")
             }
             self.registerForRemoteNotifications()
         } else {

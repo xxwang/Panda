@@ -84,7 +84,7 @@ public extension VideoUtils {
                 imageRef = try generator.copyCGImage(at: time, actualTime: &actualTime)
                 if let cgimage = imageRef { image = UIImage(cgImage: cgimage) }
             } catch {
-                Log.info("出现错误!\(error.localizedDescription)")
+                Logger.info("出现错误!\(error.localizedDescription)")
             }
 
             DispatchQueue.main.async {
@@ -107,7 +107,7 @@ public extension VideoUtils {
                     PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
                 }) { success, error in
                     if let error {
-                        Log.info(error.localizedDescription)
+                        Logger.info(error.localizedDescription)
                     }
                     completed?(success)
                 }
@@ -133,7 +133,7 @@ public extension VideoUtils {
             case .failed:
                 let exportError = exportSession.error
                 if let exportError {
-                    Log.info("AVAssetExportSessionStatusFailed:\(exportError.localizedDescription)")
+                    Logger.info("AVAssetExportSessionStatusFailed:\(exportError.localizedDescription)")
                 }
             case .completed:
                 completed?(output)
@@ -172,10 +172,10 @@ public extension VideoUtils {
             }
             PHAssetResourceManager.default().writeData(for: resource, toFile: URL(fileURLWithPath: savePath), options: nil, completionHandler: { error in
                 if let error {
-                    Log.info("convert mp4 failed. \(error)")
+                    Logger.info("convert mp4 failed. \(error)")
                     completed?(nil)
                 } else {
-                    Log.info("convert mp4 success")
+                    Logger.info("convert mp4 success")
                     completed?(savePath)
                 }
             })

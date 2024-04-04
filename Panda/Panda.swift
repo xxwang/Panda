@@ -6,6 +6,6 @@ public class Panda {
 
 public extension Panda {
     static func sayHello() {
-        Log.info("Hello \(text)")
+        Logger.info("Hello \(text)")
     }
 }

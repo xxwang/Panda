@@ -14,7 +14,7 @@
 		169409FE2ABC738800356736 /* Emitterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409552ABC738800356736 /* Emitterable.swift */; };
 		169409FF2ABC738800356736 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409562ABC738800356736 /* NibLoadable.swift */; };
 		16940A002ABC738800356736 /* Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409572ABC738800356736 /* Defaultable.swift */; };
-		16940A012ABC738800356736 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409592ABC738800356736 /* Log.swift */; };
+		16940A012ABC738800356736 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409592ABC738800356736 /* Logger.swift */; };
 		16940A022ABC738800356736 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095A2ABC738800356736 /* Shared.swift */; };
 		16940A032ABC738800356736 /* Panda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095B2ABC738800356736 /* Panda.swift */; };
 		16940A042ABC738800356736 /* PlistUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095D2ABC738800356736 /* PlistUtils.swift */; };
@@ -242,7 +242,7 @@
 		169409552ABC738800356736 /* Emitterable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emitterable.swift; sourceTree = "<group>"; };
 		169409562ABC738800356736 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		169409572ABC738800356736 /* Defaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaultable.swift; sourceTree = "<group>"; };
-		169409592ABC738800356736 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		169409592ABC738800356736 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1694095A2ABC738800356736 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		1694095B2ABC738800356736 /* Panda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Panda.swift; sourceTree = "<group>"; };
 		1694095D2ABC738800356736 /* PlistUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistUtils.swift; sourceTree = "<group>"; };
@@ -477,7 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				1694095A2ABC738800356736 /* Shared.swift */,
-				169409592ABC738800356736 /* Log.swift */,
+				169409592ABC738800356736 /* Logger.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1225,7 +1225,7 @@
 				16940A6C2ABC738800356736 /* Date+.swift in Sources */,
 				169409FF2ABC738800356736 /* NibLoadable.swift in Sources */,
 				16940A0A2ABC738800356736 /* PathUtils.swift in Sources */,
-				16940A012ABC738800356736 /* Log.swift in Sources */,
+				16940A012ABC738800356736 /* Logger.swift in Sources */,
 				16940A702ABC738800356736 /* SKNode+.swift in Sources */,
 				16940A5C2ABC738800356736 /* NSDecimalNumberHandler+.swift in Sources */,
 				16940A4D2ABC738800356736 /* SCNCapsule+.swift in Sources */,

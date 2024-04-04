@@ -137,24 +137,24 @@ public extension NSObject {
 
     /// 如果键不存在会调用这个方法
     private func hook_setValue(_ value: Any?, forUndefinedKey key: String) {
-        Log.warning("setValue(_:forUndefinedKey:), 未知键Key:\(key) 值:\(value ?? "")")
+        Logger.warning("setValue(_:forUndefinedKey:), 未知键Key:\(key) 值:\(value ?? "")")
     }
 
     /// 如果键不存在会调用这个方法
     private func hook_value(forUndefinedKey key: String) -> Any? {
-        Log.warning("value(forUndefinedKey:), 未知键:\(key)")
+        Logger.warning("value(forUndefinedKey:), 未知键:\(key)")
         return nil
     }
 
     /// 给一个非指针对象(如`NSInteger`)赋值 `nil`, 直接忽略
     private func hook_setNilValueForKey(_ key: String) {
-        Log.warning("setNilValueForKey(_:), 不能给非指针对象(如NSInteger)赋值 nil 键:\(key)")
+        Logger.warning("setNilValueForKey(_:), 不能给非指针对象(如NSInteger)赋值 nil 键:\(key)")
     }
 
     /// 用于替换`setValuesForKeys(_:)`
     private func hook_setValuesForKeys(_ keyedValues: [String: Any]) {
         for (key, value) in keyedValues {
-            Log.info("\(key) -- \(value)")
+            Logger.info("\(key) -- \(value)")
             if value is Int || value is CGFloat || value is Double {
                 setValue("\(value)", forKey: key)
             } else {
