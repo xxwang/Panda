@@ -9,17 +9,16 @@ import Panda
 import UIKit
 
 class PDTabBarButton: PDControl {
-
 //    lazy var imageView: UIImageView = {
 //        let imageView = UIImageView.default()
 //        return imageView
 //    }()
-//    
+//
 //    lazy var titleLabel: UILabel = {
 //        let label = UILabel.default()
 //        return label
 //    }()
-//    
+//
 //    init(title: String? = nil, image: UIImage, selectedImage: UIImage) {
 //        super.init(frame: .zero)
 //
@@ -33,7 +32,7 @@ class PDTabBarButton: PDControl {
 //    }
 }
 
-//extension PDTabBarButton {
+// extension PDTabBarButton {
 //    /// 设置资源
 //    private func prepareUI() {
 //        // 默认图片
@@ -68,9 +67,9 @@ class PDTabBarButton: PDControl {
 //            ], for: title.fullNSRange())
 //        setAttributedTitle(selectedTitleAttributedString, for: .selected)
 //    }
-//}
+// }
 
-//extension PDTabBarButton {
+// extension PDTabBarButton {
 //    override func layoutSubviews() {
 //        super.layoutSubviews()
 //
@@ -107,4 +106,4 @@ class PDTabBarButton: PDControl {
 //            titleLabel?.frame = CGRect(origin: CGPoint(x: titleX, y: titleY), size: titleSize)
 //        }
 //    }
-//}
+// }

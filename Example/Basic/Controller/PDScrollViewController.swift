@@ -7,9 +7,9 @@
 
 import UIKit
 
- class PDScrollViewController: PDViewController {
+class PDScrollViewController: PDViewController {
     /// 滚动视图
-     lazy var scrollView: UIScrollView = {
+    lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView.default()
             .pd_delegate(self)
             .pd_showsHorizontalScrollIndicator(false)
@@ -18,12 +18,12 @@ import UIKit
     }()
 
     /// 内容视图
-     lazy var contentView: UIView = {
+    lazy var contentView: UIView = {
         let view = UIView.default()
         return view
     }()
 
-    override  func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         // 添加到导航栏下面 确保导航栏阴影可以正常显示

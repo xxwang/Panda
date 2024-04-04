@@ -5,10 +5,10 @@
 //  Created by 奥尔良小短腿 on 2024/4/3.
 //
 
-import UIKit
 import Panda
+import UIKit
 
- class PDNavigationBar: UIImageView {
+class PDNavigationBar: UIImageView {
     // MARK: - 分割线
     private var separatorHeight: CGFloat = 0.5
     private var separatorColor = UIColor.black.alpha(0.05)
@@ -64,7 +64,7 @@ import Panda
 }
 
 extension PDNavigationBar {
-    override  func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         var navigationFullHeight: CGFloat = 0

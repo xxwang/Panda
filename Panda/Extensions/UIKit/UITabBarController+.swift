@@ -39,7 +39,6 @@ public extension UITabBarController {
 
 // MARK: - 链式语法
 public extension UITabBarController {
-    
     /// 设置`UITabBarController`代理
     /// - Parameter delegate: 代理
     /// - Returns: `Self`
@@ -48,7 +47,7 @@ public extension UITabBarController {
         self.delegate = delegate
         return self
     }
-    
+
     /// 设置`UITabBarController`子控制器
     /// - Parameter viewControllers: 子控制器
     /// - Returns: `Self`
@@ -68,8 +67,7 @@ public extension UITabBarController {
         self.setViewControllers(viewControllers, animated: animated)
         return self
     }
-    
-    
+
     /// 设置选中指定标签
     /// - Parameter index: 标签索引
     /// - Returns: `Self`

@@ -7,7 +7,7 @@
 
 import UIKit
 
- class PDNavigationController: UINavigationController {
+class PDNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 设置交互手势识别器代理
@@ -24,33 +24,33 @@ import UIKit
 // MARK: - 控制器设置
 extension PDNavigationController {
     // MARK: - 屏幕旋转
-    override  var shouldAutorotate: Bool {
+    override var shouldAutorotate: Bool {
         self.topViewController?.shouldAutorotate ?? false
     }
 
-    override  var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         self.topViewController?.supportedInterfaceOrientations ?? .portrait
     }
 
     // MARK: - 状态栏
-    override  var childForStatusBarStyle: UIViewController? {
+    override var childForStatusBarStyle: UIViewController? {
         self.topViewController
     }
 
-    override  var childForStatusBarHidden: UIViewController? {
+    override var childForStatusBarHidden: UIViewController? {
         self.topViewController
     }
 
-    override  var prefersStatusBarHidden: Bool {
+    override var prefersStatusBarHidden: Bool {
         self.topViewController?.prefersStatusBarHidden ?? false
     }
 
-    override  var preferredStatusBarStyle: UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         self.topViewController?.preferredStatusBarStyle ?? .default
     }
 
     // MARK: - 子控制器隐藏tabBar
-    override  func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         // 设置导航条
         setupNavigationBar(viewController: viewController)
 
@@ -65,18 +65,17 @@ extension PDNavigationController {
 // MARK: - UINavigationControllerDelegate
 extension PDNavigationController: UINavigationControllerDelegate {
     /// 栈顶控制器即将显示
-     func navigationController(_: UINavigationController, willShow viewController: UIViewController, animated _: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         setupNavigationBar(viewController: viewController)
     }
-
     /// 栈顶控制器已经显示
-     func navigationController(_: UINavigationController, didShow viewController: UIViewController, animated _: Bool) {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         setupNavigationBar(viewController: viewController)
     }
 
     /// 设置导航条
     /// - Parameter viewController: 导航中当前栈顶子控制器
-    @objc  func setupNavigationBar(viewController: UIViewController) {
+    @objc func setupNavigationBar(viewController: UIViewController) {
         // 设置导航返回按钮
         if let viewController = viewController as? PDViewController {
             viewController.navigationBar.hiddenBackButton(children.count <= 1)

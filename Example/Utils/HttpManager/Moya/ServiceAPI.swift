@@ -5,16 +5,16 @@
 //  Created by 王斌 on 2022/1/5.
 //
 
-//import Foundation
-//import Moya
+// import Foundation
+// import Moya
 //
-//enum ServiceAPI {
+// enum ServiceAPI {
 //    case register(_ params: [String: Any]) // 注册
 //    case login(_ params: [String: Any]) // 登录
 //    case loveLibTCNDownload(_ params: [String: Any]) // 爱库文件下载
-//}
+// }
 //
-//extension ServiceAPI: TargetType {
+// extension ServiceAPI: TargetType {
 //    var baseURL: URL {
 //        return URL(string: AppContext.serverAddr)!
 //    }
@@ -64,11 +64,11 @@
 //            return .downloadDestination(downloadDestination)
 //        }
 //    }
-//}
+// }
 //
 //// MARK: - 下载目录
 //
-//extension ServiceAPI {
+// extension ServiceAPI {
 //    // 定义一个DownloadDestination
 //    private var downloadDestination: DownloadDestination {
 //        return { _, _ in (self.localLocation, .removePreviousFile) }
@@ -89,4 +89,4 @@
 //    private var downloadDirURL: URL {
 //        return "/loveLib".cz.urlByDocument
 //    }
-//}
+// }

@@ -9,20 +9,20 @@ import Panda
 import UIKit
 
 class PDTabBarController: UITabBarController {
-    
     private var viewModel: PDTabBarViewModel!
 
     lazy var customTabBar: PDTabBar = {
         let tabBar = PDTabBar(
             vm: self.viewModel,
-            frame: CGRect(x: 0, y: 0, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight))
+            frame: CGRect(x: 0, y: 0, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
+        )
         tabBar.customDelegate = self
         tabBar.delegate = self
         return tabBar
     }()
 
     init(vm: PDTabBarViewModel) {
-        viewModel = vm
+        self.viewModel = vm
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -65,7 +65,7 @@ extension PDTabBarController {
         self.customTabBar.relayout()
 
         // 绘制tabBar背景图层
-        self.customTabBar.drawMaskLayer()
+        self.customTabBar.drawMask()
     }
 }
 
@@ -73,32 +73,32 @@ extension PDTabBarController {
 extension PDTabBarController {
     /// 是否接收屏幕旋转
     override var shouldAutorotate: Bool {
-        self.selectedViewController?.shouldAutorotate ?? false
+        return self.selectedViewController?.shouldAutorotate ?? false
     }
-    
+
     /// 屏幕支持的方向
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        self.selectedViewController?.supportedInterfaceOrientations ?? .portrait
+        return self.selectedViewController?.supportedInterfaceOrientations ?? .portrait
     }
 
     /// 子控制器状态栏样式
     override var childForStatusBarStyle: UIViewController? {
-        self.selectedViewController
+        return self.selectedViewController
     }
 
     /// 子控制器状态栏是否隐藏
     override var childForStatusBarHidden: UIViewController? {
-        self.selectedViewController
+        return self.selectedViewController
     }
 
     /// 是否隐藏状态栏
     override var prefersStatusBarHidden: Bool {
-        self.selectedViewController?.prefersStatusBarHidden ?? false
+        return self.selectedViewController?.prefersStatusBarHidden ?? false
     }
 
     /// 状态栏样式
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        selectedViewController?.preferredStatusBarStyle ?? .default
+        return self.selectedViewController?.preferredStatusBarStyle ?? .default
     }
 
     /// 安全区域发生变化
@@ -133,38 +133,24 @@ extension PDTabBarController: UITabBarControllerDelegate {
 
     /// 屏幕支持的方向
     func tabBarControllerSupportedInterfaceOrientations(_ tabBarController: UITabBarController) -> UIInterfaceOrientationMask {
-        selectedViewController?.supportedInterfaceOrientations ?? .portrait
+        return selectedViewController?.supportedInterfaceOrientations ?? .portrait
     }
 }
 
 // MARK: - UITabBarDelegate
 extension PDTabBarController {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-    }
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {}
 
-    override func tabBar(_ tabBar: UITabBar, willBeginCustomizing items: [UITabBarItem]) {
-        
-    }
-    
-    override func tabBar(_ tabBar: UITabBar, didBeginCustomizing items: [UITabBarItem]){
-        
-    }
-    
-    override func tabBar(_ tabBar: UITabBar, willEndCustomizing items: [UITabBarItem], changed: Bool)  {
-        
-    }
-    
-    override func tabBar(_ tabBar: UITabBar, didEndCustomizing items: [UITabBarItem], changed: Bool) {
-        
-    }
+    override func tabBar(_ tabBar: UITabBar, willBeginCustomizing items: [UITabBarItem]) {}
+
+    override func tabBar(_ tabBar: UITabBar, didBeginCustomizing items: [UITabBarItem]) {}
+
+    override func tabBar(_ tabBar: UITabBar, willEndCustomizing items: [UITabBarItem], changed: Bool) {}
+
+    override func tabBar(_ tabBar: UITabBar, didEndCustomizing items: [UITabBarItem], changed: Bool) {}
 }
 
 // MARK: - PDTabBarDelegate
 extension PDTabBarController: PDTabBarDelegate {
-    
-    func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {
-        
-    }
-    
+    func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {}
 }

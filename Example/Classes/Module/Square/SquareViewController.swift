@@ -8,11 +8,9 @@
 import UIKit
 
 class SquareViewController: PDViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationBar.title("广场")
     }
-
 }

@@ -8,11 +8,9 @@
 import UIKit
 
 class MineViewController: PDViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationBar.title("我的")
     }
-
 }

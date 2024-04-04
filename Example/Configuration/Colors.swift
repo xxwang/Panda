@@ -7,11 +7,6 @@
 
 import UIKit
 
-class Colors {
+class Colors {}
 
-
-}
-
-extension UIColor {
-    
-}
+extension UIColor {}

@@ -5,10 +5,10 @@
 //  Created by 奥尔良小短腿 on 2024/3/25.
 //
 
-//import Foundation
-//import ObjectMapper
+// import Foundation
+// import ObjectMapper
 //
-//class DataModel<T: Mappable>: Mappable {
+// class DataModel<T: Mappable>: Mappable {
 //    /// 状态码
 //    var code: Int = 0
 //    /// 提示消息
@@ -23,6 +23,6 @@
 //        message <- map["message"]
 //        data <- map["data"]
 //    }
-//}
+// }
 //
-//class DataModel {}
+// class DataModel {}

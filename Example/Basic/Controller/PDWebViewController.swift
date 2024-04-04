@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
- class PDWebViewController: PDViewController {
+class PDWebViewController: PDViewController {
     /// webView配置文件
     lazy var configuration: WKWebViewConfiguration = {
         let configuration = WKWebView.defaultConfiguration

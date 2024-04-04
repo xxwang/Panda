@@ -7,7 +7,7 @@
 
 import UIKit
 
- class PDButton: UIButton {
+class PDButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

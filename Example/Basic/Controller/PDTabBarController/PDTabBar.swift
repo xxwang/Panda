@@ -5,8 +5,8 @@
 //  Created by 奥尔良小短腿 on 2024/4/4.
 //
 
-import UIKit
 import Panda
+import UIKit
 
 protocol PDTabBarDelegate: NSObjectProtocol {
     func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect)
@@ -24,7 +24,7 @@ class PDTabBar: UITabBar {
         let image = UIImage(systemName: "plus")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         // 按钮大小
         let btnSize = 56.toCGSize()
-        
+
         // 创建中间按钮
         let button = UIButton.default()
             .pd_frame(CGRect(origin: .zero, size: btnSize))
@@ -193,7 +193,7 @@ extension PDTabBar {
 // MARK: - 绘制背景图层
 extension PDTabBar {
     /// 绘制背景图层
-    func drawMaskLayer() {
+    func drawMask() {
         // 防止重复添加
         if self.maskLayer?.superlayer != nil {
             self.maskLayer?.removeFromSuperlayer()
@@ -202,7 +202,7 @@ extension PDTabBar {
         }
 
         // 背景图层绘制路径
-        let shapePath = drawMaskLayerPath().cgPath
+        let shapePath = self.drawMaskPath().cgPath
 
         // 形状图层
         self.maskLayer = CAShapeLayer.default()
@@ -220,7 +220,7 @@ extension PDTabBar {
     }
 
     /// 背景图层路径
-    func drawMaskLayerPath() -> UIBezierPath {
+    func drawMaskPath() -> UIBezierPath {
         // 最大绘制区域
         let drawRect = CGRect(x: 0, y: 0, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
 

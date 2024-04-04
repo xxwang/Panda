@@ -8,8 +8,8 @@
 import UIKit
 import AVFoundation
 import Panda
-//import IQKeyboardManagerSwift
 import SnapKit
+// import IQKeyboardManagerSwift
 
 class AppContext {
     /// 是否允许旋转
@@ -74,9 +74,7 @@ extension AppContext {
 }
 
 extension AppContext {
-    
     func tabBarController() -> PDTabBarController {
-        
         let vm = PDTabBarViewModel()
         vm.normalColor = .black
         vm.selectedColor = .red

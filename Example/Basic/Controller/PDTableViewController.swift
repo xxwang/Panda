@@ -5,10 +5,10 @@
 //  Created by 奥尔良小短腿 on 2024/4/2.
 //
 
-import UIKit
 import Panda
+import UIKit
 
- class PDTableViewController: PDViewController {
+class PDTableViewController: PDViewController {
     /// 列表视图
     lazy var tableView: UITableView = {
         let tableView = UITableView.default()

@@ -8,11 +8,9 @@
 import UIKit
 
 class HomeViewController: PDViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationBar.title("首页")
     }
-    
 }

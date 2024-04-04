@@ -5,10 +5,10 @@
 //  Created by 奥尔良小短腿 on 2024/4/3.
 //
 
-import UIKit
 import Panda
+import UIKit
 
- class PDTitleBar: UIImageView {
+class PDTitleBar: UIImageView {
     /// 返回按钮点击回调
     private var backCallback: (() -> Void)?
 

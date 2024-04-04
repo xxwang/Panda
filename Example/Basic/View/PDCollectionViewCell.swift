@@ -7,7 +7,7 @@
 
 import UIKit
 
- class PDCollectionViewCell: UICollectionViewCell {
+class PDCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 

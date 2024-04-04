@@ -7,10 +7,6 @@
 
 import UIKit
 
-class Fonts {
+class Fonts {}
 
-}
-
-extension UIFont {
-    
-}
+extension UIFont {}

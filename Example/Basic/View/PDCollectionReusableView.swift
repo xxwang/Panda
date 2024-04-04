@@ -7,7 +7,7 @@
 
 import UIKit
 
- class PDCollectionReusableView: UICollectionReusableView {
+class PDCollectionReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

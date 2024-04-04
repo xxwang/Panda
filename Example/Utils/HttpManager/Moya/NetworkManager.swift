@@ -5,13 +5,13 @@
 //  Created by 奥尔良小短腿 on 2024/3/25.
 //
 
-//import Foundation
-//import Moya
-//import ObjectMapper
+// import Foundation
+// import Moya
+// import ObjectMapper
 //
 //// MARK: - NetworkResultCallback
 //
-//enum NetworkResultCallback {
+// enum NetworkResultCallback {
 //    /// 请求成功的回调
 ////    typealias Success = (_ result: Any) -> Void
 //    typealias Success = (_ result: DataModel) -> Void
@@ -21,11 +21,11 @@
 //    typealias Progress = (_ progress: Double) -> Void
 //    /// 下载完成回调
 //    typealias Download = (_ filePath: String) -> Void
-//}
+// }
 //
 //// MARK: - NetworkManager
 //
-//struct NetworkManager {
+// struct NetworkManager {
 //    // MARK: Lifecycle
 //
 //    private init() {}
@@ -34,11 +34,11 @@
 //
 //    /// 单例 Service Provider
 //    static let provider = MoyaProvider<ServiceAPI>(plugins: [NetworkHandler()])
-//}
+// }
 //
 //// MARK: - 数据请求
 //
-//extension NetworkManager {
+// extension NetworkManager {
 //    /// 发送网络请求
 //    /// - Parameters:
 //    ///   - target: api
@@ -57,11 +57,11 @@
 //                do {
 ////                    let response = try moyaResponse.mapJSON(failsOnEmptyData: true)
 ////                    successBlock(response)
-//                    
+//
 //                    let response = try moyaResponse.mapJSON(failsOnEmptyData: true)
 //                    let dataModel = Mapper<DataModel<DataType>>().map(JSONString: response)
 //                    successBlock(response)
-//                    
+//
 //                } catch {
 //                    failureBlock(MoyaError.jsonMapping(moyaResponse))
 //                }
@@ -70,11 +70,11 @@
 //            }
 //        }
 //    }
-//}
+// }
 //
 //// MARK: - 下载请求
 //
-//extension NetworkManager {
+// extension NetworkManager {
 //    /// 发送下载请求
 //    /// - Parameters:
 //    ///   - target: api
@@ -98,4 +98,4 @@
 //            }
 //        }
 //    }
-//}
+// }

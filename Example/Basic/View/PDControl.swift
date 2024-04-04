@@ -7,7 +7,7 @@
 
 import UIKit
 
- class PDControl: UIControl {
+class PDControl: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
