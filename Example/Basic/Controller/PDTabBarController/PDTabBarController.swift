@@ -5,39 +5,45 @@
 //  Created by 奥尔良小短腿 on 2024/4/4.
 //
 
+import Panda
 import UIKit
 
 class PDTabBarController: UITabBarController {
-
-    private var viewModel: PDTabBarViewModel!
     
-    lazy var tabBar: PDTabBar = {
-        let tabBar = PDTabBar(frame: CGRect(
-            x: 0, y: 0,
-            width: SizeUtils.screenWidth,
-            height: SizeUtils.tabBarFullHeight
-        ))
+    private var viewModel: PDTabBarViewModel!
+
+    lazy var customTabBar: PDTabBar = {
+        let tabBar = PDTabBar(
+            vm: self.viewModel,
+            frame: CGRect(x: 0, y: 0, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight))
+        tabBar.customDelegate = self
+        tabBar.delegate = self
         return tabBar
     }()
-    
+
     init(vm: PDTabBarViewModel) {
         viewModel = vm
         super.init(nibName: nil, bundle: nil)
     }
-    
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // 设置自定义tabBar
-        self.setValue(tabBar, forKey: "tabBar")
-        
+        self.setValue(customTabBar, forKey: "tabBar")
+
         self.pd_overrideUserInterfaceStyle(self.selectedViewController?.overrideUserInterfaceStyle ?? .light)
             .pd_backgroundColor(.white)
             .pd_delegate(self)
-            .pd_viewControllers(viewModel.controllers())
+            .pd_viewControllers(viewModel.viewControllers())
             .pd_selectedIndex(self.viewModel.selectedIndex)
-        
-        self.tabBar
+
+        self.customTabBar
             .pd_isTranslucent(false)
             .pd_backgroundColor(with: .gray.alpha(0.3))
             .pd_shadowImage(UIImage(with: .clear))
@@ -49,17 +55,17 @@ class PDTabBarController: UITabBarController {
 }
 
 extension PDTabBarController {
-    /// 更新WBTabBar
-    func updateWBTabBar() {
+    /// 更新PDTabBar
+    func updateTabBar() {
         // 更新布局
         let top = SizeUtils.screenHeight - SizeUtils.tabBarFullHeight
-        WBTabBar.frame = CGRect(x: 0, y: top, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
+        self.customTabBar.frame = CGRect(x: 0, y: top, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
 
         // 重新布局子控件
-        WBTabBar.relayout()
+        self.customTabBar.relayout()
 
         // 绘制tabBar背景图层
-        WBTabBar.drawMaskLayer()
+        self.customTabBar.drawMaskLayer()
     }
 }
 
@@ -69,7 +75,7 @@ extension PDTabBarController {
     override var shouldAutorotate: Bool {
         self.selectedViewController?.shouldAutorotate ?? false
     }
-
+    
     /// 屏幕支持的方向
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         self.selectedViewController?.supportedInterfaceOrientations ?? .portrait
@@ -132,12 +138,33 @@ extension PDTabBarController: UITabBarControllerDelegate {
 }
 
 // MARK: - UITabBarDelegate
-extension PDTabBarController: UITabBarDelegate {
-    
-}
+extension PDTabBarController {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+    }
 
+    override func tabBar(_ tabBar: UITabBar, willBeginCustomizing items: [UITabBarItem]) {
+        
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didBeginCustomizing items: [UITabBarItem]){
+        
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, willEndCustomizing items: [UITabBarItem], changed: Bool)  {
+        
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didEndCustomizing items: [UITabBarItem], changed: Bool) {
+        
+    }
+}
 
 // MARK: - PDTabBarDelegate
 extension PDTabBarController: PDTabBarDelegate {
+    
+    func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect) {
+        
+    }
     
 }

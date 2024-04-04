@@ -47,7 +47,7 @@ import Panda
 
         if !self.titleLabel.isHidden {
             let size = self.titleLabel.strSize()
-            self.titleLabel.pd_frame(CGRect(center: self.center, size: size))
+            self.titleLabel.pd_frame(CGRect(center: self.pd_middle, size: size))
         }
 
         if !backButton.isHidden {

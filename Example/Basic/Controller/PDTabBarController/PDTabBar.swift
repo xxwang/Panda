@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Panda
 
-protocol PDTabBarDelegate {
-    func middleButtonClick(tabBar: PDTabBar, button: sender, rect: middleButton.frame)
+protocol PDTabBarDelegate: NSObjectProtocol {
+    func middleButtonClick(tabBar: PDTabBar, button: UIButton, rect: CGRect)
 }
 
 class PDTabBar: UITabBar {
-    var tabBarDelegate: PDTabBarDelegate?
+    weak var customDelegate: (any PDTabBarDelegate)?
     weak var viewModel: PDTabBarViewModel!
 
     var maskLayer: CAShapeLayer?
@@ -23,7 +24,7 @@ class PDTabBar: UITabBar {
         let image = UIImage(systemName: "plus")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         // 按钮大小
         let btnSize = 56.toCGSize()
-
+        
         // 创建中间按钮
         let button = UIButton.default()
             .pd_frame(CGRect(origin: .zero, size: btnSize))
@@ -40,23 +41,23 @@ class PDTabBar: UITabBar {
         super.init(frame: frame)
         self.viewModel = vm
 
-        pd_isTranslucent(true) // 设置背景不半透明
+        self.pd_isTranslucent(true) // 设置背景不半透明
             .pd_backgroundColor(with: .clear) // 背景颜色
             .pd_shadowImage(UIImage(with: .clear)) // 隐藏阴影线
 
         // 中间按钮
         middleButton.add2(self)
 
-        // 设置自定义按钮
-        for data in viewModel.datas {
-            let button = createWBTabBarButton(with: data)
-            // 添加到数组
-            viewModel.buttons.append(button)
-
-            if viewModel.selectedIndex == button.data.index {
-                button.isSelected = true
-            }
-        }
+//        // 设置自定义按钮
+//        for data in viewModel {
+//            let button = createWBTabBarButton(with: data)
+//            // 添加到数组
+//            viewModel.buttons.append(button)
+//
+//            if viewModel.selectedIndex == button.data.index {
+//                button.isSelected = true
+//            }
+//        }
     }
 
     @available(*, unavailable)
@@ -66,84 +67,78 @@ class PDTabBar: UITabBar {
 }
 
 extension PDTabBar {
-    func pd_delegate(_ delegate: PDTabBarDelegate) -> Self {
-        return self
-    }
-}
-
-extension PDTabBar {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        // 按钮宽度
-        let btnWidth = bounds.width / (viewModel.datas.count + 1).toCGFloat()
-        // 按钮高度
-        let btnHeight = SizeUtils.tabBarHeight
-
-        // 选项按钮
-        for (index, button) in viewModel.buttons.enumerated() {
-            // 按钮X坐标
-            let btnX = btnWidth * index.toCGFloat() + (index >= 2 ? btnWidth : 0)
-            // 更新frame
-            button.frame = CGRect(x: btnX, y: 0, width: btnWidth, height: btnHeight)
-            // 更新按钮的布局
-            button.relayout()
-        }
-
-        // 中间按钮
-        let middleBtnSize = middleButton.pd_size
-        middleButton.frame = CGRect(
-            origin: CGPoint(
-                x: (SizeUtils.screenWidth - middleBtnSize.width) / 2,
-                y: -(middleBtnSize.height / 2)
-            ),
-            size: middleBtnSize
-        )
-        // 调整中间按钮响应范围
-        middleButton.expandSize(size: (btnWidth - middleBtnSize.width) / 2)
+//        // 按钮宽度
+//        let btnWidth = bounds.width / (viewModel.datas.count + 1).toCGFloat()
+//        // 按钮高度
+//        let btnHeight = SizeUtils.tabBarHeight
+//
+//        // 选项按钮
+//        for (index, button) in viewModel.buttons.enumerated() {
+//            // 按钮X坐标
+//            let btnX = btnWidth * index.toCGFloat() + (index >= 2 ? btnWidth : 0)
+//            // 更新frame
+//            button.frame = CGRect(x: btnX, y: 0, width: btnWidth, height: btnHeight)
+//            // 更新按钮的布局
+//            button.relayout()
+//        }
+//
+//        // 中间按钮
+//        let middleBtnSize = middleButton.pd_size
+//        middleButton.frame = CGRect(
+//            origin: CGPoint(
+//                x: (SizeUtils.screenWidth - middleBtnSize.width) / 2,
+//                y: -(middleBtnSize.height / 2)
+//            ),
+//            size: middleBtnSize
+//        )
+//        // 调整中间按钮响应范围
+//        middleButton.expandSize(size: (btnWidth - middleBtnSize.width) / 2)
     }
 }
 
 extension PDTabBar {
-    /// 根据模型创建按钮
-    func createWBTabBarButton(with data: WBTabBarData) -> WBTabBarButton {
-        // 按钮宽度
-        let btnWidth = pd_width / (viewModel.datas.count + 1).toCGFloat()
-        // 按钮高度
-        let btnHeight = SizeUtils.tabBarHeight
-        // 按钮X坐标
-        let btnX = btnWidth * data.index.toCGFloat() + (data.index >= 2 ? btnWidth : 0)
-
-        // 创建按钮
-        let button = WBTabBarButton(with: data, WBTabBar: self)
-        button.frame = CGRect(x: btnX, y: 0, width: btnWidth, height: btnHeight)
-        button.addTarget(self, action: #selector(WBTabBarButtonClick(sender:)), for: .touchUpInside)
-
-        // 添加到TabBar
-        button.add2(self)
-
-        return button
-    }
-
-    /// 按钮点击
-    @objc func WBTabBarButtonClick(sender: WBTabBarButton) {
-        if sender.isSelected {
-            return
-        }
-        // 震动
-        AudioUtils.shared.shake(.middle)
-
-        // 取消之前选中按钮的选中状态
-        let previousButton = viewModel.buttons[viewModel.selectedIndex]
-        previousButton.isSelected = false
-
-        // 为被点击的按钮添加状态
-        viewModel.selectedIndex = sender.data.index
-        sender.isSelected = true
-
-        // 回调点击
-        viewModel.tabBarDelegate?.tabBarButtonClick(tabBar: self, unselectedButton: previousButton, selectedButton: sender)
-    }
+//    /// 根据模型创建按钮
+//    func createWBTabBarButton(with data: WBTabBarData) -> PDTabBarButton {
+//        // 按钮宽度
+//        let btnWidth = pd_width / (viewModel.datas.count + 1).toCGFloat()
+//        // 按钮高度
+//        let btnHeight = SizeUtils.tabBarHeight
+//        // 按钮X坐标
+//        let btnX = btnWidth * data.index.toCGFloat() + (data.index >= 2 ? btnWidth : 0)
+//
+//        // 创建按钮
+//        let button = PDTabBarButton(with: data, WBTabBar: self)
+//        button.frame = CGRect(x: btnX, y: 0, width: btnWidth, height: btnHeight)
+//        button.addTarget(self, action: #selector(WBTabBarButtonClick(sender:)), for: .touchUpInside)
+//
+//        // 添加到TabBar
+//        button.add2(self)
+//
+//        return button
+//    }
+//
+//    /// 按钮点击
+//    @objc func WBTabBarButtonClick(sender: PDTabBarButton) {
+//        if sender.isSelected {
+//            return
+//        }
+//        // 震动
+//        AudioUtils.shared.shake(.middle)
+//
+//        // 取消之前选中按钮的选中状态
+//        let previousButton = viewModel.buttons[viewModel.selectedIndex]
+//        previousButton.isSelected = false
+//
+//        // 为被点击的按钮添加状态
+//        viewModel.selectedIndex = sender.data.index
+//        sender.isSelected = true
+//
+//        // 回调点击
+//        viewModel.tabBarDelegate?.tabBarButtonClick(tabBar: self, unselectedButton: previousButton, selectedButton: sender)
+//    }
 }
 
 // MARK: - 中心按钮
@@ -151,30 +146,30 @@ extension PDTabBar {
     /// 中心按钮点击
     /// - Parameter sender: 被点击的按钮
     @objc private func middleButtonClick(_ sender: UIButton) {
-        self.tabBarDelegate?.middleButtonClick(tabBar: self, button: sender, rect: middleButton.frame)
+        self.customDelegate?.middleButtonClick(tabBar: self, button: sender, rect: middleButton.frame)
     }
 }
 
 // MARK: - 移除系统自带UITabBarButton
 extension PDTabBar {
-    override var items: [UITabBarItem]? {
-        didSet {
-            clearTabBarItems()
-        }
-    }
-
-    override func setItems(_ items: [UITabBarItem]?, animated: Bool) {
-        clearTabBarItems()
-    }
-
-    /// 移除系统自带UITabBarButton
-    private func clearTabBarItems() {
-        subviews.filter {
-            String(describing: type(of: $0)) == "UITabBarButton"
-        }.forEach {
-            $0.removeFromSuperview()
-        }
-    }
+//    override var items: [UITabBarItem]? {
+//        didSet {
+//            clearTabBarItems()
+//        }
+//    }
+//
+//    override func setItems(_ items: [UITabBarItem]?, animated: Bool) {
+//        clearTabBarItems()
+//    }
+//
+//    /// 移除系统自带UITabBarButton
+//    private func clearTabBarItems() {
+//        subviews.filter {
+//            String(describing: type(of: $0)) == "UITabBarButton"
+//        }.forEach {
+//            $0.removeFromSuperview()
+//        }
+//    }
 }
 
 // MARK: - 重写系统方法
@@ -203,7 +198,7 @@ extension PDTabBar {
         if self.maskLayer?.superlayer != nil {
             self.maskLayer?.removeFromSuperlayer()
             self.maskLayer = nil
-            layer.mask = nil
+            self.layer.mask = nil
         }
 
         // 背景图层绘制路径
@@ -212,11 +207,11 @@ extension PDTabBar {
         // 形状图层
         self.maskLayer = CAShapeLayer.default()
             .pd_path(shapePath)
-            .pd_fillColor(viewModel.maskLayerFillColor)
-            .pd_shadowColor(viewModel.maskLayerShadowColor)
-            .pd_shadowRadius(viewModel.maskLayerShadowRadius)
-            .pd_shadowOpacity(viewModel.maskLayerShadowOpacity)
-            .pd_shadowOffset(CGSize(width: 0, height: -2))
+            .pd_fillColor(viewModel.maskFillColor)
+            .pd_shadowColor(viewModel.maskShadowColor)
+            .pd_shadowRadius(viewModel.maskShadowRadius)
+            .pd_shadowOpacity(viewModel.maskShadowOpacity)
+            .pd_shadowOffset(viewModel.maskShadowOffset)
             .pd_shouldRasterize(true)
             .pd_rasterizationScale(UIScreen.main.scale)
 

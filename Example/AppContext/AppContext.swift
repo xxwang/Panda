@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 import Panda
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 import SnapKit
 
 class AppContext {
@@ -78,6 +78,12 @@ extension AppContext {
     func tabBarController() -> PDTabBarController {
         
         let vm = PDTabBarViewModel()
+        vm.normalColor = .black
+        vm.selectedColor = .red
+        vm.titleFont = UIFont.pingFang(.semibold, size: 13)
+        vm.titles = ["首页", "日历", "广场", "我的"]
+        vm.imageNames = ["tab_home", "tab_calendar", "tab_square", "tab_mine"]
+        vm.controllers = [HomeViewController(), CalendarViewController(), SquareViewController(), MineViewController()]
         let tabBarVC = PDTabBarController(vm: vm)
         return tabBarVC
     }

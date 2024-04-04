@@ -43,7 +43,7 @@ public extension UITabBarItem {
     /// - Returns:`Self`
     @discardableResult
     func pd_selectedImage(_ image: UIImage) -> Self {
-        selectedImage = image
+        self.selectedImage = image
         return self
     }
 
@@ -52,7 +52,7 @@ public extension UITabBarItem {
     /// - Returns:`Self`
     @discardableResult
     func pd_badgeColor(_ color: UIColor) -> Self {
-        badgeColor = color
+        self.badgeColor = color
         return self
     }
 
@@ -61,7 +61,7 @@ public extension UITabBarItem {
     /// - Returns:`Self`
     @discardableResult
     func pd_badgeValue(_ value: String) -> Self {
-        badgeValue = value
+        self.badgeValue = value
         return self
     }
 }
