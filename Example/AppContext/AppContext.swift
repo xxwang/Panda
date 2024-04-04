@@ -72,3 +72,13 @@ extension AppContext {
 //        keyboardManager.toolbarManageBehaviour = .byPosition
     }
 }
+
+extension AppContext {
+    
+    func tabBarController() -> PDTabBarController {
+        
+        let vm = PDTabBarViewModel()
+        let tabBarVC = PDTabBarController(vm: vm)
+        return tabBarVC
+    }
+}

@@ -188,6 +188,11 @@
 		16A3EC662BBE5DCC00025F53 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC5D2BBE5DCC00025F53 /* NetworkHandler.swift */; };
 		16A3EC672BBE5DCC00025F53 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC5E2BBE5DCC00025F53 /* NetworkManager.swift */; };
 		16A3EC682BBE5DCC00025F53 /* ServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC5F2BBE5DCC00025F53 /* ServiceAPI.swift */; };
+		16A3EC6A2BBE612800025F53 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC692BBE612800025F53 /* Colors.swift */; };
+		16A3EC6C2BBE613200025F53 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC6B2BBE613200025F53 /* Fonts.swift */; };
+		16A3EC6F2BBE61A600025F53 /* PDTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC6E2BBE61A600025F53 /* PDTabBarController.swift */; };
+		16A3EC712BBE61C500025F53 /* PDTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC702BBE61C500025F53 /* PDTabBar.swift */; };
+		16A3EC732BBE628400025F53 /* PDTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC722BBE628400025F53 /* PDTabBarViewModel.swift */; };
 		1835A3BD2BB54B5C004A53B0 /* UIPickerView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */; };
 		62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6032A2A653D00043401 /* AppDelegate.swift */; };
 		62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6052A2A653D00043401 /* SceneDelegate.swift */; };
@@ -401,6 +406,11 @@
 		16A3EC5D2BBE5DCC00025F53 /* NetworkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		16A3EC5E2BBE5DCC00025F53 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		16A3EC5F2BBE5DCC00025F53 /* ServiceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAPI.swift; sourceTree = "<group>"; };
+		16A3EC692BBE612800025F53 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		16A3EC6B2BBE613200025F53 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		16A3EC6E2BBE61A600025F53 /* PDTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTabBarController.swift; sourceTree = "<group>"; };
+		16A3EC702BBE61C500025F53 /* PDTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTabBar.swift; sourceTree = "<group>"; };
+		16A3EC722BBE628400025F53 /* PDTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTabBarViewModel.swift; sourceTree = "<group>"; };
 		1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPickerView+.swift"; sourceTree = "<group>"; };
 		62E3E5F62A2A652700043401 /* Panda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Panda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E3E6012A2A653D00043401 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -756,6 +766,7 @@
 		16A3EC2E2BBDC8F500025F53 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				16A3EC6D2BBE617F00025F53 /* PDTabBarController */,
 				16A3EC282BBDC8F500025F53 /* PDCollectionViewController.swift */,
 				16A3EC292BBDC8F500025F53 /* PDNavigationController.swift */,
 				16A3EC2A2BBDC8F500025F53 /* PDScrollViewController.swift */,
@@ -864,6 +875,16 @@
 			path = HttpManager;
 			sourceTree = "<group>";
 		};
+		16A3EC6D2BBE617F00025F53 /* PDTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				16A3EC6E2BBE61A600025F53 /* PDTabBarController.swift */,
+				16A3EC722BBE628400025F53 /* PDTabBarViewModel.swift */,
+				16A3EC702BBE61C500025F53 /* PDTabBar.swift */,
+			);
+			path = PDTabBarController;
+			sourceTree = "<group>";
+		};
 		62E3E5D12A2A650400043401 = {
 			isa = PBXGroup;
 			children = (
@@ -925,6 +946,8 @@
 			isa = PBXGroup;
 			children = (
 				62E3E6112A2A653D00043401 /* Info.plist */,
+				16A3EC692BBE612800025F53 /* Colors.swift */,
+				16A3EC6B2BBE613200025F53 /* Fonts.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -1207,20 +1230,24 @@
 				16A3EC552BBE5D7E00025F53 /* UICollectionView+.swift in Sources */,
 				16A3EC3F2BBDC8F500025F53 /* PDCollectionViewController.swift in Sources */,
 				16A3EC4E2BBDC8F500025F53 /* PDView.swift in Sources */,
+				16A3EC6A2BBE612800025F53 /* Colors.swift in Sources */,
 				16A3EC4F2BBDC8F500025F53 /* PDViewModel.swift in Sources */,
 				62E3E6082A2A653D00043401 /* ViewController.swift in Sources */,
 				62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */,
 				62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */,
+				16A3EC732BBE628400025F53 /* PDTabBarViewModel.swift in Sources */,
 				16A3EC432BBDC8F500025F53 /* PDViewController.swift in Sources */,
 				16A3EC682BBE5DCC00025F53 /* ServiceAPI.swift in Sources */,
 				16A3EC402BBDC8F500025F53 /* PDNavigationController.swift in Sources */,
 				16A3EC632BBE5DCC00025F53 /* HttpManager.swift in Sources */,
 				16A3EC512BBDC9CE00025F53 /* AppContext.swift in Sources */,
 				16A3EC422BBDC8F500025F53 /* PDTableViewController.swift in Sources */,
+				16A3EC6C2BBE613200025F53 /* Fonts.swift in Sources */,
 				16A3EC672BBE5DCC00025F53 /* NetworkManager.swift in Sources */,
 				16A3EC452BBDC8F500025F53 /* PDModel.swift in Sources */,
 				16A3EC462BBDC8F500025F53 /* PDNavigationBar.swift in Sources */,
 				16A3EC622BBE5DCC00025F53 /* HttpDownloadManager.swift in Sources */,
+				16A3EC712BBE61C500025F53 /* PDTabBar.swift in Sources */,
 				16A3EC4C2BBDC8F500025F53 /* PDControl.swift in Sources */,
 				16A3EC492BBDC8F500025F53 /* PDButton.swift in Sources */,
 				16A3EC642BBE5DCC00025F53 /* DataModel.swift in Sources */,
@@ -1232,6 +1259,7 @@
 				16A3EC442BBDC8F500025F53 /* PDWebViewController.swift in Sources */,
 				16A3EC562BBE5D7E00025F53 /* UITableView+.swift in Sources */,
 				16A3EC662BBE5DCC00025F53 /* NetworkHandler.swift in Sources */,
+				16A3EC6F2BBE61A600025F53 /* PDTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1480,7 +1508,6 @@
 				INFOPLIST_FILE = Example/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1508,7 +1535,6 @@
 				INFOPLIST_FILE = Example/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
