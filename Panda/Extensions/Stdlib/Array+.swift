@@ -87,6 +87,33 @@ public extension Array {
         }
         return result
     }
+    
+    /// 按指定大小分割数组为二级数组
+    /// - Parameter subSize: 子数组大小
+    /// - Returns: 二维数组
+    func split(subSize: Int) -> [[Element]] {
+        if self.count <= subSize {
+            return [self]
+        }
+        
+        let subCount = self.count % subSize == 0 ? (self.count / subSize) : (self.count / subSize + 1)
+        var superArray: [[Element]] = []
+        
+        for i in 0..<subCount {
+            var subArr: [Element] = []
+            for j in 0..<subSize {
+                let index = i * subSize + j
+                if index < self.count {
+                    let ele = self[index]
+                    subArr.append(ele)
+                } else {
+                    break
+                }
+            }
+            superArray.append(subArr)
+        }
+        return superArray
+    }
 
     /// 插入元素到数组的头部
     ///
