@@ -101,15 +101,26 @@ public extension VideoUtils {
     ///   - url:视频保存的地址
     ///   - completed:完成回调
     func saveVideo(with videoUrl: URL, completed: ((Bool) -> Void)?) {
-        AuthorizationUtils.authorizePhotoWith { isOK in
-            if isOK {
-                PHPhotoLibrary.shared().performChanges({
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
-                }) { success, error in
-                    if let error {
-                        Logger.info(error.localizedDescription)
+        if AuthorizationRequester.shared.photoLibraryStatus == .authorized {
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
+            }) { success, error in
+                if let error {
+                    Logger.info(error.localizedDescription)
+                }
+                completed?(success)
+            }
+        } else if AuthorizationRequester.shared.photoLibraryStatus == .notDetermined {
+            AuthorizationRequester.shared.requestPhotoLibrary { granted in
+                if granted {
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoUrl)
+                    }) { success, error in
+                        if let error {
+                            Logger.info(error.localizedDescription)
+                        }
+                        completed?(success)
                     }
-                    completed?(success)
                 }
             }
         }

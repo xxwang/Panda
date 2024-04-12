@@ -8,26 +8,6 @@
 import Foundation
 
 public class Logger {
-    fileprivate enum Level: String {
-        case debug = "[debug]"
-        case info = "[info]"
-        case warning = "[warning]"
-        case error = "[error]"
-        case success = "[success]"
-
-        var icon: String {
-            switch self {
-            case .debug: return "👻"
-            case .info: return "🌸"
-            case .warning: return "⚠️"
-            case .error: return "❌"
-            case .success: return "✅"
-            }
-        }
-    }
-}
-
-public extension Logger {
     static func debug(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .debug, message: message, file: file, line: line, function: function)
     }
@@ -49,8 +29,26 @@ public extension Logger {
     }
 }
 
-extension Logger {
-    fileprivate static func log(level: Level, message: Any..., file: String, line: Int, function: String) {
+private extension Logger {
+    enum Level: String {
+        case success = "[成功]"
+        case error = "[错误]"
+        case warning = "[警告]"
+        case debug = "[调试]"
+        case info = "[信息]"
+
+        var icon: String {
+            switch self {
+            case .success: return "✅"
+            case .error: return "❌"
+            case .warning: return "⚠️"
+            case .debug: return "👻"
+            case .info: return "🌸"
+            }
+        }
+    }
+
+    static func log(level: Level, message: Any..., file: String, line: Int, function: String) {
         let dateStr = Date.default().toString(with: "HH:mm:ss.SSS", isGMT: false)
         let fileName = file.toNSString().lastPathComponent.removingSuffix(".swift")
         let content = message.map { "\($0)" }.joined(separator: "")

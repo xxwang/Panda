@@ -1921,6 +1921,26 @@ public extension UIView {
 
 // MARK: - 链式语法
 public extension UIView {
+    /// 添加`self`到`superview`
+    /// - Parameter superview: 父视图
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_add2(_ superview: UIView?) -> Self {
+        if let superview {
+            superview.addSubview(self)
+        }
+        return self
+    }
+
+    /// 添加子控件数组到当前视图上
+    /// - Parameter subviews: 子控件数组
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_addSubviews(_ subviews: [UIView]) -> Self {
+        addSubviews(subviews)
+        return self
+    }
+
     /// 设置 tag 值
     /// - Parameter tag:值
     /// - Returns:`Self`
@@ -1972,24 +1992,6 @@ public extension UIView {
     @discardableResult
     @objc func pd_backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.backgroundColor = backgroundColor
-        return self
-    }
-
-    /// 被添加到某个视图上
-    /// - Parameter superView:父视图
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_add2(_ superView: UIView) -> Self {
-        superView.addSubview(self)
-        return self
-    }
-
-    /// 添加子控件数组到当前视图上
-    /// - Parameter subviews: 子控件数组
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_addSubviews(_ subviews: [UIView]) -> Self {
-        addSubviews(subviews)
         return self
     }
 
@@ -2118,7 +2120,7 @@ public extension UIView {
     ///   - selector:方法
     /// - Returns:`Self`
     @discardableResult
-    func addTapAction(_ target: Any, _ selector: Selector) -> Self {
+    func pd_addTapGesture(_ target: Any, _ selector: Selector) -> Self {
         isUserInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: target, action: selector))
         return self

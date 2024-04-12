@@ -5,11 +5,11 @@
 //  Created by 奥尔良小短腿 on 2024/4/4.
 //
 
-import UIKit
 import AVFoundation
+import IQKeyboardManagerSwift
 import Panda
 import SnapKit
- import IQKeyboardManagerSwift
+import UIKit
 
 class AppContext {
     /// 是否允许旋转
@@ -70,8 +70,6 @@ extension AppContext {
         keyboardManager.toolbarConfiguration.manageBehavior = .byPosition
         // 将右边Done改成完成
         keyboardManager.toolbarConfiguration.doneBarButtonConfiguration = IQBarButtonItemConfiguration(title: "完成")
-        
-        
     }
 }
 

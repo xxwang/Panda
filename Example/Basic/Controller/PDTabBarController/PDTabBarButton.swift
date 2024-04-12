@@ -9,7 +9,6 @@ import Panda
 import UIKit
 
 class PDTabBarButton: PDControl {
-    
     // 图标
     lazy var imageView: UIImageView = {
         let imageView = UIImageView.default()
@@ -30,7 +29,7 @@ class PDTabBarButton: PDControl {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.imageView.add2(self)
         self.titleLabel.add2(self)
     }
@@ -41,7 +40,7 @@ extension PDTabBarButton {
         self.imageView.isHighlighted = true
         self.titleLabel.isHighlighted = true
     }
-    
+
     func deSelect() {
         self.imageView.isHighlighted = false
         self.titleLabel.isHighlighted = false
@@ -49,14 +48,13 @@ extension PDTabBarButton {
 }
 
 extension PDTabBarButton {
-
     @discardableResult
     func pd_image(_ image: UIImage?) -> Self {
         self.imageView.image = image
         self.relayout()
         return self
     }
-    
+
     @discardableResult
     func pd_selectedImage(_ image: UIImage?) -> Self {
         self.imageView.highlightedImage = image
@@ -70,21 +68,21 @@ extension PDTabBarButton {
         self.relayout()
         return self
     }
-    
+
     @discardableResult
     func pd_titleColor(_ color: UIColor?) -> Self {
         self.titleLabel.textColor = color
         self.relayout()
         return self
     }
-    
+
     @discardableResult
     func pd_highlightedTextColor(_ color: UIColor?) -> Self {
         self.titleLabel.highlightedTextColor = color
         self.relayout()
         return self
     }
-    
+
     @discardableResult
     func pd_font(_ font: UIFont) -> Self {
         self.titleLabel.pd_font(font)
@@ -93,14 +91,13 @@ extension PDTabBarButton {
     }
 }
 
-
- extension PDTabBarButton {
+extension PDTabBarButton {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        guard let normalImage = self.imageView.image else {return}
-        guard let _ = self.titleLabel.text else {return}
-        
+        guard let normalImage = self.imageView.image else { return }
+        guard let _ = self.titleLabel.text else { return }
+
         let imageSize = normalImage.size
         let titleSize = self.titleLabel.strSize()
 
@@ -132,4 +129,4 @@ extension PDTabBarButton {
             self.titleLabel.frame = CGRect(origin: CGPoint(x: titleX, y: titleY), size: titleSize)
         }
     }
- }
+}

@@ -34,10 +34,10 @@ class PDTabBar: UITabBar {
             .pd_cornerRadius(btnSize.width * 0.5)
             .pd_masksToBounds(true)
             .pd_action(self, action: #selector(middleButtonClick(_:)))
-        
+
         let buttonWidth = SizeUtils.screenWidth / (viewModel.titles.count + 1).toCGFloat()
         button.expandSize(size: (buttonWidth - btnSize.width) / 2)
-        
+
         return button
     }()
 
@@ -62,18 +62,18 @@ class PDTabBar: UITabBar {
 extension PDTabBar {
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         // 多一个中间按钮
         let buttonCount = self.viewModel.titles.count + 1
         let buttonWidth = self.pd_width / buttonCount.toCGFloat()
         let buttonHeight = SizeUtils.tabBarHeight
-        
+
         let titleButtons = self.titleButtons()
         for (i, button) in titleButtons.enumerated() {
             let buttonX = buttonWidth * i.toCGFloat() + (i >= 2 ? buttonWidth : 0)
             button.pd_frame(CGRect(x: buttonX, y: 0, width: buttonWidth, height: buttonHeight))
         }
-        
+
         // 中间按钮
         let middleBtnSize = self.middleButton.pd_size
         self.middleButton.frame = CGRect(
@@ -87,16 +87,15 @@ extension PDTabBar {
 }
 
 extension PDTabBar {
-
     func createButtons() {
-        for i in 0..<self.viewModel.titles.count {
+        for i in 0 ..< self.viewModel.titles.count {
             let title = self.viewModel.titles[i]
             let imageName = self.viewModel.imageNames[i]
             let selectedImageName = "\(imageName)_selected"
-            
+
             let image = imageName.toImage()
             let selectedImage = selectedImageName.toImage()
-            
+
             let button = PDTabBarButton()
                 .pd_tag(i)
                 .pd_image(image!)
@@ -106,28 +105,28 @@ extension PDTabBar {
                 .pd_highlightedTextColor(viewModel.selectedColor)
                 .pd_font(viewModel.titleFont ?? .system(size: 12))
             button.addTarget(self, action: #selector(buttonClick(sender:)), for: .touchUpInside)
-            
+
             viewModel.selectedIndex == i ? button.select() : button.deSelect()
-            
+
             button.add2(self)
         }
     }
-    
+
     @objc func buttonClick(sender: PDTabBarButton) {
         let titleButtons = self.titleButtons()
         // 取消之前选中按钮的状态
         let preSelectButton = titleButtons[viewModel.selectedIndex]
         preSelectButton.deSelect()
-        
+
         // 选中点击的按钮
         sender.select()
         // 记录点击按钮的索引
         viewModel.selectedIndex = sender.tag
-        
+
         // 回调点击索引到控制器
         self.customDelegate?.tabBarButtonClick(self, clicked: sender.tag)
     }
-    
+
     // 获取所有标签按钮
     func titleButtons() -> [PDTabBarButton] {
         let titleButtons = self.subviews.filter { subview in

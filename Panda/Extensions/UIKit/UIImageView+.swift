@@ -124,7 +124,7 @@ public extension UIImageView {
         self.image = image
         return self
     }
-    
+
     /// 设置高亮状态的图片
     /// - Parameter image:图片
     /// - Returns:`Self`

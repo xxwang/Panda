@@ -319,7 +319,7 @@ public extension UILabel {
         textColor = color
         return self
     }
-    
+
     /// 设置文本高亮颜色
     /// - Parameter color:颜色
     /// - Returns:`Self`
@@ -328,8 +328,7 @@ public extension UILabel {
         self.highlightedTextColor = color
         return self
     }
-    
-    
+
     /// 设置字体的大小
     /// - Parameter font:字体的大小
     /// - Returns:`Self`

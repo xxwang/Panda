@@ -65,7 +65,7 @@ extension PDTabBarViewModel {
                     .foregroundColor: self.normalColor!,
                     .font: self.titleFont!,
                 ], for: .normal)
-                
+
                 tabBarItem.setTitleTextAttributes([
                     .foregroundColor: self.selectedColor!,
                     .font: self.titleFont!,
