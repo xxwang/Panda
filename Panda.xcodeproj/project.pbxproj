@@ -192,23 +192,21 @@
 		16A3EC6F2BBE61A600025F53 /* PDTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC6E2BBE61A600025F53 /* PDTabBarController.swift */; };
 		16A3EC712BBE61C500025F53 /* PDTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC702BBE61C500025F53 /* PDTabBar.swift */; };
 		16A3EC732BBE628400025F53 /* PDTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC722BBE628400025F53 /* PDTabBarViewModel.swift */; };
-		16A3EC762BBE745700025F53 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC752BBE745700025F53 /* SnapKit */; };
-		16A3EC782BBE745700025F53 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC772BBE745700025F53 /* SnapKit-Dynamic */; };
-		16A3EC7B2BBE74A500025F53 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC7A2BBE74A500025F53 /* ReactiveMoya */; };
 		16A3EC802BBE758E00025F53 /* PDTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC7F2BBE758E00025F53 /* PDTabBarButton.swift */; };
 		16A3EC872BBE84A600025F53 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC862BBE84A600025F53 /* HomeViewController.swift */; };
 		16A3EC892BBE84C800025F53 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC882BBE84C800025F53 /* CalendarViewController.swift */; };
 		16A3EC8B2BBE84D100025F53 /* SquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC8A2BBE84D100025F53 /* SquareViewController.swift */; };
 		16A3EC8D2BBE84DB00025F53 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC8C2BBE84DB00025F53 /* MineViewController.swift */; };
-		16A3EC902BBEAE4E00025F53 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16A3EC8F2BBEAE4E00025F53 /* IQKeyboardManagerSwift */; };
 		16D659302BC982DE00E5CE0E /* AuthorizationRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6592F2BC982DE00E5CE0E /* AuthorizationRequester.swift */; };
 		181DF2072BD1039D0043AD53 /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DF2062BD1039D0043AD53 /* Requester.swift */; };
+		181DF3302BD11F750043AD53 /* DownloadResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DF32F2BD11F750043AD53 /* DownloadResult.swift */; };
 		1835A3BD2BB54B5C004A53B0 /* UIPickerView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */; };
 		62E3E6042A2A653D00043401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6032A2A653D00043401 /* AppDelegate.swift */; };
 		62E3E6062A2A653D00043401 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E3E6052A2A653D00043401 /* SceneDelegate.swift */; };
 		62E3E60B2A2A653D00043401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E3E6092A2A653D00043401 /* Main.storyboard */; };
 		62E3E60D2A2A653D00043401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62E3E60C2A2A653D00043401 /* Assets.xcassets */; };
 		62E3E6102A2A653D00043401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62E3E60E2A2A653D00043401 /* LaunchScreen.storyboard */; };
+		AA168586FF9882C6787B5973 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB3C45433E9E73B3FC37915 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -426,6 +424,7 @@
 		16A3EC8C2BBE84DB00025F53 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		16D6592F2BC982DE00E5CE0E /* AuthorizationRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRequester.swift; sourceTree = "<group>"; };
 		181DF2062BD1039D0043AD53 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
+		181DF32F2BD11F750043AD53 /* DownloadResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadResult.swift; sourceTree = "<group>"; };
 		1835A3BC2BB54B5B004A53B0 /* UIPickerView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPickerView+.swift"; sourceTree = "<group>"; };
 		62E3E5F62A2A652700043401 /* Panda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Panda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E3E6012A2A653D00043401 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -438,6 +437,9 @@
 		62E3E6152A2A656500043401 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		62E3E6162A2A658000043401 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		62E3E6172A2A658000043401 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A3B90914BB2F88D19A6C43EA /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
+		ACB3C45433E9E73B3FC37915 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB3E8F1A78FF6D78776B51D /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,11 +454,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16A3EC902BBEAE4E00025F53 /* IQKeyboardManagerSwift in Frameworks */,
 				16940A952ABC761700356736 /* Panda.framework in Frameworks */,
-				16A3EC7B2BBE74A500025F53 /* ReactiveMoya in Frameworks */,
-				16A3EC762BBE745700025F53 /* SnapKit in Frameworks */,
-				16A3EC782BBE745700025F53 /* SnapKit-Dynamic in Frameworks */,
+				AA168586FF9882C6787B5973 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,7 +879,7 @@
 				16A3EC5D2BBE5DCC00025F53 /* NetworkHandler.swift */,
 				16A3EC5F2BBE5DCC00025F53 /* ServiceAPI.swift */,
 				16A3EC5C2BBE5DCC00025F53 /* JSONArrayEncoding.swift */,
-				16A3EC5B2BBE5DCC00025F53 /* CustomResponse.swift */,
+				181DF32E2BD11F4C0043AD53 /* DataModel */,
 			);
 			path = Moya;
 			sourceTree = "<group>";
@@ -956,6 +955,23 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		181DF32E2BD11F4C0043AD53 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				16A3EC5B2BBE5DCC00025F53 /* CustomResponse.swift */,
+				181DF32F2BD11F750043AD53 /* DownloadResult.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		571CD7DA5E9FC2CF9AC5AD71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ACB3C45433E9E73B3FC37915 /* Pods_Example.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		62E3E5D12A2A650400043401 = {
 			isa = PBXGroup;
 			children = (
@@ -965,6 +981,8 @@
 				62E3E6022A2A653D00043401 /* Example */,
 				62E3E5F72A2A652700043401 /* Panda */,
 				62E3E5DB2A2A650400043401 /* Products */,
+				A881CD167BD98EA3E02FBCE7 /* Pods */,
+				571CD7DA5E9FC2CF9AC5AD71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1023,6 +1041,15 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		A881CD167BD98EA3E02FBCE7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECB3E8F1A78FF6D78776B51D /* Pods-Example.debug.xcconfig */,
+				A3B90914BB2F88D19A6C43EA /* Pods-Example.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1058,10 +1085,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62E3E6122A2A653D00043401 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				FF6715719F4809962E82410E /* [CP] Check Pods Manifest.lock */,
 				62E3E5FD2A2A653D00043401 /* Sources */,
 				62E3E5FE2A2A653D00043401 /* Frameworks */,
 				62E3E5FF2A2A653D00043401 /* Resources */,
 				16940A992ABC761700356736 /* Embed Frameworks */,
+				AE9C84FEF8BAF94E8D3919D2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1069,12 +1098,6 @@
 				16940A982ABC761700356736 /* PBXTargetDependency */,
 			);
 			name = Example;
-			packageProductDependencies = (
-				16A3EC752BBE745700025F53 /* SnapKit */,
-				16A3EC772BBE745700025F53 /* SnapKit-Dynamic */,
-				16A3EC7A2BBE74A500025F53 /* ReactiveMoya */,
-				16A3EC8F2BBEAE4E00025F53 /* IQKeyboardManagerSwift */,
-			);
 			productName = Example;
 			productReference = 62E3E6012A2A653D00043401 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -1107,12 +1130,6 @@
 				Base,
 			);
 			mainGroup = 62E3E5D12A2A650400043401;
-			packageReferences = (
-				16A3EC742BBE745700025F53 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				16A3EC792BBE74A500025F53 /* XCRemoteSwiftPackageReference "Moya" */,
-				16A3EC8E2BBEAE4E00025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				181DF2082BD106630043AD53 /* XCRemoteSwiftPackageReference "ObjectMapper" */,
-			);
 			productRefGroup = 62E3E5DB2A2A650400043401 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1142,6 +1159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AE9C84FEF8BAF94E8D3919D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF6715719F4809962E82410E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		62E3E5F22A2A652700043401 /* Sources */ = {
@@ -1330,6 +1389,7 @@
 				16A3EC8D2BBE84DB00025F53 /* MineViewController.swift in Sources */,
 				16A3EC422BBDC8F500025F53 /* PDTableViewController.swift in Sources */,
 				16A3EC6C2BBE613200025F53 /* Fonts.swift in Sources */,
+				181DF3302BD11F750043AD53 /* DownloadResult.swift in Sources */,
 				16A3EC672BBE5DCC00025F53 /* NetworkManager.swift in Sources */,
 				16A3EC452BBDC8F500025F53 /* PDModel.swift in Sources */,
 				16A3EC462BBDC8F500025F53 /* PDNavigationBar.swift in Sources */,
@@ -1586,6 +1646,7 @@
 		};
 		62E3E6132A2A653D00043401 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECB3E8F1A78FF6D78776B51D /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1613,6 +1674,7 @@
 		};
 		62E3E6142A2A653D00043401 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3B90914BB2F88D19A6C43EA /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1669,64 +1731,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		16A3EC742BBE745700025F53 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
-			};
-		};
-		16A3EC792BBE74A500025F53 /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
-		16A3EC8E2BBEAE4E00025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.2;
-			};
-		};
-		181DF2082BD106630043AD53 /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		16A3EC752BBE745700025F53 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 16A3EC742BBE745700025F53 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		16A3EC772BBE745700025F53 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 16A3EC742BBE745700025F53 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
-		16A3EC7A2BBE74A500025F53 /* ReactiveMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 16A3EC792BBE74A500025F53 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = ReactiveMoya;
-		};
-		16A3EC8F2BBEAE4E00025F53 /* IQKeyboardManagerSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 16A3EC8E2BBEAE4E00025F53 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
-			productName = IQKeyboardManagerSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 62E3E5D22A2A650400043401 /* Project object */;
 }

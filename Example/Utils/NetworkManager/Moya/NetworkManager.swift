@@ -10,8 +10,9 @@
 // MARK: - NetworkManager
 
  struct NetworkManager {
-    
+     
     private init() {}
+     
  }
 
 extension NetworkManager {

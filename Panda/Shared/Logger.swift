@@ -8,23 +8,23 @@
 import Foundation
 
 public class Logger {
-    static func debug(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    public static func debug(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .debug, message: message, file: file, line: line, function: function)
     }
 
-    static func info(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    public static func info(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .info, message: message, file: file, line: line, function: function)
     }
 
-    static func warning(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    public static func warning(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .warning, message: message, file: file, line: line, function: function)
     }
 
-    static func error(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    public static func error(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .error, message: message, file: file, line: line, function: function)
     }
 
-    static func success(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    public static func success(_ message: Any..., file: String = #file, line: Int = #line, function: String = #function) {
         log(level: .success, message: message, file: file, line: line, function: function)
     }
 }

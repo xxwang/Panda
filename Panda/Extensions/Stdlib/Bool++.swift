@@ -7,17 +7,20 @@
 
 import Foundation
 
+extension Bool: Pandaable {}
+
 // MARK: - 类型转换
-public extension Bool {
+public extension PandaEx where Base == Bool {
+    
     /// `Bool`转`Int`
     /// - Returns: `Int`
     func toInt() -> Int {
-        return self ? 1 : 0
+        return self.base ? 1 : 0
     }
-
+    
     /// `Bool`转`String`
     /// - Returns: `String`
     func toString() -> String {
-        return self ? "true" : "false"
+        return self.base ? "true" : "false"
     }
 }

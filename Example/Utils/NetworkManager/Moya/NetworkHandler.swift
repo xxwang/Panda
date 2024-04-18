@@ -5,18 +5,18 @@
 //  Created by 王斌 on 2022/1/6.
 //
 
-// import Alamofire
-// import CZExtension
-// import Moya
-// import UIKit
-//
-//// MARK: - Moya插件
-//
-// class NetworkHandler: PluginType {
-//    init() {}
-//
-//    /// 发送请求之前
-//    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
+ import Alamofire
+ import Panda
+ import Moya
+ import UIKit
+
+// MARK: - Moya插件
+
+ class NetworkHandler: PluginType {
+    init() {}
+
+    /// 发送请求之前
+    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
 //        if target.method == .get {
 //            if case Moya.Task.requestParameters(parameters: let params, encoding: _) = target.task {
 //                console.log("""
@@ -44,26 +44,26 @@
 //            =================================== 请求参数结束 ===================================
 //            """)
 //        }
-//
-//        return request
-//    }
-//
-//    /// 开始发起请求
-//    func willSend(_: RequestType, target _: TargetType) {
-////        if !common.isShowHUD {
-////            common.showWaiting()
-////        }
-//    }
-//
-//    /// 进度
-//    func process(_ result: Result<Moya.Response, MoyaError>, target _: TargetType) -> Result<Moya.Response, MoyaError> {
-//        return result
-//    }
-//
-//    // 收到响应
-//    func didReceive(_ result: Result<Response, MoyaError>, target _: TargetType) {
-//        // common.dismissHUD()
-//
+
+        return request
+    }
+
+    /// 开始发起请求
+    func willSend(_: RequestType, target _: TargetType) {
+//        if !common.isShowHUD {
+//            common.showWaiting()
+//        }
+    }
+
+    /// 进度
+    func process(_ result: Result<Moya.Response, MoyaError>, target _: TargetType) -> Result<Moya.Response, MoyaError> {
+        return result
+    }
+
+    // 收到响应
+    func didReceive(_ result: Result<Response, MoyaError>, target _: TargetType) {
+        // common.dismissHUD()
+
 //        if case let .failure(err) = result { // 失败
 //            console.log("""
 //
@@ -95,7 +95,7 @@
 //        guard let code = response["code"] as? String else { // 根据状态码处理相关逻辑
 //            return
 //        }
-//
-//        // TODO: - 登录失效或者在其它设置登录(做退出处理)
-//    }
-// }
+
+        // TODO: - 登录失效或者在其它设置登录(做退出处理)
+    }
+ }

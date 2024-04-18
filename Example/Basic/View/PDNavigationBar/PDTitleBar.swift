@@ -15,7 +15,7 @@ class PDTitleBar: UIImageView {
     /// 返回按钮
     lazy var backButton: UIButton = {
         let button = UIButton.default()
-            .addTapAction(self, #selector(backButtonClick(sender:)))
+            .pd_action(self, action: #selector(backButtonClick(sender:)))
         return button
     }()
 

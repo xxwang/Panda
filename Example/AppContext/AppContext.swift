@@ -58,18 +58,18 @@ extension AppContext {
 
     /// 设置键盘管理
     @MainActor private func setupIQKeyboardManager() {
-        // 初始化键盘管理
-        let keyboardManager = IQKeyboardManager.shared
-        // 控制整个功能是否启用.
-        keyboardManager.enable = true
-        // 控制点击背景是否收起键盘
-        keyboardManager.resignOnTouchOutside = true
-        // 控制是否显示键盘上的工具条
-        keyboardManager.enableAutoToolbar = true
-        // 最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键,自动跳转到下一个输入框,最后一个输入框点击完成,自动收起键盘
-        keyboardManager.toolbarConfiguration.manageBehavior = .byPosition
-        // 将右边Done改成完成
-        keyboardManager.toolbarConfiguration.doneBarButtonConfiguration = IQBarButtonItemConfiguration(title: "完成")
+//        // 初始化键盘管理
+//        let keyboardManager = IQKeyboardManager.shared
+//        // 控制整个功能是否启用.
+//        keyboardManager.enable = true
+//        // 控制点击背景是否收起键盘
+//        keyboardManager.resignOnTouchOutside = true
+//        // 控制是否显示键盘上的工具条
+//        keyboardManager.enableAutoToolbar = true
+//        // 最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键,自动跳转到下一个输入框,最后一个输入框点击完成,自动收起键盘
+//        keyboardManager.toolbarConfiguration.manageBehavior = .byPosition
+//        // 将右边Done改成完成
+//        keyboardManager.toolbarConfiguration.doneBarButtonConfiguration = IQBarButtonItemConfiguration(title: "完成")
     }
 }
 

@@ -7,23 +7,22 @@
 
 import Foundation
 
+extension Character: Pandaable {}
+
 // MARK: - 类型转换
-public extension Character {
-    /// 从`Character`转换成`Int`
-    /// - Returns: `Int`
-    func toInt() -> Int {
-        return self.toString().toInt()
-    }
+public extension PandaEx where Base == Character {
 
     /// 从`Character`转换成`String`
     /// - Returns: `String`
     func toString() -> String {
-        return String(self)
+        return String(self.base)
     }
+    
 }
 
 // MARK: - 静态方法
-public extension Character {
+public extension PandaEx where Base == Character {
+
     /// 随机产生一个字符`(a-z A-Z 0-9)`
     /// - Returns: 随机`Character`
     static func random() -> Character {
