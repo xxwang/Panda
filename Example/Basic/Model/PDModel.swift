@@ -6,5 +6,12 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class PDModel: NSObject {}
+class PDModel: Mappable {
+    init() {}
+
+    required init?(map: Map) {}
+
+    func mapping(map: Map) {}
+}
