@@ -25,10 +25,10 @@ PODS:
 
 DEPENDENCIES:
   - CryptoSwift
-  - IQKeyboardManagerSwift (~> 6.5.7)
+  - IQKeyboardManagerSwift
   - KeychainAccess
-  - Kingfisher (~> 7.0)
-  - MBProgressHUD (~> 1.2.0)
+  - Kingfisher
+  - MBProgressHUD
   - Moya
   - ObjectMapper
   - RxCocoa
@@ -69,6 +69,6 @@ SPEC CHECKSUMS:
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
 
-PODFILE CHECKSUM: c516b2c5f9815f8ed2498235e0120d871fd1aca3
+PODFILE CHECKSUM: e29b77e2c562b8b0923817548628c82ca105eb95
 
 COCOAPODS: 1.15.2

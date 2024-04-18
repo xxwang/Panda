@@ -11,9 +11,9 @@ target 'Example' do
   pod 'KeychainAccess'
   pod 'CryptoSwift'
   pod 'SnapKit'
-  pod 'IQKeyboardManagerSwift', '~> 6.5.7'
-  pod 'MBProgressHUD', '~> 1.2.0'
-  pod 'Kingfisher', '~> 7.0'
+  pod 'IQKeyboardManagerSwift'
+  pod 'MBProgressHUD'
+  pod 'Kingfisher'
 
 
 end

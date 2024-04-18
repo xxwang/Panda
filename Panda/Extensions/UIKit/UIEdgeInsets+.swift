@@ -37,43 +37,6 @@ public extension UIEdgeInsets {
     }
 }
 
-// MARK: - 运算符
-public extension UIEdgeInsets {
-    /// 比较两个`UIEdgeInsets`是否相等
-    /// - Returns:是否相等
-    static func == (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> Bool {
-        lhs.top == rhs.top &&
-            lhs.left == rhs.left &&
-            lhs.bottom == rhs.bottom &&
-            lhs.right == rhs.right
-    }
-
-    /// 根据两个`UIEdgeInsets`的和来创建一个新的`UIEdgeInsets`
-    ///
-    /// - Parameters:
-    ///   - lhs:左侧`UIEdgeInsets`
-    ///   - rhs:右侧`UIEdgeInsets`
-    /// - Returns:新的`UIEdgeInsets`
-    static func + (_ lhs: UIEdgeInsets, _ rhs: UIEdgeInsets) -> UIEdgeInsets {
-        UIEdgeInsets(top: lhs.top + rhs.top,
-                     left: lhs.left + rhs.left,
-                     bottom: lhs.bottom + rhs.bottom,
-                     right: lhs.right + rhs.right)
-    }
-
-    /// 把右侧的`UIEdgeInsets`添加到左侧的`UIEdgeInsets`
-    ///
-    /// - Parameters:
-    ///   - lhs:左侧`UIEdgeInsets`
-    ///   - rhs:右侧`UIEdgeInsets`
-    static func += (_ lhs: inout UIEdgeInsets, _ rhs: UIEdgeInsets) {
-        lhs.top += rhs.top
-        lhs.left += rhs.left
-        lhs.bottom += rhs.bottom
-        lhs.right += rhs.right
-    }
-}
-
 // MARK: - Defaultable
 public extension UIEdgeInsets {
     typealias Associatedtype = UIEdgeInsets
@@ -143,5 +106,42 @@ public extension UIEdgeInsets {
     @discardableResult
     func pd_insetBy(vertical: CGFloat) -> Self {
         UIEdgeInsets(top: top + vertical / 2, left: left, bottom: bottom + vertical / 2, right: right)
+    }
+}
+
+// MARK: - 运算符重载
+public extension UIEdgeInsets {
+    /// 比较两个`UIEdgeInsets`是否相等
+    /// - Returns:是否相等
+    static func == (lhs: UIEdgeInsets, rhs: UIEdgeInsets) -> Bool {
+        lhs.top == rhs.top &&
+            lhs.left == rhs.left &&
+            lhs.bottom == rhs.bottom &&
+            lhs.right == rhs.right
+    }
+
+    /// 根据两个`UIEdgeInsets`的和来创建一个新的`UIEdgeInsets`
+    ///
+    /// - Parameters:
+    ///   - lhs:左侧`UIEdgeInsets`
+    ///   - rhs:右侧`UIEdgeInsets`
+    /// - Returns:新的`UIEdgeInsets`
+    static func + (_ lhs: UIEdgeInsets, _ rhs: UIEdgeInsets) -> UIEdgeInsets {
+        UIEdgeInsets(top: lhs.top + rhs.top,
+                     left: lhs.left + rhs.left,
+                     bottom: lhs.bottom + rhs.bottom,
+                     right: lhs.right + rhs.right)
+    }
+
+    /// 把右侧的`UIEdgeInsets`添加到左侧的`UIEdgeInsets`
+    ///
+    /// - Parameters:
+    ///   - lhs:左侧`UIEdgeInsets`
+    ///   - rhs:右侧`UIEdgeInsets`
+    static func += (_ lhs: inout UIEdgeInsets, _ rhs: UIEdgeInsets) {
+        lhs.top += rhs.top
+        lhs.left += rhs.left
+        lhs.bottom += rhs.bottom
+        lhs.right += rhs.right
     }
 }

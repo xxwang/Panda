@@ -1,138 +1,152 @@
-//
-//  BinaryInteger+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
-
 import CoreGraphics
 import Foundation
 
-// MARK: - 属性
-public extension BinaryInteger {
-    /// 是否是奇数
-    var isOdd: Bool {
-        self % 2 != 0
-    }
-
-    /// 是否是偶数
-    var isEven: Bool {
-        self % 2 == 0
-    }
-}
-
 // MARK: - 类型转换
 public extension BinaryInteger {
-    /// 转换为`Int`
-    func toInt() -> Int {
-        toNSNumber().intValue
-    }
-
-    /// 转换为`Int64`
-    func toInt64() -> Int64 {
-        toNSNumber().int64Value
-    }
-
-    /// 转换为`UInt`
-    func toUInt() -> UInt {
-        toNSNumber().uintValue
-    }
-
-    /// 转换为`UInt64`
-    func toUInt64() -> UInt64 {
-        toNSNumber().uint64Value
-    }
-
-    /// 转换为`Float`
-    func toFloat() -> Float {
-        toNSNumber().floatValue
-    }
-
-    /// 转换为`Double`
-    func toDouble() -> Double {
-        toNSNumber().doubleValue
-    }
-
-    /// 转换为`CGFloat`
-    func toCGFloat() -> CGFloat {
-        toDouble()
-    }
-
     /// 转换为`NSNumber`
-    func toNSNumber() -> NSNumber {
-        NSNumber(value: Double(self))
+    /// - Returns: `NSNumber`
+    func pd_NSNumber() -> NSNumber {
+        return NSNumber(value: Double(self))
     }
 
     /// 转换为`NSDecimalNumber`
-    func toDecimalNumber() -> NSDecimalNumber {
-        NSDecimalNumber(value: Double(self))
+    /// - Returns: `NSDecimalNumber`
+    func pd_NSDecimalNumber() -> NSDecimalNumber {
+        return NSDecimalNumber(value: Double(self))
     }
 
     /// 转换为`Decimal`
-    func toDecimal() -> Decimal {
-        toDecimalNumber().decimalValue
+    /// - Returns: `Decimal`
+    func pd_Decimal() -> Decimal {
+        return self.pd_NSDecimalNumber().decimalValue
+    }
+    
+    /// 转换为`Int`
+    /// - Returns: `Int`
+    func pd_Int() -> Int {
+        return self.pd_NSNumber().intValue
+    }
+
+    /// 转换为`Int64`
+    /// - Returns: `Int64`
+    func pd_Int64() -> Int64 {
+        return self.pd_NSNumber().int64Value
+    }
+
+    /// 转换为`UInt`
+    /// - Returns: `UInt`
+    func pd_UInt() -> UInt {
+        return self.pd_NSNumber().uintValue
+    }
+
+    /// 转换为`UInt64`
+    /// - Returns: `UInt64`
+    func pd_UInt64() -> UInt64 {
+        return self.pd_NSNumber().uint64Value
+    }
+
+    /// 转换为`Float`
+    /// - Returns: `Float`
+    func pd_Float() -> Float {
+        return self.pd_NSNumber().floatValue
+    }
+
+    /// 转换为`Double`
+    /// - Returns: `Double`
+    func pd_Double() -> Double {
+        return self.pd_NSNumber().doubleValue
+    }
+
+    /// 转换为`CGFloat`
+    /// - Returns: `CGFloat`
+    func pd_CGFloat() -> CGFloat {
+        return self.pd_Double()
+    }
+    
+    /// 转换为`String`
+    /// - Returns: `String`
+    func pd_String() -> String {
+        return String(self)
     }
 
     /// 转换为`Character?`
-    func toCharacter() -> Character? {
-        Character(toString())
+    /// - Returns: `Character?`
+    func pd_Character() -> Character? {
+        return Character(self.pd_String())
     }
 
-    /// 从`整形`转换成`Character?`
-    func toASCIICharacter() -> Character? {
+    /// 从`整数`转换成`Character?`
+    /// - Returns: `Character?`
+    func pd_ASCIICharacter() -> Character? {
         guard let n = self as? Int,
-              let scalar = UnicodeScalar(n)
-        else {
-            return nil
-        }
+              let scalar = UnicodeScalar(n) else {return nil}
         return Character(scalar)
     }
 
-    /// 转换为`String`
-    func toString() -> String {
-        String(self)
-    }
-
     /// 转换为`CGPoint`
-    func toCGPoint() -> CGPoint {
-        CGPoint(x: toCGFloat(), y: toCGFloat())
+    /// - Returns: `CGPoint`
+    func pd_CGPoint() -> CGPoint {
+        return CGPoint(x: self.pd_CGFloat(), y: self.pd_CGFloat())
     }
 
     /// 转换为`CGSize`
-    func toCGSize() -> CGSize {
-        CGSize(width: toCGFloat(), height: toCGFloat())
+    /// - Returns: `CGSize`
+    func pd_CGSize() -> CGSize {
+        return CGSize(width: self.pd_CGFloat(), height: self.pd_CGFloat())
     }
 }
+
 
 // MARK: - 角度/弧度转换
 public extension BinaryInteger {
     /// `角度`转`弧度`(0-360) -> (0-2PI)
     /// - Returns: `Double`弧度
-    func toRadians() -> Double {
-        toDouble() / 180.0 * Double.pi
+    func pd_radians() -> Double {
+        return self.pd_Double() / 180.0 * Double.pi
     }
 
     /// `弧度`转`角度`(0-2PI) -> (0-360)
     /// - Returns: `Double`角度
-    func toDegrees() -> Double {
-        toDouble() * (180.0 / Double.pi)
+    func pd_degrees() -> Double {
+        return self.pd_Double() * (180.0 / Double.pi)
+    }
+}
+
+// MARK: - 判断
+public extension BinaryInteger {
+    /// 判断是否是奇数
+    /// - Returns: `Bool`
+    func pd_isOdd() -> Bool {
+        return self % 2 != 0
+    }
+
+    /// 是否是偶数
+    /// - Returns: `Bool`
+    func pd_isEven() -> Bool {
+        return self % 2 == 0
     }
 }
 
 // MARK: - 方法
 public extension BinaryInteger {
+    
+    /// 生成`0-self`之间的`CountableRange<Int>`
+    /// - Returns: `CountableRange<Int>`
+    func pd_range() -> CountableRange<Int> {
+        let n = self as! Int
+        return 0 ..< n
+    }
+    
     /// 数字转罗马数字
     /// - Returns: `String?`罗马数字
-    func toRomanNumeral() -> String? {
-        guard self > 0 else {
-            return nil
-        }
+    func pd_romanNumeral() -> String? {
+        guard self > 0 else {return nil}
 
         let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
 
         var romanValue = ""
-        var startingValue = toInt()
+        var startingValue = self.pd_Int()
 
         for (index, romanChar) in romanValues.enumerated() {
             let arabicValue = arabicValues[index]
@@ -149,8 +163,9 @@ public extension BinaryInteger {
     ///
     ///     var number = Int16(-128)
     ///     print(number.bytes) ->  "[255, 128]"
+    ///
     /// - Returns: `[UInt8]`
-    func toBytes() -> [UInt8] {
+    func pd_bytes() -> [UInt8] {
         var result = [UInt8]()
         result.reserveCapacity(MemoryLayout<Self>.size)
         var value = self
@@ -163,8 +178,8 @@ public extension BinaryInteger {
 
     /// `byte(字节)`转换存储单位
     /// - Returns: `String`单位大小
-    func toStoreUnit() -> String {
-        var value = toDouble()
+    func pd_storeUnit() -> String {
+        var value = self.pd_Double()
         var index = 0
         let units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
         while value > 1024 {
@@ -174,12 +189,6 @@ public extension BinaryInteger {
         return String(format: "%4.2f %@", value, units[index])
     }
 
-    /// 生成`0-self`之间的`CountableRange<Int>`
-    /// - Returns: `CountableRange<Int>`
-    func toRange() -> CountableRange<Int> {
-        let n = self as! Int
-        return 0 ..< n
-    }
 }
 
 // MARK: - 日期/时间
@@ -187,21 +196,21 @@ public extension BinaryInteger {
     /// `Int`时间戳转日期对象
     /// - Parameter isUnix:是否是`Unix`时间戳格式(默认`true`)
     /// - Returns:Date
-    func toDate(isUnix: Bool = true) -> Date {
-        Date(timeIntervalSince1970: TimeInterval(toDouble() / (isUnix ? 1.0 : 1000.0)))
+    func pd_toDate(isUnix: Bool = true) -> Date {
+        Date(timeIntervalSince1970: TimeInterval(self.pd_Double() / (isUnix ? 1.0 : 1000.0)))
     }
 
     /// 秒转换成播放时间条的格式
     /// - Parameters:
     ///   - component:格式类型`nil`为默认类型
     /// - Returns:返回时间条
-    func toMediaTimeString(component: Calendar.Component? = nil) -> String {
+    func pd_mediaTimeString(component: Calendar.Component? = nil) -> String {
         if self <= 0 { return "00:00" }
 
         // 秒
-        let second = toInt() % 60
+        let second = self.pd_Int() % 60
         if component == .second {
-            return String(format: "%02d", toInt())
+            return String(format: "%02d", self.pd_Int())
         }
 
         // 分钟

@@ -7,14 +7,21 @@
 
 import Foundation
 
-// MARK: - 方法
-public extension Optional {
+//extension Optional: Pandaable {}
+//public extension PandaEx where Base == Optional<base.Type> {
+//    func expect(_ fatalErrorDescription: String) -> Base.Type {
+//        guard let value = self else { fatalError(fatalErrorDescription) }
+//        return value
+//    }
+//}
+
+extension Optional {
     /// 如果不为空,则执行`block`代码
     /// - Parameter block:要执行的代码
     func run(_ block: (Wrapped) -> Void) {
         _ = map(block)
     }
-
+    
     /// 猜测数据有值(无值引起致命错误)
     /// 如果`valueLabel`是可选类型`(valueLabel.expect("期望存在值").text = state.title)`
     func expect(_ fatalErrorDescription: String) -> Wrapped {
@@ -80,46 +87,65 @@ public extension Optional where Wrapped: Error {
     }
 }
 
-// MARK: - 运算符重载(Wrapped:RawRepresentable, Wrapped.RawValue:Equatable)
+infix operator ??=: AssignmentPrecedence
+infix operator ?=: AssignmentPrecedence
+
+// MARK: - 赋值运算符重载
+public extension Optional {
+    /// 当右值不为`nil`的时候,把右值赋值给左值
+    /// - Parameters:
+    ///   - lhs: 左值
+    ///   - rhs: 右值
+    @inlinable static func ??= (lhs: inout Optional, rhs: Optional) {
+        guard let rhs else { return }
+        lhs = rhs
+    }
+
+    /// 当左值为空的时候, 把右值赋值给左值
+    /// - Parameters:
+    ///   - lhs: 左值
+    ///   - rhs: 右值
+    @inlinable static func ?= (lhs: inout Optional, rhs: @autoclosure () -> Optional) {
+        if lhs == nil { lhs = rhs() }
+    }
+}
+
+// MARK: - 比较运算符重载
 public extension Optional where Wrapped: RawRepresentable, Wrapped.RawValue: Equatable {
+
     /// 判断两个值是否相等
-    /// - Returns:是否相等
+    /// - Parameters:
+    ///   - lhs: 左值
+    ///   - rhs: 右值
+    /// - Returns: 是否相等
     @inlinable static func == (lhs: Optional, rhs: Wrapped.RawValue?) -> Bool {
         lhs?.rawValue == rhs
     }
 
     /// 判断两个值是否相等
+    /// - Parameters:
+    ///   - lhs: 左值
+    ///   - rhs: 右值
     /// - Returns:是否相等
     @inlinable static func == (lhs: Wrapped.RawValue?, rhs: Optional) -> Bool {
         lhs == rhs?.rawValue
     }
 
     /// 判断两个值是否不相等
+    /// - Parameters:
+    ///   - lhs: 左值
+    ///   - rhs: 右值
     /// - Returns:是否不相等
     @inlinable static func != (lhs: Optional, rhs: Wrapped.RawValue?) -> Bool {
         lhs?.rawValue != rhs
     }
 
     /// 判断两个值是否不相等
+    /// - Parameters:
+    ///   - lhs: 左值
+    ///   - rhs: 右值
     /// - Returns:是否不相等
     @inlinable static func != (lhs: Wrapped.RawValue?, rhs: Optional) -> Bool {
         lhs != rhs?.rawValue
-    }
-}
-
-infix operator ??=: AssignmentPrecedence
-infix operator ?=: AssignmentPrecedence
-
-// MARK: - 运算符重载
-public extension Optional {
-    /// 当右值不为`nil`的时候,把右值赋值给左值
-    static func ??= (lhs: inout Optional, rhs: Optional) {
-        guard let rhs else { return }
-        lhs = rhs
-    }
-
-    /// 当左值为空的时候, 把右值赋值给左值
-    static func ?= (lhs: inout Optional, rhs: @autoclosure () -> Optional) {
-        if lhs == nil { lhs = rhs() }
     }
 }
