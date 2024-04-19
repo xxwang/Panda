@@ -1,21 +1,16 @@
-//
-//  Sequence+.swift
-//
-//
-//  Created by xxwang on 2023/5/26.
-//
-
 import Foundation
 
 // MARK: - 方法
 public extension Sequence {
+
     /// 检查集合中的所有元素是否符合条件
     ///
     ///     [2, 2, 4].all(matching:{$0 % 2 == 0}) -> true
-    ///     [1,2, 2, 4].all(matching:{$0 % 2 == 0}) -> false
-    /// - Parameters condition:评估每个元素的条件
-    /// - Returns:当数组中的所有元素都匹配指定条件时为true
-    func all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    ///     [2, 2, 4].all(matching:{$0 % 2 == 0}) -> true
+    ///
+    /// - Parameter condition: 条件
+    /// - Returns: 是否符合
+    func pd_all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         try !contains { try !condition($0) }
     }
 
@@ -23,9 +18,10 @@ public extension Sequence {
     ///
     ///     [2, 2, 4].none(matching:{$0 % 2 == 0}) -> false
     ///     [1, 3, 5, 7].none(matching:{$0 % 2 == 0}) -> true
-    /// - Parameters condition:评估每个元素的条件
-    /// - Returns:当数组中没有元素符合指定条件时为true
-    func none(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    ///
+    /// - Parameter condition: 条件
+    /// - Returns: 是否不符合
+    func pd_none(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         try !contains { try condition($0) }
     }
 
@@ -33,27 +29,30 @@ public extension Sequence {
     ///
     ///     [1, 3, 2, 2, 4].any(matching:{$0 % 2 == 0}) -> true
     ///     [1, 3, 5, 7].any(matching:{$0 % 2 == 0}) -> false
-    /// - Parameters condition:评估每个元素的条件
-    /// - Returns:当数组中只要有一个或多个元素匹配时返回true
-    func any(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    ///
+    /// - Parameter condition: 条件
+    /// - Returns: 是否符合
+    func pd_any(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         try contains { try condition($0) }
     }
 
-    /// 根据拒绝条件过滤元素(满足条件的元素不返回)
+    /// 返回不符合条件的元素
     ///
     ///     [2, 2, 4, 7].reject(where:{$0 % 2 == 0}) -> [7]
-    /// - Parameters condition:过滤元素的条件
-    /// - Returns:返回不满足条件的元素
-    func reject(where condition: (Element) throws -> Bool) rethrows -> [Element] {
+    ///
+    /// - Parameter condition: 条件
+    /// - Returns: 结果数组
+    func pd_reject(where condition: (Element) throws -> Bool) rethrows -> [Element] {
         try filter { try !condition($0) }
     }
 
     /// 返回满足条件的元素个数
     ///
     ///     [2, 2, 4, 7].count(where:{$0 % 2 == 0}) -> 3
-    /// - Parameters condition:评估每个元素的条件
-    /// - Returns:条件为true的元素个数
-    func count(where condition: (Element) throws -> Bool) rethrows -> Int {
+    ///
+    /// - Parameter condition: 条件
+    /// - Returns: 符合条件的元素个数
+    func pd_count(where condition: (Element) throws -> Bool) rethrows -> Int {
         var count = 0
         for element in self where try condition(element) {
             count += 1
@@ -64,29 +63,32 @@ public extension Sequence {
     /// 反向迭代集合(从右到左)
     ///
     ///     [0, 2, 4, 7].forEachReversed({ print($0)}) -> // Order of print:7,4,2,0
-    /// - Parameters body:将数组元素作为参数的闭包
-    func forEachReversed(_ body: (Element) throws -> Void) rethrows {
+    ///
+    /// - Parameter body: 作用于元素的闭包
+    func pd_forEachReversed(_ body: (Element) throws -> Void) rethrows {
         try reversed().forEach(body)
     }
 
-    /// 使用条件为真的每个元素调用给定的闭包
+    /// 为`condition`条件为真的结果执行`body`闭包
     ///
     ///     [0, 2, 4, 7].forEach(where:{$0 % 2 == 0}, body:{ print($0)}) -> // print:0, 2, 4
+    ///
     /// - Parameters:
-    ///   - condition:评估每个元素的条件
-    ///   - body:将数组遍历条件为true的一个元素作为闭包参数
-    func forEach(where condition: (Element) throws -> Bool, body: (Element) throws -> Void) rethrows {
+    ///   - condition: 条件
+    ///   - body: 作用于`condition`结果中每个元素的闭包
+    func pd_forEach(where condition: (Element) throws -> Bool, body: (Element) throws -> Void) rethrows {
         try lazy.filter(condition).forEach(body)
     }
 
     /// 积累操作, 操作结果作为返回结果数组元素
     ///
     ///     [1, 2, 3].accumulate(initial:0, next:+) -> [1, 3, 6]
+    ///
     /// - Parameters:
-    ///   - initial:初始值
-    ///   - next:累积值和数组的下一个元素作为闭包的参数
-    /// - Returns:最终累积值组合的数组
-    func accumulate<U>(initial: U, next: (U, Element) throws -> U) rethrows -> [U] {
+    ///   - initial: 初始值
+    ///   - next: 作用于元素的闭包
+    /// - Returns: 最终累积值组合的数组
+    func pd_accumulate<U>(initial: U, next: (U, Element) throws -> U) rethrows -> [U] {
         var runningTotal = initial
         return try map { element in
             runningTotal = try next(runningTotal, element)
@@ -94,26 +96,28 @@ public extension Sequence {
         }
     }
 
-    /// 过滤元素并遍历执行闭包
+    /// 过滤元素并为每个结果元素执行闭包
     ///
     ///     [1,2,3,4,5].filtered({ $0 % 2 == 0 }, map:{ $0.string }) -> ["2", "4"]
+    ///
     /// - Parameters:
-    ///   - isIncluded:元素的过滤条件
-    ///   - transform:转换元素函数,用于评估每个元素
-    /// - Returns:返回一个经过过滤和映射的数组
-    func filtered<T>(_ isIncluded: (Element) throws -> Bool, map transform: (Element) throws -> T) rethrows -> [T] {
+    ///   - isIncluded: 过滤元素的条件
+    ///   - transform: 作用于过滤结果元素的闭包
+    /// - Returns: 返回一个经过过滤和映射的数组
+    func pd_filtered<T>(_ isIncluded: (Element) throws -> Bool, map transform: (Element) throws -> T) rethrows -> [T] {
         try lazy.filter(isIncluded).map(transform)
     }
 
-    /// 根据条件获取唯一元素(只有一个元素符合条件才返回true)
+    /// 查找符合条件的元素,且元素唯一才返回元素,否则为`nil`
     ///
     ///     [].single(where:{_ in true}) -> nil
     ///     [4].single(where:{_ in true}) -> 4
     ///     [1, 4, 7].single(where:{$0 % 2 == 0}) -> 4
     ///     [2, 2, 4, 7].single(where:{$0 % 2 == 0}) -> nil
-    /// - Parameters condition:评估每个元素的条件
-    /// - Returns:数组中唯一与指定条件匹配的元素.如果有更多匹配元素,则返回nil
-    func single(where condition: (Element) throws -> Bool) rethrows -> Element? {
+    ///
+    /// - Parameter condition: 条件
+    /// - Returns: 查找结果
+    func pd_single(where condition: (Element) throws -> Bool) rethrows -> Element? {
         var singleElement: Element?
         for element in self where try condition(element) {
             guard singleElement == nil else {
@@ -129,9 +133,10 @@ public extension Sequence {
     ///
     ///     [1, 2, 1, 3, 2].withoutDuplicates { $0 } -> [1, 2, 3]
     ///     [(1, 4), (2, 2), (1, 3), (3, 2), (2, 1)].withoutDuplicates { $0.0 } -> [(1, 4), (2, 2), (3, 2)]
-    /// - Parameters transform:返回要为重复元素评估的值的闭包
-    /// - Returns:没有重复元素的序列
-    func withoutDuplicates<T: Hashable>(transform: (Element) throws -> T) rethrows -> [Element] {
+    ///
+    /// - Parameter transform: 条件
+    /// - Returns: 结果数组
+    func pd_withoutDuplicates<T: Hashable>(transform: (Element) throws -> T) rethrows -> [Element] {
         var set = Set<T>()
         return try filter { try set.insert(transform($0)).inserted }
     }
@@ -142,7 +147,12 @@ public extension Sequence {
     ///     let (minors, adults) = people.divided { $0.age < 18 }
     /// - Parameters condition:评估每个元素的条件
     /// - Returns:匹配和不匹配项的元组
-    func divided(by condition: (Element) throws -> Bool) rethrows -> (matching: [Element], nonMatching: [Element]) {
+    
+    
+    /// <#Description#>
+    /// - Parameter condition: <#condition description#>
+    /// - Returns: <#description#>
+    func pd_divided(by condition: (Element) throws -> Bool) rethrows -> (matching: [Element], nonMatching: [Element]) {
         var matching = [Element]()
         var nonMatching = [Element]()
 
@@ -156,14 +166,14 @@ public extension Sequence {
     /// - Parameters keyPath:排序依据的vvvkeyPath
     /// - Parameter compare:将确定排序的比较函数
     /// - Returns:排序后的数组
-    func sorted<T>(by keyPath: KeyPath<Element, T>, with compare: (T, T) -> Bool) -> [Element] {
+    func pd_sorted<T>(by keyPath: KeyPath<Element, T>, with compare: (T, T) -> Bool) -> [Element] {
         sorted { compare($0[keyPath: keyPath], $1[keyPath: keyPath]) }
     }
 
     /// 返回一个基于keyPath的排序数组
     /// - Parameters keyPath:排序依据的keyPath. keyPath类型必须遵守Comparable
     /// - Returns:排序后的数组
-    func sorted(by keyPath: KeyPath<Element, some Comparable>) -> [Element] {
+    func pd_sorted(by keyPath: KeyPath<Element, some Comparable>) -> [Element] {
         sorted { $0[keyPath: keyPath] < $1[keyPath: keyPath] }
     }
 
@@ -171,7 +181,7 @@ public extension Sequence {
     /// - Parameters:
     ///     - keyPath1:排序依据的keyPath, 必须遵守Comparable.
     ///     - keyPath2:在 `keyPath1` 的值匹配的情况下排序的keyPath, 必须遵守Comparable.
-    func sorted(by keyPath1: KeyPath<Element, some Comparable>,
+    func pd_sorted(by keyPath1: KeyPath<Element, some Comparable>,
                 and keyPath2: KeyPath<Element, some Comparable>) -> [Element]
     {
         sorted {
@@ -187,7 +197,7 @@ public extension Sequence {
     ///     - keyPath1:排序依据的KeyPath,必须遵守Comparable
     ///     - keyPath2:在 `keyPath1` 的值匹配的情况下排序的KeyPath, 必须遵守Comparable
     ///     - keyPath3:在 `keyPath1` 和 `keyPath2` 的值匹配的情况下排序的KeyPath, 必须遵守Comparable
-    func sorted(by keyPath1: KeyPath<Element, some Comparable>,
+    func pd_sorted(by keyPath1: KeyPath<Element, some Comparable>,
                 and keyPath2: KeyPath<Element, some Comparable>,
                 and keyPath3: KeyPath<Element, some Comparable>) -> [Element]
     {
@@ -207,7 +217,7 @@ public extension Sequence {
     ///     ["James", "Wade", "Bryant"].sum(for:\.count) -> 15
     /// - Parameters keyPath:`AdditiveArithmetic` 属性的KeyPath
     /// - Returns:`keyPath` 处的 `AdditiveArithmetic` 属性的总和
-    func sum<T: AdditiveArithmetic>(for keyPath: KeyPath<Element, T>) -> T {
+    func pd_sum<T: AdditiveArithmetic>(for keyPath: KeyPath<Element, T>) -> T {
         reduce(.zero) { $0 + $1[keyPath: keyPath] }
     }
 
@@ -216,7 +226,7 @@ public extension Sequence {
     ///   - keyPath:要比较的 `Element` 属性的 `KeyPath`
     ///   - value:与 `Element` 属性比较的值
     /// - Returns:符合比较结果的第一个元素,如果没有符合的元素返回nil
-    func first<T: Equatable>(where keyPath: KeyPath<Element, T>, equals value: T) -> Element? {
+    func pd_first<T: Equatable>(where keyPath: KeyPath<Element, T>, equals value: T) -> Element? {
         first { $0[keyPath: keyPath] == value }
     }
 }
@@ -230,7 +240,7 @@ public extension Sequence where Element: Equatable {
     ///     ["h", "e", "l", "l", "o"].contains(["l", "o"]) -> true
     /// - Parameters elements:要检查的元素数组
     /// - Returns:如果数组包含所有给定项,则返回true
-    func contains(_ elements: [Element]) -> Bool {
+    func pd_contains(_ elements: [Element]) -> Bool {
         elements.allSatisfy { contains($0) }
     }
 }
@@ -244,7 +254,7 @@ public extension Sequence where Element: Hashable {
     ///     ["h", "e", "l", "l", "o"].contains(["l", "o"]) -> true
     /// - Parameters elements:要检查的元素数组
     /// - Returns:如果数组包含所有给定项,则返回true
-    func contains(_ elements: [Element]) -> Bool {
+    func pd_contains(_ elements: [Element]) -> Bool {
         let set = Set(self)
         return elements.allSatisfy { set.contains($0) }
     }
@@ -252,7 +262,7 @@ public extension Sequence where Element: Hashable {
     /// 检查序列是否包含重复项
     ///
     /// - Returns:如果接收器包含重复项,则返回true
-    func containsDuplicates() -> Bool {
+    func pd_containsDuplicates() -> Bool {
         var set = Set<Element>()
         for element in self {
             if !set.insert(element).inserted {
@@ -268,7 +278,7 @@ public extension Sequence where Element: Hashable {
     ///     ["h", "e", "l", "l", "o"].duplicates().sorted() -> ["l"])
     ///
     /// - Returns:重复元素的数组
-    func duplicates() -> [Element] {
+    func pd_duplicates() -> [Element] {
         var set = Set<Element>()
         var duplicates = Set<Element>()
         forEach {
@@ -287,7 +297,7 @@ public extension Sequence where Element: AdditiveArithmetic {
     ///     [1, 2, 3, 4, 5].sum() -> 15
     ///
     /// - Returns:数组元素的总和
-    func sum() -> Element {
+    func pd_sum() -> Element {
         reduce(.zero, +)
     }
 }

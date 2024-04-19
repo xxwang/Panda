@@ -467,6 +467,8 @@
 		168980BD2BD1425500AB73A4 /* 已优化 */ = {
 			isa = PBXGroup;
 			children = (
+				169409F92ABC738800356736 /* MutableCollection+.swift */,
+				169409F72ABC738800356736 /* Optional+.swift */,
 				169409E82ABC738800356736 /* Range+.swift */,
 				169409E72ABC738800356736 /* Character+.swift */,
 				169409F52ABC738800356736 /* ClosedRange+.swift */,
@@ -756,9 +758,7 @@
 				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
 				169409F42ABC738800356736 /* Dictionary+.swift */,
 				169409F62ABC738800356736 /* SignedInteger+.swift */,
-				169409F72ABC738800356736 /* Optional+.swift */,
 				169409F82ABC738800356736 /* Decodable+.swift */,
-				169409F92ABC738800356736 /* MutableCollection+.swift */,
 			);
 			path = Stdlib;
 			sourceTree = "<group>";
