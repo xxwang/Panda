@@ -11,7 +11,11 @@ import Moya
 import ObjectMapper
 
 struct Requester {
-    static let provider = MoyaProvider<ServiceAPI>(plugins: [NetworkHandler()])
+    fileprivate static let provider = MoyaProvider<ServiceAPI>(plugins: [
+        RequestLogger(),
+        ResponseHandler()
+    ])
+    
     private init() {}
 }
 
