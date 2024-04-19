@@ -162,7 +162,7 @@ public extension BinaryInteger {
     /// 转字节数组(`UInt8`数组)
     ///
     ///     var number = Int16(-128)
-    ///     print(number.bytes) ->  "[255, 128]"
+    ///     print(number.pd_bytes) ->  "[255, 128]"
     ///
     /// - Returns: `[UInt8]`
     func pd_bytes() -> [UInt8] {
