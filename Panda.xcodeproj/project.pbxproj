@@ -470,6 +470,7 @@
 				169409F62ABC738800356736 /* SignedInteger+.swift */,
 				169409E92ABC738800356736 /* Collection+.swift */,
 				169409F02ABC738800356736 /* Sequence+.swift */,
+				169409EF2ABC738800356736 /* Array+.swift */,
 				169409F92ABC738800356736 /* MutableCollection+.swift */,
 				169409F72ABC738800356736 /* Optional+.swift */,
 				169409E82ABC738800356736 /* Range+.swift */,
@@ -754,7 +755,6 @@
 			children = (
 				168980BD2BD1425500AB73A4 /* 已优化 */,
 				169409ED2ABC738800356736 /* Encodable+.swift */,
-				169409EF2ABC738800356736 /* Array+.swift */,
 				169409F12ABC738800356736 /* String+.swift */,
 				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
 				169409F42ABC738800356736 /* Dictionary+.swift */,

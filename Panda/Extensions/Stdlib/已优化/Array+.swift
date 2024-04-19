@@ -204,17 +204,11 @@ public extension Array where Element: Equatable {
         }
     }
 
-    /// 删除数组的中的元素(可删除第一个出现的或者删除全部出现的)
+    /// 删除数组中的指定元素(默认删除第一个)
     /// - Parameters:
-    ///   - element:要删除的元素
-    ///   - isRepeat:是否删除重复的元素
-    
-    //TODO: - 
-    /// <#Description#>
-    /// - Parameters:
-    ///   - element: <#element description#>
-    ///   - isRepeat: <#isRepeat description#>
-    /// - Returns: <#description#>
+    ///   - element: 要删除的元素
+    ///   - isRepeat: 是否删除指定的所有元素
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_remove(_ element: Element, isRepeat: Bool = true) -> Array {
         var removeIndexs: [Int] = []
@@ -232,36 +226,39 @@ public extension Array where Element: Equatable {
         return self
     }
 
-    /// 从数组中删除在`elements`数组中出现的元素
+    /// 从数组中删除在`elements`数组中出现的元素(默认删除第一个出现的)
     /// - Parameters:
-    ///   - elements:被删除的数组元素
-    ///   - isRepeat:是否删除重复的元素
+    ///   - elements: 要删除的元素数组
+    ///   - isRepeat: 是否删除指定的所有元素
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_removeArray(_ elements: [Element], isRepeat: Bool = true) -> Array {
         for element in elements {
-            if contains(element) { remove(element, isRepeat: isRepeat) }
+            if contains(element) { self.pd_remove(element, isRepeat: isRepeat) }
         }
         return self
     }
 
-    /// 移除数组中指定的元素
+    /// 删除数组中指定的所有元素
     ///
-    ///     [1, 2, 2, 3, 4, 5].removeAll(2) -> [1, 3, 4, 5]
-    ///     ["h", "e", "l", "l", "o"].removeAll("l") -> ["h", "e", "o"]
-    /// - Parameters item:要移除的对象
-    /// - Returns:移除完成后的数组
+    ///     [1, 2, 2, 3, 4, 5].pd_removeAll(2) -> [1, 3, 4, 5]
+    ///     ["h", "e", "l", "l", "o"].pd_removeAll("l") -> ["h", "e", "o"]
+    ///
+    /// - Parameter item: 要删除的元素
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_removeAll(_ item: Element) -> [Element] {
         removeAll(where: { $0 == item })
         return self
     }
 
-    /// 移除指定数组中的所有元素
+    /// 删除指定数组中的所有元素
     ///
-    ///     [1, 2, 2, 3, 4, 5].removeAll([2,5]) -> [1, 3, 4]
-    ///     ["h", "e", "l", "l", "o"].removeAll(["l", "h"]) -> ["e", "o"]
-    /// - Parameters items:要移除的对象数组
-    /// - Returns:移除完成后的数组
+    ///     [1, 2, 2, 3, 4, 5].pd_removeAll([2,5]) -> [1, 3, 4]
+    ///     ["h", "e", "l", "l", "o"].pd_removeAll(["l", "h"]) -> ["e", "o"]
+    ///
+    /// - Parameter items: 要删除的元素数组
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_removeAll(_ items: [Element]) -> [Element] {
         guard !items.isEmpty else { return self }
@@ -269,12 +266,12 @@ public extension Array where Element: Equatable {
         return self
     }
 
-    /// 移除数组中的重复元素
+    /// 删除数组中的重复元素
     ///
-    ///     [1, 2, 2, 3, 4, 5].removeDuplicates() -> [1, 2, 3, 4, 5]
-    ///     ["h", "e", "l", "l", "o"]. removeDuplicates() -> ["h", "e", "l", "o"]
+    ///     [1, 2, 2, 3, 4, 5].pd_removeDuplicates() -> [1, 2, 3, 4, 5]
+    ///     ["h", "e", "l", "l", "o"]. pd_removeDuplicates() -> ["h", "e", "l", "o"]
     ///
-    /// - Returns:移除完成后的数组
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_removeDuplicates() -> [Element] {
         self = reduce(into: [Element]()) {
@@ -283,21 +280,21 @@ public extension Array where Element: Equatable {
         return self
     }
 
-    /// 移除数组中的重复元素(不修改当前数组, 只是返回移除后的数组)
+    /// 删除数组中的重复元素(不修改当前数组, 只是返回删除后的数组)
     ///
-    ///     [1, 1, 2, 2, 3, 3, 3, 4, 5].withoutDuplicates() -> [1, 2, 3, 4, 5])
-    ///     ["h", "e", "l", "l", "o"].withoutDuplicates() -> ["h", "e", "l", "o"])
+    ///     [1, 1, 2, 2, 3, 3, 3, 4, 5].pd_withoutDuplicates() -> [1, 2, 3, 4, 5])
+    ///     ["h", "e", "l", "l", "o"].pd_withoutDuplicates() -> ["h", "e", "l", "o"])
     ///
-    /// - Returns:移除完成后的数组
+    /// - Returns: 结果数组
     func pd_withoutDuplicates() -> [Element] {
         reduce(into: [Element]()) {
             if !$0.contains($1) { $0.append($1) }
         }
     }
 
-    /// 按指定路径移除重复元素(不修改当前数组, 只是返回移除后的数组)
-    /// - Parameters path:要比较的路径,值必须是可比较的
-    /// - Returns:移除完成后的数组
+    /// 根据`keyPath`删除重复元素(不修改当前数组, 只是返回删除后的数组)
+    /// - Parameter path: 删除依据`keyPath`
+    /// - Returns: 结果数组
     func pd_withoutDuplicates(keyPath path: KeyPath<Element, some Equatable>) -> [Element] {
         reduce(into: [Element]()) { result, element in
             if !result.contains(where: { $0[keyPath: path] == element[keyPath: path] }) {
@@ -306,21 +303,23 @@ public extension Array where Element: Equatable {
         }
     }
 
-    /// 按指定路径移除重复元素(不修改当前数组, 只是返回移除后的数组)
-    /// - Parameters path:要比较的路径,值必须是可哈希的
-    /// - Returns:移除完成后的数组
+    /// 根据`keyPath`删除重复元素(不修改当前数组, 只是返回删除后的数组)
+    /// - Parameter path: 删除依据`keyPath`
+    /// - Returns: 结果数组
     func pd_withoutDuplicates<E: Hashable>(keyPath path: KeyPath<Element, E>) -> [Element] {
         var set = Set<E>()
         return filter { set.insert($0[keyPath: path]).inserted }
     }
 }
 
-// MARK: - Element:NSObjectProtocol
+// MARK: - Element: NSObjectProtocol
 public extension Array where Element: NSObjectProtocol {
-    /// 删除数组中遵守`NSObjectProtocol`协议的元素
+    
+    /// 删除数组中符合`object`的元素
     /// - Parameters:
-    ///   - object:元素
-    ///   - isRepeat:是否删除重复的元素
+    ///   - object: 删除依据
+    ///   - isRepeat: 是否重复删除
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_remove(object: NSObjectProtocol, isRepeat: Bool = true) -> Array {
         var removeIndexs: [Int] = []
@@ -336,15 +335,16 @@ public extension Array where Element: NSObjectProtocol {
         return self
     }
 
-    /// 删除一个遵守`NSObjectProtocol`的数组中的元素,支持重复删除
+    /// 删除数组中符合`objects`的元素
     /// - Parameters:
-    ///   - objects:遵守`NSObjectProtocol`的数组
-    ///   - isRepeat:是否删除重复的元素
+    ///   - objects: 删除依据
+    ///   - isRepeat: 是否重复删除
+    /// - Returns: 结果数组
     @discardableResult
     mutating func pd_removeArray(objects: [NSObjectProtocol], isRepeat: Bool = true) -> Array {
         for object in objects {
             if contains(where: { $0.isEqual(object) }) {
-                remove(object: object, isRepeat: isRepeat)
+                self.pd_remove(object: object, isRepeat: isRepeat)
             }
         }
         return self
@@ -353,9 +353,10 @@ public extension Array where Element: NSObjectProtocol {
 
 // MARK: - 方法(数组:Element:NSAttributedString)
 public extension Array where Element: NSAttributedString {
-    /// `拼接``NSAttributedString数组`中的每个元素并使用`separator`分割
-    /// - Parameter separator:`NSAttributedString`类型分割符
-    /// - Returns:`NSAttributedString`
+
+    /// 拼接数组元素为`NSAttributedString`并使用`separator`分割
+    /// - Parameter separator: `NSAttributedString`分割符
+    /// - Returns: `NSAttributedString`
     func pd_joined(separator: NSAttributedString) -> NSAttributedString {
         guard let firstElement = first else { return "".toAttributedString() }
         return dropFirst()
@@ -365,31 +366,32 @@ public extension Array where Element: NSAttributedString {
             }
     }
 
-    /// `拼接``NSAttributedString数组`中的每个元素并使用`separator`分割
-    /// - Parameter separator:`String`类型分割符
-    /// - Returns:`NSAttributedString`
+    /// 拼接数组元素为`NSAttributedString`并使用`separator`分割
+    /// - Parameter separator: `String`分割符
+    /// - Returns: `NSAttributedString`
     func pd_joined(separator: String) -> NSAttributedString {
         let separator = NSAttributedString(string: separator)
-        return joined(separator: separator)
+        return pd_joined(separator: separator)
     }
 }
 
 // MARK: - Array
 public extension Array {
-    /// 数组JSON格式的Data
-    /// - Parameter prettify:是否美化格式
-    /// - Returns:JSON格式的Data(可选类型)
-    func pd_toData(prettify: Bool = false) -> Data? {
+
+    /// 数组`JSON`转`Data?`
+    /// - Parameter prettify: 是否美化格式
+    /// - Returns: JSON格式的`Data?`
+    func pd_JSONData(prettify: Bool = false) -> Data? {
         guard JSONSerialization.isValidJSONObject(self) else { return nil }
         let options: JSONSerialization.WritingOptions = (prettify == true) ? .prettyPrinted : .init()
         return try? JSONSerialization.data(withJSONObject: self, options: options)
     }
 
-    /// 数组转成JSON字符串
-    /// - Parameter prettify:是否美化格式
-    /// - Returns:JSON字符串(可选类型)
-    func pd_toJSONString(prettify: Bool = false) -> String? {
-        guard let data = toData(prettify: prettify) else { return nil }
+    /// 数组`JSON`转`JSON`字符串
+    /// - Parameter prettify: 是否美化格式
+    /// - Returns: `JSON`字符串
+    func pd_JSONString(prettify: Bool = false) -> String? {
+        guard let data = pd_JSONData(prettify: prettify) else { return nil }
         return String(data: data, encoding: .utf8)?.replacingOccurrences(of: "\\/", with: "/", options: .caseInsensitive, range: nil)
     }
 }
