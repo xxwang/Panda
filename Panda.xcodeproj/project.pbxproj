@@ -481,6 +481,7 @@
 				169409EE2ABC738800356736 /* BinaryFloatingPoint+.swift */,
 				169409F22ABC738800356736 /* Bool+.swift */,
 				169409EB2ABC738800356736 /* BidirectionalCollection+.swift */,
+				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
 			);
 			path = "已优化";
 			sourceTree = "<group>";
@@ -755,10 +756,9 @@
 			children = (
 				168980BD2BD1425500AB73A4 /* 已优化 */,
 				169409ED2ABC738800356736 /* Encodable+.swift */,
-				169409F12ABC738800356736 /* String+.swift */,
-				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
-				169409F42ABC738800356736 /* Dictionary+.swift */,
 				169409F82ABC738800356736 /* Decodable+.swift */,
+				169409F12ABC738800356736 /* String+.swift */,
+				169409F42ABC738800356736 /* Dictionary+.swift */,
 			);
 			path = Stdlib;
 			sourceTree = "<group>";

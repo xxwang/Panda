@@ -1,10 +1,3 @@
-//
-//  Decodable+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
-
 import Foundation
 
 // MARK: - 方法

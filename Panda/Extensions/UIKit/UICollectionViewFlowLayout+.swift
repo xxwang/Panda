@@ -1,5 +1,5 @@
 //
-//  UICollectionViewFlowLayout++.swift
+//  UICollectionViewFlowLayout+.swift
 //  Panda
 //
 //  Created by 奥尔良小短腿 on 2024/3/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - 链式语法
+// MARK: - 链式语法
 extension UICollectionViewFlowLayout {
     /// 设置滚动方向间距
     /// - Parameter spacing: 间距

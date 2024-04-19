@@ -20,7 +20,7 @@ public extension BinaryInteger {
     func pd_Decimal() -> Decimal {
         return self.pd_NSDecimalNumber().decimalValue
     }
-    
+
     /// 转换为`Int`
     /// - Returns: `Int`
     func pd_Int() -> Int {
@@ -62,7 +62,7 @@ public extension BinaryInteger {
     func pd_CGFloat() -> CGFloat {
         return self.pd_Double()
     }
-    
+
     /// 转换为`String`
     /// - Returns: `String`
     func pd_String() -> String {
@@ -79,7 +79,7 @@ public extension BinaryInteger {
     /// - Returns: `Character?`
     func pd_ASCIICharacter() -> Character? {
         guard let n = self as? Int,
-              let scalar = UnicodeScalar(n) else {return nil}
+              let scalar = UnicodeScalar(n) else { return nil }
         return Character(scalar)
     }
 
@@ -95,7 +95,6 @@ public extension BinaryInteger {
         return CGSize(width: self.pd_CGFloat(), height: self.pd_CGFloat())
     }
 }
-
 
 // MARK: - 角度/弧度转换
 public extension BinaryInteger {
@@ -129,18 +128,17 @@ public extension BinaryInteger {
 
 // MARK: - 方法
 public extension BinaryInteger {
-    
     /// 生成`0-self`之间的`CountableRange<Int>`
     /// - Returns: `CountableRange<Int>`
     func pd_range() -> CountableRange<Int> {
         let n = self as! Int
         return 0 ..< n
     }
-    
+
     /// 数字转罗马数字
     /// - Returns: `String?`罗马数字
     func pd_romanNumeral() -> String? {
-        guard self > 0 else {return nil}
+        guard self > 0 else { return nil }
 
         let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
@@ -188,7 +186,6 @@ public extension BinaryInteger {
         }
         return String(format: "%4.2f %@", value, units[index])
     }
-
 }
 
 // MARK: - 日期/时间

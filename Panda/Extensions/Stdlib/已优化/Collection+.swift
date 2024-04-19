@@ -11,7 +11,6 @@ public extension Collection {
 
 // MARK: - 下标
 public extension Collection {
-
     /// 从集合中安全的读取数据(越界返回`nil`)
     ///
     ///     let arr = [1, 2, 3, 4, 5]
@@ -27,7 +26,6 @@ public extension Collection {
 
 // MARK: - 方法
 public extension Collection {
-
     /// 对集合中的每个元素执行`each`闭包
     ///
     ///     array.pd_forEachInParallel { item in
@@ -92,7 +90,6 @@ public extension Collection {
 
 // MARK: - Element:Equatable
 public extension Collection where Element: Equatable {
-
     /// 获取数组中与指定元素相同的索引
     ///
     ///     [1, 2, 2, 3, 4, 2, 5].pd_indices(of 2) -> [1, 2, 5]
@@ -108,7 +105,6 @@ public extension Collection where Element: Equatable {
 
 // MARK: - Element:BinaryInteger
 public extension Collection where Element: BinaryInteger {
-
     /// 计算整数数组中元素的平均值
     ///
     ///     [1, 2, 4, 3, 4].pd_average() = 2.8
@@ -122,7 +118,6 @@ public extension Collection where Element: BinaryInteger {
 
 // MARK: - Element:FloatingPoint
 public extension Collection where Element: FloatingPoint {
-    
     /// 计算浮点数数组中元素的平均值
     ///
     ///     [1.2, 2.3, 4.5, 3.4, 4.5].pd_average() = 3.18

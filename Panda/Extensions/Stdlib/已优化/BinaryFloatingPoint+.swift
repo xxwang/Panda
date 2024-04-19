@@ -2,7 +2,6 @@ import UIKit
 
 // MARK: - 类型转换
 public extension BinaryFloatingPoint {
-    
     /// 转换为`NSNumber`
     /// - Returns: `NSNumber`
     func pd_NSNumber() -> NSNumber {
@@ -20,7 +19,7 @@ public extension BinaryFloatingPoint {
     func pd_Decimal() -> Decimal {
         return self.pd_NSDecimalNumber().decimalValue
     }
-    
+
     /// 转换为`Int`
     /// - Returns: `Int`
     func pd_Int() -> Int {

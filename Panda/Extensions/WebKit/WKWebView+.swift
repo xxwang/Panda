@@ -59,7 +59,6 @@ public extension WKWebView {
 
 // MARK: - load方法
 public extension WKWebView {
-    
     /// 使用`URL`字符串加载网页
     /// - Parameter string: `URL`字符串
     /// - Returns: `Self`
@@ -70,7 +69,7 @@ public extension WKWebView {
         }
         return self
     }
-    
+
     /// 使用`URL`对象加载网页
     /// - Parameter string: `URL`对象
     /// - Returns: `Self`
@@ -84,7 +83,6 @@ public extension WKWebView {
 
 // MARK: - 脚本
 public extension WKWebView {
-    
     /// 向`WKWebView`注入`javascript`代码
     /// - Parameter script: 要注册的脚本
     /// - Returns: `Self`

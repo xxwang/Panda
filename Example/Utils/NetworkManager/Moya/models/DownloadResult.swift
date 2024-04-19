@@ -10,7 +10,7 @@ import ObjectMapper
 
 class DownloadResult: PDModel {
     var filePath: String?
-    
+
     override func mapping(map: Map) {
         filePath <- map["filePath"]
     }

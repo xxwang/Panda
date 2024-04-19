@@ -2,7 +2,6 @@ import UIKit
 
 // MARK: - 下标
 public extension Array {
-
     /// 使用索引数组作为下标,获取或设置数组数据
     ///
     ///     let arr = [1,2,3,4,5,6]
@@ -32,7 +31,6 @@ public extension Array {
 
 // MARK: - 方法
 public extension Array {
-
     /// 安全的取某个索引的值(索引越界返回`nil`)
     /// - Parameter index: 元素索引
     /// - Returns: 索引对应的元素
@@ -101,7 +99,7 @@ public extension Array {
     ///
     /// - Parameter newElement:要插入的元素
     mutating func pd_prepend(_ newElement: Element) {
-        insert(newElement, at: 0)
+        self.insert(newElement, at: 0)
     }
 
     /// 交换指定位置的两个元素
@@ -116,13 +114,12 @@ public extension Array {
         guard index != otherIndex else { return }
         guard startIndex ..< endIndex ~= index else { return }
         guard startIndex ..< endIndex ~= otherIndex else { return }
-        swapAt(index, otherIndex)
+        self.swapAt(index, otherIndex)
     }
 }
 
 // MARK: - 排序
 public extension Array {
-
     /// 根据指定的`otherArray`数组与`keyPath`对数组进行排序
     ///
     ///     [MyStruct(x:3), MyStruct(x:1), MyStruct(x:2)].pd_sorted(like:[1, 2, 3], keyPath:\.x)
@@ -144,7 +141,6 @@ public extension Array {
 
 // MARK: - Element == String
 public extension [String] {
-    
     /// 数组转字符转
     ///
     ///     ["1", "2", "3"].pd_toString(separator: "-") //"1-2-3"
@@ -158,7 +154,6 @@ public extension [String] {
 
 // MARK: - Element:Equatable
 public extension Array where Element: Equatable {
-    
     /// 获取数组中的指定元素的索引值
     /// - Parameter item:元素
     /// - Returns:索引数组
@@ -314,7 +309,6 @@ public extension Array where Element: Equatable {
 
 // MARK: - Element: NSObjectProtocol
 public extension Array where Element: NSObjectProtocol {
-    
     /// 删除数组中符合`object`的元素
     /// - Parameters:
     ///   - object: 删除依据
@@ -353,7 +347,6 @@ public extension Array where Element: NSObjectProtocol {
 
 // MARK: - 方法(数组:Element:NSAttributedString)
 public extension Array where Element: NSAttributedString {
-
     /// 拼接数组元素为`NSAttributedString`并使用`separator`分割
     /// - Parameter separator: `NSAttributedString`分割符
     /// - Returns: `NSAttributedString`
@@ -377,7 +370,6 @@ public extension Array where Element: NSAttributedString {
 
 // MARK: - Array
 public extension Array {
-
     /// 数组`JSON`转`Data?`
     /// - Parameter prettify: 是否美化格式
     /// - Returns: JSON格式的`Data?`

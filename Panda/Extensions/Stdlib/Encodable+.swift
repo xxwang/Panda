@@ -1,10 +1,3 @@
-//
-//  Encodable+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
-
 import Foundation
 
 // MARK: - Encodable
@@ -61,6 +54,6 @@ public extension Array where Element: Encodable {
                 objects.append(object)
             }
         }
-        return objects.toJSONString()
+        return objects.pd_JSONString()
     }
 }

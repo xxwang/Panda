@@ -2,7 +2,6 @@ import Foundation
 
 // MARK: - 方法
 public extension Sequence {
-
     /// 检查集合中的所有元素是否符合条件
     ///
     ///     [2, 2, 4].pd_all(matching:{$0 % 2 == 0}) -> true
@@ -180,7 +179,7 @@ public extension Sequence {
     ///   - keyPath2: 排序依据`keyPath`
     /// - Returns: 排序后的数组
     func pd_sorted(by keyPath1: KeyPath<Element, some Comparable>,
-                and keyPath2: KeyPath<Element, some Comparable>) -> [Element]
+                   and keyPath2: KeyPath<Element, some Comparable>) -> [Element]
     {
         sorted {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {
@@ -197,8 +196,8 @@ public extension Sequence {
     ///   - keyPath3: 排序依据`keyPath`
     /// - Returns: 排序后的数组
     func pd_sorted(by keyPath1: KeyPath<Element, some Comparable>,
-                and keyPath2: KeyPath<Element, some Comparable>,
-                and keyPath3: KeyPath<Element, some Comparable>) -> [Element]
+                   and keyPath2: KeyPath<Element, some Comparable>,
+                   and keyPath3: KeyPath<Element, some Comparable>) -> [Element]
     {
         sorted {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {
@@ -230,7 +229,6 @@ public extension Sequence {
 
 // MARK: - Element:Equatable
 public extension Sequence where Element: Equatable {
-
     /// 检查数组是否完全包含`elements`数组
     ///
     ///     [1, 2, 3, 4, 5].pd_contains([1, 2]) -> true
@@ -246,7 +244,6 @@ public extension Sequence where Element: Equatable {
 
 // MARK: - Element:Hashable
 public extension Sequence where Element: Hashable {
-    
     /// 检查数组是否完全包含`elements`数组(会排除数组中的相同元素之后再检查)
     ///
     ///     [1, 2, 3, 4, 5].pd_contains([1, 2]) -> true
@@ -292,7 +289,6 @@ public extension Sequence where Element: Hashable {
 
 // MARK: - Element:AdditiveArithmetic
 public extension Sequence where Element: AdditiveArithmetic {
-
     /// 求数组中所有元素的和
     ///
     ///     [1, 2, 3, 4, 5].pd_sum() -> 15

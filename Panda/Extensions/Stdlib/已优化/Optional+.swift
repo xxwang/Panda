@@ -98,7 +98,6 @@ public extension Optional {
 
 // MARK: - 比较运算符重载
 public extension Optional where Wrapped: RawRepresentable, Wrapped.RawValue: Equatable {
-
     /// 判断两个值是否相等
     /// - Parameters:
     ///   - lhs: 左值

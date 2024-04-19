@@ -2,7 +2,6 @@ import Foundation
 
 // MARK: - 方法
 public extension MutableCollection {
-
     /// 为集合中所有元素的指定`keyPath`赋一个值
     /// - Parameters:
     ///   - value: 要赋的值
@@ -16,7 +15,6 @@ public extension MutableCollection {
 
 // MARK: - 排序
 public extension MutableCollection where Self: RandomAccessCollection {
-
     /// 根据`keyPath`和`compare`函数对集合进行排序
     /// - Parameters:
     ///   - keyPath: keyPath
@@ -36,7 +34,7 @@ public extension MutableCollection where Self: RandomAccessCollection {
     ///   - keyPath1: keyPath1
     ///   - keyPath2: keyPath2
     mutating func pd_sort(by keyPath1: KeyPath<Element, some Comparable>,
-                       and keyPath2: KeyPath<Element, some Comparable>)
+                          and keyPath2: KeyPath<Element, some Comparable>)
     {
         sort {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {
@@ -52,8 +50,8 @@ public extension MutableCollection where Self: RandomAccessCollection {
     ///   - keyPath2: keyPath2
     ///   - keyPath3: keyPath3
     mutating func pd_sort(by keyPath1: KeyPath<Element, some Comparable>,
-                       and keyPath2: KeyPath<Element, some Comparable>,
-                       and keyPath3: KeyPath<Element, some Comparable>)
+                          and keyPath2: KeyPath<Element, some Comparable>,
+                          and keyPath3: KeyPath<Element, some Comparable>)
     {
         sort {
             if $0[keyPath: keyPath1] != $1[keyPath: keyPath1] {

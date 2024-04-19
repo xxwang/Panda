@@ -1,22 +1,12 @@
-//
-//  JSONArrayEncoding.swift
-//  JZBlockchain
-//
-//  Created by 乐芙咪 on 2021/4/2.
-//
-
- import Alamofire
- import Foundation
+import Alamofire
+import Foundation
 
 // MARK: - 请求参数为Array的编码方式
- struct JSONArrayEncoding {
-    
-     static let `default` = JSONArrayEncoding()
-     
- }
+struct JSONArrayEncoding {
+    static let `default` = JSONArrayEncoding()
+}
 
 extension JSONArrayEncoding: ParameterEncoding {
-    
     func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var request = try urlRequest.asURLRequest()
 
@@ -36,10 +26,9 @@ extension JSONArrayEncoding: ParameterEncoding {
     }
 }
 
-
- extension Array {
+extension Array {
     /// 组成数组请求参数
     var arrayParams: [String: [Element]] {
         return ["jsonArray": self]
     }
- }
+}

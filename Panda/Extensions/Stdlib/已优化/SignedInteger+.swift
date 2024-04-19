@@ -4,7 +4,7 @@ import Foundation
 public extension SignedInteger {
     /// 取`绝对值`
     /// - Returns: 结果
-    func abs() -> Self {
-        Swift.abs(self)
+    func pd_abs() -> Self {
+        return Swift.abs(self)
     }
 }
