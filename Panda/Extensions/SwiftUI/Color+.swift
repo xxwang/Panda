@@ -1,42 +1,27 @@
-//
-//  Color+.swift
-//
-//
-//  Created by xxwang on 2023/5/20.
-//
-
-#if canImport(UIKit)
-    import UIKit
-#endif
-
-#if canImport(AppKit)
-    import AppKit
-#endif
-
 #if canImport(SwiftUI)
     import SwiftUI
-#endif
 
-#if canImport(SwiftUI)
     @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
     public extension Color {
-        /// 0-255颜色值
+        /// 构造一个颜色对象
+        ///
+        /// - Note: 0-255颜色值
         /// - Parameters:
-        ///   - r:红色
-        ///   - g:绿色
-        ///   - b:蓝色
-        ///   - a:不透明度
-        init(r: Double, g: Double, b: Double, a: Double = 1.0) {
+        ///   - r: 红色
+        ///   - g: 绿色
+        ///   - b: 蓝色
+        ///   - o: 透明度
+        init(r: Double, g: Double, b: Double, o: Double = 1.0) {
             let red = r / 255.0
             let green = g / 255.0
             let blue = b / 255.0
-            self.init(red: red, green: green, blue: blue, opacity: a)
+            self.init(red: red, green: green, blue: blue, opacity: o)
         }
 
-        /// 十六进制字符串
+        /// 使用十六进制字符串构造颜色对象
         /// - Parameters:
-        ///   - hex:颜色字符串
-        ///   - opacity:不透明度
+        ///   - hex: 十六进制字符串
+        ///   - opacity: 不透明度
         init(hex: String, opacity: Double = 1.0) {
             // 去除前后空格及换行符
             var hex = hex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -68,7 +53,7 @@
             let r = Int(color >> 16) & mask
             let g = Int(color >> 8) & mask
             let b = Int(color) & mask
-            self.init(r: Double(r), g: Double(g), b: Double(b), a: opacity)
+            self.init(r: Double(r), g: Double(g), b: Double(b), o: opacity)
         }
     }
 #endif
