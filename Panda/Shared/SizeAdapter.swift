@@ -1,5 +1,5 @@
 //
-//  SizeUtils.swift
+//  SizeAdapter.swift
 //
 //
 //  Created by xxwang on 2023/5/20.
@@ -82,7 +82,7 @@ private extension SizeUtils {
     static var widthRatio: CGFloat {
         var sketchW: CGFloat = min(sketchSize.width, sketchSize.height)
         var screenW: CGFloat = min(screenWidth, screenHeight)
-        if EnvUtils.isLandscape {
+        if Environment.isLandscape {
             sketchW = max(sketchSize.width, sketchSize.height)
             screenW = max(screenWidth, screenHeight)
         }
@@ -93,7 +93,7 @@ private extension SizeUtils {
     static var heightRatio: CGFloat {
         var sketchH: CGFloat = max(sketchSize.width, sketchSize.height)
         var screenH: CGFloat = max(screenWidth, screenHeight)
-        if EnvUtils.isLandscape {
+        if Environment.isLandscape {
             sketchH = min(sketchSize.width, sketchSize.height)
             screenH = min(screenWidth, screenHeight)
         }
@@ -136,7 +136,7 @@ private extension SizeUtils {
 
     /// 适配`字体大小`
     static func fitFont(from value: Any) -> CGFloat {
-        EnvUtils.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
+        Environment.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
     }
 }
 
@@ -175,3 +175,19 @@ public extension BinaryFloatingPoint {
     /// 字体大小配置
     var font: CGFloat { SizeUtils.fitFont(from: self) }
 }
+
+// Sizer.screenBounds
+// Sizer.screen.bounds
+
+// SizeAdapter.screen.bounds
+// SizeManager.screenBounds
+// SizeCalculator
+// Sizer.maxAuto
+// Sizer.minAuto
+// Sizer.wAuto
+// Sizer.hAuto
+
+// SizeAdapter.maxAuto
+// SizeAdapter.minAuto
+// SizeAdapter.wAuto
+// SizeAdapter.hAuto
