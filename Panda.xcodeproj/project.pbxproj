@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		163DC9062BD2DB4500CC99F9 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC9052BD2DB4500CC99F9 /* Demo.swift */; };
 		163DC90B2BD37D2B00CC99F9 /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90A2BD37D2B00CC99F9 /* Codable+.swift */; };
-		163DC90D2BD426D600CC99F9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90C2BD426D600CC99F9 /* Environment.swift */; };
+		163DC90D2BD426D600CC99F9 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90C2BD426D600CC99F9 /* environment.swift */; };
 		169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409532ABC738800356736 /* StoryboardLoadable.swift */; };
 		169409FD2ABC738800356736 /* AssociatedAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409542ABC738800356736 /* AssociatedAttributes.swift */; };
 		169409FE2ABC738800356736 /* Emitterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409552ABC738800356736 /* Emitterable.swift */; };
 		169409FF2ABC738800356736 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409562ABC738800356736 /* NibLoadable.swift */; };
 		16940A002ABC738800356736 /* Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409572ABC738800356736 /* Defaultable.swift */; };
 		16940A012ABC738800356736 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409592ABC738800356736 /* Logger.swift */; };
-		16940A022ABC738800356736 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095A2ABC738800356736 /* Shared.swift */; };
+		16940A022ABC738800356736 /* shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095A2ABC738800356736 /* shared.swift */; };
 		16940A032ABC738800356736 /* Panda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095B2ABC738800356736 /* Panda.swift */; };
 		16940A042ABC738800356736 /* PlistUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095D2ABC738800356736 /* PlistUtils.swift */; };
 		16940A062ABC738800356736 /* RuntimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095F2ABC738800356736 /* RuntimeUtils.swift */; };
@@ -29,7 +29,7 @@
 		16940A0E2ABC738800356736 /* SkinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409672ABC738800356736 /* SkinUtils.swift */; };
 		16940A0F2ABC738800356736 /* DarkModeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409682ABC738800356736 /* DarkModeUtils.swift */; };
 		16940A102ABC738800356736 /* StoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409692ABC738800356736 /* StoreUtils.swift */; };
-		16940A112ABC738800356736 /* SizeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096A2ABC738800356736 /* SizeAdapter.swift */; };
+		16940A112ABC738800356736 /* sizeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096A2ABC738800356736 /* sizeAdapter.swift */; };
 		16940A122ABC738800356736 /* PhotoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096B2ABC738800356736 /* PhotoUtils.swift */; };
 		16940A132ABC738800356736 /* DocumentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096C2ABC738800356736 /* DocumentUtils.swift */; };
 		16940A152ABC738800356736 /* SKProduct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409702ABC738800356736 /* SKProduct+.swift */; };
@@ -236,14 +236,14 @@
 /* Begin PBXFileReference section */
 		163DC9052BD2DB4500CC99F9 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		163DC90A2BD37D2B00CC99F9 /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
-		163DC90C2BD426D600CC99F9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		163DC90C2BD426D600CC99F9 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		169409532ABC738800356736 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		169409542ABC738800356736 /* AssociatedAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedAttributes.swift; sourceTree = "<group>"; };
 		169409552ABC738800356736 /* Emitterable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emitterable.swift; sourceTree = "<group>"; };
 		169409562ABC738800356736 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		169409572ABC738800356736 /* Defaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaultable.swift; sourceTree = "<group>"; };
 		169409592ABC738800356736 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		1694095A2ABC738800356736 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		1694095A2ABC738800356736 /* shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shared.swift; sourceTree = "<group>"; };
 		1694095B2ABC738800356736 /* Panda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Panda.swift; sourceTree = "<group>"; };
 		1694095D2ABC738800356736 /* PlistUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistUtils.swift; sourceTree = "<group>"; };
 		1694095F2ABC738800356736 /* RuntimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeUtils.swift; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		169409672ABC738800356736 /* SkinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinUtils.swift; sourceTree = "<group>"; };
 		169409682ABC738800356736 /* DarkModeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeUtils.swift; sourceTree = "<group>"; };
 		169409692ABC738800356736 /* StoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreUtils.swift; sourceTree = "<group>"; };
-		1694096A2ABC738800356736 /* SizeAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeAdapter.swift; sourceTree = "<group>"; };
+		1694096A2ABC738800356736 /* sizeAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sizeAdapter.swift; sourceTree = "<group>"; };
 		1694096B2ABC738800356736 /* PhotoUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoUtils.swift; sourceTree = "<group>"; };
 		1694096C2ABC738800356736 /* DocumentUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUtils.swift; sourceTree = "<group>"; };
 		169409702ABC738800356736 /* SKProduct+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKProduct+.swift"; sourceTree = "<group>"; };
@@ -485,10 +485,10 @@
 		169409582ABC738800356736 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1694095A2ABC738800356736 /* Shared.swift */,
+				1694095A2ABC738800356736 /* shared.swift */,
 				169409592ABC738800356736 /* Logger.swift */,
-				1694096A2ABC738800356736 /* SizeAdapter.swift */,
-				163DC90C2BD426D600CC99F9 /* Environment.swift */,
+				1694096A2ABC738800356736 /* sizeAdapter.swift */,
+				163DC90C2BD426D600CC99F9 /* environment.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1245,10 +1245,10 @@
 				16940A882ABC738800356736 /* Sequence+.swift in Sources */,
 				16940A752ABC738800356736 /* AVAudioSession+.swift in Sources */,
 				16940A182ABC738800356736 /* CGPoint+.swift in Sources */,
-				16940A112ABC738800356736 /* SizeAdapter.swift in Sources */,
+				16940A112ABC738800356736 /* sizeAdapter.swift in Sources */,
 				16940A0B2ABC738800356736 /* VideoUtils.swift in Sources */,
 				16940A132ABC738800356736 /* DocumentUtils.swift in Sources */,
-				16940A022ABC738800356736 /* Shared.swift in Sources */,
+				16940A022ABC738800356736 /* shared.swift in Sources */,
 				16940A832ABC738800356736 /* BidirectionalCollection+.swift in Sources */,
 				16940A232ABC738800356736 /* UICollectionViewCell+.swift in Sources */,
 				16940A262ABC738800356736 /* UIPageControl+.swift in Sources */,
@@ -1288,7 +1288,7 @@
 				16940A552ABC738800356736 /* NSRegularExpression+.swift in Sources */,
 				16940A272ABC738800356736 /* UIAlertController+.swift in Sources */,
 				16940A622ABC738800356736 /* NSMutableAttributedString+.swift in Sources */,
-				163DC90D2BD426D600CC99F9 /* Environment.swift in Sources */,
+				163DC90D2BD426D600CC99F9 /* environment.swift in Sources */,
 				16940A482ABC738800356736 /* UIColor+.swift in Sources */,
 				16940A0C2ABC738800356736 /* QRCodeUtils.swift in Sources */,
 				16940A1B2ABC738800356736 /* CGAffineTransform+.swift in Sources */,

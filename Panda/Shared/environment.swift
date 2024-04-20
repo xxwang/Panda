@@ -1,6 +1,6 @@
 import UIKit
 
-class Environment {
+class environment {
     /// 是否是模拟器
     static var isSimulator: Bool {
         #if targetEnvironment(simulator)
@@ -20,7 +20,7 @@ class Environment {
     }
 }
 
-extension Environment {
+extension environment {
     /// 系统类型
     static var system: String {
         #if os(macOS)
@@ -39,16 +39,16 @@ extension Environment {
     /// 当前应用程序的运行环境
     static var runEnv: String {
         #if DEBUG
-            return "debug"
+            return "development"
         #elseif targetEnvironment(simulator)
-            return "debug"
+            return "development"
         #else
             if let _ = Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") {
                 return "testFlight"
             }
 
             guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {
-                return "debug"
+                return "development"
             }
 
             if appStoreReceiptURL.lastPathComponent.lowercased() == "sandboxreceipt" {
@@ -56,14 +56,14 @@ extension Environment {
             }
 
             if appStoreReceiptURL.path.lowercased().contains("simulator") {
-                return "debug"
+                return "development"
             }
             return "appStore"
         #endif
     }
 }
 
-extension Environment {
+extension environment {
     /// 是否是`iPad`
     static var isIPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad

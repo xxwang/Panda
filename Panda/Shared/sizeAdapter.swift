@@ -82,7 +82,7 @@ private extension SizeUtils {
     static var widthRatio: CGFloat {
         var sketchW: CGFloat = min(sketchSize.width, sketchSize.height)
         var screenW: CGFloat = min(screenWidth, screenHeight)
-        if Environment.isLandscape {
+        if environment.isLandscape {
             sketchW = max(sketchSize.width, sketchSize.height)
             screenW = max(screenWidth, screenHeight)
         }
@@ -93,7 +93,7 @@ private extension SizeUtils {
     static var heightRatio: CGFloat {
         var sketchH: CGFloat = max(sketchSize.width, sketchSize.height)
         var screenH: CGFloat = max(screenWidth, screenHeight)
-        if Environment.isLandscape {
+        if environment.isLandscape {
             sketchH = min(sketchSize.width, sketchSize.height)
             screenH = min(screenWidth, screenHeight)
         }
@@ -136,7 +136,7 @@ private extension SizeUtils {
 
     /// 适配`字体大小`
     static func fitFont(from value: Any) -> CGFloat {
-        Environment.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
+        environment.isIPad ? toCGFloat(from: value) * 1.5 : toCGFloat(from: value)
     }
 }
 
