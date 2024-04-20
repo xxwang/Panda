@@ -30,7 +30,7 @@ public extension UILabel {
 
     /// 获取`UILabel`的每一行字符串(需要`UILabel`具有宽度值)
     var textLines: [String] {
-        (text ?? "").lines(pd_width, font: font!)
+        return (text ?? "").pd_lines(pd_width, font: font!)
     }
 
     /// 获取`UILabel`第一行内容
@@ -88,8 +88,8 @@ public extension UILabel {
     /// - Parameter maxLineWidth:最大宽度
     /// - Returns:`CGSize`
     func textSize(_ maxLineWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
-        if let attributedText { return attributedTextSize(maxLineWidth) }
-        if let text { return strSize(maxLineWidth) }
+        if attributedText != nil { return self.attributedTextSize(maxLineWidth) }
+        if text != nil { return self.strSize(maxLineWidth) }
         return .zero
     }
 
@@ -108,7 +108,7 @@ public extension UILabel {
     /// - Returns:`CGSize`
     func strSize(_ maxLineWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
         if let text {
-            return text.strSize(maxLineWidth, font: font)
+            return (self.text?.pd_stringSize(maxLineWidth, font: font)).pd_or(.zero)
         }
         return .zero
     }
@@ -134,7 +134,7 @@ public extension UILabel {
                isOrgin: Bool = false) -> NSMutableAttributedString
     {
         // 头部字符串
-        let headString = text?.subString(to: position) ?? ""
+        let headString = text?.pd_subString(to: position) ?? ""
         let attributedString = NSMutableAttributedString(string: headString)
 
         for image in images {
@@ -159,11 +159,11 @@ public extension UILabel {
         }
 
         // 尾部字符串
-        let tailString = text?.subString(from: position) ?? ""
+        let tailString = text?.pd_subString(from: position) ?? ""
         attributedString.append(NSAttributedString(string: tailString))
 
         // 图文间距需要减去默认的空格宽度
-        let spaceW = " ".strSize(.greatestFiniteMagnitude, font: font).width
+        let spaceW = " ".pd_stringSize(.greatestFiniteMagnitude, font: font).width
         let range = NSRange(location: 0, length: images.count * 2)
         attributedString.addAttribute(.kern, value: spacing - spaceW, range: range)
 
@@ -192,7 +192,7 @@ public extension UILabel {
             .pd_headIndent(0)
             .pd_tailIndent(0)
 
-        let attrString = text.toMutableAttributedString()
+        let attrString = text.pd_nsMutableAttributedString()
             .pd_addAttributes([
                 .paragraphStyle: style,
                 .kern: wordSpacing,
@@ -232,7 +232,7 @@ public extension UILabel {
         ]
 
         // 创建属性字符串并设置属性
-        let attributedString = text.toMutableAttributedString().pd_addAttributes(attributes)
+        let attributedString = text.pd_nsMutableAttributedString().pd_addAttributes(attributes)
         // 创建框架设置器
         let frameSetter = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
 
@@ -248,7 +248,7 @@ public extension UILabel {
         // 获取每行内容
         for line in lines {
             let lineRange = CTLineGetStringRange(line as! CTLine)
-            result.append(text.subString(from: lineRange.location, length: lineRange.length))
+            result.append(text.pd_subString(from: lineRange.location, length: lineRange.length))
         }
         return result
     }
@@ -385,7 +385,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_lineSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutable().pd_lineSpacing(spacing, for: (text ?? "").fullNSRange())
+        let attributedString = attributedText?.toMutable().pd_lineSpacing(spacing, for: (text ?? "").pd_fullNSRange())
         attributedText = attributedString
         return self
     }
@@ -395,7 +395,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_wordSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutable().pd_wordSpacing(spacing, for: (text ?? "").fullNSRange())
+        let attributedString = attributedText?.toMutable().pd_wordSpacing(spacing, for: (text ?? "").pd_fullNSRange())
         attributedText = attributedString
         return self
     }

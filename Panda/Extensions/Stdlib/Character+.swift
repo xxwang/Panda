@@ -4,7 +4,7 @@ import Foundation
 public extension Character {
     /// 从`Character`转换成`String`
     /// - Returns: `String`
-    func pd_String() -> String {
+    func pd_string() -> String {
         return String(self)
     }
 }

@@ -4,80 +4,80 @@ import UIKit
 public extension BinaryFloatingPoint {
     /// 转换为`NSNumber`
     /// - Returns: `NSNumber`
-    func pd_NSNumber() -> NSNumber {
+    func pd_nsNumber() -> NSNumber {
         return NSNumber(value: Double(self))
     }
 
     /// 转换为`NSDecimalNumber`
     /// - Returns: `NSDecimalNumber`
-    func pd_NSDecimalNumber() -> NSDecimalNumber {
+    func pd_nsDecimalNumber() -> NSDecimalNumber {
         return NSDecimalNumber(value: Double(self))
     }
 
     /// 转换为`Decimal`
     /// - Returns: `Decimal`
-    func pd_Decimal() -> Decimal {
-        return self.pd_NSDecimalNumber().decimalValue
+    func pd_decimal() -> Decimal {
+        return self.pd_nsDecimalNumber().decimalValue
     }
 
     /// 转换为`Int`
     /// - Returns: `Int`
-    func pd_Int() -> Int {
-        return self.pd_NSNumber().intValue
+    func pd_int() -> Int {
+        return self.pd_nsNumber().intValue
     }
 
     /// 转换为`Int64`
     /// - Returns: `Int64`
-    func pd_Int64() -> Int64 {
-        return self.pd_NSNumber().int64Value
+    func pd_int64() -> Int64 {
+        return self.pd_nsNumber().int64Value
     }
 
     /// 转换为`UInt`
     /// - Returns: `UInt`
-    func pd_UInt() -> UInt {
-        return self.pd_NSNumber().uintValue
+    func pd_uInt() -> UInt {
+        return self.pd_nsNumber().uintValue
     }
 
     /// 转换为`UInt64`
     /// - Returns: `UInt64`
-    func pd_UInt64() -> UInt64 {
-        return self.pd_NSNumber().uint64Value
+    func pd_uInt64() -> UInt64 {
+        return self.pd_nsNumber().uint64Value
     }
 
     /// 转换为`Float`
     /// - Returns: `Float`
-    func pd_Float() -> Float {
-        return self.pd_NSNumber().floatValue
+    func pd_float() -> Float {
+        return self.pd_nsNumber().floatValue
     }
 
     /// 转换为`Double`
     /// - Returns: `Double`
-    func pd_Double() -> Double {
-        return self.pd_NSNumber().doubleValue
+    func pd_double() -> Double {
+        return self.pd_nsNumber().doubleValue
     }
 
     /// 转换为`CGFloat`
     /// - Returns: `CGFloat`
-    func pd_CGFloat() -> CGFloat {
-        return self.pd_Double()
+    func pd_cgFloat() -> CGFloat {
+        return self.pd_double()
     }
 
     /// 转换为`String`
     /// - Returns: `String`
-    func pd_String() -> String {
-        return String(self.pd_Double())
+    func pd_string() -> String {
+        return String(self.pd_double())
     }
 
     /// 转换为`CGPoint`
     /// - Returns: `CGPoint`
-    func pd_CGPoint() -> CGPoint {
-        return CGPoint(x: self.pd_CGFloat(), y: self.pd_CGFloat())
+    func pd_cgPoint() -> CGPoint {
+        return CGPoint(x: self.pd_cgFloat(), y: self.pd_cgFloat())
     }
 
     /// 转换为`CGSize`
     /// - Returns: `CGSize`
-    func pd_CGSize() -> CGSize {
-        return CGSize(width: self.pd_CGFloat(), height: self.pd_CGFloat())
+    func pd_cgSize() -> CGSize {
+        return CGSize(width: self.pd_cgFloat(), height: self.pd_cgFloat())
     }
 }
 
@@ -86,13 +86,13 @@ public extension BinaryFloatingPoint {
     /// `角度`转`弧度`(0-360) -> (0-2PI)
     /// - Returns: `Double`弧度
     func pd_radians() -> Double {
-        return self.pd_Double() / 180.0 * Double.pi
+        return self.pd_double() / 180.0 * Double.pi
     }
 
     /// `弧度`转`角度`(0-2PI) -> (0-360)
     /// - Returns: `Double`角度
     func pd_degrees() -> Double {
-        return self.pd_Double() * (180.0 / Double.pi)
+        return self.pd_double() * (180.0 / Double.pi)
     }
 }
 
@@ -119,23 +119,23 @@ public extension BinaryFloatingPoint {
     /// 四舍五入转`Int`
     /// - Returns: `Int`
     func pd_roundToInt() -> Int {
-        return Darwin.lround(self.pd_Double())
+        return Darwin.lround(self.pd_double())
     }
 
     /// 截断到小数点后某一位
     /// - Parameter places:指定位数
     /// - Returns:截断后的结果
     func pd_truncate(places: Int) -> Self {
-        let divisor = pow(10.0, places.pd_Double())
-        return Self((self.pd_Double() * divisor).pd_floor() / divisor)
+        let divisor = pow(10.0, places.pd_double())
+        return Self((self.pd_double() * divisor).pd_floor() / divisor)
     }
 
     /// 四舍五入到小数点后某一位
     /// - Parameter places:指定位数
     /// - Returns:四舍五入后的结果
     func pd_round(_ places: Int) -> Self {
-        let divisor = pow(10.0, places.pd_Double())
-        return Self((self.pd_Double() * divisor).rounded() / divisor)
+        let divisor = pow(10.0, places.pd_double())
+        return Self((self.pd_double() * divisor).rounded() / divisor)
     }
 
     /// 返回具有指定小数位数和舍入规则的舍入值.如果`places`为负数,小数部分则将使用'0'

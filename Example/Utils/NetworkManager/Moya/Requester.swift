@@ -22,7 +22,7 @@ extension Requester {
     static func request<T: Mappable>(
         target: ServiceAPI,
         model: T.Type,
-        responseClosure: @escaping (_ response: CustomResponse<T>) -> Void
+        responseBlock: @escaping (_ response: CustomResponse<T>) -> Void
     ) {
         self.provider.request(target) { result in
 
@@ -33,6 +33,7 @@ extension Requester {
                     let response = try response.mapJSON(failsOnEmptyData: true)
                     let responseDict = response as? [String: Any] ?? [:]
                     customResponse = Mapper<CustomResponse<T>>().map(JSON: responseDict)!
+                    customResponse.isOk = customResponse.code == 200
                 } catch {
                     let moyaError = MoyaError.jsonMapping(response)
                     customResponse = CustomResponse()
@@ -49,7 +50,7 @@ extension Requester {
             } else {
                 customResponse.isOk = false
             }
-            responseClosure(customResponse)
+            responseBlock(customResponse)
         }
     }
 }
@@ -60,16 +61,16 @@ extension Requester {
     /// - Parameters:
     ///   - target: API枚举
     ///   - model: 数据模型, 需要遵守`Mappable`协议
-    ///   - progressClosure: 下载进度
-    ///   - responseClosure: 结果回调
+    ///   - progressBlock: 下载进度
+    ///   - completionBlock: 结果回调
     static func download<T: Mappable>(
         target: ServiceAPI,
         model: T.Type = DownloadResult.self,
-        progressClosure: ((_ progress: Double) -> Void)? = nil,
-        completionClosure: @escaping (_ response: CustomResponse<T>) -> Void
+        progressBlock: ((_ progress: Double) -> Void)? = nil,
+        completionBlock: @escaping (_ response: CustomResponse<T>) -> Void
     ) {
         self.provider.request(target) { progress in
-            progressClosure?(progress.progress)
+            progressBlock?(progress.progress)
         } completion: { result in
             let customResponse: CustomResponse<T> = CustomResponse()
             switch result {
@@ -89,7 +90,7 @@ extension Requester {
             } else {
                 customResponse.isOk = false
             }
-            completionClosure(customResponse)
+            completionBlock(customResponse)
         }
     }
 }
@@ -100,16 +101,16 @@ extension Requester {
     /// - Parameters:
     ///   - target: API枚举
     ///   - model: 数据模型, 需要遵守`Mappable`协议
-    ///   - progressClosure: 上传进度
-    ///   - responseClosure: 结果回调
+    ///   - progressBlock: 上传进度
+    ///   - completionBlock: 结果回调
     static func upload<T: Mappable>(
         target: ServiceAPI,
         model: T.Type,
-        progressClosure: ((_ progress: Double) -> Void)? = nil,
-        completionClosure: @escaping (_ response: CustomResponse<T>) -> Void
+        progressBlock: ((_ progress: Double) -> Void)? = nil,
+        completionBlock: @escaping (_ response: CustomResponse<T>) -> Void
     ) {
         self.provider.request(target) { progress in
-            progressClosure?(progress.progress)
+            progressBlock?(progress.progress)
         } completion: { result in
             var customResponse: CustomResponse<T>
             switch result {
@@ -118,6 +119,7 @@ extension Requester {
                     let response = try response.mapJSON(failsOnEmptyData: true)
                     let responseDict = response as? [String: Any] ?? [:]
                     customResponse = Mapper<CustomResponse<T>>().map(JSON: responseDict)!
+                    customResponse.isOk = customResponse.code == 200
                 } catch {
                     let moyaError = MoyaError.jsonMapping(response)
                     customResponse = CustomResponse()
@@ -134,7 +136,7 @@ extension Requester {
             } else {
                 customResponse.isOk = false
             }
-            completionClosure(customResponse)
+            completionBlock(customResponse)
         }
     }
 }

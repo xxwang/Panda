@@ -144,7 +144,7 @@ public extension UITextView {
     /// 清空内容
     func clear() {
         text = ""
-        attributedText = "".toAttributedString()
+        attributedText = "".pd_nsAttributedString()
     }
 
     /// 限制输入的字数
@@ -167,18 +167,18 @@ public extension UITextView {
             guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
             // 无高亮
             // 正则的判断
-            if let weakRegex = regex, !text.isMatchRegexp(weakRegex) { return false }
+            if let weakRegex = regex, !text.pd_isMatchRegexp(weakRegex) { return false }
             // 联想选中键盘
-            let allContent = oldContent.subString(to: range.location) + text
+            let allContent = oldContent.pd_subString(to: range.location) + text
             if allContent.count > maxCharacters {
-                let newContent = allContent.subString(to: maxCharacters)
+                let newContent = allContent.pd_subString(to: maxCharacters)
                 self.text = newContent
                 return false
             }
         } else {
-            guard !text.isNineKeyBoard() else { return true }
+            guard !text.pd_isNineKeyBoard() else { return true }
             // 正则的判断
-            if let weakRegex = regex, !text.isMatchRegexp(weakRegex) { return false }
+            if let weakRegex = regex, !text.pd_isMatchRegexp(weakRegex) { return false }
             // 如果数字大于指定位数,不能输入
             guard oldContent.count + text.count <= maxCharacters else { return false }
         }
@@ -199,7 +199,7 @@ public extension UITextView {
             linkAttributedString.beginEditing()
             linkAttributedString.addAttribute(NSAttributedString.Key.link,
                                               value: linkAddr,
-                                              range: linkString.fullNSRange())
+                                              range: linkString.pd_fullNSRange())
             linkAttributedString.endEditing()
         }
 
@@ -213,7 +213,7 @@ public extension UITextView {
         let nsText: NSString = text! as NSString
 
         // 使用默认设置的字体样式
-        let m_attributedText = (text ?? "").toMutableAttributedString().pd_font(font)
+        let m_attributedText = (text ?? "").pd_nsMutableAttributedString().pd_font(font)
 
         // 用来记录遍历字符串的索引位置
         var bookmark = 0
@@ -225,7 +225,7 @@ public extension UITextView {
 
         for sentence in sentences {
             // 如果是url链接则跳过
-            if !sentence.isURL() {
+            if !sentence.pd_isValidUrl() {
                 // 再按特殊符号拆分
                 let words: [String] = sentence.components(separatedBy: charactersSet)
                 var bookmark2 = bookmark

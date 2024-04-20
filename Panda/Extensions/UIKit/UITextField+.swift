@@ -59,7 +59,7 @@ public extension UITextField {
     /// 清空内容
     func clear() {
         text = ""
-        attributedText = "".toMutableAttributedString()
+        attributedText = "".pd_nsMutableAttributedString()
     }
 
     /// 将工具栏添加到`UITextField`的`inputAccessoryView`
@@ -94,18 +94,18 @@ public extension UITextField {
             guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
             // 无高亮
             // 正则的判断
-            if let weakRegex = regex, !text.isMatchRegexp(weakRegex) { return false }
+            if let weakRegex = regex, !text.pd_isMatchRegexp(weakRegex) { return false }
             // 联想选中键盘
-            let allContent = oldContent.subString(to: range.location) + text
+            let allContent = oldContent.pd_subString(to: range.location) + text
             if allContent.count > maxCharacters {
-                let newContent = allContent.subString(to: maxCharacters)
+                let newContent = allContent.pd_subString(to: maxCharacters)
                 self.text = newContent
                 return false
             }
         } else {
-            guard !text.isNineKeyBoard() else { return true }
+            guard !text.pd_isNineKeyBoard() else { return true }
             // 正则的判断
-            if let weakRegex = regex, !text.isMatchRegexp(weakRegex) { return false }
+            if let weakRegex = regex, !text.pd_isMatchRegexp(weakRegex) { return false }
             // 如果数字大于指定位数,不能输入
             guard oldContent.count + text.count <= maxCharacters else { return false }
         }
@@ -168,11 +168,11 @@ public extension UITextField {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.attributes()
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.fullNSRange())
+            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
-                .pd_addAttributes([.foregroundColor: color], for: holder.fullNSRange())
+                .pd_addAttributes([.foregroundColor: color], for: holder.pd_fullNSRange())
             self.attributedPlaceholder = attributedPlaceholder
         }
         return self
@@ -185,11 +185,11 @@ public extension UITextField {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.attributes()
             attributes[.font] = font
-            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.string.fullNSRange())
+            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.string.pd_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
-                .pd_addAttributes([.font: font], for: holder.fullNSRange())
+                .pd_addAttributes([.font: font], for: holder.pd_fullNSRange())
             self.attributedPlaceholder = attributedPlaceholder
         }
         return self
@@ -205,11 +205,11 @@ public extension UITextField {
             var attributes = holder.attributes()
             attributes[.font] = font
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.fullNSRange())
+            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
-                .pd_addAttributes([.font: font, .foregroundColor: color], for: holder.fullNSRange())
+                .pd_addAttributes([.font: font, .foregroundColor: color], for: holder.pd_fullNSRange())
             self.attributedPlaceholder = attributedPlaceholder
         }
         return self

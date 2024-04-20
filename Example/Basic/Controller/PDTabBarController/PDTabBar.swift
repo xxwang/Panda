@@ -35,7 +35,7 @@ class PDTabBar: UITabBar {
             .pd_masksToBounds(true)
             .pd_action(self, action: #selector(middleButtonClick(_:)))
 
-        let buttonWidth = SizeUtils.screenWidth / (viewModel.titles.count + 1).toCGFloat()
+        let buttonWidth = SizeUtils.screenWidth / (viewModel.titles.count + 1).pd_CGFloat()
         button.expandSize(size: (buttonWidth - btnSize.width) / 2)
 
         return button
@@ -65,12 +65,12 @@ extension PDTabBar {
 
         // 多一个中间按钮
         let buttonCount = self.viewModel.titles.count + 1
-        let buttonWidth = self.pd_width / buttonCount.toCGFloat()
+        let buttonWidth = self.pd_width / buttonCount.pd_CGFloat()
         let buttonHeight = SizeUtils.tabBarHeight
 
         let titleButtons = self.titleButtons()
         for (i, button) in titleButtons.enumerated() {
-            let buttonX = buttonWidth * i.toCGFloat() + (i >= 2 ? buttonWidth : 0)
+            let buttonX = buttonWidth * i.pd_CGFloat() + (i >= 2 ? buttonWidth : 0)
             button.pd_frame(CGRect(x: buttonX, y: 0, width: buttonWidth, height: buttonHeight))
         }
 

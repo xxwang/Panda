@@ -54,19 +54,6 @@ public extension Data {
         let range = startIndex ..< endIndex
         return self[range]
     }
-
-    /// `Data`转指定`Foundation`对象(`数组, 字典...`)
-    /// - Parameters:
-    ///   - name:要转换的目标类型`[String:Any].self`
-    ///   - options:读取`JSON`数据和创建`Foundation`对象的选项
-    /// - Returns:失败返回`nil`
-    func toJSONObject<T>(for name: T.Type = Any.self, options: JSONSerialization.ReadingOptions = []) -> T? {
-        guard let jsonObject = try? JSONSerialization.jsonObject(with: self, options: options) else {
-            return nil
-        }
-        guard let jsonObject = jsonObject as? T else { return nil }
-        return jsonObject
-    }
 }
 
 // MARK: - base64

@@ -34,7 +34,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_string(_ string: String) -> Self {
-        pd_attributedString(string.toAttributedString())
+        return pd_attributedString(string.pd_nsAttributedString())
     }
 
     /// 设置不可变字符串`NSAttributedString`
@@ -55,7 +55,7 @@ public extension NSMutableAttributedString {
     @discardableResult
     func pd_font(_ font: UIFont?, for range: NSRange? = nil) -> Self {
         if let font {
-            let range = range ?? fullNSRange()
+            let range = range ?? pd_fullNSRange()
             return pd_addAttributes([NSAttributedString.Key.font: font], for: range)
         }
         return self
@@ -68,7 +68,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_wordSpacing(_ wordSpacing: CGFloat, for range: NSRange? = nil) -> Self {
-        let range = range ?? fullNSRange()
+        let range = range ?? pd_fullNSRange()
         pd_addAttributes([.kern: wordSpacing], for: range)
         return self
     }
@@ -81,7 +81,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_lineSpacing(_ lineSpacing: CGFloat, alignment: NSTextAlignment = .left, for range: NSRange? = nil) -> Self {
-        let range = range ?? fullNSRange()
+        let range = range ?? pd_fullNSRange()
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
@@ -96,7 +96,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_foregroundColor(_ color: UIColor, for range: NSRange? = nil) -> Self {
-        let range = range ?? fullNSRange()
+        let range = range ?? pd_fullNSRange()
         return pd_addAttributes([NSAttributedString.Key.foregroundColor: color], for: range)
     }
 
@@ -108,7 +108,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_underline(_ color: UIColor, stytle: NSUnderlineStyle = .single, for range: NSRange? = nil) -> Self {
-        let range = range ?? fullNSRange()
+        let range = range ?? pd_fullNSRange()
 
         let lineStytle = NSNumber(value: Int8(stytle.rawValue))
         return pd_addAttributes([
@@ -134,7 +134,7 @@ public extension NSMutableAttributedString {
         } else {
             attributes[NSAttributedString.Key.strikethroughStyle] = 0
         }
-        let range = range ?? fullNSRange()
+        let range = range ?? pd_fullNSRange()
         return pd_addAttributes(attributes, for: range)
     }
 
@@ -145,7 +145,7 @@ public extension NSMutableAttributedString {
     func pd_firstLineHeadIndent(_ indent: CGFloat) -> Self {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = indent
-        return pd_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: fullNSRange())
+        return pd_addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], for: pd_fullNSRange())
     }
 
     /// 设置`range`范围内`文字`的`倾斜`
@@ -155,7 +155,7 @@ public extension NSMutableAttributedString {
     /// - Returns:`Self`
     @discardableResult
     func pd_obliqueness(_ obliqueness: Float = 0, for range: NSRange? = nil) -> Self {
-        let range = range ?? fullNSRange()
+        let range = range ?? pd_fullNSRange()
         return pd_addAttributes([NSAttributedString.Key.obliqueness: obliqueness], for: range)
     }
 
@@ -188,7 +188,7 @@ public extension NSMutableAttributedString {
     @discardableResult
     func pd_addAttributes(_ attributes: [NSAttributedString.Key: Any], for range: NSRange? = nil) -> Self {
         for name in attributes.keys {
-            addAttribute(name, value: attributes[name] ?? "", range: range ?? fullNSRange())
+            addAttribute(name, value: attributes[name] ?? "", range: range ?? pd_fullNSRange())
         }
         return self
     }

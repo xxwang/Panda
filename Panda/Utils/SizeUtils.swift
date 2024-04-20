@@ -106,8 +106,8 @@ private extension SizeUtils {
     static func toCGFloat(from value: Any) -> CGFloat {
         if let value = value as? CGFloat { return value }
         if let value = value as? Double { return value }
-        if let value = value as? Float { return value.toCGFloat() }
-        if let value = value as? Int { return value.toCGFloat() }
+        if let value = value as? Float { return value.pd_cgFloat() }
+        if let value = value as? Int { return value.pd_cgFloat() }
         return 0
     }
 }

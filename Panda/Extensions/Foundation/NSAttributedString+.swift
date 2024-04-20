@@ -24,15 +24,15 @@ public extension NSAttributedString {
 
     /// 整个`NSAttributedString`的`NSRange`
     /// - Returns: `NSRange`
-    func fullNSRange() -> NSRange {
-        NSRange(location: 0, length: length)
+    func pd_fullNSRange() -> NSRange {
+        return NSRange(location: 0, length: length)
     }
 
     /// 获取`subStr`在`self`中的`NSRange`
     /// - Parameter subStr:用于查找的字符串
     /// - Returns:`NSRange`
     func subNSRange(_ subStr: String) -> NSRange {
-        string.subNSRange(subStr)
+        return string.pd_nsRange(subStr)
     }
 
     /// 获取`texts`在`self`中的`[NSRange]`

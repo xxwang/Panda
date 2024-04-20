@@ -4,13 +4,13 @@ import Foundation
 public extension Bool {
     /// `Bool`转`Int`
     /// - Returns: `Int`
-    func pd_Int() -> Int {
+    func pd_int() -> Int {
         return self ? 1 : 0
     }
 
     /// `Bool`转`String`
     /// - Returns: `String`
-    func pd_String() -> String {
+    func pd_string() -> String {
         return self ? "true" : "false"
     }
 }

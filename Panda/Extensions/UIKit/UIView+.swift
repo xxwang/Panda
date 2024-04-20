@@ -858,8 +858,8 @@ public extension UIView {
         if badgeLabel == nil {
             badgeLabel = UILabel.default()
                 .pd_text(number)
-                .pd_textColor("#FFFFFF".toHexColor())
-                .pd_backgroundColor("#EE0565".toHexColor())
+                .pd_textColor("#FFFFFF".pd_hexColor())
+                .pd_backgroundColor("#EE0565".pd_hexColor())
                 .pd_font(.system(.regular, size: 10))
                 .pd_textAlignment(.center)
                 .pd_tag(6202)
@@ -867,7 +867,7 @@ public extension UIView {
         }
 
         badgeLabel?
-            .pd_text((number.toInt()) > 99 ? "99+" : number)
+            .pd_text((number.pd_int()) > 99 ? "99+" : number)
             .pd_cornerRadius(2.5)
             .pd_masksToBounds(true)
 
@@ -984,14 +984,14 @@ public extension UIView {
         font: UIFont = UIFont.systemFont(ofSize: 12)
     ) {
         // 水印文字
-        let waterMark = text.toNSString()
+        let waterMark = text.pd_nsString()
         // 水印文字大小
         let textSize = waterMark.size(withAttributes: [NSAttributedString.Key.font: font])
 
         // 多少行
         let rowNum = NSInteger(bounds.height * 3.5 / 80)
         // 多少列:自己的宽度 / (每个水印的宽度+间隔)
-        let colNum = NSInteger(bounds.width / text.strSize(bounds.width, font: font).width)
+        let colNum = NSInteger(bounds.width / text.pd_stringSize(bounds.width, font: font).width)
 
         for i in 0 ..< rowNum {
             for j in 0 ..< colNum {

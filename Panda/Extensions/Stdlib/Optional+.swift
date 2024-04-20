@@ -104,7 +104,7 @@ public extension Optional where Wrapped: RawRepresentable, Wrapped.RawValue: Equ
     ///   - rhs: 右值
     /// - Returns: 是否相等
     @inlinable static func == (lhs: Optional, rhs: Wrapped.RawValue?) -> Bool {
-        lhs?.rawValue == rhs
+        return lhs?.rawValue == rhs
     }
 
     /// 判断两个值是否相等
@@ -113,7 +113,7 @@ public extension Optional where Wrapped: RawRepresentable, Wrapped.RawValue: Equ
     ///   - rhs: 右值
     /// - Returns:是否相等
     @inlinable static func == (lhs: Wrapped.RawValue?, rhs: Optional) -> Bool {
-        lhs == rhs?.rawValue
+        return lhs == rhs?.rawValue
     }
 
     /// 判断两个值是否不相等
@@ -122,7 +122,7 @@ public extension Optional where Wrapped: RawRepresentable, Wrapped.RawValue: Equ
     ///   - rhs: 右值
     /// - Returns:是否不相等
     @inlinable static func != (lhs: Optional, rhs: Wrapped.RawValue?) -> Bool {
-        lhs?.rawValue != rhs
+        return lhs?.rawValue != rhs
     }
 
     /// 判断两个值是否不相等
@@ -131,6 +131,6 @@ public extension Optional where Wrapped: RawRepresentable, Wrapped.RawValue: Equ
     ///   - rhs: 右值
     /// - Returns:是否不相等
     @inlinable static func != (lhs: Wrapped.RawValue?, rhs: Optional) -> Bool {
-        lhs != rhs?.rawValue
+        return lhs != rhs?.rawValue
     }
 }

@@ -20,7 +20,7 @@ public extension FileManager {
     /// - Parameter fullPath:完整路径
     /// - Returns:当前目录前一个路径(`上级目录`)
     static func previousPath(_ fullPath: String) -> String {
-        fullPath.toNSString().deletingLastPathComponent
+        fullPath.pd_nsString().deletingLastPathComponent
     }
 
     /// 判断`path`所指`文件`或`目录`是否可读
@@ -55,7 +55,7 @@ public extension FileManager {
     /// - Parameter path:路径
     /// - Returns:扩展名
     static func pathExtension(_ path: String) -> String {
-        path.toNSString().pathExtension
+        path.pd_nsString().pathExtension
     }
 
     /// 获取`path`所指文件的`文件名`
@@ -148,7 +148,7 @@ public extension FileManager {
         } catch {
             fileSize += self.fileSize(path)
         }
-        return fileSize.toStoreUnit()
+        return fileSize.pd_storeUnit()
     }
 
     /// 判断`path1`与`path2`所指`文件`或`文件夹`是否一致
@@ -227,7 +227,7 @@ public extension FileManager {
             if let url = address as? URL {
                 fileURL = url
             } else if let path = address as? String {
-                fileURL = path.toURL()
+                fileURL = path.pd_url()
             }
 
             guard let fileURL else { return false }
@@ -236,7 +236,7 @@ public extension FileManager {
             let content = "\n" + "\(Date().toString()):" + string
 
             fileHandle.seekToEndOfFile()
-            fileHandle.write(content.toData()!)
+            fileHandle.write(content.pd_data()!)
 
             return true
         } catch let error as NSError {
@@ -254,7 +254,7 @@ public extension FileManager {
     static func writeData(_ data: Data?, to path: String) -> (isSuccess: Bool, error: String) {
         guard isExists(previousPath(path)) else { return (false, "文件路径不存在!") }
         guard let data else { return (false, "写入数据不能为空!") }
-        guard let url = path.toURL(), path.isURL() else { return (false, "写入路径错误!") }
+        guard let url = path.pd_url(), path.pd_isValidUrl() else { return (false, "写入路径错误!") }
 
         do {
             try data.write(to: url, options: .atomic)

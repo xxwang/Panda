@@ -108,7 +108,7 @@ public extension CGFloat {
     /// - Parameter places:指定位数
     /// - Returns:截断后的结果
     func truncate(places: Int) -> Self {
-        let divisor = pow(10.0, places.toDouble())
+        let divisor = pow(10.0, places.pd_double())
         return Self(toDouble() * divisor / divisor)
     }
 
@@ -116,7 +116,7 @@ public extension CGFloat {
     /// - Parameter places:指定位数
     /// - Returns:四舍五入后的结果
     func round(_ places: Int) -> Self {
-        let divisor = pow(10.0, places.toDouble())
+        let divisor = pow(10.0, places.pd_double())
         return Self((toDouble() * divisor).rounded() / divisor)
     }
 

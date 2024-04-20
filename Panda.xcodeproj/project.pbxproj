@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		163DC9062BD2DB4500CC99F9 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC9052BD2DB4500CC99F9 /* Demo.swift */; };
+		163DC90B2BD37D2B00CC99F9 /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90A2BD37D2B00CC99F9 /* Codable+.swift */; };
 		165178F52BB1A4A00032ADA8 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165178F42BB1A4A00032ADA8 /* Functions.swift */; };
 		169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409532ABC738800356736 /* StoryboardLoadable.swift */; };
 		169409FD2ABC738800356736 /* AssociatedAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409542ABC738800356736 /* AssociatedAttributes.swift */; };
@@ -143,7 +145,6 @@
 		16940A822ABC738800356736 /* BinaryInteger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EA2ABC738800356736 /* BinaryInteger+.swift */; };
 		16940A832ABC738800356736 /* BidirectionalCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EB2ABC738800356736 /* BidirectionalCollection+.swift */; };
 		16940A842ABC738800356736 /* Comparable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EC2ABC738800356736 /* Comparable+.swift */; };
-		16940A852ABC738800356736 /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409ED2ABC738800356736 /* Encodable+.swift */; };
 		16940A862ABC738800356736 /* BinaryFloatingPoint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EE2ABC738800356736 /* BinaryFloatingPoint+.swift */; };
 		16940A872ABC738800356736 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409EF2ABC738800356736 /* Array+.swift */; };
 		16940A882ABC738800356736 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F02ABC738800356736 /* Sequence+.swift */; };
@@ -154,7 +155,6 @@
 		16940A8D2ABC738800356736 /* ClosedRange+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F52ABC738800356736 /* ClosedRange+.swift */; };
 		16940A8E2ABC738800356736 /* SignedInteger+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F62ABC738800356736 /* SignedInteger+.swift */; };
 		16940A8F2ABC738800356736 /* Optional+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F72ABC738800356736 /* Optional+.swift */; };
-		16940A902ABC738800356736 /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F82ABC738800356736 /* Decodable+.swift */; };
 		16940A912ABC738800356736 /* MutableCollection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409F92ABC738800356736 /* MutableCollection+.swift */; };
 		16940A922ABC738800356736 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409FB2ABC738800356736 /* Color+.swift */; };
 		16940A952ABC761700356736 /* Panda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E3E5F62A2A652700043401 /* Panda.framework */; };
@@ -235,6 +235,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		163DC9052BD2DB4500CC99F9 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
+		163DC90A2BD37D2B00CC99F9 /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		165178F42BB1A4A00032ADA8 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		169409532ABC738800356736 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		169409542ABC738800356736 /* AssociatedAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedAttributes.swift; sourceTree = "<group>"; };
@@ -371,7 +373,6 @@
 		169409EA2ABC738800356736 /* BinaryInteger+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+.swift"; sourceTree = "<group>"; };
 		169409EB2ABC738800356736 /* BidirectionalCollection+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection+.swift"; sourceTree = "<group>"; };
 		169409EC2ABC738800356736 /* Comparable+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comparable+.swift"; sourceTree = "<group>"; };
-		169409ED2ABC738800356736 /* Encodable+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
 		169409EE2ABC738800356736 /* BinaryFloatingPoint+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+.swift"; sourceTree = "<group>"; };
 		169409EF2ABC738800356736 /* Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		169409F02ABC738800356736 /* Sequence+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
@@ -382,7 +383,6 @@
 		169409F52ABC738800356736 /* ClosedRange+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClosedRange+.swift"; sourceTree = "<group>"; };
 		169409F62ABC738800356736 /* SignedInteger+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SignedInteger+.swift"; sourceTree = "<group>"; };
 		169409F72ABC738800356736 /* Optional+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+.swift"; sourceTree = "<group>"; };
-		169409F82ABC738800356736 /* Decodable+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
 		169409F92ABC738800356736 /* MutableCollection+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MutableCollection+.swift"; sourceTree = "<group>"; };
 		169409FB2ABC738800356736 /* Color+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		16A3EC282BBDC8F500025F53 /* PDCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDCollectionViewController.swift; sourceTree = "<group>"; };
@@ -464,26 +464,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		168980BD2BD1425500AB73A4 /* 已优化 */ = {
+		163DC9042BD2DB3700CC99F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				169409F62ABC738800356736 /* SignedInteger+.swift */,
-				169409E92ABC738800356736 /* Collection+.swift */,
-				169409F02ABC738800356736 /* Sequence+.swift */,
-				169409EF2ABC738800356736 /* Array+.swift */,
-				169409F92ABC738800356736 /* MutableCollection+.swift */,
-				169409F72ABC738800356736 /* Optional+.swift */,
-				169409E82ABC738800356736 /* Range+.swift */,
-				169409E72ABC738800356736 /* Character+.swift */,
-				169409F52ABC738800356736 /* ClosedRange+.swift */,
-				169409EC2ABC738800356736 /* Comparable+.swift */,
-				169409EA2ABC738800356736 /* BinaryInteger+.swift */,
-				169409EE2ABC738800356736 /* BinaryFloatingPoint+.swift */,
-				169409F22ABC738800356736 /* Bool+.swift */,
-				169409EB2ABC738800356736 /* BidirectionalCollection+.swift */,
-				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
+				163DC9052BD2DB4500CC99F9 /* Demo.swift */,
 			);
-			path = "已优化";
+			path = Other;
 			sourceTree = "<group>";
 		};
 		169409522ABC738800356736 /* protocol */ = {
@@ -754,11 +740,24 @@
 		169409E62ABC738800356736 /* Stdlib */ = {
 			isa = PBXGroup;
 			children = (
-				168980BD2BD1425500AB73A4 /* 已优化 */,
-				169409ED2ABC738800356736 /* Encodable+.swift */,
-				169409F82ABC738800356736 /* Decodable+.swift */,
-				169409F12ABC738800356736 /* String+.swift */,
+				169409F62ABC738800356736 /* SignedInteger+.swift */,
+				169409E92ABC738800356736 /* Collection+.swift */,
+				169409F02ABC738800356736 /* Sequence+.swift */,
+				169409EF2ABC738800356736 /* Array+.swift */,
+				169409F92ABC738800356736 /* MutableCollection+.swift */,
+				169409F72ABC738800356736 /* Optional+.swift */,
+				169409E82ABC738800356736 /* Range+.swift */,
+				169409E72ABC738800356736 /* Character+.swift */,
+				169409F52ABC738800356736 /* ClosedRange+.swift */,
+				169409EC2ABC738800356736 /* Comparable+.swift */,
+				169409EA2ABC738800356736 /* BinaryInteger+.swift */,
+				169409EE2ABC738800356736 /* BinaryFloatingPoint+.swift */,
+				169409F22ABC738800356736 /* Bool+.swift */,
+				169409EB2ABC738800356736 /* BidirectionalCollection+.swift */,
+				169409F32ABC738800356736 /* RangeReplaceableCollection+.swift */,
 				169409F42ABC738800356736 /* Dictionary+.swift */,
+				163DC90A2BD37D2B00CC99F9 /* Codable+.swift */,
+				169409F12ABC738800356736 /* String+.swift */,
 			);
 			path = Stdlib;
 			sourceTree = "<group>";
@@ -921,6 +920,7 @@
 				16A3EC832BBE847D00025F53 /* Calendar */,
 				16A3EC842BBE848400025F53 /* Square */,
 				16A3EC852BBE848B00025F53 /* Mine */,
+				163DC9042BD2DB3700CC99F9 /* Other */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -1240,7 +1240,6 @@
 				16940A0E2ABC738800356736 /* SkinUtils.swift in Sources */,
 				16940A042ABC738800356736 /* PlistUtils.swift in Sources */,
 				16940A822ABC738800356736 /* BinaryInteger+.swift in Sources */,
-				16940A852ABC738800356736 /* Encodable+.swift in Sources */,
 				16940A892ABC738800356736 /* String+.swift in Sources */,
 				16940A062ABC738800356736 /* RuntimeUtils.swift in Sources */,
 				16940A052ABC738800356736 /* EnvUtils.swift in Sources */,
@@ -1368,6 +1367,7 @@
 				16940A122ABC738800356736 /* PhotoUtils.swift in Sources */,
 				16940A592ABC738800356736 /* Locale+.swift in Sources */,
 				16940A002ABC738800356736 /* Defaultable.swift in Sources */,
+				163DC90B2BD37D2B00CC99F9 /* Codable+.swift in Sources */,
 				16940A502ABC738800356736 /* SCNCylinder+.swift in Sources */,
 				16940A7E2ABC738800356736 /* CAShapeLayer+.swift in Sources */,
 				16940A252ABC738800356736 /* UISlider+.swift in Sources */,
@@ -1376,7 +1376,6 @@
 				16940A162ABC738800356736 /* WKWebView+.swift in Sources */,
 				16940A7D2ABC738800356736 /* CATransform3D+.swift in Sources */,
 				16940A312ABC738800356736 /* UITabBar+.swift in Sources */,
-				16940A902ABC738800356736 /* Decodable+.swift in Sources */,
 				16940A1A2ABC738800356736 /* CGRect+.swift in Sources */,
 				16940A462ABC738800356736 /* UIRefreshControl+.swift in Sources */,
 			);
@@ -1417,6 +1416,7 @@
 				16A3EC4C2BBDC8F500025F53 /* PDControl.swift in Sources */,
 				16A3EC492BBDC8F500025F53 /* PDButton.swift in Sources */,
 				16A3EC642BBE5DCC00025F53 /* CustomResponse.swift in Sources */,
+				163DC9062BD2DB4500CC99F9 /* Demo.swift in Sources */,
 				16A3EC8B2BBE84D100025F53 /* SquareViewController.swift in Sources */,
 				16A3EC482BBDC8F500025F53 /* PDTitleBar.swift in Sources */,
 				16A3EC472BBDC8F500025F53 /* PDStatusBar.swift in Sources */,

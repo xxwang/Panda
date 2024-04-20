@@ -208,7 +208,7 @@ public extension UIDevice {
             guard let currentRadioTechs = info.serviceCurrentRadioAccessTechnology else {
                 return nil
             }
-            return currentRadioTechs.allValues()
+            return currentRadioTechs.pd_allValues()
         } else {
             guard let currentRadioTech = info.currentRadioAccessTechnology else {
                 return nil
@@ -289,7 +289,7 @@ public extension UIDevice {
             guard let providers = info.serviceSubscriberCellularProviders else {
                 return []
             }
-            return providers.filter { $0.value.carrierName != nil }.allValues()
+            return providers.filter { $0.value.carrierName != nil }.pd_allValues()
         } else {
             guard let carrier = info.subscriberCellularProvider, carrier.carrierName != nil else {
                 return []

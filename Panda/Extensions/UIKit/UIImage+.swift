@@ -45,7 +45,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - color:图像填充颜色
     ///   - size:图像尺寸
-    convenience init(with color: UIColor, size: CGSize = 1.toCGSize()) {
+    convenience init(with color: UIColor, size: CGSize = 1.pd_cgSize()) {
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
         defer { UIGraphicsEndImageContext() }
         color.setFill()
@@ -71,8 +71,8 @@ public extension UIImage {
     ///   - lightImageName:高亮图片名称
     ///   - darkImageName:暗调图片名称
     convenience init(lightImageName: String, darkImageName: String? = nil) {
-        self.init(lightImage: lightImageName.toImage(),
-                  darkImage: (darkImageName ?? lightImageName).toImage())
+        self.init(lightImage: lightImageName.pd_image(),
+                  darkImage: (darkImageName ?? lightImageName).pd_image())
     }
 
     /// 用不同的图片创建动态图片
@@ -1751,7 +1751,7 @@ public extension UIImage {
         let avatarSize = size
 
         // 只有一张图片的情况
-        if count == 1 { return [CGRect(origin: .zero, size: size.toCGSize())] }
+        if count == 1 { return [CGRect(origin: .zero, size: size.pd_cgSize())] }
 
         // 结果数组
         var rects = [CGRect]()
@@ -2059,7 +2059,7 @@ public extension UIImage {
         // 图形重绘
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         // 绘制文字
-        text.toNSString().draw(in: frame, withAttributes: attributes)
+        text.pd_nsString().draw(in: frame, withAttributes: attributes)
         // 从当前上下文获取图片
         let image = UIGraphicsGetImageFromCurrentImageContext()
         // 关闭上下文
@@ -2099,7 +2099,7 @@ public extension UIImage {
         let sise = CGSize(width: size.0, height: size.1)
         let rect = CGRect(origin: CGPoint.zero, size: sise)
 
-        let textsize = text.strSize(SizeUtils.screenWidth, font: .systemFont(ofSize: fontSize))
+        let textsize = text.pd_stringSize(SizeUtils.screenWidth, font: .systemFont(ofSize: fontSize))
 
         // 开启上下文
         UIGraphicsBeginImageContext(sise)

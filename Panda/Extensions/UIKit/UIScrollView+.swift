@@ -79,7 +79,7 @@ public extension UIScrollView {
         UIGraphicsBeginImageContextWithOptions(contentSize, false, UIScreen.main.scale)
 
         // 这个方法是一个绘图,里面可能有递归调用
-        screenshot(index: 0, maxIndex: page.toInt()) {
+        screenshot(index: 0, maxIndex: page.pd_int()) {
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             // 设置原点偏移
@@ -100,13 +100,13 @@ public extension UIScrollView {
         setContentOffset(
             CGPoint(
                 x: 0,
-                y: index.toCGFloat() * frame.size.height
+                y: index.pd_cgFloat() * frame.size.height
             ),
             animated: false
         )
         let splitFrame = CGRect(
             x: 0,
-            y: index.toCGFloat() * frame.size.height,
+            y: index.pd_cgFloat() * frame.size.height,
             width: bounds.width,
             height: bounds.height
         )

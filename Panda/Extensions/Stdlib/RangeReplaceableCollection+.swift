@@ -2,7 +2,6 @@ import Foundation
 
 // MARK: - 构造方法
 public extension RangeReplaceableCollection {
-
     /// 使用`expression`结果创建一个指定大小的集合
     ///
     ///     let values = Array(expression:"Value", count:3)
@@ -24,7 +23,6 @@ public extension RangeReplaceableCollection {
 
 // MARK: - 下标
 public extension RangeReplaceableCollection {
-    
     /// 访问指定位置的元素
     /// - Parameter offset: 元素位置对应的偏移
     /// - Returns: 指定位置的元素
@@ -56,7 +54,6 @@ public extension RangeReplaceableCollection {
 
 // MARK: - 方法
 public extension RangeReplaceableCollection {
-
     /// 按给定位置返回新的旋转集合
     ///
     ///     [1, 2, 3, 4].pd_rotated(by:1) -> [4,1,2,3]

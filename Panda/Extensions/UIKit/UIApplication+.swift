@@ -130,22 +130,22 @@ public extension UIApplication {
     /// - Returns:(isOk:是否成功, versions:(major:主版本号, minor:次版本号, patch:补丁版本号))
     func splitAppVersion(_ version: String) -> (isOk: Bool, versions: (major: Int, minor: Int, patch: Int)) {
         // 获取(主版本号、次版本号、补丁版本号)字符串数组
-        let versionNumbers = version.split(with: ".")
+        let versionNumbers = version.pd_split(with: ".")
         if versionNumbers.count != 3 {
             return (isOk: false, versions: (major: 0, minor: 0, patch: 0))
         }
 
         // 主版本号
         let majorString = versionNumbers[0]
-        let majorNumber = majorString.toInt()
+        let majorNumber = majorString.pd_int()
 
         // 次版本号
         let minorString = versionNumbers[1]
-        let minorNumber = minorString.toInt()
+        let minorNumber = minorString.pd_int()
 
         // 补丁版本号
         let patchString = versionNumbers[2]
-        let patchNumber = patchString.toInt()
+        let patchNumber = patchString.pd_int()
 
         return (isOk: true, versions: (major: majorNumber, minor: minorNumber, patch: patchNumber))
     }

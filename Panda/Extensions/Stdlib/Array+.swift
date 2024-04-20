@@ -143,11 +143,11 @@ public extension Array {
 public extension [String] {
     /// 数组转字符转
     ///
-    ///     ["1", "2", "3"].pd_toString(separator: "-") //"1-2-3"
+    ///     ["1", "2", "3"].pd_string(separator: "-") //"1-2-3"
     ///
     /// - Parameter separator: 分割符
     /// - Returns: 结果字符串
-    func pd_toString(separator: String = "") -> String {
+    func pd_string(separator: String = "") -> String {
         self.joined(separator: separator)
     }
 }
@@ -351,7 +351,7 @@ public extension Array where Element: NSAttributedString {
     /// - Parameter separator: `NSAttributedString`分割符
     /// - Returns: `NSAttributedString`
     func pd_joined(separator: NSAttributedString) -> NSAttributedString {
-        guard let firstElement = first else { return "".toAttributedString() }
+        guard let firstElement = first else { return "".pd_nsAttributedString() }
         return dropFirst()
             .reduce(into: NSMutableAttributedString(attributedString: firstElement)) { result, element in
                 result.append(separator)
@@ -365,25 +365,5 @@ public extension Array where Element: NSAttributedString {
     func pd_joined(separator: String) -> NSAttributedString {
         let separator = NSAttributedString(string: separator)
         return pd_joined(separator: separator)
-    }
-}
-
-// MARK: - Array
-public extension Array {
-    /// 数组`JSON`转`Data?`
-    /// - Parameter prettify: 是否美化格式
-    /// - Returns: JSON格式的`Data?`
-    func pd_JSONData(prettify: Bool = false) -> Data? {
-        guard JSONSerialization.isValidJSONObject(self) else { return nil }
-        let options: JSONSerialization.WritingOptions = (prettify == true) ? .prettyPrinted : .init()
-        return try? JSONSerialization.data(withJSONObject: self, options: options)
-    }
-
-    /// 数组`JSON`转`JSON`字符串
-    /// - Parameter prettify: 是否美化格式
-    /// - Returns: `JSON`字符串
-    func pd_JSONString(prettify: Bool = false) -> String? {
-        guard let data = pd_JSONData(prettify: prettify) else { return nil }
-        return String(data: data, encoding: .utf8)?.replacingOccurrences(of: "\\/", with: "/", options: .caseInsensitive, range: nil)
     }
 }

@@ -220,7 +220,7 @@ public extension DarkModeUtils {
         if startTime != nil, endTime != nil {
             timeIntervalValue = [startTime!, endTime!]
         } else {
-            timeIntervalValue = DarkModeUtils.SmartPeelingTimeIntervalValue.split(with: "~")
+            timeIntervalValue = DarkModeUtils.SmartPeelingTimeIntervalValue.pd_split(with: "~")
         }
         // 1、时间区间分隔为:开始时间 和 结束时间
         // 2、当前的时间转时间戳
@@ -228,13 +228,13 @@ public extension DarkModeUtils {
         let currentTimeStamp = Int(currentDate.dateAsTimestamp())!
         let dateString = currentDate.toString(with: "yyyy-MM-dd", isGMT: false)
         let startTimeStamp = (dateString + " " + timeIntervalValue[0])
-            .toDate(with: "yyyy-MM-dd HH:mm")?
+            .pd_date(with: "yyyy-MM-dd HH:mm")?
             .secondStamp()
-            .toInt() ?? 0
+            .pd_int() ?? 0
         var endTimeStamp = (dateString + " " + timeIntervalValue[1])
-            .toDate(with: "yyyy-MM-dd HH:mm")?
+            .pd_date(with: "yyyy-MM-dd HH:mm")?
             .secondStamp()
-            .toInt() ?? 0
+            .pd_int() ?? 0
 
         if startTimeStamp > endTimeStamp {
             endTimeStamp = endTimeStamp + 884_600
