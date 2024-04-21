@@ -1,10 +1,3 @@
-//
-//  Data+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
-
 import UIKit
 
 // MARK: - 方法
