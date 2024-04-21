@@ -1,10 +1,3 @@
-//
-//  NSMutableParagraphStyle+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
-
 import UIKit
 
 // MARK: - Defaultable
@@ -14,11 +7,11 @@ public extension NSMutableParagraphStyle {
 
     @objc class func `default`() -> Associatedtype {
         let style = NSMutableParagraphStyle()
-        style.hyphenationFactor = 1.0
-        style.firstLineHeadIndent = 0.0
-        style.paragraphSpacingBefore = 0.0
-        style.headIndent = 0
-        style.tailIndent = 0
+            .pd_hyphenationFactor(1.0)
+            .pd_firstLineHeadIndent(0.0)
+            .pd_paragraphSpacingBefore(0.0)
+            .pd_headIndent(0)
+            .pd_tailIndent(0)
         return style
     }
 }
@@ -26,8 +19,8 @@ public extension NSMutableParagraphStyle {
 // MARK: - 链式语法
 public extension NSMutableParagraphStyle {
     /// 设置对齐方式
-    /// - Parameter alignment:对方方式
-    /// - Returns:`Self`
+    /// - Parameter alignment: 对方方式
+    /// - Returns: `Self`
     @discardableResult
     func pd_alignment(_ alignment: NSTextAlignment) -> Self {
         self.alignment = alignment
@@ -35,8 +28,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置换行方式
-    /// - Parameter lineBreakMode:换行方式
-    /// - Returns:`Self`
+    /// - Parameter lineBreakMode: 换行方式
+    /// - Returns: `Self`
     @discardableResult
     func pd_lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> Self {
         self.lineBreakMode = lineBreakMode
@@ -44,8 +37,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置行间距
-    /// - Parameter lineSpacing:行间距
-    /// - Returns:`Self`
+    /// - Parameter lineSpacing: 行间距
+    /// - Returns: `Self`
     @discardableResult
     func pd_lineSpacing(_ lineSpacing: CGFloat) -> Self {
         self.lineSpacing = lineSpacing
@@ -53,8 +46,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置段落间距
-    /// - Parameter paragraphSpacing:段落间距
-    /// - Returns:`Self`
+    /// - Parameter paragraphSpacing: 段落间距
+    /// - Returns: `Self`
     @discardableResult
     func pd_paragraphSpacing(_ paragraphSpacing: CGFloat) -> Self {
         self.paragraphSpacing = paragraphSpacing
@@ -62,8 +55,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置连字符系数
-    /// - Parameter hyphenationFactor:连字符系数
-    /// - Returns:`Self`
+    /// - Parameter hyphenationFactor: 连字符系数
+    /// - Returns: `Self`
     @discardableResult
     func pd_hyphenationFactor(_ hyphenationFactor: Float) -> Self {
         self.hyphenationFactor = hyphenationFactor
@@ -71,8 +64,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置第一行缩进
-    /// - Parameter firstLineHeadIndent:缩进
-    /// - Returns:`Self`
+    /// - Parameter firstLineHeadIndent: 缩进
+    /// - Returns: `Self`
     @discardableResult
     func pd_firstLineHeadIndent(_ firstLineHeadIndent: CGFloat) -> Self {
         self.firstLineHeadIndent = firstLineHeadIndent
@@ -81,7 +74,7 @@ public extension NSMutableParagraphStyle {
 
     /// 设置段落前间距
     /// - Parameter paragraphSpacingBefore: 段落前间距
-    /// - Returns:`Self`
+    /// - Returns: `Self`
     @discardableResult
     func pd_paragraphSpacingBefore(_ paragraphSpacingBefore: CGFloat) -> Self {
         self.paragraphSpacingBefore = paragraphSpacingBefore
@@ -89,8 +82,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置头部缩进
-    /// - Parameter headIndent:头部缩进
-    /// - Returns:`Self`
+    /// - Parameter headIndent: 头部缩进
+    /// - Returns: `Self`
     @discardableResult
     func pd_headIndent(_ headIndent: CGFloat) -> Self {
         self.headIndent = headIndent
@@ -98,8 +91,8 @@ public extension NSMutableParagraphStyle {
     }
 
     /// 设置尾部缩进
-    /// - Parameter paragraphSpacing:尾部缩进
-    /// - Returns:`Self`
+    /// - Parameter tailIndent: 尾部缩进
+    /// - Returns: `Self`
     @discardableResult
     func pd_tailIndent(_ tailIndent: CGFloat) -> Self {
         self.tailIndent = tailIndent

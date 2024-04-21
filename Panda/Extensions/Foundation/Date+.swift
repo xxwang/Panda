@@ -1185,7 +1185,7 @@ public extension Date {
 extension Date: Defaultable {}
 public extension Date {
     typealias Associatedtype = Date
-    static func pd_`default`() -> Associatedtype {
+    static func `default`() -> Associatedtype {
         if #available(iOS 15, *) {
             return Date.now
         } else {
