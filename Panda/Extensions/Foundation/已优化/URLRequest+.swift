@@ -1,16 +1,9 @@
-//
-//  URLRequest+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
-
 import Foundation
 
 // MARK: - 构造方法
 public extension URLRequest {
-    /// 使用URL字符串创建`URLRequest`
-    /// - Parameter urlString:`URL`字符串
+    /// 使用`URL`字符串构建`URLRequest`
+    /// - Parameter urlString: URL`字符串
     init?(string urlString: String) {
         guard let url = URL(string: urlString) else { return nil }
         self.init(url: url)
@@ -20,8 +13,8 @@ public extension URLRequest {
 // MARK: - 方法
 public extension URLRequest {
     /// `URLRequest`的`cURL`命令表示形式
-    /// - Returns: `String`
-    func toCURLString() -> String {
+    /// - Returns: 结果字符串
+    func pd_cURLString() -> String {
         guard let url else { return "" }
 
         var baseCommand = "curl \(url.absoluteString)"

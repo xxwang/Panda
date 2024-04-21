@@ -96,7 +96,7 @@ public extension Bundle {
     ///   - fileName:文件名称
     ///   - ext:后缀名称
     /// - Returns:对应路径
-    static func path(for fileName: String?, withExtension ext: String? = nil) -> String? {
+    static func pd_path(for fileName: String?, withExtension ext: String? = nil) -> String? {
         guard let path = Bundle.main.path(forResource: fileName, ofType: ext) else {
             return nil
         }
@@ -108,7 +108,7 @@ public extension Bundle {
     ///   - fileName:文件名称
     ///   - ext:后缀名称
     /// - Returns:对应路径
-    static func url(for fileName: String?, withExtension ext: String? = nil) -> URL? {
+    static func pd_url(for fileName: String?, withExtension ext: String? = nil) -> URL? {
         guard let url = Bundle.main.url(forResource: fileName, withExtension: ext) else {
             return nil
         }

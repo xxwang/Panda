@@ -1,10 +1,3 @@
-//
-//  NSNumber+.swift
-//
-//
-//  Created by xxwang on 2023/5/24.
-//
-
 import Foundation
 
 // MARK: - 方法
@@ -12,16 +5,16 @@ public extension NSNumber {
     /// 按指定样式格式化数字
     /// - Parameters:
     ///   - style: 样式
-    ///   - separator: 分割符
-    ///   - mode: 传入模式
+    ///   - separator: 分隔符
+    ///   - mode: 模式
     ///   - minDecimalPlaces: 小数点后最少保留位数
     ///   - maxDecimalPlaces: 小数点后最大保留位数
-    /// - Returns: 字符串
-    func formatter(style: NumberFormatter.Style = .none,
-                   separator: String = ",",
-                   mode: NumberFormatter.RoundingMode = .halfEven,
-                   min minDecimalPlaces: Int = 0,
-                   max maxDecimalPlaces: Int = 0) -> String?
+    /// - Returns: 结果字符串
+    func pd_formatter(style: NumberFormatter.Style = .none,
+                      separator: String = ",",
+                      mode: NumberFormatter.RoundingMode = .halfEven,
+                      minDecimalPlaces: Int = 0,
+                      maxDecimalPlaces: Int = 0) -> String?
     {
         let formater = NumberFormatter()
         // 样式

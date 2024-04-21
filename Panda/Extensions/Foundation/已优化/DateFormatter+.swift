@@ -1,10 +1,3 @@
-//
-//  DateFormatter+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
-
 import Foundation
 
 // MARK: - 构造方法
@@ -16,7 +9,7 @@ public extension DateFormatter {
     ///   - timeZone: 时区
     convenience init(format: String, locale: Locale? = nil, timeZone: TimeZone? = nil) {
         self.init()
-        dateFormat = format
+        self.dateFormat = format
         if let locale { self.locale = locale }
         if let timeZone { self.timeZone = timeZone }
     }
@@ -28,13 +21,14 @@ public extension DateFormatter {
     typealias Associatedtype = DateFormatter
 
     @objc class func `default`() -> Associatedtype {
-        DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss", locale: .current, timeZone: .current)
+        let formatter = DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss", locale: .current, timeZone: .current)
+        return formatter
     }
 }
 
 // MARK: - 链式语法
 public extension DateFormatter {
-    /// 日期格式
+    /// 设置日期格式
     /// - Parameter dateFormat: 日期格式
     /// - Returns: `Self`
     @discardableResult
@@ -43,7 +37,7 @@ public extension DateFormatter {
         return self
     }
 
-    /// 地区
+    /// 设置地区
     /// - Parameter locale: 地区
     /// - Returns: `Self`
     @discardableResult
@@ -52,7 +46,7 @@ public extension DateFormatter {
         return self
     }
 
-    /// 时区
+    /// 设置时区
     /// - Parameter locale: 时区
     /// - Returns: `Self`
     @discardableResult

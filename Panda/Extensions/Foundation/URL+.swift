@@ -39,7 +39,7 @@ public extension URL {
 public extension URL {
     /// 检测应用是否能打开这个`URL`
     /// - Returns: `Bool`
-    func canOpen() -> Bool {
+    func pd_canOpen() -> Bool {
         UIApplication.shared.canOpenURL(self)
     }
 
@@ -51,7 +51,7 @@ public extension URL {
     ///
     /// - Parameter parameters: 参数字典
     /// - Returns: 附加查询参数的`URL`
-    func appendParameters(_ parameters: [String: String]) -> URL {
+    func pd_appendParameters(_ parameters: [String: String]) -> URL {
         var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = (urlComponents.queryItems ?? []) + parameters.map {
             URLQueryItem(name: $0, value: $1)
@@ -67,7 +67,7 @@ public extension URL {
     ///     print(url) // prints "https://google.com?q=Swifter%20Swift"
     ///
     /// - Parameter parameters:参数字典
-    mutating func appendParameters(_ parameters: [String: String]) {
+    mutating func pd_appendParameters(_ parameters: [String: String]) {
         self = appendParameters(parameters)
     }
 
@@ -77,7 +77,7 @@ public extension URL {
     ///     queryValue(for:"code") -> "12345"
     ///
     /// - Parameter key:键
-    func queryValue(for key: String) -> String? {
+    func pd_queryValue(for key: String) -> String? {
         URLComponents(string: absoluteString)?
             .queryItems?
             .first(where: { $0.name == key })?
@@ -90,7 +90,7 @@ public extension URL {
     ///     print(url.deletingAllPathComponents()) // prints "https://domain.com/"
     ///
     /// - Returns:`URL`
-    func deletingAllPathComponents() -> URL {
+    func pd_deletingAllPathComponents() -> URL {
         var url: URL = self
         for _ in 0 ..< pathComponents.count - 1 {
             url.deleteLastPathComponent()
@@ -104,7 +104,7 @@ public extension URL {
     ///     url.deleteAllPathComponents()
     ///     print(url) // prints "https://domain.com/"
     ///
-    mutating func deleteAllPathComponents() {
+    mutating func pd_deleteAllPathComponents() {
         for _ in 0 ..< pathComponents.count - 1 {
             deleteLastPathComponent()
         }
@@ -115,7 +115,7 @@ public extension URL {
     ///     let url = URL(string:"https://domain.com")!
     ///     print(url.droppedScheme()) // prints "domain.com"
     ///
-    func droppedScheme() -> URL? {
+    func pd_droppedScheme() -> URL? {
         if let scheme {
             let droppedScheme = String(absoluteString.dropFirst(scheme.count + 3))
             return URL(string: droppedScheme)
@@ -137,7 +137,7 @@ public extension URL {
     ///
     /// - Parameter time:需要生成图片的视频的时间`秒`
     /// - Returns:`UIImage`
-    func thumbnail(from time: Float64 = 0) -> UIImage? {
+    func pd_thumbnail(from time: Float64 = 0) -> UIImage? {
         let imageGenerator = AVAssetImageGenerator(asset: AVAsset(url: self))
         let time = CMTimeMakeWithSeconds(time, preferredTimescale: 1)
         var actualTime = CMTimeMake(value: 0, timescale: 0)

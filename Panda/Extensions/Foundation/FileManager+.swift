@@ -12,49 +12,49 @@ public extension FileManager {
     /// 判断`path`所指`文件`或`文件夹`是否存在
     /// - Parameter path:路径
     /// - Returns:`Bool`
-    static func isExists(_ path: String) -> Bool {
+    static func pd_isExists(_ path: String) -> Bool {
         FileManager.default.fileExists(atPath: path)
     }
 
     /// 获取`path`所指前一个路径(`上级目录`)
     /// - Parameter fullPath:完整路径
     /// - Returns:当前目录前一个路径(`上级目录`)
-    static func previousPath(_ fullPath: String) -> String {
+    static func pd_previousPath(_ fullPath: String) -> String {
         fullPath.pd_nsString().deletingLastPathComponent
     }
 
     /// 判断`path`所指`文件`或`目录`是否可读
     /// - Parameter path:路径
     /// - Returns:`Bool`
-    static func isReadable(_ path: String) -> Bool {
+    static func pd_isReadable(_ path: String) -> Bool {
         FileManager.default.isReadableFile(atPath: path)
     }
 
     /// 判断`path`所指`文件`或`目录`是否可写
     /// - Parameter path:路径
     /// - Returns:`Bool`
-    static func isWritable(_ path: String) -> Bool {
+    static func pd_isWritable(_ path: String) -> Bool {
         FileManager.default.isWritableFile(atPath: path)
     }
 
     /// 判断`path`所指`文件`或`目录`是否可执行
     /// - Parameter path:路径
     /// - Returns:`Bool`
-    static func isExecutable(_ path: String) -> Bool {
+    static func pd_isExecutable(_ path: String) -> Bool {
         FileManager.default.isExecutableFile(atPath: path)
     }
 
     /// 判断`path`所指`文件`或`目录`是否可删除
     /// - Parameter path:路径
     /// - Returns:`Bool`
-    static func isDeletable(_ path: String) -> Bool {
+    static func pd_isDeletable(_ path: String) -> Bool {
         FileManager.default.isDeletableFile(atPath: path)
     }
 
     /// 获取`path`所指文件的`扩展名`
     /// - Parameter path:路径
     /// - Returns:扩展名
-    static func pathExtension(_ path: String) -> String {
+    static func pd_pathExtension(_ path: String) -> String {
         path.pd_nsString().pathExtension
     }
 
@@ -63,7 +63,7 @@ public extension FileManager {
     ///   - path:路径
     ///   - pathExtension:是否获取`扩展名`
     /// - Returns:文件名称
-    static func fileName(_ path: String, suffix pathExtension: Bool = true) -> String {
+    static func pd_fileName(_ path: String, suffix pathExtension: Bool = true) -> String {
         let fileName = (path as NSString).lastPathComponent
         guard pathExtension else { return (fileName as NSString).deletingPathExtension }
         return fileName
@@ -72,7 +72,7 @@ public extension FileManager {
     /// 获取`path`目录下的`文件``目录``符号链接`(不进行`递归遍历`)
     /// - Parameter path:要搜索的路径
     /// - Returns:结果数组
-    static func shallowSearchAllFiles(_ path: String) -> [String] {
+    static func pd_shallowSearchAllFiles(_ path: String) -> [String] {
         guard let result = try? FileManager.default.contentsOfDirectory(atPath: path) else {
             return []
         }
@@ -82,7 +82,7 @@ public extension FileManager {
     /// 获取`path`目录下的`文件``目录``符号链接`(`递归遍历`)
     /// - Parameter path:要搜索的路径
     /// - Returns:结果数组
-    static func allFiles(_ path: String) -> [String] {
+    static func pd_allFiles(_ path: String) -> [String] {
         guard
             isExists(path),
             let subPaths = FileManager.default.subpaths(atPath: path)
@@ -95,7 +95,7 @@ public extension FileManager {
     /// 深度搜索`path`所指目录(`递归遍历子文件夹`,`不遍历符号链接`)
     /// - Parameter path:路径
     /// - Returns:结果数组
-    static func deepSearchAllFiles(_ path: String) -> [Any]? {
+    static func pd_deepSearchAllFiles(_ path: String) -> [Any]? {
         guard isExists(path),
               let contents = FileManager.default.enumerator(atPath: path)
         else {
@@ -107,7 +107,7 @@ public extension FileManager {
     /// 获取`path`所指`文件`或`文件夹`的属性列表
     /// - Parameter path:路径
     /// - Returns:属性列表
-    static func attributeList(_ path: String) -> [FileAttributeKey: Any]? {
+    static func pd_attributeList(_ path: String) -> [FileAttributeKey: Any]? {
         do {
             return try FileManager.default.attributesOfItem(atPath: path)
         } catch {
@@ -118,7 +118,7 @@ public extension FileManager {
     /// 计算`path`所指`文件`或`文件夹`的存储大小(单位`字节`)
     /// - Parameter path:路径
     /// - Returns:存储大小(单位`字节`)
-    static func fileSize(_ path: String) -> UInt64 {
+    static func pd_fileSize(_ path: String) -> UInt64 {
         guard isExists(path) else {
             return 0
         }
@@ -133,7 +133,7 @@ public extension FileManager {
     /// 计算`path`所指`文件`或`文件夹`的存储大小(格式化表示)
     /// - Parameter path:路径
     /// - Returns:存储大小(格式化表示)
-    static func folderSize(_ path: String) -> String {
+    static func pd_folderSize(_ path: String) -> String {
         if path.count == 0, !FileManager.default.fileExists(atPath: path) {
             return "0KB"
         }
@@ -156,7 +156,7 @@ public extension FileManager {
     ///   - path1:参与比较的第一个路径
     ///   - path2:参与比较的第二个路径
     /// - Returns:`Bool`
-    static func isEqual(path1: String, path2: String) -> Bool {
+    static func pd_isEqual(path1: String, path2: String) -> Bool {
         guard isExists(path1), isExists(path2) else { return false }
         return FileManager.default.contentsEqual(atPath: path1, andPath: path2)
     }
@@ -165,7 +165,7 @@ public extension FileManager {
     /// - Parameter path:完整路径
     /// - Returns:结果
     @discardableResult
-    static func createFolder(_ path: String) -> (isSuccess: Bool, error: String) {
+    static func pd_createFolder(_ path: String) -> (isSuccess: Bool, error: String) {
         if isExists(path) { return (true, "文件已存在!") }
         do {
             try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
@@ -179,7 +179,7 @@ public extension FileManager {
     /// - Parameter path:完整路径
     /// - Returns:结果信息
     @discardableResult
-    static func removeFolder(_ path: String) -> (isSuccess: Bool, error: String) {
+    static func pd_removeFolder(_ path: String) -> (isSuccess: Bool, error: String) {
         guard isExists(path) else { return (true, "文件夹不存在!") }
         do {
             try FileManager.default.removeItem(atPath: path)
@@ -193,7 +193,7 @@ public extension FileManager {
     /// - Parameter path:完整路径
     /// - Returns:结果信息
     @discardableResult
-    static func createFile(_ path: String) -> (isSuccess: Bool, error: String) {
+    static func pd_createFile(_ path: String) -> (isSuccess: Bool, error: String) {
         guard isExists(path) else {
             let ok = FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
             return (ok, ok ? "创建成功!" : "创建失败!")
@@ -205,7 +205,7 @@ public extension FileManager {
     /// - Parameter path:完整路径
     /// - Returns:结果信息
     @discardableResult
-    static func removeFile(_ path: String) -> (isSuccess: Bool, error: String) {
+    static func pd_removeFile(_ path: String) -> (isSuccess: Bool, error: String) {
         guard isExists(path) else { return (true, "文件不存在!") }
 
         do {
@@ -221,7 +221,7 @@ public extension FileManager {
     ///   - string:`String`内容
     ///   - address:文件所在位置(可是是`Path`或者`URL`)
     /// - Returns:是否追加成功
-    static func appendStringToEnd(_ string: String, to address: Any) -> Bool {
+    static func pd_appendStringToEnd(_ string: String, to address: Any) -> Bool {
         do {
             var fileURL: URL?
             if let url = address as? URL {
@@ -251,7 +251,7 @@ public extension FileManager {
     ///   - path:`文件`路径
     /// - Returns:结果信息
     @discardableResult
-    static func writeData(_ data: Data?, to path: String) -> (isSuccess: Bool, error: String) {
+    static func pd_writeData(_ data: Data?, to path: String) -> (isSuccess: Bool, error: String) {
         guard isExists(previousPath(path)) else { return (false, "文件路径不存在!") }
         guard let data else { return (false, "写入数据不能为空!") }
         guard let url = path.pd_url(), path.pd_isValidUrl() else { return (false, "写入路径错误!") }
@@ -268,7 +268,7 @@ public extension FileManager {
     /// - Parameter path:完整路径
     /// - Returns:`String?`
     @discardableResult
-    static func readFile(_ path: String) -> String? {
+    static func pd_readFile(_ path: String) -> String? {
         guard isExists(path) else { return nil }
         let data = FileManager.default.contents(atPath: path)
         return String(data: data!, encoding: String.Encoding.utf8)
@@ -278,7 +278,7 @@ public extension FileManager {
     /// - Parameter path:完整路径
     /// - Returns:结果信息
     @discardableResult
-    static func readData(from path: String) -> (isSuccess: Bool, data: Data?, error: String) {
+    static func pd_readData(from path: String) -> (isSuccess: Bool, data: Data?, error: String) {
         guard isExists(path), let readHandler = FileHandle(forReadingAtPath: path) else {
             return (false, nil, "文件路径不存在!")
         }
@@ -296,7 +296,7 @@ public extension FileManager {
     ///   - isCover:是否覆盖
     /// - Returns:结果信息
     @discardableResult
-    static func copyItem(from fromPath: String, to toPath: String, isFile: Bool = true, isCover: Bool = true) -> (isSuccess: Bool, error: String) {
+    static func pd_copyItem(from fromPath: String, to toPath: String, isFile: Bool = true, isCover: Bool = true) -> (isSuccess: Bool, error: String) {
         guard isExists(fromPath) else { return (false, "文件路径不存在!") }
 
         if !isExists(previousPath(toPath)), isFile
@@ -330,7 +330,7 @@ public extension FileManager {
     ///   - isCover:是否覆盖
     /// - Returns:结果信息
     @discardableResult
-    static func moveItem(from fromPath: String, to toPath: String, isFile: Bool = true, isCover: Bool = true) -> (isSuccess: Bool, error: String) {
+    static func pd_moveItem(from fromPath: String, to toPath: String, isFile: Bool = true, isCover: Bool = true) -> (isSuccess: Bool, error: String) {
         guard isExists(fromPath) else { return (false, "要移动的文件不存在!") }
 
         if !isExists(previousPath(toPath)),

@@ -73,7 +73,7 @@ public extension UIApplication {
         // 获取存储的版本
         let sandboxVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         // 存储当前版本
-        UserDefaults.standard.set(currentVersion, for: "appVersion")
+        UserDefaults.standard.set(currentVersion, forKey: "appVersion")
         UserDefaults.standard.synchronize()
         // 返回比较结果
         return currentVersion.compare(sandboxVersion) == .orderedDescending

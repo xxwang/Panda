@@ -14,7 +14,7 @@ public extension NumberFormatter {
     ///   - value:`Float`数值
     ///   - style:格式
     /// - Returns:`String`
-    static func numberFormatting(value: Float, style: NumberFormatter.Style = .none) -> String {
+    static func pd_numberFormatting(value: Float, style: NumberFormatter.Style = .none) -> String {
         NumberFormatter.localizedString(from: NSNumber(value: value), number: style)
     }
 
@@ -23,7 +23,7 @@ public extension NumberFormatter {
     ///   - value:`Double`数值
     ///   - style:格式
     /// - Returns:`String`
-    static func numberFormatting(value: Double, style: NumberFormatter.Style = .none) -> String {
+    static func pd_numberFormatting(value: Double, style: NumberFormatter.Style = .none) -> String {
         NumberFormatter.localizedString(from: NSNumber(value: value), number: style)
     }
 
@@ -32,7 +32,7 @@ public extension NumberFormatter {
     ///   - value:`String`数值
     ///   - style:格式
     /// - Returns:`String?`
-    static func stringFormattingNumber(value: String, style: NumberFormatter.Style = .none) -> String? {
+    static func pd_stringFormattingNumber(value: String, style: NumberFormatter.Style = .none) -> String? {
         guard let number = NumberFormatter().number(from: value) else { return nil }
         return NumberFormatter.localizedString(from: number, number: style)
     }
@@ -42,7 +42,7 @@ public extension NumberFormatter {
     ///   - value:`String`数值
     ///   - numberFormatter:格式化对象
     /// - Returns:`String?`
-    static func customFormatter(value: String, numberFormatter: NumberFormatter) -> String? {
+    static func pd_customFormatter(value: String, numberFormatter: NumberFormatter) -> String? {
         guard let number = NumberFormatter().number(from: value) else { return nil }
         guard let formatValue = numberFormatter.string(from: number) else { return nil }
         return formatValue
@@ -55,10 +55,10 @@ public extension NumberFormatter {
     ///   - size:分割位数
     ///   - style:格式
     /// - Returns:`String?`
-    static func setGroupingSeparatorAndSize(value: String,
-                                            separator: String,
-                                            size: Int,
-                                            style: NumberFormatter.Style = .none) -> String?
+    static func pd_setGroupingSeparatorAndSize(value: String,
+                                               separator: String,
+                                               size: Int,
+                                               style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
@@ -76,11 +76,11 @@ public extension NumberFormatter {
     ///   - paddingPosition:填充的位置
     ///   - style:格式
     /// - Returns:`String?`
-    static func setFormatWidthPaddingCharacterAndPosition(value: String,
-                                                          formatWidth: Int,
-                                                          paddingCharacter: String,
-                                                          paddingPosition: NumberFormatter.PadPosition = .beforePrefix,
-                                                          style: NumberFormatter.Style = .none) -> String?
+    static func pd_setFormatWidthPaddingCharacterAndPosition(value: String,
+                                                             formatWidth: Int,
+                                                             paddingCharacter: String,
+                                                             paddingPosition: NumberFormatter.PadPosition = .beforePrefix,
+                                                             style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
@@ -97,10 +97,10 @@ public extension NumberFormatter {
     ///   - minimumIntegerDigits:最小整数位数
     ///   - style:格式
     /// - Returns:`String?`
-    static func setMaximumIntegerDigitsAndMinimumIntegerDigits(value: String,
-                                                               maximumIntegerDigits: Int,
-                                                               minimumIntegerDigits: Int,
-                                                               style: NumberFormatter.Style = .none) -> String?
+    static func pd_setMaximumIntegerDigitsAndMinimumIntegerDigits(value: String,
+                                                                  maximumIntegerDigits: Int,
+                                                                  minimumIntegerDigits: Int,
+                                                                  style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
@@ -115,9 +115,9 @@ public extension NumberFormatter {
     ///   - maximumFractionDigits:最大小数位数
     ///   - minimumFractionDigits:最小小数位数
     /// - Returns:`String?`
-    static func setmMximumFractionDigitsAndMinimumFractionDigits(value: String,
-                                                                 maximumFractionDigits: Int,
-                                                                 minimumFractionDigits: Int) -> String?
+    static func pd_setmMximumFractionDigitsAndMinimumFractionDigits(value: String,
+                                                                    maximumFractionDigits: Int,
+                                                                    minimumFractionDigits: Int) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = maximumFractionDigits
@@ -132,10 +132,10 @@ public extension NumberFormatter {
     ///   - positiveSuffix:自定义后缀
     ///   - style:格式
     /// - Returns:`String?`
-    static func setMaximumIntegerDigitsAndMinimumIntegerDigits(value: String,
-                                                               positivePrefix: String,
-                                                               positiveSuffix: String,
-                                                               style: NumberFormatter.Style = .none) -> String?
+    static func pd_setMaximumIntegerDigitsAndMinimumIntegerDigits(value: String,
+                                                                  positivePrefix: String,
+                                                                  positiveSuffix: String,
+                                                                  style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style
@@ -150,9 +150,9 @@ public extension NumberFormatter {
     ///   - positiveFormat:自定义格式化样式`###,###.##`
     ///   - style:格式
     /// - Returns:`String?`
-    static func setPositiveFormat(value: String,
-                                  positiveFormat: String,
-                                  style: NumberFormatter.Style = .none) -> String?
+    static func pd_setPositiveFormat(value: String,
+                                     positiveFormat: String,
+                                     style: NumberFormatter.Style = .none) -> String?
     {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = style

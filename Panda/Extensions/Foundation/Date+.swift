@@ -231,14 +231,14 @@ public extension Date {
 public extension Date {
     /// `格林威治标准时间`转换为`当地时间`
     /// - Returns: `当地时间`
-    func dateFromGMT() -> Date {
+    func pd_dateFromGMT() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return addingTimeInterval(secondFromGMT)
     }
 
     /// `当地时间`转换为`格林威治标准时间`
     /// - Returns: `格林威治标准时间`
-    func dateToGMT() -> Date {
+    func pd_dateToGMT() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return addingTimeInterval(-secondFromGMT)
     }
@@ -255,8 +255,8 @@ public extension Date {
     ///   - format: 日期格式(默认 `yyyy-MM-dd HH:mm:ss`)
     ///   - isGMT: 是否是`格林尼治时区`
     /// - Returns: 日期字符串
-    func toString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss",
-                  isGMT: Bool = false) -> String
+    func pd_toString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss",
+                     isGMT: Bool = false) -> String
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
@@ -274,7 +274,7 @@ public extension Date {
     ///
     /// - Parameter style:日期格式的样式(默认 `.medium`)
     /// - Returns:日期字符串
-    func toDateString(ofStyle style: DateFormatter.Style = .medium) -> String {
+    func pd_toDateString(ofStyle style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = style
@@ -290,7 +290,7 @@ public extension Date {
     ///
     /// - Parameter style:日期格式的样式(默认 `.medium`)
     /// - Returns:日期和时间字符串
-    func toDateTimeString(ofStyle style: DateFormatter.Style = .medium) -> String {
+    func pd_toDateTimeString(ofStyle style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = style
@@ -306,7 +306,7 @@ public extension Date {
     ///
     /// - Parameter style:日期格式的样式(默认 `.medium`)
     /// - Returns:时间字符串
-    func toTimeString(ofStyle style: DateFormatter.Style = .medium) -> String {
+    func pd_toTimeString(ofStyle style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = .none
@@ -321,7 +321,7 @@ public extension Date {
     ///
     /// - Parameter Style:月份名称的样式(默认 `MonthNameStyle.full`)
     /// - Returns:月份名称字符串(例如:`D、Dec、December`)
-    func monthName(ofStyle style: MonthNameStyle = .full) -> String {
+    func pd_monthName(ofStyle style: MonthNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -345,7 +345,7 @@ public extension Date {
     ///
     /// - Parameter Style:日期名称的样式(默认 `DayNameStyle.full`)
     /// - Returns:日期名称字符串(例如:`W、Wed、Wednesday`)
-    func dayName(ofStyle style: DayNameStyle = .full) -> String {
+    func pd_dayName(ofStyle style: DayNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -365,7 +365,7 @@ public extension Date {
     ///
     /// - Parameter date:参与比较的日期
     /// - Returns:self 和给定日期之间的天数
-    func daysSince(_ date: Date) -> Double {
+    func pd_daysSince(_ date: Date) -> Double {
         timeIntervalSince(date) / (3600 * 24)
     }
 
@@ -373,7 +373,7 @@ public extension Date {
     ///
     /// - Parameter date:参与比较的日期
     /// - Returns:self 和给定日期之间的小时数
-    func hoursSince(_ date: Date) -> Double {
+    func pd_hoursSince(_ date: Date) -> Double {
         timeIntervalSince(date) / 3600
     }
 
@@ -381,7 +381,7 @@ public extension Date {
     ///
     /// - Parameter date:参与比较的日期
     /// - Returns:self 和给定日期之间的分钟数
-    func minutesSince(_ date: Date) -> Double {
+    func pd_minutesSince(_ date: Date) -> Double {
         timeIntervalSince(date) / 60
     }
 
@@ -389,20 +389,20 @@ public extension Date {
     ///
     /// - Parameter date:参与比较的日期
     /// - Returns:self 和给定日期之间的秒数
-    func secondsSince(_ date: Date) -> Double {
+    func pd_secondsSince(_ date: Date) -> Double {
         timeIntervalSince(date)
     }
 
     /// 比较`other`与当前日期之间的距离
     /// - Parameter date: 要比较的日期
     /// - Returns: `TimeInterval`
-    func distance(other date: Date) -> TimeInterval {
+    func pd_distance(other date: Date) -> TimeInterval {
         timeIntervalSince(date)
     }
 
     /// 取得与当前时间的间隔差
     /// - Returns:时间差
-    func callTimeAfterNow() -> String {
+    func pd_callTimeAfterNow() -> String {
         // 获取时间间隔
         let timeInterval = Date().timeIntervalSince(self)
         // 后缀
@@ -438,7 +438,7 @@ public extension Date {
     }
 
     /// 当前`时区`的`日期`
-    func currentZoneDate() -> Date {
+    func pd_currentZoneDate() -> Date {
         let date = Date()
         let zone = NSTimeZone.system
         let time = zone.secondsFromGMT(for: date)
@@ -450,7 +450,7 @@ public extension Date {
     /// 将日期格式化为`ISO8601`标准的格式`(yyyy-MM-dd'T'HH:mm:ss.SSS)`
     ///
     ///     Date().iso8601String -> "2017-01-12T14:51:29.574Z"
-    func iso8601String() -> String {
+    func pd_iso8601String() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
@@ -461,13 +461,13 @@ public extension Date {
 
     /// ` 距离最近`的可以被`五分钟整除`的`时间`
     ///
-    ///     func date = Date() // "5:54 PM"
+    ///     func pd_date = Date() // "5:54 PM"
     ///     date.minute = 32 // "5:32 PM"
     ///     date.nearestFiveMinutes() // "5:30 PM"
     ///
     ///     date.minute = 44 // "5:44 PM"
     ///     date.nearestFiveMinutes() // "5:45 PM"
-    func nearestFiveMinutes() -> Date {
+    func pd_nearestFiveMinutes() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
@@ -478,13 +478,13 @@ public extension Date {
 
     /// `距离最近`的可以被`十分钟整除`的`时间`
     ///
-    ///     func date = Date() // "5:57 PM"
+    ///     func pd_date = Date() // "5:57 PM"
     ///     date.minute = 34 // "5:34 PM"
     ///     date.nearestTenMinutes // "5:30 PM"
     ///
     ///     date.minute = 48 // "5:48 PM"
     ///     date.nearestTenMinutes // "5:50 PM"
-    func nearestTenMinutes() -> Date {
+    func pd_nearestTenMinutes() -> Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
             from: self
@@ -498,13 +498,13 @@ public extension Date {
 
     /// `距离最近`的可以被`十五分钟(一刻钟)`整除的`时间`
     ///
-    ///     func date = Date() // "5:57 PM"
+    ///     func pd_date = Date() // "5:57 PM"
     ///     date.minute = 34 // "5:34 PM"
     ///     date.nearestQuarterHour // "5:30 PM"
     ///
     ///     date.minute = 40 // "5:40 PM"
     ///     date.nearestQuarterHour // "5:45 PM"
-    func nearestQuarterHour() -> Date {
+    func pd_nearestQuarterHour() -> Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
             from: self
@@ -518,13 +518,13 @@ public extension Date {
 
     /// `距离最近`的可以被`三十分钟(半小时)`整除的`时间`
     ///
-    ///     func date = Date() // "6:07 PM"
+    ///     func pd_date = Date() // "6:07 PM"
     ///     date.minute = 41 // "6:41 PM"
     ///     date.nearestHalfHour // "6:30 PM"
     ///
     ///     date.minute = 51 // "6:51 PM"
     ///     date.nearestHalfHour // "7:00 PM"
-    func nearestHalfHour() -> Date {
+    func pd_nearestHalfHour() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
@@ -535,12 +535,12 @@ public extension Date {
 
     /// `距离最近`的可以被`六十分钟(一小时)`整除的`时间`
     ///
-    ///     func date = Date() // "6:17 PM"
+    ///     func pd_date = Date() // "6:17 PM"
     ///     date.nearestHour // "6:00 PM"
     ///
     ///     date.minute = 36 // "6:36 PM"
     ///     date.nearestHour // "7:00 PM"
-    func nearestHour() -> Date {
+    func pd_nearestHour() -> Date {
         let min = calendar.component(.minute, from: self)
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour]
         let date = calendar.date(from: calendar.dateComponents(components, from: self))!
@@ -555,7 +555,7 @@ public extension Date {
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
     ///     let yesterday = date.yesterday // "Oct 2, 2018, 10:57:11"
-    func yesterday() -> Date {
+    func pd_yesterday() -> Date {
         calendar.date(byAdding: .day, value: -1, to: self) ?? Date()
     }
 
@@ -563,18 +563,18 @@ public extension Date {
     ///
     ///     let date = Date() // "Oct 3, 2018, 10:57:11"
     ///     let tomorrow = date.tomorrow // "Oct 4, 2018, 10:57:11"
-    func tomorrow() -> Date {
+    func pd_tomorrow() -> Date {
         calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
     }
 
     /// 当前年属性哪个`年代`
-    func era() -> Int {
+    func pd_era() -> Int {
         calendar.component(.era, from: self)
     }
 
     #if !os(Linux)
         /// 本年中的第几个`季度`
-        func quarter() -> Int {
+        func pd_quarter() -> Int {
             let month = Double(calendar.component(.month, from: self))
             let numberOfMonths = Double(calendar.monthSymbols.count)
             let numberOfMonthsInQuarter = numberOfMonths / 4
@@ -583,22 +583,22 @@ public extension Date {
     #endif
 
     /// 本年中的第几`周`
-    func weekOfYear() -> Int {
+    func pd_weekOfYear() -> Int {
         calendar.component(.weekOfYear, from: self)
     }
 
     /// 一个月的第几`周`
-    func weekOfMonth() -> Int {
+    func pd_weekOfMonth() -> Int {
         calendar.component(.weekOfMonth, from: self)
     }
 
     /// 本`周`中的第几`天`
-    func weekday() -> Int {
+    func pd_weekday() -> Int {
         calendar.component(.weekday, from: self)
     }
 
     /// `self`是`星期几`(中文)
-    func weekdayAsString() -> String {
+    func pd_weekdayAsString() -> String {
         let weekdays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
         var calendar = Calendar(identifier: .gregorian)
         let timeZone = TimeZone(identifier: "Asia/Shanghai")
@@ -608,7 +608,7 @@ public extension Date {
     }
 
     /// `self`是`几月`(英文)
-    func monthAsString() -> String {
+    func pd_monthAsString() -> String {
         dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
     }
@@ -618,44 +618,44 @@ public extension Date {
 public extension Date {
     /// `今天`的`日期`
     /// - Returns: `Date`
-    static func todayDate() -> Date {
+    static func pd_todayDate() -> Date {
         Date()
     }
 
     /// `昨天`的`日期`
     /// - Returns: `Date?`
-    static func yesterDayDate() -> Date? {
+    static func pd_yesterDayDate() -> Date? {
         Calendar.current.date(byAdding: DateComponents(day: -1), to: Date())
     }
 
     /// `明天`的`日期`
     /// - Returns: `Date?`
-    static func tomorrowDate() -> Date? {
+    static func pd_tomorrowDate() -> Date? {
         Calendar.current.date(byAdding: DateComponents(day: 1), to: Date())
     }
 
     /// `前天`的`日期`
     /// - Returns: `Date?`
-    static func theDayBeforYesterDayDate() -> Date? {
+    static func pd_theDayBeforYesterDayDate() -> Date? {
         Calendar.current.date(byAdding: DateComponents(day: -2), to: Date())
     }
 
     /// `后天`的`日期`
     /// - Returns: `Date?`
-    static func theDayAfterYesterDayDate() -> Date? {
+    static func pd_theDayAfterYesterDayDate() -> Date? {
         Calendar.current.date(byAdding: DateComponents(day: 2), to: Date())
     }
 
     /// 获取当前时间戳`秒`(`10位`)
     /// - Returns: `String`
-    static func secondStamp() -> String {
+    static func pd_secondStamp() -> String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         return "\(Int(timeInterval))"
     }
 
     /// 获取当前时间戳`毫秒`(`13位`)
     /// - Returns: `String`
-    static func milliStamp() -> String {
+    static func pd_milliStamp() -> String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         let millisecond = CLongLong(Darwin.round(timeInterval * 1000))
         return "\(millisecond)"
@@ -666,7 +666,7 @@ public extension Date {
     ///   - year:年份
     ///   - month:月份
     /// - Returns:天数
-    static func daysCount(year: Int, month: Int) -> Int {
+    static func pd_daysCount(year: Int, month: Int) -> Int {
         switch month {
         case 1, 3, 5, 7, 8, 10, 12:
             return 31
@@ -682,7 +682,7 @@ public extension Date {
 
     /// 获取当前日期`月份`的`天数`
     /// - Returns:当前日期`月份`的`天数`
-    static func currentMonthDays() -> Int {
+    static func pd_currentMonthDays() -> Int {
         let date = Date()
         return daysCount(year: date.year, month: date.month)
     }
@@ -693,7 +693,7 @@ public extension Date {
     /// 日期对象转时间戳(支持返回 `13位` 和 `10位`的时间戳)
     /// - Parameter isUnix: 是否是unix格式`
     /// - Returns: `Int`类型时间戳
-    func toTimestamp(isUnix: Bool = true) -> Int {
+    func pd_toTimestamp(isUnix: Bool = true) -> Int {
         if isUnix { return Int(timeIntervalSince1970) }
         return Int(timeIntervalSince1970 * 1000)
     }
@@ -703,7 +703,7 @@ public extension Date {
     ///   - timestamp:时间戳
     ///   - format:格式
     /// - Returns:对应时间的字符串
-    static func timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    static func pd_timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         // 时间戳转为Date
         let date = timestampAsDate(timestamp: timestamp)
         // 设置 dateFormat
@@ -715,7 +715,7 @@ public extension Date {
     /// 时间戳转换为`Date`
     /// - Parameter timestamp:时间戳
     /// - Returns:返回 Date
-    static func timestampAsDate(timestamp: String) -> Date {
+    static func pd_timestampAsDate(timestamp: String) -> Date {
         guard timestamp.count == 10 || timestamp.count == 13 else {
             #if DEBUG
                 fatalError("时间戳位数不是 10 也不是 13")
@@ -732,24 +732,24 @@ public extension Date {
     /// `Date`转`时间戳`
     /// - Parameter isUnix:是否是`Unix`格式时间戳
     /// - Returns:时间戳
-    func dateAsTimestamp(isUnix: Bool = true) -> String {
+    func pd_dateAsTimestamp(isUnix: Bool = true) -> String {
         // 10位数时间戳 和 13位数时间戳
         let interval = isUnix ? CLongLong(Int(timeIntervalSince1970)) : CLongLong(Darwin.round(timeIntervalSince1970 * 1000))
         return "\(interval)"
     }
 
     /// 当前时间戳(单位`毫秒`)
-    func milliStamp() -> Int {
+    func pd_milliStamp() -> Int {
         Int(timeIntervalSince1970 * 1000)
     }
 
     /// 当前时间戳(单位`秒`)
-    func secondStamp() -> Double {
+    func pd_secondStamp() -> Double {
         timeIntervalSince1970
     }
 
     /// 格林尼治时间戳(单位`秒`)
-    func secondStampFromGMT() -> Int {
+    func pd_secondStampFromGMT() -> Int {
         let offset = TimeZone.current.secondsFromGMT(for: self)
         return Int(timeIntervalSince1970) - offset
     }
@@ -758,71 +758,71 @@ public extension Date {
 // MARK: - 判断
 public extension Date {
     /// 日期`是否在将来`
-    func isInFuture() -> Bool {
+    func pd_isInFuture() -> Bool {
         self > Date()
     }
 
     /// 日期`是否过去`
-    func isInPast() -> Bool {
+    func pd_isInPast() -> Bool {
         self < Date()
     }
 
     /// 日期是否在`今天之内`
-    func isInToday() -> Bool {
+    func pd_isInToday() -> Bool {
         calendar.isDateInToday(self)
     }
 
     /// 日期是否在`昨天之内`
-    func isInYesterday() -> Bool {
+    func pd_isInYesterday() -> Bool {
         calendar.isDateInYesterday(self)
     }
 
     /// 日期是否在`明天之内`
-    func isInTomorrow() -> Bool {
+    func pd_isInTomorrow() -> Bool {
         calendar.isDateInTomorrow(self)
     }
 
     /// 日期是否在`周末期间`
-    func isInWeekend() -> Bool {
+    func pd_isInWeekend() -> Bool {
         calendar.isDateInWeekend(self)
     }
 
     /// 日期是否在`工作日期间`
-    func isWorkday() -> Bool {
+    func pd_isWorkday() -> Bool {
         !calendar.isDateInWeekend(self)
     }
 
     /// 日期是否在`本周内`
-    func isInCurrentWeek() -> Bool {
+    func pd_isInCurrentWeek() -> Bool {
         calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
     }
 
     /// 日期是否在`当前月份内`
-    func isInCurrentMonth() -> Bool {
+    func pd_isInCurrentMonth() -> Bool {
         calendar.isDate(self, equalTo: Date(), toGranularity: .month)
     }
 
     /// 日期是否在`当年之内`
-    func isInCurrentYear() -> Bool {
+    func pd_isInCurrentYear() -> Bool {
         calendar.isDate(self, equalTo: Date(), toGranularity: .year)
     }
 
     /// 当前日期`是不是润年`
-    func isLeapYear() -> Bool {
+    func pd_isLeapYear() -> Bool {
         let year = year
         return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0))
     }
 
     /// 比较是否为`同一天`
     /// - Returns:`Bool`
-    func isSameDay(date: Date) -> Bool {
+    func pd_isSameDay(date: Date) -> Bool {
         Calendar.current.isDate(self, inSameDayAs: date)
     }
 
     /// 比较是否为`同一年``同一月``同一天`
     /// - Parameter date: `date`
     /// - Returns: `Bool`
-    func isSameYeaerMountDay(_ date: Date) -> Bool {
+    func pd_isSameYeaerMountDay(_ date: Date) -> Bool {
         let com = Calendar.current.dateComponents([.year, .month, .day], from: self)
         let comToday = Calendar.current.dateComponents([.year, .month, .day], from: date)
         return com.day == comToday.day
@@ -835,7 +835,7 @@ public extension Date {
     ///   - date:对比的日期
     ///   - unit:对比的类型
     /// - Returns:两个日期之间的数据
-    func componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
+    func pd_componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
         Calendar.current.dateComponents(unit, from: date, to: self)
     }
 
@@ -846,7 +846,7 @@ public extension Date {
     ///
     /// - Parameter component:要检查的日历组件
     /// - Returns:如果日期在当前给定的日历组件中,则返回 `true`
-    func isInCurrent(_ component: Calendar.Component) -> Bool {
+    func pd_isInCurrent(_ component: Calendar.Component) -> Bool {
         calendar.isDate(self, equalTo: Date(), toGranularity: component)
     }
 
@@ -856,7 +856,7 @@ public extension Date {
     ///   - endDate:结束日期
     ///   - includeBounds:如果应该包括开始和结束日期,则为 true(默认为 false)
     /// - Returns:如果日期在两个给定日期之间,则返回 true
-    func isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
+    func pd_isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
         if includeBounds {
             return startDate.compare(self).rawValue * compare(endDate).rawValue >= 0
         }
@@ -870,7 +870,7 @@ public extension Date {
     ///   - component:`Calendar.Component`(要比较的组件)
     ///   - date:结束日期
     /// - Returns:如果`value`在当前日期和指定日期的指定组件之中,则返回`true`
-    func isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
+    func pd_isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
         let components = calendar.dateComponents([component], from: self, to: date)
         let componentValue = components.value(for: component)!
         return Darwin.abs(Int32(componentValue)) <= value
@@ -883,7 +883,7 @@ public extension Date {
     ///
     /// - Parameter range:创建随机日期的范围. `range` 不能为空(不包含结束日期)
     /// - Returns:`range` 范围内的随机日期
-    static func random(in range: Range<Date>) -> Date {
+    static func pd_random(in range: Range<Date>) -> Date {
         Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound
@@ -894,7 +894,7 @@ public extension Date {
     ///
     /// - Parameter range:创建随机日期的范围(包含结束日期)
     /// - Returns:`range` 范围内的随机日期
-    static func random(in range: ClosedRange<Date>) -> Date {
+    static func pd_random(in range: ClosedRange<Date>) -> Date {
         Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound
@@ -907,8 +907,8 @@ public extension Date {
     ///   - range:创建随机日期的范围. `range` 不能为空(不包含结束日期)
     ///   - generator:创建新随机日期时使用的随机数生成器
     /// - Returns:`range` 范围内的随机日期
-    static func random(in range: Range<Date>,
-                       using generator: inout some RandomNumberGenerator) -> Date
+    static func pd_random(in range: Range<Date>,
+                          using generator: inout some RandomNumberGenerator) -> Date
     {
         Date(timeIntervalSinceReferenceDate:
             TimeInterval.random(
@@ -923,7 +923,7 @@ public extension Date {
     ///   - range:创建随机日期的范围(包含结束日期)
     ///   - generator:创建新随机日期时使用的随机数生成器
     /// - Returns:`range` 范围内的随机日期
-    static func random(
+    static func pd_random(
         in range: ClosedRange<Date>,
         using generator: inout some RandomNumberGenerator
     ) -> Date {
@@ -940,35 +940,35 @@ public extension Date {
     /// 获取两个日期之间的天数
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的天数
-    func numberOfDays(from date: Date) -> Int? {
+    func pd_numberOfDays(from date: Date) -> Int? {
         componentCompare(from: date, unit: [.day]).day
     }
 
     /// 获取两个日期之间的小时
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的小时
-    func numberOfHours(from date: Date) -> Int? {
+    func pd_numberOfHours(from date: Date) -> Int? {
         componentCompare(from: date, unit: [.hour]).hour
     }
 
     /// 获取两个日期之间的分钟
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的分钟
-    func numberOfMinutes(from date: Date) -> Int? {
+    func pd_numberOfMinutes(from date: Date) -> Int? {
         componentCompare(from: date, unit: [.minute]).minute
     }
 
     /// 获取两个日期之间的秒数
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的秒数
-    func numberOfSeconds(from date: Date) -> Int? {
+    func pd_numberOfSeconds(from date: Date) -> Int? {
         componentCompare(from: date, unit: [.second]).second
     }
 
     /// 日期的`加减`操作
     /// - Parameter day:天数变化
     /// - Returns:`date`
-    func adding(day: Int) -> Date? {
+    func pd_adding(day: Int) -> Date? {
         Calendar.current.date(byAdding: DateComponents(day: day), to: self)
     }
 
@@ -984,7 +984,7 @@ public extension Date {
     ///   - component:组件类型
     ///   - value:要添加到Date的组件的值
     /// - Returns:原始日期 + 添加的组件的值
-    func adding(_ component: Calendar.Component, value: Int) -> Date {
+    func pd_adding(_ component: Calendar.Component, value: Int) -> Date {
         Calendar.current.date(byAdding: component, value: value, to: self)!
     }
 
@@ -999,7 +999,7 @@ public extension Date {
     /// - Parameters:
     ///   - component:组件类型
     ///   - value:要添加到`Date`的组件的值
-    func add(_ component: Calendar.Component, value: Int) -> Date? {
+    func pd_add(_ component: Calendar.Component, value: Int) -> Date? {
         if let date = calendar.date(byAdding: component, value: value, to: self) {
             return date
         }
@@ -1018,7 +1018,7 @@ public extension Date {
     ///   - component:组件类型
     ///   - value:组件对应的新值
     /// - Returns:将指定组件更改为指定值后的原始日期
-    func changing(_ component: Calendar.Component, value: Int) -> Date? {
+    func pd_changing(_ component: Calendar.Component, value: Int) -> Date? {
         switch component {
         case .nanosecond:
             #if targetEnvironment(macCatalyst)
@@ -1087,7 +1087,7 @@ public extension Date {
         ///
         /// - Parameter component:日历组件在开始时获取日期
         /// - Returns:日历组件开头的日期(如果适用)
-        func beginning(of component: Calendar.Component) -> Date? {
+        func pd_beginning(of component: Calendar.Component) -> Date? {
             if component == .day { return calendar.startOfDay(for: self) }
 
             var components: Set<Calendar.Component> {
@@ -1129,7 +1129,7 @@ public extension Date {
     ///
     /// - Parameter component:日历组件,用于获取末尾的日期
     /// - Returns:日历组件末尾的日期(如果适用)
-    func end(of component: Calendar.Component) -> Date? {
+    func pd_end(of component: Calendar.Component) -> Date? {
         switch component {
         case .second:
             var date = adding(.second, value: 1)
@@ -1185,7 +1185,7 @@ public extension Date {
 extension Date: Defaultable {}
 public extension Date {
     typealias Associatedtype = Date
-    static func `default`() -> Associatedtype {
+    static func pd_`default`() -> Associatedtype {
         if #available(iOS 15, *) {
             return Date.now
         } else {
