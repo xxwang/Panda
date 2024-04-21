@@ -188,7 +188,7 @@ public extension UIWindow {
     typealias Associatedtype = UIWindow
 
     override class func `default`() -> Associatedtype {
-        let window = UIWindow(frame: SizeUtils.screenBounds)
+        let window = UIWindow(frame: sizer.screen.bounds)
         return window
     }
 }

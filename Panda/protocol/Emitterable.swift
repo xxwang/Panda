@@ -1,10 +1,3 @@
-//
-//  Emitterable.swift
-//  xcode15-demo
-//
-//  Created by 奥尔良小短腿 on 2023/9/21.
-//
-
 import UIKit
 
 // MARK: - 粒子发射器
@@ -57,6 +50,7 @@ public extension Emitterable where Self: UIViewController {
         view.layer.addSublayer(emitter)
     }
 
+    /// 停止发射
     func stopEmitting() {
         view.layer.sublayers?
             .filter { $0.isKind(of: CAEmitterLayer.self) }

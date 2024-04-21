@@ -124,7 +124,7 @@ public extension DarkModeUtils {
             // 模式存储
             UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
             // 通知模式更新
-            SkinUtils.shared.updateSkin()
+            SkinManager.shared.updateSkin()
         }
         UserDefaults.standard.synchronize()
     }
@@ -147,7 +147,7 @@ public extension DarkModeUtils {
             // 设置跟随系统:否
             UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
             // 通知模式更新
-            SkinUtils.shared.updateSkin()
+            SkinManager.shared.updateSkin()
         }
     }
 
@@ -176,7 +176,7 @@ public extension DarkModeUtils {
             // 模式存储
             UserDefaults.standard.set(light, forKey: AssociateKeys.LightDarkKey)
             // 通知模式更新
-            SkinUtils.shared.updateSkin()
+            SkinManager.shared.updateSkin()
         }
     }
 }

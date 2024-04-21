@@ -1,10 +1,3 @@
-//
-//  AssociatedObject.swift
-//
-//
-//  Created by xxwang on 2023/5/23.
-//
-
 import UIKit
 
 // MARK: - 关联属性`操作方法`

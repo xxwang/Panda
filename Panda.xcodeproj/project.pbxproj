@@ -10,11 +10,10 @@
 		163DC9062BD2DB4500CC99F9 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC9052BD2DB4500CC99F9 /* Demo.swift */; };
 		163DC90B2BD37D2B00CC99F9 /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90A2BD37D2B00CC99F9 /* Codable+.swift */; };
 		163DC90D2BD426D600CC99F9 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90C2BD426D600CC99F9 /* environment.swift */; };
-		169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409532ABC738800356736 /* StoryboardLoadable.swift */; };
-		169409FD2ABC738800356736 /* AssociatedAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409542ABC738800356736 /* AssociatedAttributes.swift */; };
+		163DC90F2BD4AA6F00CC99F9 /* sizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90E2BD4AA6F00CC99F9 /* sizer.swift */; };
+		163DC9112BD4C60400CC99F9 /* SkinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC9102BD4C60400CC99F9 /* SkinManager.swift */; };
 		169409FE2ABC738800356736 /* Emitterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409552ABC738800356736 /* Emitterable.swift */; };
-		169409FF2ABC738800356736 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409562ABC738800356736 /* NibLoadable.swift */; };
-		16940A002ABC738800356736 /* Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409572ABC738800356736 /* Defaultable.swift */; };
+		169409FF2ABC738800356736 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409562ABC738800356736 /* Loadable.swift */; };
 		16940A012ABC738800356736 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409592ABC738800356736 /* Logger.swift */; };
 		16940A022ABC738800356736 /* shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095A2ABC738800356736 /* shared.swift */; };
 		16940A032ABC738800356736 /* Panda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694095B2ABC738800356736 /* Panda.swift */; };
@@ -26,10 +25,8 @@
 		16940A0B2ABC738800356736 /* VideoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409642ABC738800356736 /* VideoUtils.swift */; };
 		16940A0C2ABC738800356736 /* QRCodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409652ABC738800356736 /* QRCodeUtils.swift */; };
 		16940A0D2ABC738800356736 /* BiometricAuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409662ABC738800356736 /* BiometricAuthUtils.swift */; };
-		16940A0E2ABC738800356736 /* SkinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409672ABC738800356736 /* SkinUtils.swift */; };
 		16940A0F2ABC738800356736 /* DarkModeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409682ABC738800356736 /* DarkModeUtils.swift */; };
 		16940A102ABC738800356736 /* StoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409692ABC738800356736 /* StoreUtils.swift */; };
-		16940A112ABC738800356736 /* sizeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096A2ABC738800356736 /* sizeAdapter.swift */; };
 		16940A122ABC738800356736 /* PhotoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096B2ABC738800356736 /* PhotoUtils.swift */; };
 		16940A132ABC738800356736 /* DocumentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694096C2ABC738800356736 /* DocumentUtils.swift */; };
 		16940A152ABC738800356736 /* SKProduct+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409702ABC738800356736 /* SKProduct+.swift */; };
@@ -237,11 +234,10 @@
 		163DC9052BD2DB4500CC99F9 /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		163DC90A2BD37D2B00CC99F9 /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		163DC90C2BD426D600CC99F9 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
-		169409532ABC738800356736 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
-		169409542ABC738800356736 /* AssociatedAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedAttributes.swift; sourceTree = "<group>"; };
+		163DC90E2BD4AA6F00CC99F9 /* sizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sizer.swift; sourceTree = "<group>"; };
+		163DC9102BD4C60400CC99F9 /* SkinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinManager.swift; sourceTree = "<group>"; };
 		169409552ABC738800356736 /* Emitterable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emitterable.swift; sourceTree = "<group>"; };
-		169409562ABC738800356736 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
-		169409572ABC738800356736 /* Defaultable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaultable.swift; sourceTree = "<group>"; };
+		169409562ABC738800356736 /* Loadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		169409592ABC738800356736 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		1694095A2ABC738800356736 /* shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shared.swift; sourceTree = "<group>"; };
 		1694095B2ABC738800356736 /* Panda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Panda.swift; sourceTree = "<group>"; };
@@ -253,10 +249,8 @@
 		169409642ABC738800356736 /* VideoUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoUtils.swift; sourceTree = "<group>"; };
 		169409652ABC738800356736 /* QRCodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeUtils.swift; sourceTree = "<group>"; };
 		169409662ABC738800356736 /* BiometricAuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricAuthUtils.swift; sourceTree = "<group>"; };
-		169409672ABC738800356736 /* SkinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinUtils.swift; sourceTree = "<group>"; };
 		169409682ABC738800356736 /* DarkModeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeUtils.swift; sourceTree = "<group>"; };
 		169409692ABC738800356736 /* StoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreUtils.swift; sourceTree = "<group>"; };
-		1694096A2ABC738800356736 /* sizeAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sizeAdapter.swift; sourceTree = "<group>"; };
 		1694096B2ABC738800356736 /* PhotoUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoUtils.swift; sourceTree = "<group>"; };
 		1694096C2ABC738800356736 /* DocumentUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUtils.swift; sourceTree = "<group>"; };
 		169409702ABC738800356736 /* SKProduct+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKProduct+.swift"; sourceTree = "<group>"; };
@@ -473,11 +467,8 @@
 		169409522ABC738800356736 /* protocol */ = {
 			isa = PBXGroup;
 			children = (
-				169409532ABC738800356736 /* StoryboardLoadable.swift */,
-				169409542ABC738800356736 /* AssociatedAttributes.swift */,
+				169409562ABC738800356736 /* Loadable.swift */,
 				169409552ABC738800356736 /* Emitterable.swift */,
-				169409562ABC738800356736 /* NibLoadable.swift */,
-				169409572ABC738800356736 /* Defaultable.swift */,
 			);
 			path = protocol;
 			sourceTree = "<group>";
@@ -486,9 +477,11 @@
 			isa = PBXGroup;
 			children = (
 				1694095A2ABC738800356736 /* shared.swift */,
-				169409592ABC738800356736 /* Logger.swift */,
-				1694096A2ABC738800356736 /* sizeAdapter.swift */,
+				163DC90E2BD4AA6F00CC99F9 /* sizer.swift */,
 				163DC90C2BD426D600CC99F9 /* environment.swift */,
+				169409592ABC738800356736 /* Logger.swift */,
+				169409602ABC738800356736 /* AssociatedObject.swift */,
+				163DC9102BD4C60400CC99F9 /* SkinManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -498,13 +491,11 @@
 			children = (
 				1694095D2ABC738800356736 /* PlistUtils.swift */,
 				1694095F2ABC738800356736 /* RuntimeUtils.swift */,
-				169409602ABC738800356736 /* AssociatedObject.swift */,
 				169409622ABC738800356736 /* AudioUtils.swift */,
 				169409632ABC738800356736 /* PathUtils.swift */,
 				169409642ABC738800356736 /* VideoUtils.swift */,
 				169409652ABC738800356736 /* QRCodeUtils.swift */,
 				169409662ABC738800356736 /* BiometricAuthUtils.swift */,
-				169409672ABC738800356736 /* SkinUtils.swift */,
 				169409682ABC738800356736 /* DarkModeUtils.swift */,
 				169409692ABC738800356736 /* StoreUtils.swift */,
 				1694096B2ABC738800356736 /* PhotoUtils.swift */,
@@ -1226,6 +1217,7 @@
 				16940A792ABC738800356736 /* CLLocationCoordinate2D+.swift in Sources */,
 				16940A922ABC738800356736 /* Color+.swift in Sources */,
 				16940A2E2ABC738800356736 /* UIEdgeInsets+.swift in Sources */,
+				163DC90F2BD4AA6F00CC99F9 /* sizer.swift in Sources */,
 				16940A522ABC738800356736 /* SCNPlane+.swift in Sources */,
 				16940A7B2ABC738800356736 /* CALayer+.swift in Sources */,
 				16940A572ABC738800356736 /* UserDefaults+.swift in Sources */,
@@ -1234,7 +1226,6 @@
 				181A074C2BD243B000EDCD0D /* UICollectionViewFlowLayout+.swift in Sources */,
 				16940A772ABC738800356736 /* CLGeocoder+.swift in Sources */,
 				16940A4A2ABC738800356736 /* UIScreen+.swift in Sources */,
-				16940A0E2ABC738800356736 /* SkinUtils.swift in Sources */,
 				16940A042ABC738800356736 /* PlistUtils.swift in Sources */,
 				16940A822ABC738800356736 /* BinaryInteger+.swift in Sources */,
 				16940A892ABC738800356736 /* String+.swift in Sources */,
@@ -1245,7 +1236,6 @@
 				16940A882ABC738800356736 /* Sequence+.swift in Sources */,
 				16940A752ABC738800356736 /* AVAudioSession+.swift in Sources */,
 				16940A182ABC738800356736 /* CGPoint+.swift in Sources */,
-				16940A112ABC738800356736 /* sizeAdapter.swift in Sources */,
 				16940A0B2ABC738800356736 /* VideoUtils.swift in Sources */,
 				16940A132ABC738800356736 /* DocumentUtils.swift in Sources */,
 				16940A022ABC738800356736 /* shared.swift in Sources */,
@@ -1299,23 +1289,22 @@
 				16940A242ABC738800356736 /* UINavigationController+.swift in Sources */,
 				16940A7C2ABC738800356736 /* CATextLayer+.swift in Sources */,
 				16940A362ABC738800356736 /* UIStackView+.swift in Sources */,
+				163DC9112BD4C60400CC99F9 /* SkinManager.swift in Sources */,
 				16940A3F2ABC738800356736 /* UITextField+.swift in Sources */,
 				16940A4C2ABC738800356736 /* SCNMaterial+.swift in Sources */,
 				1835A3BD2BB54B5C004A53B0 /* UIPickerView+.swift in Sources */,
 				16940A5A2ABC738800356736 /* DateFormatter+.swift in Sources */,
 				16940A4B2ABC738800356736 /* SCNGeometry+.swift in Sources */,
 				16940A3C2ABC738800356736 /* UICollectionView+.swift in Sources */,
-				169409FD2ABC738800356736 /* AssociatedAttributes.swift in Sources */,
 				16940A032ABC738800356736 /* Panda.swift in Sources */,
 				16940A6C2ABC738800356736 /* Date+.swift in Sources */,
-				169409FF2ABC738800356736 /* NibLoadable.swift in Sources */,
+				169409FF2ABC738800356736 /* Loadable.swift in Sources */,
 				16940A0A2ABC738800356736 /* PathUtils.swift in Sources */,
 				16940A012ABC738800356736 /* Logger.swift in Sources */,
 				16940A702ABC738800356736 /* SKNode+.swift in Sources */,
 				16940A5C2ABC738800356736 /* NSDecimalNumberHandler+.swift in Sources */,
 				16940A4D2ABC738800356736 /* SCNCapsule+.swift in Sources */,
 				16940A3A2ABC738800356736 /* UILabel+.swift in Sources */,
-				169409FC2ABC738800356736 /* StoryboardLoadable.swift in Sources */,
 				16940A582ABC738800356736 /* NSTextAttachment+.swift in Sources */,
 				16940A492ABC738800356736 /* UINavigationBar+.swift in Sources */,
 				16940A212ABC738800356736 /* DispatchQueue+.swift in Sources */,
@@ -1362,7 +1351,6 @@
 				16940A372ABC738800356736 /* UIGestureRecognizer+.swift in Sources */,
 				16940A122ABC738800356736 /* PhotoUtils.swift in Sources */,
 				16940A592ABC738800356736 /* Locale+.swift in Sources */,
-				16940A002ABC738800356736 /* Defaultable.swift in Sources */,
 				163DC90B2BD37D2B00CC99F9 /* Codable+.swift in Sources */,
 				16940A502ABC738800356736 /* SCNCylinder+.swift in Sources */,
 				16940A7E2ABC738800356736 /* CAShapeLayer+.swift in Sources */,

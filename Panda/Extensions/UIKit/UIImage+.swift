@@ -2099,7 +2099,7 @@ public extension UIImage {
         let sise = CGSize(width: size.0, height: size.1)
         let rect = CGRect(origin: CGPoint.zero, size: sise)
 
-        let textsize = text.pd_stringSize(SizeUtils.screenWidth, font: .systemFont(ofSize: fontSize))
+        let textsize = text.pd_stringSize(sizer.screen.width, font: .systemFont(ofSize: fontSize))
 
         // 开启上下文
         UIGraphicsBeginImageContext(sise)

@@ -238,7 +238,7 @@ public extension UIButton {
     /// 获取指定宽度下字符串的Size
     /// - Parameter maxLineWidth: 最大行宽度
     /// - Returns: 文字尺寸
-    func titleSize(with maxLineWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
+    func titleSize(with maxLineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let attText = currentAttributedTitle { // 使用属性文本计算
             return attText.strSize(maxLineWidth)
         } else { // 使用文本计算

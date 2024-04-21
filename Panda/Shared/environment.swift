@@ -66,18 +66,18 @@ extension environment {
 extension environment {
     /// 是否是`iPad`
     static var isIPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
 
     /// 是否是`iPhone`
     static var isIPhone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
+        return UIDevice.current.userInterfaceIdiom == .phone
     }
 
     /// 是否是`iPhoneX`系列
     static var isIPhoneX: Bool {
         if #available(iOS 11, *) {
-            return max(SizeUtils.safeDistanceLeft, SizeUtils.safeDistanceBottom) > 0
+            return max(sizer.safeArea.left, sizer.safeArea.bottom) > 0
         }
         return false
     }

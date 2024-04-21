@@ -62,9 +62,9 @@ public extension UINavigationBar {
 
         let statusBar = UIView(frame: CGRect(
             x: 0,
-            y: -SizeUtils.statusBarHeight,
-            width: SizeUtils.screenWidth,
-            height: SizeUtils.screenHeight
+            y: -sizer.nav.statusHeight,
+            width: sizer.screen.width,
+            height: sizer.nav.statusHeight
         )).pd_add2(self)
         statusBar.backgroundColor = .clear
         self.statusBar = statusBar

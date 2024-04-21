@@ -61,7 +61,7 @@ public extension NSAttributedString {
     /// 计算`NSAttributedString`的`CGSize`
     /// - Parameter maxWidth:最大宽度
     /// - Returns:`CGSize`
-    func strSize(_ maxWidth: CGFloat = SizeUtils.screenWidth) -> CGSize {
+    func strSize(_ maxWidth: CGFloat = sizer.screen.width) -> CGSize {
         let result = boundingRect(
             with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude),
             options: [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine],
