@@ -1,44 +1,37 @@
-//
-//  NSAttributedString+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
-
 import UIKit
 
 // MARK: - 方法
 public extension NSAttributedString {
-    /// `NSAttributedString`转`NSMutableAttributedString`
-    /// - Returns: `NSMutableAttributedString`
-    func toMutable() -> NSMutableAttributedString {
-        NSMutableAttributedString(attributedString: self)
+    /// 不可变属性字符串转可变属性字符串
+    /// - Returns: 可变属性字符串
+    func pd_mutable() -> NSMutableAttributedString {
+        return NSMutableAttributedString(attributedString: self)
     }
 
-    /// `NSAttributedString`上的`属性字典`
-    /// - Returns: `[NSAttributedString.Key: Any]`
-    func attributes() -> [NSAttributedString.Key: Any] {
+    /// 获取属性字符串的属性字典
+    /// - Returns: 属性字典
+    func pd_attributes() -> [NSAttributedString.Key: Any] {
         guard length > 0 else { return [:] }
-        return attributes(at: 0, effectiveRange: nil)
+        return self.attributes(at: 0, effectiveRange: nil)
     }
 
-    /// 整个`NSAttributedString`的`NSRange`
+    /// 获取整个属性字符串的`NSRange`
     /// - Returns: `NSRange`
     func pd_fullNSRange() -> NSRange {
         return NSRange(location: 0, length: length)
     }
 
-    /// 获取`subStr`在`self`中的`NSRange`
-    /// - Parameter subStr:用于查找的字符串
-    /// - Returns:`NSRange`
-    func subNSRange(_ subStr: String) -> NSRange {
+    /// 获取`subStr`在属性字符串中的`NSRange`
+    /// - Parameter subStr: 用于查找的字符串
+    /// - Returns: 结果`NSRange`
+    func pd_nsRange(_ subStr: String) -> NSRange {
         return string.pd_nsRange(subStr)
     }
 
-    /// 获取`texts`在`self`中的`[NSRange]`
-    /// - Parameter texts:`[String]`
-    /// - Returns:`[NSRange]`
-    func subNSRanges(with texts: [String]) -> [NSRange] {
+    /// 获取`texts`在属性字符串中的所有`NSRange`
+    /// - Parameter texts: 用于查找的字符串数组
+    /// - Returns: 结果`[NSRange]`
+    func pd_nsRanges(with texts: [String]) -> [NSRange] {
         var ranges = [NSRange]()
         for str in texts {
             if string.contains(str) {
@@ -58,55 +51,55 @@ public extension NSAttributedString {
         return ranges
     }
 
-    /// 计算`NSAttributedString`的`CGSize`
-    /// - Parameter maxWidth:最大宽度
-    /// - Returns:`CGSize`
-    func strSize(_ maxWidth: CGFloat = sizer.screen.width) -> CGSize {
+    /// 计算属性字符串在指定的宽度下的`CGSize`
+    /// - Parameter lineWidth: 宽度
+    /// - Returns: 结果`CGSize`
+    func pd_stringSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         let result = boundingRect(
-            with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude),
+            with: CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude),
             options: [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine],
             context: nil
         ).size
-        return CGSize(width: Darwin.ceil(result.width), height: Darwin.ceil(result.height))
+        return CGSize(width: result.width.pd_ceil(), height: result.height.pd_ceil())
     }
 }
 
 // MARK: - 运算符
 public extension NSAttributedString {
-    /// 将`NSAttributedString`追加到另一个`NSAttributedString`
+    /// 向`lhs`属性字符串中追加一个属性字符串`rhs`
     /// - Parameters:
-    ///   - lhs:目标`NSAttributedString`
-    ///   - rhs:待追加`NSAttributedString`
+    ///   - lhs: 目标`NSAttributedString`
+    ///   - rhs: 要追加的`NSAttributedString`
     static func += (lhs: inout NSAttributedString, rhs: NSAttributedString) {
         let string = NSMutableAttributedString(attributedString: lhs)
         string.append(rhs)
         lhs = string
     }
 
-    /// 将`String`追加到`NSAttributedString`
+    /// 在`lhs`属性字符串中追加一个`rhs`字符串
     /// - Parameters:
-    ///   - lhs:目标`NSAttributedString`
-    ///   - rhs:要添加的`String`
+    ///   - lhs: 目标`NSAttributedString`
+    ///   - rhs: 要追加的`String`
     static func += (lhs: inout NSAttributedString, rhs: String) {
         lhs += NSAttributedString(string: rhs)
     }
 
-    /// 合并两个`NSAttributedString`,生成新的`NSAttributedString`
+    /// 合并两个属性字符串,并返回一个新的
     /// - Parameters:
-    ///   - lhs:参与合并的第一个`NSAttributedString`
-    ///   - rhs:参与合并的第二个`NSAttributedString`
-    /// - Returns:`NSAttributedString`
+    ///   - lhs: 左值属性字符串
+    ///   - rhs: 右值属性字符串
+    /// - Returns: 新的属性字符串
     static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
         let string = NSMutableAttributedString(attributedString: lhs)
         string.append(rhs)
         return NSAttributedString(attributedString: string)
     }
 
-    /// 将`String`添加到`NSAttributedString`,返回新的`NSAttributedString`
+    /// 将一个属性字符串和一个字符串合并起来
     /// - Parameters:
-    ///   - lhs:目标`NSAttributedString`
-    ///   - rhs:要添加的`String`
-    /// - Returns:新`NSAttributedString`
+    ///   - lhs: 属性字符串
+    ///   - rhs: 字符串
+    /// - Returns: 新的属性字符串
     static func + (lhs: NSAttributedString, rhs: String) -> NSAttributedString {
         lhs + NSAttributedString(string: rhs)
     }

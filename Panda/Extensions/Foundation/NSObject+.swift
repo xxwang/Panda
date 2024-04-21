@@ -1,10 +1,3 @@
-//
-//  NSObject+.swift
-//
-//
-//  Created by xxwang on 2023/5/23.
-//
-
 import Foundation
 
 // MARK: - 属性

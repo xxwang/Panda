@@ -12,6 +12,7 @@
 		163DC90D2BD426D600CC99F9 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90C2BD426D600CC99F9 /* environment.swift */; };
 		163DC90F2BD4AA6F00CC99F9 /* sizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC90E2BD4AA6F00CC99F9 /* sizer.swift */; };
 		163DC9112BD4C60400CC99F9 /* SkinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC9102BD4C60400CC99F9 /* SkinManager.swift */; };
+		163DC9142BD567F400CC99F9 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DC9132BD567F400CC99F9 /* NotificationNames.swift */; };
 		169409FE2ABC738800356736 /* Emitterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409552ABC738800356736 /* Emitterable.swift */; };
 		169409FF2ABC738800356736 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409562ABC738800356736 /* Loadable.swift */; };
 		16940A012ABC738800356736 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 169409592ABC738800356736 /* Logger.swift */; };
@@ -236,6 +237,7 @@
 		163DC90C2BD426D600CC99F9 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		163DC90E2BD4AA6F00CC99F9 /* sizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sizer.swift; sourceTree = "<group>"; };
 		163DC9102BD4C60400CC99F9 /* SkinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinManager.swift; sourceTree = "<group>"; };
+		163DC9132BD567F400CC99F9 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		169409552ABC738800356736 /* Emitterable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emitterable.swift; sourceTree = "<group>"; };
 		169409562ABC738800356736 /* Loadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		169409592ABC738800356736 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -475,11 +477,21 @@
 				169409D02ABC738800356736 /* NSNumber+.swift */,
 				169409B92ABC738800356736 /* UserDefaults+.swift */,
 				169409CA2ABC738800356736 /* NSRange+.swift */,
-				169409C12ABC738800356736 /* NSMutableParagraphStyle+.swift */,
 				169409C62ABC738800356736 /* Data+.swift */,
 				169409C32ABC738800356736 /* IndexPath+.swift */,
+				169409C72ABC738800356736 /* URL+.swift */,
 				169409BC2ABC738800356736 /* DateFormatter+.swift */,
+				169409C92ABC738800356736 /* DateComponents+.swift */,
+				169409BA2ABC738800356736 /* NSTextAttachment+.swift */,
+				169409CD2ABC738800356736 /* FileManager+.swift */,
+				169409C02ABC738800356736 /* Timer+.swift */,
+				169409C82ABC738800356736 /* Bundle+.swift */,
+				169409CB2ABC738800356736 /* NumberFormatter+.swift */,
+				169409C22ABC738800356736 /* NSPredicate+.swift */,
 				169409BB2ABC738800356736 /* Locale+.swift */,
+				169409C12ABC738800356736 /* NSMutableParagraphStyle+.swift */,
+				169409BF2ABC738800356736 /* NSAttributedString+.swift */,
+				169409C42ABC738800356736 /* NSMutableAttributedString+.swift */,
 			);
 			path = "已优化";
 			sourceTree = "<group>";
@@ -666,17 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				163DC9122BD4D23500CC99F9 /* 已优化 */,
-				169409BA2ABC738800356736 /* NSTextAttachment+.swift */,
 				169409BD2ABC738800356736 /* NSObject+.swift */,
-				169409BF2ABC738800356736 /* NSAttributedString+.swift */,
-				169409C02ABC738800356736 /* Timer+.swift */,
-				169409C22ABC738800356736 /* NSPredicate+.swift */,
-				169409C42ABC738800356736 /* NSMutableAttributedString+.swift */,
-				169409C72ABC738800356736 /* URL+.swift */,
-				169409C82ABC738800356736 /* Bundle+.swift */,
-				169409C92ABC738800356736 /* DateComponents+.swift */,
-				169409CB2ABC738800356736 /* NumberFormatter+.swift */,
-				169409CD2ABC738800356736 /* FileManager+.swift */,
 				169409CE2ABC738800356736 /* Date+.swift */,
 				169409CF2ABC738800356736 /* NotificationCenter+.swift */,
 			);
@@ -1052,6 +1054,7 @@
 				62E3E6112A2A653D00043401 /* Info.plist */,
 				16A3EC692BBE612800025F53 /* Colors.swift */,
 				16A3EC6B2BBE613200025F53 /* Fonts.swift */,
+				163DC9132BD567F400CC99F9 /* NotificationNames.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -1406,6 +1409,7 @@
 				16A3EC622BBE5DCC00025F53 /* HttpDownloadManager.swift in Sources */,
 				16A3EC712BBE61C500025F53 /* PDTabBar.swift in Sources */,
 				16A3EC4C2BBDC8F500025F53 /* PDControl.swift in Sources */,
+				163DC9142BD567F400CC99F9 /* NotificationNames.swift in Sources */,
 				16A3EC492BBDC8F500025F53 /* PDButton.swift in Sources */,
 				16A3EC642BBE5DCC00025F53 /* CustomResponse.swift in Sources */,
 				163DC9062BD2DB4500CC99F9 /* Demo.swift in Sources */,

@@ -1,18 +1,11 @@
-//
-//  NSTextAttachment+.swift
-//
-//
-//  Created by xxwang on 2023/5/26.
-//
-
 import UIKit
 
 // MARK: - 方法
 public extension NSTextAttachment {
-    /// 使用`NSTextAttachment`创建`NSAttributedString`
-    /// - Returns: `NSAttributedString`
+    /// 使用附件创建一个属性字符串
+    /// - Returns: 属性字符串
     func toAttributedString() -> NSAttributedString {
-        NSAttributedString(attachment: self)
+        return NSAttributedString(attachment: self)
     }
 }
 
@@ -20,8 +13,9 @@ public extension NSTextAttachment {
 extension NSTextAttachment: Defaultable {}
 public extension NSTextAttachment {
     typealias Associatedtype = NSTextAttachment
+
     static func `default`() -> Associatedtype {
-        NSTextAttachment()
+        return NSTextAttachment()
     }
 }
 

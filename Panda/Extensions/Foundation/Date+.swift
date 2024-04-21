@@ -1,10 +1,3 @@
-//
-//  Date+.swift
-//
-//
-//  Created by xxwang on 2023/5/24.
-//
-
 import Foundation
 
 private let calendar = Calendar.current

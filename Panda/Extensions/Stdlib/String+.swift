@@ -1437,40 +1437,40 @@ public extension String {
 
 // MARK: - 字符串尺寸计算
 public extension String {
-    /// 根据`maxWidth`与`font`参数计算字符串尺寸
+    /// 根据参数计算字符串`CGSize`
     /// - Parameters:
-    ///   - maxWidth: 最大宽度
+    ///   - lineWidth: 最大宽度
     ///   - font: 字体
     /// - Returns: 结果`CGSize`
-    func pd_stringSize(_ maxWidth: CGFloat = UIScreen.main.bounds.width,
+    func pd_stringSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
                        font: UIFont) -> CGSize
     {
-        let constraint = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
-        let rect = pd_nsString().boundingRect(with: constraint,
-                                              options: [
-                                                  .usesLineFragmentOrigin,
-                                                  .usesFontLeading,
-                                                  .truncatesLastVisibleLine,
-                                              ],
-                                              attributes: [
-                                                  .font: font,
-                                              ],
-                                              context: nil)
+        let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
+        let rect = self.pd_nsString().boundingRect(with: constraint,
+                                                   options: [
+                                                       .usesLineFragmentOrigin,
+                                                       .usesFontLeading,
+                                                       .truncatesLastVisibleLine,
+                                                   ],
+                                                   attributes: [
+                                                       .font: font,
+                                                   ],
+                                                   context: nil)
 
-        return CGSize(width: Foundation.ceil(rect.width), height: Foundation.ceil(rect.height))
+        return CGSize(width: rect.width.pd_ceil(), height: rect.height.pd_ceil())
     }
 
-    /// 根据`maxWidth`/`font`/`lineSpacing`/`wordSpacing`参数以`NSMutableAttributedString`计算字符串大小
+    /// 根据参数计算字符串`CGSize`
     /// - Parameters:
-    ///   - maxWidth: 最大宽度
+    ///   - lineWidth: 最大宽度
     ///   - font: 字体
     ///   - lineSpacing: 行间距
     ///   - wordSpacing: 字间距
     /// - Returns: 结果`CGSize`
-    func pd_attributeSize(_ maxWidth: CGFloat = UIScreen.main.bounds.width,
-                          font: UIFont,
-                          lineSpacing: CGFloat = 0,
-                          wordSpacing: CGFloat = 0) -> CGSize
+    func pd_attributedSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
+                           font: UIFont,
+                           lineSpacing: CGFloat = 0,
+                           wordSpacing: CGFloat = 0) -> CGSize
     {
         // 段落样式
         let paragraphStyle = NSMutableParagraphStyle.default()
@@ -1491,7 +1491,7 @@ public extension String {
                 .paragraphStyle: paragraphStyle,
             ])
 
-        let constraint = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+        let constraint = CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude)
         let textSize = attributedString.boundingRect(with: constraint,
                                                      options: [
                                                          .usesLineFragmentOrigin,
@@ -1499,7 +1499,7 @@ public extension String {
                                                          .truncatesLastVisibleLine,
                                                      ], context: nil).size
         // 向上取整(由于计算结果小数问题, 导致界面字符串显示不完整)
-        return CGSize(width: Foundation.ceil(textSize.width), height: Foundation.ceil(textSize.height))
+        return CGSize(width: textSize.width.pd_ceil(), height: textSize.height.pd_ceil())
     }
 }
 

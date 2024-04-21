@@ -1,13 +1,4 @@
-//
-//  DateComponents+.swift
-//
-//
-//  Created by xxwang on 2023/5/24.
-//
-
 import UIKit
-
-public extension DateComponents {}
 
 // MARK: - Defaultable
 extension DateComponents: Defaultable {}
@@ -15,7 +6,7 @@ public extension DateComponents {
     typealias Associatedtype = DateComponents
 
     static func `default`() -> Associatedtype {
-        DateComponents()
+        return DateComponents()
     }
 }
 
@@ -43,7 +34,7 @@ public extension DateComponents {
     /// - Parameter era: 时代
     /// - Returns: `Self`
     @discardableResult
-    mutating func pd_calendar(_ era: Int) -> Self {
+    mutating func pd_era(_ era: Int) -> Self {
         self.era = era
         return self
     }
