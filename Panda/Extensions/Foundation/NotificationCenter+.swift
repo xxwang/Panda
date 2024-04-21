@@ -31,6 +31,10 @@ public extension NotificationCenter {
             object: object
         )
     }
+    //TODO: -
+    如果把block传递到object中 执行(类似 timer中 有一个cb函数)
+    如果出现多个监听会不会乱???? 移除是否有效???
+    
 
     /// 移除监听者
     /// - Parameters:
