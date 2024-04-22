@@ -1486,15 +1486,15 @@ public extension String {
             ])
 
         let constraint = CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude)
-        let textSize = attributedString.boundingRect(with: constraint,
-                                                     options: [
-                                                         .usesLineFragmentOrigin,
-                                                         .usesFontLeading,
-                                                         .usesDeviceMetrics,
-                                                         .truncatesLastVisibleLine,
-                                                     ], context: nil).size
+        let size = attributedString.boundingRect(with: constraint,
+                                                 options: [
+                                                     .usesLineFragmentOrigin,
+                                                     .usesFontLeading,
+                                                     .usesDeviceMetrics,
+                                                     .truncatesLastVisibleLine,
+                                                 ], context: nil).size
         // 向上取整(由于计算结果小数问题, 导致界面字符串显示不完整)
-        return CGSize(width: textSize.width.pd_ceil(), height: textSize.height.pd_ceil())
+        return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
     }
 }
 
