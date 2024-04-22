@@ -1505,6 +1505,13 @@ public extension String {
 
 // MARK: - 方法
 public extension String {
+    
+    /// 从字符串中提取数字
+    /// - Returns: 数字字符串
+    func pd_extractNumber() -> String {
+        return self.filter { $0.isNumber}
+    }
+    
     /// 字符串中第一个字符
     /// - Returns: 第一个字符(字符串)
     func pd_firstCharacter() -> String? {
