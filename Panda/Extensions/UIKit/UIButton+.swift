@@ -239,11 +239,15 @@ public extension UIButton {
     /// - Parameter lineWidth: 最大行宽度
     /// - Returns: 文字尺寸
     func pd_titleSize(with lineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        if let attText = currentAttributedTitle { // 使用属性文本计算
-            return attText.pd_attributedSize(lineWidth)
-        } else { // 使用文本计算
-            return titleLabel?.pd_textSize(lineWidth) ?? .zero
+        var size: CGSize = .zero
+        if let attText = currentAttributedTitle {
+            // 使用属性文本计算
+            size = attText.pd_attributedSize(lineWidth)
+        } else {
+            // 使用文本计算
+            size = titleLabel?.pd_textSize(lineWidth) ?? .zero
         }
+        return size
     }
 }
 

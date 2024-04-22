@@ -1446,18 +1446,12 @@ public extension String {
                        font: UIFont) -> CGSize
     {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
-        let rect = self.pd_nsString().boundingRect(with: constraint,
-                                                   options: [
-                                                       .usesLineFragmentOrigin,
-                                                       .usesFontLeading,
-                                                       .truncatesLastVisibleLine,
-                                                   ],
-                                                   attributes: [
-                                                       .font: font,
-                                                   ],
-                                                   context: nil)
-
-        return CGSize(width: rect.width.pd_ceil(), height: rect.height.pd_ceil())
+        let size = self.pd_nsString()
+            .boundingRect(with: constraint,
+                          options: [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine],
+                          attributes: [.font: font],
+                          context: nil)
+        return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
     }
 
     /// 根据参数计算字符串`CGSize`
