@@ -84,16 +84,6 @@ public extension UILabel {
 
 // MARK: - 获取`UILabel`中内容大小
 public extension UILabel {
-    /// 获取`UILabel`中内容的CGSize
-    /// - Parameter lineWidth:最大宽度
-    /// - Returns:`CGSize`
-    func pd_textSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        if let _ = attributedText {
-            return self.pd_attributedTextSize(lineWidth)
-        }
-        return self.pd_stringSize(lineWidth)
-    }
-
     /// 获取`UILabel`中`属性字符串`的CGSize
     /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
@@ -104,7 +94,7 @@ public extension UILabel {
     /// 获取`UILabel`中`字符串`的CGSize
     /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
-    func pd_stringSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+    func pd_textSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         return self.text?.pd_stringSize(lineWidth, font: font) ?? .zero
     }
 }

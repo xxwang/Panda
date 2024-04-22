@@ -242,7 +242,7 @@ public extension UIButton {
         if let currentAttributedTitle {
             return currentAttributedTitle.pd_attributedSize(lineWidth)
         }
-        return titleLabel?.pd_textSize(lineWidth) ?? .zero
+        return titleLabel?.pd_stringSize(lineWidth) ?? .zero
     }
 }
 
