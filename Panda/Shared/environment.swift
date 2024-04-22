@@ -1,6 +1,6 @@
 import UIKit
 
-class environment {
+public class environment {
     /// 是否是模拟器
     static var isSimulator: Bool {
         #if targetEnvironment(simulator)
@@ -20,7 +20,7 @@ class environment {
     }
 }
 
-extension environment {
+public extension environment {
     /// 系统类型
     static var system: String {
         #if os(macOS)
@@ -63,7 +63,7 @@ extension environment {
     }
 }
 
-extension environment {
+public extension environment {
     /// 是否是`iPad`
     static var isIPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
