@@ -1445,10 +1445,11 @@ public extension String {
     func pd_stringSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
                        font: UIFont) -> CGSize
     {
-        let constraint = CGSize(width: lineWidth.pd_floor(), height: .greatestFiniteMagnitude)
+        let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
+        //.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine
         let size = self.pd_nsString()
             .boundingRect(with: constraint,
-                          options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine],
+                          options: [.usesFontLeading],
                           attributes: [.font: font],
                           context: nil)
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
@@ -1485,13 +1486,15 @@ public extension String {
                 .paragraphStyle: paragraphStyle,
             ])
 
-        let constraint = CGSize(width: lineWidth.pd_floor(), height: CGFloat.greatestFiniteMagnitude)
+        let constraint = CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude)
+        /*.usesLineFragmentOrigin,
+        .usesFontLeading,
+        .usesDeviceMetrics,
+        .truncatesLastVisibleLine,
+         */
         let size = attributedString.boundingRect(with: constraint,
                                                  options: [
-                                                     .usesLineFragmentOrigin,
-                                                     .usesFontLeading,
-                                                     .usesDeviceMetrics,
-                                                     .truncatesLastVisibleLine,
+                                                    .usesFontLeading
                                                  ], context: nil).size
         // 向上取整(由于计算结果小数问题, 导致界面字符串显示不完整)
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())

@@ -55,10 +55,11 @@ public extension NSAttributedString {
     /// - Parameter lineWidth: 宽度
     /// - Returns: 结果`CGSize`
     func pd_attributedSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        let constraint = CGSize(width: lineWidth.pd_floor(), height: .greatestFiniteMagnitude)
+        let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
+        //.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine
         let size = self.boundingRect(
             with: constraint,
-            options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine],
+            options: [.usesFontLeading],
             context: nil
         ).size
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
