@@ -474,4 +474,14 @@ public extension UIButton {
         addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return self
     }
+    
+    /// 扩大按钮的点击区域
+    /// - Parameter size: 向四周扩展的像素大小
+    /// - Returns: `Self`
+    @discardableResult
+    func pd_expandClickArea(_ size: CGFloat = 10) -> Self {
+        self.expandSize(size: size)
+        return self
+    }
+        
 }
