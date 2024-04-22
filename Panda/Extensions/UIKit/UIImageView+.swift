@@ -105,10 +105,10 @@ public extension UIImageView {
 }
 
 // MARK: - Defaultable
-public extension UIImageView {
-    typealias Associatedtype = UIImageView
+extension UIImageView {
+    public typealias Associatedtype = UIImageView
 
-    override class func `default`() -> Associatedtype {
+    @objc override class open func `default`() -> Associatedtype {
         let imageView = UIImageView()
         return imageView
     }
