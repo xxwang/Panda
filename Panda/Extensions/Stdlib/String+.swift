@@ -2280,10 +2280,10 @@ public extension String {
 
 // MARK: - Defaultable
 extension String: Defaultable {}
+extension String {
+    public typealias Associatedtype = String
 
-public extension String {
-    typealias Associatedtype = String
-    static func `default`() -> Associatedtype {
+    static public func `default`() -> Associatedtype {
         return String()
     }
 }

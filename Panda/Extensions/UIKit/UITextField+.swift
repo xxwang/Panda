@@ -114,14 +114,15 @@ public extension UITextField {
 }
 
 // MARK: - Defaultable
-public extension UITextField {
-    typealias Associatedtype = UITextField
+extension UITextField {
+    public typealias Associatedtype = UITextField
 
-    override class func `default`() -> Associatedtype {
+    @objc override class open func `default`() -> Associatedtype {
         let textField = UITextField()
         return textField
     }
 }
+
 
 // MARK: - 链式语法
 public extension UITextField {
