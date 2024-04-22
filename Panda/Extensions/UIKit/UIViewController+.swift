@@ -261,8 +261,8 @@ public extension UIViewController {
 // MARK: - Runtime
 @objc extension UIViewController {
     /// 交换方法
-    class func initializeHookMethod() {
-        super.initializeMethod()
+    public override class func pd_initializeMethod() {
+        super.pd_initializeMethod()
 
         if self == UIViewController.self {
             let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
@@ -270,22 +270,22 @@ public extension UIViewController {
                 // viewDidLoad
                 let oriSel = #selector(viewDidLoad)
                 let repSel = #selector(hook_viewDidLoad)
-                _ = self.hookInstanceMethod(of: oriSel, with: repSel)
+                _ = self.pd_hookInstanceMethod(of: oriSel, with: repSel)
 
                 // viewWillAppear
                 let oriSel1 = #selector(viewWillAppear(_:))
                 let repSel1 = #selector(hook_viewWillAppear(animated:))
-                _ = self.hookInstanceMethod(of: oriSel1, with: repSel1)
+                _ = self.pd_hookInstanceMethod(of: oriSel1, with: repSel1)
 
                 // viewWillDisappear
                 let oriSel2 = #selector(viewWillDisappear(_:))
                 let repSel2 = #selector(hook_viewWillDisappear(animated:))
-                _ = self.hookInstanceMethod(of: oriSel2, with: repSel2)
+                _ = self.pd_hookInstanceMethod(of: oriSel2, with: repSel2)
 
                 // present
                 let oriSelPresent = #selector(present(_:animated:completion:))
                 let repSelPresent = #selector(hook_present(_:animated:completion:))
-                _ = self.hookInstanceMethod(of: oriSelPresent, with: repSelPresent)
+                _ = self.pd_hookInstanceMethod(of: oriSelPresent, with: repSelPresent)
             }
         } else if self == UINavigationController.self {
             let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
@@ -293,7 +293,7 @@ public extension UIViewController {
                 // pushViewController
                 let oriSel = #selector(UINavigationController.pushViewController(_:animated:))
                 let repSel = #selector(UINavigationController.hook_pushViewController(_:animated:))
-                _ = self.hookInstanceMethod(of: oriSel, with: repSel)
+                _ = self.pd_hookInstanceMethod(of: oriSel, with: repSel)
             }
         }
     }
