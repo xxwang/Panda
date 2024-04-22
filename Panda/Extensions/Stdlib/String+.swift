@@ -1445,7 +1445,7 @@ public extension String {
     func pd_stringSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
                        font: UIFont) -> CGSize
     {
-        let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
+        let constraint = CGSize(width: lineWidth.pd_floor(), height: .greatestFiniteMagnitude)
         let size = self.pd_nsString()
             .boundingRect(with: constraint,
                           options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine],
@@ -1485,7 +1485,7 @@ public extension String {
                 .paragraphStyle: paragraphStyle,
             ])
 
-        let constraint = CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude)
+        let constraint = CGSize(width: lineWidth.pd_floor(), height: CGFloat.greatestFiniteMagnitude)
         let size = attributedString.boundingRect(with: constraint,
                                                  options: [
                                                      .usesLineFragmentOrigin,
