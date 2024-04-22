@@ -164,6 +164,7 @@ public extension UITextField {
     /// 设置占位符颜色
     /// - Parameter color:颜色
     /// - Returns:`Self`
+    @discardableResult
     func pd_placeholderColor(_ color: UIColor) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.pd_attributes()
@@ -181,6 +182,7 @@ public extension UITextField {
     /// 设置占位符字体
     /// - Parameter font:字体
     /// - Returns:`Self`
+    @discardableResult
     func pd_placeholderFont(_ font: UIFont) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.pd_attributes()
@@ -200,6 +202,7 @@ public extension UITextField {
     ///   - color:颜色
     ///   - font:字体
     /// - Returns:`Self`
+    @discardableResult
     func pd_placeholder(_ color: UIColor, font: UIFont) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
             var attributes = holder.pd_attributes()
