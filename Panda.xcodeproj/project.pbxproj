@@ -466,6 +466,17 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		163DC9152BD682B300CC99F9 /* 已优化 */ = {
+			isa = PBXGroup;
+			children = (
+				169409852ABC738800356736 /* UISlider+.swift */,
+				169409832ABC738800356736 /* UICollectionViewCell+.swift */,
+				169409842ABC738800356736 /* UINavigationController+.swift */,
+				169409862ABC738800356736 /* UIPageControl+.swift */,
+			);
+			path = "已优化";
+			sourceTree = "<group>";
+		};
 		169409522ABC738800356736 /* protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,10 +592,7 @@
 		169409822ABC738800356736 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				169409832ABC738800356736 /* UICollectionViewCell+.swift */,
-				169409842ABC738800356736 /* UINavigationController+.swift */,
-				169409852ABC738800356736 /* UISlider+.swift */,
-				169409862ABC738800356736 /* UIPageControl+.swift */,
+				163DC9152BD682B300CC99F9 /* 已优化 */,
 				169409872ABC738800356736 /* UIAlertController+.swift */,
 				169409882ABC738800356736 /* UIDevice+.swift */,
 				169409892ABC738800356736 /* UIFont+.swift */,

@@ -1,10 +1,3 @@
-//
-//  UIPageControl+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
-
 import UIKit
 
 // MARK: - Defaultable
@@ -24,7 +17,7 @@ public extension UIPageControl {
     /// - Returns: `Self`
     @discardableResult
     func pd_currentPageIndicatorTintColor(_ color: UIColor) -> Self {
-        currentPageIndicatorTintColor = color
+        self.currentPageIndicatorTintColor = color
         return self
     }
 
@@ -33,7 +26,7 @@ public extension UIPageControl {
     /// - Returns: `Self`
     @discardableResult
     func pd_pageIndicatorTintColor(_ color: UIColor) -> Self {
-        pageIndicatorTintColor = color
+        self.pageIndicatorTintColor = color
         return self
     }
 
@@ -42,7 +35,7 @@ public extension UIPageControl {
     /// - Returns: `Self`
     @discardableResult
     func pd_hidesForSinglePage(_ isHidden: Bool) -> Self {
-        hidesForSinglePage = isHidden
+        self.hidesForSinglePage = isHidden
         return self
     }
 
@@ -51,7 +44,7 @@ public extension UIPageControl {
     /// - Returns: `Self`
     @discardableResult
     func pd_currentPage(_ current: Int) -> Self {
-        currentPage = current
+        self.currentPage = current
         return self
     }
 
@@ -60,7 +53,7 @@ public extension UIPageControl {
     /// - Returns: `Self`
     @discardableResult
     func pd_numberOfPages(_ count: Int) -> Self {
-        numberOfPages = count
+        self.numberOfPages = count
         return self
     }
 }

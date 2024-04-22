@@ -98,7 +98,7 @@ public extension UILabel {
     /// - Returns:`CGSize`
     func pd_attributedTextSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let attributedText {
-            return attributedText.pd_stringSize(lineWidth)
+            return attributedText.pd_attributedSize(lineWidth)
         }
         return .zero
     }
@@ -257,8 +257,8 @@ public extension UILabel {
 // MARK: - Defaultable
 extension UILabel {
     public typealias Associatedtype = UILabel
-    
-    open override class func `default`() -> Associatedtype {
+
+    override open class func `default`() -> Associatedtype {
         let label = UILabel()
         return label
     }

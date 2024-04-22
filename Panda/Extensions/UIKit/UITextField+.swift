@@ -117,12 +117,11 @@ public extension UITextField {
 extension UITextField {
     public typealias Associatedtype = UITextField
 
-    @objc override class open func `default`() -> Associatedtype {
+    @objc override open class func `default`() -> Associatedtype {
         let textField = UITextField()
         return textField
     }
 }
-
 
 // MARK: - 链式语法
 public extension UITextField {

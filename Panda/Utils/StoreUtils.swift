@@ -5,9 +5,9 @@
 ////  Created by xxwang on 2023/5/29.
 ////
 //
-//import StoreKit
+// import StoreKit
 //
-//class StoreUtils: NSObject {
+// class StoreUtils: NSObject {
 //    /// 结果回调
 //    private var goodsListResult: ((_ result: SKProductsResponse?) -> Void)?
 //
@@ -18,9 +18,9 @@
 //    deinit {
 //        SKPaymentQueue.default().remove(self)
 //    }
-//}
+// }
 //
-//extension StoreUtils {
+// extension StoreUtils {
 //    /// 根据`商品ID`从`App store`获取`商品信息`
 //    /// - Parameters:
 //    ///   - ids: `商品ID`
@@ -58,10 +58,10 @@
 //        SKPaymentQueue.default().restoreCompletedTransactions()
 //        SKPaymentQueue.default().add(self)
 //    }
-//}
+// }
 //
 //// MARK: - SKProductsRequestDelegate
-//extension StoreUtils: SKProductsRequestDelegate {
+// extension StoreUtils: SKProductsRequestDelegate {
 //    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
 //        goodsListResult?(response)
 //    }
@@ -74,10 +74,10 @@
 //        print("商品请求失败:\(error.localizedDescription)")
 //        goodsListResult?(nil)
 //    }
-//}
+// }
 //
 //// MARK: - SKPaymentQueueDelegate
-//extension StoreUtils: SKPaymentQueueDelegate {
+// extension StoreUtils: SKPaymentQueueDelegate {
 //    /// `SKStorefront` 发生变化的时候被调用`true`:继续交易 `false`:停止交易
 //    func paymentQueue(_ paymentQueue: SKPaymentQueue, shouldContinue transaction: SKPaymentTransaction, in newStorefront: SKStorefront) -> Bool {
 //        true
@@ -87,10 +87,10 @@
 //    func paymentQueueShouldShowPriceConsent(_ paymentQueue: SKPaymentQueue) -> Bool {
 //        true
 //    }
-//}
+// }
 //
 //// MARK: - SKPaymentTransactionObserver
-//extension StoreUtils: SKPaymentTransactionObserver {
+// extension StoreUtils: SKPaymentTransactionObserver {
 //    /// 当交易队列中添加的每一笔交易状态发生变化时调用
 //    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
 //        for transaction in transactions {
@@ -126,4 +126,4 @@
 //    func paymentQueueDidChangeStorefront(_ queue: SKPaymentQueue) {}
 //
 //    func paymentQueue(_ queue: SKPaymentQueue, didRevokeEntitlementsForProductIdentifiers productIdentifiers: [String]) {}
-//}
+// }

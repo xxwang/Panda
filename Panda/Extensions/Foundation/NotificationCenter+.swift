@@ -72,7 +72,7 @@ private extension NotificationCenter {
     /// - Parameter notification: 接收到的通知
     @objc class func pd_notificationCB(notification: Notification) {
         if let cb = notification.object as? ((Notification) -> Void) {
-            DispatchQueue.main.async {            
+            DispatchQueue.main.async {
                 cb(notification)
             }
         }

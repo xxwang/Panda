@@ -240,7 +240,7 @@ public extension UIButton {
     /// - Returns: 文字尺寸
     func pd_titleSize(with lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let attText = currentAttributedTitle { // 使用属性文本计算
-            return attText.pd_stringSize(lineWidth)
+            return attText.pd_attributedSize(lineWidth)
         } else { // 使用文本计算
             return titleLabel?.pd_textSize(lineWidth) ?? .zero
         }
@@ -474,7 +474,7 @@ public extension UIButton {
         addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return self
     }
-    
+
     /// 扩大按钮的点击区域
     /// - Parameter size: 向四周扩展的像素大小
     /// - Returns: `Self`
@@ -483,5 +483,4 @@ public extension UIButton {
         self.expandSize(size: size)
         return self
     }
-        
 }

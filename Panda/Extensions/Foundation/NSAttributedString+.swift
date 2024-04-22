@@ -54,8 +54,8 @@ public extension NSAttributedString {
     /// 计算属性字符串在指定的宽度下的`CGSize`
     /// - Parameter lineWidth: 宽度
     /// - Returns: 结果`CGSize`
-    func pd_stringSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        let result = boundingRect(
+    func pd_attributedSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+        let result = self.boundingRect(
             with: CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude),
             options: [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine],
             context: nil

@@ -261,7 +261,7 @@ public extension UIViewController {
 // MARK: - Runtime
 @objc extension UIViewController {
     /// 交换方法
-    public override class func pd_initializeMethod() {
+    override public class func pd_initializeMethod() {
         super.pd_initializeMethod()
 
         if self == UIViewController.self {

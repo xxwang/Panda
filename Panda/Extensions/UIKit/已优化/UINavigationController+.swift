@@ -1,31 +1,24 @@
-//
-//  UINavigationController+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
-
 import UIKit
 
 // MARK: - 方法
 public extension UINavigationController {
-    /// `Push`方法(把控制器压入导航栈中)
+    /// 把控制器压入导航栈中
     /// - Parameters:
     ///   - viewController: 要入栈的控制器
     ///   - animated: 是否动画
     ///   - completion: 完成回调
-    func push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func pd_push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         pushViewController(viewController, animated: animated)
         CATransaction.commit()
     }
 
-    /// `pop`方法(把控制器从栈中移除)
+    /// 把控制器人栈中移除
     /// - Parameters:
-    ///   - animated:是否动画
-    ///   - completion:完成回调
-    func pop(animated: Bool = true, completion: (() -> Void)? = nil) {
+    ///   - animated: 是否动画
+    ///   - completion: 完成回调
+    func pd_pop(animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         popViewController(animated: animated)
@@ -33,8 +26,8 @@ public extension UINavigationController {
     }
 
     /// 设置导航条为透明
-    /// - Parameter tintColor:导航条`tintColor`
-    func transparent(with tintColor: UIColor = .white) {
+    /// - Parameter tintColor: 导航条`tintColor`
+    func pd_transparent(with tintColor: UIColor = .white) {
         navigationBar.pd_isTranslucent(true)
             .pd_backgroundImage(UIImage())
             .pd_backgroundColor(.clear)
@@ -46,7 +39,7 @@ public extension UINavigationController {
 
     /// 设置全局返回手势
     /// - Parameter isOpen: 是否开启
-    func fullScreenBackGesture(_ isOpen: Bool) {
+    func pd_fullScreenBackGesture(_ isOpen: Bool) {
         if isOpen {
             guard let popGestureRecognizer = interactivePopGestureRecognizer,
                   let targets = popGestureRecognizer.value(forKey: "_targets") as? [NSObject]
@@ -69,16 +62,7 @@ public extension UINavigationController {
     }
 }
 
-// MARK: - Defaultable
-public extension UINavigationController {
-    typealias Associatedtype = UINavigationController
-
-    override class func `default`() -> UINavigationController {
-        let item = UINavigationController()
-        return item
-    }
-}
-
+// MARK: - 链式语法
 public extension UINavigationController {
     /// 设置导航控制器代理
     /// - Parameter delegate: 代理

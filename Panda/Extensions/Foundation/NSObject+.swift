@@ -2,7 +2,6 @@ import Foundation
 
 // MARK: - 方法
 public extension NSObject {
-
     /// 获取对象的类名字符串
     /// - Returns: 类名字符串
     func pd_className() -> String {
@@ -16,7 +15,7 @@ public extension NSObject {
     static func pd_className() -> String {
         String(describing: Self.self)
     }
-    
+
     /// 获取类中所有的成员变量名称
     /// - Returns: 成员变量名称数组
     static func pd_members() -> [String] {
@@ -39,7 +38,6 @@ public extension NSObject {
 
 // MARK: - 交换方法
 public extension NSObject {
-
     /// 交换类的两个方法(方法前需要`@objc dynamic`修饰)
     /// - Parameters:
     ///   - originalSelector: 原始方法
@@ -101,7 +99,6 @@ public extension NSObject {
 
 // MARK: - setValue
 @objc public extension NSObject {
-
     /// 初始化方法
     /// - Note: 由于在`swift`中`initialize()`这个方法已经被废弃了,所以需要在`Appdelegate`中调用此方法
     class func pd_initializeMethod() {

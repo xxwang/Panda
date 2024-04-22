@@ -5,7 +5,6 @@ private let dateFormatter = DateFormatter()
 
 // MARK: - 属性
 public extension Date {
-
     /// 获取一个日历对象
     var pd_calendar: Calendar {
         return Calendar(identifier: Calendar.current.identifier)
@@ -253,7 +252,7 @@ public extension Date {
     ///   - isGMT: 是否是`格林尼治时区`
     /// - Returns: 日期字符串
     func pd_string(with format: String = "yyyy-MM-dd HH:mm:ss",
-                     isGMT: Bool = false) -> String
+                   isGMT: Bool = false) -> String
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -295,7 +294,7 @@ public extension Date {
         dateFormatter.dateStyle = .none
         return dateFormatter.string(from: self)
     }
-    
+
     /// 使用格式化枚举格式化日期和时间返回日期和时间字符串
     ///
     ///     Date().pd_dateTimeString(of:.short) -> "1/12/17, 7:32 PM"
@@ -322,6 +321,7 @@ public extension Date {
         /// 完整的月份名称
         case full
     }
+
     /// 当前日期的月份名称
     ///
     ///     Date().pd_monthName(of:.oneLetter) -> "J"
@@ -355,7 +355,7 @@ public extension Date {
         /// 完整的天名称
         case full
     }
-    
+
     /// 当前日期的天名称(周一到周日)
     ///
     ///     Date().pd_dayName(of:.oneLetter) -> "T"
@@ -612,8 +612,8 @@ public extension Date {
     }
 
     #if !os(Linux)
-    /// 获取当前日期属于本年中的第几个季度
-    /// - Returns: 结果季度
+        /// 获取当前日期属于本年中的第几个季度
+        /// - Returns: 结果季度
         func pd_quarter() -> Int {
             let month = Double(calendar.component(.month, from: self))
             let numberOfMonths = Double(calendar.monthSymbols.count)
@@ -665,14 +665,12 @@ public extension Date {
 
 // MARK: - 静态方法
 public extension Date {
-
-    
     /// 获取现在的日期
     /// - Returns: 结果`Date`
     static func pd_now() -> Date {
         return Date()
     }
-    
+
     /// 获取今天的日期
     /// - Returns: 结果`Date`
     static func pd_todayDate() -> Date {
@@ -751,7 +749,6 @@ public extension Date {
 
 // MARK: - 时间戳
 public extension Date {
-
     /// 获取当前日期对象的时间戳
     ///
     /// - Note: 支持返回秒和毫秒的时间戳
@@ -825,7 +822,6 @@ public extension Date {
     func pd_milliStamp() -> Int {
         return Int(timeIntervalSince1970 * 1000)
     }
-
 }
 
 // MARK: - 判断
@@ -963,7 +959,6 @@ public extension Date {
 
 // MARK: - 随机
 public extension Date {
-    
     /// 在指定日期区间中生成一个随机日期
     ///
     /// - Note: 不包含结果日期本身
@@ -998,7 +993,7 @@ public extension Date {
     static func pd_random(in range: Range<Date>,
                           using generator: inout some RandomNumberGenerator) -> Date
     {
-    return Date(timeIntervalSinceReferenceDate:
+        return Date(timeIntervalSinceReferenceDate:
             TimeInterval.random(
                 in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound.timeIntervalSinceReferenceDate,
                 using: &generator
@@ -1026,7 +1021,6 @@ public extension Date {
 
 // MARK: - 操作
 public extension Date {
-
     /// 获取两个日期之间的天数
     /// - Parameter date: 参与比较的日期
     /// - Returns: 结果天数
@@ -1151,16 +1145,16 @@ public extension Date {
 
     #if !os(Linux)
 
-    /// 获取以指定日历组件为开头的日期
-    ///
-    ///     let date = Date() // "Jan 12, 2017, 7:14 PM"
-    ///     let date2 = date.pd_beginning(of:.hour) // "Jan 12, 2017, 7:00 PM"
-    ///     let date3 = date.pd_beginning(of:.month) // "Jan 1, 2017, 12:00 AM"
-    ///     let date4 = date.pd_beginning(of:.year) // "Jan 1, 2017, 12:00 AM"
-    ///
-    /// - Note: 由于日期格式的原因, 显示因格式不一样
-    /// - Parameter component: 日历组件
-    /// - Returns: 结果日期
+        /// 获取以指定日历组件为开头的日期
+        ///
+        ///     let date = Date() // "Jan 12, 2017, 7:14 PM"
+        ///     let date2 = date.pd_beginning(of:.hour) // "Jan 12, 2017, 7:00 PM"
+        ///     let date3 = date.pd_beginning(of:.month) // "Jan 1, 2017, 12:00 AM"
+        ///     let date4 = date.pd_beginning(of:.year) // "Jan 1, 2017, 12:00 AM"
+        ///
+        /// - Note: 由于日期格式的原因, 显示因格式不一样
+        /// - Parameter component: 日历组件
+        /// - Returns: 结果日期
         func pd_beginning(of component: Calendar.Component) -> Date? {
             if component == .day { return calendar.startOfDay(for: self) }
 
@@ -1259,7 +1253,7 @@ public extension Date {
 extension Date: Defaultable {}
 public extension Date {
     typealias Associatedtype = Date
-    
+
     static func `default`() -> Associatedtype {
         if #available(iOS 15, *) {
             return Date.now

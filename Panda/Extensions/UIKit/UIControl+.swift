@@ -161,7 +161,7 @@ public extension UIControl {
         addTarget(self, action: #selector(controlEventHandler(_:)), for: controlEvent)
         return self
     }
-    
+
     /// 设置指定时间内不可重复点击(单位:秒)
     /// - Parameter time: 间隔时长
     /// - Returns: `Self`
@@ -170,5 +170,4 @@ public extension UIControl {
         self.doubleHit(hitTime: time)
         return self
     }
-    
 }

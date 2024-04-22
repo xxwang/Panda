@@ -108,7 +108,7 @@ public extension UIImageView {
 extension UIImageView {
     public typealias Associatedtype = UIImageView
 
-    @objc override class open func `default`() -> Associatedtype {
+    @objc override open class func `default`() -> Associatedtype {
         let imageView = UIImageView()
         return imageView
     }

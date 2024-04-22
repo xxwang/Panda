@@ -1505,13 +1505,12 @@ public extension String {
 
 // MARK: - 方法
 public extension String {
-    
     /// 从字符串中提取数字
     /// - Returns: 数字字符串
     func pd_extractNumber() -> String {
-        return self.filter { $0.isNumber}
+        return self.filter(\.isNumber)
     }
-    
+
     /// 字符串中第一个字符
     /// - Returns: 第一个字符(字符串)
     func pd_firstCharacter() -> String? {
@@ -2287,10 +2286,10 @@ public extension String {
 
 // MARK: - Defaultable
 extension String: Defaultable {}
-extension String {
-    public typealias Associatedtype = String
+public extension String {
+    typealias Associatedtype = String
 
-    static public func `default`() -> Associatedtype {
+    static func `default`() -> Associatedtype {
         return String()
     }
 }
