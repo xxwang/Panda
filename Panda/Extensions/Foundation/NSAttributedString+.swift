@@ -58,7 +58,7 @@ public extension NSAttributedString {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         let size = self.boundingRect(
             with: constraint,
-            options: [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine],
+            options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine],
             context: nil
         ).size
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())

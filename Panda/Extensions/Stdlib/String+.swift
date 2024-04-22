@@ -1448,7 +1448,7 @@ public extension String {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         let size = self.pd_nsString()
             .boundingRect(with: constraint,
-                          options: [.usesLineFragmentOrigin, .usesFontLeading, .truncatesLastVisibleLine],
+                          options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics, .truncatesLastVisibleLine],
                           attributes: [.font: font],
                           context: nil)
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
@@ -1490,6 +1490,7 @@ public extension String {
                                                      options: [
                                                          .usesLineFragmentOrigin,
                                                          .usesFontLeading,
+                                                         .usesDeviceMetrics,
                                                          .truncatesLastVisibleLine,
                                                      ], context: nil).size
         // 向上取整(由于计算结果小数问题, 导致界面字符串显示不完整)
