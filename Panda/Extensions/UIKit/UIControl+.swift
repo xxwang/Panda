@@ -124,8 +124,8 @@ public extension UIControl {
     ///   - events:事件的类型
     /// - Returns:`Self`
     @discardableResult
-    func pd_action(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
-        addTarget(target, action: action, for: event)
+    func pd_addTarget(_ target: Any?, action: Selector, for event: UIControl.Event = .touchUpInside) -> Self {
+        self.addTarget(target, action: action, for: event)
         return self
     }
 
