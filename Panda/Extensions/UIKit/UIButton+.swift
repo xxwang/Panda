@@ -236,13 +236,13 @@ public extension UIButton {
 // MARK: - 计算按钮尺寸
 public extension UIButton {
     /// 获取指定宽度下字符串的Size
-    /// - Parameter maxLineWidth: 最大行宽度
+    /// - Parameter lineWidth: 最大行宽度
     /// - Returns: 文字尺寸
-    func titleSize(with maxLineWidth: CGFloat = sizer.screen.width) -> CGSize {
+    func titleSize(with lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let attText = currentAttributedTitle { // 使用属性文本计算
-            return attText.pd_stringSize(maxLineWidth)
+            return attText.pd_stringSize(lineWidth)
         } else { // 使用文本计算
-            return titleLabel?.textSize(maxLineWidth) ?? .zero
+            return titleLabel?.pd_textSize(lineWidth) ?? .zero
         }
     }
 }

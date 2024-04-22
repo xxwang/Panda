@@ -97,7 +97,7 @@ private extension UITextView {
         guard let placeholderLabel else { return }
 
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        let placeholderSize = placeholderLabel.textSize()
+        let placeholderSize = placeholderLabel.pd_textSize()
 
         removeConstraints(constraints)
         addConstraints([

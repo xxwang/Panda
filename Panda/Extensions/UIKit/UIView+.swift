@@ -915,7 +915,7 @@ public extension UIView {
             )
             addConstraints([widthCons, heightCons, centerXCons, centerYCons])
         } else {
-            var textWidth = (badgeLabel?.textSize().width ?? 0) + 10
+            var textWidth = (badgeLabel?.pd_textSize().width ?? 0) + 10
             textWidth = max(textWidth, 16)
 
             // 宽度约束
