@@ -830,71 +830,83 @@ public extension Date {
 
 // MARK: - 判断
 public extension Date {
-    /// 日期`是否在将来`
+    /// 判断日期是否在未来
+    /// - Returns: 是否在未来
     func pd_isInFuture() -> Bool {
-        self > Date()
+        return self > Date()
     }
 
-    /// 日期`是否过去`
+    /// 判断日期是否在过去
+    /// - Returns: 是否在过去
     func pd_isInPast() -> Bool {
-        self < Date()
+        return self < Date()
     }
 
-    /// 日期是否在`今天之内`
+    /// 判断日期是否在今天
+    /// - Returns: 是否在今天
     func pd_isInToday() -> Bool {
-        calendar.isDateInToday(self)
+        return calendar.isDateInToday(self)
     }
 
-    /// 日期是否在`昨天之内`
+    /// 判断日期是否在昨天
+    /// - Returns: 是否在昨天
     func pd_isInYesterday() -> Bool {
-        calendar.isDateInYesterday(self)
+        return calendar.isDateInYesterday(self)
     }
 
-    /// 日期是否在`明天之内`
+    /// 判断日期是否在明天
+    /// - Returns: 是否在明天
     func pd_isInTomorrow() -> Bool {
-        calendar.isDateInTomorrow(self)
+        return calendar.isDateInTomorrow(self)
     }
 
-    /// 日期是否在`周末期间`
+    /// 判断日期是否在周末
+    /// - Returns: 是否在周末
     func pd_isInWeekend() -> Bool {
-        calendar.isDateInWeekend(self)
+        return calendar.isDateInWeekend(self)
     }
 
-    /// 日期是否在`工作日期间`
+    /// 判断日期是否在工作日
+    /// - Returns: 是否在工作日
     func pd_isWorkday() -> Bool {
-        !calendar.isDateInWeekend(self)
+        return !calendar.isDateInWeekend(self)
     }
 
-    /// 日期是否在`本周内`
+    /// 判断日期是否在本周内
+    /// - Returns: 是否在本周内
     func pd_isInCurrentWeek() -> Bool {
-        calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
     }
 
-    /// 日期是否在`当前月份内`
+    /// 判断日期是否在本月
+    /// - Returns: 是否在本月
     func pd_isInCurrentMonth() -> Bool {
-        calendar.isDate(self, equalTo: Date(), toGranularity: .month)
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .month)
     }
 
-    /// 日期是否在`当年之内`
+    /// 判断日期是否在本年
+    /// - Returns: 是否在本年
     func pd_isInCurrentYear() -> Bool {
-        calendar.isDate(self, equalTo: Date(), toGranularity: .year)
+        return calendar.isDate(self, equalTo: Date(), toGranularity: .year)
     }
 
-    /// 当前日期`是不是润年`
+    /// 判断日期所在年是否是润年
+    /// - Returns: 是否是润年
     func pd_isLeapYear() -> Bool {
-        let year = year
+        let year = self.pd_year
         return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0))
     }
 
-    /// 比较是否为`同一天`
-    /// - Returns:`Bool`
+    /// 判断两个日期是否是同一天
+    /// - Parameter date: 参与比较的日期
+    /// - Returns: 是否是同一天
     func pd_isSameDay(date: Date) -> Bool {
-        Calendar.current.isDate(self, inSameDayAs: date)
+        return Calendar.current.isDate(self, inSameDayAs: date)
     }
 
-    /// 比较是否为`同一年``同一月``同一天`
-    /// - Parameter date: `date`
-    /// - Returns: `Bool`
+    /// 判断日期是否是同年同月同一天
+    /// - Parameter date: 参与比较的日期
+    /// - Returns: 是否是同年同月同天
     func pd_isSameYeaerMountDay(_ date: Date) -> Bool {
         let com = Calendar.current.dateComponents([.year, .month, .day], from: self)
         let comToday = Calendar.current.dateComponents([.year, .month, .day], from: date)
@@ -903,32 +915,32 @@ public extension Date {
             && com.year == comToday.year
     }
 
-    /// 获取两个日期之间的数据
+    /// 获取两个日期的差距
     /// - Parameters:
-    ///   - date:对比的日期
-    ///   - unit:对比的类型
-    /// - Returns:两个日期之间的数据
+    ///   - date: 参与比较的日期
+    ///   - unit: 单位
+    /// - Returns: 差距日历组件
     func pd_componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
-        Calendar.current.dateComponents(unit, from: date, to: self)
+        return Calendar.current.dateComponents(unit, from: date, to: self)
     }
 
-    /// 检查日期是否在当前给定的日历组件中
+    /// 判断日期是否在当前指定的日历组件中
     ///
-    ///     Date().isInCurrent(.day) -> true
-    ///     Date().isInCurrent(.year) -> true
+    ///     Date().pd_isInCurrent(.day) -> true
+    ///     Date().pd_isInCurrent(.year) -> true
     ///
-    /// - Parameter component:要检查的日历组件
-    /// - Returns:如果日期在当前给定的日历组件中,则返回 `true`
+    /// - Parameter component: 日历组件
+    /// - Returns: 是否在指定的日历组件中
     func pd_isInCurrent(_ component: Calendar.Component) -> Bool {
-        calendar.isDate(self, equalTo: Date(), toGranularity: component)
+        return calendar.isDate(self, equalTo: Date(), toGranularity: component)
     }
 
-    /// 检查一个日期是否在另外两个日期之间
+    /// 判断当前日期是否在给定的两个日期对象区间之中
     /// - Parameters:
-    ///   - startDate:开始日期
-    ///   - endDate:结束日期
-    ///   - includeBounds:如果应该包括开始和结束日期,则为 true(默认为 false)
-    /// - Returns:如果日期在两个给定日期之间,则返回 true
+    ///   - startDate: 开始日期
+    ///   - endDate: 结束日期
+    ///   - includeBounds: 是否包含边界
+    /// - Returns: 是否在指定日期中
     func pd_isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
         if includeBounds {
             return startDate.compare(self).rawValue * compare(endDate).rawValue >= 0
@@ -936,13 +948,12 @@ public extension Date {
         return startDate.compare(self).rawValue * compare(endDate).rawValue > 0
     }
 
-    /// 检查指定日历组件的值是否包含在当前日期和指定日期之间
-    ///
+    /// 判断日历组件的值是否包含在当前日期和指定日期之间
     /// - Parameters:
-    ///   - value:要判断的值
-    ///   - component:`Calendar.Component`(要比较的组件)
-    ///   - date:结束日期
-    /// - Returns:如果`value`在当前日期和指定日期的指定组件之中,则返回`true`
+    ///   - value: 指定日历组件的值
+    ///   - component: 日历组件
+    ///   - date: 结果日期
+    /// - Returns: 是否包含
     func pd_isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
         let components = calendar.dateComponents([component], from: self, to: date)
         let componentValue = components.value(for: component)!
@@ -952,55 +963,60 @@ public extension Date {
 
 // MARK: - 随机
 public extension Date {
-    /// 返回指定范围内的随机日期
+    
+    /// 在指定日期区间中生成一个随机日期
     ///
-    /// - Parameter range:创建随机日期的范围. `range` 不能为空(不包含结束日期)
-    /// - Returns:`range` 范围内的随机日期
+    /// - Note: 不包含结果日期本身
+    /// - Parameter range: 日期区间
+    /// - Returns: 随机结果
     static func pd_random(in range: Range<Date>) -> Date {
-        Date(timeIntervalSinceReferenceDate:
+        return Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound
                     .timeIntervalSinceReferenceDate))
     }
 
-    /// 返回指定范围内的随机日期
+    /// 在指定日期区间中生成一个随机日期
     ///
-    /// - Parameter range:创建随机日期的范围(包含结束日期)
-    /// - Returns:`range` 范围内的随机日期
+    /// - Note: 包含结果日期本身
+    /// - Parameter range: 日期区间
+    /// - Returns: 随机结果
     static func pd_random(in range: ClosedRange<Date>) -> Date {
-        Date(timeIntervalSinceReferenceDate:
+        return Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound
                     .timeIntervalSinceReferenceDate))
     }
 
-    /// 返回指定范围内的随机日期,使用给定的生成器作为随机源
+    /// 使用给定的生成器在指定日期区间生成一个随机日期
     ///
+    /// - Note: 不包含结果日期本身
     /// - Parameters:
-    ///   - range:创建随机日期的范围. `range` 不能为空(不包含结束日期)
-    ///   - generator:创建新随机日期时使用的随机数生成器
-    /// - Returns:`range` 范围内的随机日期
+    ///   - range: 日期区间
+    ///   - generator: 生成器
+    /// - Returns: 随机结果
     static func pd_random(in range: Range<Date>,
                           using generator: inout some RandomNumberGenerator) -> Date
     {
-        Date(timeIntervalSinceReferenceDate:
+    return Date(timeIntervalSinceReferenceDate:
             TimeInterval.random(
                 in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound.timeIntervalSinceReferenceDate,
                 using: &generator
             ))
     }
 
-    /// 返回指定范围内的随机日期,使用给定的生成器作为随机源
+    /// 使用给定的生成器在指定日期区间生成一个随机日期
     ///
+    /// - Note: 包含结果日期本身
     /// - Parameters:
-    ///   - range:创建随机日期的范围(包含结束日期)
-    ///   - generator:创建新随机日期时使用的随机数生成器
-    /// - Returns:`range` 范围内的随机日期
+    ///   - range: 日期区间
+    ///   - generator: 生成器
+    /// - Returns: 随机结果
     static func pd_random(
         in range: ClosedRange<Date>,
         using generator: inout some RandomNumberGenerator
     ) -> Date {
-        Date(timeIntervalSinceReferenceDate:
+        return Date(timeIntervalSinceReferenceDate:
             TimeInterval.random(
                 in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound.timeIntervalSinceReferenceDate,
                 using: &generator
@@ -1010,76 +1026,59 @@ public extension Date {
 
 // MARK: - 操作
 public extension Date {
+
     /// 获取两个日期之间的天数
-    /// - Parameter date:对比的日期
-    /// - Returns:两个日期之间的天数
+    /// - Parameter date: 参与比较的日期
+    /// - Returns: 结果天数
     func pd_numberOfDays(from date: Date) -> Int? {
-        pd_componentCompare(from: date, unit: [.day]).day
+        return pd_componentCompare(from: date, unit: [.day]).day
     }
 
-    /// 获取两个日期之间的小时
-    /// - Parameter date:对比的日期
-    /// - Returns:两个日期之间的小时
+    /// 获取两个日期之间的小时数
+    /// - Parameter date: 参与比较的日期
+    /// - Returns: 结果小时数
     func pd_numberOfHours(from date: Date) -> Int? {
-        pd_componentCompare(from: date, unit: [.hour]).hour
+        return pd_componentCompare(from: date, unit: [.hour]).hour
     }
 
-    /// 获取两个日期之间的分钟
-    /// - Parameter date:对比的日期
-    /// - Returns:两个日期之间的分钟
+    /// 获取两个日期之间的分钟数
+    /// - Parameter date: 参与比较的日期
+    /// - Returns: 结果分钟数
     func pd_numberOfMinutes(from date: Date) -> Int? {
-        pd_componentCompare(from: date, unit: [.minute]).minute
+        return pd_componentCompare(from: date, unit: [.minute]).minute
     }
 
     /// 获取两个日期之间的秒数
-    /// - Parameter date:对比的日期
-    /// - Returns:两个日期之间的秒数
+    /// - Parameter date: 参与比较的日期
+    /// - Returns: 结果秒数
     func pd_numberOfSeconds(from date: Date) -> Int? {
-        pd_componentCompare(from: date, unit: [.second]).second
+        return pd_componentCompare(from: date, unit: [.second]).second
     }
 
-    /// 日期的`加减`操作
-    /// - Parameter day:天数变化
-    /// - Returns:`date`
+    /// 向当前日期增加指定天数
+    /// - Parameter day: 要增加的天数
+    /// - Returns: 结果日期
     func pd_adding(day: Int) -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: day), to: self)
     }
 
-    /// 添加指定日历组件的值到`Date`
+    /// 添加指定日历组件的值到当前日期
     ///
     ///     let date = Date() // "Jan 12, 2017, 7:07 PM"
-    ///     let date2 = date.adding(.minute, value:-10) // "Jan 12, 2017, 6:57 PM"
-    ///     let date3 = date.adding(.day, value:4) // "Jan 16, 2017, 7:07 PM"
-    ///     let date4 = date.adding(.month, value:2) // "Mar 12, 2017, 7:07 PM"
-    ///     let date5 = date.adding(.year, value:13) // "Jan 12, 2030, 7:07 PM"
+    ///     let date2 = date.pd_adding(.minute, value:-10) // "Jan 12, 2017, 6:57 PM"
+    ///     let date3 = date.pd_adding(.day, value:4) // "Jan 16, 2017, 7:07 PM"
+    ///     let date4 = date.pd_adding(.month, value:2) // "Mar 12, 2017, 7:07 PM"
+    ///     let date5 = date.pd_adding(.year, value:13) // "Jan 12, 2030, 7:07 PM"
     ///
     /// - Parameters:
-    ///   - component:组件类型
-    ///   - value:要添加到Date的组件的值
-    /// - Returns:原始日期 + 添加的组件的值
+    ///   - component: 日历组件
+    ///   - value: 日历组件对应的值
+    /// - Returns: 结果日期
     func pd_adding(_ component: Calendar.Component, value: Int) -> Date {
-        Calendar.current.date(byAdding: component, value: value, to: self)!
+        return Calendar.current.date(byAdding: component, value: value, to: self)!
     }
 
-    /// 添加指定日历组件的值到`Date`
-    ///
-    ///     var date = Date() // "Jan 12, 2017, 7:07 PM"
-    ///     date.add(.minute, value:-10) // "Jan 12, 2017, 6:57 PM"
-    ///     date.add(.day, value:4) // "Jan 16, 2017, 7:07 PM"
-    ///     date.add(.month, value:2) // "Mar 12, 2017, 7:07 PM"
-    ///     date.add(.year, value:13) // "Jan 12, 2030, 7:07 PM"
-    ///
-    /// - Parameters:
-    ///   - component:组件类型
-    ///   - value:要添加到`Date`的组件的值
-    func pd_add(_ component: Calendar.Component, value: Int) -> Date? {
-        if let date = calendar.date(byAdding: component, value: value, to: self) {
-            return date
-        }
-        return nil
-    }
-
-    /// 修改日期对象对应日历组件的值
+    /// 个性日期对象指定日历组件的值
     ///
     ///     let date = Date() // "Jan 12, 2017, 7:07 PM"
     ///     let date2 = date.changing(.minute, value:10) // "Jan 12, 2017, 7:10 PM"
@@ -1088,9 +1087,9 @@ public extension Date {
     ///     let date5 = date.changing(.year, value:2000) // "Jan 12, 2000, 7:07 PM"
     ///
     /// - Parameters:
-    ///   - component:组件类型
-    ///   - value:组件对应的新值
-    /// - Returns:将指定组件更改为指定值后的原始日期
+    ///   - component: 日历组件
+    ///   - value: 日历组件对应值
+    /// - Returns: 结果日期
     func pd_changing(_ component: Calendar.Component, value: Int) -> Date? {
         switch component {
         case .nanosecond:
@@ -1151,15 +1150,17 @@ public extension Date {
     }
 
     #if !os(Linux)
-        /// 日历组件开头的数据
-        ///
-        ///     let date = Date() // "Jan 12, 2017, 7:14 PM"
-        ///     let date2 = date.beginning(of:.hour) // "Jan 12, 2017, 7:00 PM"
-        ///     let date3 = date.beginning(of:.month) // "Jan 1, 2017, 12:00 AM"
-        ///     let date4 = date.beginning(of:.year) // "Jan 1, 2017, 12:00 AM"
-        ///
-        /// - Parameter component:日历组件在开始时获取日期
-        /// - Returns:日历组件开头的日期(如果适用)
+
+    /// 获取以指定日历组件为开头的日期
+    ///
+    ///     let date = Date() // "Jan 12, 2017, 7:14 PM"
+    ///     let date2 = date.pd_beginning(of:.hour) // "Jan 12, 2017, 7:00 PM"
+    ///     let date3 = date.pd_beginning(of:.month) // "Jan 1, 2017, 12:00 AM"
+    ///     let date4 = date.pd_beginning(of:.year) // "Jan 1, 2017, 12:00 AM"
+    ///
+    /// - Note: 由于日期格式的原因, 显示因格式不一样
+    /// - Parameter component: 日历组件
+    /// - Returns: 结果日期
         func pd_beginning(of component: Calendar.Component) -> Date? {
             if component == .day { return calendar.startOfDay(for: self) }
 
@@ -1193,15 +1194,15 @@ public extension Date {
         }
     #endif
 
-    /// 日历组件末尾的日期
+    /// 获取以指定日历组件为结尾的日期
     ///
     ///     let date = Date() // "Jan 12, 2017, 7:27 PM"
-    ///     let date2 = date.end(of:.day) // "Jan 12, 2017, 11:59 PM"
-    ///     let date3 = date.end(of:.month) // "Jan 31, 2017, 11:59 PM"
-    ///     let date4 = date.end(of:.year) // "Dec 31, 2017, 11:59 PM"
+    ///     let date2 = date.pd_end(of:.day) // "Jan 12, 2017, 11:59 PM"
+    ///     let date3 = date.pd_end(of:.month) // "Jan 31, 2017, 11:59 PM"
+    ///     let date4 = date.pd_end(of:.year) // "Dec 31, 2017, 11:59 PM"
     ///
-    /// - Parameter component:日历组件,用于获取末尾的日期
-    /// - Returns:日历组件末尾的日期(如果适用)
+    /// - Parameter component: 日历组件
+    /// - Returns: 结果日期
     func pd_end(of component: Calendar.Component) -> Date? {
         switch component {
         case .second:
@@ -1211,7 +1212,7 @@ public extension Date {
                     [.year, .month, .day, .hour, .minute, .second],
                     from: date
                 ))!
-            return date.pd_add(.second, value: -1)
+            return date.pd_adding(.second, value: -1)
         case .minute:
             var date = pd_adding(.minute, value: 1)
             let after = calendar.date(from:
@@ -1227,7 +1228,7 @@ public extension Date {
         case .day:
             var date = pd_adding(.day, value: 1)
             date = calendar.startOfDay(for: date)
-            return date.pd_add(.second, value: -1)
+            return date.pd_adding(.second, value: -1)
         case .weekOfYear, .weekOfMonth:
             var date = self
             let beginningOfWeek = calendar.date(from:
