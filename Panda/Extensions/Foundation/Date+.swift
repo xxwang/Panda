@@ -248,7 +248,7 @@ public extension Date {
     ///   - format: 日期格式(默认 `yyyy-MM-dd HH:mm:ss`)
     ///   - isGMT: 是否是`格林尼治时区`
     /// - Returns: 日期字符串
-    func pd_toString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss",
+    func pd_string(with dateFormat: String = "yyyy-MM-dd HH:mm:ss",
                      isGMT: Bool = false) -> String
     {
         let dateFormatter = DateFormatter()
@@ -677,7 +677,7 @@ public extension Date {
     /// - Returns:当前日期`月份`的`天数`
     static func pd_currentMonthDays() -> Int {
         let date = Date()
-        return daysCount(year: date.year, month: date.month)
+        return pd_daysCount(year: date.year, month: date.month)
     }
 }
 
@@ -698,7 +698,7 @@ public extension Date {
     /// - Returns:对应时间的字符串
     static func pd_timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
         // 时间戳转为Date
-        let date = timestampAsDate(timestamp: timestamp)
+        let date = pd_timestampAsDate(timestamp: timestamp)
         // 设置 dateFormat
         dateFormatter.dateFormat = format
         // 按照dateFormat把Date转化为String
@@ -934,35 +934,35 @@ public extension Date {
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的天数
     func pd_numberOfDays(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.day]).day
+        pd_componentCompare(from: date, unit: [.day]).day
     }
 
     /// 获取两个日期之间的小时
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的小时
     func pd_numberOfHours(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.hour]).hour
+        pd_componentCompare(from: date, unit: [.hour]).hour
     }
 
     /// 获取两个日期之间的分钟
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的分钟
     func pd_numberOfMinutes(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.minute]).minute
+        pd_componentCompare(from: date, unit: [.minute]).minute
     }
 
     /// 获取两个日期之间的秒数
     /// - Parameter date:对比的日期
     /// - Returns:两个日期之间的秒数
     func pd_numberOfSeconds(from date: Date) -> Int? {
-        componentCompare(from: date, unit: [.second]).second
+        pd_componentCompare(from: date, unit: [.second]).second
     }
 
     /// 日期的`加减`操作
     /// - Parameter day:天数变化
     /// - Returns:`date`
     func pd_adding(day: Int) -> Date? {
-        Calendar.current.date(byAdding: DateComponents(day: day), to: self)
+        return Calendar.current.date(byAdding: DateComponents(day: day), to: self)
     }
 
     /// 添加指定日历组件的值到`Date`
@@ -1125,47 +1125,47 @@ public extension Date {
     func pd_end(of component: Calendar.Component) -> Date? {
         switch component {
         case .second:
-            var date = adding(.second, value: 1)
+            var date = pd_adding(.second, value: 1)
             date = calendar.date(
                 from: calendar.dateComponents(
                     [.year, .month, .day, .hour, .minute, .second],
                     from: date
                 ))!
-            return date.add(.second, value: -1)
+            return date.pd_add(.second, value: -1)
         case .minute:
-            var date = adding(.minute, value: 1)
+            var date = pd_adding(.minute, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date))!
-            date = after.adding(.second, value: -1)
+            date = after.pd_adding(.second, value: -1)
             return date
         case .hour:
-            var date = adding(.hour, value: 1)
+            var date = pd_adding(.hour, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month, .day, .hour], from: date))!
-            date = after.adding(.second, value: -1)
+            date = after.pd_adding(.second, value: -1)
             return date
         case .day:
-            var date = adding(.day, value: 1)
+            var date = pd_adding(.day, value: 1)
             date = calendar.startOfDay(for: date)
-            return date.add(.second, value: -1)
+            return date.pd_add(.second, value: -1)
         case .weekOfYear, .weekOfMonth:
             var date = self
             let beginningOfWeek = calendar.date(from:
                 calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date))!
-            date = beginningOfWeek.adding(.day, value: 7).adding(.second, value: -1)
+            date = beginningOfWeek.pd_adding(.day, value: 7).pd_adding(.second, value: -1)
             return date
         case .month:
-            var date = adding(.month, value: 1)
+            var date = pd_adding(.month, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month], from: date))!
-            date = after.adding(.second, value: -1)
+            date = after.pd_adding(.second, value: -1)
             return date
 
         case .year:
-            var date = adding(.year, value: 1)
+            var date = pd_adding(.year, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year], from: date))!
-            date = after.adding(.second, value: -1)
+            date = after.pd_adding(.second, value: -1)
             return date
 
         default:

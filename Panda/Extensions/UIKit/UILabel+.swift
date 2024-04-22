@@ -85,30 +85,30 @@ public extension UILabel {
 // MARK: - 获取`UILabel`中内容大小
 public extension UILabel {
     /// 获取`UILabel`中内容的CGSize
-    /// - Parameter maxLineWidth:最大宽度
+    /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
-    func textSize(_ maxLineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        if attributedText != nil { return self.attributedTextSize(maxLineWidth) }
-        if text != nil { return self.strSize(maxLineWidth) }
+    func textSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+        if attributedText != nil { return self.attributedTextSize(lineWidth) }
+        if text != nil { return self.strSize(lineWidth) }
         return .zero
     }
 
     /// 获取`UILabel`中`属性字符串`的CGSize
-    /// - Parameter maxLineWidth:最大宽度
+    /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
-    func attributedTextSize(_ maxLineWidth: CGFloat = sizer.screen.width) -> CGSize {
+    func attributedTextSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let attributedText {
-            return attributedText.strSize(maxLineWidth)
+            return attributedText.pd_stringSize(lineWidth)
         }
         return .zero
     }
 
     /// 获取`UILabel`中`字符串`的CGSize
-    /// - Parameter maxLineWidth:最大宽度
+    /// - Parameter lineWidth:最大宽度
     /// - Returns:`CGSize`
-    func strSize(_ maxLineWidth: CGFloat = sizer.screen.width) -> CGSize {
+    func strSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let text {
-            return (self.text?.pd_stringSize(maxLineWidth, font: font)).pd_or(.zero)
+            return (self.text?.pd_stringSize(lineWidth, font: font)).pd_or(.zero)
         }
         return .zero
     }
@@ -363,7 +363,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedFont(_ font: UIFont, for range: NSRange) -> Self {
-        let attribuedString = attributedText?.toMutable().pd_font(font, for: range)
+        let attribuedString = attributedText?.pd_mutable().pd_font(font, for: range)
         attributedText = attribuedString
         return self
     }
@@ -375,7 +375,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedColor(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutable().pd_foregroundColor(color, for: range)
+        let attributedString = attributedText?.pd_mutable().pd_foregroundColor(color, for: range)
         attributedText = attributedString
         return self
     }
@@ -385,7 +385,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_lineSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutable().pd_lineSpacing(spacing, for: (text ?? "").pd_fullNSRange())
+        let attributedString = attributedText?.pd_mutable().pd_lineSpacing(spacing, for: (text ?? "").pd_fullNSRange())
         attributedText = attributedString
         return self
     }
@@ -395,7 +395,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_wordSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutable().pd_wordSpacing(spacing, for: (text ?? "").pd_fullNSRange())
+        let attributedString = attributedText?.pd_mutable().pd_wordSpacing(spacing, for: (text ?? "").pd_fullNSRange())
         attributedText = attributedString
         return self
     }
@@ -408,7 +408,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutable().pd_underline(color, stytle: style, for: range)
+        let attributedString = attributedText?.pd_mutable().pd_underline(color, stytle: style, for: range)
         attributedText = attributedString
         return self
     }
@@ -419,7 +419,7 @@ public extension UILabel {
     ///   - range:范围
     @discardableResult
     func pd_attributedDeleteLine(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutable().pd_strikethrough(color, for: range)
+        let attributedString = attributedText?.pd_mutable().pd_strikethrough(color, for: range)
         attributedText = attributedString
         return self
     }
@@ -429,7 +429,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedFirstLineHeadIndent(_ indent: CGFloat) -> Self {
-        let attributedString = attributedText?.toMutable().pd_firstLineHeadIndent(indent)
+        let attributedString = attributedText?.pd_mutable().pd_firstLineHeadIndent(indent)
         attributedText = attributedString
         return self
     }
@@ -441,7 +441,7 @@ public extension UILabel {
     /// - Returns:`Self`
     @discardableResult
     func pd_attributedBliqueness(_ inclination: Float = 0, for range: NSRange) -> Self {
-        let attributedString = attributedText?.toMutable().pd_obliqueness(inclination, for: range)
+        let attributedString = attributedText?.pd_mutable().pd_obliqueness(inclination, for: range)
         attributedText = attributedString
         return self
     }
@@ -458,7 +458,7 @@ public extension UILabel {
         bounds: CGRect = .zero,
         index: Int = 0
     ) -> Self {
-        let mAttributedString = attributedText?.toMutable().pd_image(image, bounds: bounds, index: index)
+        let mAttributedString = attributedText?.pd_mutable().pd_image(image, bounds: bounds, index: index)
         attributedText = mAttributedString
         return self
     }

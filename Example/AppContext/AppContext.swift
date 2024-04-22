@@ -5,7 +5,6 @@
 //  Created by 奥尔良小短腿 on 2024/4/4.
 //
 
-import AVFoundation
 import IQKeyboardManagerSwift
 import Panda
 import SnapKit
@@ -27,7 +26,7 @@ extension AppContext {
         UIApplication.shared.applicationIconBadgeNumber = 0
 
         // 设置设计图尺寸(适配使用)
-        SizeUtils.setupSketch(size: CGSize(width: 375, height: 812))
+        sizer.setupSketch(size: CGSize(width: 375, height: 812))
 
         // 适配Appearance
         setupAppearance()

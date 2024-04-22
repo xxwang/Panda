@@ -204,7 +204,7 @@ public extension UITextView {
         }
 
         attributedText = attributedText
-            .toMutable()
+            .pd_mutable()
             .pd_append(linkAttributedString)
     }
 

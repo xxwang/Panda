@@ -225,15 +225,15 @@ public extension DarkModeUtils {
         // 1、时间区间分隔为:开始时间 和 结束时间
         // 2、当前的时间转时间戳
         let currentDate = Date.default()
-        let currentTimeStamp = Int(currentDate.dateAsTimestamp())!
-        let dateString = currentDate.toString(with: "yyyy-MM-dd", isGMT: false)
+        let currentTimeStamp = Int(currentDate.pd_dateAsTimestamp())!
+        let dateString = currentDate.pd_string(with: "yyyy-MM-dd", isGMT: false)
         let startTimeStamp = (dateString + " " + timeIntervalValue[0])
             .pd_date(with: "yyyy-MM-dd HH:mm")?
-            .secondStamp()
+            .pd_secondStamp()
             .pd_int() ?? 0
         var endTimeStamp = (dateString + " " + timeIntervalValue[1])
             .pd_date(with: "yyyy-MM-dd HH:mm")?
-            .secondStamp()
+            .pd_secondStamp()
             .pd_int() ?? 0
 
         if startTimeStamp > endTimeStamp {

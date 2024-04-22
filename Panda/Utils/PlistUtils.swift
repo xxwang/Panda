@@ -18,7 +18,7 @@ public extension PlistUtils {
     /// - Returns: 解析结果
     func parse(plistName: String?) -> Any? {
         guard let plistName else { return nil }
-        guard let plistPath = Bundle.path(for: plistName) else { return nil }
+        guard let plistPath = Bundle.pd_path(for: plistName) else { return nil }
         return parse(plistPath: plistPath)
     }
 

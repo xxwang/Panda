@@ -166,9 +166,9 @@ public extension UITextField {
     /// - Returns:`Self`
     func pd_placeholderColor(_ color: UIColor) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.attributes()
+            var attributes = holder.pd_attributes()
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
+            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
@@ -183,9 +183,9 @@ public extension UITextField {
     /// - Returns:`Self`
     func pd_placeholderFont(_ font: UIFont) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.attributes()
+            var attributes = holder.pd_attributes()
             attributes[.font] = font
-            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.string.pd_fullNSRange())
+            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.string.pd_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
@@ -202,10 +202,10 @@ public extension UITextField {
     /// - Returns:`Self`
     func pd_placeholder(_ color: UIColor, font: UIFont) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.attributes()
+            var attributes = holder.pd_attributes()
             attributes[.font] = font
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.toMutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
+            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder

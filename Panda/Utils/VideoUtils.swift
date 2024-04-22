@@ -135,7 +135,7 @@ public extension VideoUtils {
         guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetMediumQuality) else {
             return
         }
-        let output = "\(Date().secondStamp()).mp4".pd_urlByCache()
+        let output = "\(Date().pd_secondStamp()).mp4".pd_urlByCache()
         exportSession.shouldOptimizeForNetworkUse = true
         exportSession.outputURL = output
         exportSession.outputFileType = .mp4

@@ -240,7 +240,7 @@ public extension UIButton {
     /// - Returns: 文字尺寸
     func titleSize(with maxLineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let attText = currentAttributedTitle { // 使用属性文本计算
-            return attText.strSize(maxLineWidth)
+            return attText.pd_stringSize(maxLineWidth)
         } else { // 使用文本计算
             return titleLabel?.textSize(maxLineWidth) ?? .zero
         }
