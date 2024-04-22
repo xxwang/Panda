@@ -1788,10 +1788,10 @@ public extension UIView {
 
 // MARK: - Defaultable
 extension UIView: Defaultable {}
-public extension UIView {
-    typealias Associatedtype = UIView
-
-    @objc class func `default`() -> Associatedtype {
+extension UIView {
+    public typealias Associatedtype = UIView
+    
+    @objc class open func `default`() -> Associatedtype {
         let view = UIView()
         return view
     }

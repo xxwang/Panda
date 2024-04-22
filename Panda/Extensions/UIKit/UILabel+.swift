@@ -255,10 +255,10 @@ public extension UILabel {
 }
 
 // MARK: - Defaultable
-public extension UILabel {
-    typealias Associatedtype = UILabel
-
-    override class func `default`() -> Associatedtype {
+extension UILabel {
+    public typealias Associatedtype = UILabel
+    
+    open override class func `default`() -> Associatedtype {
         let label = UILabel()
         return label
     }
