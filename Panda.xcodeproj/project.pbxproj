@@ -863,7 +863,6 @@
 		16A3EC572BBE5DAF00025F53 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				16D659312BC988D500E5CE0E /* Common */,
 				16A3EC612BBE5DCC00025F53 /* NetworkManager */,
 			);
 			path = Utils;
@@ -1018,6 +1017,7 @@
 				1694096E2ABC738800356736 /* Extensions */,
 				169409522ABC738800356736 /* protocol */,
 				169409582ABC738800356736 /* Shared */,
+				16D659312BC988D500E5CE0E /* Common */,
 				1694095C2ABC738800356736 /* Utils */,
 				1694095B2ABC738800356736 /* Panda.swift */,
 			);
