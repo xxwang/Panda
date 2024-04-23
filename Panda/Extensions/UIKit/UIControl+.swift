@@ -63,7 +63,7 @@ private extension UIControl {
 // MARK: - Defaultable
 extension UIControl {
     public typealias Associatedtype = UIControl
-    
+
     override open class func `default`() -> Associatedtype {
         let control = UIControl()
         return control
