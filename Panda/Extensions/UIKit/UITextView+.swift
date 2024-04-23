@@ -23,27 +23,34 @@ public extension UITextView {
         get { AssociatedObject.get(self, &AssociateKeys.placeholder) as? String }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholder, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            initPlaceholder(placeholder!)
+
+            guard let placeholderLabel else {
+                self.initPlaceholder(placeholder!)
+                return
+            }
+            placeholderLabel.pd_text(placeholder)
+            self.constraintPlaceholder()
         }
     }
 
     /// 占位文本字体
     var placeholderFont: UIFont? {
+        get {
+            return (AssociatedObject.get(self, &AssociateKeys.placeholdFont) as? UIFont).pd_or(.systemFont(ofSize: 13))
+        }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholdFont, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard placeholderLabel != nil else { return }
-            placeholderLabel?.font = placeholderFont
-            constraintPlaceholder()
+            guard let placeholderLabel = self.placeholderLabel else {return}
+            placeholderLabel.pd_font(placeholderFont!)
+            self.constraintPlaceholder()
         }
-        get {
-            (AssociatedObject.get(self, &AssociateKeys.placeholdFont) as? UIFont) ?? UIFont.systemFont(ofSize: 13)
-        }
+        
     }
 
     /// 占位文本的颜色
     var placeholderColor: UIColor? {
         get {
-            (AssociatedObject.get(self, AssociateKeys.placeholdColor) as? UIColor) ?? UIColor.lightGray
+            return (AssociatedObject.get(self, AssociateKeys.placeholdColor) as? UIColor).pd_or(.lightGray)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholdColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -54,12 +61,12 @@ public extension UITextView {
     /// 设置占位文本的`Origin`
     var placeholderOrigin: CGPoint? {
         get {
-            (AssociatedObject.get(self, AssociateKeys.placeholderOrigin) as? CGPoint) ?? CGPoint(x: 7, y: 7)
+            return (AssociatedObject.get(self, AssociateKeys.placeholderOrigin) as? CGPoint).pd_or(.zero)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderOrigin, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard placeholderLabel != nil, placeholderOrigin != nil else { return }
-            placeholderLabel?.frame.origin = placeholderOrigin!
+            guard let placeholderLabel, let placeholderOrigin else {return}
+            placeholderLabel.frame.origin = placeholderOrigin
         }
     }
 }
@@ -82,60 +89,60 @@ private extension UITextView {
                                                name: UITextView.textDidChangeNotification,
                                                object: self)
 
-        placeholderLabel = UILabel.default()
+        self.placeholderLabel = UILabel.default()
             .pd_text(placeholder)
             .pd_font(placeholderFont ?? .systemFont(ofSize: 14))
             .pd_textColor(placeholderColor ?? .gray)
             .pd_numberOfLines(0)
             .pd_add2(self)
             .pd_isHidden(text.count > 0)
-        constraintPlaceholder()
+        self.constraintPlaceholder()
     }
 
     /// 为占位Label添加约束
     func constraintPlaceholder() {
         guard let placeholderLabel else { return }
-
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         let placeholderSize = placeholderLabel.pd_textSize()
-
-        removeConstraints(constraints)
-        addConstraints([
-            NSLayoutConstraint(item: placeholderLabel,
-                               attribute: .width,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .width,
-                               multiplier: 1,
-                               constant: placeholderSize.width),
-            NSLayoutConstraint(item: placeholderLabel,
-                               attribute: .height,
-                               relatedBy: .equal,
-                               toItem: nil,
-                               attribute: .height,
-                               multiplier: 1,
-                               constant: placeholderSize.height),
-            NSLayoutConstraint(item: placeholderLabel,
-                               attribute: .left,
-                               relatedBy: .equal,
-                               toItem: self,
-                               attribute: .left,
-                               multiplier: 1,
-                               constant: textContainer.lineFragmentPadding + textContainerInset.left),
-            NSLayoutConstraint(item: placeholderLabel,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: self,
-                               attribute: .top,
-                               multiplier: 1,
-                               constant: textContainerInset.top),
-        ])
+        placeholderLabel.pd_frame(CGRect(origin: self.placeholderOrigin.pd_or(.zero), size: placeholderSize))
+        
+//        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+//        removeConstraints(constraints)
+//        addConstraints([
+//            NSLayoutConstraint(item: placeholderLabel,
+//                               attribute: .width,
+//                               relatedBy: .equal,
+//                               toItem: nil,
+//                               attribute: .width,
+//                               multiplier: 1,
+//                               constant: placeholderSize.width),
+//            NSLayoutConstraint(item: placeholderLabel,
+//                               attribute: .height,
+//                               relatedBy: .equal,
+//                               toItem: nil,
+//                               attribute: .height,
+//                               multiplier: 1,
+//                               constant: placeholderSize.height),
+//            NSLayoutConstraint(item: placeholderLabel,
+//                               attribute: .left,
+//                               relatedBy: .equal,
+//                               toItem: self,
+//                               attribute: .left,
+//                               multiplier: 1,
+//                               constant: textContainer.lineFragmentPadding + textContainerInset.left),
+//            NSLayoutConstraint(item: placeholderLabel,
+//                               attribute: .top,
+//                               relatedBy: .equal,
+//                               toItem: self,
+//                               attribute: .top,
+//                               multiplier: 1,
+//                               constant: textContainerInset.top),
+//        ])
     }
 
     /// 文本框输入内容变化通知处理
     /// - Parameter notification:动态监听
     @objc func textChangeHandler(_ notification: Notification) {
-        if placeholder != nil { placeholderLabel?.isHidden = text.count > 0 }
+        self.placeholderLabel?.pd_isHidden(text.count > 0)
     }
 }
 
@@ -395,7 +402,7 @@ public extension UITextView {
     /// - Returns: `Self`
     @discardableResult
     func pd_lineFragmentPadding(_ lineFragmentPadding: CGFloat) -> Self {
-        textContainer.lineFragmentPadding = lineFragmentPadding
+        self.textContainer.lineFragmentPadding = lineFragmentPadding
         return self
     }
 
