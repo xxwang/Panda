@@ -460,12 +460,7 @@ public extension UIColor {
 
 // MARK: - 方法
 public extension UIColor {
-    /// 设置颜色透明度
-    /// - Parameter value:要设置的透明度
-    /// - Returns:`UIColor`
-    func alpha(_ value: CGFloat) -> UIColor {
-        withAlphaComponent(value)
-    }
+    
 
     /// 颜色转图片
     /// - Parameter size:图片尺寸
@@ -884,5 +879,15 @@ public extension [UIColor] {
                                    end: CGPoint) -> UIImage?
     {
         UIColor.createLinearGradientImage(size, colors: self, locations: locations, start: start, end: end)
+    }
+}
+
+//MARK: - 链式语法
+extension UIColor {
+    /// 设置颜色透明度
+    /// - Parameter value:要设置的透明度
+    /// - Returns:`UIColor`
+    func pd_alpha(_ value: CGFloat) -> UIColor {
+        return self.withAlphaComponent(value)
     }
 }
