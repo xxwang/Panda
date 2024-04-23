@@ -11,10 +11,10 @@ import UIKit
 class PDNavigationBar: UIImageView {
     // MARK: - 分割线
     private var separatorHeight: CGFloat = 0.5
-    private var separatorColor = UIColor.black.alpha(0.05)
+    private var separatorColor = UIColor.black.pd_alpha(0.05)
 
     // MARK: - 导航栏阴影
-    private var navigationShadowColor = UIColor.black.alpha(0.2)
+    private var navigationShadowColor = UIColor.black.pd_alpha(0.2)
     private var navigationShadowRadius: CGFloat = 5
     private var navigationShadowOffset = CGSize(width: 0, height: 5)
     private var navigationShadowOpacity: Float = 0.25
@@ -39,7 +39,7 @@ class PDNavigationBar: UIImageView {
     }()
 
     override init(frame: CGRect = .zero) {
-        let size = CGSize(width: SizeUtils.screenWidth, height: SizeUtils.navigationFullHeight)
+        let size = CGSize(width: sizer.screen.width, height: sizer.nav.fullHeight)
         let rect = CGRect(origin: .zero, size: size)
         super.init(frame: rect)
 
@@ -70,25 +70,25 @@ extension PDNavigationBar {
         var navigationFullHeight: CGFloat = 0
 
         if !statusBar.isHidden {
-            let size = CGSize(width: SizeUtils.screenWidth, height: SizeUtils.statusBarHeight)
+            let size = CGSize(width: sizer.screen.width, height: sizer.nav.statusHeight)
             self.statusBar.pd_frame(CGRect(origin: .zero, size: size))
-            navigationFullHeight += SizeUtils.statusBarHeight
+            navigationFullHeight += sizer.nav.statusHeight
         }
 
         if !titleBar.isHidden {
-            let top: CGFloat = !statusBar.isHidden ? SizeUtils.statusBarHeight : 0
-            let size = CGSize(width: SizeUtils.screenWidth, height: SizeUtils.titleBarHeight)
+            let top: CGFloat = !statusBar.isHidden ? sizer.nav.statusHeight : 0
+            let size = CGSize(width: sizer.screen.width, height: sizer.nav.titleHeight)
             self.titleBar.pd_frame(CGRect(origin: CGPoint(x: 0, y: top), size: size))
-            navigationFullHeight += SizeUtils.titleBarHeight
+            navigationFullHeight += sizer.nav.titleHeight
         }
 
         if !separatorView.isHidden {
             let top = navigationFullHeight - separatorHeight
-            let size = CGSize(width: SizeUtils.screenWidth, height: separatorHeight)
+            let size = CGSize(width: sizer.screen.width, height: separatorHeight)
             self.separatorView.pd_frame(CGRect(origin: CGPoint(x: 0, y: top), size: size))
         }
 
-        let size = CGSize(width: SizeUtils.screenWidth, height: navigationFullHeight)
+        let size = CGSize(width: sizer.screen.width, height: navigationFullHeight)
         self.pd_frame(CGRect(origin: .zero, size: size))
     }
 }

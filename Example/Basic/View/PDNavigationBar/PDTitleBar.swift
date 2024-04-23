@@ -15,7 +15,7 @@ class PDTitleBar: UIImageView {
     /// 返回按钮
     lazy var backButton: UIButton = {
         let button = UIButton.default()
-            .pd_action(self, action: #selector(backButtonClick(sender:)))
+            .pd_addTarget(self, action: #selector(backButtonClick(sender:)))
         return button
     }()
 
@@ -46,14 +46,14 @@ class PDTitleBar: UIImageView {
         super.layoutSubviews()
 
         if !self.titleLabel.isHidden {
-            let size = self.titleLabel.strSize()
+            let size = self.titleLabel.pd_textSize()
             self.titleLabel.pd_frame(CGRect(center: self.pd_middle, size: size))
         }
 
         if !backButton.isHidden {
-            let left = max(10, SizeUtils.safeAreaInsets.left)
+            let left = max(10, sizer.safeArea.left)
             let top = (self.pd_height - 40) / 2
-            backButton.pd_frame(CGRect(origin: CGPoint(x: left, y: top), size: 44.toCGSize()))
+            backButton.pd_frame(CGRect(origin: CGPoint(x: left, y: top), size: 44.pd_cgSize()))
         }
     }
 }

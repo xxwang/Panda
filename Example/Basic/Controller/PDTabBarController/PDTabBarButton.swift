@@ -99,9 +99,9 @@ extension PDTabBarButton {
         guard let _ = self.titleLabel.text else { return }
 
         let imageSize = normalImage.size
-        let titleSize = self.titleLabel.strSize()
+        let titleSize = self.titleLabel.pd_textSize()
 
-        if EnvUtils.isLandscape { // 横屏
+        if environment.isLandscape { // 横屏
             // 图片与标题之间的间距
             let middleMargin: CGFloat = 4
 

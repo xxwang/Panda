@@ -24,18 +24,18 @@ class PDTabBar: UITabBar {
         // 加号图标
         let image = UIImage(systemName: "plus")?.withTintColor(.white, renderingMode: .alwaysOriginal)
         // 按钮大小
-        let btnSize = 56.toCGSize()
+        let btnSize = 56.pd_cgSize()
 
         // 创建中间按钮
         let button = UIButton.default()
             .pd_frame(CGRect(origin: .zero, size: btnSize))
             .pd_image(image)
-            .pd_backgroundColor("#5DC77D".toHexColor())
+            .pd_backgroundColor("#5DC77D".pd_hexColor())
             .pd_cornerRadius(btnSize.width * 0.5)
             .pd_masksToBounds(true)
-            .pd_action(self, action: #selector(middleButtonClick(_:)))
+            .pd_addTarget(self, action: #selector(middleButtonClick(_:)))
 
-        let buttonWidth = SizeUtils.screenWidth / (viewModel.titles.count + 1).pd_CGFloat()
+        let buttonWidth = sizer.screen.width / (viewModel.titles.count + 1).pd_cgFloat()
         button.expandSize(size: (buttonWidth - btnSize.width) / 2)
 
         return button
@@ -65,12 +65,12 @@ extension PDTabBar {
 
         // 多一个中间按钮
         let buttonCount = self.viewModel.titles.count + 1
-        let buttonWidth = self.pd_width / buttonCount.pd_CGFloat()
-        let buttonHeight = SizeUtils.tabBarHeight
+        let buttonWidth = self.pd_width / buttonCount.pd_cgFloat()
+        let buttonHeight = sizer.tab.tabHeight
 
         let titleButtons = self.titleButtons()
         for (i, button) in titleButtons.enumerated() {
-            let buttonX = buttonWidth * i.pd_CGFloat() + (i >= 2 ? buttonWidth : 0)
+            let buttonX = buttonWidth * i.pd_cgFloat() + (i >= 2 ? buttonWidth : 0)
             button.pd_frame(CGRect(x: buttonX, y: 0, width: buttonWidth, height: buttonHeight))
         }
 
@@ -78,7 +78,7 @@ extension PDTabBar {
         let middleBtnSize = self.middleButton.pd_size
         self.middleButton.frame = CGRect(
             origin: CGPoint(
-                x: (SizeUtils.screenWidth - middleBtnSize.width) / 2,
+                x: (sizer.screen.width - middleBtnSize.width) / 2,
                 y: -(middleBtnSize.height / 2)
             ),
             size: middleBtnSize
@@ -93,8 +93,8 @@ extension PDTabBar {
             let imageName = self.viewModel.imageNames[i]
             let selectedImageName = "\(imageName)_selected"
 
-            let image = imageName.toImage()
-            let selectedImage = selectedImageName.toImage()
+            let image = imageName.pd_image()
+            let selectedImage = selectedImageName.pd_image()
 
             let button = PDTabBarButton()
                 .pd_tag(i)
@@ -176,7 +176,7 @@ extension PDTabBar {
     /// 尺寸计算
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
         var sizeThatFits = super.sizeThatFits(size)
-        sizeThatFits.height = SizeUtils.tabBarFullHeight
+        sizeThatFits.height = sizer.tab.fullHeight
         return sizeThatFits
     }
 
@@ -221,7 +221,7 @@ extension PDTabBar {
     /// 背景图层路径
     func drawMaskPath() -> UIBezierPath {
         // 最大绘制区域
-        let drawRect = CGRect(x: 0, y: 0, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
+        let drawRect = CGRect(x: 0, y: 0, width: sizer.screen.width, height: sizer.tab.fullHeight)
 
         let path = UIBezierPath()
         // 画笔移动到CGPoint(0, 0)
@@ -233,8 +233,8 @@ extension PDTabBar {
         path.addArc(
             withCenter: center,
             radius: radius,
-            startAngle: 180.toRadians(),
-            endAngle: (180 + 90).toRadians(),
+            startAngle: 180.pd_radians(),
+            endAngle: (180 + 90).pd_radians(),
             clockwise: true
         )
 
@@ -244,8 +244,8 @@ extension PDTabBar {
         path.addArc(
             withCenter: center,
             radius: radius,
-            startAngle: 270.toRadians(),
-            endAngle: (270 + 70).toRadians(),
+            startAngle: 270.pd_radians(),
+            endAngle: (270 + 70).pd_radians(),
             clockwise: true
         )
 
@@ -255,8 +255,8 @@ extension PDTabBar {
         path.addArc(
             withCenter: center,
             radius: radius,
-            startAngle: 160.toRadians(),
-            endAngle: 20.toRadians(),
+            startAngle: 160.pd_radians(),
+            endAngle: 20.pd_radians(),
             clockwise: false
         )
 
@@ -266,8 +266,8 @@ extension PDTabBar {
         path.addArc(
             withCenter: center,
             radius: radius,
-            startAngle: 200.toRadians(),
-            endAngle: (200 + 70).toRadians(),
+            startAngle: 200.pd_radians(),
+            endAngle: (200 + 70).pd_radians(),
             clockwise: true
         )
 
@@ -276,8 +276,8 @@ extension PDTabBar {
         path.addArc(
             withCenter: center,
             radius: radius,
-            startAngle: 270.toRadians(),
-            endAngle: (270 + 90).toRadians(),
+            startAngle: 270.pd_radians(),
+            endAngle: (270 + 90).pd_radians(),
             clockwise: true
         )
 

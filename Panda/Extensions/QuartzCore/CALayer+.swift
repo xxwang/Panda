@@ -292,9 +292,9 @@ public extension CALayer {
     ///   - removedOnCompletion:动画完成是否移除
     ///   - option:动画选项
     func addKeyframeAnimationRotation(_ values: [Any] = [
-        -5.pd_cgFloat().toRadians(),
-        5.pd_cgFloat().toRadians(),
-        -5.pd_cgFloat().toRadians(),
+        -5.pd_cgFloat().pd_radians(),
+        5.pd_cgFloat().pd_radians(),
+        -5.pd_cgFloat().pd_radians(),
     ],
     keyTimes: [NSNumber]?,
     duration: TimeInterval = 1.0,

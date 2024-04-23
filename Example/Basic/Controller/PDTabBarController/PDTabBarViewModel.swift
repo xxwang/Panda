@@ -26,7 +26,7 @@ class PDTabBarViewModel: PDViewModel {
     var controllers: [PDViewController] = []
 
     var maskFillColor: UIColor = .white
-    var maskShadowColor: UIColor = .black.alpha(0.5)
+    var maskShadowColor: UIColor = .black.pd_alpha(0.5)
     var maskShadowRadius: CGFloat = 4
     var maskShadowOffset: CGSize = .init(width: 0, height: -2)
     var maskShadowOpacity: Float = 0.25
@@ -45,8 +45,8 @@ extension PDTabBarViewModel {
             let selectedImageName = "\(imageName)_selected"
 
             // 图标图片
-            let image = imageName.toImage()!.withRenderingMode(.alwaysOriginal)
-            let selectedImage = selectedImageName.toImage()!.withRenderingMode(.alwaysOriginal)
+            let image = imageName.pd_image()!.withRenderingMode(.alwaysOriginal)
+            let selectedImage = selectedImageName.pd_image()!.withRenderingMode(.alwaysOriginal)
 
             // 对应控制器
             let controller = self.controllers[i]

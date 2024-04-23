@@ -14,8 +14,8 @@ class PDViewController: UIViewController {
     /// 完整导航栏(状态栏 + 标题栏)
     lazy var navigationBar: PDNavigationBar = {
         let navigationBar = PDNavigationBar()
-            .backButtonImage("navbar_back_icon".toImage(), for: .normal)
-            .backButtonImage("navbar_back_icon".toImage(), for: .highlighted)
+            .backButtonImage("navbar_back_icon".pd_image(), for: .normal)
+            .backButtonImage("navbar_back_icon".pd_image(), for: .highlighted)
             .backButtonCallback { [weak self] in
                 guard let self else { return }
                 let count = navigationController?.children.count ?? 0

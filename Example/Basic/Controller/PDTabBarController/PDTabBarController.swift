@@ -14,13 +14,13 @@ class PDTabBarController: UITabBarController {
     lazy var customTabBar: PDTabBar = {
         let tabBar = PDTabBar(
             vm: self.viewModel,
-            frame: CGRect(x: 0, y: 0, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
+            frame: CGRect(x: 0, y: 0, width: sizer.screen.width, height: sizer.tab.fullHeight)
         )
         tabBar.customDelegate = self
         tabBar.delegate = self
         return tabBar
     }()
-
+    
     init(vm: PDTabBarViewModel) {
         self.viewModel = vm
         super.init(nibName: nil, bundle: nil)
@@ -49,8 +49,8 @@ class PDTabBarController: UITabBarController {
             .pd_shadowImage(UIImage(with: .clear))
             .pd_titleFont(UIFont.boldSystemFont(ofSize: 12), state: .normal)
             .pd_titleFont(UIFont.systemFont(ofSize: 15), state: .selected)
-            .pd_titleColor("#515151".toHexColor(), state: .normal)
-            .pd_titleColor("#40DE5A".toHexColor(), state: .selected)
+            .pd_titleColor("#515151".pd_hexColor(), state: .normal)
+            .pd_titleColor("#40DE5A".pd_hexColor(), state: .selected)
     }
 }
 
@@ -58,8 +58,8 @@ extension PDTabBarController {
     /// 更新PDTabBar
     func updateTabBar() {
         // 更新布局
-        let top = SizeUtils.screenHeight - SizeUtils.tabBarFullHeight
-        self.customTabBar.frame = CGRect(x: 0, y: top, width: SizeUtils.screenWidth, height: SizeUtils.tabBarFullHeight)
+        let top = sizer.screen.height - sizer.tab.fullHeight
+        self.customTabBar.frame = CGRect(x: 0, y: top, width: sizer.screen.width, height: sizer.tab.fullHeight)
 
         // 重新布局子控件
         self.customTabBar.relayout()

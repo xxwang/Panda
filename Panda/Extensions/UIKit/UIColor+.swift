@@ -460,8 +460,6 @@ public extension UIColor {
 
 // MARK: - 方法
 public extension UIColor {
-    
-
     /// 颜色转图片
     /// - Parameter size:图片尺寸
     /// - Returns:`UIImage`
@@ -882,8 +880,8 @@ public extension [UIColor] {
     }
 }
 
-//MARK: - 链式语法
-extension UIColor {
+// MARK: - 链式语法
+public extension UIColor {
     /// 设置颜色透明度
     /// - Parameter value:要设置的透明度
     /// - Returns:`UIColor`

@@ -1367,7 +1367,7 @@ public extension String {
     /// - Returns: 拼接后的路径`URL`
     func pd_urlBySupport() -> URL {
         _ = pd_appendByDocument()
-        var fileUrl = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let fileUrl = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         return fileUrl.appendingPathComponent(self)
     }
 
@@ -1375,7 +1375,7 @@ public extension String {
     /// - Returns: 拼接后的路径`URL`
     func pd_urlByDocument() -> URL {
         _ = pd_appendByDocument()
-        var fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return fileUrl.appendingPathComponent(self)
     }
 
@@ -1383,7 +1383,7 @@ public extension String {
     /// - Returns: 拼接后的路径`URL`
     func pd_urlByCache() -> URL {
         _ = pd_appendByCache()
-        var fileUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let fileUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         return fileUrl.appendingPathComponent(self)
     }
 }
@@ -1449,7 +1449,7 @@ public extension String {
         // .usesDeviceMetrics, .truncatesLastVisibleLine
         let size = self.pd_nsString()
             .boundingRect(with: constraint,
-                          options: [.usesLineFragmentOrigin, .usesFontLeading,],
+                          options: [.usesLineFragmentOrigin, .usesFontLeading],
                           attributes: [.font: font],
                           context: nil)
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
@@ -1488,13 +1488,13 @@ public extension String {
 
         let constraint = CGSize(width: lineWidth, height: CGFloat.greatestFiniteMagnitude)
         /*
-        .usesDeviceMetrics,
-        .truncatesLastVisibleLine,
-         */
+         .usesDeviceMetrics,
+         .truncatesLastVisibleLine,
+          */
         let size = attributedString.boundingRect(with: constraint,
                                                  options: [
-                                                    .usesLineFragmentOrigin,
-                                                    .usesFontLeading
+                                                     .usesLineFragmentOrigin,
+                                                     .usesFontLeading,
                                                  ], context: nil).size
         // 向上取整(由于计算结果小数问题, 导致界面字符串显示不完整)
         return CGSize(width: size.width.pd_ceil(), height: size.height.pd_ceil())
