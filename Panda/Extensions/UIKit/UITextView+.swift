@@ -40,11 +40,10 @@ public extension UITextView {
         }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholdFont, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard let placeholderLabel = self.placeholderLabel else {return}
+            guard let placeholderLabel = self.placeholderLabel else { return }
             placeholderLabel.pd_font(placeholderFont!)
             self.constraintPlaceholder()
         }
-        
     }
 
     /// 占位文本的颜色
@@ -65,7 +64,7 @@ public extension UITextView {
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderOrigin, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard let placeholderLabel, let placeholderOrigin else {return}
+            guard let placeholderLabel, let placeholderOrigin else { return }
             placeholderLabel.frame.origin = placeholderOrigin
         }
     }
