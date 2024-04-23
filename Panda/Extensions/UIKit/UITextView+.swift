@@ -104,39 +104,6 @@ private extension UITextView {
         guard let placeholderLabel else { return }
         let placeholderSize = placeholderLabel.pd_textSize()
         placeholderLabel.pd_frame(CGRect(origin: self.placeholderOrigin.pd_or(.zero), size: placeholderSize))
-        
-//        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-//        removeConstraints(constraints)
-//        addConstraints([
-//            NSLayoutConstraint(item: placeholderLabel,
-//                               attribute: .width,
-//                               relatedBy: .equal,
-//                               toItem: nil,
-//                               attribute: .width,
-//                               multiplier: 1,
-//                               constant: placeholderSize.width),
-//            NSLayoutConstraint(item: placeholderLabel,
-//                               attribute: .height,
-//                               relatedBy: .equal,
-//                               toItem: nil,
-//                               attribute: .height,
-//                               multiplier: 1,
-//                               constant: placeholderSize.height),
-//            NSLayoutConstraint(item: placeholderLabel,
-//                               attribute: .left,
-//                               relatedBy: .equal,
-//                               toItem: self,
-//                               attribute: .left,
-//                               multiplier: 1,
-//                               constant: textContainer.lineFragmentPadding + textContainerInset.left),
-//            NSLayoutConstraint(item: placeholderLabel,
-//                               attribute: .top,
-//                               relatedBy: .equal,
-//                               toItem: self,
-//                               attribute: .top,
-//                               multiplier: 1,
-//                               constant: textContainerInset.top),
-//        ])
     }
 
     /// 文本框输入内容变化通知处理
