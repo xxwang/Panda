@@ -1986,6 +1986,15 @@ public extension UIView {
         return self
     }
 
+    /// 设置背景色(十六进制颜色字符串)
+    /// - Parameter hexColor: 十六进制颜色字符串
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_backgroundColor(_ hexColor: String) -> Self {
+        self.backgroundColor = hexColor.pd_hexColor()
+        return self
+    }
+
     /// 设置背景色
     /// - Parameter color:颜色
     /// - Returns:`Self`

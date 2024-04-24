@@ -300,6 +300,15 @@ public extension UITextView {
         return self
     }
 
+    /// 设置文本颜色(十六进制颜色字符串)
+    /// - Parameter hexColor: 十六进制颜色字符串
+    /// - Returns:`Self`
+    @discardableResult
+    func pd_textColor(_ hexColor: String) -> Self {
+        self.textColor = textColor
+        return self
+    }
+
     /// 设置文本字体
     /// - Parameter font:字体
     /// - Returns:`Self`
