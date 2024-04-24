@@ -9,9 +9,10 @@ public extension UserDefaults {
     ///   - encoder: 编码器
     /// - Returns: 操作是否成功
     func pd_set(_ object: (some Codable)?, for key: String?, using encoder: JSONEncoder = JSONEncoder()) {
-        guard let object, let key, let data = try? encoder.encode(object) else { return }
-        set(data, forKey: key)
-        synchronize()
+        guard let key else {return}
+        let data = try? encoder.encode(object)
+        self.set(data, forKey: key)
+        self.synchronize()
     }
 
     /// 从`UserDefaults`检索遵守`Codable`的对象
