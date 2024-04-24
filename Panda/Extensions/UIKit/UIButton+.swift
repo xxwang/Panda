@@ -337,17 +337,6 @@ public extension UIButton {
         return self
     }
 
-    /// 设置文字颜色(十六进制颜色字符串)
-    /// - Parameters:
-    ///   - hexString: 十六进制颜色字符串
-    ///   - state:状态
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_titleColor(_ hexColor: String, for state: UIControl.State = .normal) -> Self {
-        self.setTitleColor(hexColor.pd_hexColor(), for: state)
-        return self
-    }
-
     /// 设置文字颜色
     /// - Parameters:
     ///   - color:文字颜色

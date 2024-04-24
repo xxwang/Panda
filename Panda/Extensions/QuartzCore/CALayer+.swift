@@ -590,15 +590,6 @@ public extension CALayer {
         return self
     }
 
-    /// 设置背景色(十六进制颜色字符串)
-    /// - Parameter hexColor: 十六进制颜色字符串
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_backgroundColor(_ hexColor: String) -> Self {
-        backgroundColor = hexColor.pd_hexColor().cgColor
-        return self
-    }
-
     /// 设置背景色
     /// - Parameter color:背景色
     /// - Returns:`Self`

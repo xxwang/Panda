@@ -380,15 +380,6 @@ public extension UIViewController {
         return self
     }
 
-    /// 设置控制器根视图背景颜色(十六进制颜色字符串)
-    /// - Parameter hexColor: 十六进制颜色字符串
-    /// - Returns: `Self`
-    @discardableResult
-    func pd_backgroundColor(_ hexColor: String) -> Self {
-        self.view.backgroundColor = hexColor.pd_hexColor()
-        return self
-    }
-
     /// 设置控制器根视图背景颜色
     /// - Parameter backgroundColor: 要设置的背景颜色
     /// - Returns: `Self`
