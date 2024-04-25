@@ -22,11 +22,18 @@ public enum AuthorizationStatus {
     case authorized
 }
 
+// MARK: - LocationAuthorizationAction
+public enum LocationAuthorizationAction {
+    case front
+    case back
+}
+
+// MARK: - AuthorizationRequester
 public class AuthorizationRequester: NSObject {
     private var locationAuthorizationStatusBlock: AuthenticationBlock?
     private var locationManager: CLLocationManager!
 
-    static let shared = AuthorizationRequester()
+    public static let shared = AuthorizationRequester()
     override private init() {
         super.init()
 
@@ -202,11 +209,6 @@ public extension AuthorizationRequester {
 
 // MARK: - 定位
 public extension AuthorizationRequester {
-    enum LocationAuthorizationAction {
-        case front
-        case back
-    }
-
     var locationServicesEnabled: Bool {
         return CLLocationManager.locationServicesEnabled()
     }
