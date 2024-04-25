@@ -248,7 +248,10 @@ extension AuthorizationRequester: CLLocationManagerDelegate {
     @available(iOS 14.0, *)
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
+        guard status != .notDetermined else { return }
+
         let granted = status == .authorizedAlways || status == .authorizedWhenInUse
+
         if let block = self.locationAuthorizationStatusBlock {
             DispatchQueue.main.async {
                 block(granted)
@@ -257,7 +260,10 @@ extension AuthorizationRequester: CLLocationManagerDelegate {
     }
 
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status != .notDetermined else { return }
+
         let granted = status == .authorizedAlways || status == .authorizedWhenInUse
+
         if let block = self.locationAuthorizationStatusBlock {
             DispatchQueue.main.async {
                 block(granted)
