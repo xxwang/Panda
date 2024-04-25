@@ -13,17 +13,17 @@ import CoreLocation
 import Photos
 import UIKit
 
-typealias AuthenticationCallback = (_ granted: Bool) -> Void
+public typealias AuthenticationBlock = (_ granted: Bool) -> Void
 
-class AuthorizationRequester: NSObject {
-    // MARK: - AuthorizationStatus
-    enum AuthorizationStatus {
-        case notDetermined
-        case denied
-        case authorized
-    }
+// MARK: - AuthorizationStatus
+public enum AuthorizationStatus {
+    case notDetermined
+    case denied
+    case authorized
+}
 
-    private var locationAuthorizationStatusCallback: AuthenticationCallback?
+public class AuthorizationRequester: NSObject {
+    private var locationAuthorizationStatusBlock: AuthenticationBlock?
     private var locationManager: CLLocationManager!
 
     static let shared = AuthorizationRequester()
@@ -36,7 +36,7 @@ class AuthorizationRequester: NSObject {
 }
 
 // MARK: - IDFA
-extension AuthorizationRequester {
+public extension AuthorizationRequester {
     var idfaStatus: AuthorizationStatus {
         if #available(iOS 14, *) {
             let status = ATTrackingManager.trackingAuthorizationStatus
@@ -60,25 +60,25 @@ extension AuthorizationRequester {
         }
     }
 
-    func requestIDFA(resultCallback: AuthenticationCallback?) {
+    func requestIDFA(resultBlock: AuthenticationBlock?) {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
                 let granted = status == .authorized
                 DispatchQueue.main.async {
-                    resultCallback?(granted)
+                    resultBlock?(granted)
                 }
             }
         } else {
             let granted = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
             DispatchQueue.main.async {
-                resultCallback?(granted)
+                resultBlock?(granted)
             }
         }
     }
 }
 
 // MARK: - 麦克风
-extension AuthorizationRequester {
+public extension AuthorizationRequester {
     var microphoneStatus: AuthorizationStatus {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
         switch status {
@@ -93,17 +93,17 @@ extension AuthorizationRequester {
         }
     }
 
-    func requestMicrophone(resultCallback: AuthenticationCallback?) {
+    func requestMicrophone(resultBlock: AuthenticationBlock?) {
         AVCaptureDevice.requestAccess(for: .audio) { granted in
             DispatchQueue.main.async {
-                resultCallback?(granted)
+                resultBlock?(granted)
             }
         }
     }
 }
 
 // MARK: - 相机
-extension AuthorizationRequester {
+public extension AuthorizationRequester {
     var cameraStatus: AuthorizationStatus {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         switch status {
@@ -118,17 +118,17 @@ extension AuthorizationRequester {
         }
     }
 
-    func requestCamera(resultCallback: AuthenticationCallback?) {
+    func requestCamera(resultBlock: AuthenticationBlock?) {
         AVCaptureDevice.requestAccess(for: .video) { granted in
             DispatchQueue.main.async {
-                resultCallback?(granted)
+                resultBlock?(granted)
             }
         }
     }
 }
 
 // MARK: - 相册
-extension AuthorizationRequester {
+public extension AuthorizationRequester {
     var photoLibraryStatus: AuthorizationStatus {
         var status: PHAuthorizationStatus
         if #available(iOS 14, *) {
@@ -149,19 +149,19 @@ extension AuthorizationRequester {
         }
     }
 
-    func requestPhotoLibrary(resultCallback: AuthenticationCallback?) {
+    func requestPhotoLibrary(resultBlock: AuthenticationBlock?) {
         if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 let granted = status == .authorized || status == .limited
                 DispatchQueue.main.async {
-                    resultCallback?(granted)
+                    resultBlock?(granted)
                 }
             }
         } else {
             PHPhotoLibrary.requestAuthorization { status in
                 let granted = status == .authorized
                 DispatchQueue.main.async {
-                    resultCallback?(granted)
+                    resultBlock?(granted)
                 }
             }
         }
@@ -169,7 +169,7 @@ extension AuthorizationRequester {
 }
 
 // MARK: - 通讯录
-extension AuthorizationRequester {
+public extension AuthorizationRequester {
     var contactsStatus: AuthorizationStatus {
         let status = CNContactStore.authorizationStatus(for: .contacts)
         switch status {
@@ -184,16 +184,16 @@ extension AuthorizationRequester {
         }
     }
 
-    func requestContacts(resultCallback: AuthenticationCallback?) {
+    func requestContacts(resultBlock: AuthenticationBlock?) {
         let store = CNContactStore()
         store.requestAccess(for: .contacts) { granted, error in
             if error != nil {
                 DispatchQueue.main.async {
-                    resultCallback?(false)
+                    resultBlock?(false)
                 }
             } else {
                 DispatchQueue.main.async {
-                    resultCallback?(granted)
+                    resultBlock?(granted)
                 }
             }
         }
@@ -201,7 +201,7 @@ extension AuthorizationRequester {
 }
 
 // MARK: - 定位
-extension AuthorizationRequester {
+public extension AuthorizationRequester {
     enum LocationAuthorizationAction {
         case front
         case back
@@ -230,8 +230,8 @@ extension AuthorizationRequester {
         }
     }
 
-    func requestLocation(action: LocationAuthorizationAction, resultCallback: AuthenticationCallback?) {
-        self.locationAuthorizationStatusCallback = resultCallback
+    func requestLocation(action: LocationAuthorizationAction, completion: AuthenticationBlock?) {
+        self.locationAuthorizationStatusBlock = completion
 
         if action == .back {
             self.locationManager.requestAlwaysAuthorization()
@@ -244,21 +244,21 @@ extension AuthorizationRequester {
 // MARK: - CLLocationManagerDelegate
 extension AuthorizationRequester: CLLocationManagerDelegate {
     @available(iOS 14.0, *)
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         let granted = status == .authorizedAlways || status == .authorizedWhenInUse
-        if let callback = self.locationAuthorizationStatusCallback {
+        if let block = self.locationAuthorizationStatusBlock {
             DispatchQueue.main.async {
-                callback(granted)
+                block(granted)
             }
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         let granted = status == .authorizedAlways || status == .authorizedWhenInUse
-        if let callback = self.locationAuthorizationStatusCallback {
+        if let block = self.locationAuthorizationStatusBlock {
             DispatchQueue.main.async {
-                callback(granted)
+                block(granted)
             }
         }
     }
