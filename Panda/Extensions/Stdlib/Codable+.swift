@@ -9,13 +9,13 @@ public extension Encodable {
         let result = try? encoder.encode(self)
         return result
     }
-    
+
     /// 模型转`Data?`
     /// - Returns:`Data?`
     func pd_data() -> Data? {
         return self.pd_encode()
     }
-    
+
     /// 模型转`JSON`字符串
     /// - Returns:`JSON`字符串
     func pd_jsonString() -> String? {
@@ -24,7 +24,7 @@ public extension Encodable {
         }
         return String(data: jsonData, encoding: .utf8)
     }
-    
+
     /// 模型转`[String: Any]`
     /// - Returns:`[String: Any]`
     func pd_jsonObject<T>() -> T? {
@@ -44,7 +44,7 @@ public extension Array where Element: Encodable {
     func pd_data() -> Data? {
         return self.pd_jsonString()?.pd_data()
     }
-    
+
     /// 数组转`JSON`字符串
     /// - Returns:`JSON`字符串
     func pd_jsonString() -> String? {
@@ -69,7 +69,7 @@ public extension Decodable {
         guard let result = try? decoder.decode(Self.self, from: data) else { return nil }
         return result
     }
-    
+
     /// `JSON String?`转模型
     /// - Parameter string: `JSON`字符串
     /// - Returns: `Self`
@@ -79,7 +79,7 @@ public extension Decodable {
         }
         return self.pd_model(data)
     }
-    
+
     /// `JSON Data?`转模型
     /// - Parameter data: `JSON``Data`
     /// - Returns: `Self`
@@ -87,7 +87,7 @@ public extension Decodable {
         guard let data else { return nil }
         return self.pd_decode(from: data)
     }
-    
+
     /// `[String: Any]?` 转模型
     /// - Parameter dict: `JSON`字典
     /// - Returns: 模型
@@ -97,7 +97,7 @@ public extension Decodable {
         }
         return self.pd_decode(from: data)
     }
-    
+
     /// `[Any]?`转模型
     /// - Parameter array: `JSON`数组
     /// - Returns: 模型数组
@@ -117,25 +117,24 @@ public extension String {
         guard let data = self.pd_data() else { return nil }
         return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
     }
-    
+
     /// `JSON`字符串转字典数组
     /// - Returns: 结果数组
     func pd_jsonObjects() -> [[String: Any]]? {
         guard let data = self.pd_data() else { return nil }
         return try? JSONSerialization.jsonObject(with: data) as? [[String: Any]]
     }
-    
+
     /// 格式化JSON字符串
     /// - Returns: 格式化结果
     func pd_jsonFormat() -> String {
-        
         guard let data = self.pd_data() else {
             return self
         }
         guard let anyObject = try? JSONSerialization.jsonObject(with: data) else {
             return self
         }
-        
+
         guard let jsonData = try? JSONSerialization.data(withJSONObject: anyObject, options: .prettyPrinted) else {
             return self
         }
@@ -174,7 +173,7 @@ public extension Collection {
         let options: JSONSerialization.WritingOptions = (prettify == true) ? .prettyPrinted : .init()
         return try? JSONSerialization.data(withJSONObject: self, options: options)
     }
-    
+
     /// 集合类型转换成`JSON`字符串
     ///
     /// - Note: 如果转换失败, 返回`nil`
@@ -186,4 +185,3 @@ public extension Collection {
         return String(data: jsonData, encoding: .utf8)?.replacingOccurrences(of: "\\/", with: "/", options: .caseInsensitive, range: nil)
     }
 }
-

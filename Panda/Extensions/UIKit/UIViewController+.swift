@@ -146,10 +146,9 @@ public extension UIViewController {
     /// - Returns:是否成功
     @discardableResult
     func pop2(aClass: AnyClass, animated: Bool = false) -> Bool {
-
         func pop2(nav: UINavigationController?) -> Bool {
-            guard let nav else {return false}
-            
+            guard let nav else { return false }
+
             for viewController in nav.viewControllers.reversed() {
                 if viewController.isMember(of: aClass) {
                     nav.popToViewController(viewController, animated: animated)
@@ -158,7 +157,7 @@ public extension UIViewController {
             }
             return false
         }
-        
+
         if let nav = self as? UINavigationController {
             return pop2(nav: nav)
         } else {

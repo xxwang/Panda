@@ -454,7 +454,7 @@ public extension String {
         let subString = self[range]
         return String(subString)
     }
-    
+
     /// 截断字符串
     ///
     ///     "This is a very long sentence".pd_truncate(len:14) -> "This is a very"
@@ -2307,6 +2307,4 @@ public extension String {
 }
 
 // MARK: - 链式语法
-public extension String {
-    
-}
+public extension String {}

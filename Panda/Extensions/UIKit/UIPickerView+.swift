@@ -10,7 +10,6 @@ public extension UIPickerView {
 }
 
 public extension UIPickerView {
-    
     /// 设置代理
     /// - Parameter delegate: 代理
     /// - Returns: `Self`
