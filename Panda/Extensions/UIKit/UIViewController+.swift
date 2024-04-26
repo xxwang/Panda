@@ -120,23 +120,23 @@ public extension UIViewController {
     /// POP到`navigationController`的根控制器
     /// - Parameters:
     ///   - animated:是否动画
-    func popToRootViewController(_ animated: Bool = true) {
-        navigationController?.popToRootViewController(animated: animated)
+    func pop2rootViewController(_ animated: Bool = true) {
+        self.navigationController?.popToRootViewController(animated: animated)
     }
 
     /// POP到上级控制器
     /// - Parameters:
     ///   - animated:是否动画
     func popViewController(_ animated: Bool = true) {
-        navigationController?.popViewController(animated: animated)
+        self.navigationController?.popViewController(animated: animated)
     }
 
     /// POP到指定控制器
     /// - Parameters:
     ///   - viewController:指定的控制器
     ///   - animated:是否动画
-    func popTo(_ viewController: UIViewController, animated: Bool = true) {
-        navigationController?.popToViewController(viewController, animated: animated)
+    func pop2(_ viewController: UIViewController, animated: Bool = true) {
+        self.navigationController?.popToViewController(viewController, animated: animated)
     }
 
     /// `POP`到指定类型控制器, 从栈顶开始逐个遍历
@@ -145,16 +145,25 @@ public extension UIViewController {
     ///   - animated:是否动画
     /// - Returns:是否成功
     @discardableResult
-    func popTo(aClass: AnyClass, animated: Bool = false) -> Bool {
-        guard let navigationController else { return false }
+    func pop2(aClass: AnyClass, animated: Bool = false) -> Bool {
 
-        for viewController in navigationController.viewControllers.reversed() {
-            if viewController.isMember(of: aClass) {
-                navigationController.popToViewController(viewController, animated: animated)
-                return true
+        func pop2(nav: UINavigationController?) -> Bool {
+            guard let nav else {return false}
+            
+            for viewController in nav.viewControllers.reversed() {
+                if viewController.isMember(of: aClass) {
+                    nav.popToViewController(viewController, animated: animated)
+                    return true
+                }
             }
+            return false
         }
-        return false
+        
+        if let nav = self as? UINavigationController {
+            return pop2(nav: nav)
+        } else {
+            return pop2(nav: navigationController)
+        }
     }
 
     /// POP指定数量的控制器(释放指定数量控制器)
@@ -184,14 +193,14 @@ public extension UIViewController {
     ///   - animated:是否动画
     ///   - completion:完成回调
     func dismissViewController(_ animated: Bool = true, completion: (() -> Void)? = nil) {
-        dismiss(animated: animated, completion: completion)
+        self.dismiss(animated: animated, completion: completion)
     }
 
     /// 关闭当前显示的控制器
     /// - Parameter animated:是否动画
     func closeViewController(_ animated: Bool = true) {
         guard let nav = navigationController else {
-            dismiss(animated: animated, completion: nil)
+            self.dismiss(animated: animated, completion: nil)
             return
         }
 
