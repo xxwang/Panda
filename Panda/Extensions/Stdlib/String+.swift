@@ -225,19 +225,6 @@ public extension String {
     }
 }
 
-//MARK: - JSON
-public extension String {
-    
-    /// 格式化JSON字符串
-    /// - Returns: 格式化后的JSON字符串
-    func pd_jsonFormat() -> String {
-        if let data = self.pd_jsonData(prettify: true) {
-            return data.pd_jsonString(prettify: true).pd_or(self)
-        }
-        return self
-    }
-}
-
 // MARK: - 类/实例
 public extension String {
     /// `类名字符串`转指定类,类型默认:`AnyClass`
