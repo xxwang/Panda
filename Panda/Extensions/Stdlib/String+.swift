@@ -225,6 +225,19 @@ public extension String {
     }
 }
 
+//MARK: - JSON
+public extension String {
+    
+    /// 格式化JSON字符串
+    /// - Returns: 格式化后的JSON字符串
+    func pd_jsonFormat() -> String {
+        if let data = self.pd_jsonData(prettify: true) {
+            return data.pd_jsonString(prettify: true).pd_or(self)
+        }
+        return self
+    }
+}
+
 // MARK: - 类/实例
 public extension String {
     /// `类名字符串`转指定类,类型默认:`AnyClass`
@@ -453,6 +466,52 @@ public extension String {
     func pd_subString(range: Range<String.Index>) -> String {
         let subString = self[range]
         return String(subString)
+    }
+    
+    /// 截断字符串
+    ///
+    ///     "This is a very long sentence".pd_truncate(len:14) -> "This is a very"
+    ///
+    /// - Note: 保留指定长度
+    /// - Parameter len: 保留长度
+    /// - Returns: 结果字符串
+    func pd_truncate(len: Int) -> String {
+        if self.count > len {
+            return self.pd_subString(to: len)
+        }
+        return self
+    }
+
+    /// 截断字符串, 并添加尾巴
+    ///
+    ///     "This is a very long sentence".pd_truncate(length:14) -> "This is a very..."
+    ///     "Short sentence".pd_truncate(length:14) -> "Short sentence"
+    ///
+    /// - Note: 只有字符串长度大于保留长度,才会发生截断
+    /// - Parameters:
+    ///   - length: 保留长度
+    ///   - trailing: 尾巴
+    /// - Returns: 结果字符串
+    func pd_truncate(length: Int, trailing: String? = "...") -> String {
+        guard 0 ..< count ~= length else { return self }
+        return self[startIndex ..< index(startIndex, offsetBy: length)] + (trailing ?? "")
+    }
+
+    /// 截断字符串,并添加分割符
+    /// - Parameters:
+    ///   - length: 截断长度
+    ///   - separator: 分隔符
+    /// - Returns: 结果字符串
+    func pd_truncate(_ length: Int, separator: String = "-") -> String {
+        var newValue = ""
+        for (i, char) in self.enumerated() {
+            if i > (count - length) {
+                newValue += "\(char)"
+            } else {
+                newValue += (((i % length) == (length - 1)) ? "\(char)\(separator)" : "\(char)")
+            }
+        }
+        return newValue
     }
 }
 
@@ -1852,52 +1911,6 @@ public extension String {
         self = String(chars)
         return self
     }
-    
-    /// 截断字符串
-    ///
-    ///     "This is a very long sentence".pd_truncate(len:14) -> "This is a very"
-    ///
-    /// - Note: 保留指定长度
-    /// - Parameter len: 保留长度
-    /// - Returns: 结果字符串
-    func pd_truncate(len: Int) -> String {
-        if self.count > len {
-            return self.pd_subString(to: len)
-        }
-        return self
-    }
-
-    /// 截断字符串, 并添加尾巴
-    ///
-    ///     "This is a very long sentence".pd_truncate(length:14) -> "This is a very..."
-    ///     "Short sentence".pd_truncate(length:14) -> "Short sentence"
-    ///
-    /// - Note: 只有字符串长度大于保留长度,才会发生截断
-    /// - Parameters:
-    ///   - length: 保留长度
-    ///   - trailing: 尾巴
-    /// - Returns: 结果字符串
-    func pd_truncate(length: Int, trailing: String? = "...") -> String {
-        guard 0 ..< count ~= length else { return self }
-        return self[startIndex ..< index(startIndex, offsetBy: length)] + (trailing ?? "")
-    }
-
-    /// 截断字符串,并添加分割符
-    /// - Parameters:
-    ///   - length: 截断长度
-    ///   - separator: 分隔符
-    /// - Returns: 结果字符串
-    func pd_truncate(_ length: Int, separator: String = "-") -> String {
-        var newValue = ""
-        for (i, char) in self.enumerated() {
-            if i > (count - length) {
-                newValue += "\(char)"
-            } else {
-                newValue += (((i % length) == (length - 1)) ? "\(char)\(separator)" : "\(char)")
-            }
-        }
-        return newValue
-    }
 
     /// 分割字符串
     /// - Parameter char: 分割依据
@@ -2307,4 +2320,6 @@ public extension String {
 }
 
 // MARK: - 链式语法
-public extension String {}
+public extension String {
+    
+}
