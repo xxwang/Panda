@@ -128,7 +128,15 @@ public extension String {
     /// 格式化JSON字符串
     /// - Returns: 格式化结果
     func pd_jsonFormat() -> String {
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted) else {
+        
+        guard let data = self.pd_data() else {
+            return self
+        }
+        guard let anyObject = try? JSONSerialization.jsonObject(with: data) else {
+            return self
+        }
+        
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: anyObject, options: .prettyPrinted) else {
             return self
         }
         return String(data: jsonData, encoding: .utf8)?.replacingOccurrences(
