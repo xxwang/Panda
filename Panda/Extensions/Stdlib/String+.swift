@@ -1852,6 +1852,20 @@ public extension String {
         self = String(chars)
         return self
     }
+    
+    /// 截断字符串
+    ///
+    ///     "This is a very long sentence".pd_truncate(len:14) -> "This is a very"
+    ///
+    /// - Note: 保留指定长度
+    /// - Parameter len: 保留长度
+    /// - Returns: 结果字符串
+    func pd_truncate(len: Int) -> String {
+        if self.count > len {
+            return self.pd_subString(to: len)
+        }
+        return self
+    }
 
     /// 截断字符串, 并添加尾巴
     ///
