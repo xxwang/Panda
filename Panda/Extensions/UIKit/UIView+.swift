@@ -635,6 +635,24 @@ public extension UIView {
         shapeLayer.path = path
         layer.addSublayer(shapeLayer)
     }
+    
+    @discardableResult
+    func pd_drawDashLineBorder(lineWidth: CGFloat, lineColor: UIColor, lineLen: CGFloat, lineSpacing: CGFloat, radius: CGFloat) -> Self {
+        
+        let frame = self.bounds.insetBy(dx: lineWidth / 2, dy: lineWidth / 2)
+        
+        let borderPath = UIBezierPath(roundedRect: frame, cornerRadius: radius).cgPath
+        let borderLayer = CAShapeLayer.default()
+            .pd_frame(frame)
+            .pd_lineWidth(lineWidth)
+            .pd_strokeColor(lineColor)
+            .pd_fillColor(.clear)
+            .pd_lineDashPattern([lineLen.pd_nsNumber(), lineSpacing.pd_nsNumber()])
+            .pd_path(borderPath)
+            .pd_cornerRadius(10)
+        self.layer.addSublayer(borderLayer)
+        return self
+    }
 }
 
 // MARK: - 颜色渐变
