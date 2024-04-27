@@ -245,6 +245,14 @@ public extension UITextField {
         return self
     }
 
+    /// 设置字体根据控件大小自动调整
+    /// - Parameter adjustsFontSizeToFitWidth: 是否自动适配宽度
+    /// - Returns: `Self`
+    func pd_adjustsFontSizeToFitWidth(_ adjustsFontSizeToFitWidth: Bool) -> Self {
+        self.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
+        return self
+    }
+
     /// 设置系统字体
     /// - Parameter fontSize:字体大小
     /// - Returns:`Self`

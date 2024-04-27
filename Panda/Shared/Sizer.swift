@@ -33,6 +33,7 @@ public struct sizer {
                 if let statusbar = UIWindow.main?.windowScene?.statusBarManager {
                     return statusbar.statusBarFrame.size.height
                 }
+                
                 return 0
             } else {
                 return UIApplication.shared.statusBarFrame.size.height
