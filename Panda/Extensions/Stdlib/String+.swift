@@ -2121,7 +2121,7 @@ public extension String {
     ///     "1234567.56".pd_amountAsThousands() => 1,234,567.56
     ///
     /// - Returns: 结果字符串
-    func pd_amountAsThousands(roundOff: Bool = true) -> String? {
+    func pd_amountAsThousands(roundOff: Bool = true, or default: String = "") -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.roundingMode = .floor
@@ -2135,7 +2135,7 @@ public extension String {
         var num = NSDecimalNumber(string: self)
         if num.doubleValue.isNaN { num = NSDecimalNumber(string: "0") }
         let result = formatter.string(from: num)
-        return result
+        return result ?? `default`
     }
 
     /// 删除小数点后面多余的0
