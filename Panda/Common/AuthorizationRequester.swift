@@ -255,6 +255,7 @@ extension AuthorizationRequester: CLLocationManagerDelegate {
         if let block = self.locationAuthorizationStatusBlock {
             DispatchQueue.main.async {
                 block(granted)
+                self.locationAuthorizationStatusBlock = nil
             }
         }
     }
@@ -267,6 +268,7 @@ extension AuthorizationRequester: CLLocationManagerDelegate {
         if let block = self.locationAuthorizationStatusBlock {
             DispatchQueue.main.async {
                 block(granted)
+                self.locationAuthorizationStatusBlock = nil
             }
         }
     }
