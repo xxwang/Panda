@@ -6,7 +6,7 @@ public extension Loadable where Self: UIView {
     /// 加载与类同名的`xib`视图
     /// - Parameter nibName: `xib`文件名称
     /// - Returns: 类对象
-    static func loadNib(_ nibName: String? = nil) -> Self {
+    static func pd_loadNib(_ nibName: String? = nil) -> Self {
         let nibName = nibName ?? "\(self)"
         return Bundle.main.loadNibNamed(nibName, owner: nil, options: nil)?.first as! Self
     }
@@ -19,7 +19,7 @@ public extension Loadable where Self: UIViewController {
     ///   - bundle: `storyboard`所在`bundle`
     ///   - fileName: `storyboard`文件名称
     /// - Returns: 指定的控制器
-    static func loadStoryboard(withClass name: Self.Type, in bundle: Bundle? = nil, fileName: String? = nil) -> Self? {
+    static func pd_loadStoryboard(withClass name: Self.Type, in bundle: Bundle? = nil, fileName: String? = nil) -> Self? {
         let bundle = bundle ?? Bundle.main
         guard let storyboardFileName = fileName ?? bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else {
             return nil

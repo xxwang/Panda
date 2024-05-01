@@ -194,6 +194,7 @@
 		16A3EC8B2BBE84D100025F53 /* SquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC8A2BBE84D100025F53 /* SquareViewController.swift */; };
 		16A3EC8D2BBE84DB00025F53 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A3EC8C2BBE84DB00025F53 /* MineViewController.swift */; };
 		16D659302BC982DE00E5CE0E /* AuthorizationRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6592F2BC982DE00E5CE0E /* AuthorizationRequester.swift */; };
+		16D9C4E72BE29C380013D26A /* PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D9C4E62BE29C380013D26A /* PropertyWrapper.swift */; };
 		181A074C2BD243B000EDCD0D /* UICollectionViewFlowLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A074B2BD243B000EDCD0D /* UICollectionViewFlowLayout+.swift */; };
 		181A074F2BD245C900EDCD0D /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A074E2BD245C900EDCD0D /* ResponseHandler.swift */; };
 		181DF2072BD1039D0043AD53 /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181DF2062BD1039D0043AD53 /* Requester.swift */; };
@@ -417,6 +418,7 @@
 		16A3EC8A2BBE84D100025F53 /* SquareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareViewController.swift; sourceTree = "<group>"; };
 		16A3EC8C2BBE84DB00025F53 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		16D6592F2BC982DE00E5CE0E /* AuthorizationRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRequester.swift; sourceTree = "<group>"; };
+		16D9C4E62BE29C380013D26A /* PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrapper.swift; sourceTree = "<group>"; };
 		181A074B2BD243B000EDCD0D /* UICollectionViewFlowLayout+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+.swift"; sourceTree = "<group>"; };
 		181A074E2BD245C900EDCD0D /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
 		181DF2062BD1039D0043AD53 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				1694095A2ABC738800356736 /* shared.swift */,
 				163DC90E2BD4AA6F00CC99F9 /* sizer.swift */,
 				163DC90C2BD426D600CC99F9 /* environment.swift */,
+				16D9C4E62BE29C380013D26A /* PropertyWrapper.swift */,
 				169409592ABC738800356736 /* Logger.swift */,
 				169409602ABC738800356736 /* AssociatedObject.swift */,
 				163DC9102BD4C60400CC99F9 /* SkinManager.swift */,
@@ -1373,6 +1376,7 @@
 				16940A312ABC738800356736 /* UITabBar+.swift in Sources */,
 				16940A1A2ABC738800356736 /* CGRect+.swift in Sources */,
 				16940A462ABC738800356736 /* UIRefreshControl+.swift in Sources */,
+				16D9C4E72BE29C380013D26A /* PropertyWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

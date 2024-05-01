@@ -8,7 +8,7 @@ public extension Emitterable where Self: UIViewController {
     /// - Parameters:
     ///   - position: 发射器位置
     ///   - images: 粒子图片
-    func startEmitting(position: CGPoint, images: [UIImage?]) {
+    func pd_startEmitting(position: CGPoint, images: [UIImage?]) {
         // 创建发射器
         let emitter = CAEmitterLayer()
         // 设置发射器位置
@@ -51,7 +51,7 @@ public extension Emitterable where Self: UIViewController {
     }
 
     /// 停止发射
-    func stopEmitting() {
+    func pd_stopEmitting() {
         view.layer.sublayers?
             .filter { $0.isKind(of: CAEmitterLayer.self) }
             .forEach { $0.removeFromSuperlayer() }
