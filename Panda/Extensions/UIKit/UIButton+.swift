@@ -305,12 +305,11 @@ public extension UIButton {
 }
 
 // MARK: - Defaultable
-public extension UIButton {
-    typealias Associatedtype = UIButton
+extension UIButton {
+    public typealias Associatedtype = UIButton
 
-    @objc override class func `default`() -> Associatedtype {
-        let button = UIButton(type: .custom)
-        return button
+    @objc open override class func `default`() -> Associatedtype {
+        return UIButton(type: .custom)
     }
 }
 
