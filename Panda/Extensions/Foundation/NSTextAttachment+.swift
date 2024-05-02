@@ -11,10 +11,10 @@ public extension NSTextAttachment {
 
 // MARK: - Defaultable
 extension NSTextAttachment: Defaultable {}
-public extension NSTextAttachment {
-    typealias Associatedtype = NSTextAttachment
+extension NSTextAttachment {
+    public typealias Associatedtype = NSTextAttachment
 
-    static func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         return NSTextAttachment()
     }
 }

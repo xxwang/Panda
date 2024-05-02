@@ -49,10 +49,10 @@ public extension UIGestureRecognizer {
 
 // MARK: - Defaultable
 extension UIGestureRecognizer: Defaultable {}
-public extension UIGestureRecognizer {
-    typealias Associatedtype = UIGestureRecognizer
+extension UIGestureRecognizer {
+    public typealias Associatedtype = UIGestureRecognizer
 
-    class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let gestureRecognizer = UIGestureRecognizer()
         return gestureRecognizer
     }

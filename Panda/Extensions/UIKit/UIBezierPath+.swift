@@ -223,10 +223,10 @@ private extension UIBezierPath {
 
 // MARK: - Defaultable
 extension UIBezierPath: Defaultable {}
-public extension UIBezierPath {
-    typealias Associatedtype = UIBezierPath
+extension UIBezierPath {
+    public typealias Associatedtype = UIBezierPath
 
-    class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let path = UIBezierPath()
         return path
     }

@@ -552,10 +552,10 @@ public extension CALayer {
 
 // MARK: - Defaultable
 extension CALayer: Defaultable {}
-public extension CALayer {
-    typealias Associatedtype = CALayer
+extension CALayer {
+    public typealias Associatedtype = CALayer
 
-    @objc class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let layer = CALayer()
         return layer
     }

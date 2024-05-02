@@ -366,10 +366,10 @@ public extension UIViewController {
 
 // MARK: - Defaultable
 extension UIViewController: Defaultable {}
-public extension UIViewController {
-    typealias Associatedtype = UIViewController
+extension UIViewController {
+    public typealias Associatedtype = UIViewController
 
-    @objc class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let vc = UIViewController()
         return vc
     }

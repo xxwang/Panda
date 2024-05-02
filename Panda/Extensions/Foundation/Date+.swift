@@ -668,7 +668,11 @@ public extension Date {
     /// 获取现在的日期
     /// - Returns: 结果`Date`
     static func pd_now() -> Date {
-        return Date()
+        if #available(iOS 15, *) {
+            return Date.now
+        } else {
+            return Date()
+        }
     }
 
     /// 获取今天的日期
@@ -1245,20 +1249,6 @@ public extension Date {
 
         default:
             return nil
-        }
-    }
-}
-
-// MARK: - Defaultable
-extension Date: Defaultable {}
-public extension Date {
-    typealias Associatedtype = Date
-
-    static func `default`() -> Associatedtype {
-        if #available(iOS 15, *) {
-            return Date.now
-        } else {
-            return Date()
         }
     }
 }

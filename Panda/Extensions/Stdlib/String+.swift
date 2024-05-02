@@ -1739,7 +1739,7 @@ public extension String {
 
         let frameSetter = CTFramesetterCreateWithAttributedString(attributedString)
 
-        let path = CGMutablePath.default().pd_addRect(CGRect(x: 0, y: 0, width: lineWidth, height: 100_000))
+        let path = CGMutablePath().pd_addRect(CGRect(x: 0, y: 0, width: lineWidth, height: 100_000))
         let frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(CFIndex(0), CFIndex(0)), path, nil)
         let lines = CTFrameGetLines(frame) as? [AnyHashable]
 
@@ -2295,16 +2295,3 @@ public extension String {
         return String(repeating: rhs, count: lhs)
     }
 }
-
-// MARK: - Defaultable
-extension String: Defaultable {}
-public extension String {
-    typealias Associatedtype = String
-
-    static func `default`() -> Associatedtype {
-        return String()
-    }
-}
-
-// MARK: - 链式语法
-public extension String {}

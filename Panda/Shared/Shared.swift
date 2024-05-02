@@ -1,7 +1,6 @@
 import UIKit
 
-// public protocol Defaultable: NSObjectProtocol where Self: NSObject {
-public protocol Defaultable {
+public protocol Defaultable: NSObjectProtocol where Self: NSObject {
     /// 关联类型
     associatedtype Associatedtype
 

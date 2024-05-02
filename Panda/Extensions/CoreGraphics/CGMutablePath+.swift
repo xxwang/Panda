@@ -15,15 +15,6 @@ public extension CGMutablePath {
     }
 }
 
-// MARK: - Defaultable
-extension CGMutablePath: Defaultable {}
-public extension CGMutablePath {
-    typealias Associatedtype = CGMutablePath
-    static func `default`() -> Associatedtype {
-        CGMutablePath()
-    }
-}
-
 // MARK: - 链式语法
 extension CGMutablePath {
     /// 添加四边形

@@ -224,7 +224,7 @@ public extension DarkModeUtils {
         }
         // 1、时间区间分隔为:开始时间 和 结束时间
         // 2、当前的时间转时间戳
-        let currentDate = Date.default()
+        let currentDate = Date.pd_now()
         let currentTimeStamp = Int(currentDate.pd_dateAsTimestamp())!
         let dateString = currentDate.pd_string(with: "yyyy-MM-dd", isGMT: false)
         let startTimeStamp = (dateString + " " + timeIntervalValue[0])

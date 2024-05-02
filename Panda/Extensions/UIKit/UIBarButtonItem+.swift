@@ -79,10 +79,10 @@ extension UIBarButtonItem: AssociatedAttributes {
 
 // MARK: - Defaultable
 extension UIBarButtonItem: Defaultable {}
-public extension UIBarButtonItem {
-    typealias Associatedtype = UIBarButtonItem
+extension UIBarButtonItem {
+    public typealias Associatedtype = UIBarButtonItem
 
-    class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let item = UIBarButtonItem()
         return item
     }

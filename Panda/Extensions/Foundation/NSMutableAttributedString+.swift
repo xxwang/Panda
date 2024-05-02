@@ -11,10 +11,10 @@ public extension NSMutableAttributedString {
 
 // MARK: - Defaultable
 extension NSMutableAttributedString: Defaultable {}
-public extension NSMutableAttributedString {
-    typealias Associatedtype = NSMutableAttributedString
+extension NSMutableAttributedString {
+    public typealias Associatedtype = NSMutableAttributedString
 
-    class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         return NSMutableAttributedString()
     }
 }

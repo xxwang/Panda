@@ -9,10 +9,10 @@ import UIKit
 
 // MARK: - Defaultable
 extension UITabBarItem: Defaultable {}
-public extension UITabBarItem {
-    typealias Associatedtype = UITabBarItem
+extension UITabBarItem {
+    public typealias Associatedtype = UITabBarItem
 
-    class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let item = UITabBarItem()
         return item
     }

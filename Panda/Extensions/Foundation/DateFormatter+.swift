@@ -17,10 +17,10 @@ public extension DateFormatter {
 
 // MARK: - Defaultable
 extension DateFormatter: Defaultable {}
-public extension DateFormatter {
-    typealias Associatedtype = DateFormatter
+extension DateFormatter {
+    public typealias Associatedtype = DateFormatter
 
-    @objc class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let formatter = DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss", locale: .current, timeZone: .current)
         return formatter
     }

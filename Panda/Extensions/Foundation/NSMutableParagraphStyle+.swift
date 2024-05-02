@@ -2,10 +2,10 @@ import UIKit
 
 // MARK: - Defaultable
 extension NSMutableParagraphStyle: Defaultable {}
-public extension NSMutableParagraphStyle {
-    typealias Associatedtype = NSMutableParagraphStyle
+extension NSMutableParagraphStyle {
+    public typealias Associatedtype = NSMutableParagraphStyle
 
-    @objc class func `default`() -> Associatedtype {
+    @objc open class func `default`() -> Associatedtype {
         let style = NSMutableParagraphStyle()
             .pd_hyphenationFactor(1.0)
             .pd_firstLineHeadIndent(0.0)

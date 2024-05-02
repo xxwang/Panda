@@ -42,7 +42,7 @@ private extension Logger {
     }
 
     static func log(level: Level, message: Any..., file: String, line: Int, function: String) {
-        let dateStr = Date.default().pd_string(with: "HH:mm:ss.SSS", isGMT: false)
+        let dateStr = Date.pd_now().pd_string(with: "HH:mm:ss.SSS", isGMT: false)
         let fileName = file.pd_nsString().lastPathComponent.pd_removeSuffix(".swift")
         let content = message.map { "\($0)" }.joined(separator: "")
         print("\(level.icon)::PD::\(level.rawValue)[\(dateStr)]{\(fileName)(\(line)) => \(function)}: " + content)

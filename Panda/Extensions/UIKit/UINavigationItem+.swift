@@ -23,10 +23,10 @@ public extension UINavigationItem {
 
 // MARK: - Defaultable
 extension UINavigationItem: Defaultable {}
-public extension UINavigationItem {
-    typealias Associatedtype = UINavigationItem
+extension UINavigationItem {
+    public typealias Associatedtype = UINavigationItem
 
-    class func `default`() -> UINavigationItem {
+    @objc open class func `default`() -> UINavigationItem {
         let item = UINavigationItem()
         return item
     }

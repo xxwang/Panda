@@ -1,15 +1,5 @@
 import UIKit
 
-// MARK: - Defaultable
-extension DateComponents: Defaultable {}
-public extension DateComponents {
-    typealias Associatedtype = DateComponents
-
-    static func `default`() -> Associatedtype {
-        return DateComponents()
-    }
-}
-
 // MARK: - 链式语法
 public extension DateComponents {
     /// 日历对象
