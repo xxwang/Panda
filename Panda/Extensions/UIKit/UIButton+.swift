@@ -308,7 +308,7 @@ public extension UIButton {
 extension UIButton {
     public typealias Associatedtype = UIButton
 
-    @objc open override class func `default`() -> Associatedtype {
+    @objc override open class func `default`() -> Associatedtype {
         return UIButton(type: .custom)
     }
 }
