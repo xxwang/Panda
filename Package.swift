@@ -16,6 +16,6 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "Panda", dependencies: [], path: "Panda"),
+        .target(name: "Panda", dependencies: [], path: "Sources"),
     ]
 )
