@@ -2,23 +2,18 @@
 import CoreGraphics
 import Foundation
 
-
 public extension CGFloat {
-
     func pd_int() -> Int {
         return self.pd_nsNumber().intValue
     }
-
 
     func pd_int64() -> Int64 {
         return self.pd_nsNumber().int64Value
     }
 
-
     func pd_uInt() -> UInt {
         return self.pd_nsNumber().uintValue
     }
-
 
     func pd_uInt64() -> UInt64 {
         return self.pd_nsNumber().uint64Value
@@ -50,7 +45,6 @@ public extension CGFloat {
 }
 
 public extension CGFloat {
-
     func pd_radians() -> Double {
         return self.pd_double() / 180.0 * Double.pi
     }

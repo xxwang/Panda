@@ -1,7 +1,6 @@
 import UIKit
 
 public extension Data {
-
     func pd_image() -> UIImage? {
         return UIImage(data: self)
     }
@@ -36,7 +35,6 @@ public extension Data {
 }
 
 public extension Data {
-
     func pd_base64Encoded() -> Data? {
         return self.base64EncodedData()
     }
@@ -47,7 +45,6 @@ public extension Data {
 }
 
 public extension Data {
-
     func pd_imageFormat() -> String {
         let c = self[0]
         switch c {

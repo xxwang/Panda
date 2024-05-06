@@ -3,7 +3,6 @@ import CoreGraphics
 import UIKit
 
 public extension CGVector {
-
     var pd_angle: CGFloat {
         atan2(dy, dx)
     }
@@ -13,16 +12,13 @@ public extension CGVector {
     }
 }
 
-
 public extension CGVector {
-
     init(angle: CGFloat, magnitude: CGFloat) {
         self.init(dx: magnitude * cos(angle), dy: magnitude * sin(angle))
     }
 }
 
 public extension CGVector {
-
     static func * (vector: CGVector, scalar: CGFloat) -> CGVector {
         CGVector(dx: vector.dx * scalar, dy: vector.dy * scalar)
     }

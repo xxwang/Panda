@@ -3,7 +3,6 @@ import Dispatch
 import Foundation
 
 public extension DispatchQueue {
-
     static func pd_isCurrent(_ queue: DispatchQueue) -> Bool {
         let key = DispatchSpecificKey<Void>()
         queue.setSpecific(key: key, value: ())
@@ -17,7 +16,6 @@ public extension DispatchQueue {
 }
 
 public extension DispatchQueue {
-
     static func pd_async_execute_on_main(_ block: @escaping () -> Void) {
         DispatchQueue.main.async { block() }
     }
@@ -28,7 +26,6 @@ public extension DispatchQueue {
 }
 
 public extension DispatchQueue {
-
     @discardableResult
     static func pd_countdown(_ timeInterval: TimeInterval, repeatCount: Int, handler: @escaping (DispatchSourceTimer?, Int) -> Void) -> DispatchSourceTimer? {
         if repeatCount <= 0 { return nil }
@@ -64,7 +61,6 @@ public extension DispatchQueue {
 }
 
 public extension DispatchQueue {
-
     static func pd_debounce(_ queue: DispatchQueue = .main,
                             delay timeInterval: TimeInterval,
                             execute work: @escaping () -> Void) -> () -> Void

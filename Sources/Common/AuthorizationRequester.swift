@@ -8,13 +8,11 @@ import UIKit
 
 public typealias AuthenticationBlock = (_ granted: Bool) -> Void
 
-
 public enum AuthorizationStatus {
     case notDetermined
     case denied
     case authorized
 }
-
 
 public enum LocationAuthorizationAction {
     case front

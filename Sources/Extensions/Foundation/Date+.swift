@@ -3,7 +3,6 @@ import Foundation
 private let calendar = Calendar.current
 private let dateFormatter = DateFormatter()
 
-
 public extension Date {
     var pd_calendar: Calendar {
         return Calendar(identifier: Calendar.current.identifier)
@@ -11,7 +10,6 @@ public extension Date {
 }
 
 public extension Date {
-
     var pd_year: Int {
         get {
             return calendar.component(.year, from: self)
@@ -140,7 +138,6 @@ public extension Date {
 }
 
 public extension Date {
-
     init?(calendar: Calendar? = .current, components: DateComponents) {
         guard let date = calendar?.date(from: components) else { return nil }
         self = date
@@ -161,7 +158,6 @@ public extension Date {
 }
 
 public extension Date {
-
     func pd_dateFromGMT() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return self.addingTimeInterval(secondFromGMT)
@@ -174,7 +170,6 @@ public extension Date {
 }
 
 public extension Date {
-
     func pd_string(with format: String = "yyyy-MM-dd HH:mm:ss",
                    isGMT: Bool = false) -> String
     {
@@ -234,7 +229,6 @@ public extension Date {
         case full
     }
 
-
     func pd_dayName(of style: Date.DayNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
@@ -270,7 +264,6 @@ public extension Date {
     func pd_distance(_ date: Date) -> TimeInterval {
         return self.timeIntervalSince(date)
     }
-
 
     func pd_currentZoneDate() -> Date {
         let date = Date()
@@ -382,7 +375,6 @@ public extension Date {
     }
 }
 
-
 public extension Date {
     static func pd_now() -> Date {
         if #available(iOS 15, *) {
@@ -444,7 +436,6 @@ public extension Date {
 }
 
 public extension Date {
-
     func pd_timestamp(isUnix: Bool = true) -> Int {
         if isUnix { return Int(timeIntervalSince1970) }
         return Int(timeIntervalSince1970 * 1000)
@@ -485,7 +476,6 @@ public extension Date {
 }
 
 public extension Date {
-
     func pd_isInFuture() -> Bool {
         return self > Date()
     }
@@ -547,7 +537,6 @@ public extension Date {
         return Calendar.current.dateComponents(unit, from: date, to: self)
     }
 
-
     func pd_isInCurrent(_ component: Calendar.Component) -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: component)
     }
@@ -567,7 +556,6 @@ public extension Date {
 }
 
 public extension Date {
-
     static func pd_random(in range: Range<Date>) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval
@@ -605,7 +593,6 @@ public extension Date {
 }
 
 public extension Date {
-
     func pd_numberOfDays(from date: Date) -> Int? {
         return pd_componentCompare(from: date, unit: [.day]).day
     }
@@ -777,7 +764,6 @@ public extension Date {
 }
 
 extension Date {
-
     @discardableResult
     mutating func pd_year(_ year: Int) -> Self {
         self.pd_year = year

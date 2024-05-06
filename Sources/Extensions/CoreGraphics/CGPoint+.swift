@@ -2,16 +2,13 @@
 import CoreGraphics
 import Foundation
 
-
 public extension CGPoint {
-
     func pd_distance(to point: CGPoint) -> CGFloat {
         return sqrt(pow(point.x - x, 2) + pow(point.y - y, 2))
     }
 }
 
 public extension CGPoint {
-
     static func + (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
         CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }

@@ -1,20 +1,17 @@
 import UIKit
 
 public extension DateComponents {
-
     @discardableResult
     mutating func pd_calendar(_ calendar: Calendar) -> Self {
         self.calendar = calendar
         return self
     }
 
-
     @discardableResult
     mutating func pd_timeZone(_ timeZone: TimeZone) -> Self {
         self.timeZone = timeZone
         return self
     }
-
 
     @discardableResult
     mutating func pd_era(_ era: Int) -> Self {

@@ -1,13 +1,11 @@
 
-import UIKit
 import CoreLocation
+import UIKit
 
 public extension CLLocation {
-
     static func pd_distance(_ start: CLLocation, end: CLLocation) -> Double {
         start.distance(from: end)
     }
-
 
     static func pd_midLocation(_ start: CLLocation, _ end: CLLocation) -> CLLocation {
         start.pd_middleLocation(to: end)
@@ -15,7 +13,6 @@ public extension CLLocation {
 }
 
 public extension CLLocation {
-
     func pd_middleLocation(to point: CLLocation) -> CLLocation {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
@@ -52,7 +49,6 @@ public extension CLLocation {
 }
 
 public extension [CLLocation] {
-
     @available(tvOS 10.0, macOS 10.12, watchOS 3.0, *)
     func pd_distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
         guard count > 1 else {

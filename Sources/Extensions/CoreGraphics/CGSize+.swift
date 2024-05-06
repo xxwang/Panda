@@ -3,7 +3,6 @@ import CoreGraphics
 import UIKit
 
 public extension CGSize {
-
     var pd_aspectRatio: CGFloat {
         guard height != 0 else { return 0 }
         return width / height
@@ -19,7 +18,6 @@ public extension CGSize {
 }
 
 public extension CGSize {
-
     func pd_aspectFit(to size: CGSize) -> CGSize {
         let minRatio = min(size.width / width, size.height / height)
         return CGSize(width: width * minRatio, height: height * minRatio)
@@ -33,9 +31,7 @@ public extension CGSize {
     }
 }
 
-
 public extension CGSize {
-
     static func + (lhs: CGSize, rhs: CGSize) -> CGSize {
         CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
     }
@@ -53,7 +49,6 @@ public extension CGSize {
         lhs.width += tuple.width
         lhs.height += tuple.height
     }
-
 
     static func - (lhs: CGSize, rhs: CGSize) -> CGSize {
         CGSize(width: lhs.width - rhs.width, height: lhs.height - rhs.height)

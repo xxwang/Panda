@@ -2,15 +2,12 @@
 import UIKit
 
 public extension CGMutablePath {
-
     func pd_path() -> CGPath {
         self
     }
 }
 
-
 extension CGMutablePath {
-
     @discardableResult
     func pd_addRect(_ rect: CGRect,
                     transform: CGAffineTransform = .identity) -> Self

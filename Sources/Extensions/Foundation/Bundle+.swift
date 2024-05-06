@@ -1,7 +1,6 @@
 import UIKit
 
 public extension Bundle {
-
     static func pd_infoDict() -> [String: Any] {
         return Bundle.main.infoDictionary.pd_or([:])
     }
@@ -68,7 +67,6 @@ public extension Bundle {
 }
 
 public extension Bundle {
-
     static func pd_path(for fileName: String?, with extension: String? = nil) -> String? {
         guard let path = Bundle.main.path(forResource: fileName, ofType: `extension`) else {
             return nil

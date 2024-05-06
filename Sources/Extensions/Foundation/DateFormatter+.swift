@@ -1,8 +1,6 @@
 import Foundation
 
-
 public extension DateFormatter {
-
     convenience init(format: String, locale: Locale? = nil, timeZone: TimeZone? = nil) {
         self.init()
         self.dateFormat = format
@@ -21,9 +19,7 @@ extension DateFormatter {
     }
 }
 
-
 public extension DateFormatter {
-
     @discardableResult
     func pd_dateFormat(_ dateFormat: String) -> Self {
         self.dateFormat = dateFormat
