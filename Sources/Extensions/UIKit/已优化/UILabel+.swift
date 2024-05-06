@@ -10,14 +10,14 @@ import UIKit
 // MARK: - 属性
 public extension UILabel {
     /// 获取字体的大小
-    var fontSize: CGFloat {
+    var pd_fontSize: CGFloat {
         let context = NSStringDrawingContext()
         context.minimumScaleFactor = minimumScaleFactor
         return font.pointSize * context.actualScaleFactor
     }
 
     /// 获取内容需要的高度(需要在`UILabel`宽度确定的情况下)
-    var requiredHeight: CGFloat {
+    var pd_requiredHeight: CGFloat {
         UILabel.default()
             .pd_frame(CGRect(x: 0, y: 0, width: frame.width, height: .greatestFiniteMagnitude))
             .pd_lineBreakMode(.byWordWrapping)
@@ -29,17 +29,17 @@ public extension UILabel {
     }
 
     /// 获取`UILabel`的每一行字符串(需要`UILabel`具有宽度值)
-    var textLines: [String] {
+    var pd_textLines: [String] {
         return (text ?? "").pd_lines(pd_width, font: font!)
     }
 
     /// 获取`UILabel`第一行内容
-    var firstLineString: String? {
-        linesContent().first
+    var pd_firstLineString: String? {
+        pd_linesContent().first
     }
 
     /// 判断`UILabel`中的内容是否被截断
-    var isTruncated: Bool {
+    var pd_isTruncated: Bool {
         guard let labelText = text else { return false }
         // 计算理论上显示所有文字需要的尺寸
         let theorySize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
@@ -111,7 +111,7 @@ public extension UILabel {
     ///   - isOrgin: 是否使用图片原始大小
     /// - Returns: `NSMutableAttributedString`
     @discardableResult
-    func blend(_ text: String?,
+    func pd_blend(_ text: String?,
                images: [UIImage?] = [],
                spacing: CGFloat = 5,
                scale: CGFloat,
@@ -165,7 +165,7 @@ public extension UILabel {
     ///   - wordSpacing: 字间距
     /// - Returns: `NSMutableAttributedString`
     @discardableResult
-    func setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
+    func pd_setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
         // 段落样式
         let style = NSMutableParagraphStyle.default()
             .pd_lineBreakMode(.byCharWrapping)
@@ -194,7 +194,7 @@ public extension UILabel {
     ///   - wordSpacing:字间距
     ///   - paragraphSpacing:段落间距
     /// - Returns:行数及每行内容
-    func linesContent(_ labelWidth: CGFloat? = nil,
+    func pd_linesContent(_ labelWidth: CGFloat? = nil,
                       lineSpacing: CGFloat = 0.0,
                       wordSpacing: CGFloat = 0.0,
                       paragraphSpacing: CGFloat = 0.0) -> [String]

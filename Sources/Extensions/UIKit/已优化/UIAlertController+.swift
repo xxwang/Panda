@@ -57,7 +57,7 @@ public extension UIAlertController {
     ///   - completion:完成回调
     /// - Returns:`UIAlertController`实例
     @discardableResult
-    static func showAlertController(_ title: String? = nil,
+    static func pd_showAlertController(_ title: String? = nil,
                                     message: String? = nil,
                                     titles: [String] = [],
                                     tintColor: UIColor? = nil,
@@ -83,7 +83,7 @@ public extension UIAlertController {
     ///   - completion:完成回调
     /// - Returns:`UIAlertController`实例
     @discardableResult
-    static func showSheetController(_ title: String? = nil,
+    static func pd_showSheetController(_ title: String? = nil,
                                     message: String? = nil,
                                     titles: [String] = [],
                                     tintColor: UIColor? = nil,
@@ -105,7 +105,7 @@ public extension UIAlertController {
     ///   - shake:是否震动
     ///   - deadline:消失时间
     ///   - completion:完成回调
-    func show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
+    func pd_show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
         // 弹起UIAlertController实例
         UIWindow.pd_main?.rootViewController?.present(self, animated: animated, completion: completion)
         // 是否震动

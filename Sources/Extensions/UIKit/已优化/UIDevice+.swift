@@ -15,12 +15,12 @@ import UIKit
 // MARK: - 标识
 public extension UIDevice {
     /// IDFV
-    static var IDFV: String? {
+    static var pd_IDFV: String? {
         UIDevice.current.identifierForVendor?.uuidString
     }
 
     /// IDFA用户关闭,则返回nil
-    static var IDFA: String? {
+    static var pd_IDFA: String? {
         if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
             return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         }
@@ -28,7 +28,7 @@ public extension UIDevice {
     }
 
     /// UUID
-    static var UUID: String {
+    static var pd_UUID: String {
         let uuidRef = CFUUIDCreate(kCFAllocatorDefault)
         let strRef = CFUUIDCreateString(kCFAllocatorDefault, uuidRef)
         let uuidString = (strRef! as String).replacingOccurrences(of: "_", with: "")
@@ -39,7 +39,7 @@ public extension UIDevice {
 // MARK: - 设备区分
 public extension UIDevice {
     /// 当前设备是否越狱
-    static var isBreak: Bool {
+    static var pd_isBreak: Bool {
         if environment.isSimulator {
             return false
         }
@@ -55,7 +55,7 @@ public extension UIDevice {
             fclose(bash)
             return true
         }
-        let path = String(format: "/private/%@", UUID)
+        let path = String(format: "/private/%@", pd_UUID)
         do {
             try "test".write(toFile: path, atomically: true, encoding: .utf8)
             try FileManager.default.removeItem(atPath: path)
@@ -68,7 +68,7 @@ public extension UIDevice {
 
     /// 当前设备能否打电话
     /// - Returns:结果
-    static func isCanCallTel() -> Bool {
+    static func pd_isCanCallTel() -> Bool {
         if let url = URL(string: "tel://") {
             return UIApplication.shared.canOpenURL(url)
         }
@@ -79,43 +79,43 @@ public extension UIDevice {
 // MARK: - 设备的基本信息
 public extension UIDevice {
     /// 当前设备的系统版本
-    static var currentSystemVersion: String {
+    static var pd_currentSystemVersion: String {
         UIDevice.current.systemVersion
     }
 
     /// 当前系统更新时间
-    static var systemUpdateTime: Date {
+    static var pd_systemUpdateTime: Date {
         let time = ProcessInfo.processInfo.systemUptime
         return Date(timeIntervalSinceNow: 0 - time)
     }
 
     /// 当前设备的类型
-    static var deviceModel: String {
+    static var pd_deviceModel: String {
         UIDevice.current.model
     }
 
     /// 当前系统的名称
-    static var currentSystemName: String {
+    static var pd_currentSystemName: String {
         UIDevice.current.systemName
     }
 
     /// 当前设备的名称
-    static var currentDeviceName: String {
+    static var pd_currentDeviceName: String {
         UIDevice.current.name
     }
 
     /// 当前设备语言
-    static var deviceLanguage: String {
-        Bundle.main.preferredLocalizations[0]
+    static var pd_deviceLanguage: String {
+        return Bundle.main.preferredLocalizations[0]
     }
 
     /// 设备区域化型号
-    static var currentLocalizedModel: String {
+    static var pd_currentLocalizedModel: String {
         UIDevice.current.localizedModel
     }
 
     /// 获取CPU核心数量
-    static var deviceCPUCount: Int {
+    static var pd_deviceCPUCount: Int {
         var ncpu = UInt(0)
         var len: size_t = MemoryLayout.size(ofValue: ncpu)
         sysctlbyname("hw.ncpu", &ncpu, &len, nil, 0)
@@ -126,7 +126,7 @@ public extension UIDevice {
 // MARK: - 存储信息
 public extension UIDevice {
     /// 当前硬盘的空间
-    static var diskSpace: Int64 {
+    static var pd_diskSpace: Int64 {
         if let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()) {
             if let space: NSNumber = attrs[FileAttributeKey.systemSize] as? NSNumber {
                 if space.int64Value > 0 {
@@ -138,7 +138,7 @@ public extension UIDevice {
     }
 
     /// 当前硬盘可用空间
-    static var diskSpaceFree: Int64 {
+    static var pd_diskSpaceFree: Int64 {
         if let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()) {
             if let space: NSNumber = attrs[FileAttributeKey.systemFreeSize] as? NSNumber {
                 if space.int64Value > 0 {
@@ -150,7 +150,7 @@ public extension UIDevice {
     }
 
     /// 可用磁盘空间(字节)
-    static var freeDiskSpaceInBytes: Int64 {
+    static var pd_freeDiskSpaceInBytes: Int64 {
         if #available(iOS 11.0, *) {
             if let space = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [URLResourceKey.volumeAvailableCapacityForImportantUsageKey]).volumeAvailableCapacityForImportantUsage {
                 return space
@@ -169,9 +169,9 @@ public extension UIDevice {
     }
 
     /// 当前硬盘已经使用的空间
-    static var diskSpaceUsed: Int64 {
-        let total = diskSpace
-        let free = diskSpaceFree
+    static var pd_diskSpaceUsed: Int64 {
+        let total = pd_diskSpace
+        let free = pd_diskSpaceFree
         guard total > 0, free > 0 else {
             return -1
         }
@@ -184,7 +184,7 @@ public extension UIDevice {
     }
 
     /// 获取总内存大小
-    static var memoryTotal: UInt64 {
+    static var pd_memoryTotal: UInt64 {
         ProcessInfo.processInfo.physicalMemory
     }
 }
@@ -192,13 +192,13 @@ public extension UIDevice {
 // MARK: - 有关设备运营商的信息
 public extension UIDevice {
     /// sim卡信息
-    static func simCardInfos() -> [CTCarrier]? {
-        getCarriers()
+    static func pd_simCardInfos() -> [CTCarrier]? {
+        return pd_getCarriers()
     }
 
     /// 数据业务对应的通信技术
     /// - Returns:通信技术
-    static func currentRadioAccessTechnologys() -> [String]? {
+    static func pd_currentRadioAccessTechnologys() -> [String]? {
         guard !environment.isSimulator else {
             return nil
         }
@@ -219,19 +219,19 @@ public extension UIDevice {
 
     /// 设备网络制式
     /// - Returns:网络
-    static func networkTypes() -> [String]? {
+    static func pd_networkTypes() -> [String]? {
         // 获取并输出运营商信息
-        guard let currentRadioTechs = currentRadioAccessTechnologys() else {
+        guard let currentRadioTechs = pd_currentRadioAccessTechnologys() else {
             return nil
         }
-        return currentRadioTechs.compactMap { getNetworkType(currentRadioTech: $0) }
+        return currentRadioTechs.compactMap { pd_getNetworkType(currentRadioTech: $0) }
     }
 
     /// 运营商名字
     /// - Returns:运营商名字
-    static func carrierNames() -> [String]? {
+    static func pd_carrierNames() -> [String]? {
         // 获取并输出运营商信息
-        guard let carriers = getCarriers(), !carriers.isEmpty else {
+        guard let carriers = pd_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.carrierName! }
@@ -239,9 +239,9 @@ public extension UIDevice {
 
     /// 移动国家码(MCC)
     /// - Returns:移动国家码(MCC)
-    static func mobileCountryCodes() -> [String]? {
+    static func pd_mobileCountryCodes() -> [String]? {
         // 获取并输出运营商信息
-        guard let carriers = getCarriers(), !carriers.isEmpty else {
+        guard let carriers = pd_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.mobileCountryCode! }
@@ -249,9 +249,9 @@ public extension UIDevice {
 
     /// 移动网络码(MNC)
     /// - Returns:移动网络码(MNC)
-    static func mobileNetworkCodes() -> [String]? {
+    static func pd_mobileNetworkCodes() -> [String]? {
         // 获取并输出运营商信息
-        guard let carriers = getCarriers(), !carriers.isEmpty else {
+        guard let carriers = pd_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.mobileNetworkCode! }
@@ -259,9 +259,9 @@ public extension UIDevice {
 
     /// ISO国家代码
     /// - Returns:ISO国家代码
-    static func isoCountryCodes() -> [String]? {
+    static func pd_isoCountryCodes() -> [String]? {
         // 获取并输出运营商信息
-        guard let carriers = getCarriers(), !carriers.isEmpty else {
+        guard let carriers = pd_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.isoCountryCode! }
@@ -269,9 +269,9 @@ public extension UIDevice {
 
     /// 是否允许VoIP
     /// - Returns:是否允许VoIP
-    static func isAllowsVOIPs() -> [Bool]? {
+    static func pd_isAllowsVOIPs() -> [Bool]? {
         // 获取并输出运营商信息
-        guard let carriers = getCarriers(), !carriers.isEmpty else {
+        guard let carriers = pd_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map(\.allowsVOIP)
@@ -279,7 +279,7 @@ public extension UIDevice {
 
     /// 获取并输出运营商信息
     /// - Returns:运营商信息
-    private static func getCarriers() -> [CTCarrier]? {
+    private static func pd_getCarriers() -> [CTCarrier]? {
         guard !environment.isSimulator else {
             return nil
         }
@@ -301,7 +301,7 @@ public extension UIDevice {
     /// 根据数据业务信息获取对应的网络类型
     /// - Parameter currentRadioTech:当前的无线电接入技术信息
     /// - Returns:网络类型
-    private static func getNetworkType(currentRadioTech: String) -> String {
+    private static func pd_getNetworkType(currentRadioTech: String) -> String {
         /// 手机的数据业务对应的通信技术
         /// CTRadioAccessTechnologyGPRS:2G(有时又叫2.5G,介于2G和3G之间的过度技术)
         /// CTRadioAccessTechnologyEdge:2G (有时又叫2.75G,是GPRS到第三代移动通信的过渡)
@@ -344,7 +344,7 @@ public extension UIDevice {
     }
 
     /// 获取运营商
-    static var deviceSupplier: String {
+    static var pd_deviceSupplier: String {
         let info = CTTelephonyNetworkInfo()
         var supplier = ""
         if #available(iOS 12.0, *) {
@@ -384,7 +384,7 @@ public extension UIDevice {
 // MARK: - 设备控制
 public extension UIDevice {
     /// 闪光灯是否打开
-    static var flashIsOn: Bool {
+    static var pd_flashIsOn: Bool {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
             print("camera invalid, please check")
             return false
@@ -394,7 +394,7 @@ public extension UIDevice {
 
     /// 是否打开闪光灯
     /// - Parameter on:是否打开
-    static func flash(on: Bool) {
+    static func pd_flash(on: Bool) {
         // 获取摄像设备
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
             print("camera invalid, please check")
@@ -421,7 +421,7 @@ public extension UIDevice {
 // MARK: - 网络
 public extension UIDevice {
     /// 获取连接wifi的名字和mac地址, 需要定位权限和添加Access WiFi information
-    static var WifiNameWithMac: (wifiName: String?, macIP: String?) {
+    static var pd_WifiNameWithMac: (wifiName: String?, macIP: String?) {
         guard let interfaces: NSArray = CNCopySupportedInterfaces() else {
             return (nil, nil)
         }
@@ -437,7 +437,7 @@ public extension UIDevice {
     }
 
     /// 获取当前设备IP
-    static var ipAddress: String? {
+    static var pd_ipAddress: String? {
         var addresses = [String]()
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
         if getifaddrs(&ifaddr) == 0 {
@@ -467,7 +467,7 @@ public extension UIDevice {
     }
 
     /// 获取连接wifi的ip地址, 需要定位权限和添加Access WiFi information
-    static var wifiIP: String? {
+    static var pd_wifiIP: String? {
         var address: String?
         // get list of all interfaces on the local machine
         var ifaddr: UnsafeMutablePointer<ifaddrs>?

@@ -14,14 +14,14 @@ import UserNotifications
 /// 属性
 public extension UIApplication {
     /// 获取`UIApplicationDelegate`
-    var appDelegate: UIApplicationDelegate? {
+    var pd_appDelegate: UIApplicationDelegate? {
         let delegate = delegate
         return delegate
     }
 
     /// 获取`UIWindowSceneDelegate`
     @available(iOS 13.0, *)
-    var sceneDelegate: UIWindowSceneDelegate? {
+    var pd_sceneDelegate: UIWindowSceneDelegate? {
         for scene in connectedScenes {
             if let windowScene = scene as? UIWindowScene,
                let windowSceneDelegate = windowScene.delegate as? UIWindowSceneDelegate
@@ -33,7 +33,7 @@ public extension UIApplication {
     }
 
     /// 获取屏幕的方向
-    var interfaceOrientation: UIInterfaceOrientation {
+    var pd_interfaceOrientation: UIInterfaceOrientation {
         if #available(iOS 13, *) {
             return UIWindow.pd_main?.windowScene?.interfaceOrientation ?? .unknown
         } else {
@@ -42,7 +42,7 @@ public extension UIApplication {
     }
 
     /// 网络状态是否可用
-    static var reachable: Bool {
+    static var pd_reachable: Bool {
         NSData(contentsOf: URL(string: "https://www.baidu.com/")!) != nil
     }
 }
@@ -52,14 +52,14 @@ public extension UIApplication {
     /// 应用在商店中的链接地址
     /// - Parameter appID: 应用在商店中的ID
     /// - Returns: 地址字符串
-    func homeUrlInAppStore(with appID: String) -> String {
+    func pd_homeUrlInAppStore(with appID: String) -> String {
         "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
     }
 
     /// 应用在商店中的详情链接地址
     /// - Parameter appID: 应用在商店中的ID
     /// - Returns: 地址字符串
-    func detailUrlInAppStore(with appID: String) -> String {
+    func pd_detailUrlInAppStore(with appID: String) -> String {
         "http://itunes.apple.com/cn/lookup?id=\(appID)"
     }
 }
@@ -67,7 +67,7 @@ public extension UIApplication {
 // MARK: - 版本号
 public extension UIApplication {
     /// 判断当前版本是否为新版本
-    var isNewVersion: Bool {
+    var pd_isNewVersion: Bool {
         // 当前应用版本
         let currentVersion = Bundle.pd_appVersion()
         // 获取存储的版本
@@ -82,13 +82,13 @@ public extension UIApplication {
     /// 指定版本号与应用当前版本号进行比较
     /// - Parameter version:传进来的版本号码
     /// - Returns:返回对比加过,true:比当前的版本大,false:比当前的版本小
-    func compareVersion(_ version: String) -> Bool {
+    func pd_compareVersion(_ version: String) -> Bool {
         // 获取要比较的(主版本号、次版本号、补丁版本号)
-        let newVersion = splitAppVersion(version)
+        let newVersion = pd_splitAppVersion(version)
         guard newVersion.isOk else { return false }
 
         // 获取当前应用的(主版本号、次版本号、补丁版本号)
-        let currentVersion = splitAppVersion(Bundle.pd_appVersion())
+        let currentVersion = pd_splitAppVersion(Bundle.pd_appVersion())
         guard currentVersion.isOk else { return false }
 
         // 主版本大于
@@ -128,7 +128,7 @@ public extension UIApplication {
     /// 分割版本号
     /// - Parameter version:要分割的版本号
     /// - Returns:(isOk:是否成功, versions:(major:主版本号, minor:次版本号, patch:补丁版本号))
-    func splitAppVersion(_ version: String) -> (isOk: Bool, versions: (major: Int, minor: Int, patch: Int)) {
+    func pd_splitAppVersion(_ version: String) -> (isOk: Bool, versions: (major: Int, minor: Int, patch: Int)) {
         // 获取(主版本号、次版本号、补丁版本号)字符串数组
         let versionNumbers = version.pd_split(with: ".")
         if versionNumbers.count != 3 {
@@ -154,7 +154,7 @@ public extension UIApplication {
 // MARK: - 方法
 public extension UIApplication {
     /// 清理图标上的角标
-    func clearApplicationIconBadge() {
+    func pd_clearApplicationIconBadge() {
         applicationIconBadgeNumber = 0
     }
 }
@@ -165,7 +165,7 @@ public extension UIApplication {
     /// - Parameters:
     ///   - url:要打开的URL地址
     ///   - complete:完成回调
-    func openURL(_ url: URL, completion: ((_ isOk: Bool) -> Void)? = nil) {
+    func pd_openURL(_ url: URL, completion: ((_ isOk: Bool) -> Void)? = nil) {
         if #available(iOS 10.0, *) {
             self.open(url, options: [:]) { success in
                 completion?(success)
@@ -179,18 +179,18 @@ public extension UIApplication {
     /// - Parameters:
     ///   - phoneNumber:要拨打的电话号码
     ///   - completion:完成回调
-    func call(with phoneNumber: String, completion: @escaping (_ isOk: Bool) -> Void) {
+    func pd_call(with phoneNumber: String, completion: @escaping (_ isOk: Bool) -> Void) {
         let callAddress = ("tel://" + phoneNumber)
         guard let url = URL(string: callAddress) else { completion(false); return }
         guard canOpenURL(url) else { completion(false); return }
-        openURL(url, completion: completion)
+        pd_openURL(url, completion: completion)
     }
 
     /// 在应用中打开指定应用在`AppStore`中的详情页面
     /// - Parameters:
     ///   - controller: 是哪个控制器来弹出的
     ///   - appID: 应用在商店中的ID
-    func openAppDetailViewController(from controller: some UIViewController & SKStoreProductViewControllerDelegate,
+    func pd_openAppDetailViewController(from controller: some UIViewController & SKStoreProductViewControllerDelegate,
                                      appID: String)
     {
         guard appID.count > 0 else { return }
@@ -213,13 +213,13 @@ public extension UIApplication {
         let urlString = "https://itunes.apple.com/cn/app/id\(appID)?mt=12"
         guard let url = URL(string: urlString) else { return }
         guard UIApplication.shared.canOpenURL(url) else { return }
-        openURL(url) { $0 ? Logger.info("打开应用商店评分页成功!") : Logger.error("打开应用商店评分页失败!") }
+        pd_openURL(url) { $0 ? Logger.info("打开应用商店评分页成功!") : Logger.error("打开应用商店评分页失败!") }
     }
 
     /// 打开`设置App`并跳转至当前App权限相关界面
-    func openSettings() {
+    func pd_openSettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        openURL(url) { $0 ? Logger.info("打开设置App成功!") : Logger.error("打开设置App失败!") }
+        pd_openURL(url) { $0 ? Logger.info("打开设置App成功!") : Logger.error("打开设置App失败!") }
     }
 
     /// 让用户自己决定是否打开`设置App`并跳转至当前App权限相关界面
@@ -229,7 +229,7 @@ public extension UIApplication {
     ///   - cancel:取消按钮标题
     ///   - confirm:确认按钮标题
     ///   - parent:来源控制器(谁来弹出提示窗)
-    func openSettings(_ title: String?,
+    func pd_openSettings(_ title: String?,
                       message: String?,
                       cancel: String = "取消",
                       confirm: String = "设置",
@@ -243,7 +243,7 @@ public extension UIApplication {
             }
             .pd_addAction_(title: confirm, style: .default) { _ in
                 // 打开系统设置App
-                self.openSettings()
+                self.pd_openSettings()
             }.show()
     }
 }
@@ -252,7 +252,7 @@ public extension UIApplication {
 public extension UIApplication {
     /// 注册APNs远程推送
     /// - Parameter delegate:代理对象
-    func registerAPNsWithDelegate(_ delegate: Any) {
+    func pd_registerAPNsWithDelegate(_ delegate: Any) {
         if #available(iOS 10.0, *) {
             let options: UNAuthorizationOptions = [.alert, .badge, .sound]
             let center = UNUserNotificationCenter.current()
@@ -280,7 +280,7 @@ public extension UIApplication {
     ///   - repeats:是否重复
     ///   - handler:处理回调
     @available(iOS 10.0, *)
-    func addLocalUserNotification(trigger: AnyObject,
+    func pd_addLocalUserNotification(trigger: AnyObject,
                                   content: UNMutableNotificationContent,
                                   identifier: String,
                                   categories: AnyObject,

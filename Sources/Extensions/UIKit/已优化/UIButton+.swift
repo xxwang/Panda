@@ -7,116 +7,29 @@
 
 import UIKit
 
-// MARK: - 属性
-public extension UIButton {
-    /// 按钮正常状态的图像；也可以从故事板上查看
-    @IBInspectable
-    var imageForNormal: UIImage? {
-        get { image(for: .normal) }
-        set { setImage(newValue, for: .normal) }
-    }
-
-    /// 按钮所选状态的图像；也可以从故事板上查看
-    @IBInspectable
-    var imageForSelected: UIImage? {
-        get { image(for: .selected) }
-        set { setImage(newValue, for: .selected) }
-    }
-
-    /// 按钮高亮显示状态的图像；也可以从故事板上查看
-    @IBInspectable
-    var imageForHighlighted: UIImage? {
-        get { image(for: .highlighted) }
-        set { setImage(newValue, for: .highlighted) }
-    }
-
-    /// 按钮禁用状态的图像；也可以从故事板上查看
-    @IBInspectable
-    var imageForDisabled: UIImage? {
-        get { image(for: .disabled) }
-        set { setImage(newValue, for: .disabled) }
-    }
-
-    /// 按钮正常状态的标题颜色；也可以从故事板上查看
-    @IBInspectable
-    var titleColorForNormal: UIColor? {
-        get { titleColor(for: .normal) }
-        set { setTitleColor(newValue, for: .normal) }
-    }
-
-    /// 按钮所选状态的标题颜色；也可以从故事板上查看
-    @IBInspectable
-    var titleColorForSelected: UIColor? {
-        get { titleColor(for: .selected) }
-        set { setTitleColor(newValue, for: .selected) }
-    }
-
-    /// 按钮高亮显示状态的标题颜色；也可以从故事板上查看
-    @IBInspectable
-    var titleColorForHighlighted: UIColor? {
-        get { titleColor(for: .highlighted) }
-        set { setTitleColor(newValue, for: .highlighted) }
-    }
-
-    /// 按钮禁用状态的标题颜色；也可以从故事板上查看
-    @IBInspectable
-    var titleColorForDisabled: UIColor? {
-        get { titleColor(for: .disabled) }
-        set { setTitleColor(newValue, for: .disabled) }
-    }
-
-    /// 按钮的正常状态标题；也可以从故事板上查看
-    @IBInspectable
-    var titleForNormal: String? {
-        get { title(for: .normal) }
-        set { setTitle(newValue, for: .normal) }
-    }
-
-    /// 按钮所选状态的标题；也可以从故事板上查看
-    @IBInspectable
-    var titleForSelected: String? {
-        get { title(for: .selected) }
-        set { setTitle(newValue, for: .selected) }
-    }
-
-    /// 按钮高亮显示状态的标题；也可以从故事板上查看
-    @IBInspectable
-    var titleForHighlighted: String? {
-        get { title(for: .highlighted) }
-        set { setTitle(newValue, for: .highlighted) }
-    }
-
-    /// 按钮的禁用状态标题；也可以从故事板上查看
-    @IBInspectable
-    var titleForDisabled: String? {
-        get { title(for: .disabled) }
-        set { setTitle(newValue, for: .disabled) }
-    }
-}
-
 // MARK: - 方法
 public extension UIButton {
     /// 所有状态
-    private var states: [UIControl.State] {
+    private var pd_states: [UIControl.State] {
         [.normal, .selected, .highlighted, .disabled]
     }
 
     /// 为按钮的所有状态设置同样的图片
     /// - Parameter image:要设置的图片
-    func setImageForAllStates(_ image: UIImage) {
-        states.forEach { setImage(image, for: $0) }
+    func pd_setImageForAllStates(_ image: UIImage) {
+        pd_states.forEach { setImage(image, for: $0) }
     }
 
     /// 为按钮的所有状态设置同样的标题颜色
     /// - Parameter color:要设置的颜色
-    func setTitleColorForAllStates(_ color: UIColor) {
-        states.forEach { setTitleColor(color, for: $0) }
+    func pd_setTitleColorForAllStates(_ color: UIColor) {
+        pd_states.forEach { setTitleColor(color, for: $0) }
     }
 
     /// 为按钮的所有状态设置同样的标题
     /// - Parameter title:标题文字
-    func setTitleForAllStates(_ title: String) {
-        states.forEach { setTitle(title, for: $0) }
+    func pd_setTitleForAllStates(_ title: String) {
+        pd_states.forEach { setTitle(title, for: $0) }
     }
 }
 
@@ -134,7 +47,7 @@ public extension UIButton {
     /// - Parameters:
     ///   - spacing:间距
     ///   - style:布局样式
-    func changeLayout(_ spacing: CGFloat, style: LayoutStyle) {
+    func pd_changeLayout(_ spacing: CGFloat, style: LayoutStyle) {
         let imageRect: CGRect = imageView?.frame ?? .zero
         let titleRect: CGRect = titleLabel?.frame ?? .zero
         let buttonWidth: CGFloat = frame.size.width
@@ -201,7 +114,7 @@ public extension UIButton {
     /// - Parameters:
     ///   - imageAboveText:设置为true可使图像位于标题文本上方,默认值为false,图像位于文本左侧
     ///   - spacing:标题文本和图像之间的间距
-    func centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
+    func pd_centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
         if imageAboveText {
             guard let imageSize = imageView?.image?.size else { return }
             guard let text = titleLabel?.text else { return }
@@ -226,7 +139,7 @@ public extension UIButton {
     }
 
     /// 调整图标与文字的间距(必须左图右字)
-    func spacing(_ spacing: CGFloat) {
+    func pd_spacing(_ spacing: CGFloat) {
         let sp = spacing * 0.5
         imageEdgeInsets = UIEdgeInsets(top: 0, left: -sp, bottom: 0, right: sp)
         titleEdgeInsets = UIEdgeInsets(top: 0, left: sp, bottom: 0, right: -sp)
@@ -270,7 +183,7 @@ extension UIButton: AssociatedAttributes {
 public extension UIButton {
     /// 扩大UIButton的点击区域,向四周扩展10像素的点击范围
     /// - Parameter size:向四周扩展像素的点击范围
-    func expandSize(size: CGFloat = 10) {
+    func pd_expandSize(size: CGFloat = 10) {
         AssociatedObject.set(self,
                              &AssociateKeys.ExpandSizeKey,
                              size,
@@ -478,7 +391,7 @@ public extension UIButton {
     /// - Returns: `Self`
     @discardableResult
     func pd_expandClickArea(_ size: CGFloat = 10) -> Self {
-        self.expandSize(size: size)
+        self.pd_expandSize(size: size)
         return self
     }
 }

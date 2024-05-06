@@ -51,7 +51,7 @@ public extension UIBarButtonItem {
         // 设置响应方法
         if let target, let action { button.addTarget(target, action: action, for: .touchUpInside) }
         // 设置图标与标题之间的间距
-        button.spacing(3)
+        button.pd_spacing(3)
 
         self.init(customView: button)
     }

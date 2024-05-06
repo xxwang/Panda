@@ -49,7 +49,7 @@ extension DocumentUtils: UIDocumentPickerDelegate {
         if iCloudEnable {
             download(url) { fileData in self.completion?(true, fileData, fileName) }
         } else {
-            UIApplication.shared.openSettings("请允许使用【iCloud】云盘",
+            UIApplication.shared.pd_openSettings("请允许使用【iCloud】云盘",
                                               message: nil,
                                               cancel: "取消",
                                               confirm: "确认",
