@@ -11,18 +11,18 @@ import UIKit
 // MARK: - 属性
 public extension CGSize {
     /// 获取`宽高比`
-    var aspectRatio: CGFloat {
+    var pd_aspectRatio: CGFloat {
         guard height != 0 else { return 0 }
         return width / height
     }
 
     /// 获取`宽高最大值`
-    var maxDimension: CGFloat {
+    var pd_maxDimension: CGFloat {
         max(width, height)
     }
 
     /// 获取`宽高最小值`
-    var minDimension: CGFloat {
+    var pd_minDimension: CGFloat {
         min(width, height)
     }
 }
@@ -37,7 +37,7 @@ public extension CGSize {
     ///     // newSize.width = 75 , newSize = 50
     /// - Parameter size: 边界`CGSize`
     /// - Returns: 缩放后的`CGSize`
-    func aspectFit(to size: CGSize) -> CGSize {
+    func pd_aspectFit(to size: CGSize) -> CGSize {
         let minRatio = min(size.width / width, size.height / height)
         return CGSize(width: width * minRatio, height: height * minRatio)
     }
@@ -50,7 +50,7 @@ public extension CGSize {
     ///     // newSize.width = 100 , newSize = 60
     /// - Parameter size: 边界`CGSize`
     /// - Returns: 缩放后的`CGSize`
-    func aspectFill(to size: CGSize) -> CGSize {
+    func pd_aspectFill(to size: CGSize) -> CGSize {
         let maxRatio = max(size.width / width, size.height / height)
         let aWidth = min(width * maxRatio, size.width)
         let aHeight = min(height * maxRatio, size.height)

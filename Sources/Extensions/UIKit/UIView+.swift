@@ -981,7 +981,7 @@ public extension UIView {
 
     /// 移除角标
     func removeBadege() {
-        DispatchQueue.async_execute_on_main {
+        DispatchQueue.pd_async_execute_on_main {
             let badge = self.viewWithTag(6202)
             badge?.removeFromSuperview()
         }
@@ -1436,11 +1436,11 @@ public extension UIView {
         // 将发射器的Layer添加到父Layer中
         layer.addSublayer(emitter)
 
-        DispatchQueue.delay_execute(delay: 1) {
+        DispatchQueue.pd_delay_execute(delay: 1) {
             guard style.cellFireOnce else { return }
             emitter.birthRate = 0
 
-            DispatchQueue.delay_execute(delay: 1) {
+            DispatchQueue.pd_delay_execute(delay: 1) {
                 self.stopEmitter()
             }
         }

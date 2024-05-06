@@ -56,7 +56,7 @@ public extension UINavigationController {
             view.gestureRecognizers?.filter { ges in
                 ges is UIPanGestureRecognizer
             }.forEach { ges in
-                ges.remove()
+                ges.pd_remove()
             }
         }
     }

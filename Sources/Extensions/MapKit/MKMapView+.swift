@@ -12,15 +12,15 @@ public extension MKMapView {
     /// 注册大头针
     /// - Parameter name: 继承自`MKAnnotationView`的类型
     @available(iOS 11.0, tvOS 11.0, macOS 10.13, *)
-    func register<T: MKAnnotationView>(annotationViewWithClass name: T.Type) {
-        register(T.self, forAnnotationViewWithReuseIdentifier: String(describing: name))
+    func pd_register<T: MKAnnotationView>(annotationViewWithClass name: T.Type) {
+        self.register(T.self, forAnnotationViewWithReuseIdentifier: String(describing: name))
     }
 
     /// 获取`可重用`的大头针
     /// - Parameter name: 继承自`MKAnnotationView`的类型
     /// - Returns: 继承自`MKAnnotationView`的对象
-    func dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type) -> T? {
-        dequeueReusableAnnotationView(withIdentifier: String(describing: name)) as? T
+    func pd_dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type) -> T? {
+        self.dequeueReusableAnnotationView(withIdentifier: String(describing: name)) as? T
     }
 
     /// 获取`可重用`的大头针
@@ -29,8 +29,8 @@ public extension MKMapView {
     ///   - annotation: 大头针对象
     /// - Returns: 继承自`MKAnnotationView`的对象
     @available(iOS 11.0, tvOS 11.0, macOS 10.13, *)
-    func dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type, for annotation: MKAnnotation) -> T? {
-        guard let annotationView = dequeueReusableAnnotationView(
+    func pd_dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type, for annotation: MKAnnotation) -> T? {
+        guard let annotationView = self.dequeueReusableAnnotationView(
             withIdentifier: String(describing: name),
             for: annotation
         ) as? T else {
@@ -48,12 +48,12 @@ public extension MKMapView {
     ///   - meter: 缩放单位`米`
     ///   - edgePadding: 边界距离
     ///   - animated: 是否动画
-    func zoom(to coordinates: [CLLocationCoordinate2D], meter: Double, edgePadding: UIEdgeInsets, animated: Bool) {
+    func pd_zoom(to coordinates: [CLLocationCoordinate2D], meter: Double, edgePadding: UIEdgeInsets, animated: Bool) {
         guard !coordinates.isEmpty else { return }
 
         guard coordinates.count == 1 else {
             let mkPolygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
-            setVisibleMapRect(mkPolygon.boundingMapRect, edgePadding: edgePadding, animated: animated)
+            self.setVisibleMapRect(mkPolygon.boundingMapRect, edgePadding: edgePadding, animated: animated)
             return
         }
 
@@ -62,6 +62,6 @@ public extension MKMapView {
             latitudinalMeters: meter,
             longitudinalMeters: meter
         )
-        setRegion(coordinateRegion, animated: true)
+        self.setRegion(coordinateRegion, animated: true)
     }
 }

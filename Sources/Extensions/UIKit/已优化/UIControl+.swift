@@ -17,46 +17,46 @@ private class AssociateKeys {
 public extension UIControl {
     /// 设置指定时长(单位:秒)内不可重复点击
     /// - Parameter hitTime:时长
-    func doubleHit(time: Double = 1) {
-        doubleHit(hitTime: time)
+    func pd_doubleHit(time: Double = 1) {
+        self.pd_doubleHit(hitTime: time)
     }
 }
 
 // MARK: - 限制连续点击时间间隔
 private extension UIControl {
     /// 重复点击限制时间
-    var hitTime: Double? {
+    var pd_hitTime: Double? {
         get { AssociatedObject.get(self, &AssociateKeys.HitTimerKey) as? Double }
         set { AssociatedObject.set(self, &AssociateKeys.HitTimerKey, newValue, .OBJC_ASSOCIATION_ASSIGN) }
     }
 
     /// 点击回调
-    var callback: ((_ control: UIControl) -> Void)? {
+    var pd_callback: ((_ control: UIControl) -> Void)? {
         get { AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? ((_ control: UIControl) -> Void) }
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
     /// 设置指定时长(单位:秒)内不可重复点击
     /// - Parameter hitTime:时长
-    func doubleHit(hitTime: Double) {
-        self.hitTime = hitTime
-        addTarget(self, action: #selector(preventDoubleHit), for: .touchUpInside)
+    func pd_doubleHit(hitTime: Double) {
+        self.pd_hitTime = hitTime
+        self.addTarget(self, action: #selector(preventDoubleHit), for: .touchUpInside)
     }
 
     /// 防止重复点击实现
     /// - Parameter sender:被点击的`UIControl`
     @objc func preventDoubleHit(_ sender: UIControl) {
-        isUserInteractionEnabled = false
-        DispatchQueue.delay_execute(delay: hitTime ?? 1.0) { [weak self] in
+        self.isUserInteractionEnabled = false
+        DispatchQueue.pd_delay_execute(delay: self.pd_hitTime ?? 1.0) { [weak self] in
             guard let self else { return }
-            isUserInteractionEnabled = true
+            self.isUserInteractionEnabled = true
         }
     }
 
     /// 事件处理方法
     /// - Parameter sender:事件发起者
     @objc func controlEventHandler(_ sender: UIControl) {
-        if let block = callback { block(sender) }
+        if let block = self.pd_callback { block(sender) }
     }
 }
 
@@ -146,7 +146,7 @@ public extension UIControl {
     /// - Returns:`Self`
     @discardableResult
     func pd_disableMultiTouch(_ hitTime: Double = 1) -> Self {
-        doubleHit(hitTime: hitTime)
+        self.pd_doubleHit(hitTime: hitTime)
         return self
     }
 
@@ -157,7 +157,7 @@ public extension UIControl {
     /// - Returns:`Self`
     @discardableResult
     func pd_callback(_ callback: ((_ control: UIControl) -> Void)?, for controlEvent: UIControl.Event = .touchUpInside) -> Self {
-        self.callback = callback
+        self.pd_callback = callback
         addTarget(self, action: #selector(controlEventHandler(_:)), for: controlEvent)
         return self
     }
@@ -167,7 +167,7 @@ public extension UIControl {
     /// - Returns: `Self`
     @discardableResult
     func pd_doubleHit(_ time: Double = 1) -> Self {
-        self.doubleHit(hitTime: time)
+        self.pd_doubleHit(hitTime: time)
         return self
     }
 }

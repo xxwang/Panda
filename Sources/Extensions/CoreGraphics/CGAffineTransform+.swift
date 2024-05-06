@@ -12,7 +12,7 @@ import UIKit
 public extension CGAffineTransform {
     /// `CGAffineTransform`转`CATransform3D`
     /// - Returns: `CATransform3D`
-    func toCATransform3D() -> CATransform3D {
+    func pd_CATransform3D() -> CATransform3D {
         CATransform3DMakeAffineTransform(self)
     }
 }

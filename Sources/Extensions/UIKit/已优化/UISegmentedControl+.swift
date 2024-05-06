@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 属性
 public extension UISegmentedControl {
     /// 图片数组
-    var images: [UIImage] {
+    var pd_images: [UIImage] {
         get {
             let range = 0 ..< numberOfSegments
             return range.compactMap { self.imageForSegment(at: $0) }
@@ -24,7 +24,7 @@ public extension UISegmentedControl {
     }
 
     /// 标题数组
-    var titles: [String] {
+    var pd_titles: [String] {
         get {
             let range = 0 ..< numberOfSegments
             return range.compactMap { self.titleForSegment(at: $0) }

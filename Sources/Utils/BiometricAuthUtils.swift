@@ -78,7 +78,7 @@ extension BiometricAuthUtils {
 
         // 唤起认证
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReason) { success, evaluateError in
-            DispatchQueue.async_execute_on_main {
+            DispatchQueue.pd_async_execute_on_main {
                 if success {
                     self.delegate?.biometricAuthResult(result: .success, mode: self.biometricMode)
                 } else {
@@ -114,7 +114,7 @@ extension BiometricAuthUtils {
                 } else if errorCode == LAError.biometryLockout.rawValue {
                     // 错误次数过多, 使用deviceOwnerAuthentication触发输入密码
                     context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason, reply: { success, evaluateError in
-                        DispatchQueue.async_execute_on_main {
+                        DispatchQueue.pd_async_execute_on_main {
                             if success {
                                 self.delegate?.biometricAuthResult(result: .success, mode: self.biometricMode)
                             } else {

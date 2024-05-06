@@ -12,7 +12,7 @@ import UIKit
 public extension CGImage {
     /// `CGImage`转`UIImage`
     /// - Returns: `UIImage?`
-    func toUIImage() -> UIImage? {
-        UIImage(cgImage: self)
+    func pd_uiImage() -> UIImage? {
+        return UIImage(cgImage: self)
     }
 }

@@ -930,7 +930,7 @@ public extension UIImage {
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
 
         // 回调
-        DispatchQueue.async_execute_on_main {
+        DispatchQueue.pd_async_execute_on_main {
             completion?(resultImage)
         }
         return resultImage!

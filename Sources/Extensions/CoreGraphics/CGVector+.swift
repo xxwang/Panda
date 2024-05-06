@@ -11,12 +11,12 @@ import UIKit
 // MARK: - 属性
 public extension CGVector {
     /// 向量的`旋转角度-弧度`
-    var angle: CGFloat {
+    var pd_angle: CGFloat {
         atan2(dy, dx)
     }
 
     /// 向量的`长度`
-    var magnitude: CGFloat {
+    var pd_magnitude: CGFloat {
         sqrt((dx * dx) + (dy * dy))
     }
 }

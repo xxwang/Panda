@@ -23,7 +23,7 @@ public extension SCNPlane {
     ///   - material:材质
     convenience init(width: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(width: width, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`宽度`和`材质`的`方形平面几何图形`
@@ -32,7 +32,7 @@ public extension SCNPlane {
     ///   - material:材质
     convenience init(width: CGFloat, material: SCNMaterial) {
         self.init(width: width, height: width)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`宽度`、`高度`和`材质颜色`的`平面几何体`
@@ -42,7 +42,7 @@ public extension SCNPlane {
     ///   - color:材质的颜色
     convenience init(width: CGFloat, height: CGFloat, color: UIColor) {
         self.init(width: width, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 
     /// 创建具有指定`宽度`和`材质颜色`的`方形平面几何体`
@@ -51,6 +51,6 @@ public extension SCNPlane {
     ///   - color:材质的颜色
     convenience init(width: CGFloat, color: UIColor) {
         self.init(width: width, height: width)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 }

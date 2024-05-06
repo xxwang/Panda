@@ -12,7 +12,7 @@ import UIKit
 public extension CALayer {
     /// 图层转图片(需要图层已经有`size`)
     /// - Returns: `UIImage?`
-    func toImage() -> UIImage? {
+    func pd_image() -> UIImage? {
         UIGraphicsBeginImageContext(frame.size)
         render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -24,7 +24,7 @@ public extension CALayer {
     /// - Parameters:
     ///   - scale: 缩放比例
     /// - Returns: `UIImage?`
-    func toImage(scale: CGFloat = 0.0) -> UIImage? {
+    func pd_image(scale: CGFloat = 0.0) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, scale)
         defer { UIGraphicsEndImageContext() }
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
@@ -34,8 +34,8 @@ public extension CALayer {
 
     /// 图层转颜色(`UIColor`)
     /// - Returns: `UIColor?`
-    func toUIColor() -> UIColor? {
-        if let image = toImage() {
+    func pd_uiColor() -> UIColor? {
+        if let image = self.pd_image() {
             return UIColor(patternImage: image)
         }
         return nil
@@ -52,14 +52,14 @@ public extension CALayer {
     ///   - repeatCount: 重复动画次数
     ///   - removedOnCompletion: 在动画完成后是否移除动画
     ///   - option: 动画节奏控制
-    func basicAnimationMovePoint(_ point: CGPoint,
+    func pd_basicAnimationMovePoint(_ point: CGPoint,
                                  duration: TimeInterval,
                                  delay: TimeInterval = 0,
                                  repeatCount: Float = 1,
                                  removedOnCompletion: Bool = false,
                                  option: CAMediaTimingFunctionName = .default)
     {
-        baseBasicAnimation(
+    self.pd_baseBasicAnimation(
             keyPath: "position",
             startValue: position,
             endValue: point,
@@ -79,14 +79,14 @@ public extension CALayer {
     ///   - repeatCount: 重复动画次数
     ///   - removedOnCompletion: 在动画完成后是否移除动画
     ///   - option: 动画节奏控制
-    func basicAnimationMoveX(_ moveValue: Any?,
+    func pd_basicAnimationMoveX(_ moveValue: Any?,
                              duration: TimeInterval = 2.0,
                              delay: TimeInterval = 0,
                              repeatCount: Float = 1,
                              removedOnCompletion: Bool = false,
                              option: CAMediaTimingFunctionName = .default)
     {
-        baseBasicAnimation(
+    self.pd_baseBasicAnimation(
             keyPath: "transform.translation.x",
             startValue: position,
             endValue: moveValue,
@@ -106,14 +106,14 @@ public extension CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func basicAnimationMoveY(_ moveValue: Any?,
+    func pd_basicAnimationMoveY(_ moveValue: Any?,
                              duration: TimeInterval = 2.0,
                              delay: TimeInterval = 0,
                              repeatCount: Float = 1,
                              removedOnCompletion: Bool = false,
                              option: CAMediaTimingFunctionName = .default)
     {
-        baseBasicAnimation(
+    self.pd_baseBasicAnimation(
             keyPath: "transform.translation.y",
             startValue: position,
             endValue: moveValue,
@@ -133,14 +133,14 @@ public extension CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func animationCornerRadius(_ cornerRadius: Any?,
+    func pd_animationCornerRadius(_ cornerRadius: Any?,
                                duration: TimeInterval = 2.0,
                                delay: TimeInterval = 0,
                                repeatCount: Float = 1,
                                removedOnCompletion: Bool = false,
                                option: CAMediaTimingFunctionName = .default)
     {
-        baseBasicAnimation(
+    self.pd_baseBasicAnimation(
             keyPath: "cornerRadius",
             startValue: position,
             endValue: cornerRadius,
@@ -160,14 +160,14 @@ public extension CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func animationScale(_ scaleValue: Any?,
+    func pd_animationScale(_ scaleValue: Any?,
                         duration: TimeInterval = 2.0,
                         delay: TimeInterval = 0,
                         repeatCount: Float = 1,
                         removedOnCompletion: Bool = true,
                         option: CAMediaTimingFunctionName = .default)
     {
-        baseBasicAnimation(
+    self.pd_baseBasicAnimation(
             keyPath: "transform.scale",
             startValue: 1,
             endValue: scaleValue,
@@ -187,14 +187,14 @@ public extension CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func animationRotation(_ rotation: Any?,
+    func pd_animationRotation(_ rotation: Any?,
                            duration: TimeInterval = 2.0,
                            delay: TimeInterval = 0,
                            repeatCount: Float = 1,
                            removedOnCompletion: Bool = true,
                            option: CAMediaTimingFunctionName = .default)
     {
-        baseBasicAnimation(
+    self.pd_baseBasicAnimation(
             keyPath: "transform.rotation",
             startValue: nil,
             endValue: rotation,
@@ -216,7 +216,7 @@ public extension CALayer {
     ///   - repeatCount:重复动画次数
     ///   - removedOnCompletion:在动画完成后是否移除动画
     ///   - option:动画节奏控制
-    func baseBasicAnimation(keyPath: String,
+    func pd_baseBasicAnimation(keyPath: String,
                             startValue: Any?,
                             endValue: Any?,
                             duration: TimeInterval = 2.0,
@@ -261,7 +261,7 @@ public extension CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画选项
-    func addKeyframeAnimationPosition(_ values: [Any],
+    func pd_addKeyframeAnimationPosition(_ values: [Any],
                                       keyTimes: [NSNumber]?,
                                       duration: TimeInterval = 2.0,
                                       delay: TimeInterval = 0,
@@ -269,7 +269,7 @@ public extension CALayer {
                                       removedOnCompletion: Bool = false,
                                       option: CAMediaTimingFunctionName = .default)
     {
-        baseKeyframeAnimation(
+    self.pd_baseKeyframeAnimation(
             keyPath: "position",
             values: values,
             keyTimes: keyTimes,
@@ -291,7 +291,7 @@ public extension CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除
     ///   - option:动画选项
-    func addKeyframeAnimationRotation(_ values: [Any] = [
+    func pd_addKeyframeAnimationRotation(_ values: [Any] = [
         -5.pd_cgFloat().pd_radians(),
         5.pd_cgFloat().pd_radians(),
         -5.pd_cgFloat().pd_radians(),
@@ -302,7 +302,7 @@ public extension CALayer {
     repeatCount: Float = 1,
     removedOnCompletion: Bool = true,
     option: CAMediaTimingFunctionName = .default) {
-        baseKeyframeAnimation(
+        self.pd_baseKeyframeAnimation(
             keyPath: "transform.rotation",
             values: values,
             keyTimes: keyTimes,
@@ -323,14 +323,14 @@ public extension CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:是否在动画完成后移除动画
     ///   - option:动画控制选项
-    func addKeyframeAnimationPositionBezierPath(_ path: CGPath? = nil,
+    func pd_addKeyframeAnimationPositionBezierPath(_ path: CGPath? = nil,
                                                 duration: TimeInterval = 2.0,
                                                 delay: TimeInterval = 0,
                                                 repeatCount: Float = 1,
                                                 removedOnCompletion: Bool = false,
                                                 option: CAMediaTimingFunctionName = .default)
     {
-        baseKeyframeAnimation(
+    self.pd_baseKeyframeAnimation(
             keyPath: "position",
             duration: duration,
             delay: delay,
@@ -352,7 +352,7 @@ public extension CALayer {
     ///   - path:动画路径
     ///   - removedOnCompletion:是否在动画完成之后移除动画
     ///   - option:动画节奏控制选项
-    func baseKeyframeAnimation(keyPath: String,
+    func pd_baseKeyframeAnimation(keyPath: String,
                                values: [Any]? = nil,
                                keyTimes: [NSNumber]? = nil,
                                duration: TimeInterval = 2.0,
@@ -413,7 +413,7 @@ public extension CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画控制选项
-    func addSpringAnimationBounds(_ toValue: Any?,
+    func pd_addSpringAnimationBounds(_ toValue: Any?,
                                   delay: TimeInterval = 0,
                                   mass: CGFloat = 10.0,
                                   stiffness: CGFloat = 5000,
@@ -423,7 +423,7 @@ public extension CALayer {
                                   removedOnCompletion: Bool = false,
                                   option: CAMediaTimingFunctionName = .default)
     {
-        baseSpringAnimation(
+    self.pd_baseSpringAnimation(
             path: "bounds",
             toValue: toValue,
             mass: mass,
@@ -448,7 +448,7 @@ public extension CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画控制选项
-    func baseSpringAnimation(path: String?,
+    func pd_baseSpringAnimation(path: String?,
                              toValue: Any? = nil,
                              delay: TimeInterval = 0,
                              mass: CGFloat = 10.0,
@@ -496,7 +496,7 @@ public extension CALayer {
     ///   - repeatCount:动画重复次数
     ///   - removedOnCompletion:动画完成是否移除动画
     ///   - option:动画控制选项
-    func baseAnimationGroup(animations: [CAAnimation]? = nil,
+    func pd_baseAnimationGroup(animations: [CAAnimation]? = nil,
                             duration: TimeInterval = 2.0,
                             delay: TimeInterval = 0,
                             repeatCount: Float = 1,
@@ -530,7 +530,7 @@ public extension CALayer {
     ///   - subtype:过渡动画的方向
     ///   - duration:动画的时间
     ///   - delay:延时
-    func addTransition(_ type: CATransitionType,
+    func pd_addTransition(_ type: CATransitionType,
                        subtype: CATransitionSubtype?,
                        duration: CFTimeInterval = 2.0,
                        delay: TimeInterval = 0)
@@ -546,7 +546,7 @@ public extension CALayer {
         transition.duration = duration
 
         // 添加动画
-        add(transition, forKey: nil)
+    self.add(transition, forKey: nil)
     }
 }
 

@@ -25,7 +25,7 @@ public extension SCNCylinder {
     ///   - material:材质
     convenience init(radius: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(radius: radius, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`直径`、`高度`和`材质`的`圆柱体几何体`
@@ -35,7 +35,7 @@ public extension SCNCylinder {
     ///   - material:材质
     convenience init(diameter: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(radius: diameter / 2, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`半径`、`高度`和`材质颜色`的`圆柱体几何体`
@@ -45,7 +45,7 @@ public extension SCNCylinder {
     ///   - color:材质的颜色
     convenience init(radius: CGFloat, height: CGFloat, color: UIColor) {
         self.init(radius: radius, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 
     /// 创建具有指定`直径`、`高度`和`材质颜色`的`圆柱体几何体`
@@ -55,6 +55,6 @@ public extension SCNCylinder {
     ///   - color:材质的颜色
     convenience init(diameter: CGFloat, height: CGFloat, color: UIColor) {
         self.init(radius: diameter / 2, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 }

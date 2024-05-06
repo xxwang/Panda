@@ -14,6 +14,6 @@ public extension SCNMaterial {
     /// - Parameter color:漫反射颜色
     convenience init(color: UIColor) {
         self.init()
-        diffuse.contents = color
+        self.diffuse.contents = color
     }
 }

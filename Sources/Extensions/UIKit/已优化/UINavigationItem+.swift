@@ -13,11 +13,11 @@ public extension UINavigationItem {
     /// - Parameters:
     ///   - image: 要设置的图片
     ///   - size: 大小
-    func titleView(with image: UIImage, size: CGSize = CGSize(width: 100, height: 30)) {
+    func pd_titleView(with image: UIImage, size: CGSize = CGSize(width: 100, height: 30)) {
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: size))
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
-        titleView = imageView
+        self.titleView = imageView
     }
 }
 

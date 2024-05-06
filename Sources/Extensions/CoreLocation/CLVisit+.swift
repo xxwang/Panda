@@ -12,7 +12,7 @@ import Foundation
 public extension CLVisit {
     /// `CLVisit`转`CLLocation`
     /// - Returns: `CLLocation`
-    func toLocation() -> CLLocation {
-        CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    func pd_location() -> CLLocation {
+        return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
 }

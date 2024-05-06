@@ -11,58 +11,63 @@ import Foundation
 // MARK: - 类型转换
 public extension CGFloat {
     /// 转换为`Int`
-    func toInt() -> Int {
-        toNSNumber().intValue
+    /// - Returns: `Int`
+    func pd_int() -> Int {
+        return self.pd_nsNumber().intValue
     }
 
     /// 转换为`Int64`
-    func toInt64() -> Int64 {
-        toNSNumber().int64Value
+    /// - Returns: `Int64`
+    func pd_int64() -> Int64 {
+        return self.pd_nsNumber().int64Value
     }
 
     /// 转换为`UInt`
-    func toUInt() -> UInt {
-        toNSNumber().uintValue
+    /// - Returns: `UInt`
+    func pd_uInt() -> UInt {
+        return self.pd_nsNumber().uintValue
     }
 
     /// 转换为`UInt64`
-    func toUInt64() -> UInt64 {
-        toNSNumber().uint64Value
+    /// - Returns: `UInt64`
+    func pd_uInt64() -> UInt64 {
+        return self.pd_nsNumber().uint64Value
     }
 
     /// 转换为`Float`
-    func toFloat() -> Float {
-        toNSNumber().floatValue
+    /// - Returns: `Float`
+    func pd_float() -> Float {
+        return self.pd_nsNumber().floatValue
     }
 
     /// 转换为`Double`
-    func toDouble() -> Double {
-        toNSNumber().doubleValue
+    /// - Returns: `Double`
+    func pd_double() -> Double {
+        return self.pd_nsNumber().doubleValue
     }
 
-    /// 转换为`CGFloat`
-    func toCGFloat() -> CGFloat {
-        toDouble()
-    }
-
-    /// 转换为`NSNumber`
-    func toNSNumber() -> NSNumber {
-        NSNumber(value: Double(self))
+    /// 转换为`NSNumber
+    /// - Returns: `NSNumber`
+    func pd_nsNumber() -> NSNumber {
+        return NSNumber(value: Double(self))
     }
 
     /// 转换为`NSDecimalNumber`
-    func toDecimalNumber() -> NSDecimalNumber {
-        NSDecimalNumber(value: Double(self))
+    /// - Returns: `NSDecimalNumber`
+    func pd_decimalNumber() -> NSDecimalNumber {
+        return NSDecimalNumber(value: Double(self))
     }
 
     /// 转换为`Decimal`
-    func toDecimal() -> Decimal {
-        toDecimalNumber().decimalValue
+    /// - Returns: `Decimal`
+    func pd_decimal() -> Decimal {
+        return self.pd_decimalNumber().decimalValue
     }
 
     /// 转换为`String`
-    func toString() -> String {
-        String(toDouble())
+    /// - Returns: `String`
+    func pd_string() -> String {
+        return String(self.pd_double())
     }
 }
 
@@ -70,54 +75,54 @@ public extension CGFloat {
 public extension CGFloat {
     /// `角度`转`弧度`(0-360) -> (0-2PI)
     /// - Returns: `Double`弧度
-    func toRadians() -> Double {
-        toDouble() / 180.0 * Double.pi
+    func pd_radians() -> Double {
+        return self.pd_double() / 180.0 * Double.pi
     }
 
     /// `弧度`转`角度`(0-2PI) -> (0-360)
     /// - Returns: `Double`角度
-    func toDegrees() -> Double {
-        toDouble() * (180.0 / Double.pi)
+    func pd_degrees() -> Double {
+        return self.pd_double() * (180.0 / Double.pi)
     }
 
     /// 取`绝对值`
     /// - Returns: `绝对值`
-    func abs() -> Self {
-        Swift.abs(self)
+    func pd_abs() -> Self {
+        return Swift.abs(self)
     }
 
     /// 向上取整
     /// - Returns: 取整结果
-    func ceil() -> Self {
-        Foundation.ceil(self)
+    func pd_ceil() -> Self {
+        return Foundation.ceil(self)
     }
 
     /// 向下取整
     /// - Returns: 取整结果
-    func floor() -> Self {
-        Foundation.floor(self)
+    func pd_floor() -> Self {
+        return Foundation.floor(self)
     }
 
     /// 四舍五入转`Int`
     /// - Returns: `Int`
-    func lround() -> Int {
-        Darwin.lround(Double(self))
+    func pd_lround() -> Int {
+        return Darwin.lround(Double(self))
     }
 
     /// 截断到小数点后某一位
     /// - Parameter places:指定位数
     /// - Returns:截断后的结果
-    func truncate(places: Int) -> Self {
+    func pd_truncate(places: Int) -> Self {
         let divisor = pow(10.0, places.pd_double())
-        return Self(toDouble() * divisor / divisor)
+        return Self(self.pd_double() * divisor / divisor)
     }
 
     /// 四舍五入到小数点后某一位
     /// - Parameter places:指定位数
     /// - Returns:四舍五入后的结果
-    func round(_ places: Int) -> Self {
+    func pd_round(_ places: Int) -> Self {
         let divisor = pow(10.0, places.pd_double())
-        return Self((toDouble() * divisor).rounded() / divisor)
+        return Self((self.pd_double() * divisor).rounded() / divisor)
     }
 
     /// 返回具有指定小数位数和舍入规则的舍入值.如果`places`为负数,小数部分则将使用'0'
@@ -125,7 +130,7 @@ public extension CGFloat {
     ///   - places:预期的小数位数
     ///   - rule:要使用的舍入规则
     /// - Returns:四舍五入的值
-    func rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
+    func pd_rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
         let factor = Self(pow(10.0, Double(Swift.max(0, places))))
         return (self * factor).rounded(rule) / factor
     }

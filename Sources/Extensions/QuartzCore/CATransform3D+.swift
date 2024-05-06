@@ -11,18 +11,18 @@ import QuartzCore
 // MARK: - 属性
 public extension CATransform3D {
     /// 判断是否是`CATransform3D`默认对象
-    var isIdentity: Bool {
-        CATransform3DIsIdentity(self)
+    var pd_isIdentity: Bool {
+        return CATransform3DIsIdentity(self)
     }
 
     /// 如果`CATransform3D`可以用`CGAffineTransform`(`仿射变换`)精确表示，则返回 `true`
-    var isAffine: Bool {
-        CATransform3DIsAffine(self)
+    var pd_isAffine: Bool {
+        return CATransform3DIsAffine(self)
     }
 
     /// `CATransform3D`默认值(`[1 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 1]`)
-    static var identity: CATransform3D {
-        CATransform3DIdentity
+    static var pd_identity: CATransform3D {
+        return CATransform3DIdentity
     }
 }
 
@@ -63,8 +63,8 @@ public extension CATransform3D {
 // MARK: - 方法
 public extension CATransform3D {
     /// `CATransform3D`转`CGAffineTransform`失败,返回`identity`
-    func toCGAffineTransform() -> CGAffineTransform {
-        CATransform3DGetAffineTransform(self)
+    func pd_cgAffineTransform() -> CGAffineTransform {
+        return CATransform3DGetAffineTransform(self)
     }
 
     /// 通过平移`(tx, ty, tz)` 返回新的`CATransform3D`
@@ -73,8 +73,8 @@ public extension CATransform3D {
     ///   - ty:y 轴平移
     ///   - tz:z 轴平移
     /// - Returns:平移后的`CATransform3D`
-    func translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) -> CATransform3D {
-        CATransform3DTranslate(self, tx, ty, tz)
+    func pd_translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) -> CATransform3D {
+        return CATransform3DTranslate(self, tx, ty, tz)
     }
 
     /// 通过缩放`(sx, sy, sz)` 返回新的`CATransform3D`
@@ -83,8 +83,8 @@ public extension CATransform3D {
     ///   - sy:y 轴缩放
     ///   - sz:z 轴缩放
     /// - Returns:缩放后的`CATransform3D`
-    func scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) -> CATransform3D {
-        CATransform3DScale(self, sx, sy, sz)
+    func pd_scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) -> CATransform3D {
+        return CATransform3DScale(self, sx, sy, sz)
     }
 
     /// 通过旋转`(x, y, z)` 返回新的`CATransform3D`
@@ -94,21 +94,21 @@ public extension CATransform3D {
     ///   - y:向量的y位置
     ///   - z:向量的z位置
     /// - Returns:旋转后的`CATransform3D`
-    func rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) -> CATransform3D {
-        CATransform3DRotate(self, angle, x, y, z)
+    func pd_rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) -> CATransform3D {
+        return CATransform3DRotate(self, angle, x, y, z)
     }
 
     /// 反转`CATransform3D`
     /// - Returns:`CATransform3D`
-    func inverted() -> CATransform3D {
-        CATransform3DInvert(self)
+    func pd_inverted() -> CATransform3D {
+        return CATransform3DInvert(self)
     }
 
     /// 将两个`CATransform3D`连接,并生成新的`CATransform3D`
     /// - Parameter t2:`CATransform3D`
     /// - Returns: 新的`CATransform3D`
-    func concatenating(_ t2: CATransform3D) -> CATransform3D {
-        CATransform3DConcat(self, t2)
+    func pd_concatenating(_ t2: CATransform3D) -> CATransform3D {
+        return CATransform3DConcat(self, t2)
     }
 
     /// 通过平移`(tx, ty, tz)` 并赋值给`base`
@@ -117,7 +117,7 @@ public extension CATransform3D {
     ///   - ty:y 轴平移
     ///   - tz:z 轴平移
     /// - Returns:平移后的`CATransform3D`
-    mutating func translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) {
+    mutating func pd_translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) {
         self = CATransform3DTranslate(self, tx, ty, tz)
     }
 
@@ -127,7 +127,7 @@ public extension CATransform3D {
     ///   - sy:y 轴缩放
     ///   - sz:z 轴缩放
     /// - Returns:缩放后的`CATransform3D`
-    mutating func scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) {
+    mutating func pd_scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) {
         self = CATransform3DScale(self, sx, sy, sz)
     }
 
@@ -138,20 +138,20 @@ public extension CATransform3D {
     ///   - y:向量的y位置
     ///   - z:向量的z位置
     /// - Returns:旋转后的`CATransform3D`
-    mutating func rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) {
+    mutating func pd_rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) {
         self = CATransform3DRotate(self, angle, x, y, z)
     }
 
     /// 反转`CATransform3D` 并赋值给`base`
     /// - Returns:`CATransform3D`
-    mutating func inverted() {
+    mutating func pd_inverted() {
         self = CATransform3DInvert(self)
     }
 
     /// 将两个`CATransform3D`连接, 并赋值给`base`
     /// - Parameter t2:`CATransform3D`
     /// - Returns: 新的`CATransform3D`
-    mutating func concatenating(_ t2: CATransform3D) {
+    mutating func pd_concatenating(_ t2: CATransform3D) {
         self = CATransform3DConcat(self, t2)
     }
 }

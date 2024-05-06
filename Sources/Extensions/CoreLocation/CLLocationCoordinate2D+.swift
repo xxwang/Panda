@@ -11,8 +11,8 @@ import CoreLocation
 public extension CLLocationCoordinate2D {
     /// `CLLocationCoordinate2D`转`CLLocation`
     /// - Returns: `CLLocation`
-    func toLocation() -> CLLocation {
-        CLLocation(latitude: latitude, longitude: longitude)
+    func pd_location() -> CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
 }
 
@@ -21,7 +21,7 @@ public extension CLLocationCoordinate2D {
     /// 两个`CLLocationCoordinate2D`之间的`距离`(单位:`米`)
     /// - Parameter second:`CLLocationCoordinate2D`
     /// - Returns: `Double`
-    func distance(to second: CLLocationCoordinate2D) -> Double {
-        toLocation().distance(from: second.toLocation())
+    func pd_distance(to second: CLLocationCoordinate2D) -> Double {
+        return pd_location().distance(from: second.pd_location())
     }
 }

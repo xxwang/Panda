@@ -13,8 +13,8 @@ public extension CGPoint {
     /// 计算两个`CGPoint`之间的`距离`
     /// - Parameter point: 要计算的结束点
     /// - Returns: `CGFloat`
-    func distance(to point: CGPoint) -> CGFloat {
-        sqrt(pow(point.x - x, 2) + pow(point.y - y, 2))
+    func pd_distance(to point: CGPoint) -> CGFloat {
+        return sqrt(pow(point.x - x, 2) + pow(point.y - y, 2))
     }
 }
 

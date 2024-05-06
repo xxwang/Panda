@@ -25,7 +25,7 @@ public extension SCNCapsule {
     ///   - material:材质
     convenience init(capRadius: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(capRadius: capRadius, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`直径`和`高度`的`胶囊几何体`
@@ -35,7 +35,7 @@ public extension SCNCapsule {
     ///   - material:材质
     convenience init(capDiameter: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(capRadius: capDiameter / 2, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`半径`和`高度`的`胶囊几何体`
@@ -45,7 +45,7 @@ public extension SCNCapsule {
     ///   - color:材质颜色
     convenience init(capRadius: CGFloat, height: CGFloat, color: UIColor) {
         self.init(capRadius: capRadius, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 
     /// 创建具有指定`直径`和`高度`的`胶囊几何体`
@@ -55,6 +55,6 @@ public extension SCNCapsule {
     ///   - color:材质颜色
     convenience init(capDiameter: CGFloat, height: CGFloat, color: UIColor) {
         self.init(capRadius: capDiameter / 2, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 属性
 public extension UITableViewCell {
     /// 标识符(使用类名注册时)
-    var identifier: String {
+    var pd_identifier: String {
         // 获取完整类名
         let classNameString = NSStringFromClass(Self.self)
         // 获取类名
@@ -22,7 +22,7 @@ public extension UITableViewCell {
 public extension UITableViewCell {
     /// `cell`所在`UITableView`
     /// - Returns:`UITableView`, 未找到返回`nil`
-    func findTableView() -> UITableView? {
+    func pd_findTableView() -> UITableView? {
         for view in sequence(first: superview, next: { $0?.superview }) {
             if let tableView = view as? UITableView {
                 return tableView

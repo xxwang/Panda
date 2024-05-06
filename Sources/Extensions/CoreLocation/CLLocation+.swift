@@ -16,7 +16,7 @@ public extension CLLocation {
     ///   - start: 开始`CLLocation`
     ///   - end: 结束`CLLocation`
     /// - Returns: `Double`
-    static func distance(_ start: CLLocation, end: CLLocation) -> Double {
+    static func pd_distance(_ start: CLLocation, end: CLLocation) -> Double {
         start.distance(from: end)
     }
 
@@ -25,8 +25,8 @@ public extension CLLocation {
     ///   - start: 开始`CLLocation`
     ///   - end: 结束`CLLocation`
     /// - Returns: 中间点`CLLocation`
-    static func midLocation(_ start: CLLocation, _ end: CLLocation) -> CLLocation {
-        start.middleLocation(to: end)
+    static func pd_midLocation(_ start: CLLocation, _ end: CLLocation) -> CLLocation {
+        start.pd_middleLocation(to: end)
     }
 }
 
@@ -35,7 +35,7 @@ public extension CLLocation {
     /// 计算`两点之间`的`大圆路径`的`中间点`
     /// - Parameter point: 结束`CLLocation`
     /// - Returns: 中间点`CLLocation`
-    func middleLocation(to point: CLLocation) -> CLLocation {
+    func pd_middleLocation(to point: CLLocation) -> CLLocation {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
 
@@ -54,7 +54,7 @@ public extension CLLocation {
     /// - Parameters:
     ///   - destination: 参与计算的`CLLocation`
     /// - Returns:`Double`类型方位角, 范围 `0°... 360° `
-    func bearing(to destination: CLLocation) -> Double {
+    func pd_bearing(to destination: CLLocation) -> Double {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
         let lat2 = Double.pi * destination.coordinate.latitude / 180.0
@@ -71,7 +71,7 @@ public extension CLLocation {
 
     /// 反地理编码(`坐标转地址`)
     /// - Parameter completionHandler: 回调函数
-    func reverseGeocode(completionHandler: @escaping CLGeocodeCompletionHandler) {
+    func pd_reverseGeocode(completionHandler: @escaping CLGeocodeCompletionHandler) {
         CLGeocoder().reverseGeocodeLocation(self, completionHandler: completionHandler)
     }
 }
@@ -82,7 +82,7 @@ public extension [CLLocation] {
     /// - Parameter unit: 距离单位`UnitLength`
     /// - Returns: 指定单位的距离总和
     @available(tvOS 10.0, macOS 10.12, watchOS 3.0, *)
-    func distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
+    func pd_distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
         guard count > 1 else {
             return Measurement(value: 0.0, unit: unit)
         }

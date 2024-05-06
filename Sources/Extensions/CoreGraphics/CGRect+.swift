@@ -11,13 +11,13 @@ import Foundation
 // MARK: - 属性
 public extension CGRect {
     /// 获取中心点坐标(包括`origin`, 以`frame`为基准)
-    var center: CGPoint {
-        CGPoint(x: midX, y: midY)
+    var pd_center: CGPoint {
+        return CGPoint(x: midX, y: midY)
     }
 
     /// 获取中心点坐标(不包括`origin`, 以`bounds`为基准)
-    var middle: CGPoint {
-        CGPoint(x: width / 2, y: height / 2)
+    var pd_middle: CGPoint {
+        return CGPoint(x: width / 2, y: height / 2)
     }
 }
 
@@ -50,7 +50,7 @@ public extension CGRect {
     ///   - size: 目标尺寸
     ///   - anchor: 锚点
     /// - Returns:  新的`CGRect`
-    func resizing(to size: CGSize, anchor: CGPoint = CGPoint(x: 0.5, y: 0.5)) -> CGRect {
+    func pd_resizing(to size: CGSize, anchor: CGPoint = CGPoint(x: 0.5, y: 0.5)) -> CGRect {
         let sizeDelta = CGSize(width: size.width - width, height: size.height - height)
         let origin = CGPoint(x: minX - sizeDelta.width * anchor.x, y: minY - sizeDelta.height * anchor.y)
         return CGRect(origin: origin, size: size)

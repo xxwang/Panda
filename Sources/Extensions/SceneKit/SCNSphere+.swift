@@ -23,7 +23,7 @@ public extension SCNSphere {
     ///   - material:几何体的材质
     convenience init(radius: CGFloat, material: SCNMaterial) {
         self.init(radius: radius)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`半径`和`材质颜色`的`球体几何体`
@@ -40,7 +40,7 @@ public extension SCNSphere {
     ///   - material:几何体的材质
     convenience init(diameter: CGFloat, material: SCNMaterial) {
         self.init(radius: diameter / 2)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`直径`和`材质颜色`的`球体几何体`

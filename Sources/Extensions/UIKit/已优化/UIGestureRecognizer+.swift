@@ -16,7 +16,7 @@ private class AssociateKeys {
 // MARK: - 属性
 public extension UIGestureRecognizer {
     /// 功能名称(用于自定义`标识`)
-    var functionName: String {
+    var pd_functionName: String {
         get {
             if let obj = AssociatedObject.get(self, &AssociateKeys.FunctionNameKey) as? String {
                 return obj
@@ -34,13 +34,13 @@ public extension UIGestureRecognizer {
 // MARK: - 方法
 public extension UIGestureRecognizer {
     /// 移除手势
-    func remove() { view?.removeGestureRecognizer(self) }
+    func pd_remove() { view?.removeGestureRecognizer(self) }
 }
 
 // MARK: - 私有方法
 public extension UIGestureRecognizer {
     /// 手势响应方法
-    @objc private func p_invoke() {
+    @objc private func pd_p_invoke() {
         if let callback = AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
             callback(self)
         }
@@ -65,7 +65,7 @@ public extension UIGestureRecognizer {
     /// - Returns: `Self`
     @discardableResult
     func pd_callback(_ callback: @escaping (_ recognizer: UIGestureRecognizer) -> Void) -> Self {
-        addTarget(self, action: #selector(p_invoke))
+        addTarget(self, action: #selector(pd_p_invoke))
         AssociatedObject.set(self, &AssociateKeys.CallbackKey, callback, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self
     }

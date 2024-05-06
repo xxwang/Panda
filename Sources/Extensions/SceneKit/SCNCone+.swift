@@ -27,7 +27,7 @@ public extension SCNCone {
     ///   - material:材质
     convenience init(topRadius: CGFloat, bottomRadius: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(topRadius: topRadius, bottomRadius: bottomRadius, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有给定`顶径`、`底径`、`高度`和`材质`的`圆锥体几何体`
@@ -38,7 +38,7 @@ public extension SCNCone {
     ///   - material:材质
     convenience init(topDiameter: CGFloat, bottomDiameter: CGFloat, height: CGFloat, material: SCNMaterial) {
         self.init(topRadius: topDiameter / 2, bottomRadius: bottomDiameter / 2, height: height)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 使用给定的`顶部半径`、`底部半径`、`高度`和`材质`创建`圆锥体几何体`
@@ -49,7 +49,7 @@ public extension SCNCone {
     ///   - color:材质的颜色
     convenience init(topRadius: CGFloat, bottomRadius: CGFloat, height: CGFloat, color: UIColor) {
         self.init(topRadius: topRadius, bottomRadius: bottomRadius, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 
     /// 创建具有给定`顶径`、`底径`、`高度`和`材质`的`圆锥体几何体`
@@ -60,6 +60,6 @@ public extension SCNCone {
     ///   - color:材质的颜色
     convenience init(topDiameter: CGFloat, bottomDiameter: CGFloat, height: CGFloat, color: UIColor) {
         self.init(topRadius: topDiameter / 2, bottomRadius: bottomDiameter / 2, height: height)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 }

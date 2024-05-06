@@ -11,7 +11,7 @@ import SpriteKit
 public extension SKSpriteNode {
     /// 等比例填充
     /// - Parameter fillSize:边界尺寸
-    func aspectFill(to fillSize: CGSize) {
+    func pd_aspectFill(to fillSize: CGSize) {
         guard let textureSize = texture?.size() else { return }
 
         let width = textureSize.width
@@ -22,6 +22,6 @@ public extension SKSpriteNode {
         let horizontalRatio = fillSize.width / width
         let verticalRatio = fillSize.height / height
         let ratio = horizontalRatio < verticalRatio ? horizontalRatio : verticalRatio
-        size = CGSize(width: width * ratio, height: height * ratio)
+        self.size = CGSize(width: width * ratio, height: height * ratio)
     }
 }

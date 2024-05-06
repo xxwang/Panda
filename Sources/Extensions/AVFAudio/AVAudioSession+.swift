@@ -9,8 +9,9 @@ import AVFAudio
 import UIKit
 
 public extension AVAudioSession {
-    /// 支持蓝牙耳机
-    static func setAudioSession() {
+
+    /// 开启蓝牙耳机支持
+    static func pd_setAudioSession() {
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setCategory(.playback, mode: .default, options: [.allowBluetoothA2DP, .mixWithOthers])

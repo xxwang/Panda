@@ -10,7 +10,7 @@ import UIKit
 public extension CGMutablePath {
     /// 转换成`CGPath`
     /// - Returns: `CGPath`
-    func toPath() -> CGPath {
+    func pd_path() -> CGPath {
         self
     }
 }
@@ -26,7 +26,7 @@ extension CGMutablePath {
     func pd_addRect(_ rect: CGRect,
                     transform: CGAffineTransform = .identity) -> Self
     {
-        addRect(rect, transform: transform)
+    self.addRect(rect, transform: transform)
         return self
     }
 
@@ -43,7 +43,7 @@ extension CGMutablePath {
                            cornerHeight: CGFloat,
                            transform: CGAffineTransform = .identity) -> Self
     {
-        addRoundedRect(in: rect,
+    self.addRoundedRect(in: rect,
                        cornerWidth: cornerWidth,
                        cornerHeight: cornerHeight,
                        transform: transform)
@@ -59,7 +59,7 @@ extension CGMutablePath {
     func pd_addRects(_ rects: [CGRect],
                      transform: CGAffineTransform = .identity) -> Self
     {
-        addRects(rects, transform: transform)
+    self.addRects(rects, transform: transform)
         return self
     }
 
@@ -72,7 +72,7 @@ extension CGMutablePath {
     func pd_move(to point: CGPoint,
                  transform: CGAffineTransform = .identity) -> Self
     {
-        move(to: point, transform: transform)
+    self.move(to: point, transform: transform)
         return self
     }
 
@@ -85,7 +85,7 @@ extension CGMutablePath {
     func pd_addLine(to point: CGPoint,
                     transform: CGAffineTransform = .identity) -> Self
     {
-        addLine(to: point, transform: transform)
+    self.addLine(to: point, transform: transform)
         return self
     }
 
@@ -100,7 +100,7 @@ extension CGMutablePath {
                          control: CGPoint,
                          transform: CGAffineTransform = .identity) -> Self
     {
-        addQuadCurve(to: end,
+    self.addQuadCurve(to: end,
                      control: control,
                      transform: transform)
         return self
@@ -119,7 +119,7 @@ extension CGMutablePath {
                      control2: CGPoint,
                      transform: CGAffineTransform = .identity) -> Self
     {
-        addCurve(to: end,
+    self.addCurve(to: end,
                  control1: control1,
                  control2: control2,
                  transform: transform)
@@ -135,7 +135,7 @@ extension CGMutablePath {
     func pd_addLines(between points: [CGPoint],
                      transform: CGAffineTransform = .identity) -> Self
     {
-        addLines(between: points, transform: transform)
+    self.addLines(between: points, transform: transform)
         return self
     }
 
@@ -148,7 +148,7 @@ extension CGMutablePath {
     func pd_addEllipse(in rect: CGRect,
                        transform: CGAffineTransform = .identity) -> Self
     {
-        addEllipse(in: rect, transform: transform)
+    self.addEllipse(in: rect, transform: transform)
         return self
     }
 
@@ -167,7 +167,7 @@ extension CGMutablePath {
                            delta: CGFloat,
                            transform: CGAffineTransform = .identity) -> Self
     {
-        addRelativeArc(center: center,
+    self.addRelativeArc(center: center,
                        radius: radius,
                        startAngle: startAngle,
                        delta: delta,
@@ -192,7 +192,7 @@ extension CGMutablePath {
                    clockwise: Bool,
                    transform: CGAffineTransform = .identity) -> Self
     {
-        addArc(center: center,
+    self.addArc(center: center,
                radius: radius,
                startAngle: startAngle,
                endAngle: endAngle,
@@ -214,7 +214,7 @@ extension CGMutablePath {
                    radius: CGFloat,
                    transform: CGAffineTransform = .identity) -> Self
     {
-        addArc(tangent1End: tangent1End,
+    self.addArc(tangent1End: tangent1End,
                tangent2End: tangent2End,
                radius: radius,
                transform: transform)
@@ -230,7 +230,7 @@ extension CGMutablePath {
     func pd_addPath(_ path: CGPath,
                     transform: CGAffineTransform = .identity) -> Self
     {
-        addPath(path, transform: transform)
+    self.addPath(path, transform: transform)
         return self
     }
 }

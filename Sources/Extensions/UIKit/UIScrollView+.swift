@@ -111,7 +111,7 @@ public extension UIScrollView {
             height: bounds.height
         )
 
-        DispatchQueue.delay_execute(delay: 0.3) {
+        DispatchQueue.pd_delay_execute(delay: 0.3) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
                 self.screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)

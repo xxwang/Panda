@@ -8,7 +8,7 @@ public extension NotificationCenter {
     ///   - object: 对象
     ///   - userInfo: 信息字典
     static func pd_post(_ name: Notification.Name, object: Any? = nil, userInfo: [AnyHashable: Any]? = nil) {
-        DispatchQueue.async_execute_on_main {
+        DispatchQueue.pd_async_execute_on_main {
             NotificationCenter.default.post(name: name,
                                             object: object,
                                             userInfo: userInfo)

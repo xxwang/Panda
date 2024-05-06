@@ -11,7 +11,7 @@ import UIKit
 public extension UIImageView {
     /// 添加模糊效果
     /// - Parameter style:模糊效果的样式
-    func blur(with style: UIBlurEffect.Style = .light) {
+    func pd_blur(with style: UIBlurEffect.Style = .light) {
         // 模糊效果
         let blurEffect = UIBlurEffect(style: style)
         // 效果View
@@ -21,17 +21,17 @@ public extension UIImageView {
         // 支持设备旋转
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         // 添加效果到图片
-        addSubview(blurEffectView)
+        self.addSubview(blurEffectView)
     }
 
     /// 修改图像的颜色
     /// - Parameter color:要修改成的颜色
-    func image(with color: UIColor) {
+    func pd_image(with color: UIColor) {
         // .automatic 根据图片的使用环境和所处的绘图上下文自动调整渲染模式.
         // .alwaysOriginal 始终绘制图片原始状态,不使用Tint Color.
         // .alwaysTemplate 始终根据Tint Color绘制图片,忽略图片的颜色信息.
-        image = image?.withRenderingMode(.alwaysTemplate)
-        tintColor = color
+        self.image = image?.withRenderingMode(.alwaysTemplate)
+        self.tintColor = color
     }
 }
 
@@ -43,7 +43,7 @@ public extension UIImageView {
     ///   - contentMode:图片视图内容模式
     ///   - placeholder:占位图片
     ///   - completionHandler:完成回调
-    func loadImage(form url: URL,
+    func pd_loadImage(form url: URL,
                    contentMode: UIView.ContentMode = .scaleAspectFill,
                    placeholder: UIImage? = nil,
                    completionHandler: ((UIImage?) -> Void)? = nil)
@@ -62,7 +62,7 @@ public extension UIImageView {
                 return
             }
 
-            DispatchQueue.async_execute_on_main {
+            DispatchQueue.pd_async_execute_on_main {
                 self.image = image
                 completionHandler?(image)
             }
@@ -71,10 +71,10 @@ public extension UIImageView {
 
     /// 加载本地`Gif`图片的名称
     /// - Parameter name:图片名称
-    func loadGifWith(imageNamed: String) {
-        DispatchQueue.async_execute_on_global {
+    func pd_loadGifWith(imageNamed: String) {
+        DispatchQueue.pd_async_execute_on_global {
             let image = UIImage.loadImageWithGif(name: imageNamed)
-            DispatchQueue.async_execute_on_main {
+            DispatchQueue.pd_async_execute_on_main {
                 self.image = image
             }
         }
@@ -82,10 +82,10 @@ public extension UIImageView {
 
     /// 加载`Asset`中的`Gif`图片
     /// - Parameter asset:`asset`中的图片名称
-    func loadGifWith(asset: String) {
-        DispatchQueue.async_execute_on_global {
+    func pd_loadGifWith(asset: String) {
+        DispatchQueue.pd_async_execute_on_global {
             let image = UIImage.loadImageWithGif(asset: asset)
-            DispatchQueue.async_execute_on_main {
+            DispatchQueue.pd_async_execute_on_main {
                 self.image = image
             }
         }
@@ -94,10 +94,10 @@ public extension UIImageView {
     /// 加载网络`URL`的`Gif`图片
     /// - Parameter url:`Gif`图片URL地址
     @available(iOS 9.0, *)
-    func loadGifWith(url: String) {
-        DispatchQueue.async_execute_on_global {
+    func pd_loadGifWith(url: String) {
+        DispatchQueue.pd_async_execute_on_global {
             let image = UIImage.loadImageWithGif(url: url)
-            DispatchQueue.async_execute_on_main {
+            DispatchQueue.pd_async_execute_on_main {
                 self.image = image
             }
         }
@@ -139,7 +139,7 @@ public extension UIImageView {
     /// - Returns:`Self`
     @discardableResult
     func pd_blur(_ style: UIBlurEffect.Style = .light) -> Self {
-        blur(with: style)
+        self.pd_blur(with: style)
         return self
     }
 }

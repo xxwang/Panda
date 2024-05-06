@@ -8,7 +8,7 @@
 import UIKit
 
 public extension UINavigationBar {
-    static func fitAllNavigationBar() {
+    static func pd_fitAllNavigationBar() {
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
@@ -29,8 +29,8 @@ public extension UINavigationBar {
 public extension UINavigationBar {
     /// 设置导航条为透明
     /// - Parameter tintColor:`tintColor`
-    func setupTransparent(with tintColor: UIColor = .white) {
-        pd_isTranslucent(true)
+    func pd_setupTransparent(with tintColor: UIColor = .white) {
+        self.pd_isTranslucent(true)
             .pd_backgroundColor(.clear)
             .pd_backgroundImage(UIImage())
             .pd_barTintColor(.clear)
@@ -43,20 +43,20 @@ public extension UINavigationBar {
     /// - Parameters:
     ///   - background:背景颜色
     ///   - text:文字颜色
-    func setupColors(background: UIColor, text: UIColor) {
-        isTranslucent = false
-        backgroundColor = background
-        barTintColor = background
-        setBackgroundImage(UIImage(), for: .default)
-        tintColor = text
-        titleTextAttributes = [.foregroundColor: text]
+    func pd_setupColors(background: UIColor, text: UIColor) {
+        self.isTranslucent = false
+        self.backgroundColor = background
+        self.barTintColor = background
+        self.setBackgroundImage(UIImage(), for: .default)
+        self.tintColor = text
+        self.titleTextAttributes = [.foregroundColor: text]
     }
 
     /// 修改`statusBar`的背景颜色
     /// - Parameter color:要设置的颜色
-    func setupStatusBarBackgroundColor(with color: UIColor) {
-        guard self.statusBar == nil else {
-            self.statusBar?.backgroundColor = color
+    func pd_setupStatusBarBackgroundColor(with color: UIColor) {
+        guard self.pd_statusBar == nil else {
+            self.pd_statusBar?.backgroundColor = color
             return
         }
 
@@ -67,13 +67,13 @@ public extension UINavigationBar {
             height: sizer.nav.statusHeight
         )).pd_add2(self)
         statusBar.backgroundColor = .clear
-        self.statusBar = statusBar
+        self.pd_statusBar = statusBar
     }
 
     /// 移除`statusBar`
-    func clearStatusBar() {
-        statusBar?.removeFromSuperview()
-        statusBar = nil
+    func pd_clearStatusBar() {
+        self.pd_statusBar?.removeFromSuperview()
+        self.pd_statusBar = nil
     }
 }
 
@@ -85,7 +85,7 @@ private class AssociateKeys {
 // MARK: - 关联属性
 private extension UINavigationBar {
     /// 通过 Runtime 的属性关联添加自定义 View
-    var statusBar: UIView? {
+    var pd_statusBar: UIView? {
         get { AssociatedObject.get(self, &AssociateKeys.StatusBarKey) as? UIView }
         set { AssociatedObject.set(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }

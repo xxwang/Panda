@@ -115,7 +115,7 @@ public extension UIAlertController {
         guard let deadline else { return }
 
         // 根据deadline来让UIAlertController实例消失
-        DispatchQueue.delay_execute(delay: deadline) { [weak self] in
+        DispatchQueue.pd_delay_execute(delay: deadline) { [weak self] in
             guard let self else { return }
             dismiss(animated: animated, completion: nil)
         }

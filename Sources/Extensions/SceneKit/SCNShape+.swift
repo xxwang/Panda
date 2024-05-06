@@ -17,7 +17,7 @@ public extension SCNShape {
     ///   - material:几何体的材质
     convenience init(path: UIBezierPath, extrusionDepth: CGFloat, material: SCNMaterial) {
         self.init(path: path, extrusionDepth: extrusionDepth)
-        materials = [material]
+        self.materials = [material]
     }
 
     /// 创建具有指定`路径`、`拉伸深度`和`材质颜色`的`形状几何体`
@@ -27,6 +27,6 @@ public extension SCNShape {
     ///   - color:材质的颜色
     convenience init(path: UIBezierPath, extrusionDepth: CGFloat, color: UIColor) {
         self.init(path: path, extrusionDepth: extrusionDepth)
-        materials = [SCNMaterial(color: color)]
+        self.materials = [SCNMaterial(color: color)]
     }
 }

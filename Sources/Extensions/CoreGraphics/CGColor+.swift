@@ -12,7 +12,7 @@ import UIKit
 public extension CGColor {
     /// `CGColor`转`UIColor`
     /// - Returns: `UIColor`
-    func toUIColor() -> UIColor {
+    func pd_uiColor() -> UIColor {
         UIColor(cgColor: self)
     }
 }

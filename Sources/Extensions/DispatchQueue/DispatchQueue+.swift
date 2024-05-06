@@ -13,7 +13,7 @@ public extension DispatchQueue {
     /// 判断`当前队列`是否是`指定队列`
     /// - Parameter queue: `指定队列`
     /// - Returns:
-    static func isCurrent(_ queue: DispatchQueue) -> Bool {
+    static func pd_isCurrent(_ queue: DispatchQueue) -> Bool {
         let key = DispatchSpecificKey<Void>()
         queue.setSpecific(key: key, value: ())
         defer { queue.setSpecific(key: key, value: nil) }
@@ -23,7 +23,7 @@ public extension DispatchQueue {
     /// 判断`当前队列`是否是`主队列`
     /// - Returns: `Bool`
     static func isMainQueue() -> Bool {
-        isCurrent(.main)
+        return pd_isCurrent(.main)
     }
 }
 
@@ -31,13 +31,13 @@ public extension DispatchQueue {
 public extension DispatchQueue {
     /// 在主线程异步执行
     /// - Parameter block: 要执行任务
-    static func async_execute_on_main(_ block: @escaping () -> Void) {
+    static func pd_async_execute_on_main(_ block: @escaping () -> Void) {
         DispatchQueue.main.async { block() }
     }
 
     /// 在默认的全局队列异步执行
     /// - Parameter block: 要执行任务
-    static func async_execute_on_global(_ block: @escaping () -> Void) {
+    static func pd_async_execute_on_global(_ block: @escaping () -> Void) {
         DispatchQueue.global().async { block() }
     }
 }
@@ -50,7 +50,7 @@ public extension DispatchQueue {
     ///   - repeatCount: 重复次数
     ///   - handler: 循环执行任务(`主线程`)
     @discardableResult
-    static func countdown(_ timeInterval: TimeInterval, repeatCount: Int, handler: @escaping (DispatchSourceTimer?, Int) -> Void) -> DispatchSourceTimer? {
+    static func pd_countdown(_ timeInterval: TimeInterval, repeatCount: Int, handler: @escaping (DispatchSourceTimer?, Int) -> Void) -> DispatchSourceTimer? {
         if repeatCount <= 0 { return nil }
 
         let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
@@ -74,7 +74,7 @@ public extension DispatchQueue {
     ///   - timeInterval:间隔时间
     ///   - handler: 任务
     @discardableResult
-    static func interval(_ timeInterval: TimeInterval, handler: @escaping (DispatchSourceTimer?) -> Void) -> DispatchSourceTimer {
+    static func pd_interval(_ timeInterval: TimeInterval, handler: @escaping (DispatchSourceTimer?) -> Void) -> DispatchSourceTimer {
         let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
         timer.schedule(deadline: .now(), repeating: timeInterval)
         timer.setEventHandler {
@@ -95,7 +95,7 @@ public extension DispatchQueue {
     ///   - seconds: `延迟时间`
     ///   - work: 要执行的任务
     /// - Returns: `block`
-    static func debounce(_ queue: DispatchQueue = .main,
+    static func pd_debounce(_ queue: DispatchQueue = .main,
                          delay timeInterval: TimeInterval,
                          execute work: @escaping () -> Void) -> () -> Void
     {
@@ -119,7 +119,7 @@ public extension DispatchQueue {
     ///   - qos: 优化级
     ///   - flags: 标识
     ///   - work: 要执行的任务
-    static func delay_execute(delay timeInterval: TimeInterval,
+    static func pd_delay_execute(delay timeInterval: TimeInterval,
                               queue: DispatchQueue = .main,
                               qos: DispatchQoS = .unspecified,
                               flags: DispatchWorkItemFlags = [],
@@ -134,7 +134,7 @@ public extension DispatchQueue {
     ///   - asyncTask: `异步执行`的`任务`
     ///   - mainTask: `异步任务`完成之后执行的`主线程任务`
     /// - Returns:`DispatchWorkItem`
-    static func delay_execute(delay timeInterval: TimeInterval,
+    static func pd_delay_execute(delay timeInterval: TimeInterval,
                               task: (() -> Void)? = nil,
                               callback: (() -> Void)? = nil) -> DispatchWorkItem
     {
@@ -148,21 +148,21 @@ public extension DispatchQueue {
 // MARK: - 任务只被执行一次
 public extension DispatchQueue {
     /// 函数`token`数组
-    private static var onceTracker = [String]()
+    private static var pd_onceTracker = [String]()
 
     /// `只执行一次``代码块`
     /// - Parameters:
     ///   - token: 函数标识
     ///   - block: 要执行的任务
-    static func once(token: String, block: () -> Void) {
-        if DispatchQueue.onceTracker.contains(token) {
+    static func pd_once(token: String, block: () -> Void) {
+        if DispatchQueue.pd_onceTracker.contains(token) {
             return
         }
         objc_sync_enter(self)
         defer {
             objc_sync_exit(self)
         }
-        DispatchQueue.onceTracker.append(token)
+        DispatchQueue.pd_onceTracker.append(token)
         block()
     }
 }
