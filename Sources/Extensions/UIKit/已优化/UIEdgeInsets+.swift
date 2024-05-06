@@ -128,9 +128,9 @@ public extension UIEdgeInsets {
     /// - Returns:新的`UIEdgeInsets`
     static func + (_ lhs: UIEdgeInsets, _ rhs: UIEdgeInsets) -> UIEdgeInsets {
         return UIEdgeInsets(top: lhs.top + rhs.top,
-                     left: lhs.left + rhs.left,
-                     bottom: lhs.bottom + rhs.bottom,
-                     right: lhs.right + rhs.right)
+                            left: lhs.left + rhs.left,
+                            bottom: lhs.bottom + rhs.bottom,
+                            right: lhs.right + rhs.right)
     }
 
     /// 把右侧的`UIEdgeInsets`添加到左侧的`UIEdgeInsets`

@@ -39,7 +39,6 @@ public extension UITableView {
 
 // MARK: - 方法
 public extension UITableView {
-    
     /// 重新加载数据后调用`completion`回调
     /// - Parameter completion:完成回调
     func pd_reloadData(_ completion: @escaping () -> Void) {
@@ -53,7 +52,6 @@ public extension UITableView {
 
 // MARK: - UITableViewCell复用相关
 public extension UITableView {
-
     /// 使用类名注册`UITableViewCell`
     /// - Parameters:
     ///   - nib:用于创建`UITableViewCell`的nib文件

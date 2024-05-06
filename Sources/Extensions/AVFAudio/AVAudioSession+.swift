@@ -9,7 +9,6 @@ import AVFAudio
 import UIKit
 
 public extension AVAudioSession {
-
     /// 开启蓝牙耳机支持
     static func pd_setAudioSession() {
         let session = AVAudioSession.sharedInstance()

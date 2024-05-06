@@ -96,8 +96,8 @@ public extension DispatchQueue {
     ///   - work: 要执行的任务
     /// - Returns: `block`
     static func pd_debounce(_ queue: DispatchQueue = .main,
-                         delay timeInterval: TimeInterval,
-                         execute work: @escaping () -> Void) -> () -> Void
+                            delay timeInterval: TimeInterval,
+                            execute work: @escaping () -> Void) -> () -> Void
     {
         var lastFireTime = DispatchTime.now()
         let deadline = { lastFireTime + timeInterval }
@@ -120,10 +120,10 @@ public extension DispatchQueue {
     ///   - flags: 标识
     ///   - work: 要执行的任务
     static func pd_delay_execute(delay timeInterval: TimeInterval,
-                              queue: DispatchQueue = .main,
-                              qos: DispatchQoS = .unspecified,
-                              flags: DispatchWorkItemFlags = [],
-                              execute work: @escaping () -> Void)
+                                 queue: DispatchQueue = .main,
+                                 qos: DispatchQoS = .unspecified,
+                                 flags: DispatchWorkItemFlags = [],
+                                 execute work: @escaping () -> Void)
     {
         queue.asyncAfter(deadline: .now() + timeInterval, qos: qos, flags: flags, execute: work)
     }
@@ -135,8 +135,8 @@ public extension DispatchQueue {
     ///   - mainTask: `异步任务`完成之后执行的`主线程任务`
     /// - Returns:`DispatchWorkItem`
     static func pd_delay_execute(delay timeInterval: TimeInterval,
-                              task: (() -> Void)? = nil,
-                              callback: (() -> Void)? = nil) -> DispatchWorkItem
+                                 task: (() -> Void)? = nil,
+                                 callback: (() -> Void)? = nil) -> DispatchWorkItem
     {
         let item = DispatchWorkItem(block: task ?? {})
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + timeInterval, execute: item)

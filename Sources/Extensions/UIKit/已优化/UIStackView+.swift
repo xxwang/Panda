@@ -99,11 +99,11 @@ public extension UIStackView {
     ///   - options:动画选项(默认为`AnimationOptions.curveLinear`)
     ///   - completion:可选的完成回调,用于在动画完成时运行(默认为`nil`)
     func pd_swap(_ view1: UIView, _ view2: UIView,
-              animated: Bool = false,
-              duration: TimeInterval = 0.25,
-              delay: TimeInterval = 0,
-              options: UIView.AnimationOptions = .curveLinear,
-              completion: ((Bool) -> Void)? = nil)
+                 animated: Bool = false,
+                 duration: TimeInterval = 0.25,
+                 delay: TimeInterval = 0,
+                 options: UIView.AnimationOptions = .curveLinear,
+                 completion: ((Bool) -> Void)? = nil)
     {
         if animated {
             UIView.animate(withDuration: duration, delay: delay, options: options, animations: {

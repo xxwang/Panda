@@ -9,7 +9,6 @@ import HealthKit
 
 // MARK: - 判断
 public extension HKActivitySummary {
-    
     /// 是否完成设定的站立目标(小时数)
     var pd_isCompleteStandHoursGoal: Bool {
         appleStandHoursGoal.compare(appleStandHours) != .orderedDescending

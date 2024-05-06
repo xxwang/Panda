@@ -58,11 +58,11 @@ public extension UIAlertController {
     /// - Returns:`UIAlertController`实例
     @discardableResult
     static func pd_showAlertController(_ title: String? = nil,
-                                    message: String? = nil,
-                                    titles: [String] = [],
-                                    tintColor: UIColor? = nil,
-                                    highlightedIndex: Int? = nil,
-                                    completion: ((Int) -> Void)? = nil) -> UIAlertController
+                                       message: String? = nil,
+                                       titles: [String] = [],
+                                       tintColor: UIColor? = nil,
+                                       highlightedIndex: Int? = nil,
+                                       completion: ((Int) -> Void)? = nil) -> UIAlertController
     {
         // 初始化UIAlertController
         let alertController = UIAlertController(title, message: message, style: .alert, highlightedIndex: highlightedIndex, completion: completion)
@@ -84,11 +84,11 @@ public extension UIAlertController {
     /// - Returns:`UIAlertController`实例
     @discardableResult
     static func pd_showSheetController(_ title: String? = nil,
-                                    message: String? = nil,
-                                    titles: [String] = [],
-                                    tintColor: UIColor? = nil,
-                                    highlightedIndex: Int? = nil,
-                                    completion: ((Int) -> Void)? = nil) -> UIAlertController
+                                       message: String? = nil,
+                                       titles: [String] = [],
+                                       tintColor: UIColor? = nil,
+                                       highlightedIndex: Int? = nil,
+                                       completion: ((Int) -> Void)? = nil) -> UIAlertController
     {
         // 初始化UIAlertController
         let alertController = UIAlertController(title, message: message, style: .actionSheet, highlightedIndex: highlightedIndex, completion: completion)

@@ -9,7 +9,6 @@ import UIKit
 
 // MARK: - 方法
 public extension UICollectionView {
-
     /// 刷新`UICollectionView`的数据,刷新后调用回调
     /// - Parameter completion:完成回调
     func pd_reloadData(_ completion: @escaping () -> Void) {
@@ -83,8 +82,8 @@ public extension UICollectionView {
     ///   - kind:要检索的视图的种类.该值由布局对象定义
     ///   - name:`UICollectionReusableView`类型
     func pd_register(nib: UINib?,
-                  forSupplementaryViewOfKind kind: String,
-                  withClass name: (some UICollectionReusableView).Type)
+                     forSupplementaryViewOfKind kind: String,
+                     withClass name: (some UICollectionReusableView).Type)
     {
         register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: String(describing: name))
     }
@@ -96,8 +95,8 @@ public extension UICollectionView {
     ///   - indexPath:单元格在`UICollectionView`中的位置
     /// - Returns:类名关联的`UICollectionReusableView`对象
     func pd_dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind kind: String,
-                                                                       withClass name: T.Type,
-                                                                       for indexPath: IndexPath) -> T
+                                                                          withClass name: T.Type,
+                                                                          for indexPath: IndexPath) -> T
     {
         guard let reusableView = dequeueReusableSupplementaryView(ofKind: kind,
                                                                   withReuseIdentifier: String(describing: name),

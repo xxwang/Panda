@@ -44,9 +44,9 @@ public extension UIImageView {
     ///   - placeholder:占位图片
     ///   - completionHandler:完成回调
     func pd_loadImage(form url: URL,
-                   contentMode: UIView.ContentMode = .scaleAspectFill,
-                   placeholder: UIImage? = nil,
-                   completionHandler: ((UIImage?) -> Void)? = nil)
+                      contentMode: UIView.ContentMode = .scaleAspectFill,
+                      placeholder: UIImage? = nil,
+                      completionHandler: ((UIImage?) -> Void)? = nil)
     {
         image = placeholder
         self.contentMode = contentMode
@@ -73,7 +73,7 @@ public extension UIImageView {
     /// - Parameter name:图片名称
     func pd_loadGifWith(imageNamed: String) {
         DispatchQueue.pd_async_execute_on_global {
-            let image = UIImage.loadImageWithGif(name: imageNamed)
+            let image = UIImage.pd_loadImageWithGif(name: imageNamed)
             DispatchQueue.pd_async_execute_on_main {
                 self.image = image
             }
@@ -84,7 +84,7 @@ public extension UIImageView {
     /// - Parameter asset:`asset`中的图片名称
     func pd_loadGifWith(asset: String) {
         DispatchQueue.pd_async_execute_on_global {
-            let image = UIImage.loadImageWithGif(asset: asset)
+            let image = UIImage.pd_loadImageWithGif(asset: asset)
             DispatchQueue.pd_async_execute_on_main {
                 self.image = image
             }
@@ -96,7 +96,7 @@ public extension UIImageView {
     @available(iOS 9.0, *)
     func pd_loadGifWith(url: String) {
         DispatchQueue.pd_async_execute_on_global {
-            let image = UIImage.loadImageWithGif(url: url)
+            let image = UIImage.pd_loadImageWithGif(url: url)
             DispatchQueue.pd_async_execute_on_main {
                 self.image = image
             }

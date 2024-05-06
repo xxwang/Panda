@@ -127,10 +127,10 @@ public extension UIWindow {
     ///   - competion: 完成回调
     /// - Returns: `Self`
     static func pd_setupRootViewController(with rootViewController: UIViewController,
-                                        animated: Bool = true,
-                                        duration: TimeInterval = 0.25,
-                                        options: UIView.AnimationOptions = .transitionFlipFromRight,
-                                        competion: (() -> Void)?)
+                                           animated: Bool = true,
+                                           duration: TimeInterval = 0.25,
+                                           options: UIView.AnimationOptions = .transitionFlipFromRight,
+                                           competion: (() -> Void)?)
     {
         guard let window = UIWindow.pd_main else { return }
         if animated { // 需要动画切换
@@ -158,12 +158,12 @@ public extension UIWindow {
     ///   - timingFunction: 定时功能
     ///   - competion: 完成回调
     static func pd_setupRootViewController(with rootViewController: UIViewController,
-                                        animated: Bool = true,
-                                        duration: TimeInterval = 0.25,
-                                        animationType: CATransitionType = .fade,
-                                        animationSubtype: CATransitionSubtype? = .fromRight,
-                                        timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
-                                        competion: (() -> Void)? = nil)
+                                           animated: Bool = true,
+                                           duration: TimeInterval = 0.25,
+                                           animationType: CATransitionType = .fade,
+                                           animationSubtype: CATransitionSubtype? = .fromRight,
+                                           timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
+                                           competion: (() -> Void)? = nil)
     {
         guard let window = UIWindow.pd_main else { return }
         if animated {

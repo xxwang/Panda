@@ -50,10 +50,10 @@ extension DocumentUtils: UIDocumentPickerDelegate {
             download(url) { fileData in self.completion?(true, fileData, fileName) }
         } else {
             UIApplication.shared.pd_openSettings("请允许使用【iCloud】云盘",
-                                              message: nil,
-                                              cancel: "取消",
-                                              confirm: "确认",
-                                              parent: UIWindow.pd_main?.rootViewController)
+                                                 message: nil,
+                                                 cancel: "取消",
+                                                 confirm: "确认",
+                                                 parent: UIWindow.pd_main?.rootViewController)
         }
     }
 

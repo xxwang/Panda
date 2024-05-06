@@ -76,7 +76,7 @@ public extension QRCodeUtils {
 
         var newLogo: UIImage = logoImage
         if let newLogoRoundCorner = logoCornerRadius,
-           let roundCornersLogo = logoImage.roundCorners(size: logoSize, radius: newLogoRoundCorner)
+           let roundCornersLogo = logoImage.pd_roundCorners(size: logoSize, radius: newLogoRoundCorner)
         {
             newLogo = roundCornersLogo
         }

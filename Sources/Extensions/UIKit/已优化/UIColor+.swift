@@ -11,15 +11,15 @@ import UIKit
 // MARK: - 属性
 public extension UIColor {
     /// 获取颜色的`Int`表示
-    var int: Int {
-        let red = Int(rgba.0 * 255) << 16
-        let green = Int(rgba.1 * 255) << 8
-        let blue = Int(rgba.2 * 255)
+    var pd_int: Int {
+        let red = Int(pd_rgba.0 * 255) << 16
+        let green = Int(pd_rgba.1 * 255) << 8
+        let blue = Int(pd_rgba.2 * 255)
         return red + green + blue
     }
 
     /// 获取颜色的`UInt`表示
-    var uInt: UInt {
+    var pd_uInt: UInt {
         let components: [CGFloat] = {
             let comps: [CGFloat] = cgColor.components!
             guard comps.count != 4 else { return comps }
@@ -35,15 +35,15 @@ public extension UIColor {
     }
 
     /// 十六进制颜色字符串(短)`1位==2位 3位==4位 5位==6位, 相同使用一个`长度3位
-    var shortHexString: String? {
-        let string = hexString(true).replacingOccurrences(of: "#", with: "")
+    var pd_shortHexString: String? {
+        let string = pd_hexString(true).replacingOccurrences(of: "#", with: "")
         let chrs = Array(string)
         guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else { return nil }
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
 
     /// 优先返回短的十六进制颜色值,如果不能转换则返回长的十六进制颜色值(字符串)
-    var shortHexOrHexString: String {
+    var pd_shortHexOrHexString: String {
         let components: [Int] = {
             let comps = cgColor.components!.map { Int($0 * 255.0) }
             guard comps.count != 4 else { return comps }
@@ -57,7 +57,7 @@ public extension UIColor {
     }
 
     /// 把`UIColor`转成`(red:CGFloat, green:CGFloat, blue:CGFloat, alpha:CGFloat)`元组
-    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    var pd_rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         let numberOfComponents = self.cgColor.numberOfComponents
         guard let components = self.cgColor.components else {
             return (0, 0, 0, 1)
@@ -76,7 +76,7 @@ public extension UIColor {
     /// - saturation:饱和度
     /// - brightness:亮度
     /// - alpha:透明度
-    var hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    var pd_hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var b: CGFloat = 0
@@ -86,12 +86,12 @@ public extension UIColor {
     }
 
     /// 转换为`CoreImage.CIColor`
-    var ciColor: CoreImage.CIColor? {
+    var pd_ciColor: CoreImage.CIColor? {
         CoreImage.CIColor(color: self)
     }
 
     /// 获取互补色
-    var complementaryColor: UIColor? {
+    var pd_complementaryColor: UIColor? {
         let colorSpaceRGB = CGColorSpaceCreateDeviceRGB()
         let convertColorToRGBSpace: ((_ color: UIColor) -> UIColor?) = { _ -> UIColor? in
             if self.cgColor.colorSpace!.model == CGColorSpaceModel.monochrome {
@@ -114,13 +114,13 @@ public extension UIColor {
     }
 
     /// 颜色的透明度
-    var alpha: CGFloat {
+    var pd_alpha: CGFloat {
         get { cgColor.alpha }
         set { withAlphaComponent(newValue) }
     }
 
     /// 生成随机颜色
-    static var random: UIColor {
+    static var pd_random: UIColor {
         let red = Int.random(in: 0 ... 255)
         let green = Int.random(in: 0 ... 255)
         let blue = Int.random(in: 0 ... 255)
@@ -131,7 +131,7 @@ public extension UIColor {
 // MARK: - 颜色组成(Components)
 public extension UIColor {
     /// `RGBA`组成数组
-    func rgbComponents() -> [CGFloat] {
+    func pd_rgbComponents() -> [CGFloat] {
         var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0, 0.0)
         getRed(&r, green: &g, blue: &b, alpha: &a)
 
@@ -139,7 +139,7 @@ public extension UIColor {
     }
 
     /// 获取颜色的`RGB`组成(`Int`元组)
-    var intComponents: (red: Int, green: Int, blue: Int) {
+    var pd_intComponents: (red: Int, green: Int, blue: Int) {
         let components: [CGFloat] = {
             let comps: [CGFloat] = cgColor.components!
             guard comps.count != 4 else { return comps }
@@ -152,7 +152,7 @@ public extension UIColor {
     }
 
     /// 获取颜色的`RGB`组成(`CGFloat`元组)
-    var cgFloatComponents: (red: CGFloat, green: CGFloat, blue: CGFloat) {
+    var pd_cgFloatComponents: (red: CGFloat, green: CGFloat, blue: CGFloat) {
         let components: [CGFloat] = {
             let comps: [CGFloat] = cgColor.components!
             guard comps.count != 4 else { return comps }
@@ -165,7 +165,7 @@ public extension UIColor {
     }
 
     /// 获取颜色的`HSBA`组成(`CGFloat`元组)
-    var hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    var pd_hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var hue: CGFloat = 0.0
         var saturation: CGFloat = 0.0
         var brightness: CGFloat = 0.0
@@ -176,49 +176,49 @@ public extension UIColor {
     }
 
     /// 红色组成
-    var redComponent: CGFloat {
+    var pd_redComponent: CGFloat {
         var red: CGFloat = 0
         getRed(&red, green: nil, blue: nil, alpha: nil)
         return red
     }
 
     /// 绿色组成
-    var greenComponent: CGFloat {
+    var pd_greenComponent: CGFloat {
         var green: CGFloat = 0
         getRed(nil, green: &green, blue: nil, alpha: nil)
         return green
     }
 
     /// 蓝色组成
-    var blueComponent: CGFloat {
+    var pd_blueComponent: CGFloat {
         var blue: CGFloat = 0
         getRed(nil, green: nil, blue: &blue, alpha: nil)
         return blue
     }
 
     /// 透明值组成
-    var alphaComponent: CGFloat {
+    var pd_alphaComponent: CGFloat {
         var alpha: CGFloat = 0
         getRed(nil, green: nil, blue: nil, alpha: &alpha)
         return alpha
     }
 
     /// 色相组成
-    var hueComponent: CGFloat {
+    var pd_hueComponent: CGFloat {
         var hue: CGFloat = 0
         getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
         return hue
     }
 
     /// 饱和度组成
-    var saturationComponent: CGFloat {
+    var pd_saturationComponent: CGFloat {
         var saturation: CGFloat = 0
         getHue(nil, saturation: &saturation, brightness: nil, alpha: nil)
         return saturation
     }
 
     /// 明度组成
-    var brightnessComponent: CGFloat {
+    var pd_brightnessComponent: CGFloat {
         var brightness: CGFloat = 0
         getHue(nil, saturation: nil, brightness: &brightness, alpha: nil)
         return brightness
@@ -229,34 +229,34 @@ public extension UIColor {
 public extension UIColor {
     /// 是否是暗色
     var isDark: Bool {
-        let RGB = rgbComponents()
+        let RGB = pd_rgbComponents()
         return (0.2126 * RGB[0] + 0.7152 * RGB[1] + 0.0722 * RGB[2]) < 0.5
     }
 
     /// 是否是黑色或者白色
     var isBlackOrWhite: Bool {
-        let RGB = rgbComponents()
+        let RGB = pd_rgbComponents()
         return (RGB[0] > 0.91 && RGB[1] > 0.91 && RGB[2] > 0.91) || (RGB[0] < 0.09 && RGB[1] < 0.09 && RGB[2] < 0.09)
     }
 
     /// 是否是黑色
     var isBlack: Bool {
-        let RGB = rgbComponents()
+        let RGB = pd_rgbComponents()
         return RGB[0] < 0.09 && RGB[1] < 0.09 && RGB[2] < 0.09
     }
 
     /// 是否是白色
     var isWhite: Bool {
-        let RGB = rgbComponents()
+        let RGB = pd_rgbComponents()
         return RGB[0] > 0.91 && RGB[1] > 0.91 && RGB[2] > 0.91
     }
 
     /// 比较两个颜色是否一样
     /// - Parameter color:要比较的颜色
     /// - Returns:是否一样
-    func isDistinct(from color: UIColor) -> Bool {
-        let bg = rgbComponents()
-        let fg = color.rgbComponents()
+    func pd_isDistinct(from color: UIColor) -> Bool {
+        let bg = pd_rgbComponents()
+        let fg = color.pd_rgbComponents()
         let threshold: CGFloat = 0.25
         var result = false
 
@@ -275,9 +275,9 @@ public extension UIColor {
     /// 两个颜色是否不一样
     /// - Parameter color:要比较的颜色
     /// - Returns:是否不一样
-    func isContrasting(with color: UIColor) -> Bool {
-        let bg = rgbComponents()
-        let fg = color.rgbComponents()
+    func pd_isContrasting(with color: UIColor) -> Bool {
+        let bg = pd_rgbComponents()
+        let fg = color.pd_rgbComponents()
 
         let bgLum = 0.2126 * bg[0] + 0.7152 * bg[1] + 0.0722 * bg[2]
         let fgLum = 0.2126 * fg[0] + 0.7152 * fg[1] + 0.0722 * fg[2]
@@ -463,7 +463,7 @@ public extension UIColor {
     /// 颜色转图片
     /// - Parameter size:图片尺寸
     /// - Returns:`UIImage`
-    func image(by size: CGSize) -> UIImage {
+    func pd_image(by size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
 
@@ -479,7 +479,7 @@ public extension UIColor {
     /// 返回十六进制(长)颜色值字符串
     /// - Parameter hashPrefix:是否添加前缀
     /// - Returns:`String`
-    func hexString(_ hashPrefix: Bool = true) -> String {
+    func pd_hexString(_ hashPrefix: Bool = true) -> String {
         var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0, 0.0)
         getRed(&r, green: &g, blue: &b, alpha: &a)
         let prefix = hashPrefix ? "#" : ""
@@ -491,7 +491,7 @@ public extension UIColor {
     ///   - hex:十六进制颜色字符串
     ///   - alpha:透明度
     /// - Returns:`UIColor`
-    static func proceesHex(hex: String, alpha: CGFloat) -> UIColor {
+    static func pd_proceesHex(hex: String, alpha: CGFloat) -> UIColor {
         /** 如果传入的字符串为空 */
         if hex.isEmpty {
             return UIColor.clear
@@ -554,10 +554,10 @@ public extension UIColor {
     ///   - color2:要混合的第二个颜色
     ///   - intensity2:第二个颜色的强度(默认值为0.5)
     /// - Returns:混合后的新颜色
-    static func blend(_ color1: UIColor,
-                      intensity1: CGFloat = 0.5,
-                      with color2: UIColor,
-                      intensity2: CGFloat = 0.5) -> UIColor
+    static func pd_blend(_ color1: UIColor,
+                         intensity1: CGFloat = 0.5,
+                         with color2: UIColor,
+                         intensity2: CGFloat = 0.5) -> UIColor
     {
         let total = intensity1 + intensity2
         let level1 = intensity1 / total
@@ -605,7 +605,7 @@ public extension UIColor {
     ///   - brightness:亮度
     ///   - alpha:透明度
     /// - Returns:`UIColor`
-    func add(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) -> UIColor {
+    func pd_add(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) -> UIColor {
         var (oldHue, oldSat, oldBright, oldAlpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         getHue(&oldHue, saturation: &oldSat, brightness: &oldBright, alpha: &oldAlpha)
 
@@ -632,7 +632,7 @@ public extension UIColor {
     ///   - blue:蓝色
     ///   - alpha:透明度
     /// - Returns:混合后的新颜色
-    func add(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
+    func pd_add(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
         var (oldRed, oldGreen, oldBlue, oldAlpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         getRed(&oldRed, green: &oldGreen, blue: &oldBlue, alpha: &oldAlpha)
         // 确保颜色值不会溢出
@@ -646,17 +646,17 @@ public extension UIColor {
     /// 以`HSB`模式混合一个`UIColor`对象到当前颜色
     /// - Parameter color:要混合的颜色
     /// - Returns:`UIColor`
-    func add(hsb color: UIColor) -> UIColor {
+    func pd_add(hsb color: UIColor) -> UIColor {
         var (h, s, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         color.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return add(hue: h, saturation: s, brightness: b, alpha: 0)
+        return pd_add(hue: h, saturation: s, brightness: b, alpha: 0)
     }
 
     /// 以`RGB`模式混合一个`UIColor`对象到当前颜色
     /// - Parameter color:要混合的颜色
     /// - Returns:`UIColor`
-    func add(rgb color: UIColor) -> UIColor {
-        add(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: 0)
+    func pd_add(rgb color: UIColor) -> UIColor {
+        pd_add(red: color.pd_redComponent, green: color.pd_greenComponent, blue: color.pd_blueComponent, alpha: 0)
     }
 
     /// 以`HSBA`模式混合一个`UIColor`对象到当前颜色
@@ -665,20 +665,20 @@ public extension UIColor {
     func add(hsba color: UIColor) -> UIColor {
         var (h, s, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         color.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return add(hue: h, saturation: s, brightness: b, alpha: a)
+        return pd_add(hue: h, saturation: s, brightness: b, alpha: a)
     }
 
     /// 以`RGBA`模式混合一个`UIColor`对象到当前颜色
     /// - Parameter color:要混合的颜色
     /// - Returns:`UIColor`
-    func add(rgba color: UIColor) -> UIColor {
-        add(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, alpha: color.alphaComponent)
+    func pd_add(rgba color: UIColor) -> UIColor {
+        pd_add(red: color.pd_redComponent, green: color.pd_greenComponent, blue: color.pd_blueComponent, alpha: color.pd_alphaComponent)
     }
 
     /// 根据`最小饱和度`调整颜色
     /// - Parameter minSaturation:最小饱和度
     /// - Returns:`UIColor`
-    func color(minSaturation: CGFloat) -> UIColor {
+    func pd_color(minSaturation: CGFloat) -> UIColor {
         var (hue, saturation, brightness, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0, 0.0)
         getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
 
@@ -694,7 +694,7 @@ public extension UIColor {
     ///
     /// - Parameter percentage:增加亮度的值(0-1)
     /// - Returns:一个新的颜色对象
-    func lighten(by percentage: CGFloat = 0.2) -> UIColor {
+    func pd_lighten(by percentage: CGFloat = 0.2) -> UIColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: min(red + percentage, 1.0),
@@ -710,7 +710,7 @@ public extension UIColor {
     ///
     /// - Parameter percentage:减少亮度的值(0-1)
     /// - Returns:一个新的颜色对象
-    func darken(by percentage: CGFloat = 0.2) -> UIColor {
+    func pd_darken(by percentage: CGFloat = 0.2) -> UIColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: max(red - percentage, 0),
@@ -725,8 +725,8 @@ public extension UIColor {
     /// 动态颜色为同一种颜色
     /// - Parameter hex:十六进制颜色字符串
     /// - Returns:颜色对象
-    static func darkModeColor(hex: String) -> UIColor {
-        darkModeColor(lightColor: hex, darkColor: hex)
+    static func pd_darkModeColor(hex: String) -> UIColor {
+        pd_darkModeColor(lightColor: hex, darkColor: hex)
     }
 
     /// 生成一个动态颜色(十六进制 字符串格式)
@@ -734,15 +734,15 @@ public extension UIColor {
     ///   - lightColor:高亮颜色(默认颜色)
     ///   - darkColor:暗调颜色
     /// - Returns:动态颜色
-    static func darkModeColor(lightColor: String, darkColor: String) -> UIColor {
-        darkModeColor(lightColor: UIColor(hex: lightColor), darkColor: UIColor(hex: darkColor))
+    static func pd_darkModeColor(lightColor: String, darkColor: String) -> UIColor {
+        pd_darkModeColor(lightColor: UIColor(hex: lightColor), darkColor: UIColor(hex: darkColor))
     }
 
     /// 动态颜色为同一种颜色
     /// - Parameter hex:十六进制颜色字符串
     /// - Returns:颜色对象
-    static func darkModeColor(color: UIColor) -> UIColor {
-        darkModeColor(lightColor: color, darkColor: color)
+    static func pd_darkModeColor(color: UIColor) -> UIColor {
+        pd_darkModeColor(lightColor: color, darkColor: color)
     }
 
     /// 深色模式和浅色模式颜色设置,非layer颜色设置
@@ -750,7 +750,7 @@ public extension UIColor {
     ///   - lightColor:浅色模式的颜色
     ///   - darkColor:深色模式的颜色
     /// - Returns:返回一个颜色(UIColor)
-    static func darkModeColor(lightColor: UIColor, darkColor: UIColor) -> UIColor {
+    static func pd_darkModeColor(lightColor: UIColor, darkColor: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { traitCollection -> UIColor in
                 if traitCollection.userInterfaceStyle == .dark {
@@ -775,11 +775,11 @@ public extension UIColor {
     ///   - start: 开始位置
     ///   - end: 结束位置
     /// - Returns: `UIColor?`
-    static func createLinearGradientColor(_ size: CGSize,
-                                          colors: [UIColor],
-                                          locations: [CGFloat] = [0, 1],
-                                          start: CGPoint,
-                                          end: CGPoint) -> UIColor?
+    static func pd_createLinearGradientColor(_ size: CGSize,
+                                             colors: [UIColor],
+                                             locations: [CGFloat] = [0, 1],
+                                             start: CGPoint,
+                                             end: CGPoint) -> UIColor?
     {
         UIColor(size, colors: colors, locations: locations, type: .axial, start: start, end: end)
     }
@@ -792,11 +792,11 @@ public extension UIColor {
     ///   - start: 开始位置
     ///   - end: 结束位置
     /// - Returns: `CAGradientLayer`
-    static func createLinearGradientLayer(_ size: CGSize,
-                                          colors: [UIColor],
-                                          locations: [CGFloat] = [0, 1],
-                                          start: CGPoint,
-                                          end: CGPoint) -> CAGradientLayer
+    static func pd_createLinearGradientLayer(_ size: CGSize,
+                                             colors: [UIColor],
+                                             locations: [CGFloat] = [0, 1],
+                                             start: CGPoint,
+                                             end: CGPoint) -> CAGradientLayer
     {
         CAGradientLayer(CGRect(origin: .zero, size: size),
                         colors: colors,
@@ -814,13 +814,13 @@ public extension UIColor {
     ///   - start: 开始位置
     ///   - end: 结束位置
     /// - Returns:`UIImage?`
-    static func createLinearGradientImage(_ size: CGSize,
-                                          colors: [UIColor],
-                                          locations: [CGFloat] = [0, 1],
-                                          start: CGPoint,
-                                          end: CGPoint) -> UIImage?
+    static func pd_createLinearGradientImage(_ size: CGSize,
+                                             colors: [UIColor],
+                                             locations: [CGFloat] = [0, 1],
+                                             start: CGPoint,
+                                             end: CGPoint) -> UIImage?
     {
-        let layer = createLinearGradientLayer(size, colors: colors, locations: locations, start: start, end: end)
+        let layer = pd_createLinearGradientLayer(size, colors: colors, locations: locations, start: start, end: end)
         UIGraphicsBeginImageContext(size)
         layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -839,12 +839,12 @@ public extension [UIColor] {
     ///   - start: 开始位置
     ///   - end: 结束位置
     /// - Returns: `UIColor?`
-    func createLinearGradientColor(_ size: CGSize,
-                                   locations: [CGFloat] = [0, 1],
-                                   start: CGPoint,
-                                   end: CGPoint) -> UIColor?
+    func pd_createLinearGradientColor(_ size: CGSize,
+                                      locations: [CGFloat] = [0, 1],
+                                      start: CGPoint,
+                                      end: CGPoint) -> UIColor?
     {
-        UIColor.createLinearGradientColor(size, colors: self, locations: locations, start: start, end: end)
+        UIColor.pd_createLinearGradientColor(size, colors: self, locations: locations, start: start, end: end)
     }
 
     /// 生成一个线性渐变图层`CAGradientLayer`
@@ -855,12 +855,12 @@ public extension [UIColor] {
     ///   - start: 开始位置
     ///   - end: 结束位置
     /// - Returns: `CAGradientLayer`
-    func createLinearGradientLayer(_ size: CGSize,
-                                   locations: [CGFloat] = [0, 1],
-                                   start: CGPoint,
-                                   end: CGPoint) -> CAGradientLayer
+    func pd_createLinearGradientLayer(_ size: CGSize,
+                                      locations: [CGFloat] = [0, 1],
+                                      start: CGPoint,
+                                      end: CGPoint) -> CAGradientLayer
     {
-        UIColor.createLinearGradientLayer(size, colors: self, locations: locations, start: start, end: end)
+        UIColor.pd_createLinearGradientLayer(size, colors: self, locations: locations, start: start, end: end)
     }
 
     /// 生成一个线性渐变图片`UIImage`
@@ -871,12 +871,12 @@ public extension [UIColor] {
     ///   - start: 开始位置
     ///   - end: 结束位置
     /// - Returns:`UIImage?`
-    func createLinearGradientImage(_ size: CGSize,
-                                   locations: [CGFloat] = [0, 1],
-                                   start: CGPoint,
-                                   end: CGPoint) -> UIImage?
+    func pd_createLinearGradientImage(_ size: CGSize,
+                                      locations: [CGFloat] = [0, 1],
+                                      start: CGPoint,
+                                      end: CGPoint) -> UIImage?
     {
-        UIColor.createLinearGradientImage(size, colors: self, locations: locations, start: start, end: end)
+        UIColor.pd_createLinearGradientImage(size, colors: self, locations: locations, start: start, end: end)
     }
 }
 

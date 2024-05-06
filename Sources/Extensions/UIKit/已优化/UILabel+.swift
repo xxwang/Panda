@@ -112,11 +112,11 @@ public extension UILabel {
     /// - Returns: `NSMutableAttributedString`
     @discardableResult
     func pd_blend(_ text: String?,
-               images: [UIImage?] = [],
-               spacing: CGFloat = 5,
-               scale: CGFloat,
-               position: Int = 0,
-               isOrgin: Bool = false) -> NSMutableAttributedString
+                  images: [UIImage?] = [],
+                  spacing: CGFloat = 5,
+                  scale: CGFloat,
+                  position: Int = 0,
+                  isOrgin: Bool = false) -> NSMutableAttributedString
     {
         // 头部字符串
         let headString = text?.pd_subString(to: position) ?? ""
@@ -195,9 +195,9 @@ public extension UILabel {
     ///   - paragraphSpacing:段落间距
     /// - Returns:行数及每行内容
     func pd_linesContent(_ labelWidth: CGFloat? = nil,
-                      lineSpacing: CGFloat = 0.0,
-                      wordSpacing: CGFloat = 0.0,
-                      paragraphSpacing: CGFloat = 0.0) -> [String]
+                         lineSpacing: CGFloat = 0.0,
+                         wordSpacing: CGFloat = 0.0,
+                         paragraphSpacing: CGFloat = 0.0) -> [String]
     {
         guard let text, let font else { return [] }
         // UILabel的宽度

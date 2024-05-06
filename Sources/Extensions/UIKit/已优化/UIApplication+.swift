@@ -191,7 +191,7 @@ public extension UIApplication {
     ///   - controller: 是哪个控制器来弹出的
     ///   - appID: 应用在商店中的ID
     func pd_openAppDetailViewController(from controller: some UIViewController & SKStoreProductViewControllerDelegate,
-                                     appID: String)
+                                        appID: String)
     {
         guard appID.count > 0 else { return }
 
@@ -230,10 +230,10 @@ public extension UIApplication {
     ///   - confirm:确认按钮标题
     ///   - parent:来源控制器(谁来弹出提示窗)
     func pd_openSettings(_ title: String?,
-                      message: String?,
-                      cancel: String = "取消",
-                      confirm: String = "设置",
-                      parent: UIViewController? = nil)
+                         message: String?,
+                         cancel: String = "取消",
+                         confirm: String = "设置",
+                         parent: UIViewController? = nil)
     {
         UIAlertController.default()
             .pd_title(title)
@@ -244,7 +244,7 @@ public extension UIApplication {
             .pd_addAction_(title: confirm, style: .default) { _ in
                 // 打开系统设置App
                 self.pd_openSettings()
-            }.show()
+            }.pd_show()
     }
 }
 
@@ -281,11 +281,11 @@ public extension UIApplication {
     ///   - handler:处理回调
     @available(iOS 10.0, *)
     func pd_addLocalUserNotification(trigger: AnyObject,
-                                  content: UNMutableNotificationContent,
-                                  identifier: String,
-                                  categories: AnyObject,
-                                  repeats: Bool = true,
-                                  handler: ((UNUserNotificationCenter, UNNotificationRequest, Error?) -> Void)?)
+                                     content: UNMutableNotificationContent,
+                                     identifier: String,
+                                     categories: AnyObject,
+                                     repeats: Bool = true,
+                                     handler: ((UNUserNotificationCenter, UNNotificationRequest, Error?) -> Void)?)
     {
         // 通知触发器
         var notiTrigger: UNNotificationTrigger?

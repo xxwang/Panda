@@ -188,7 +188,7 @@ public extension UITabBar {
     /// - Returns:`Self`
     @discardableResult
     func pd_corner(corners: UIRectCorner, radius: CGFloat) -> Self {
-        roundCorners(radius: radius, corners: corners)
+        pd_roundCorners(radius: radius, corners: corners)
         return self
     }
 }

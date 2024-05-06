@@ -131,7 +131,7 @@ public extension SCNVector3 {
     ///   - scalar:`标量`
     /// - Returns: `SCNVector3`
     static func / (vector: SCNVector3, scalar: Float) -> SCNVector3 {
-        return  SCNVector3(vector.x / scalar, vector.y / scalar, vector.z / scalar)
+        return SCNVector3(vector.x / scalar, vector.y / scalar, vector.z / scalar)
     }
 
     /// 求`标量`和`SCNVector3`的`商`(结果赋值给左值)
