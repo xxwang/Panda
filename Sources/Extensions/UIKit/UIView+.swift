@@ -1524,10 +1524,6 @@ public extension UIView {
         return result
     }
 
-    /// 将视图添加到父视图
-    /// - Parameter superview: 父视图
-    func pd_add2(_ superview: UIView) { superview.addSubview(self) }
-
     /// 移除所有的子视图
     func pd_removeSubviews() { subviews.forEach { $0.removeFromSuperview() }}
 
