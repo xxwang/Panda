@@ -1,10 +1,3 @@
-//
-//  AuthorizationRequester.swift
-//  PHI33-DC
-//
-//  Created by 奥尔良小短腿 on 2024/4/6.
-//
-
 import AdSupport
 import AppTrackingTransparency
 import AVFoundation
@@ -15,20 +8,19 @@ import UIKit
 
 public typealias AuthenticationBlock = (_ granted: Bool) -> Void
 
-// MARK: - AuthorizationStatus
+
 public enum AuthorizationStatus {
     case notDetermined
     case denied
     case authorized
 }
 
-// MARK: - LocationAuthorizationAction
+
 public enum LocationAuthorizationAction {
     case front
     case back
 }
 
-// MARK: - AuthorizationRequester
 public class AuthorizationRequester: NSObject {
     private var locationAuthorizationStatusBlock: AuthenticationBlock?
     private var locationManager: CLLocationManager!
@@ -42,7 +34,6 @@ public class AuthorizationRequester: NSObject {
     }
 }
 
-// MARK: - IDFA
 public extension AuthorizationRequester {
     var idfaStatus: AuthorizationStatus {
         if #available(iOS 14, *) {
@@ -84,7 +75,6 @@ public extension AuthorizationRequester {
     }
 }
 
-// MARK: - 麦克风
 public extension AuthorizationRequester {
     var microphoneStatus: AuthorizationStatus {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
@@ -109,7 +99,6 @@ public extension AuthorizationRequester {
     }
 }
 
-// MARK: - 相机
 public extension AuthorizationRequester {
     var cameraStatus: AuthorizationStatus {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
@@ -134,7 +123,6 @@ public extension AuthorizationRequester {
     }
 }
 
-// MARK: - 相册
 public extension AuthorizationRequester {
     var photoLibraryStatus: AuthorizationStatus {
         var status: PHAuthorizationStatus
@@ -175,7 +163,6 @@ public extension AuthorizationRequester {
     }
 }
 
-// MARK: - 通讯录
 public extension AuthorizationRequester {
     var contactsStatus: AuthorizationStatus {
         let status = CNContactStore.authorizationStatus(for: .contacts)
@@ -207,7 +194,6 @@ public extension AuthorizationRequester {
     }
 }
 
-// MARK: - 定位
 public extension AuthorizationRequester {
     var locationServicesEnabled: Bool {
         return CLLocationManager.locationServicesEnabled()
@@ -243,7 +229,6 @@ public extension AuthorizationRequester {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
 extension AuthorizationRequester: CLLocationManagerDelegate {
     @available(iOS 14.0, *)
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

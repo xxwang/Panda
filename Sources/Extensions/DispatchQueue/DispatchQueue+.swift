@@ -1,18 +1,9 @@
-//
-//  DispatchQueue+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
 
 import Dispatch
 import Foundation
 
-// MARK: - 队列判断
 public extension DispatchQueue {
-    /// 判断`当前队列`是否是`指定队列`
-    /// - Parameter queue: `指定队列`
-    /// - Returns:
+
     static func pd_isCurrent(_ queue: DispatchQueue) -> Bool {
         let key = DispatchSpecificKey<Void>()
         queue.setSpecific(key: key, value: ())
@@ -20,35 +11,24 @@ public extension DispatchQueue {
         return DispatchQueue.getSpecific(key: key) != nil
     }
 
-    /// 判断`当前队列`是否是`主队列`
-    /// - Returns: `Bool`
     static func isMainQueue() -> Bool {
         return pd_isCurrent(.main)
     }
 }
 
-// MARK: - 指定队列执行
 public extension DispatchQueue {
-    /// 在主线程异步执行
-    /// - Parameter block: 要执行任务
+
     static func pd_async_execute_on_main(_ block: @escaping () -> Void) {
         DispatchQueue.main.async { block() }
     }
 
-    /// 在默认的全局队列异步执行
-    /// - Parameter block: 要执行任务
     static func pd_async_execute_on_global(_ block: @escaping () -> Void) {
         DispatchQueue.global().async { block() }
     }
 }
 
-// MARK: - GCD定时器
 public extension DispatchQueue {
-    /// `GCD定时器``倒计时`⏳
-    /// - Parameters:
-    ///   - timeInterval: 间隔时间
-    ///   - repeatCount: 重复次数
-    ///   - handler: 循环执行任务(`主线程`)
+
     @discardableResult
     static func pd_countdown(_ timeInterval: TimeInterval, repeatCount: Int, handler: @escaping (DispatchSourceTimer?, Int) -> Void) -> DispatchSourceTimer? {
         if repeatCount <= 0 { return nil }
@@ -69,10 +49,6 @@ public extension DispatchQueue {
         return timer
     }
 
-    /// `GCD定时器`按指定时间间隔连续执行
-    /// - Parameters:
-    ///   - timeInterval:间隔时间
-    ///   - handler: 任务
     @discardableResult
     static func pd_interval(_ timeInterval: TimeInterval, handler: @escaping (DispatchSourceTimer?) -> Void) -> DispatchSourceTimer {
         let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
@@ -87,14 +63,8 @@ public extension DispatchQueue {
     }
 }
 
-// MARK: - 延时执行
 public extension DispatchQueue {
-    /// `防抖``延时`执行
-    /// - Parameters:
-    ///   - queue: 任务执行的队列
-    ///   - seconds: `延迟时间`
-    ///   - work: 要执行的任务
-    /// - Returns: `block`
+
     static func pd_debounce(_ queue: DispatchQueue = .main,
                             delay timeInterval: TimeInterval,
                             execute work: @escaping () -> Void) -> () -> Void
@@ -112,13 +82,6 @@ public extension DispatchQueue {
         }
     }
 
-    /// `延时``异步`执行
-    /// - Parameters:
-    ///   - queue: 任务执行的队列
-    ///   - seconds: `延迟时间`
-    ///   - qos: 优化级
-    ///   - flags: 标识
-    ///   - work: 要执行的任务
     static func pd_delay_execute(delay timeInterval: TimeInterval,
                                  queue: DispatchQueue = .main,
                                  qos: DispatchQoS = .unspecified,
@@ -128,12 +91,6 @@ public extension DispatchQueue {
         queue.asyncAfter(deadline: .now() + timeInterval, qos: qos, flags: flags, execute: work)
     }
 
-    /// `延时`执行指定任务
-    /// - Parameters:
-    ///   - seconds: `延迟时间`
-    ///   - asyncTask: `异步执行`的`任务`
-    ///   - mainTask: `异步任务`完成之后执行的`主线程任务`
-    /// - Returns:`DispatchWorkItem`
     static func pd_delay_execute(delay timeInterval: TimeInterval,
                                  task: (() -> Void)? = nil,
                                  callback: (() -> Void)? = nil) -> DispatchWorkItem
@@ -145,15 +102,9 @@ public extension DispatchQueue {
     }
 }
 
-// MARK: - 任务只被执行一次
 public extension DispatchQueue {
-    /// 函数`token`数组
     private static var pd_onceTracker = [String]()
 
-    /// `只执行一次``代码块`
-    /// - Parameters:
-    ///   - token: 函数标识
-    ///   - block: 要执行的任务
     static func pd_once(token: String, block: () -> Void) {
         if DispatchQueue.pd_onceTracker.contains(token) {
             return

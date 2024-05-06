@@ -1,40 +1,21 @@
-//
-//  CLLocation+.swift
-//
-//
-//  Created by xxwang on 2023/5/21.
-//
 
 import UIKit
-
 import CoreLocation
 
-// MARK: - 静态方法
 public extension CLLocation {
-    /// 两个`CLLocation`之间的`距离`(`米`)
-    /// - Parameters:
-    ///   - start: 开始`CLLocation`
-    ///   - end: 结束`CLLocation`
-    /// - Returns: `Double`
+
     static func pd_distance(_ start: CLLocation, end: CLLocation) -> Double {
         start.distance(from: end)
     }
 
-    /// 计算`两点之间`的`大圆路径`的`中间点`
-    /// - Parameters:
-    ///   - start: 开始`CLLocation`
-    ///   - end: 结束`CLLocation`
-    /// - Returns: 中间点`CLLocation`
+
     static func pd_midLocation(_ start: CLLocation, _ end: CLLocation) -> CLLocation {
         start.pd_middleLocation(to: end)
     }
 }
 
-// MARK: - 方法
 public extension CLLocation {
-    /// 计算`两点之间`的`大圆路径`的`中间点`
-    /// - Parameter point: 结束`CLLocation`
-    /// - Returns: 中间点`CLLocation`
+
     func pd_middleLocation(to point: CLLocation) -> CLLocation {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
@@ -50,10 +31,6 @@ public extension CLLocation {
         return CLLocation(latitude: mlat * 180 / Double.pi, longitude: mlong * 180 / Double.pi)
     }
 
-    /// 计算两个`CLLocation` 的方位角
-    /// - Parameters:
-    ///   - destination: 参与计算的`CLLocation`
-    /// - Returns:`Double`类型方位角, 范围 `0°... 360° `
     func pd_bearing(to destination: CLLocation) -> Double {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
@@ -69,18 +46,13 @@ public extension CLLocation {
         return (degrees + 360).truncatingRemainder(dividingBy: 360)
     }
 
-    /// 反地理编码(`坐标转地址`)
-    /// - Parameter completionHandler: 回调函数
     func pd_reverseGeocode(completionHandler: @escaping CLGeocodeCompletionHandler) {
         CLGeocoder().reverseGeocodeLocation(self, completionHandler: completionHandler)
     }
 }
 
-// MARK: - `CLLocation`数组
 public extension [CLLocation] {
-    /// 根据地球的曲率,计算数组中每个`CLLocation`距离的总和
-    /// - Parameter unit: 距离单位`UnitLength`
-    /// - Returns: 指定单位的距离总和
+
     @available(tvOS 10.0, macOS 10.12, watchOS 3.0, *)
     func pd_distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
         guard count > 1 else {
