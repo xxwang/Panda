@@ -1,9 +1,3 @@
-//
-//  UICollectionViewFlowLayout+.swift
-//  Panda
-//
-//  Created by 奥尔良小短腿 on 2024/3/30.
-//
 
 import UIKit
 

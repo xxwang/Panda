@@ -1,25 +1,13 @@
 import UIKit
 
-// MARK: - NSDecimalNumberHandler操作符
 public enum DecimalNumberHandlerOperator: String {
-    /// 加法
     case add
-    /// 减法
     case sub
-    /// 乘法
     case mul
-    /// 除法/
     case div
 }
 
-// MARK: - 静态方法
 public extension NSDecimalNumberHandler {
-    /// 简化数字计算操作
-    /// - Parameters:
-    ///   - operator: 操作符
-    ///   - valueA: 数字1
-    ///   - valueB: 数字2
-    /// - Returns: 计算结果
     static func pd_calculation(operator: DecimalNumberHandlerOperator,
                                valueA: Any,
                                valueB: Any) -> NSDecimalNumber
@@ -31,11 +19,6 @@ public extension NSDecimalNumberHandler {
                                          scale: 30)
     }
 
-    /// 向下取整
-    /// - Parameters:
-    ///   - valueA: 被除数
-    ///   - valueB: 除数
-    /// - Returns: 计算结果
     static func pd_intFloor(valueA: Any, valueB: Any) -> Int {
         return pd_decimalNumberCalculate(valueA: valueA,
                                          valueB: valueB,
@@ -44,11 +27,6 @@ public extension NSDecimalNumberHandler {
                                          scale: 0).intValue
     }
 
-    /// 判断一个数字是否可以被另一个数字整除
-    /// - Parameters:
-    ///   - valueA: 被除数
-    ///   - valueB: 除数
-    /// - Returns: 判断结果
     static func pd_isDivisible(valueA: Any, valueB: Any) -> Bool {
         let value = pd_decimalNumberCalculate(valueA: valueA,
                                               valueB: valueB,
@@ -62,18 +40,6 @@ public extension NSDecimalNumberHandler {
         return true
     }
 
-    /// 数字计算
-    /// - Parameters:
-    ///   - valueA: 数字1
-    ///   - valueB: 数字2
-    ///   - operator: 操作符
-    ///   - roundingMode: 传入模式
-    ///   - scale: 小数点后舍入值的位数
-    ///   - exact: 精度错误处理
-    ///   - overflow: 溢出错误处理
-    ///   - underflow: 下溢错误处理
-    ///   - divideByZero: 除以0的错误处理
-    /// - Returns: 计算结果
     static func pd_decimalNumberCalculate(valueA: Any,
                                           valueB: Any,
                                           operator: DecimalNumberHandlerOperator,

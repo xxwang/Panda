@@ -1,13 +1,6 @@
 import Foundation
 
-// MARK: - 方法
 public extension NSRegularExpression {
-    /// 为符合`正则表达式`的每个匹配项执行`block`闭包
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    ///   - block: 作用于结果项的代码块
     func pd_enumerateMatches(in string: String,
                              options: NSRegularExpression.MatchingOptions = [],
                              range: Range<String.Index>,
@@ -22,12 +15,6 @@ public extension NSRegularExpression {
         }
     }
 
-    /// 返回所有符合`正则表达式`的匹配项
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    /// - Returns: 结果数组
     func pd_matches(in string: String,
                     options: NSRegularExpression.MatchingOptions = [],
                     range: Range<String.Index>) -> [NSTextCheckingResult]
@@ -35,12 +22,6 @@ public extension NSRegularExpression {
         return self.matches(in: string, options: options, range: NSRange(range, in: string))
     }
 
-    /// 获取指定范围内符合`正则表达式`的匹配项数量
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    /// - Returns: 结果数量
     func pd_numberOfMatches(in string: String,
                             options: NSRegularExpression.MatchingOptions = [],
                             range: Range<String.Index>) -> Int
@@ -48,12 +29,6 @@ public extension NSRegularExpression {
         return self.numberOfMatches(in: string, options: options, range: NSRange(range, in: string))
     }
 
-    /// 返回符合`正则表达式`的`第一个`匹配项
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    /// - Returns: 结果`NSTextCheckingResult?`
     func pd_firstMatch(in string: String,
                        options: NSRegularExpression.MatchingOptions = [],
                        range: Range<String.Index>) -> NSTextCheckingResult?
@@ -61,12 +36,6 @@ public extension NSRegularExpression {
         return self.firstMatch(in: string, options: options, range: NSRange(range, in: string))
     }
 
-    /// 获取符合`正则表达式`的第一个匹配项的`Range`
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    /// - Returns: 结果`Range`
     func pd_rangeOfFirstMatch(in string: String,
                               options: NSRegularExpression.MatchingOptions = [],
                               range: Range<String.Index>) -> Range<String.Index>?
@@ -76,13 +45,6 @@ public extension NSRegularExpression {
                                        range: NSRange(range, in: string)), in: string)
     }
 
-    /// 使用`template`替换符合`正则表达式`的匹配项
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    ///   - template: 用于替换的字符串
-    /// - Returns: 结果字符串
     func pd_stringByReplacingMatches(in string: String,
                                      options: NSRegularExpression.MatchingOptions = [],
                                      range: Range<String.Index>,
@@ -94,13 +56,6 @@ public extension NSRegularExpression {
                                              withTemplate: template)
     }
 
-    /// 使用`template`替换符合`正则表达式`的匹配项
-    /// - Parameters:
-    ///   - string: 用于正则匹配的字符串
-    ///   - options: 选项
-    ///   - range: 搜索范围
-    ///   - template: 用于替换的字符串
-    /// - Returns: 匹配项数量
     @discardableResult
     func pd_replaceMatches(in string: inout String,
                            options: NSRegularExpression.MatchingOptions = [],

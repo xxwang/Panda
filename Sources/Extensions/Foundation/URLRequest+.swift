@@ -1,19 +1,13 @@
 import Foundation
 
-// MARK: - 构造方法
 public extension URLRequest {
-    /// 使用`URL`字符串构建`URLRequest`
-    /// - Parameter urlString: URL`字符串
     init?(string urlString: String) {
         guard let url = URL(string: urlString) else { return nil }
         self.init(url: url)
     }
 }
 
-// MARK: - 方法
 public extension URLRequest {
-    /// `URLRequest`的`cURL`命令表示形式
-    /// - Returns: 结果字符串
     func pd_cURLString() -> String {
         guard let url else { return "" }
 

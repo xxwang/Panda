@@ -1,16 +1,7 @@
 
 import Foundation
 
-// MARK: - 构造方法
 public extension Timer {
-    /// 构建一个立即执行的定时器
-    ///
-    /// - Note: 需要调用`fire()`
-    /// - Parameters:
-    ///   - timeInterval: 执行间距
-    ///   - repeats: 是否重复执行
-    ///   - mode: `RunLoop`模式
-    ///   - block: 执行代码的`block`
     convenience init(timeInterval: TimeInterval,
                      repeats: Bool,
                      forMode mode: RunLoop.Mode,
@@ -30,15 +21,6 @@ public extension Timer {
         RunLoop.current.add(self, forMode: mode)
     }
 
-    /// 构建一个延时执行的定时器
-    ///
-    /// - Note: 不需要调用`fire()`
-    /// - Parameters:
-    ///   - date: 开始时间
-    ///   - timeInterval: 执行间距
-    ///   - repeats: 是否重复执行
-    ///   - mode: `RunLoop`模式
-    ///   - block: 执行代码的`block`
     convenience init(startDate date: Date,
                      timeInterval: TimeInterval,
                      repeats: Bool,
@@ -62,16 +44,7 @@ public extension Timer {
     }
 }
 
-// MARK: - 静态方法
 public extension Timer {
-    /// 创建一个立即执行的定时器
-    ///
-    /// - Note: 不需要调用`fire()`,不需要加入`RunLoop`
-    /// - Parameters:
-    ///   - timeInterval: 执行间隔
-    ///   - repeats: 是否重复执行
-    ///   - block: 执行代码的`block`
-    /// - Returns: `Timer`对象
     @discardableResult
     static func pd_safeScheduledTimer(timeInterval: TimeInterval,
                                       repeats: Bool,
@@ -89,13 +62,6 @@ public extension Timer {
                                     repeats: repeats)
     }
 
-    /// 创建C语言形式的定时器
-    ///
-    /// - Note: 不需要调用`fire()`,不需要加入`RunLoop`
-    /// - Parameters:
-    ///   - timeInterval: 执行间隔
-    ///   - block: 执行代码的`block`
-    /// - Returns: `Timer`对象
     @discardableResult
     static func pd_runThisEvery(timeInterval: TimeInterval,
                                 block: @escaping (Timer?) -> Void) -> Timer?
@@ -117,10 +83,7 @@ public extension Timer {
     }
 }
 
-// MARK: - 私有方法
 private extension Timer {
-    /// 执行`timer.userInfo`中传递的闭包的方法
-    /// - Parameter timer: 定时器
     @objc class func pd_timerCB(timer: Timer) {
         if let cb = timer.userInfo as? ((Timer) -> Void) {
             cb(timer)
