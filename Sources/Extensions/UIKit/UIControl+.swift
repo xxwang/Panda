@@ -14,10 +14,7 @@ private class AssociateKeys {
 }
 
 // MARK: - 方法
-public extension UIControl {
-
-        
-}
+public extension UIControl {}
 
 // MARK: - 限制连续点击时间间隔
 private extension UIControl {
@@ -33,13 +30,13 @@ private extension UIControl {
         set { AssociatedObject.set(self, &AssociateKeys.CallbackKey, newValue) }
     }
 
-        /// 设置指定时长(单位:秒)内不可重复点击
-        /// - Parameter hitTime:时长
+    /// 设置指定时长(单位:秒)内不可重复点击
+    /// - Parameter hitTime:时长
     func pd_doubleHit(hitTime: Double = 1) {
         self.pd_hitTime = hitTime
         self.addTarget(self, action: #selector(preventDoubleHit), for: .touchUpInside)
     }
-    
+
     /// 防止重复点击实现
     /// - Parameter sender:被点击的`UIControl`
     @objc func preventDoubleHit(_ sender: UIControl) {
@@ -158,5 +155,4 @@ public extension UIControl {
         addTarget(self, action: #selector(controlEventHandler(_:)), for: controlEvent)
         return self
     }
-
 }
