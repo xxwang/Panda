@@ -35,7 +35,7 @@ public extension UIApplication {
     /// 获取屏幕的方向
     var interfaceOrientation: UIInterfaceOrientation {
         if #available(iOS 13, *) {
-            return UIWindow.main?.windowScene?.interfaceOrientation ?? .unknown
+            return UIWindow.pd_main?.windowScene?.interfaceOrientation ?? .unknown
         } else {
             return statusBarOrientation
         }

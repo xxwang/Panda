@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 属性
 public extension UISearchBar {
     /// 搜索栏中的`UITextField`(如果适用)
-    var textField: UITextField? {
+    var pd_textField: UITextField? {
         if #available(iOS 13.0, *) {
             return self.searchTextField
         }
@@ -22,16 +22,16 @@ public extension UISearchBar {
     }
 
     /// 返回去除开头与结尾空字符的字符串
-    var trimmedText: String? {
-        text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    var pd_trimmedText: String? {
+        return self.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
 // MARK: - 方法
 public extension UISearchBar {
     /// 清空内容
-    func clear() {
-        text = ""
+    func pd_clear() {
+        self.text = ""
     }
 }
 

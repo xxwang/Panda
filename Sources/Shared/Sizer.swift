@@ -14,7 +14,7 @@ public struct sizer {
     public struct safeArea {
         public static var insets: UIEdgeInsets {
             if #available(iOS 11.0, *) {
-                return UIWindow.main?.safeAreaInsets ?? .zero
+                return UIWindow.pd_main?.safeAreaInsets ?? .zero
             }
             return .zero
         }
@@ -30,7 +30,7 @@ public struct sizer {
     public struct nav {
         public static var statusHeight: CGFloat {
             if #available(iOS 13.0, *) {
-                if let statusbar = UIWindow.main?.windowScene?.statusBarManager {
+                if let statusbar = UIWindow.pd_main?.windowScene?.statusBarManager {
                     return statusbar.statusBarFrame.size.height
                 }
 

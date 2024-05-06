@@ -35,7 +35,7 @@ public extension DocumentUtils {
         let documentPickerViewController = UIDocumentPickerViewController(documentTypes: types, in: mode)
         documentPickerViewController.delegate = self
         documentPickerViewController.modalPresentationStyle = .fullScreen
-        UIWindow.main?.rootViewController?.present(viewController: documentPickerViewController)
+        UIWindow.pd_main?.rootViewController?.pd_present(viewController: documentPickerViewController)
     }
 }
 
@@ -53,7 +53,7 @@ extension DocumentUtils: UIDocumentPickerDelegate {
                                               message: nil,
                                               cancel: "取消",
                                               confirm: "确认",
-                                              parent: UIWindow.main?.rootViewController)
+                                              parent: UIWindow.pd_main?.rootViewController)
         }
     }
 

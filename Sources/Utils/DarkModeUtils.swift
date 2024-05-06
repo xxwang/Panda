@@ -83,7 +83,7 @@ public extension DarkModeUtils {
             if DarkModeUtils.isFollowSystem {
                 DarkModeUtils.setDarkModeFollowSystem(isFollowSystem: true)
             } else {
-                UIWindow.main?.overrideUserInterfaceStyle = DarkModeUtils.isLight ? .light : .dark
+                UIWindow.pd_main?.overrideUserInterfaceStyle = DarkModeUtils.isLight ? .light : .dark
             }
         }
     }
@@ -102,9 +102,9 @@ public extension DarkModeUtils {
 
             // 设置模式的保存
             if isFollowSystem {
-                UIWindow.main?.overrideUserInterfaceStyle = .unspecified
+                UIWindow.pd_main?.overrideUserInterfaceStyle = .unspecified
             } else {
-                UIWindow.main?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+                UIWindow.pd_main?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
             }
         }
     }
@@ -113,7 +113,7 @@ public extension DarkModeUtils {
     static func setDarkModeCustom(isLight: Bool) {
         if #available(iOS 13.0, *) {
             // 只要设置了模式:就是黑或者白
-            UIWindow.main?.overrideUserInterfaceStyle = isLight ? .light : .dark
+            UIWindow.pd_main?.overrideUserInterfaceStyle = isLight ? .light : .dark
             // 设置跟随系统和智能换肤:否
             UserDefaults.standard.set(false, forKey: AssociateKeys.DarkToSystemKey)
             UserDefaults.standard.set(false, forKey: AssociateKeys.SmartPeelingKey)
@@ -136,7 +136,7 @@ public extension DarkModeUtils {
             // 设置智能换肤
             UserDefaults.standard.set(isSmartPeeling, forKey: AssociateKeys.SmartPeelingKey)
             // 智能换肤根据时间段来设置:黑或者白
-            UIWindow.main?.overrideUserInterfaceStyle = isLight ? .light : .dark
+            UIWindow.pd_main?.overrideUserInterfaceStyle = isLight ? .light : .dark
             // 设置跟随系统:否
             UserDefaults.standard.set(false, forKey: AssociateKeys.DarkToSystemKey)
             UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
@@ -169,7 +169,7 @@ public extension DarkModeUtils {
 
         if #available(iOS 13.0, *) {
             // 只要设置了模式:就是黑或者白
-            UIWindow.main?.overrideUserInterfaceStyle = light ? .light : .dark
+            UIWindow.pd_main?.overrideUserInterfaceStyle = light ? .light : .dark
             // 黑白模式的设置
             UserDefaults.standard.set(light, forKey: AssociateKeys.LightDarkKey)
         } else {

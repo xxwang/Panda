@@ -75,14 +75,14 @@ public extension UIBezierPath {
     ///   - centerPoint:中间任意一点
     ///   - endPoint:结束点
     ///   - clockwise:顺时针方向
-    func addArc(startPoint: CGPoint, centerPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
+    func pd_addArc(startPoint: CGPoint, centerPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
         // 求圆心
-        let arcCenter = getCircleCenter(pontA: startPoint, pontB: centerPoint, pontC: endPoint)
+        let arcCenter = pd_getCircleCenter(pontA: startPoint, pontB: centerPoint, pontC: endPoint)
         // 求半径
-        let radius = getRadius(center: arcCenter, point: startPoint)
+        let radius = pd_getRadius(center: arcCenter, point: startPoint)
         // 求角度
-        let startAngle = getAngle(center: arcCenter, point: startPoint)
-        let endAngle = getAngle(center: arcCenter, point: endPoint)
+        let startAngle = pd_getAngle(center: arcCenter, point: startPoint)
+        let endAngle = pd_getAngle(center: arcCenter, point: endPoint)
         addArc(withCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
     }
 
@@ -92,12 +92,12 @@ public extension UIBezierPath {
     ///   - startPoint:起点
     ///   - endPoint:结束点
     ///   - clockwise:顺时针,逆时针 这个决定这哪一个半圆
-    func addArc(arcCenter: CGPoint, startPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
+    func pd_addArc(arcCenter: CGPoint, startPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
         // 求半径
-        let radius = getRadius(center: arcCenter, point: startPoint)
+        let radius = pd_getRadius(center: arcCenter, point: startPoint)
         // 求角度
-        let startAngle = getAngle(center: arcCenter, point: startPoint)
-        let endAngle = getAngle(center: arcCenter, point: endPoint)
+        let startAngle = pd_getAngle(center: arcCenter, point: startPoint)
+        let endAngle = pd_getAngle(center: arcCenter, point: endPoint)
         addArc(withCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
     }
 }
@@ -112,19 +112,19 @@ private extension UIBezierPath {
     /// 3.根据斜率 = (y1-y2)/ (x1-x2)
     /// 得出方程:shapeABVertical = (abCenter.y - centerY) / (abCenter.x - centerX)
     /// 同理得出:shapeBCVertical = (bcCenter.y - centerY) / (bcCenter.x - centerX)
-    func getCircleCenter(pontA: CGPoint, pontB: CGPoint, pontC: CGPoint) -> CGPoint {
-        let abCenter = getCenterPoint(pontA: pontA, pontB: pontB)
-        let slopeAB = getSlope(pontA: pontA, pontB: pontB)
+    func pd_getCircleCenter(pontA: CGPoint, pontB: CGPoint, pontC: CGPoint) -> CGPoint {
+        let abCenter = pd_getCenterPoint(pontA: pontA, pontB: pontB)
+        let slopeAB = pd_getSlope(pontA: pontA, pontB: pontB)
         let slopeABVertical = -1 / slopeAB
 
-        let bcCenter = getCenterPoint(pontA: pontB, pontB: pontC)
-        let slopeBC = getSlope(pontA: pontB, pontB: pontC)
+        let bcCenter = pd_getCenterPoint(pontA: pontB, pontB: pontC)
+        let slopeBC = pd_getSlope(pontA: pontB, pontB: pontC)
         let slopeBCVertical = -1 / slopeBC
 
-        return getCircleCenter(slopeA: slopeABVertical, pointA: abCenter, slopeB: slopeBCVertical, pointB: bcCenter)
+        return pd_getCircleCenter(slopeA: slopeABVertical, pointA: abCenter, slopeB: slopeBCVertical, pointB: bcCenter)
     }
 
-    func getCircleCenter(slopeA: CGFloat, pointA: CGPoint, slopeB: CGFloat, pointB: CGPoint) -> CGPoint {
+    func pd_getCircleCenter(slopeA: CGFloat, pointA: CGPoint, slopeB: CGFloat, pointB: CGPoint) -> CGPoint {
         let centerX = -(pointA.y - slopeA * pointA.x - pointB.y + slopeB * pointB.x) / (slopeA - slopeB)
         let centerY = pointA.y - slopeA * (pointA.x - centerX)
         return CGPoint(x: centerX, y: centerY)
@@ -135,7 +135,7 @@ private extension UIBezierPath {
     ///   - pontA:A 点
     ///   - pontB:B 点
     /// - Returns:两点之间中间点
-    func getCenterPoint(pontA: CGPoint, pontB: CGPoint) -> CGPoint {
+    func pd_getCenterPoint(pontA: CGPoint, pontB: CGPoint) -> CGPoint {
         CGPoint(x: (pontA.x + pontB.x) / 2, y: (pontA.y + pontB.y) / 2)
     }
 
@@ -144,7 +144,7 @@ private extension UIBezierPath {
     ///   - pontA:A 点
     ///   - pontB:B 点
     /// - Returns:某条线的斜率
-    func getSlope(pontA: CGPoint, pontB: CGPoint) -> CGFloat {
+    func pd_getSlope(pontA: CGPoint, pontB: CGPoint) -> CGFloat {
         (pontB.y - pontA.y) / (pontB.x - pontA.x)
     }
 
@@ -153,7 +153,7 @@ private extension UIBezierPath {
     ///   - center:中心点
     ///   - point:圆上的某点
     /// - Returns:圆的半径
-    func getRadius(center: CGPoint, point: CGPoint) -> CGFloat {
+    func pd_getRadius(center: CGPoint, point: CGPoint) -> CGFloat {
         // 求半径
         let a = Double(Swift.abs(point.x - center.x))
         let b = Double(Swift.abs(point.y - center.y))
@@ -181,7 +181,7 @@ private extension UIBezierPath {
     ///   - center:圆心
     ///   - point:点
     /// - Returns:圆角
-    func getAngle(center: CGPoint, point: CGPoint) -> CGFloat {
+    func pd_getAngle(center: CGPoint, point: CGPoint) -> CGFloat {
         let pointX = point.x
         let pointY = point.y
 

@@ -10,17 +10,17 @@ import UIKit
 // MARK: - 静态属性
 public extension UITabBarController {
     /// `UITabBarController`选中索引
-    static var selectIndex: Int {
-        get { findTabBarController()?.selectedIndex ?? 0 }
-        set { findTabBarController()?.selectedIndex = newValue }
+    static var pd_selectIndex: Int {
+        get { return self.pd_findTabBarController()?.selectedIndex ?? 0 }
+        set { self.pd_findTabBarController()?.selectedIndex = newValue }
     }
 }
 
 // MARK: - 静态方法
 public extension UITabBarController {
     /// 查找项目中的`UITabBarController`
-    static func findTabBarController() -> UITabBarController? {
-        guard let currentTabBarController = UIWindow.main?.rootViewController as? UITabBarController else {
+    static func pd_findTabBarController() -> UITabBarController? {
+        guard let currentTabBarController = UIWindow.pd_main?.rootViewController as? UITabBarController else {
             return nil
         }
         return currentTabBarController

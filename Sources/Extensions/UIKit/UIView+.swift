@@ -1645,7 +1645,7 @@ public extension UIView {
 // MARK: - 截图
 public extension UIView {
     /// 截取整个滚动视图的快照(截图)
-    @objc func captureScreenshot() -> UIImage? {
+    @objc func pd_captureScreenshot() -> UIImage? {
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
         guard let context = UIGraphicsGetCurrentContext() else {

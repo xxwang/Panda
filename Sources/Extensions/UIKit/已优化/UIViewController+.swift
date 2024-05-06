@@ -10,8 +10,8 @@ import UIKit
 // MARK: - 属性
 public extension UIViewController {
     /// 检查`UIViewController`是否加载完成且在`UIWindow`上
-    var isVisible: Bool {
-        isViewLoaded && view.window != nil
+    var pd_isVisible: Bool {
+        return self.isViewLoaded && self.view.window != nil
     }
 }
 
@@ -21,8 +21,8 @@ public extension UIViewController {
     /// - Parameters:
     ///   - child: 子控制器
     ///   - containerView: 子控制器`view`要添加到的父`view`
-    func addChildViewController(_ child: UIViewController, to containerView: UIView) {
-        addChild(child)
+    func pd_addChildViewController(_ child: UIViewController, to containerView: UIView) {
+        self.addChild(child)
         containerView.addSubview(child.view)
         child.didMove(toParent: self)
     }
@@ -30,9 +30,9 @@ public extension UIViewController {
     /// 从其父级移除当前控制器及其view
     func removeViewAndControllerFromParentViewController() {
         guard parent != nil else { return }
-        willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
+        self.willMove(toParent: nil)
+        self.view.removeFromSuperview()
+        self.removeFromParent()
     }
 }
 
@@ -43,7 +43,7 @@ public extension UIViewController {
     ///   - viewController:要显示的控制器
     ///   - animated:是否动画
     ///   - completion:完成回调
-    func present(viewController: UIViewController, fullScreen: Bool = true, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func pd_present(viewController: UIViewController, fullScreen: Bool = true, animated: Bool = true, completion: (() -> Void)? = nil) {
         if fullScreen {
             viewController.modalPresentationStyle = .fullScreen
         }
@@ -54,7 +54,7 @@ public extension UIViewController {
     /// - Parameters:
     ///   - viewController:要压入栈的控制器
     ///   - animated:是否动画
-    func push(viewController: UIViewController, animated: Bool = true) {
+    func pd_push(viewController: UIViewController, animated: Bool = true) {
         navigationController?.pushViewController(viewController, animated: animated)
     }
 
@@ -62,7 +62,7 @@ public extension UIViewController {
     /// - Parameters:
     ///   - viewController:要压入栈的控制器
     ///   - animated:是否要动画
-    func popLast(thenPush viewController: UIViewController, animated: Bool = true) {
+    func pd_popLast(thenPush viewController: UIViewController, animated: Bool = true) {
         guard let navigationController else { return }
 
         // 栈中的控制器数组
@@ -79,7 +79,7 @@ public extension UIViewController {
     ///   - count:返回(POP)几个控制器
     ///   - vc:被push的控制器
     ///   - animated:是否要动画
-    func pop(count: Int, thenPush viewController: UIViewController, animated: Bool = true) {
+    func pd_pop(count: Int, thenPush viewController: UIViewController, animated: Bool = true) {
         guard let navigationController else { return }
         if count < 1 { return }
 
@@ -107,7 +107,7 @@ public extension UIViewController {
 
     /// 获取当前显示的控制器的前一个控制器
     /// - Returns:`UIViewController`
-    func previousViewController() -> UIViewController? {
+    func pd_previousViewController() -> UIViewController? {
         guard let nav = navigationController else { return nil }
         if nav.viewControllers.count <= 1 { return nil }
         guard let index = nav.viewControllers.firstIndex(of: self), index > 0 else { return nil }
@@ -120,14 +120,14 @@ public extension UIViewController {
     /// POP到`navigationController`的根控制器
     /// - Parameters:
     ///   - animated:是否动画
-    func pop2rootViewController(_ animated: Bool = true) {
+    func pd_pop2rootViewController(_ animated: Bool = true) {
         self.navigationController?.popToRootViewController(animated: animated)
     }
 
     /// POP到上级控制器
     /// - Parameters:
     ///   - animated:是否动画
-    func popViewController(_ animated: Bool = true) {
+    func pd_popViewController(_ animated: Bool = true) {
         self.navigationController?.popViewController(animated: animated)
     }
 
@@ -135,7 +135,7 @@ public extension UIViewController {
     /// - Parameters:
     ///   - viewController:指定的控制器
     ///   - animated:是否动画
-    func pop2(_ viewController: UIViewController, animated: Bool = true) {
+    func pd_pop2(_ viewController: UIViewController, animated: Bool = true) {
         self.navigationController?.popToViewController(viewController, animated: animated)
     }
 
@@ -145,7 +145,7 @@ public extension UIViewController {
     ///   - animated:是否动画
     /// - Returns:是否成功
     @discardableResult
-    func pop2(aClass: AnyClass, animated: Bool = false) -> Bool {
+    func pd_pop2(aClass: AnyClass, animated: Bool = false) -> Bool {
         func pop2(nav: UINavigationController?) -> Bool {
             guard let nav else { return false }
 
@@ -169,7 +169,7 @@ public extension UIViewController {
     /// - Parameters:
     ///   - count:返回(POP)几个控制器
     ///   - animated:是否有动画
-    func pop(count: Int, animated: Bool = false) {
+    func pd_pop(count: Int, animated: Bool = false) {
         guard let navigationController else { return }
         guard count >= 1 else { return }
 
@@ -191,13 +191,13 @@ public extension UIViewController {
     /// - Parameters:
     ///   - animated:是否动画
     ///   - completion:完成回调
-    func dismissViewController(_ animated: Bool = true, completion: (() -> Void)? = nil) {
+    func pd_dismissViewController(_ animated: Bool = true, completion: (() -> Void)? = nil) {
         self.dismiss(animated: animated, completion: completion)
     }
 
     /// 关闭当前显示的控制器
     /// - Parameter animated:是否动画
-    func closeViewController(_ animated: Bool = true) {
+    func pd_closeViewController(_ animated: Bool = true) {
         guard let nav = navigationController else {
             self.dismiss(animated: animated, completion: nil)
             return
@@ -221,7 +221,7 @@ public extension UIViewController {
     ///   - delegate: 代理
     ///   - animated: 是否动画
     ///   - completion: 完成回调
-    func presentPopover(
+    func pd_presentPopover(
         _ contentViewController: UIViewController,
         arrowPoint: CGPoint,
         contentSize: CGSize? = nil,
@@ -242,7 +242,7 @@ public extension UIViewController {
             popoverPresentationController.delegate = delegate
         }
         // 弹出
-        present(contentViewController, animated: animated, completion: completion)
+        self.present(contentViewController, animated: animated, completion: completion)
     }
 }
 
@@ -254,7 +254,7 @@ public extension UIViewController {
     ///   - bundle:故事板所在的`Bundle`
     ///   - identifier:`UIViewController`的`UIStoryboard`标识符
     /// - Returns:从`UIStoryboard`实例化的`UIViewController`实例
-    class func instantiateViewController(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Self {
+    class func pd_instantiateViewController(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Self {
         let identifier = identifier ?? String(describing: self)
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
         let instantiateViewController = storyboard.instantiateViewController(withIdentifier: identifier) as? Self
@@ -277,22 +277,22 @@ public extension UIViewController {
             DispatchQueue.pd_once(token: onceToken) {
                 // viewDidLoad
                 let oriSel = #selector(viewDidLoad)
-                let repSel = #selector(hook_viewDidLoad)
+                let repSel = #selector(pd_hook_viewDidLoad)
                 _ = self.pd_hookInstanceMethod(of: oriSel, with: repSel)
 
                 // viewWillAppear
                 let oriSel1 = #selector(viewWillAppear(_:))
-                let repSel1 = #selector(hook_viewWillAppear(animated:))
+                let repSel1 = #selector(pd_hook_viewWillAppear(animated:))
                 _ = self.pd_hookInstanceMethod(of: oriSel1, with: repSel1)
 
                 // viewWillDisappear
                 let oriSel2 = #selector(viewWillDisappear(_:))
-                let repSel2 = #selector(hook_viewWillDisappear(animated:))
+                let repSel2 = #selector(pd_hook_viewWillDisappear(animated:))
                 _ = self.pd_hookInstanceMethod(of: oriSel2, with: repSel2)
 
                 // present
                 let oriSelPresent = #selector(present(_:animated:completion:))
-                let repSelPresent = #selector(hook_present(_:animated:completion:))
+                let repSelPresent = #selector(pd_hook_present(_:animated:completion:))
                 _ = self.pd_hookInstanceMethod(of: oriSelPresent, with: repSelPresent)
             }
         } else if self == UINavigationController.self {
@@ -300,7 +300,7 @@ public extension UIViewController {
             DispatchQueue.pd_once(token: onceToken) {
                 // pushViewController
                 let oriSel = #selector(UINavigationController.pushViewController(_:animated:))
-                let repSel = #selector(UINavigationController.hook_pushViewController(_:animated:))
+                let repSel = #selector(UINavigationController.pd_hook_pushViewController(_:animated:))
                 _ = self.pd_hookInstanceMethod(of: oriSel, with: repSel)
             }
         }
@@ -308,23 +308,23 @@ public extension UIViewController {
 
     /// hook`viewDidLoad`
     /// - Parameter animated:是否动画
-    private func hook_viewDidLoad(animated: Bool) {
+    private func pd_hook_viewDidLoad(animated: Bool) {
         // 需要注入的代码写在此处
-        hook_viewDidLoad(animated: animated)
+        self.pd_hook_viewDidLoad(animated: animated)
     }
 
     /// hook`viewWillAppear`
     /// - Parameter animated:是否动画
-    private func hook_viewWillAppear(animated: Bool) {
+    private func pd_hook_viewWillAppear(animated: Bool) {
         // 需要注入的代码写在此处
-        hook_viewWillAppear(animated: animated)
+        self.pd_hook_viewWillAppear(animated: animated)
     }
 
     /// hook`viewWillDisappear`
     /// - Parameter animated:是否动画
-    private func hook_viewWillDisappear(animated: Bool) {
+    private func pd_hook_viewWillDisappear(animated: Bool) {
         // 需要注入的代码写在此处
-        hook_viewWillDisappear(animated: animated)
+        self.pd_hook_viewWillDisappear(animated: animated)
     }
 
     /// hook`present`
@@ -332,13 +332,13 @@ public extension UIViewController {
     ///   - viewControllerToPresent:要`modal`的控制器
     ///   - flag:是否动画
     ///   - completion:完成回调
-    private func hook_present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+    private func pd_hook_present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if viewControllerToPresent.presentationController == nil {
             viewControllerToPresent.presentationController?.presentedViewController.dismiss(animated: false, completion: nil)
             print("viewControllerToPresent.presentationController 不能为 nil")
             return
         }
-        hook_present(viewControllerToPresent, animated: flag, completion: completion)
+        pd_hook_present(viewControllerToPresent, animated: flag, completion: completion)
     }
 }
 
@@ -348,7 +348,7 @@ public extension UIViewController {
     /// - Parameters:
     ///   - viewController:要压入栈的控制器
     ///   - animated:是否动画
-    func hook_pushViewController(_ viewController: UIViewController, animated: Bool) {
+    func pd_hook_pushViewController(_ viewController: UIViewController, animated: Bool) {
         // 判断是否是根控制器
         if viewControllers.count <= 1 {
             Logger.info("根控制器")
@@ -360,7 +360,7 @@ public extension UIViewController {
         }
 
         // push进入下一个控制器
-        hook_pushViewController(viewController, animated: animated)
+        self.pd_hook_pushViewController(viewController, animated: animated)
     }
 }
 

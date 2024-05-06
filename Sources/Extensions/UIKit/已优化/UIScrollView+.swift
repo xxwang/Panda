@@ -10,7 +10,7 @@ import UIKit
 // MARK: - 属性
 public extension UIScrollView {
     /// 滚动视图的当前可见区域
-    var visibleRect: CGRect {
+    var pd_visibleRect: CGRect {
         let contentWidth = contentSize.width - contentOffset.x
         let contentHeight = contentSize.height - contentOffset.y
         return CGRect(
@@ -24,7 +24,7 @@ public extension UIScrollView {
 // MARK: - 适配
 public extension UIScrollView {
     /// 适配当前`UIScrollView`
-    func fitScrollView() {
+    func pd_fitScrollView() {
         if #available(iOS 11.0, *) {
             // 取消滚动视图自动缩进
             self.contentInsetAdjustmentBehavior = .never
@@ -32,7 +32,7 @@ public extension UIScrollView {
     }
 
     /// 适配项目中所有`UIScrollView`
-    static func fitAllScrollView() {
+    static func pd_fitAllScrollView() {
         if #available(iOS 11.0, *) {
             // 取消滚动视图自动缩进
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
@@ -43,7 +43,7 @@ public extension UIScrollView {
 // MARK: - 截图
 public extension UIScrollView {
     /// 获取`ScrollView`当前可见的部分的快照`截图`
-    override func captureScreenshot() -> UIImage? {
+    override func pd_captureScreenshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
         defer { UIGraphicsEndImageContext() }
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
@@ -60,7 +60,7 @@ public extension UIScrollView {
 
     /// 截取整个`ScrollView``contentSize`的快照(截图)
     /// - Parameter completion:完成回调
-    func captureLongScreenshot(_ completion: @escaping (_ image: UIImage?) -> Void) {
+    func pd_captureLongScreenshot(_ completion: @escaping (_ image: UIImage?) -> Void) {
         // 放一个假的封面
         let snapshotView = snapshotView(afterScreenUpdates: true)
         snapshotView?.frame = CGRect(
@@ -79,7 +79,7 @@ public extension UIScrollView {
         UIGraphicsBeginImageContextWithOptions(contentSize, false, UIScreen.main.scale)
 
         // 这个方法是一个绘图,里面可能有递归调用
-        screenshot(index: 0, maxIndex: page.pd_int()) {
+        pd_screenshot(index: 0, maxIndex: page.pd_int()) {
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             // 设置原点偏移
@@ -96,7 +96,7 @@ public extension UIScrollView {
     ///   - index:当前要绘制的页码索引
     ///   - maxIndex:最大页码索引
     ///   - callback:完成回调
-    func screenshot(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
+    func pd_screenshot(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
         setContentOffset(
             CGPoint(
                 x: 0,
@@ -114,7 +114,7 @@ public extension UIScrollView {
         DispatchQueue.pd_delay_execute(delay: 0.3) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
-                self.screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)
+                self.pd_screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)
             } else {
                 callback()
             }

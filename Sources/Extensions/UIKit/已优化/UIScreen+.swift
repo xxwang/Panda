@@ -10,7 +10,7 @@ import UIKit
 public extension UIScreen {
     /// 检查截屏或者录屏并发送通知
     /// - Parameter action:回调
-    static func detectScreenShot(_ action: @escaping (String) -> Void) {
+    static func pd_detectScreenShot(_ action: @escaping (String) -> Void) {
         let mainQueue = OperationQueue.main
         NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
             action("screenshot")

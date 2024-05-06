@@ -91,7 +91,7 @@ public extension environment {
             isLandscape = UIApplication.shared.statusBarOrientation.isLandscape
         }
 
-        if let window = UIWindow.main, isLandscape == false {
+        if let window = UIWindow.pd_main, isLandscape == false {
             isLandscape = window.pd_width > window.pd_height
         }
         return isLandscape

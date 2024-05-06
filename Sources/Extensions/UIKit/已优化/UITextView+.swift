@@ -19,53 +19,53 @@ private class AssociateKeys {
 // MARK: - 占位符Label
 public extension UITextView {
     /// 设置占位符
-    var placeholder: String? {
+    var pd_placeholder: String? {
         get { AssociatedObject.get(self, &AssociateKeys.placeholder) as? String }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholder, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
 
-            guard let placeholderLabel else {
-                self.initPlaceholder(placeholder!)
+            guard let pd_placeholderLabel else {
+                self.pd_initPlaceholder(pd_placeholder!)
                 return
             }
-            placeholderLabel.pd_text(placeholder)
-            self.constraintPlaceholder()
+            pd_placeholderLabel.pd_text(pd_placeholder)
+            self.pd_constraintPlaceholder()
         }
     }
 
     /// 占位文本字体
-    var placeholderFont: UIFont? {
+    var pd_placeholderFont: UIFont? {
         get {
             return (AssociatedObject.get(self, &AssociateKeys.placeholdFont) as? UIFont).pd_or(.systemFont(ofSize: 13))
         }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholdFont, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard let placeholderLabel = self.placeholderLabel else { return }
-            placeholderLabel.pd_font(placeholderFont!)
-            self.constraintPlaceholder()
+            guard let pd_placeholderLabel = self.pd_placeholderLabel else { return }
+            pd_placeholderLabel.pd_font(pd_placeholderFont!)
+            self.pd_constraintPlaceholder()
         }
     }
 
     /// 占位文本的颜色
-    var placeholderColor: UIColor? {
+    var pd_placeholderColor: UIColor? {
         get {
             return (AssociatedObject.get(self, AssociateKeys.placeholdColor) as? UIColor).pd_or(.lightGray)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholdColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            placeholderLabel?.textColor = placeholderColor
+            pd_placeholderLabel?.textColor = pd_placeholderColor
         }
     }
 
     /// 设置占位文本的`Origin`
-    var placeholderOrigin: CGPoint? {
+    var pd_placeholderOrigin: CGPoint? {
         get {
             return (AssociatedObject.get(self, AssociateKeys.placeholderOrigin) as? CGPoint).pd_or(.zero)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderOrigin, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard let placeholderLabel, let placeholderOrigin else { return }
-            placeholderLabel.frame.origin = placeholderOrigin
+            guard let pd_placeholderLabel, let pd_placeholderOrigin else { return }
+            pd_placeholderLabel.frame.origin = pd_placeholderOrigin
         }
     }
 }
@@ -73,7 +73,7 @@ public extension UITextView {
 // MARK: - 私有(占位符)
 private extension UITextView {
     /// 默认文本
-    var placeholderLabel: UILabel? {
+    var pd_placeholderLabel: UILabel? {
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderLabel, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -82,43 +82,39 @@ private extension UITextView {
 
     /// 初始化占位符Label
     /// - Parameter placeholder:占位符
-    func initPlaceholder(_ placeholder: String) {
+    func pd_initPlaceholder(_ placeholder: String) {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(textChangeHandler(_:)),
+                                               selector: #selector(pd_textChangeHandler(_:)),
                                                name: UITextView.textDidChangeNotification,
                                                object: self)
 
-        self.placeholderLabel = UILabel.default()
-            .pd_text(placeholder)
-            .pd_font(placeholderFont ?? .systemFont(ofSize: 14))
-            .pd_textColor(placeholderColor ?? .gray)
+        self.pd_placeholderLabel = UILabel.default()
+            .pd_text(pd_placeholder)
+            .pd_font(pd_placeholderFont ?? .systemFont(ofSize: 14))
+            .pd_textColor(pd_placeholderColor ?? .gray)
             .pd_numberOfLines(0)
             .pd_add2(self)
             .pd_isHidden(text.count > 0)
-        self.constraintPlaceholder()
+        self.pd_constraintPlaceholder()
     }
 
     /// 为占位Label添加约束
-    func constraintPlaceholder() {
-        guard let placeholderLabel else { return }
-        let placeholderSize = placeholderLabel.pd_textSize()
-        placeholderLabel.pd_frame(CGRect(origin: self.placeholderOrigin.pd_or(.zero), size: placeholderSize))
+    func pd_constraintPlaceholder() {
+        guard let pd_placeholderLabel else { return }
+        let placeholderSize = pd_placeholderLabel.pd_textSize()
+        pd_placeholderLabel.pd_frame(CGRect(origin: self.pd_placeholderOrigin.pd_or(.zero), size: placeholderSize))
     }
 
     /// 文本框输入内容变化通知处理
     /// - Parameter notification:动态监听
-    @objc func textChangeHandler(_ notification: Notification) {
-        self.placeholderLabel?.pd_isHidden(text.count > 0)
+    @objc func pd_textChangeHandler(_ notification: Notification) {
+        self.pd_placeholderLabel?.pd_isHidden(text.count > 0)
     }
 }
 
 // MARK: - 方法
 public extension UITextView {
-    /// 清空内容
-    func clear() {
-        text = ""
-        attributedText = "".pd_nsAttributedString()
-    }
+
 
     /// 限制输入的字数
     ///
@@ -131,7 +127,7 @@ public extension UITextView {
     ///   - maxCharacters:限制字数
     ///   - regex:可输入内容(正则)
     /// - Returns:返回是否可输入
-    func inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+    func pd_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
         guard !text.isEmpty else { return true }
         guard let oldContent = self.text else { return false }
 
@@ -162,7 +158,7 @@ public extension UITextView {
     /// - Parameters:
     ///   - string:文本
     ///   - withURLString:链接
-    func appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
+    func pd_appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
         // 新增的文本内容(使用默认设置的字体样式)
         let addAttributes = [NSAttributedString.Key.font: font]
         let linkAttributedString = NSMutableAttributedString(string: linkString, attributes: addAttributes)
@@ -182,7 +178,7 @@ public extension UITextView {
     }
 
     /// 转换特殊符号标签字段
-    func resolveHashTags() {
+    func pd_resolveHashTags() {
         let nsText: NSString = text! as NSString
 
         // 使用默认设置的字体样式
@@ -204,7 +200,7 @@ public extension UITextView {
                 var bookmark2 = bookmark
                 for i in 0 ..< words.count {
                     let word = words[i]
-                    let keyword = chopOffNonAlphaNumericCharacters(word as String) ?? ""
+                    let keyword = pd_chopOffNonAlphaNumericCharacters(word as String) ?? ""
                     if keyword != "", i > 0 {
                         // 使用自定义的scheme来表示各种特殊链接,比如:mention:hangge
                         // 使得这些字段会变蓝色且可点击
@@ -238,7 +234,7 @@ public extension UITextView {
     /// 过滤部多余的非数字和字符的部分
     /// - Parameter text:@hangge.123 -> @hangge
     /// - Returns:返回过滤后的字符串
-    private func chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
+    private func pd_chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
         let nonAlphaNumericCharacters = CharacterSet.alphanumerics.inverted
         return text.components(separatedBy: nonAlphaNumericCharacters).first
     }
@@ -260,7 +256,8 @@ public extension UITextView {
     /// - Returns:`Self`
     @discardableResult
     func pd_clear() -> Self {
-        clear()
+        self.text = ""
+        self.attributedText = "".pd_nsAttributedString()
         return self
     }
 
@@ -377,7 +374,7 @@ public extension UITextView {
     /// - Returns:`Self`
     @discardableResult
     func pd_placeholder(_ placeholder: String) -> Self {
-        self.placeholder = placeholder
+        self.pd_placeholder = placeholder
         return self
     }
 
@@ -386,7 +383,7 @@ public extension UITextView {
     /// - Returns:`Self`
     @discardableResult
     func pd_placeholderColor(_ textColor: UIColor) -> Self {
-        placeholderColor = textColor
+        pd_placeholderColor = textColor
         return self
     }
 
@@ -395,7 +392,7 @@ public extension UITextView {
     /// - Returns:`Self`
     @discardableResult
     func pd_placeholderFont(_ font: UIFont) -> Self {
-        placeholderFont = font
+        pd_placeholderFont = font
         return self
     }
 
@@ -404,7 +401,7 @@ public extension UITextView {
     /// - Returns:`Self`
     @discardableResult
     func pd_placeholderOrigin(_ origin: CGPoint) -> Self {
-        placeholderOrigin = origin
+        pd_placeholderOrigin = origin
         return self
     }
 

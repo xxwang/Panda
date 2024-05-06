@@ -40,7 +40,7 @@ public extension UIStackView {
     /// - Parameters:
     ///   - spacing:间距
     ///   - arrangedSubview:要添加到谁的后面
-    func addSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
+    func pd_addSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
         if #available(iOS 11.0, *) {
             self.setCustomSpacing(spacing, after: arrangedSubview)
         } else {
@@ -62,14 +62,14 @@ public extension UIStackView {
 
     /// 将视图数组添加到`addArrangedSubviews`数组的末尾
     /// - Parameter views:`UIView`数组
-    func addArrangedSubviews(_ views: [UIView]) {
+    func pd_addArrangedSubviews(_ views: [UIView]) {
         for view in views {
             addArrangedSubview(view)
         }
     }
 
     /// 删除堆栈排列子视图数组中的所有视图
-    func removeArrangedSubviews() {
+    func pd_removeArrangedSubviews() {
         for view in arrangedSubviews {
             removeArrangedSubview(view)
         }
@@ -79,7 +79,7 @@ public extension UIStackView {
     /// - Parameters:
     ///   - view1: 要交换的第一个视图
     ///   - view2: 要交换的第二个视图
-    func `switch`(_ view1: UIView, _ view2: UIView) {
+    func pd_switch(_ view1: UIView, _ view2: UIView) {
         guard let view1Index = arrangedSubviews.firstIndex(of: view1),
               let view2Index = arrangedSubviews.firstIndex(of: view2) else { return }
         removeArrangedSubview(view1)
@@ -98,7 +98,7 @@ public extension UIStackView {
     ///   - delay:以秒为单位的动画延迟(默认值为1秒)
     ///   - options:动画选项(默认为`AnimationOptions.curveLinear`)
     ///   - completion:可选的完成回调,用于在动画完成时运行(默认为`nil`)
-    func swap(_ view1: UIView, _ view2: UIView,
+    func pd_swap(_ view1: UIView, _ view2: UIView,
               animated: Bool = false,
               duration: TimeInterval = 0.25,
               delay: TimeInterval = 0,
@@ -107,11 +107,11 @@ public extension UIStackView {
     {
         if animated {
             UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
-                self.switch(view1, view2)
+                self.pd_switch(view1, view2)
                 self.layoutIfNeeded()
             }, completion: completion)
         } else {
-            self.switch(view1, view2)
+            self.pd_switch(view1, view2)
         }
     }
 }

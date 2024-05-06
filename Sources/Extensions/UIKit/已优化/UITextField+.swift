@@ -10,56 +10,17 @@ import UIKit
 // MARK: - 属性
 public extension UITextField {
     /// 内容是否为空
-    var isEmpty: Bool {
-        text == nil || text!.isEmpty
-    }
-
-    /// 返回去掉头尾空格及换行符的内容字符串
-    var trimmedText: String? {
-        text?.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    /// 检查内容是否为邮箱格式
-    var isValidEmail: Bool {
-        guard let text else { return false }
-        let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        return text.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
-    }
-
-    /// 是否都是数字
-    var isValidDigits: Bool {
-        let digitsRegEx = "[0-9]*"
-        let digitsTest = NSPredicate(format: "SELF MATCHES %@", digitsRegEx)
-        return digitsTest.evaluate(with: text)
-    }
-
-    /// 左侧图标`tintColor`(前提是左侧`View`是`UIImage`)
-    @IBInspectable var leftViewTintColor: UIColor? {
-        get { if let icon = leftView as? UIImageView { return icon.tintColor } else { return nil }}
-        set {
-            guard let iconView = leftView as? UIImageView else { return }
-            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
-            iconView.tintColor = newValue
-        }
-    }
-
-    /// 右侧图标`tintColor`(前提是右侧`View`是`UIImage`)
-    @IBInspectable var rightViewTintColor: UIColor? {
-        get { if let icon = rightView as? UIImageView { return icon.tintColor } else { return nil }}
-        set {
-            guard let iconView = rightView as? UIImageView else { return }
-            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
-            iconView.tintColor = newValue
-        }
+    var pd_isEmpty: Bool {
+        return self.text.pd_isNilOrEmpty
     }
 }
 
 // MARK: - 方法
 public extension UITextField {
     /// 清空内容
-    func clear() {
-        text = ""
-        attributedText = "".pd_nsMutableAttributedString()
+    func pd_clear() {
+        self.text = ""
+        self.attributedText = "".pd_nsMutableAttributedString()
     }
 
     /// 将工具栏添加到`UITextField`的`inputAccessoryView`
@@ -68,7 +29,7 @@ public extension UITextField {
     ///   - height: 工具栏高度
     /// - Returns: `UIToolbar`
     @discardableResult
-    func addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
+    func pd_addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
         let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: sizer.screen.width, height: height)))
         toolBar.setItems(items, animated: false)
         inputAccessoryView = toolBar
@@ -85,7 +46,7 @@ public extension UITextField {
     ///   - maxCharacters:限制字数
     ///   - regex:可输入内容(正则)
     /// - Returns:返回是否可输入
-    func inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+    func pd_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
         guard !text.isEmpty else { return true }
         guard let oldContent = self.text else { return false }
 

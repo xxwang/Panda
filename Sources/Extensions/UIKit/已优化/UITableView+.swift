@@ -7,24 +7,10 @@
 
 import UIKit
 
-// MARK: - 属性
-public extension UITableView {
-    /// `UITableView`中最后一行的`IndexPath`
-    var indexPathForLastRow: IndexPath? {
-        guard let lastSection else { return nil }
-        return indexPathForLastRow(inSection: lastSection)
-    }
-
-    /// `UITableView`中最后一组的索引
-    var lastSection: Int? {
-        numberOfSections > 0 ? numberOfSections - 1 : nil
-    }
-}
-
 // MARK: - 适配
 public extension UITableView {
     /// 适配当前`UITableView`
-    func fitTableView() {
+    func pd_fitTableView() {
         if #available(iOS 11, *) {
             self.estimatedRowHeight = 0
             self.estimatedSectionFooterHeight = 0
@@ -38,7 +24,7 @@ public extension UITableView {
     }
 
     /// 适配项目中所有`UITableView`
-    static func fitAllTableView() {
+    static func pd_fitAllTableView() {
         if #available(iOS 11.0, *) {
             UITableView.appearance().estimatedRowHeight = 0
             UITableView.appearance().estimatedSectionHeaderHeight = 0
@@ -53,42 +39,10 @@ public extension UITableView {
 
 // MARK: - 方法
 public extension UITableView {
-    /// `UITableView`所有组中的所有行数总和
-    /// - Returns:`UITableView`中所有行的总数
-    func numberOfRows() -> Int {
-        var section = 0
-        var rowCount = 0
-        while section < numberOfSections {
-            rowCount += numberOfRows(inSection: section)
-            section += 1
-        }
-        return rowCount
-    }
-
-    /// 指定组中最后一行的`indexath`
-    /// - Parameter section:要获取最后一行的组
-    /// - Returns:组中最后一行的可选`IndexPath`(没有返回`nil`)
-    func indexPathForLastRow(inSection section: Int) -> IndexPath? {
-        guard numberOfSections > 0, section >= 0 else { return nil }
-        guard numberOfRows(inSection: section) > 0 else {
-            return IndexPath(row: 0, section: section)
-        }
-        return IndexPath(row: numberOfRows(inSection: section) - 1, section: section)
-    }
-
-    /// 检查`IndexPath`在`UITableView`中是否存在
-    /// - Parameter indexPath:要检查的`indexPath`
-    /// - Returns:是否存在
-    func isValidIndexPath(_ indexPath: IndexPath) -> Bool {
-        indexPath.section >= 0 &&
-            indexPath.row >= 0 &&
-            indexPath.section < numberOfSections &&
-            indexPath.row < numberOfRows(inSection: indexPath.section)
-    }
-
+    
     /// 重新加载数据后调用`completion`回调
     /// - Parameter completion:完成回调
-    func reloadData(_ completion: @escaping () -> Void) {
+    func pd_reloadData(_ completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0, animations: {
             self.reloadData()
         }, completion: { _ in
@@ -99,17 +53,12 @@ public extension UITableView {
 
 // MARK: - UITableViewCell复用相关
 public extension UITableView {
-    /// 使用类名注册`UITableViewCell`
-    /// - Parameter name:`UITableViewCell`类型
-    func register<T: UITableViewCell>(cellWithClass name: T.Type) {
-        register(T.self, forCellReuseIdentifier: String(describing: name))
-    }
 
     /// 使用类名注册`UITableViewCell`
     /// - Parameters:
     ///   - nib:用于创建`UITableViewCell`的nib文件
     ///   - name:`UITableViewCell`类型
-    func register(nib: UINib?, withCellClass name: (some UITableViewCell).Type) {
+    func pd_register(nib: UINib?, withCellClass name: (some UITableViewCell).Type) {
         register(nib, forCellReuseIdentifier: String(describing: name))
     }
 
@@ -118,7 +67,7 @@ public extension UITableView {
     /// - Parameters:
     ///   - name:`UITableViewCell`类型
     ///   - bundleClass:`bundle`实例基于的类
-    func register(nibWithCellClass name: (some UITableViewCell).Type, at bundleClass: AnyClass? = nil) {
+    func pd_register(nibWithCellClass name: (some UITableViewCell).Type, at bundleClass: AnyClass? = nil) {
         let identifier = String(describing: name)
         var bundle: Bundle?
 
@@ -126,13 +75,13 @@ public extension UITableView {
             bundle = Bundle(for: bundleName)
         }
 
-        register(UINib(nibName: identifier, bundle: bundle), forCellReuseIdentifier: identifier)
+        self.register(UINib(nibName: identifier, bundle: bundle), forCellReuseIdentifier: identifier)
     }
 
     /// 使用类名获取可重用`UITableViewCell`
     /// - Parameter name:`UITableViewCell`类型
     /// - Returns:类名关联的`UITableViewCell`对象
-    func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type) -> T {
+    func pd_dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: String(describing: name)) as? T else {
             fatalError(
                 "Couldn't find UITableViewCell for \(String(describing: name)), make sure the cell is registered with table view")
@@ -145,7 +94,7 @@ public extension UITableView {
     ///   - name:`UITableViewCell`类型
     ///   - indexPath:单元格在`tableView`中的位置
     /// - Returns:类名关联的`UITableViewCell`对象
-    func dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
+    func pd_dequeueReusableCell<T: UITableViewCell>(withClass name: T.Type, for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: String(describing: name), for: indexPath) as? T else {
             fatalError(
                 "Couldn't find UITableViewCell for \(String(describing: name)), make sure the cell is registered with table view")
@@ -160,20 +109,20 @@ public extension UITableView {
     /// - Parameters:
     ///   - nib:用于创建页眉或页脚视图的`nib`文件
     ///   - name:`UITableViewHeaderFooterView`类型
-    func register(nib: UINib?, withHeaderFooterViewClass name: (some UITableViewHeaderFooterView).Type) {
+    func pd_register(nib: UINib?, withHeaderFooterViewClass name: (some UITableViewHeaderFooterView).Type) {
         register(nib, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
 
     /// 使用类名注册`UITableViewHeaderFooterView`
     /// - Parameter name:`UITableViewHeaderFooterView`类型
-    func register<T: UITableViewHeaderFooterView>(headerFooterViewClassWith name: T.Type) {
+    func pd_register<T: UITableViewHeaderFooterView>(headerFooterViewClassWith name: T.Type) {
         register(T.self, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
 
     /// 使用类名获取可重用`UITableViewHeaderFooterView`
     /// - Parameter name:`UITableViewHeaderFooterView`类型
     /// - Returns:类名关联的`UITableViewHeaderFooterView`对象
-    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass name: T.Type) -> T {
+    func pd_dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(withClass name: T.Type) -> T {
         guard let headerFooterView = dequeueReusableHeaderFooterView(withIdentifier: String(describing: name)) as? T else {
             fatalError(
                 "Couldn't find UITableViewHeaderFooterView for \(String(describing: name)), make sure the view is registered with table view")
@@ -229,8 +178,8 @@ public extension UITableView {
     /// 注册`cell`
     /// - Returns:`Self`
     @discardableResult
-    func pd_register<T: UITableViewCell>(_ cell: T.Type) -> Self {
-        register(cellWithClass: T.self)
+    func pd_register<T: UITableViewCell>(cellWithClass name: T.Type) -> Self {
+        register(T.self, forCellReuseIdentifier: String(describing: name))
         return self
     }
 

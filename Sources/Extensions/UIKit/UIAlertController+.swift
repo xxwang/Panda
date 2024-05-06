@@ -68,7 +68,7 @@ public extension UIAlertController {
         let alertController = UIAlertController(title, message: message, style: .alert, highlightedIndex: highlightedIndex, completion: completion)
 
         // 弹出UIAlertController
-        UIWindow.rootViewController()?.present(alertController, animated: true, completion: nil)
+        UIWindow.pd_rootViewController()?.present(alertController, animated: true, completion: nil)
 
         return alertController
     }
@@ -94,7 +94,7 @@ public extension UIAlertController {
         let alertController = UIAlertController(title, message: message, style: .actionSheet, highlightedIndex: highlightedIndex, completion: completion)
 
         // 弹出UIAlertController
-        UIWindow.rootViewController()?.present(alertController, animated: true, completion: nil)
+        UIWindow.pd_rootViewController()?.present(alertController, animated: true, completion: nil)
 
         return alertController
     }
@@ -107,7 +107,7 @@ public extension UIAlertController {
     ///   - completion:完成回调
     func show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
         // 弹起UIAlertController实例
-        UIWindow.main?.rootViewController?.present(self, animated: animated, completion: completion)
+        UIWindow.pd_main?.rootViewController?.present(self, animated: animated, completion: completion)
         // 是否震动
         if shake { AudioServicesPlayAlertSound(kSystemSoundID_Vibrate) }
 
