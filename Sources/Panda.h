@@ -1,9 +1,3 @@
-//
-//  Panda.h
-//  Panda
-//
-//  Created by 王斌 on 2023/6/3.
-//
 
 #import <Foundation/Foundation.h>
 
