@@ -159,7 +159,6 @@ public extension UITextView {
                         m_attributedText.addAttribute(NSAttributedString.Key.link, value: "test1:\(encodeKeyword)", range: matchRange)
                         matchRange = nsText.range(of: "#\(keyword)#", options: .literal, range: remainingRange)
                         m_attributedText.addAttribute(NSAttributedString.Key.link, value: "test2:\(encodeKeyword)", range: matchRange)
-                        // attrString.addAttributes([NSAttributedString.Key.link :"test2:\(encodeKeyword)"], range:matchRange)
                     }
                     bookmark2 += word.count + 1
                 }

@@ -1,7 +1,6 @@
 import UIKit
 
 public class environment {
-    /// 是否是模拟器
     static var isSimulator: Bool {
         #if targetEnvironment(simulator)
             return true
@@ -10,7 +9,6 @@ public class environment {
         #endif
     }
 
-    /// 是否是调试模式
     static var isDebug: Bool {
         #if DEBUG
             return true
@@ -21,7 +19,6 @@ public class environment {
 }
 
 public extension environment {
-    /// 系统类型
     static var system: String {
         #if os(macOS)
             return "macOS"
@@ -36,7 +33,6 @@ public extension environment {
         #endif
     }
 
-    /// 当前应用程序的运行环境
     static var runEnv: String {
         #if DEBUG
             return "development"
@@ -64,17 +60,15 @@ public extension environment {
 }
 
 public extension environment {
-    /// 是否是`iPad`
+
     static var isIPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
 
-    /// 是否是`iPhone`
     static var isIPhone: Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
 
-    /// 是否是`iPhoneX`系列
     static var isIPhoneX: Bool {
         if #available(iOS 11, *) {
             return max(sizer.safeArea.left, sizer.safeArea.bottom) > 0
@@ -82,7 +76,6 @@ public extension environment {
         return false
     }
 
-    /// 是否是横屏
     static var isLandscape: Bool {
         var isLandscape = false
         if #available(iOS 13, *) {

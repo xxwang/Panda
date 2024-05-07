@@ -24,11 +24,11 @@ public class Logger {
 
 private extension Logger {
     enum Level: String {
-        case info = "[信息]"
-        case debug = "[调试]"
-        case warning = "[警告]"
-        case error = "[错误]"
-        case success = "[成功]"
+        case info = "[Info]"
+        case debug = "[Debug]"
+        case warning = "[Warning]"
+        case error = "[Error]"
+        case success = "[Success]"
 
         var icon: String {
             switch self {

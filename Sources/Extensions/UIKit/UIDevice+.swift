@@ -398,7 +398,7 @@ public extension UIDevice {
 
     static var pd_wifiIP: String? {
         var address: String?
-        // get list of all interfaces on the local machine
+
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&ifaddr) == 0,
               let firstAddr = ifaddr
@@ -407,13 +407,13 @@ public extension UIDevice {
         }
         for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
             let interface = ifptr.pointee
-            // Check for IPV4 or IPV6 interface
+
             let addrFamily = interface.ifa_addr.pointee.sa_family
             if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
-                // Check interface name
+      
                 let name = String(cString: interface.ifa_name)
                 if name == "en0" {
-                    // Convert interface address to a human readable string
+        
                     var addr = interface.ifa_addr.pointee
                     var hostName = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                     getnameinfo(&addr, socklen_t(interface.ifa_addr.pointee.sa_len), &hostName, socklen_t(hostName.count), nil, socklen_t(0), NI_NUMERICHOST)

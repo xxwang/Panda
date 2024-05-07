@@ -1553,7 +1553,6 @@ public extension UIImage {
     }
 }
 
-// MARK: - 图片水印
 public extension UIImage {
 
     func pd_drawWatermark(with text: String, attributes: [NSAttributedString.Key: Any]?, frame: CGRect) -> UIImage {

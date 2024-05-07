@@ -100,7 +100,7 @@ public extension NSObject {
     }
 
     private func pd_hook_setValue(_ value: Any?, forUndefinedKey key: String) {
-        Logger.warning("setValue(_:forUndefinedKey:), UndefinedKey:\(key) 值:\(value ?? "")")
+        Logger.warning("setValue(_:forUndefinedKey:), UndefinedKey:\(key) value: \(value ?? "")")
     }
 
     private func pd_hook_value(forUndefinedKey key: String) -> Any? {

@@ -1,6 +1,5 @@
 import UIKit
 
-// MARK: - UserDefault
 @propertyWrapper
 public struct UserDefault<T> {
     let key: String

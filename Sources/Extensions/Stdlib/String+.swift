@@ -208,7 +208,6 @@ public extension String {
     static func pd_loremIpsum(of length: Int = 445) -> String {
         guard length > 0 else { return "" }
 
-        // https://www.lipsum.com/
         let loremIpsum = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         """
@@ -434,13 +433,11 @@ public extension String {
     }
 
     func pd_isEmail1() -> Bool {
-        //     let pattern = "^([a-z0-9A-Z]+[-_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$"
         let pattern = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?"
         return pd_regexp(pattern)
     }
 
     func pd_isEmai2() -> Bool {
-        // http://emailregex.com/
         let regex =
             "^(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[\\p{L}0-9-]*[\\p{L}0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$"
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
@@ -818,7 +815,7 @@ public extension String {
         do {
             returnStr = try PropertyListSerialization.propertyList(from: tempData!, options: [.mutableContainers], format: nil) as! String
         } catch {
-            print("😭出错啦! \(error.localizedDescription)")
+            print("😭error! \(error.localizedDescription)")
         }
         return returnStr.replacingOccurrences(of: "\\r\\n", with: "\n")
     }
@@ -1001,7 +998,7 @@ public extension String {
                        font: UIFont) -> CGSize
     {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
-        // .usesDeviceMetrics, .truncatesLastVisibleLine
+
         let size = self.pd_nsString()
             .boundingRect(with: constraint,
                           options: [.usesLineFragmentOrigin, .usesFontLeading],
