@@ -1,15 +1,9 @@
-//
-//  UISegmentedControl+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
 
 import UIKit
 
-// MARK: - 属性
+
 public extension UISegmentedControl {
-    /// 图片数组
+
     var pd_images: [UIImage] {
         get {
             let range = 0 ..< numberOfSegments
@@ -23,7 +17,6 @@ public extension UISegmentedControl {
         }
     }
 
-    /// 标题数组
     var pd_titles: [String] {
         get {
             let range = 0 ..< numberOfSegments
@@ -38,7 +31,7 @@ public extension UISegmentedControl {
     }
 }
 
-// MARK: - Defaultable
+
 public extension UISegmentedControl {
     typealias Associatedtype = UISegmentedControl
 
@@ -48,5 +41,5 @@ public extension UISegmentedControl {
     }
 }
 
-// MARK: - 链式语法
+
 public extension UISegmentedControl {}

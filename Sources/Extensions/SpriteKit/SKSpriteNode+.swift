@@ -1,16 +1,8 @@
-//
-//  SKSpriteNode+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
 
 import SpriteKit
 
-// MARK: - 方法
 public extension SKSpriteNode {
-    /// 等比例填充
-    /// - Parameter fillSize:边界尺寸
+
     func pd_aspectFill(to fillSize: CGSize) {
         guard let textureSize = texture?.size() else { return }
 

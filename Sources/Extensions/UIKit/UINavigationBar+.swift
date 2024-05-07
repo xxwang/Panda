@@ -1,10 +1,3 @@
-//
-//  UINavigationBar+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
-
 import UIKit
 
 public extension UINavigationBar {
@@ -25,10 +18,8 @@ public extension UINavigationBar {
     }
 }
 
-// MARK: - 方法
 public extension UINavigationBar {
-    /// 设置导航条为透明
-    /// - Parameter tintColor:`tintColor`
+
     func pd_setupTransparent(with tintColor: UIColor = .white) {
         self.pd_isTranslucent(true)
             .pd_backgroundColor(.clear)
@@ -39,10 +30,6 @@ public extension UINavigationBar {
             .pd_titleTextAttributes([.foregroundColor: tintColor])
     }
 
-    /// 设置导航条背景和文字颜色
-    /// - Parameters:
-    ///   - background:背景颜色
-    ///   - text:文字颜色
     func pd_setupColors(background: UIColor, text: UIColor) {
         self.isTranslucent = false
         self.backgroundColor = background
@@ -52,8 +39,6 @@ public extension UINavigationBar {
         self.titleTextAttributes = [.foregroundColor: text]
     }
 
-    /// 修改`statusBar`的背景颜色
-    /// - Parameter color:要设置的颜色
     func pd_setupStatusBarBackgroundColor(with color: UIColor) {
         guard self.pd_statusBar == nil else {
             self.pd_statusBar?.backgroundColor = color
@@ -70,28 +55,23 @@ public extension UINavigationBar {
         self.pd_statusBar = statusBar
     }
 
-    /// 移除`statusBar`
     func pd_clearStatusBar() {
         self.pd_statusBar?.removeFromSuperview()
         self.pd_statusBar = nil
     }
 }
 
-// MARK: - 关联键
 private class AssociateKeys {
     static var StatusBarKey = UnsafeRawPointer(bitPattern: ("UINavigationBar" + "StatusBarKey").hashValue)
 }
 
-// MARK: - 关联属性
 private extension UINavigationBar {
-    /// 通过 Runtime 的属性关联添加自定义 View
     var pd_statusBar: UIView? {
         get { AssociatedObject.get(self, &AssociateKeys.StatusBarKey) as? UIView }
         set { AssociatedObject.set(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 }
 
-// MARK: - Defaultable
 public extension UINavigationBar {
     typealias Associatedtype = UINavigationBar
 
@@ -101,30 +81,19 @@ public extension UINavigationBar {
     }
 }
 
-// MARK: - 链式语法
 public extension UINavigationBar {
-    /// 是否半透明
-    /// - Parameter isTranslucent:是否半透明
-    /// - Returns:`Self`
+
     @discardableResult
     func pd_isTranslucent(_ isTranslucent: Bool) -> Self {
         self.isTranslucent = isTranslucent
         return self
     }
 
-    /// 设置是否大导航
-    /// - Parameter large:是否大导航
-    /// - Returns:`Self`
     func pd_prefersLargeTitles(_ large: Bool) -> Self {
         prefersLargeTitles = large
         return self
     }
 
-    /// 设置标题字体
-    /// - Parameters:
-    ///   - font:字体
-    ///   - state:状态
-    /// - Returns:`Self`
     @discardableResult
     func pd_titleFont(_ font: UIFont) -> Self {
         if #available(iOS 13.0, *) {
@@ -144,11 +113,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置大标题字体
-    /// - Parameters:
-    ///   - font:字体
-    ///   - state:状态
-    /// - Returns:`Self`
     @discardableResult
     func pd_largeTitleFont(_ font: UIFont) -> Self {
         if #available(iOS 13.0, *) {
@@ -168,11 +132,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置标题颜色
-    /// - Parameters:
-    ///   - color:颜色
-    ///   - state:状态
-    /// - Returns:`Self`
     @discardableResult
     func pd_titleColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
@@ -192,11 +151,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置大标题颜色
-    /// - Parameters:
-    ///   - color:颜色
-    ///   - state:状态
-    /// - Returns:`Self`
     @discardableResult
     func pd_largeTitleColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
@@ -216,27 +170,18 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置`barTintColor`
-    /// - Parameter color: 颜色
-    /// - Returns: `Self`
     @discardableResult
     func pd_barTintColor(_ color: UIColor) -> Self {
         barTintColor = color
         return self
     }
 
-    /// 设置`tintColor`
-    /// - Parameter color: 颜色
-    /// - Returns: `Self`
     @discardableResult
     override func pd_tintColor(_ color: UIColor) -> Self {
         tintColor = color
         return self
     }
 
-    /// 设置背景颜色
-    /// - Parameter color:颜色
-    /// - Returns:`Self`
     @discardableResult
     override func pd_backgroundColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
@@ -254,9 +199,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置背景图片
-    /// - Parameter image:图片
-    /// - Returns:`Self`
     @discardableResult
     func pd_backgroundImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
@@ -273,9 +215,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置阴影图片
-    /// - Parameter imageName:图片
-    /// - Returns:`Self`
     @discardableResult
     func pd_shadowImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
@@ -291,8 +230,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置当页面中有滚动时`UITabBar`的外观与`standardAppearance`一致
-    /// - Returns:`Self`
     @discardableResult
     func pd_scrollEdgeAppearance() -> Self {
         if #available(iOS 13.0, *) {
@@ -302,9 +239,6 @@ public extension UINavigationBar {
         return self
     }
 
-    /// 设置标题的的属性
-    /// - Parameter attributes: 富文本属性
-    /// - Returns: `Self`
     @discardableResult
     func pd_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]) -> Self {
         titleTextAttributes = attributes

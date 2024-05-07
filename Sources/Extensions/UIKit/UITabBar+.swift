@@ -1,13 +1,6 @@
-//
-//  UITabBar+.swift
-//
-//
-//  Created by xxwang on 2023/5/22.
-//
 
 import UIKit
 
-// MARK: - Defaultable
 public extension UITabBar {
     typealias Associatedtype = UITabBar
 
@@ -17,22 +10,15 @@ public extension UITabBar {
     }
 }
 
-// MARK: - 链式语法
+
 public extension UITabBar {
-    /// 是否半透明
-    /// - Parameter isTranslucent:是否半透明
-    /// - Returns:`Self`
+
     @discardableResult
     func pd_isTranslucent(_ isTranslucent: Bool) -> Self {
         self.isTranslucent = isTranslucent
         return self
     }
 
-    /// 设置标题字体
-    /// - Parameters:
-    ///   - font:字体
-    ///   - state:状态
-    /// - Returns:`Self`
     @discardableResult
     func pd_titleFont(_ font: UIFont, state: UIControl.State) -> Self {
         if #available(iOS 13.0, *) {
@@ -56,11 +42,6 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置标题颜色
-    /// - Parameters:
-    ///   - color:颜色
-    ///   - state:状态
-    /// - Returns:`Self`
     @discardableResult
     func pd_titleColor(_ color: UIColor, state: UIControl.State) -> Self {
         if #available(iOS 13.0, *) {
@@ -77,9 +58,7 @@ public extension UITabBar {
             self.standardAppearance = appearance
             if #available(iOS 15.0, *) { self.scrollEdgeAppearance = appearance }
 
-            // item未选中颜色
             if state == .normal { self.unselectedItemTintColor = color }
-            // item选中颜色
             if state == .selected { self.tintColor = color }
         } else {
             var attributeds = UITabBarItem.appearance().titleTextAttributes(for: state) ?? [:]
@@ -89,9 +68,6 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置背景颜色
-    /// - Parameter color:颜色
-    /// - Returns:`Self`
     @discardableResult
     func pd_backgroundColor(with color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
@@ -109,9 +85,6 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置背景图片
-    /// - Parameter image:图片
-    /// - Returns:`Self`
     @discardableResult
     func pd_backgroundImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
@@ -126,9 +99,6 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置标题文字偏移
-    /// - Parameter offset:偏移
-    /// - Returns:`Self`
     @discardableResult
     func pd_titlePositionAdjustment(_ offset: UIOffset) -> Self {
         if #available(iOS 13.0, *) {
@@ -145,9 +115,6 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置阴影图片
-    /// - Parameter imageName:图片
-    /// - Returns:`Self`
     @discardableResult
     func pd_shadowImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
@@ -161,8 +128,6 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置当页面中有滚动时`UITabBar`的外观与`standardAppearance`一致
-    /// - Returns:`Self`
     @discardableResult
     func pd_scrollEdgeAppearance() -> Self {
         if #available(iOS 13.0, *) {
@@ -172,20 +137,12 @@ public extension UITabBar {
         return self
     }
 
-    /// 设置选中指示器图片
-    /// - Parameter image:图片
-    /// - Returns:`Self`
     @discardableResult
     func pd_selectionIndicatorImage(_ image: UIImage) -> Self {
         selectionIndicatorImage = image
         return self
     }
 
-    /// 设置圆角
-    /// - Parameters:
-    ///   - corners:需要设置圆角的角
-    ///   - radius:圆角大小
-    /// - Returns:`Self`
     @discardableResult
     func pd_corner(corners: UIRectCorner, radius: CGFloat) -> Self {
         pd_roundCorners(radius: radius, corners: corners)
