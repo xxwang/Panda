@@ -9,11 +9,11 @@ public extension URL {
 }
 
 public extension URL {
-    func pd_canOpen() -> Bool {
+    func xx_canOpen() -> Bool {
         return UIApplication.shared.canOpenURL(self)
     }
 
-    func pd_parameters() -> [String: String]? {
+    func xx_parameters() -> [String: String]? {
         guard let components = URLComponents(url: self, resolvingAgainstBaseURL: false) else { return nil }
         guard let queryItems = components.queryItems else { return nil }
 
@@ -24,7 +24,7 @@ public extension URL {
         return items
     }
 
-    func pd_appendParameters(_ parameters: [String: String]) -> URL {
+    func xx_appendParameters(_ parameters: [String: String]) -> URL {
         var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = (urlComponents.queryItems ?? []) + parameters.map {
             URLQueryItem(name: $0, value: $1)
@@ -32,18 +32,18 @@ public extension URL {
         return urlComponents.url!
     }
 
-    mutating func pd_appendParameters(_ parameters: [String: String]) {
-        self = pd_appendParameters(parameters)
+    mutating func xx_appendParameters(_ parameters: [String: String]) {
+        self = xx_appendParameters(parameters)
     }
 
-    func pd_queryValue(for key: String) -> String? {
+    func xx_queryValue(for key: String) -> String? {
         URLComponents(string: absoluteString)?
             .queryItems?
             .first(where: { $0.name == key })?
             .value
     }
 
-    func pd_deleteAllPathComponents() -> URL {
+    func xx_deleteAllPathComponents() -> URL {
         var url: URL = self
         for _ in 0 ..< pathComponents.count - 1 {
             url.deleteLastPathComponent()
@@ -51,13 +51,13 @@ public extension URL {
         return url
     }
 
-    mutating func pd_deleteAllPathComponents() {
+    mutating func xx_deleteAllPathComponents() {
         for _ in 0 ..< pathComponents.count - 1 {
             self.deleteLastPathComponent()
         }
     }
 
-    func pd_droppedScheme() -> URL? {
+    func xx_droppedScheme() -> URL? {
         if let scheme {
             let droppedScheme = String(absoluteString.dropFirst(scheme.count + 3))
             return URL(string: droppedScheme)
@@ -67,7 +67,7 @@ public extension URL {
         return URL(string: droppedScheme)
     }
 
-    func pd_thumbnail(from time: Float64 = 0) -> UIImage? {
+    func xx_thumbnail(from time: Float64 = 0) -> UIImage? {
         let imageGenerator = AVAssetImageGenerator(asset: AVAsset(url: self))
         let time = CMTimeMakeWithSeconds(time, preferredTimescale: 1)
         var actualTime = CMTimeMake(value: 0, timescale: 0)
@@ -80,7 +80,7 @@ public extension URL {
 }
 
 public extension URL {
-    func pd_appendingPathComponent(_ path: String) -> Self {
+    func xx_appendingPathComponent(_ path: String) -> Self {
         if #available(iOS 16.0, *) {
             return self.appending(component: path)
         } else {

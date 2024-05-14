@@ -78,7 +78,7 @@ public extension PathUtils {
     static func supportAppend(_ path: String) -> URL {
         let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         createDirs(url.absoluteString)
-        return url.pd_appendingPathComponent(path)
+        return url.xx_appendingPathComponent(path)
     }
 
     static func documentAppend(_ path: String) -> String {
@@ -90,7 +90,7 @@ public extension PathUtils {
     static func documentAppend(_ path: String) -> URL {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         createDirs(url.absoluteString)
-        return url.pd_appendingPathComponent(path)
+        return url.xx_appendingPathComponent(path)
     }
 
     static func cacheAppend(_ path: String) -> String {
@@ -102,7 +102,7 @@ public extension PathUtils {
     static func cacheAppend(_ path: String) -> URL {
         let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         createDirs(url.absoluteString)
-        return url.pd_appendingPathComponent(path)
+        return url.xx_appendingPathComponent(path)
     }
 
     static func tempAppend(_ path: String) -> String {

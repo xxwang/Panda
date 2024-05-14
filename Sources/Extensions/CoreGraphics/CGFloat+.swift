@@ -3,83 +3,83 @@ import CoreGraphics
 import Foundation
 
 public extension CGFloat {
-    func pd_int() -> Int {
-        return self.pd_nsNumber().intValue
+    func xx_int() -> Int {
+        return self.xx_nsNumber().intValue
     }
 
-    func pd_int64() -> Int64 {
-        return self.pd_nsNumber().int64Value
+    func xx_int64() -> Int64 {
+        return self.xx_nsNumber().int64Value
     }
 
-    func pd_uInt() -> UInt {
-        return self.pd_nsNumber().uintValue
+    func xx_uInt() -> UInt {
+        return self.xx_nsNumber().uintValue
     }
 
-    func pd_uInt64() -> UInt64 {
-        return self.pd_nsNumber().uint64Value
+    func xx_uInt64() -> UInt64 {
+        return self.xx_nsNumber().uint64Value
     }
 
-    func pd_float() -> Float {
-        return self.pd_nsNumber().floatValue
+    func xx_float() -> Float {
+        return self.xx_nsNumber().floatValue
     }
 
-    func pd_double() -> Double {
-        return self.pd_nsNumber().doubleValue
+    func xx_double() -> Double {
+        return self.xx_nsNumber().doubleValue
     }
 
-    func pd_nsNumber() -> NSNumber {
+    func xx_nsNumber() -> NSNumber {
         return NSNumber(value: Double(self))
     }
 
-    func pd_decimalNumber() -> NSDecimalNumber {
+    func xx_decimalNumber() -> NSDecimalNumber {
         return NSDecimalNumber(value: Double(self))
     }
 
-    func pd_decimal() -> Decimal {
-        return self.pd_decimalNumber().decimalValue
+    func xx_decimal() -> Decimal {
+        return self.xx_decimalNumber().decimalValue
     }
 
-    func pd_string() -> String {
-        return String(self.pd_double())
+    func xx_string() -> String {
+        return String(self.xx_double())
     }
 }
 
 public extension CGFloat {
-    func pd_radians() -> Double {
-        return self.pd_double() / 180.0 * Double.pi
+    func xx_radians() -> Double {
+        return self.xx_double() / 180.0 * Double.pi
     }
 
-    func pd_degrees() -> Double {
-        return self.pd_double() * (180.0 / Double.pi)
+    func xx_degrees() -> Double {
+        return self.xx_double() * (180.0 / Double.pi)
     }
 
-    func pd_abs() -> Self {
+    func xx_abs() -> Self {
         return Swift.abs(self)
     }
 
-    func pd_ceil() -> Self {
+    func xx_ceil() -> Self {
         return Foundation.ceil(self)
     }
 
-    func pd_floor() -> Self {
+    func xx_floor() -> Self {
         return Foundation.floor(self)
     }
 
-    func pd_lround() -> Int {
+    func xx_lround() -> Int {
         return Darwin.lround(Double(self))
     }
 
-    func pd_truncate(places: Int) -> Self {
-        let divisor = pow(10.0, places.pd_double())
-        return Self(self.pd_double() * divisor / divisor)
+    func xx_truncate(places: Int) -> Self {
+        let divisor = pow(10.0, places.xx_double())
+        return Self(self.xx_double() * divisor / divisor)
     }
 
-    func pd_round(_ places: Int) -> Self {
-        let divisor = pow(10.0, places.pd_double())
-        return Self((self.pd_double() * divisor).rounded() / divisor)
+    func xx_round(_ places: Int) -> Self {
+        let divisor = pow(10.0, places.xx_double())
+        return Self((self.xx_double() * divisor).rounded() / divisor)
     }
 
-    func pd_rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
+    func xx_rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
         let factor = Self(pow(10.0, Double(Swift.max(0, places))))
         return (self * factor).rounded(rule) / factor
     }

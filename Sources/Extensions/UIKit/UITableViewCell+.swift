@@ -3,7 +3,7 @@ import UIKit
 
 public extension UITableViewCell {
 
-    var pd_identifier: String {
+    var xx_identifier: String {
         let classNameString = NSStringFromClass(Self.self)
         return classNameString.components(separatedBy: ".").last!
     }
@@ -12,7 +12,7 @@ public extension UITableViewCell {
 
 public extension UITableViewCell {
 
-    func pd_findTableView() -> UITableView? {
+    func xx_findTableView() -> UITableView? {
         for view in sequence(first: superview, next: { $0?.superview }) {
             if let tableView = view as? UITableView {
                 return tableView
@@ -34,7 +34,7 @@ public extension UITableViewCell {
 public extension UITableViewCell {
 
     @discardableResult
-    func pd_selectionStyle(_ style: UITableViewCell.SelectionStyle) -> Self {
+    func xx_selectionStyle(_ style: UITableViewCell.SelectionStyle) -> Self {
         selectionStyle = style
         return self
     }

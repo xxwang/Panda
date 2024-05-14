@@ -4,7 +4,7 @@ import UIKit
 
 public extension UIScrollView {
 
-    var pd_visibleRect: CGRect {
+    var xx_visibleRect: CGRect {
         let contentWidth = contentSize.width - contentOffset.x
         let contentHeight = contentSize.height - contentOffset.y
         return CGRect(
@@ -18,7 +18,7 @@ public extension UIScrollView {
 
 public extension UIScrollView {
 
-    func pd_fitScrollView() {
+    func xx_fitScrollView() {
         if #available(iOS 11.0, *) {
 
             self.contentInsetAdjustmentBehavior = .never
@@ -26,7 +26,7 @@ public extension UIScrollView {
     }
 
 
-    static func pd_fitAllScrollView() {
+    static func xx_fitAllScrollView() {
         if #available(iOS 11.0, *) {
 
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
@@ -37,7 +37,7 @@ public extension UIScrollView {
 
 public extension UIScrollView {
 
-    override func pd_captureScreenshot() -> UIImage? {
+    override func xx_captureScreenshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
         defer { UIGraphicsEndImageContext() }
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
@@ -52,7 +52,7 @@ public extension UIScrollView {
         return image
     }
 
-    func pd_captureLongScreenshot(_ completion: @escaping (_ image: UIImage?) -> Void) {
+    func xx_captureLongScreenshot(_ completion: @escaping (_ image: UIImage?) -> Void) {
 
         let snapshotView = snapshotView(afterScreenUpdates: true)
         snapshotView?.frame = CGRect(
@@ -71,7 +71,7 @@ public extension UIScrollView {
         UIGraphicsBeginImageContextWithOptions(contentSize, false, UIScreen.main.scale)
 
 
-        pd_screenshot(index: 0, maxIndex: page.pd_int()) {
+        xx_screenshot(index: 0, maxIndex: page.xx_int()) {
             let screenShotImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
 
@@ -83,25 +83,25 @@ public extension UIScrollView {
         }
     }
 
-    func pd_screenshot(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
+    func xx_screenshot(index: Int, maxIndex: Int, callback: @escaping () -> Void) {
         setContentOffset(
             CGPoint(
                 x: 0,
-                y: index.pd_cgFloat() * frame.size.height
+                y: index.xx_cgFloat() * frame.size.height
             ),
             animated: false
         )
         let splitFrame = CGRect(
             x: 0,
-            y: index.pd_cgFloat() * frame.size.height,
+            y: index.xx_cgFloat() * frame.size.height,
             width: bounds.width,
             height: bounds.height
         )
 
-        DispatchQueue.pd_delay_execute(delay: 0.3) {
+        DispatchQueue.xx_delay_execute(delay: 0.3) {
             self.drawHierarchy(in: splitFrame, afterScreenUpdates: true)
             if index < maxIndex {
-                self.pd_screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)
+                self.xx_screenshot(index: index + 1, maxIndex: maxIndex, callback: callback)
             } else {
                 callback()
             }
@@ -123,110 +123,110 @@ public extension UIScrollView {
 public extension UIScrollView {
 
     @discardableResult
-    func pd_delegate(_ delegate: UIScrollViewDelegate) -> Self {
+    func xx_delegate(_ delegate: UIScrollViewDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
 
     @discardableResult
-    func pd_contentOffset(_ offset: CGPoint) -> Self {
+    func xx_contentOffset(_ offset: CGPoint) -> Self {
         contentOffset = offset
         return self
     }
 
     @discardableResult
-    func pd_contentSize(_ size: CGSize) -> Self {
+    func xx_contentSize(_ size: CGSize) -> Self {
         contentSize = size
         return self
     }
 
     @discardableResult
-    func pd_contentInset(_ inset: UIEdgeInsets) -> Self {
+    func xx_contentInset(_ inset: UIEdgeInsets) -> Self {
         contentInset = inset
         return self
     }
 
     @discardableResult
-    func pd_bounces(_ bounces: Bool) -> Self {
+    func xx_bounces(_ bounces: Bool) -> Self {
         self.bounces = bounces
         return self
     }
 
     @discardableResult
-    func pd_alwaysBounceHorizontal(_ bounces: Bool) -> Self {
+    func xx_alwaysBounceHorizontal(_ bounces: Bool) -> Self {
         alwaysBounceHorizontal = bounces
         return self
     }
 
     @discardableResult
-    func pd_alwaysBounceVertical(_ bounces: Bool) -> Self {
+    func xx_alwaysBounceVertical(_ bounces: Bool) -> Self {
         alwaysBounceVertical = bounces
         return self
     }
 
     @discardableResult
-    func pd_isPagingEnabled(_ enabled: Bool) -> Self {
+    func xx_isPagingEnabled(_ enabled: Bool) -> Self {
         isPagingEnabled = enabled
         return self
     }
 
     @discardableResult
-    func pd_showsHorizontalScrollIndicator(_ enabled: Bool) -> Self {
+    func xx_showsHorizontalScrollIndicator(_ enabled: Bool) -> Self {
         showsHorizontalScrollIndicator = enabled
         return self
     }
 
     @discardableResult
-    func pd_showsVerticalScrollIndicator(_ enabled: Bool) -> Self {
+    func xx_showsVerticalScrollIndicator(_ enabled: Bool) -> Self {
         showsVerticalScrollIndicator = enabled
         return self
     }
 
     @discardableResult
-    func pd_scrollIndicatorInsets(_ inset: UIEdgeInsets) -> Self {
+    func xx_scrollIndicatorInsets(_ inset: UIEdgeInsets) -> Self {
         scrollIndicatorInsets = inset
         return self
     }
 
     @discardableResult
-    func pd_isScrollEnabled(_ enabled: Bool) -> Self {
+    func xx_isScrollEnabled(_ enabled: Bool) -> Self {
         isScrollEnabled = enabled
         return self
     }
 
     @discardableResult
-    func pd_indicatorStyle(_ style: UIScrollView.IndicatorStyle) -> Self {
+    func xx_indicatorStyle(_ style: UIScrollView.IndicatorStyle) -> Self {
         indicatorStyle = style
         return self
     }
 
     @discardableResult
-    func pd_decelerationRate(_ rate: UIScrollView.DecelerationRate) -> Self {
+    func xx_decelerationRate(_ rate: UIScrollView.DecelerationRate) -> Self {
         decelerationRate = rate
         return self
     }
 
     @discardableResult
-    func pd_isDirectionalLockEnabled(_ enabled: Bool) -> Self {
+    func xx_isDirectionalLockEnabled(_ enabled: Bool) -> Self {
         isDirectionalLockEnabled = enabled
         return self
     }
 
     @discardableResult
-    func pd_scrollsToTop(_ scrollsToTop: Bool) -> Self {
+    func xx_scrollsToTop(_ scrollsToTop: Bool) -> Self {
         self.scrollsToTop = scrollsToTop
         return self
     }
 
     @discardableResult
-    func pd_scrollToEndTop(_ animated: Bool = true) -> Self {
+    func xx_scrollToEndTop(_ animated: Bool = true) -> Self {
         setContentOffset(CGPoint(x: contentOffset.x, y: -contentInset.top), animated: animated)
         return self
     }
 
     @discardableResult
-    func pd_scrollToEndBottom(_ animated: Bool = true) -> Self {
+    func xx_scrollToEndBottom(_ animated: Bool = true) -> Self {
         setContentOffset(CGPoint(
             x: contentOffset.x,
             y: Swift.max(0, contentSize.height - bounds.height) + contentInset.bottom
@@ -236,13 +236,13 @@ public extension UIScrollView {
     }
 
     @discardableResult
-    func pd_scrollToEndLeft(_ animated: Bool = true) -> Self {
+    func xx_scrollToEndLeft(_ animated: Bool = true) -> Self {
         setContentOffset(CGPoint(x: -contentInset.left, y: contentOffset.y), animated: animated)
         return self
     }
 
     @discardableResult
-    func pd_scrollToEndRight(_ animated: Bool = true) -> Self {
+    func xx_scrollToEndRight(_ animated: Bool = true) -> Self {
         setContentOffset(
             CGPoint(
                 x: Swift.max(0, contentSize.width - bounds.width) + contentInset.right,
@@ -254,7 +254,7 @@ public extension UIScrollView {
     }
 
     @discardableResult
-    func pd_scrollUp(_ animated: Bool = true) -> Self {
+    func xx_scrollUp(_ animated: Bool = true) -> Self {
         let minY = -contentInset.top
         var y = Swift.max(minY, contentOffset.y - bounds.height)
         #if !os(tvOS)
@@ -268,7 +268,7 @@ public extension UIScrollView {
     }
 
     @discardableResult
-    func pd_scrollDown(_ animated: Bool = true) -> Self {
+    func xx_scrollDown(_ animated: Bool = true) -> Self {
         let maxY = Swift.max(0, contentSize.height - bounds.height) + contentInset.bottom
         var y = Swift.min(maxY, contentOffset.y + bounds.height)
         #if !os(tvOS)
@@ -282,7 +282,7 @@ public extension UIScrollView {
     }
 
     @discardableResult
-    func pd_scrollLeft(_ animated: Bool = true) -> Self {
+    func xx_scrollLeft(_ animated: Bool = true) -> Self {
         let minX = -contentInset.left
         var x = Swift.max(minX, contentOffset.x - bounds.width)
         #if !os(tvOS)
@@ -296,7 +296,7 @@ public extension UIScrollView {
     }
 
     @discardableResult
-    func pd_scrollRight(_ animated: Bool = true) -> Self {
+    func xx_scrollRight(_ animated: Bool = true) -> Self {
         let maxX = Swift.max(0, contentSize.width - bounds.width) + contentInset.right
         var x = Swift.min(maxX, contentOffset.x + bounds.width)
         #if !os(tvOS)

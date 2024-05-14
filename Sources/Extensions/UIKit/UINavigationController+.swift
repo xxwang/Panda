@@ -3,31 +3,31 @@ import UIKit
 
 public extension UINavigationController {
 
-    func pd_push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func xx_push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         pushViewController(viewController, animated: animated)
         CATransaction.commit()
     }
 
-    func pd_pop(animated: Bool = true, completion: (() -> Void)? = nil) {
+    func xx_pop(animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         popViewController(animated: animated)
         CATransaction.commit()
     }
 
-    func pd_transparent(with tintColor: UIColor = .white) {
-        navigationBar.pd_isTranslucent(true)
-            .pd_backgroundImage(UIImage())
-            .pd_backgroundColor(.clear)
-            .pd_shadowImage(UIImage())
-            .pd_tintColor(tintColor)
-            .pd_barTintColor(.clear)
-            .pd_titleTextAttributes([.foregroundColor: tintColor])
+    func xx_transparent(with tintColor: UIColor = .white) {
+        navigationBar.xx_isTranslucent(true)
+            .xx_backgroundImage(UIImage())
+            .xx_backgroundColor(.clear)
+            .xx_shadowImage(UIImage())
+            .xx_tintColor(tintColor)
+            .xx_barTintColor(.clear)
+            .xx_titleTextAttributes([.foregroundColor: tintColor])
     }
 
-    func pd_fullScreenBackGesture(_ isOpen: Bool) {
+    func xx_fullScreenBackGesture(_ isOpen: Bool) {
         if isOpen {
             guard let popGestureRecognizer = interactivePopGestureRecognizer,
                   let targets = popGestureRecognizer.value(forKey: "_targets") as? [NSObject]
@@ -44,7 +44,7 @@ public extension UINavigationController {
             view.gestureRecognizers?.filter { ges in
                 ges is UIPanGestureRecognizer
             }.forEach { ges in
-                ges.pd_remove()
+                ges.xx_remove()
             }
         }
     }
@@ -52,13 +52,13 @@ public extension UINavigationController {
 
 public extension UINavigationController {
     @discardableResult
-    func pd_delegate(_ delegate: UINavigationControllerDelegate) -> Self {
+    func xx_delegate(_ delegate: UINavigationControllerDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
     @discardableResult
-    func pd_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
+    func xx_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
         self.setNavigationBarHidden(hidden, animated: animated)
         return self
     }

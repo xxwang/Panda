@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Locale {
-    func pd_is12hour() -> Bool {
+    func xx_is12hour() -> Bool {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none

@@ -31,7 +31,7 @@ public extension UIAlertController {
 public extension UIAlertController {
 
     @discardableResult
-    static func pd_showAlertController(_ title: String? = nil,
+    static func xx_showAlertController(_ title: String? = nil,
                                        message: String? = nil,
                                        titles: [String] = [],
                                        tintColor: UIColor? = nil,
@@ -41,13 +41,13 @@ public extension UIAlertController {
 
         let alertController = UIAlertController(title, message: message, style: .alert, highlightedIndex: highlightedIndex, completion: completion)
 
-        UIWindow.pd_rootViewController()?.present(alertController, animated: true, completion: nil)
+        UIWindow.xx_rootViewController()?.present(alertController, animated: true, completion: nil)
 
         return alertController
     }
 
     @discardableResult
-    static func pd_showSheetController(_ title: String? = nil,
+    static func xx_showSheetController(_ title: String? = nil,
                                        message: String? = nil,
                                        titles: [String] = [],
                                        tintColor: UIColor? = nil,
@@ -55,16 +55,16 @@ public extension UIAlertController {
                                        completion: ((Int) -> Void)? = nil) -> UIAlertController
     {
         let alertController = UIAlertController(title, message: message, style: .actionSheet, highlightedIndex: highlightedIndex, completion: completion)
-        UIWindow.pd_rootViewController()?.present(alertController, animated: true, completion: nil)
+        UIWindow.xx_rootViewController()?.present(alertController, animated: true, completion: nil)
 
         return alertController
     }
 
-    func pd_show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
-        UIWindow.pd_main?.rootViewController?.present(self, animated: animated, completion: completion)
+    func xx_show(animated: Bool = true, shake: Bool = false, deadline: TimeInterval? = nil, completion: (() -> Void)? = nil) {
+        UIWindow.xx_main?.rootViewController?.present(self, animated: animated, completion: completion)
         if shake { AudioServicesPlayAlertSound(kSystemSoundID_Vibrate) }
         guard let deadline else { return }
-        DispatchQueue.pd_delay_execute(delay: deadline) { [weak self] in
+        DispatchQueue.xx_delay_execute(delay: deadline) { [weak self] in
             guard let self else { return }
             dismiss(animated: animated, completion: nil)
         }
@@ -83,32 +83,32 @@ public extension UIAlertController {
 public extension UIAlertController {
 
     @discardableResult
-    func pd_title(_ title: String?) -> Self {
+    func xx_title(_ title: String?) -> Self {
         self.title = title
         return self
     }
 
     @discardableResult
-    func pd_message(_ message: String?) -> Self {
+    func xx_message(_ message: String?) -> Self {
         self.message = message
         return self
     }
 
     @discardableResult
-    func pd_addAction(_ action: UIAlertAction) -> Self {
+    func xx_addAction(_ action: UIAlertAction) -> Self {
         addAction(action)
         return self
     }
 
     @discardableResult
-    func pd_addAction_(title: String, style: UIAlertAction.Style = .default, action: ((UIAlertAction) -> Void)? = nil) -> Self {
+    func xx_addAction_(title: String, style: UIAlertAction.Style = .default, action: ((UIAlertAction) -> Void)? = nil) -> Self {
         let action = UIAlertAction(title: title, style: style, handler: action)
         addAction(action)
         return self
     }
 
     @discardableResult
-    func pd_addTextField(_ text: String? = nil, placeholder: String? = nil, target: Any?, action: Selector?) -> Self {
+    func xx_addTextField(_ text: String? = nil, placeholder: String? = nil, target: Any?, action: Selector?) -> Self {
         addTextField { textField in
             textField.text = text
             textField.placeholder = placeholder

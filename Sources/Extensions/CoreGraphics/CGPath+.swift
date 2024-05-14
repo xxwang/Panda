@@ -2,7 +2,7 @@
 import UIKit
 
 public extension CGPath {
-    func pd_mutable() -> CGMutablePath {
-        return CGMutablePath().pd_addPath(self)
+    func xx_mutable() -> CGMutablePath {
+        return CGMutablePath().xx_addPath(self)
     }
 }

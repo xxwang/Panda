@@ -1,7 +1,7 @@
 import UIKit
 
 public extension UINavigationBar {
-    static func pd_fitAllNavigationBar() {
+    static func xx_fitAllNavigationBar() {
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
@@ -20,17 +20,17 @@ public extension UINavigationBar {
 
 public extension UINavigationBar {
 
-    func pd_setupTransparent(with tintColor: UIColor = .white) {
-        self.pd_isTranslucent(true)
-            .pd_backgroundColor(.clear)
-            .pd_backgroundImage(UIImage())
-            .pd_barTintColor(.clear)
-            .pd_tintColor(tintColor)
-            .pd_shadowImage(UIImage())
-            .pd_titleTextAttributes([.foregroundColor: tintColor])
+    func xx_setupTransparent(with tintColor: UIColor = .white) {
+        self.xx_isTranslucent(true)
+            .xx_backgroundColor(.clear)
+            .xx_backgroundImage(UIImage())
+            .xx_barTintColor(.clear)
+            .xx_tintColor(tintColor)
+            .xx_shadowImage(UIImage())
+            .xx_titleTextAttributes([.foregroundColor: tintColor])
     }
 
-    func pd_setupColors(background: UIColor, text: UIColor) {
+    func xx_setupColors(background: UIColor, text: UIColor) {
         self.isTranslucent = false
         self.backgroundColor = background
         self.barTintColor = background
@@ -39,9 +39,9 @@ public extension UINavigationBar {
         self.titleTextAttributes = [.foregroundColor: text]
     }
 
-    func pd_setupStatusBarBackgroundColor(with color: UIColor) {
-        guard self.pd_statusBar == nil else {
-            self.pd_statusBar?.backgroundColor = color
+    func xx_setupStatusBarBackgroundColor(with color: UIColor) {
+        guard self.xx_statusBar == nil else {
+            self.xx_statusBar?.backgroundColor = color
             return
         }
 
@@ -50,14 +50,14 @@ public extension UINavigationBar {
             y: -sizer.nav.statusHeight,
             width: sizer.screen.width,
             height: sizer.nav.statusHeight
-        )).pd_add2(self)
+        )).xx_add2(self)
         statusBar.backgroundColor = .clear
-        self.pd_statusBar = statusBar
+        self.xx_statusBar = statusBar
     }
 
-    func pd_clearStatusBar() {
-        self.pd_statusBar?.removeFromSuperview()
-        self.pd_statusBar = nil
+    func xx_clearStatusBar() {
+        self.xx_statusBar?.removeFromSuperview()
+        self.xx_statusBar = nil
     }
 }
 
@@ -66,7 +66,7 @@ private class AssociateKeys {
 }
 
 private extension UINavigationBar {
-    var pd_statusBar: UIView? {
+    var xx_statusBar: UIView? {
         get { AssociatedObject.get(self, &AssociateKeys.StatusBarKey) as? UIView }
         set { AssociatedObject.set(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
@@ -84,18 +84,18 @@ public extension UINavigationBar {
 public extension UINavigationBar {
 
     @discardableResult
-    func pd_isTranslucent(_ isTranslucent: Bool) -> Self {
+    func xx_isTranslucent(_ isTranslucent: Bool) -> Self {
         self.isTranslucent = isTranslucent
         return self
     }
 
-    func pd_prefersLargeTitles(_ large: Bool) -> Self {
+    func xx_prefersLargeTitles(_ large: Bool) -> Self {
         prefersLargeTitles = large
         return self
     }
 
     @discardableResult
-    func pd_titleFont(_ font: UIFont) -> Self {
+    func xx_titleFont(_ font: UIFont) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.titleTextAttributes
@@ -114,7 +114,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_largeTitleFont(_ font: UIFont) -> Self {
+    func xx_largeTitleFont(_ font: UIFont) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.largeTitleTextAttributes
@@ -133,7 +133,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_titleColor(_ color: UIColor) -> Self {
+    func xx_titleColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.titleTextAttributes
@@ -152,7 +152,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_largeTitleColor(_ color: UIColor) -> Self {
+    func xx_largeTitleColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.largeTitleTextAttributes
@@ -171,19 +171,19 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_barTintColor(_ color: UIColor) -> Self {
+    func xx_barTintColor(_ color: UIColor) -> Self {
         barTintColor = color
         return self
     }
 
     @discardableResult
-    override func pd_tintColor(_ color: UIColor) -> Self {
+    override func xx_tintColor(_ color: UIColor) -> Self {
         tintColor = color
         return self
     }
 
     @discardableResult
-    override func pd_backgroundColor(_ color: UIColor) -> Self {
+    override func xx_backgroundColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundColor = color
@@ -200,7 +200,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_backgroundImage(_ image: UIImage) -> Self {
+    func xx_backgroundImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundImage = image
@@ -216,7 +216,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_shadowImage(_ image: UIImage) -> Self {
+    func xx_shadowImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.shadowImage = image.withRenderingMode(.alwaysOriginal)
@@ -231,7 +231,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_scrollEdgeAppearance() -> Self {
+    func xx_scrollEdgeAppearance() -> Self {
         if #available(iOS 13.0, *) {
             let appearance = standardAppearance
             if #available(iOS 15.0, *) { self.scrollEdgeAppearance = appearance }
@@ -240,7 +240,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func pd_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]) -> Self {
+    func xx_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]) -> Self {
         titleTextAttributes = attributes
         return self
     }

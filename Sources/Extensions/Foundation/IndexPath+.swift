@@ -1,7 +1,7 @@
 import UIKit
 
 public extension IndexPath {
-    func pd_string() -> String {
+    func xx_string() -> String {
         return String(format: "{section: %d, row: %d}", section, row)
     }
 }

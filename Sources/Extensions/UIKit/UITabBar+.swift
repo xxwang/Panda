@@ -14,13 +14,13 @@ public extension UITabBar {
 public extension UITabBar {
 
     @discardableResult
-    func pd_isTranslucent(_ isTranslucent: Bool) -> Self {
+    func xx_isTranslucent(_ isTranslucent: Bool) -> Self {
         self.isTranslucent = isTranslucent
         return self
     }
 
     @discardableResult
-    func pd_titleFont(_ font: UIFont, state: UIControl.State) -> Self {
+    func xx_titleFont(_ font: UIFont, state: UIControl.State) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             if state == .normal {
@@ -43,7 +43,7 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_titleColor(_ color: UIColor, state: UIControl.State) -> Self {
+    func xx_titleColor(_ color: UIColor, state: UIControl.State) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             if state == .normal {
@@ -69,7 +69,7 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_backgroundColor(with color: UIColor) -> Self {
+    func xx_backgroundColor(with color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundColor = color
@@ -86,7 +86,7 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_backgroundImage(_ image: UIImage) -> Self {
+    func xx_backgroundImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundImage = image
@@ -100,7 +100,7 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_titlePositionAdjustment(_ offset: UIOffset) -> Self {
+    func xx_titlePositionAdjustment(_ offset: UIOffset) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = offset
@@ -116,7 +116,7 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_shadowImage(_ image: UIImage) -> Self {
+    func xx_shadowImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.shadowImage = image.withRenderingMode(.alwaysOriginal)
@@ -129,7 +129,7 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_scrollEdgeAppearance() -> Self {
+    func xx_scrollEdgeAppearance() -> Self {
         if #available(iOS 13.0, *) {
             let appearance = standardAppearance
             if #available(iOS 15.0, *) { self.scrollEdgeAppearance = appearance }
@@ -138,14 +138,14 @@ public extension UITabBar {
     }
 
     @discardableResult
-    func pd_selectionIndicatorImage(_ image: UIImage) -> Self {
+    func xx_selectionIndicatorImage(_ image: UIImage) -> Self {
         selectionIndicatorImage = image
         return self
     }
 
     @discardableResult
-    func pd_corner(corners: UIRectCorner, radius: CGFloat) -> Self {
-        pd_roundCorners(radius: radius, corners: corners)
+    func xx_corner(corners: UIRectCorner, radius: CGFloat) -> Self {
+        xx_roundCorners(radius: radius, corners: corners)
         return self
     }
 }

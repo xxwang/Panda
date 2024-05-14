@@ -3,17 +3,17 @@ import CoreLocation
 import UIKit
 
 public extension CLLocation {
-    static func pd_distance(_ start: CLLocation, end: CLLocation) -> Double {
+    static func xx_distance(_ start: CLLocation, end: CLLocation) -> Double {
         start.distance(from: end)
     }
 
-    static func pd_midLocation(_ start: CLLocation, _ end: CLLocation) -> CLLocation {
-        start.pd_middleLocation(to: end)
+    static func xx_midLocation(_ start: CLLocation, _ end: CLLocation) -> CLLocation {
+        start.xx_middleLocation(to: end)
     }
 }
 
 public extension CLLocation {
-    func pd_middleLocation(to point: CLLocation) -> CLLocation {
+    func xx_middleLocation(to point: CLLocation) -> CLLocation {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
 
@@ -28,7 +28,7 @@ public extension CLLocation {
         return CLLocation(latitude: mlat * 180 / Double.pi, longitude: mlong * 180 / Double.pi)
     }
 
-    func pd_bearing(to destination: CLLocation) -> Double {
+    func xx_bearing(to destination: CLLocation) -> Double {
         let lat1 = Double.pi * coordinate.latitude / 180.0
         let long1 = Double.pi * coordinate.longitude / 180.0
         let lat2 = Double.pi * destination.coordinate.latitude / 180.0
@@ -43,14 +43,14 @@ public extension CLLocation {
         return (degrees + 360).truncatingRemainder(dividingBy: 360)
     }
 
-    func pd_reverseGeocode(completionHandler: @escaping CLGeocodeCompletionHandler) {
+    func xx_reverseGeocode(completionHandler: @escaping CLGeocodeCompletionHandler) {
         CLGeocoder().reverseGeocodeLocation(self, completionHandler: completionHandler)
     }
 }
 
 public extension [CLLocation] {
     @available(tvOS 10.0, macOS 10.12, watchOS 3.0, *)
-    func pd_distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
+    func xx_distance(unitLength unit: UnitLength) -> Measurement<UnitLength> {
         guard count > 1 else {
             return Measurement(value: 0.0, unit: unit)
         }

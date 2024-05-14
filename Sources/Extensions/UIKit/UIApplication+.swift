@@ -7,13 +7,13 @@ import UserNotifications
 
 
 public extension UIApplication {
-    var pd_appDelegate: UIApplicationDelegate? {
+    var xx_appDelegate: UIApplicationDelegate? {
         let delegate = delegate
         return delegate
     }
 
     @available(iOS 13.0, *)
-    var pd_sceneDelegate: UIWindowSceneDelegate? {
+    var xx_sceneDelegate: UIWindowSceneDelegate? {
         for scene in connectedScenes {
             if let windowScene = scene as? UIWindowScene,
                let windowSceneDelegate = windowScene.delegate as? UIWindowSceneDelegate
@@ -24,44 +24,44 @@ public extension UIApplication {
         return nil
     }
 
-    var pd_interfaceOrientation: UIInterfaceOrientation {
+    var xx_interfaceOrientation: UIInterfaceOrientation {
         if #available(iOS 13, *) {
-            return UIWindow.pd_main?.windowScene?.interfaceOrientation ?? .unknown
+            return UIWindow.xx_main?.windowScene?.interfaceOrientation ?? .unknown
         } else {
             return statusBarOrientation
         }
     }
 
-    static var pd_reachable: Bool {
+    static var xx_reachable: Bool {
         NSData(contentsOf: URL(string: "https://www.baidu.com/")!) != nil
     }
 }
 
 public extension UIApplication {
 
-    func pd_homeUrlInAppStore(with appID: String) -> String {
+    func xx_homeUrlInAppStore(with appID: String) -> String {
         "itms-apps://itunes.apple.com/app/id\(appID)?mt=8"
     }
 
-    func pd_detailUrlInAppStore(with appID: String) -> String {
+    func xx_detailUrlInAppStore(with appID: String) -> String {
         "http://itunes.apple.com/cn/lookup?id=\(appID)"
     }
 }
 
 public extension UIApplication {
-    var pd_isNewVersion: Bool {
-        let currentVersion = Bundle.pd_appVersion()
+    var xx_isNewVersion: Bool {
+        let currentVersion = Bundle.xx_appVersion()
         let sandboxVersion = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         UserDefaults.standard.set(currentVersion, forKey: "appVersion")
         UserDefaults.standard.synchronize()
         return currentVersion.compare(sandboxVersion) == .orderedDescending
     }
 
-    func pd_compareVersion(_ version: String) -> Bool {
-        let newVersion = pd_splitAppVersion(version)
+    func xx_compareVersion(_ version: String) -> Bool {
+        let newVersion = xx_splitAppVersion(version)
         guard newVersion.isOk else { return false }
 
-        let currentVersion = pd_splitAppVersion(Bundle.pd_appVersion())
+        let currentVersion = xx_splitAppVersion(Bundle.xx_appVersion())
         guard currentVersion.isOk else { return false }
 
         if newVersion.versions.major > currentVersion.versions.major {
@@ -91,34 +91,34 @@ public extension UIApplication {
         return false
     }
 
-    func pd_splitAppVersion(_ version: String) -> (isOk: Bool, versions: (major: Int, minor: Int, patch: Int)) {
-        let versionNumbers = version.pd_split(with: ".")
+    func xx_splitAppVersion(_ version: String) -> (isOk: Bool, versions: (major: Int, minor: Int, patch: Int)) {
+        let versionNumbers = version.xx_split(with: ".")
         if versionNumbers.count != 3 {
             return (isOk: false, versions: (major: 0, minor: 0, patch: 0))
         }
 
         let majorString = versionNumbers[0]
-        let majorNumber = majorString.pd_int()
+        let majorNumber = majorString.xx_int()
 
         let minorString = versionNumbers[1]
-        let minorNumber = minorString.pd_int()
+        let minorNumber = minorString.xx_int()
 
         let patchString = versionNumbers[2]
-        let patchNumber = patchString.pd_int()
+        let patchNumber = patchString.xx_int()
 
         return (isOk: true, versions: (major: majorNumber, minor: minorNumber, patch: patchNumber))
     }
 }
 
 public extension UIApplication {
-    func pd_clearApplicationIconBadge() {
+    func xx_clearApplicationIconBadge() {
         applicationIconBadgeNumber = 0
     }
 }
 
 public extension UIApplication {
 
-    func pd_openURL(_ url: URL, completion: ((_ isOk: Bool) -> Void)? = nil) {
+    func xx_openURL(_ url: URL, completion: ((_ isOk: Bool) -> Void)? = nil) {
         if #available(iOS 10.0, *) {
             self.open(url, options: [:]) { success in
                 completion?(success)
@@ -128,14 +128,14 @@ public extension UIApplication {
         }
     }
 
-    func pd_call(with phoneNumber: String, completion: @escaping (_ isOk: Bool) -> Void) {
+    func xx_call(with phoneNumber: String, completion: @escaping (_ isOk: Bool) -> Void) {
         let callAddress = ("tel://" + phoneNumber)
         guard let url = URL(string: callAddress) else { completion(false); return }
         guard canOpenURL(url) else { completion(false); return }
-        pd_openURL(url, completion: completion)
+        xx_openURL(url, completion: completion)
     }
 
-    func pd_openAppDetailViewController(from controller: some UIViewController & SKStoreProductViewControllerDelegate,
+    func xx_openAppDetailViewController(from controller: some UIViewController & SKStoreProductViewControllerDelegate,
                                         appID: String)
     {
         guard appID.count > 0 else { return }
@@ -155,36 +155,36 @@ public extension UIApplication {
         let urlString = "https://itunes.apple.com/cn/app/id\(appID)?mt=12"
         guard let url = URL(string: urlString) else { return }
         guard UIApplication.shared.canOpenURL(url) else { return }
-        pd_openURL(url) { isOk in  }
+        xx_openURL(url) { isOk in  }
     }
 
-    func pd_openSettings() {
+    func xx_openSettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        pd_openURL(url) { isOk in }
+        xx_openURL(url) { isOk in }
     }
 
-    func pd_openSettings(_ title: String?,
+    func xx_openSettings(_ title: String?,
                          message: String?,
                          cancel: String = "Cancel",
                          confirm: String = "Settings",
                          parent: UIViewController? = nil)
     {
         UIAlertController.default()
-            .pd_title(title)
-            .pd_message(message)
-            .pd_addAction_(title: cancel, style: .cancel) { _ in
+            .xx_title(title)
+            .xx_message(message)
+            .xx_addAction_(title: cancel, style: .cancel) { _ in
                
             }
-            .pd_addAction_(title: confirm, style: .default) { _ in
-                self.pd_openSettings()
-            }.pd_show()
+            .xx_addAction_(title: confirm, style: .default) { _ in
+                self.xx_openSettings()
+            }.xx_show()
     }
 }
 
 
 public extension UIApplication {
 
-    func pd_registerAPNsWithDelegate(_ delegate: Any) {
+    func xx_registerAPNsWithDelegate(_ delegate: Any) {
         if #available(iOS 10.0, *) {
             let options: UNAuthorizationOptions = [.alert, .badge, .sound]
             let center = UNUserNotificationCenter.current()
@@ -202,7 +202,7 @@ public extension UIApplication {
     }
 
     @available(iOS 10.0, *)
-    func pd_addLocalUserNotification(trigger: AnyObject,
+    func xx_addLocalUserNotification(trigger: AnyObject,
                                      content: UNMutableNotificationContent,
                                      identifier: String,
                                      categories: AnyObject,

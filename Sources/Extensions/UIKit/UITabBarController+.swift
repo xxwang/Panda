@@ -3,15 +3,15 @@ import UIKit
 
 public extension UITabBarController {
 
-    static var pd_selectIndex: Int {
-        get { return self.pd_findTabBarController()?.selectedIndex ?? 0 }
-        set { self.pd_findTabBarController()?.selectedIndex = newValue }
+    static var xx_selectIndex: Int {
+        get { return self.xx_findTabBarController()?.selectedIndex ?? 0 }
+        set { self.xx_findTabBarController()?.selectedIndex = newValue }
     }
 }
 
 public extension UITabBarController {
-    static func pd_findTabBarController() -> UITabBarController? {
-        guard let currentTabBarController = UIWindow.pd_main?.rootViewController as? UITabBarController else {
+    static func xx_findTabBarController() -> UITabBarController? {
+        guard let currentTabBarController = UIWindow.xx_main?.rootViewController as? UITabBarController else {
             return nil
         }
         return currentTabBarController
@@ -30,25 +30,25 @@ public extension UITabBarController {
 public extension UITabBarController {
 
     @discardableResult
-    func pd_delegate(_ delegate: UITabBarControllerDelegate) -> Self {
+    func xx_delegate(_ delegate: UITabBarControllerDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
     @discardableResult
-    func pd_viewControllers(_ viewControllers: [UIViewController]?) -> Self {
+    func xx_viewControllers(_ viewControllers: [UIViewController]?) -> Self {
         self.viewControllers = viewControllers
         return self
     }
 
     @discardableResult
-    func pd_setViewControllers(_ viewControllers: [UIViewController]?, animated: Bool = false) -> Self {
+    func xx_setViewControllers(_ viewControllers: [UIViewController]?, animated: Bool = false) -> Self {
         self.setViewControllers(viewControllers, animated: animated)
         return self
     }
 
     @discardableResult
-    func pd_selectedIndex(_ index: Int) -> Self {
+    func xx_selectedIndex(_ index: Int) -> Self {
         self.selectedIndex = index
         return self
     }

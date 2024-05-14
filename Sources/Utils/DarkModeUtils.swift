@@ -60,7 +60,7 @@ public extension DarkModeUtils {
             if DarkModeUtils.isFollowSystem {
                 DarkModeUtils.setDarkModeFollowSystem(isFollowSystem: true)
             } else {
-                UIWindow.pd_main?.overrideUserInterfaceStyle = DarkModeUtils.isLight ? .light : .dark
+                UIWindow.xx_main?.overrideUserInterfaceStyle = DarkModeUtils.isLight ? .light : .dark
             }
         }
     }
@@ -76,16 +76,16 @@ public extension DarkModeUtils {
             UserDefaults.standard.synchronize()
 
             if isFollowSystem {
-                UIWindow.pd_main?.overrideUserInterfaceStyle = .unspecified
+                UIWindow.xx_main?.overrideUserInterfaceStyle = .unspecified
             } else {
-                UIWindow.pd_main?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+                UIWindow.xx_main?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
             }
         }
     }
 
     static func setDarkModeCustom(isLight: Bool) {
         if #available(iOS 13.0, *) {
-            UIWindow.pd_main?.overrideUserInterfaceStyle = isLight ? .light : .dark
+            UIWindow.xx_main?.overrideUserInterfaceStyle = isLight ? .light : .dark
             UserDefaults.standard.set(false, forKey: AssociateKeys.DarkToSystemKey)
             UserDefaults.standard.set(false, forKey: AssociateKeys.SmartPeelingKey)
             UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
@@ -100,7 +100,7 @@ public extension DarkModeUtils {
     static func setSmartPeelingDarkMode(isSmartPeeling: Bool) {
         if #available(iOS 13.0, *) {
             UserDefaults.standard.set(isSmartPeeling, forKey: AssociateKeys.SmartPeelingKey)
-            UIWindow.pd_main?.overrideUserInterfaceStyle = isLight ? .light : .dark
+            UIWindow.xx_main?.overrideUserInterfaceStyle = isLight ? .light : .dark
             UserDefaults.standard.set(false, forKey: AssociateKeys.DarkToSystemKey)
             UserDefaults.standard.set(isLight, forKey: AssociateKeys.LightDarkKey)
         } else {
@@ -125,7 +125,7 @@ public extension DarkModeUtils {
         DarkModeUtils.SmartPeelingTimeIntervalValue = startTime + "~" + endTime
 
         if #available(iOS 13.0, *) {
-            UIWindow.pd_main?.overrideUserInterfaceStyle = light ? .light : .dark
+            UIWindow.xx_main?.overrideUserInterfaceStyle = light ? .light : .dark
             UserDefaults.standard.set(light, forKey: AssociateKeys.LightDarkKey)
         } else {
             UserDefaults.standard.set(light, forKey: AssociateKeys.LightDarkKey)
@@ -164,20 +164,20 @@ public extension DarkModeUtils {
         if startTime != nil, endTime != nil {
             timeIntervalValue = [startTime!, endTime!]
         } else {
-            timeIntervalValue = DarkModeUtils.SmartPeelingTimeIntervalValue.pd_split(with: "~")
+            timeIntervalValue = DarkModeUtils.SmartPeelingTimeIntervalValue.xx_split(with: "~")
         }
 
-        let currentDate = Date.pd_now()
-        let currentTimeStamp = Int(currentDate.pd_dateAsTimestamp())!
-        let dateString = currentDate.pd_string(with: "yyyy-MM-dd", isGMT: false)
+        let currentDate = Date.xx_now()
+        let currentTimeStamp = Int(currentDate.xx_dateAsTimestamp())!
+        let dateString = currentDate.xx_string(with: "yyyy-MM-dd", isGMT: false)
         let startTimeStamp = (dateString + " " + timeIntervalValue[0])
-            .pd_date(with: "yyyy-MM-dd HH:mm")?
-            .pd_secondStamp()
-            .pd_int() ?? 0
+            .xx_date(with: "yyyy-MM-dd HH:mm")?
+            .xx_secondStamp()
+            .xx_int() ?? 0
         var endTimeStamp = (dateString + " " + timeIntervalValue[1])
-            .pd_date(with: "yyyy-MM-dd HH:mm")?
-            .pd_secondStamp()
-            .pd_int() ?? 0
+            .xx_date(with: "yyyy-MM-dd HH:mm")?
+            .xx_secondStamp()
+            .xx_int() ?? 0
 
         if startTimeStamp > endTimeStamp {
             endTimeStamp = endTimeStamp + 884_600

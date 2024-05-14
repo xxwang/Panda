@@ -12,13 +12,13 @@ public extension UIPickerView {
 public extension UIPickerView {
 
     @discardableResult
-    func pd_delegate(_ delegate: UIPickerViewDelegate) -> Self {
+    func xx_delegate(_ delegate: UIPickerViewDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
     @discardableResult
-    func pd_dataSource(_ dataSource: UIPickerViewDataSource) -> Self {
+    func xx_dataSource(_ dataSource: UIPickerViewDataSource) -> Self {
         self.dataSource = dataSource
         return self
     }

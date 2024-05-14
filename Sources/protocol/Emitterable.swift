@@ -4,7 +4,7 @@ public protocol Emitterable {}
 
 public extension Emitterable where Self: UIViewController {
 
-    func pd_startEmitting(position: CGPoint, images: [UIImage?]) {
+    func xx_startEmitting(position: CGPoint, images: [UIImage?]) {
 
         let emitter = CAEmitterLayer()
         emitter.emitterPosition = position
@@ -31,7 +31,7 @@ public extension Emitterable where Self: UIViewController {
         view.layer.addSublayer(emitter)
     }
 
-    func pd_stopEmitting() {
+    func xx_stopEmitting() {
         view.layer.sublayers?
             .filter { $0.isKind(of: CAEmitterLayer.self) }
             .forEach { $0.removeFromSuperlayer() }

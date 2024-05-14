@@ -5,15 +5,15 @@ import UIKit
 
 public extension UIColor {
 
-    var pd_int: Int {
-        let red = Int(pd_rgba.0 * 255) << 16
-        let green = Int(pd_rgba.1 * 255) << 8
-        let blue = Int(pd_rgba.2 * 255)
+    var xx_int: Int {
+        let red = Int(xx_rgba.0 * 255) << 16
+        let green = Int(xx_rgba.1 * 255) << 8
+        let blue = Int(xx_rgba.2 * 255)
         return red + green + blue
     }
 
 
-    var pd_uInt: UInt {
+    var xx_uInt: UInt {
         let components: [CGFloat] = {
             let comps: [CGFloat] = cgColor.components!
             guard comps.count != 4 else { return comps }
@@ -28,14 +28,14 @@ public extension UIColor {
         return UInt(colorAsUInt32)
     }
 
-    var pd_shortHexString: String? {
-        let string = pd_hexString(true).replacingOccurrences(of: "#", with: "")
+    var xx_shortHexString: String? {
+        let string = xx_hexString(true).replacingOccurrences(of: "#", with: "")
         let chrs = Array(string)
         guard chrs[0] == chrs[1], chrs[2] == chrs[3], chrs[4] == chrs[5] else { return nil }
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
 
-    var pd_shortHexOrHexString: String {
+    var xx_shortHexOrHexString: String {
         let components: [Int] = {
             let comps = cgColor.components!.map { Int($0 * 255.0) }
             guard comps.count != 4 else { return comps }
@@ -48,7 +48,7 @@ public extension UIColor {
         return "#\(chrs[0])\(chrs[2])\(chrs[4])"
     }
 
-    var pd_rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    var xx_rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         let numberOfComponents = self.cgColor.numberOfComponents
         guard let components = self.cgColor.components else {
             return (0, 0, 0, 1)
@@ -62,7 +62,7 @@ public extension UIColor {
         return (0, 0, 0, 1)
     }
 
-    var pd_hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    var xx_hsba: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var b: CGFloat = 0
@@ -71,11 +71,11 @@ public extension UIColor {
         return (h * 360, s, b, a)
     }
 
-    var pd_ciColor: CoreImage.CIColor? {
+    var xx_ciColor: CoreImage.CIColor? {
         CoreImage.CIColor(color: self)
     }
 
-    var pd_complementaryColor: UIColor? {
+    var xx_complementaryColor: UIColor? {
         let colorSpaceRGB = CGColorSpaceCreateDeviceRGB()
         let convertColorToRGBSpace: ((_ color: UIColor) -> UIColor?) = { _ -> UIColor? in
             if self.cgColor.colorSpace!.model == CGColorSpaceModel.monochrome {
@@ -97,12 +97,12 @@ public extension UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
     }
 
-    var pd_alpha: CGFloat {
+    var xx_alpha: CGFloat {
         get { cgColor.alpha }
         set { withAlphaComponent(newValue) }
     }
 
-    static var pd_random: UIColor {
+    static var xx_random: UIColor {
         let red = Int.random(in: 0 ... 255)
         let green = Int.random(in: 0 ... 255)
         let blue = Int.random(in: 0 ... 255)
@@ -111,14 +111,14 @@ public extension UIColor {
 }
 
 public extension UIColor {
-    func pd_rgbComponents() -> [CGFloat] {
+    func xx_rgbComponents() -> [CGFloat] {
         var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0, 0.0)
         getRed(&r, green: &g, blue: &b, alpha: &a)
 
         return [r, g, b]
     }
 
-    var pd_intComponents: (red: Int, green: Int, blue: Int) {
+    var xx_intComponents: (red: Int, green: Int, blue: Int) {
         let components: [CGFloat] = {
             let comps: [CGFloat] = cgColor.components!
             guard comps.count != 4 else { return comps }
@@ -130,7 +130,7 @@ public extension UIColor {
         return (red: Int(red * 255.0), green: Int(green * 255.0), blue: Int(blue * 255.0))
     }
 
-    var pd_cgFloatComponents: (red: CGFloat, green: CGFloat, blue: CGFloat) {
+    var xx_cgFloatComponents: (red: CGFloat, green: CGFloat, blue: CGFloat) {
         let components: [CGFloat] = {
             let comps: [CGFloat] = cgColor.components!
             guard comps.count != 4 else { return comps }
@@ -142,7 +142,7 @@ public extension UIColor {
         return (red: red * 255.0, green: green * 255.0, blue: blue * 255.0)
     }
 
-    var pd_hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    var xx_hsbaComponents: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var hue: CGFloat = 0.0
         var saturation: CGFloat = 0.0
         var brightness: CGFloat = 0.0
@@ -152,43 +152,43 @@ public extension UIColor {
         return (hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
 
-    var pd_redComponent: CGFloat {
+    var xx_redComponent: CGFloat {
         var red: CGFloat = 0
         getRed(&red, green: nil, blue: nil, alpha: nil)
         return red
     }
 
-    var pd_greenComponent: CGFloat {
+    var xx_greenComponent: CGFloat {
         var green: CGFloat = 0
         getRed(nil, green: &green, blue: nil, alpha: nil)
         return green
     }
 
-    var pd_blueComponent: CGFloat {
+    var xx_blueComponent: CGFloat {
         var blue: CGFloat = 0
         getRed(nil, green: nil, blue: &blue, alpha: nil)
         return blue
     }
 
-    var pd_alphaComponent: CGFloat {
+    var xx_alphaComponent: CGFloat {
         var alpha: CGFloat = 0
         getRed(nil, green: nil, blue: nil, alpha: &alpha)
         return alpha
     }
 
-    var pd_hueComponent: CGFloat {
+    var xx_hueComponent: CGFloat {
         var hue: CGFloat = 0
         getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
         return hue
     }
 
-    var pd_saturationComponent: CGFloat {
+    var xx_saturationComponent: CGFloat {
         var saturation: CGFloat = 0
         getHue(nil, saturation: &saturation, brightness: nil, alpha: nil)
         return saturation
     }
 
-    var pd_brightnessComponent: CGFloat {
+    var xx_brightnessComponent: CGFloat {
         var brightness: CGFloat = 0
         getHue(nil, saturation: nil, brightness: &brightness, alpha: nil)
         return brightness
@@ -197,28 +197,28 @@ public extension UIColor {
 
 public extension UIColor {
     var isDark: Bool {
-        let RGB = pd_rgbComponents()
+        let RGB = xx_rgbComponents()
         return (0.2126 * RGB[0] + 0.7152 * RGB[1] + 0.0722 * RGB[2]) < 0.5
     }
 
     var isBlackOrWhite: Bool {
-        let RGB = pd_rgbComponents()
+        let RGB = xx_rgbComponents()
         return (RGB[0] > 0.91 && RGB[1] > 0.91 && RGB[2] > 0.91) || (RGB[0] < 0.09 && RGB[1] < 0.09 && RGB[2] < 0.09)
     }
 
     var isBlack: Bool {
-        let RGB = pd_rgbComponents()
+        let RGB = xx_rgbComponents()
         return RGB[0] < 0.09 && RGB[1] < 0.09 && RGB[2] < 0.09
     }
 
     var isWhite: Bool {
-        let RGB = pd_rgbComponents()
+        let RGB = xx_rgbComponents()
         return RGB[0] > 0.91 && RGB[1] > 0.91 && RGB[2] > 0.91
     }
 
-    func pd_isDistinct(from color: UIColor) -> Bool {
-        let bg = pd_rgbComponents()
-        let fg = color.pd_rgbComponents()
+    func xx_isDistinct(from color: UIColor) -> Bool {
+        let bg = xx_rgbComponents()
+        let fg = color.xx_rgbComponents()
         let threshold: CGFloat = 0.25
         var result = false
 
@@ -234,9 +234,9 @@ public extension UIColor {
         return result
     }
 
-    func pd_isContrasting(with color: UIColor) -> Bool {
-        let bg = pd_rgbComponents()
-        let fg = color.pd_rgbComponents()
+    func xx_isContrasting(with color: UIColor) -> Bool {
+        let bg = xx_rgbComponents()
+        let fg = color.xx_rgbComponents()
 
         let bgLum = 0.2126 * bg[0] + 0.7152 * bg[1] + 0.0722 * bg[2]
         let fgLum = 0.2126 * fg[0] + 0.7152 * fg[1] + 0.0722 * fg[2]
@@ -362,12 +362,12 @@ public extension UIColor {
                       end: CGPoint)
     {
         let layer = CAGradientLayer.default()
-            .pd_frame(CGRect(origin: .zero, size: size))
-            .pd_colors(colors)
-            .pd_locations(locations)
-            .pd_type(type)
-            .pd_start(start)
-            .pd_end(end)
+            .xx_frame(CGRect(origin: .zero, size: size))
+            .xx_colors(colors)
+            .xx_locations(locations)
+            .xx_type(type)
+            .xx_start(start)
+            .xx_end(end)
 
         UIGraphicsBeginImageContext(size)
         layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -382,7 +382,7 @@ public extension UIColor {
 
 public extension UIColor {
 
-    func pd_image(by size: CGSize) -> UIImage {
+    func xx_image(by size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
 
@@ -395,14 +395,14 @@ public extension UIColor {
         return image!
     }
 
-    func pd_hexString(_ hashPrefix: Bool = true) -> String {
+    func xx_hexString(_ hashPrefix: Bool = true) -> String {
         var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0, 0.0)
         getRed(&r, green: &g, blue: &b, alpha: &a)
         let prefix = hashPrefix ? "#" : ""
         return String(format: "\(prefix)%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255))
     }
 
-    static func pd_proceesHex(hex: String, alpha: CGFloat) -> UIColor {
+    static func xx_proceesHex(hex: String, alpha: CGFloat) -> UIColor {
         if hex.isEmpty {
             return UIColor.clear
         }
@@ -447,7 +447,7 @@ public extension UIColor {
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
     }
 
-    static func pd_blend(_ color1: UIColor,
+    static func xx_blend(_ color1: UIColor,
                          intensity1: CGFloat = 0.5,
                          with color2: UIColor,
                          intensity2: CGFloat = 0.5) -> UIColor
@@ -491,7 +491,7 @@ public extension UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 
-    func pd_add(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) -> UIColor {
+    func xx_add(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) -> UIColor {
         var (oldHue, oldSat, oldBright, oldAlpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         getHue(&oldHue, saturation: &oldSat, brightness: &oldBright, alpha: &oldAlpha)
 
@@ -510,7 +510,7 @@ public extension UIColor {
         return UIColor(hue: newHue, saturation: newSat, brightness: newBright, alpha: newAlpha)
     }
 
-    func pd_add(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
+    func xx_add(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) -> UIColor {
         var (oldRed, oldGreen, oldBlue, oldAlpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         getRed(&oldRed, green: &oldGreen, blue: &oldBlue, alpha: &oldAlpha)
 
@@ -521,27 +521,27 @@ public extension UIColor {
         return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: newAlpha)
     }
 
-    func pd_add(hsb color: UIColor) -> UIColor {
+    func xx_add(hsb color: UIColor) -> UIColor {
         var (h, s, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         color.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return pd_add(hue: h, saturation: s, brightness: b, alpha: 0)
+        return xx_add(hue: h, saturation: s, brightness: b, alpha: 0)
     }
 
-    func pd_add(rgb color: UIColor) -> UIColor {
-        pd_add(red: color.pd_redComponent, green: color.pd_greenComponent, blue: color.pd_blueComponent, alpha: 0)
+    func xx_add(rgb color: UIColor) -> UIColor {
+        xx_add(red: color.xx_redComponent, green: color.xx_greenComponent, blue: color.xx_blueComponent, alpha: 0)
     }
 
     func add(hsba color: UIColor) -> UIColor {
         var (h, s, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         color.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return pd_add(hue: h, saturation: s, brightness: b, alpha: a)
+        return xx_add(hue: h, saturation: s, brightness: b, alpha: a)
     }
 
-    func pd_add(rgba color: UIColor) -> UIColor {
-        pd_add(red: color.pd_redComponent, green: color.pd_greenComponent, blue: color.pd_blueComponent, alpha: color.pd_alphaComponent)
+    func xx_add(rgba color: UIColor) -> UIColor {
+        xx_add(red: color.xx_redComponent, green: color.xx_greenComponent, blue: color.xx_blueComponent, alpha: color.xx_alphaComponent)
     }
 
-    func pd_color(minSaturation: CGFloat) -> UIColor {
+    func xx_color(minSaturation: CGFloat) -> UIColor {
         var (hue, saturation, brightness, alpha): (CGFloat, CGFloat, CGFloat, CGFloat) = (0.0, 0.0, 0.0, 0.0)
         getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
 
@@ -550,7 +550,7 @@ public extension UIColor {
             : self
     }
 
-    func pd_lighten(by percentage: CGFloat = 0.2) -> UIColor {
+    func xx_lighten(by percentage: CGFloat = 0.2) -> UIColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: min(red + percentage, 1.0),
@@ -559,7 +559,7 @@ public extension UIColor {
                        alpha: alpha)
     }
 
-    func pd_darken(by percentage: CGFloat = 0.2) -> UIColor {
+    func xx_darken(by percentage: CGFloat = 0.2) -> UIColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: max(red - percentage, 0),
@@ -571,19 +571,19 @@ public extension UIColor {
 
 public extension UIColor {
 
-    static func pd_darkModeColor(hex: String) -> UIColor {
-        pd_darkModeColor(lightColor: hex, darkColor: hex)
+    static func xx_darkModeColor(hex: String) -> UIColor {
+        xx_darkModeColor(lightColor: hex, darkColor: hex)
     }
 
-    static func pd_darkModeColor(lightColor: String, darkColor: String) -> UIColor {
-        pd_darkModeColor(lightColor: UIColor(hex: lightColor), darkColor: UIColor(hex: darkColor))
+    static func xx_darkModeColor(lightColor: String, darkColor: String) -> UIColor {
+        xx_darkModeColor(lightColor: UIColor(hex: lightColor), darkColor: UIColor(hex: darkColor))
     }
 
-    static func pd_darkModeColor(color: UIColor) -> UIColor {
-        pd_darkModeColor(lightColor: color, darkColor: color)
+    static func xx_darkModeColor(color: UIColor) -> UIColor {
+        xx_darkModeColor(lightColor: color, darkColor: color)
     }
 
-    static func pd_darkModeColor(lightColor: UIColor, darkColor: UIColor) -> UIColor {
+    static func xx_darkModeColor(lightColor: UIColor, darkColor: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
             return UIColor { traitCollection -> UIColor in
                 if traitCollection.userInterfaceStyle == .dark {
@@ -600,7 +600,7 @@ public extension UIColor {
 
 public extension UIColor {
 
-    static func pd_createLinearGradientColor(_ size: CGSize,
+    static func xx_createLinearGradientColor(_ size: CGSize,
                                              colors: [UIColor],
                                              locations: [CGFloat] = [0, 1],
                                              start: CGPoint,
@@ -609,7 +609,7 @@ public extension UIColor {
         UIColor(size, colors: colors, locations: locations, type: .axial, start: start, end: end)
     }
 
-    static func pd_createLinearGradientLayer(_ size: CGSize,
+    static func xx_createLinearGradientLayer(_ size: CGSize,
                                              colors: [UIColor],
                                              locations: [CGFloat] = [0, 1],
                                              start: CGPoint,
@@ -623,13 +623,13 @@ public extension UIColor {
                         type: .axial)
     }
 
-    static func pd_createLinearGradientImage(_ size: CGSize,
+    static func xx_createLinearGradientImage(_ size: CGSize,
                                              colors: [UIColor],
                                              locations: [CGFloat] = [0, 1],
                                              start: CGPoint,
                                              end: CGPoint) -> UIImage?
     {
-        let layer = pd_createLinearGradientLayer(size, colors: colors, locations: locations, start: start, end: end)
+        let layer = xx_createLinearGradientLayer(size, colors: colors, locations: locations, start: start, end: end)
         UIGraphicsBeginImageContext(size)
         layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -641,34 +641,34 @@ public extension UIColor {
 
 public extension [UIColor] {
 
-    func pd_createLinearGradientColor(_ size: CGSize,
+    func xx_createLinearGradientColor(_ size: CGSize,
                                       locations: [CGFloat] = [0, 1],
                                       start: CGPoint,
                                       end: CGPoint) -> UIColor?
     {
-        UIColor.pd_createLinearGradientColor(size, colors: self, locations: locations, start: start, end: end)
+        UIColor.xx_createLinearGradientColor(size, colors: self, locations: locations, start: start, end: end)
     }
 
-    func pd_createLinearGradientLayer(_ size: CGSize,
+    func xx_createLinearGradientLayer(_ size: CGSize,
                                       locations: [CGFloat] = [0, 1],
                                       start: CGPoint,
                                       end: CGPoint) -> CAGradientLayer
     {
-        UIColor.pd_createLinearGradientLayer(size, colors: self, locations: locations, start: start, end: end)
+        UIColor.xx_createLinearGradientLayer(size, colors: self, locations: locations, start: start, end: end)
     }
 
-    func pd_createLinearGradientImage(_ size: CGSize,
+    func xx_createLinearGradientImage(_ size: CGSize,
                                       locations: [CGFloat] = [0, 1],
                                       start: CGPoint,
                                       end: CGPoint) -> UIImage?
     {
-        UIColor.pd_createLinearGradientImage(size, colors: self, locations: locations, start: start, end: end)
+        UIColor.xx_createLinearGradientImage(size, colors: self, locations: locations, start: start, end: end)
     }
 }
 
 public extension UIColor {
 
-    func pd_alpha(_ value: CGFloat) -> UIColor {
+    func xx_alpha(_ value: CGFloat) -> UIColor {
         return self.withAlphaComponent(value)
     }
 }

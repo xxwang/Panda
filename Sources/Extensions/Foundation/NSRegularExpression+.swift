@@ -1,7 +1,7 @@
 import Foundation
 
 public extension NSRegularExpression {
-    func pd_enumerateMatches(in string: String,
+    func xx_enumerateMatches(in string: String,
                              options: NSRegularExpression.MatchingOptions = [],
                              range: Range<String.Index>,
                              using block: (_ result: NSTextCheckingResult?,
@@ -15,28 +15,28 @@ public extension NSRegularExpression {
         }
     }
 
-    func pd_matches(in string: String,
+    func xx_matches(in string: String,
                     options: NSRegularExpression.MatchingOptions = [],
                     range: Range<String.Index>) -> [NSTextCheckingResult]
     {
         return self.matches(in: string, options: options, range: NSRange(range, in: string))
     }
 
-    func pd_numberOfMatches(in string: String,
+    func xx_numberOfMatches(in string: String,
                             options: NSRegularExpression.MatchingOptions = [],
                             range: Range<String.Index>) -> Int
     {
         return self.numberOfMatches(in: string, options: options, range: NSRange(range, in: string))
     }
 
-    func pd_firstMatch(in string: String,
+    func xx_firstMatch(in string: String,
                        options: NSRegularExpression.MatchingOptions = [],
                        range: Range<String.Index>) -> NSTextCheckingResult?
     {
         return self.firstMatch(in: string, options: options, range: NSRange(range, in: string))
     }
 
-    func pd_rangeOfFirstMatch(in string: String,
+    func xx_rangeOfFirstMatch(in string: String,
                               options: NSRegularExpression.MatchingOptions = [],
                               range: Range<String.Index>) -> Range<String.Index>?
     {
@@ -45,7 +45,7 @@ public extension NSRegularExpression {
                                        range: NSRange(range, in: string)), in: string)
     }
 
-    func pd_stringByReplacingMatches(in string: String,
+    func xx_stringByReplacingMatches(in string: String,
                                      options: NSRegularExpression.MatchingOptions = [],
                                      range: Range<String.Index>,
                                      with template: String) -> String
@@ -57,7 +57,7 @@ public extension NSRegularExpression {
     }
 
     @discardableResult
-    func pd_replaceMatches(in string: inout String,
+    func xx_replaceMatches(in string: inout String,
                            options: NSRegularExpression.MatchingOptions = [],
                            range: Range<String.Index>,
                            with template: String) -> Int

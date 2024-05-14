@@ -5,15 +5,15 @@ import UIKit
 
 public extension SCNVector3 {
 
-    var pd_absolute: SCNVector3 {
+    var xx_absolute: SCNVector3 {
         return SCNVector3(Swift.abs(x), Swift.abs(y), Swift.abs(z))
     }
 
-    var pd_length: Float {
+    var xx_length: Float {
         return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))
     }
 
-    var pd_normalized: SCNVector3 {
+    var xx_normalized: SCNVector3 {
         let length = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))
         return SCNVector3(x / length, y / length, z / length)
     }

@@ -12,12 +12,12 @@ public extension CAGradientLayer {
     {
         self.init()
 
-        pd_frame(frame)
-            .pd_colors(colors)
-            .pd_locations(locations ?? [])
-            .pd_start(start)
-            .pd_end(end)
-            .pd_type(type)
+        xx_frame(frame)
+            .xx_colors(colors)
+            .xx_locations(locations ?? [])
+            .xx_start(start)
+            .xx_end(end)
+            .xx_type(type)
     }
 }
 
@@ -32,14 +32,14 @@ public extension CAGradientLayer {
 
 public extension CAGradientLayer {
     @discardableResult
-    func pd_colors(_ colors: [UIColor]) -> Self {
+    func xx_colors(_ colors: [UIColor]) -> Self {
         let cgColors = colors.map(\.cgColor)
         self.colors = cgColors
         return self
     }
 
     @discardableResult
-    func pd_locations(_ locations: [CGFloat] = [0, 1]) -> Self {
+    func xx_locations(_ locations: [CGFloat] = [0, 1]) -> Self {
         let locationNumbers = locations.map { flt in
             NSNumber(floatLiteral: flt)
         }
@@ -48,19 +48,19 @@ public extension CAGradientLayer {
     }
 
     @discardableResult
-    func pd_start(_ startPoint: CGPoint = .zero) -> Self {
+    func xx_start(_ startPoint: CGPoint = .zero) -> Self {
         self.startPoint = startPoint
         return self
     }
 
     @discardableResult
-    func pd_end(_ endPoint: CGPoint = .zero) -> Self {
+    func xx_end(_ endPoint: CGPoint = .zero) -> Self {
         self.endPoint = endPoint
         return self
     }
 
     @discardableResult
-    func pd_type(_ type: CAGradientLayerType) -> Self {
+    func xx_type(_ type: CAGradientLayerType) -> Self {
         self.type = type
         return self
     }

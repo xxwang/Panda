@@ -4,7 +4,7 @@ import UIKit
 
 public extension UISegmentedControl {
 
-    var pd_images: [UIImage] {
+    var xx_images: [UIImage] {
         get {
             let range = 0 ..< numberOfSegments
             return range.compactMap { self.imageForSegment(at: $0) }
@@ -17,7 +17,7 @@ public extension UISegmentedControl {
         }
     }
 
-    var pd_titles: [String] {
+    var xx_titles: [String] {
         get {
             let range = 0 ..< numberOfSegments
             return range.compactMap { self.titleForSegment(at: $0) }

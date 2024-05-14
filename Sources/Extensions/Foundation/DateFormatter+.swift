@@ -21,19 +21,19 @@ extension DateFormatter {
 
 public extension DateFormatter {
     @discardableResult
-    func pd_dateFormat(_ dateFormat: String) -> Self {
+    func xx_dateFormat(_ dateFormat: String) -> Self {
         self.dateFormat = dateFormat
         return self
     }
 
     @discardableResult
-    func pd_locale(_ locale: Locale) -> Self {
+    func xx_locale(_ locale: Locale) -> Self {
         self.locale = locale
         return self
     }
 
     @discardableResult
-    func pd_timeZone(_ timeZone: TimeZone) -> Self {
+    func xx_timeZone(_ timeZone: TimeZone) -> Self {
         self.timeZone = timeZone
         return self
     }

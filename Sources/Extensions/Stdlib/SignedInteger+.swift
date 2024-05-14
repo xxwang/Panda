@@ -3,7 +3,7 @@ import Foundation
 
 public extension SignedInteger {
 
-    func pd_abs() -> Self {
+    func xx_abs() -> Self {
         return Swift.abs(self)
     }
 }

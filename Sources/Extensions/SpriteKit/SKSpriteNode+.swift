@@ -3,7 +3,7 @@ import SpriteKit
 
 public extension SKSpriteNode {
 
-    func pd_aspectFill(to fillSize: CGSize) {
+    func xx_aspectFill(to fillSize: CGSize) {
         guard let textureSize = texture?.size() else { return }
 
         let width = textureSize.width

@@ -13,73 +13,73 @@ public extension CAShapeLayer {
 
 public extension CAShapeLayer {
     @discardableResult
-    func pd_path(_ path: CGPath) -> Self {
+    func xx_path(_ path: CGPath) -> Self {
         self.path = path
         return self
     }
 
     @discardableResult
-    func pd_lineWidth(_ width: CGFloat) -> Self {
+    func xx_lineWidth(_ width: CGFloat) -> Self {
         lineWidth = width
         return self
     }
 
     @discardableResult
-    func pd_fillColor(_ color: UIColor) -> Self {
+    func xx_fillColor(_ color: UIColor) -> Self {
         fillColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func pd_strokeColor(_ color: UIColor) -> Self {
+    func xx_strokeColor(_ color: UIColor) -> Self {
         strokeColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func pd_strokeStart(_ strokeStart: CGFloat) -> Self {
+    func xx_strokeStart(_ strokeStart: CGFloat) -> Self {
         self.strokeStart = strokeStart
         return self
     }
 
     @discardableResult
-    func pd_strokeEnd(_ strokeEnd: CGFloat) -> Self {
+    func xx_strokeEnd(_ strokeEnd: CGFloat) -> Self {
         self.strokeEnd = strokeEnd
         return self
     }
 
     @discardableResult
-    func pd_miterLimit(_ miterLimit: CGFloat) -> Self {
+    func xx_miterLimit(_ miterLimit: CGFloat) -> Self {
         self.miterLimit = miterLimit
         return self
     }
 
     @discardableResult
-    func pd_lineCap(_ lineCap: CAShapeLayerLineCap) -> Self {
+    func xx_lineCap(_ lineCap: CAShapeLayerLineCap) -> Self {
         self.lineCap = lineCap
         return self
     }
 
     @discardableResult
-    func pd_lineJoin(_ lineJoin: CAShapeLayerLineJoin) -> Self {
+    func xx_lineJoin(_ lineJoin: CAShapeLayerLineJoin) -> Self {
         self.lineJoin = lineJoin
         return self
     }
 
     @discardableResult
-    func pd_fillRule(_ fillRule: CAShapeLayerFillRule) -> Self {
+    func xx_fillRule(_ fillRule: CAShapeLayerFillRule) -> Self {
         self.fillRule = fillRule
         return self
     }
 
     @discardableResult
-    func pd_lineDashPhase(_ lineDashPhase: CGFloat) -> Self {
+    func xx_lineDashPhase(_ lineDashPhase: CGFloat) -> Self {
         self.lineDashPhase = lineDashPhase
         return self
     }
 
     @discardableResult
-    func pd_lineDashPattern(_ lineDashPattern: [NSNumber]) -> Self {
+    func xx_lineDashPattern(_ lineDashPattern: [NSNumber]) -> Self {
         self.lineDashPattern = lineDashPattern
         return self
     }

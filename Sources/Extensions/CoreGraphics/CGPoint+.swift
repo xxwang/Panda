@@ -3,7 +3,7 @@ import CoreGraphics
 import Foundation
 
 public extension CGPoint {
-    func pd_distance(to point: CGPoint) -> CGFloat {
+    func xx_distance(to point: CGPoint) -> CGFloat {
         return sqrt(pow(point.x - x, 2) + pow(point.y - y, 2))
     }
 }

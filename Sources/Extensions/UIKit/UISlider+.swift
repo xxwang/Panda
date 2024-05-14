@@ -2,7 +2,7 @@ import UIKit
 
 public extension UISlider {
 
-    func pd_setValue(_ value: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
+    func xx_setValue(_ value: Float, animated: Bool = true, duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
         if animated {
             UIView.animate(withDuration: duration, animations: {
                 self.setValue(value, animated: true)
@@ -43,52 +43,52 @@ public extension UISlider {
 
 public extension UISlider {
 
-    func pd_value(_ value: Float) -> Self {
+    func xx_value(_ value: Float) -> Self {
         self.value = value
         return self
     }
 
-    func pd_minimumValue(_ minimumValue: Float) -> Self {
+    func xx_minimumValue(_ minimumValue: Float) -> Self {
         self.minimumValue = value
         return self
     }
 
-    func pd_maximumValue(_ maximumValue: Float) -> Self {
+    func xx_maximumValue(_ maximumValue: Float) -> Self {
         self.maximumValue = maximumValue
         return self
     }
 
-    func pd_minimumValueImage(_ minimumValueImage: UIImage?) -> Self {
+    func xx_minimumValueImage(_ minimumValueImage: UIImage?) -> Self {
         self.minimumValueImage = minimumValueImage
         return self
     }
 
-    func pd_maximumValueImage(_ maximumValueImage: UIImage?) -> Self {
+    func xx_maximumValueImage(_ maximumValueImage: UIImage?) -> Self {
         self.maximumValueImage = maximumValueImage
         return self
     }
 
-    func pd_isContinuous(_ isContinuous: Bool) -> Self {
+    func xx_isContinuous(_ isContinuous: Bool) -> Self {
         self.isContinuous = isContinuous
         return self
     }
 
-    func pd_minimumTrackTintColor(_ minimumTrackTintColor: UIColor?) -> Self {
+    func xx_minimumTrackTintColor(_ minimumTrackTintColor: UIColor?) -> Self {
         self.minimumTrackTintColor = minimumTrackTintColor
         return self
     }
 
-    func pd_maximumTrackTintColor(_ maximumTrackTintColor: UIColor?) -> Self {
+    func xx_maximumTrackTintColor(_ maximumTrackTintColor: UIColor?) -> Self {
         self.maximumTrackTintColor = maximumTrackTintColor
         return self
     }
 
-    func pd_thumbTintColor(_ thumbTintColor: UIColor?) -> Self {
+    func xx_thumbTintColor(_ thumbTintColor: UIColor?) -> Self {
         self.thumbTintColor = thumbTintColor
         return self
     }
 
-    func pd_callback(_ callback: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
+    func xx_callback(_ callback: ((Float?) -> Void)?, for controlEvent: UIControl.Event = .valueChanged) -> Self {
         self.callback = callback
         self.addTarget(self, action: #selector(sliderValueChanged), for: controlEvent)
         return self

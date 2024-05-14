@@ -4,42 +4,42 @@ import UIKit
 
 public extension UITextField {
 
-    var pd_isEmpty: Bool {
-        return self.text.pd_isNilOrEmpty
+    var xx_isEmpty: Bool {
+        return self.text.xx_isNilOrEmpty
     }
 }
 
 public extension UITextField {
-    func pd_clear() {
+    func xx_clear() {
         self.text = ""
-        self.attributedText = "".pd_nsMutableAttributedString()
+        self.attributedText = "".xx_nsMutableAttributedString()
     }
 
     @discardableResult
-    func pd_addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
+    func xx_addToolbar(items: [UIBarButtonItem]?, height: CGFloat = 44) -> UIToolbar {
         let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: sizer.screen.width, height: height)))
         toolBar.setItems(items, animated: false)
         inputAccessoryView = toolBar
         return toolBar
     }
 
-    func pd_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+    func xx_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
         guard !text.isEmpty else { return true }
         guard let oldContent = self.text else { return false }
 
         if let _ = markedTextRange {
             guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
 
-            if let weakRegex = regex, !text.pd_isMatchRegexp(weakRegex) { return false }
-            let allContent = oldContent.pd_subString(to: range.location) + text
+            if let weakRegex = regex, !text.xx_isMatchRegexp(weakRegex) { return false }
+            let allContent = oldContent.xx_subString(to: range.location) + text
             if allContent.count > maxCharacters {
-                let newContent = allContent.pd_subString(to: maxCharacters)
+                let newContent = allContent.xx_subString(to: maxCharacters)
                 self.text = newContent
                 return false
             }
         } else {
-            guard !text.pd_isNineKeyBoard() else { return true }
-            if let weakRegex = regex, !text.pd_isMatchRegexp(weakRegex) { return false }
+            guard !text.xx_isNineKeyBoard() else { return true }
+            if let weakRegex = regex, !text.xx_isMatchRegexp(weakRegex) { return false }
             guard oldContent.count + text.count <= maxCharacters else { return false }
         }
         return true
@@ -58,150 +58,150 @@ extension UITextField {
 public extension UITextField {
 
     @discardableResult
-    func pd_text(_ text: String) -> Self {
+    func xx_text(_ text: String) -> Self {
         self.text = text
         return self
     }
 
     @discardableResult
-    func pd_attributedText(_ attributedText: NSAttributedString) -> Self {
+    func xx_attributedText(_ attributedText: NSAttributedString) -> Self {
         self.attributedText = attributedText
         return self
     }
 
     @discardableResult
-    func pd_placeholder(_ placeholder: String) -> Self {
+    func xx_placeholder(_ placeholder: String) -> Self {
         self.placeholder = placeholder
         return self
     }
 
     @discardableResult
-    func pd_attributedPlaceholder(_ attributedPlaceholder: NSAttributedString) -> Self {
+    func xx_attributedPlaceholder(_ attributedPlaceholder: NSAttributedString) -> Self {
         self.attributedPlaceholder = attributedPlaceholder
         return self
     }
 
     @discardableResult
-    func pd_placeholderColor(_ color: UIColor) -> Self {
+    func xx_placeholderColor(_ color: UIColor) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
+            var attributes = holder.xx_attributes()
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
+            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.xx_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
-                .pd_addAttributes([.foregroundColor: color], for: holder.pd_fullNSRange())
+                .xx_addAttributes([.foregroundColor: color], for: holder.xx_fullNSRange())
             self.attributedPlaceholder = attributedPlaceholder
         }
         return self
     }
 
     @discardableResult
-    func pd_placeholderFont(_ font: UIFont) -> Self {
+    func xx_placeholderFont(_ font: UIFont) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
+            var attributes = holder.xx_attributes()
             attributes[.font] = font
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.string.pd_fullNSRange())
+            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.string.xx_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
-                .pd_addAttributes([.font: font], for: holder.pd_fullNSRange())
+                .xx_addAttributes([.font: font], for: holder.xx_fullNSRange())
             self.attributedPlaceholder = attributedPlaceholder
         }
         return self
     }
 
     @discardableResult
-    func pd_placeholder(_ color: UIColor, font: UIFont) -> Self {
+    func xx_placeholder(_ color: UIColor, font: UIFont) -> Self {
         if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
+            var attributes = holder.xx_attributes()
             attributes[.font] = font
             attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
+            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.xx_fullNSRange())
         } else if let holder = placeholder {
             let attributedPlaceholder = NSMutableAttributedString(string: holder)
             attributedPlaceholder
-                .pd_addAttributes([.font: font, .foregroundColor: color], for: holder.pd_fullNSRange())
+                .xx_addAttributes([.font: font, .foregroundColor: color], for: holder.xx_fullNSRange())
             self.attributedPlaceholder = attributedPlaceholder
         }
         return self
     }
 
     @discardableResult
-    func pd_textAlignment(_ textAlignment: NSTextAlignment) -> Self {
+    func xx_textAlignment(_ textAlignment: NSTextAlignment) -> Self {
         self.textAlignment = textAlignment
         return self
     }
 
     @discardableResult
-    func pd_textColor(_ textColor: UIColor) -> Self {
+    func xx_textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
         return self
     }
 
     @discardableResult
-    func pd_font(_ font: UIFont) -> Self {
+    func xx_font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
 
-    func pd_adjustsFontSizeToFitWidth(_ adjustsFontSizeToFitWidth: Bool) -> Self {
+    func xx_adjustsFontSizeToFitWidth(_ adjustsFontSizeToFitWidth: Bool) -> Self {
         self.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
         return self
     }
 
     @discardableResult
-    func pd_systemFont(_ fontSize: CGFloat) -> Self {
+    func xx_systemFont(_ fontSize: CGFloat) -> Self {
         font = UIFont.systemFont(ofSize: fontSize)
         return self
     }
 
     @discardableResult
-    func pd_delegate(_ delegate: UITextFieldDelegate) -> Self {
+    func xx_delegate(_ delegate: UITextFieldDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
     @discardableResult
-    func pd_keyboardType(_ keyboardType: UIKeyboardType) -> Self {
+    func xx_keyboardType(_ keyboardType: UIKeyboardType) -> Self {
         self.keyboardType = keyboardType
         return self
     }
 
     @discardableResult
-    func pd_returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self {
+    func xx_returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self {
         self.returnKeyType = returnKeyType
         return self
     }
 
     @discardableResult
-    func pd_leftViewMode(_ mode: ViewMode) -> Self {
+    func xx_leftViewMode(_ mode: ViewMode) -> Self {
         leftViewMode = mode
         return self
     }
 
     @discardableResult
-    func pd_rightViewMode(_ mode: ViewMode) -> Self {
+    func xx_rightViewMode(_ mode: ViewMode) -> Self {
         rightViewMode = mode
         return self
     }
 
     @discardableResult
-    func pd_leftPadding(_ padding: CGFloat) -> Self {
+    func xx_leftPadding(_ padding: CGFloat) -> Self {
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         leftViewMode = .always
         return self
     }
 
     @discardableResult
-    func pd_rightPadding(_ padding: CGFloat) -> Self {
+    func xx_rightPadding(_ padding: CGFloat) -> Self {
         rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         rightViewMode = .always
         return self
     }
 
     @discardableResult
-    func pd_leftView(_ leftView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
+    func xx_leftView(_ leftView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
         let containerView = UIView(frame: containerRect)
         if let contentRect { leftView?.frame = contentRect }
         if let leftView { containerView.addSubview(leftView) }
@@ -213,7 +213,7 @@ public extension UITextField {
     }
 
     @discardableResult
-    func pd_rightView(_ rightView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
+    func xx_rightView(_ rightView: UIView?, containerRect: CGRect, contentRect: CGRect? = nil) -> Self {
 
         let containerView = UIView(frame: containerRect)
         if let contentRect {
@@ -232,19 +232,19 @@ public extension UITextField {
     }
 
     @discardableResult
-    func pd_inputAccessoryView(_ inputAccessoryView: UIView?) -> Self {
+    func xx_inputAccessoryView(_ inputAccessoryView: UIView?) -> Self {
         self.inputAccessoryView = inputAccessoryView
         return self
     }
 
     @discardableResult
-    func pd_inputView(_ inputView: UIView) -> Self {
+    func xx_inputView(_ inputView: UIView) -> Self {
         self.inputView = inputView
         return self
     }
 
     @discardableResult
-    func pd_toolbar(_ toobar: UIToolbar) -> Self {
+    func xx_toolbar(_ toobar: UIToolbar) -> Self {
         inputAccessoryView = toobar
         return self
     }

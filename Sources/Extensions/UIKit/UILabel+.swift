@@ -1,32 +1,32 @@
 import UIKit
 
 public extension UILabel {
-    var pd_fontSize: CGFloat {
+    var xx_fontSize: CGFloat {
         let context = NSStringDrawingContext()
         context.minimumScaleFactor = minimumScaleFactor
         return font.pointSize * context.actualScaleFactor
     }
 
-    var pd_requiredHeight: CGFloat {
+    var xx_requiredHeight: CGFloat {
         UILabel.default()
-            .pd_frame(CGRect(x: 0, y: 0, width: frame.width, height: .greatestFiniteMagnitude))
-            .pd_lineBreakMode(.byWordWrapping)
-            .pd_font(font)
-            .pd_text(text)
-            .pd_attributedText(attributedText)
-            .pd_sizeToFit()
-            .pd_height
+            .xx_frame(CGRect(x: 0, y: 0, width: frame.width, height: .greatestFiniteMagnitude))
+            .xx_lineBreakMode(.byWordWrapping)
+            .xx_font(font)
+            .xx_text(text)
+            .xx_attributedText(attributedText)
+            .xx_sizeToFit()
+            .xx_height
     }
 
-    var pd_textLines: [String] {
-        return (text ?? "").pd_lines(pd_width, font: font!)
+    var xx_textLines: [String] {
+        return (text ?? "").xx_lines(xx_width, font: font!)
     }
 
-    var pd_firstLineString: String? {
-        pd_linesContent().first
+    var xx_firstLineString: String? {
+        xx_linesContent().first
     }
 
-    var pd_isTruncated: Bool {
+    var xx_isTruncated: Bool {
         guard let labelText = text else { return false }
         let theorySize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
         let labelTextSize = (labelText as NSString)
@@ -60,26 +60,26 @@ public extension UILabel {
 
 public extension UILabel {
 
-    func pd_textSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        return self.text?.pd_stringSize(lineWidth, font: self.font) ?? .zero
+    func xx_textSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+        return self.text?.xx_stringSize(lineWidth, font: self.font) ?? .zero
     }
 
-    func pd_attributedTextSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
-        return self.attributedText?.pd_attributedSize(lineWidth) ?? .zero
+    func xx_attributedTextSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+        return self.attributedText?.xx_attributedSize(lineWidth) ?? .zero
     }
 }
 
 public extension UILabel {
 
     @discardableResult
-    func pd_blend(_ text: String?,
+    func xx_blend(_ text: String?,
                   images: [UIImage?] = [],
                   spacing: CGFloat = 5,
                   scale: CGFloat,
                   position: Int = 0,
                   isOrgin: Bool = false) -> NSMutableAttributedString
     {
-        let headString = text?.pd_subString(to: position) ?? ""
+        let headString = text?.xx_subString(to: position) ?? ""
         let attributedString = NSMutableAttributedString(string: headString)
 
         for image in images {
@@ -89,17 +89,17 @@ public extension UILabel {
             let imageWidth = (image.size.width / image.size.height) * imageHeight
             let attachTop = (font.lineHeight - font.pointSize) / 2
             let imageAttributedString = NSTextAttachment.default()
-                .pd_image(image)
-                .pd_bounds(CGRect(x: -3, y: -attachTop, width: imageWidth, height: imageHeight))
+                .xx_image(image)
+                .xx_bounds(CGRect(x: -3, y: -attachTop, width: imageWidth, height: imageHeight))
                 .toAttributedString()
             attributedString.append(imageAttributedString)
             attributedString.append(NSAttributedString(string: " "))
         }
 
-        let tailString = text?.pd_subString(from: position) ?? ""
+        let tailString = text?.xx_subString(from: position) ?? ""
         attributedString.append(NSAttributedString(string: tailString))
 
-        let spaceW = " ".pd_stringSize(.greatestFiniteMagnitude, font: font).width
+        let spaceW = " ".xx_stringSize(.greatestFiniteMagnitude, font: font).width
         let range = NSRange(location: 0, length: images.count * 2)
         attributedString.addAttribute(.kern, value: spacing - spaceW, range: range)
 
@@ -109,19 +109,19 @@ public extension UILabel {
     }
 
     @discardableResult
-    func pd_setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
+    func xx_setText(_ text: String, lineSpacing: CGFloat, wordSpacing: CGFloat = 1) -> NSMutableAttributedString {
         let style = NSMutableParagraphStyle.default()
-            .pd_lineBreakMode(.byCharWrapping)
-            .pd_alignment(.left)
-            .pd_lineSpacing(lineSpacing)
-            .pd_hyphenationFactor(1.0)
-            .pd_firstLineHeadIndent(0.0)
-            .pd_paragraphSpacingBefore(0.0)
-            .pd_headIndent(0)
-            .pd_tailIndent(0)
+            .xx_lineBreakMode(.byCharWrapping)
+            .xx_alignment(.left)
+            .xx_lineSpacing(lineSpacing)
+            .xx_hyphenationFactor(1.0)
+            .xx_firstLineHeadIndent(0.0)
+            .xx_paragraphSpacingBefore(0.0)
+            .xx_headIndent(0)
+            .xx_tailIndent(0)
 
-        let attrString = text.pd_nsMutableAttributedString()
-            .pd_addAttributes([
+        let attrString = text.xx_nsMutableAttributedString()
+            .xx_addAttributes([
                 .paragraphStyle: style,
                 .kern: wordSpacing,
                 .font: font ?? .systemFont(ofSize: 14),
@@ -130,7 +130,7 @@ public extension UILabel {
         return attrString
     }
 
-    func pd_linesContent(_ labelWidth: CGFloat? = nil,
+    func xx_linesContent(_ labelWidth: CGFloat? = nil,
                          lineSpacing: CGFloat = 0.0,
                          wordSpacing: CGFloat = 0.0,
                          paragraphSpacing: CGFloat = 0.0) -> [String]
@@ -139,17 +139,17 @@ public extension UILabel {
         let labelWidth: CGFloat = labelWidth ?? bounds.width
 
         let style = NSMutableParagraphStyle.default()
-            .pd_lineBreakMode(lineBreakMode)
-            .pd_alignment(textAlignment)
-            .pd_lineSpacing(lineSpacing)
-            .pd_paragraphSpacing(paragraphSpacing)
+            .xx_lineBreakMode(lineBreakMode)
+            .xx_alignment(textAlignment)
+            .xx_lineSpacing(lineSpacing)
+            .xx_paragraphSpacing(paragraphSpacing)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
             .paragraphStyle: style,
             .kern: wordSpacing,
         ]
 
-        let attributedString = text.pd_nsMutableAttributedString().pd_addAttributes(attributes)
+        let attributedString = text.xx_nsMutableAttributedString().xx_addAttributes(attributes)
         let frameSetter = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
 
         let path = CGMutablePath()
@@ -160,7 +160,7 @@ public extension UILabel {
         var result = [String]()
         for line in lines {
             let lineRange = CTLineGetStringRange(line as! CTLine)
-            result.append(text.pd_subString(from: lineRange.location, length: lineRange.length))
+            result.append(text.xx_subString(from: lineRange.location, length: lineRange.length))
         }
         return result
     }
@@ -178,140 +178,140 @@ extension UILabel {
 public extension UILabel {
 
     @discardableResult
-    func pd_text(_ text: String?) -> Self {
+    func xx_text(_ text: String?) -> Self {
         self.text = text
         return self
     }
 
     @discardableResult
-    func pd_numberOfLines(_ lines: Int) -> Self {
+    func xx_numberOfLines(_ lines: Int) -> Self {
         numberOfLines = lines
         return self
     }
 
     @discardableResult
-    func pd_lineBreakMode(_ mode: NSLineBreakMode) -> Self {
+    func xx_lineBreakMode(_ mode: NSLineBreakMode) -> Self {
         lineBreakMode = mode
         return self
     }
 
     @discardableResult
-    func pd_textAlignment(_ alignment: NSTextAlignment) -> Self {
+    func xx_textAlignment(_ alignment: NSTextAlignment) -> Self {
         textAlignment = alignment
         return self
     }
 
     @discardableResult
-    func pd_attributedText(_ attributedText: NSAttributedString?) -> Self {
+    func xx_attributedText(_ attributedText: NSAttributedString?) -> Self {
         self.attributedText = attributedText
         return self
     }
 
     @discardableResult
-    func pd_textColor(_ color: UIColor) -> Self {
+    func xx_textColor(_ color: UIColor) -> Self {
         textColor = color
         return self
     }
 
     @discardableResult
-    func pd_highlightedTextColor(_ color: UIColor) -> Self {
+    func xx_highlightedTextColor(_ color: UIColor) -> Self {
         self.highlightedTextColor = color
         return self
     }
 
     @discardableResult
-    func pd_font(_ font: UIFont) -> Self {
+    func xx_font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
 
     @discardableResult
-    func pd_systemFont(_ fontSize: CGFloat) -> Self {
+    func xx_systemFont(_ fontSize: CGFloat) -> Self {
         font = UIFont.systemFont(ofSize: fontSize)
         return self
     }
 
     @discardableResult
-    func pd_boldSystemFont(_ fontSize: CGFloat) -> Self {
+    func xx_boldSystemFont(_ fontSize: CGFloat) -> Self {
         font = UIFont.boldSystemFont(ofSize: fontSize)
         return self
     }
 
     @discardableResult
-    func pd_attributedFont(_ font: UIFont, for range: NSRange) -> Self {
-        let attribuedString = attributedText?.pd_mutable().pd_font(font, for: range)
+    func xx_attributedFont(_ font: UIFont, for range: NSRange) -> Self {
+        let attribuedString = attributedText?.xx_mutable().xx_font(font, for: range)
         attributedText = attribuedString
         return self
     }
 
     @discardableResult
-    func pd_attributedColor(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_foregroundColor(color, for: range)
+    func xx_attributedColor(_ color: UIColor, for range: NSRange) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_foregroundColor(color, for: range)
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_lineSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_lineSpacing(spacing, for: (text ?? "").pd_fullNSRange())
+    func xx_lineSpacing(_ spacing: CGFloat) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_lineSpacing(spacing, for: (text ?? "").xx_fullNSRange())
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_wordSpacing(_ spacing: CGFloat) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_wordSpacing(spacing, for: (text ?? "").pd_fullNSRange())
+    func xx_wordSpacing(_ spacing: CGFloat) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_wordSpacing(spacing, for: (text ?? "").xx_fullNSRange())
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for range: NSRange) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_underline(color, stytle: style, for: range)
+    func xx_attributedUnderLine(_ color: UIColor, style: NSUnderlineStyle = .single, for range: NSRange) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_underline(color, stytle: style, for: range)
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_attributedDeleteLine(_ color: UIColor, for range: NSRange) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_strikethrough(color, for: range)
+    func xx_attributedDeleteLine(_ color: UIColor, for range: NSRange) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_strikethrough(color, for: range)
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_attributedFirstLineHeadIndent(_ indent: CGFloat) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_firstLineHeadIndent(indent)
+    func xx_attributedFirstLineHeadIndent(_ indent: CGFloat) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_firstLineHeadIndent(indent)
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_attributedBliqueness(_ inclination: Float = 0, for range: NSRange) -> Self {
-        let attributedString = attributedText?.pd_mutable().pd_obliqueness(inclination, for: range)
+    func xx_attributedBliqueness(_ inclination: Float = 0, for range: NSRange) -> Self {
+        let attributedString = attributedText?.xx_mutable().xx_obliqueness(inclination, for: range)
         attributedText = attributedString
         return self
     }
 
     @discardableResult
-    func pd_attributedImage(
+    func xx_attributedImage(
         _ image: String,
         bounds: CGRect = .zero,
         index: Int = 0
     ) -> Self {
-        let mAttributedString = attributedText?.pd_mutable().pd_image(image, bounds: bounds, index: index)
+        let mAttributedString = attributedText?.xx_mutable().xx_image(image, bounds: bounds, index: index)
         attributedText = mAttributedString
         return self
     }
 
     @discardableResult
-    func pd_adjustsFontSizeToFitWidth(_ adjusts: Bool) -> Self {
+    func xx_adjustsFontSizeToFitWidth(_ adjusts: Bool) -> Self {
         adjustsFontSizeToFitWidth = adjusts
         return self
     }
 
     @discardableResult
-    func pd_sizeToFit() -> Self {
+    func xx_sizeToFit() -> Self {
         sizeToFit()
         return self
     }

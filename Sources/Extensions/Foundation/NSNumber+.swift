@@ -1,7 +1,7 @@
 import Foundation
 
 public extension NSNumber {
-    func pd_formatter(style: NumberFormatter.Style = .none,
+    func xx_formatter(style: NumberFormatter.Style = .none,
                       separator: String = ",",
                       mode: NumberFormatter.RoundingMode = .halfEven,
                       minDecimalPlaces: Int = 0,

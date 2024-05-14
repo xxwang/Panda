@@ -17,13 +17,13 @@ extension NSTextAttachment {
 
 public extension NSTextAttachment {
     @discardableResult
-    func pd_image(_ image: UIImage?) -> Self {
+    func xx_image(_ image: UIImage?) -> Self {
         self.image = image
         return self
     }
 
     @discardableResult
-    func pd_bounds(_ bounds: CGRect) -> Self {
+    func xx_bounds(_ bounds: CGRect) -> Self {
         self.bounds = bounds
         return self
     }

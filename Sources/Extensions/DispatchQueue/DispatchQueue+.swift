@@ -3,7 +3,7 @@ import Dispatch
 import Foundation
 
 public extension DispatchQueue {
-    static func pd_isCurrent(_ queue: DispatchQueue) -> Bool {
+    static func xx_isCurrent(_ queue: DispatchQueue) -> Bool {
         let key = DispatchSpecificKey<Void>()
         queue.setSpecific(key: key, value: ())
         defer { queue.setSpecific(key: key, value: nil) }
@@ -11,23 +11,23 @@ public extension DispatchQueue {
     }
 
     static func isMainQueue() -> Bool {
-        return pd_isCurrent(.main)
+        return xx_isCurrent(.main)
     }
 }
 
 public extension DispatchQueue {
-    static func pd_async_execute_on_main(_ block: @escaping () -> Void) {
+    static func xx_async_execute_on_main(_ block: @escaping () -> Void) {
         DispatchQueue.main.async { block() }
     }
 
-    static func pd_async_execute_on_global(_ block: @escaping () -> Void) {
+    static func xx_async_execute_on_global(_ block: @escaping () -> Void) {
         DispatchQueue.global().async { block() }
     }
 }
 
 public extension DispatchQueue {
     @discardableResult
-    static func pd_countdown(_ timeInterval: TimeInterval, repeatCount: Int, handler: @escaping (DispatchSourceTimer?, Int) -> Void) -> DispatchSourceTimer? {
+    static func xx_countdown(_ timeInterval: TimeInterval, repeatCount: Int, handler: @escaping (DispatchSourceTimer?, Int) -> Void) -> DispatchSourceTimer? {
         if repeatCount <= 0 { return nil }
 
         let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
@@ -47,7 +47,7 @@ public extension DispatchQueue {
     }
 
     @discardableResult
-    static func pd_interval(_ timeInterval: TimeInterval, handler: @escaping (DispatchSourceTimer?) -> Void) -> DispatchSourceTimer {
+    static func xx_interval(_ timeInterval: TimeInterval, handler: @escaping (DispatchSourceTimer?) -> Void) -> DispatchSourceTimer {
         let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
         timer.schedule(deadline: .now(), repeating: timeInterval)
         timer.setEventHandler {
@@ -61,7 +61,7 @@ public extension DispatchQueue {
 }
 
 public extension DispatchQueue {
-    static func pd_debounce(_ queue: DispatchQueue = .main,
+    static func xx_debounce(_ queue: DispatchQueue = .main,
                             delay timeInterval: TimeInterval,
                             execute work: @escaping () -> Void) -> () -> Void
     {
@@ -78,7 +78,7 @@ public extension DispatchQueue {
         }
     }
 
-    static func pd_delay_execute(delay timeInterval: TimeInterval,
+    static func xx_delay_execute(delay timeInterval: TimeInterval,
                                  queue: DispatchQueue = .main,
                                  qos: DispatchQoS = .unspecified,
                                  flags: DispatchWorkItemFlags = [],
@@ -87,7 +87,7 @@ public extension DispatchQueue {
         queue.asyncAfter(deadline: .now() + timeInterval, qos: qos, flags: flags, execute: work)
     }
 
-    static func pd_delay_execute(delay timeInterval: TimeInterval,
+    static func xx_delay_execute(delay timeInterval: TimeInterval,
                                  task: (() -> Void)? = nil,
                                  callback: (() -> Void)? = nil) -> DispatchWorkItem
     {
@@ -99,17 +99,17 @@ public extension DispatchQueue {
 }
 
 public extension DispatchQueue {
-    private static var pd_onceTracker = [String]()
+    private static var xx_onceTracker = [String]()
 
-    static func pd_once(token: String, block: () -> Void) {
-        if DispatchQueue.pd_onceTracker.contains(token) {
+    static func xx_once(token: String, block: () -> Void) {
+        if DispatchQueue.xx_onceTracker.contains(token) {
             return
         }
         objc_sync_enter(self)
         defer {
             objc_sync_exit(self)
         }
-        DispatchQueue.pd_onceTracker.append(token)
+        DispatchQueue.xx_onceTracker.append(token)
         block()
     }
 }

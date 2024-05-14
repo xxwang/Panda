@@ -30,13 +30,13 @@ public extension WKWebView {
 public extension WKWebView {
 
     @discardableResult
-    func pd_navigationDelegate(_ delegate: WKNavigationDelegate?) -> Self {
+    func xx_navigationDelegate(_ delegate: WKNavigationDelegate?) -> Self {
         navigationDelegate = delegate
         return self
     }
 
     @discardableResult
-    func pd_uiDelegate(_ delegate: WKUIDelegate?) -> Self {
+    func xx_uiDelegate(_ delegate: WKUIDelegate?) -> Self {
         uiDelegate = delegate
         return self
     }
@@ -44,15 +44,15 @@ public extension WKWebView {
 
 public extension WKWebView {
     @discardableResult
-    func pd_load(_ string: String) -> Self {
+    func xx_load(_ string: String) -> Self {
         if let url = URL(string: string) {
-            self.pd_load(url)
+            self.xx_load(url)
         }
         return self
     }
 
     @discardableResult
-    func pd_load(_ url: URL) -> Self {
+    func xx_load(_ url: URL) -> Self {
         let request = URLRequest(url: url)
         self.load(request)
         return self
@@ -62,34 +62,34 @@ public extension WKWebView {
 public extension WKWebView {
 
     @discardableResult
-    func pd_injection(script: String) -> Self {
+    func xx_injection(script: String) -> Self {
         let userScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: false)
         self.configuration.userContentController.addUserScript(userScript)
         return self
     }
 
     @discardableResult
-    func pd_evaluate(script: String, completion: ((Any?, Error?) -> Void)? = nil) -> Self {
+    func xx_evaluate(script: String, completion: ((Any?, Error?) -> Void)? = nil) -> Self {
         self.evaluateJavaScript(script, completionHandler: completion)
         return self
     }
 
     @discardableResult
-    func pd_textSizeAdjust(_ ratio: CGFloat) -> Self {
+    func xx_textSizeAdjust(_ ratio: CGFloat) -> Self {
         let script = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '\(ratio)%'"
-        self.pd_evaluate(script: script)
+        self.xx_evaluate(script: script)
         return self
     }
 
     @discardableResult
-    func pd_fitMobile() -> Self {
+    func xx_fitMobile() -> Self {
         let script = """
         var meta = document.createElement('meta');
         meta.setAttribute('name', 'viewport');
         meta.setAttribute('content', 'width=device-width');
         document.getElementsByTagName('head')[0].appendChild(meta);
         """
-        self.pd_evaluate(script: script)
+        self.xx_evaluate(script: script)
         return self
     }
 }

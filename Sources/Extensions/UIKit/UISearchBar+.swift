@@ -4,7 +4,7 @@ import UIKit
 
 public extension UISearchBar {
 
-    var pd_textField: UITextField? {
+    var xx_textField: UITextField? {
         if #available(iOS 13.0, *) {
             return self.searchTextField
         }
@@ -16,7 +16,7 @@ public extension UISearchBar {
     }
 
 
-    var pd_trimmedText: String? {
+    var xx_trimmedText: String? {
         return self.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
@@ -24,7 +24,7 @@ public extension UISearchBar {
 
 public extension UISearchBar {
 
-    func pd_clear() {
+    func xx_clear() {
         self.text = ""
     }
 }

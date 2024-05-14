@@ -3,7 +3,7 @@ import UIKit
 
 public extension UIScreen {
 
-    static func pd_detectScreenShot(_ action: @escaping (String) -> Void) {
+    static func xx_detectScreenShot(_ action: @escaping (String) -> Void) {
         let mainQueue = OperationQueue.main
         NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
             action("screenshot")

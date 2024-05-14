@@ -3,87 +3,87 @@ import Foundation
 
 public extension BinaryInteger {
 
-    func pd_nsNumber() -> NSNumber {
+    func xx_nsNumber() -> NSNumber {
         return NSNumber(value: Double(self))
     }
 
-    func pd_nsDecimalNumber() -> NSDecimalNumber {
+    func xx_nsDecimalNumber() -> NSDecimalNumber {
         return NSDecimalNumber(value: Double(self))
     }
 
-    func pd_decimal() -> Decimal {
-        return self.pd_nsDecimalNumber().decimalValue
+    func xx_decimal() -> Decimal {
+        return self.xx_nsDecimalNumber().decimalValue
     }
 
-    func pd_int() -> Int {
-        return self.pd_nsNumber().intValue
+    func xx_int() -> Int {
+        return self.xx_nsNumber().intValue
     }
 
-    func pd_int64() -> Int64 {
-        return self.pd_nsNumber().int64Value
+    func xx_int64() -> Int64 {
+        return self.xx_nsNumber().int64Value
     }
 
-    func pd_uInt() -> UInt {
-        return self.pd_nsNumber().uintValue
+    func xx_uInt() -> UInt {
+        return self.xx_nsNumber().uintValue
     }
 
-    func pd_uInt64() -> UInt64 {
-        return self.pd_nsNumber().uint64Value
+    func xx_uInt64() -> UInt64 {
+        return self.xx_nsNumber().uint64Value
     }
 
-    func pd_float() -> Float {
-        return self.pd_nsNumber().floatValue
+    func xx_float() -> Float {
+        return self.xx_nsNumber().floatValue
     }
 
-    func pd_double() -> Double {
-        return self.pd_nsNumber().doubleValue
+    func xx_double() -> Double {
+        return self.xx_nsNumber().doubleValue
     }
 
-    func pd_cgFloat() -> CGFloat {
-        return self.pd_double()
+    func xx_cgFloat() -> CGFloat {
+        return self.xx_double()
     }
 
-    func pd_string() -> String {
+    func xx_string() -> String {
         return String(self)
     }
 
-    func pd_character() -> Character? {
-        return Character(self.pd_string())
+    func xx_character() -> Character? {
+        return Character(self.xx_string())
     }
 
-    func pd_asciiCharacter() -> Character? {
+    func xx_asciiCharacter() -> Character? {
         guard let n = self as? Int,
               let scalar = UnicodeScalar(n) else { return nil }
         return Character(scalar)
     }
 
-    func pd_cgPoint() -> CGPoint {
-        return CGPoint(x: self.pd_cgFloat(), y: self.pd_cgFloat())
+    func xx_cgPoint() -> CGPoint {
+        return CGPoint(x: self.xx_cgFloat(), y: self.xx_cgFloat())
     }
 
-    func pd_cgSize() -> CGSize {
-        return CGSize(width: self.pd_cgFloat(), height: self.pd_cgFloat())
-    }
-}
-
-public extension BinaryInteger {
-
-    func pd_radians() -> Double {
-        return self.pd_double() / 180.0 * Double.pi
-    }
-
-    func pd_degrees() -> Double {
-        return self.pd_double() * (180.0 / Double.pi)
+    func xx_cgSize() -> CGSize {
+        return CGSize(width: self.xx_cgFloat(), height: self.xx_cgFloat())
     }
 }
 
 public extension BinaryInteger {
 
-    func pd_isOdd() -> Bool {
+    func xx_radians() -> Double {
+        return self.xx_double() / 180.0 * Double.pi
+    }
+
+    func xx_degrees() -> Double {
+        return self.xx_double() * (180.0 / Double.pi)
+    }
+}
+
+public extension BinaryInteger {
+
+    func xx_isOdd() -> Bool {
         return self % 2 != 0
     }
 
-    func pd_isEven() -> Bool {
+    func xx_isEven() -> Bool {
         return self % 2 == 0
     }
 }
@@ -91,19 +91,19 @@ public extension BinaryInteger {
 
 public extension BinaryInteger {
 
-    func pd_range() -> CountableRange<Int> {
+    func xx_range() -> CountableRange<Int> {
         let n = self as! Int
         return 0 ..< n
     }
 
-    func pd_romanNumeral() -> String? {
+    func xx_romanNumeral() -> String? {
         guard self > 0 else { return nil }
 
         let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
 
         var romanValue = ""
-        var startingValue = self.pd_int()
+        var startingValue = self.xx_int()
 
         for (index, romanChar) in romanValues.enumerated() {
             let arabicValue = arabicValues[index]
@@ -116,7 +116,7 @@ public extension BinaryInteger {
         return romanValue
     }
 
-    func pd_bytes() -> [UInt8] {
+    func xx_bytes() -> [UInt8] {
         var result = [UInt8]()
         result.reserveCapacity(MemoryLayout<Self>.size)
         var value = self
@@ -127,8 +127,8 @@ public extension BinaryInteger {
         return result.reversed()
     }
 
-    func pd_storeUnit() -> String {
-        var value = self.pd_double()
+    func xx_storeUnit() -> String {
+        var value = self.xx_double()
         var index = 0
         let units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
         while value > 1024 {
@@ -141,16 +141,16 @@ public extension BinaryInteger {
 
 public extension BinaryInteger {
 
-    func pd_date(isUnix: Bool = true) -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.pd_double() / (isUnix ? 1.0 : 1000.0)))
+    func xx_date(isUnix: Bool = true) -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(self.xx_double() / (isUnix ? 1.0 : 1000.0)))
     }
 
-    func pd_mediaTimeString(component: Calendar.Component? = nil) -> String {
+    func xx_mediaTimeString(component: Calendar.Component? = nil) -> String {
         if self <= 0 { return "00:00" }
 
-        let second = self.pd_int() % 60
+        let second = self.xx_int() % 60
         if component == .second {
-            return String(format: "%02d", self.pd_int())
+            return String(format: "%02d", self.xx_int())
         }
 
         var minute = Int(self / 60)

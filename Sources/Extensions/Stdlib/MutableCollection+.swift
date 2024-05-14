@@ -2,7 +2,7 @@ import Foundation
 
 public extension MutableCollection {
 
-    mutating func pd_assignToAll<Value>(value: Value, by keyPath: WritableKeyPath<Element, Value>) {
+    mutating func xx_assignToAll<Value>(value: Value, by keyPath: WritableKeyPath<Element, Value>) {
         for idx in indices {
             self[idx][keyPath: keyPath] = value
         }
@@ -12,15 +12,15 @@ public extension MutableCollection {
 
 public extension MutableCollection where Self: RandomAccessCollection {
 
-    mutating func pd_sort<T>(by keyPath: KeyPath<Element, T>, with compare: (T, T) -> Bool) {
+    mutating func xx_sort<T>(by keyPath: KeyPath<Element, T>, with compare: (T, T) -> Bool) {
         sort { compare($0[keyPath: keyPath], $1[keyPath: keyPath]) }
     }
 
-    mutating func pd_sort(by keyPath: KeyPath<Element, some Comparable>) {
+    mutating func xx_sort(by keyPath: KeyPath<Element, some Comparable>) {
         sort { $0[keyPath: keyPath] < $1[keyPath: keyPath] }
     }
 
-    mutating func pd_sort(by keyPath1: KeyPath<Element, some Comparable>,
+    mutating func xx_sort(by keyPath1: KeyPath<Element, some Comparable>,
                           and keyPath2: KeyPath<Element, some Comparable>)
     {
         sort {
@@ -31,7 +31,7 @@ public extension MutableCollection where Self: RandomAccessCollection {
         }
     }
 
-    mutating func pd_sort(by keyPath1: KeyPath<Element, some Comparable>,
+    mutating func xx_sort(by keyPath1: KeyPath<Element, some Comparable>,
                           and keyPath2: KeyPath<Element, some Comparable>,
                           and keyPath3: KeyPath<Element, some Comparable>)
     {

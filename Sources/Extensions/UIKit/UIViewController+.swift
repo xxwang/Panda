@@ -1,14 +1,14 @@
 import UIKit
 
 public extension UIViewController {
-    var pd_isVisible: Bool {
+    var xx_isVisible: Bool {
         return self.isViewLoaded && self.view.window != nil
     }
 }
 
 public extension UIViewController {
 
-    func pd_addChildViewController(_ child: UIViewController, to containerView: UIView) {
+    func xx_addChildViewController(_ child: UIViewController, to containerView: UIView) {
         self.addChild(child)
         containerView.addSubview(child.view)
         child.didMove(toParent: self)
@@ -24,18 +24,18 @@ public extension UIViewController {
 
 public extension UIViewController {
 
-    func pd_present(viewController: UIViewController, fullScreen: Bool = true, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func xx_present(viewController: UIViewController, fullScreen: Bool = true, animated: Bool = true, completion: (() -> Void)? = nil) {
         if fullScreen {
             viewController.modalPresentationStyle = .fullScreen
         }
         present(viewController, animated: animated, completion: completion)
     }
 
-    func pd_push(viewController: UIViewController, animated: Bool = true) {
+    func xx_push(viewController: UIViewController, animated: Bool = true) {
         navigationController?.pushViewController(viewController, animated: animated)
     }
 
-    func pd_popLast(thenPush viewController: UIViewController, animated: Bool = true) {
+    func xx_popLast(thenPush viewController: UIViewController, animated: Bool = true) {
         guard let navigationController else { return }
 
         var viewControllers = navigationController.viewControllers
@@ -46,7 +46,7 @@ public extension UIViewController {
         navigationController.setViewControllers(viewControllers, animated: animated)
     }
 
-    func pd_pop(count: Int, thenPush viewController: UIViewController, animated: Bool = true) {
+    func xx_pop(count: Int, thenPush viewController: UIViewController, animated: Bool = true) {
         guard let navigationController else { return }
         if count < 1 { return }
 
@@ -64,7 +64,7 @@ public extension UIViewController {
         navigationController.setViewControllers(Array(vcs), animated: animated)
     }
 
-    func pd_previousViewController() -> UIViewController? {
+    func xx_previousViewController() -> UIViewController? {
         guard let nav = navigationController else { return nil }
         if nav.viewControllers.count <= 1 { return nil }
         guard let index = nav.viewControllers.firstIndex(of: self), index > 0 else { return nil }
@@ -74,20 +74,20 @@ public extension UIViewController {
 
 public extension UIViewController {
 
-    func pd_pop2rootViewController(_ animated: Bool = true) {
+    func xx_pop2rootViewController(_ animated: Bool = true) {
         self.navigationController?.popToRootViewController(animated: animated)
     }
 
-    func pd_popViewController(_ animated: Bool = true) {
+    func xx_popViewController(_ animated: Bool = true) {
         self.navigationController?.popViewController(animated: animated)
     }
 
-    func pd_pop2(_ viewController: UIViewController, animated: Bool = true) {
+    func xx_pop2(_ viewController: UIViewController, animated: Bool = true) {
         self.navigationController?.popToViewController(viewController, animated: animated)
     }
 
     @discardableResult
-    func pd_pop2(aClass: AnyClass, animated: Bool = false) -> Bool {
+    func xx_pop2(aClass: AnyClass, animated: Bool = false) -> Bool {
         func pop2(nav: UINavigationController?) -> Bool {
             guard let nav else { return false }
 
@@ -107,7 +107,7 @@ public extension UIViewController {
         }
     }
 
-    func pd_pop(count: Int, animated: Bool = false) {
+    func xx_pop(count: Int, animated: Bool = false) {
         guard let navigationController else { return }
         guard count >= 1 else { return }
 
@@ -122,11 +122,11 @@ public extension UIViewController {
         navigationController.popToViewController(viewController, animated: animated)
     }
 
-    func pd_dismissViewController(_ animated: Bool = true, completion: (() -> Void)? = nil) {
+    func xx_dismissViewController(_ animated: Bool = true, completion: (() -> Void)? = nil) {
         self.dismiss(animated: animated, completion: completion)
     }
 
-    func pd_closeViewController(_ animated: Bool = true) {
+    func xx_closeViewController(_ animated: Bool = true) {
         guard let nav = navigationController else {
             self.dismiss(animated: animated, completion: nil)
             return
@@ -142,7 +142,7 @@ public extension UIViewController {
 
 public extension UIViewController {
 
-    func pd_presentPopover(
+    func xx_presentPopover(
         _ contentViewController: UIViewController,
         arrowPoint: CGPoint,
         contentSize: CGSize? = nil,
@@ -168,7 +168,7 @@ public extension UIViewController {
 
 public extension UIViewController {
 
-    class func pd_instantiateViewController(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Self {
+    class func xx_instantiateViewController(from storyboard: String = "Main", bundle: Bundle? = nil, identifier: String? = nil) -> Self {
         let identifier = identifier ?? String(describing: self)
         let storyboard = UIStoryboard(name: storyboard, bundle: bundle)
         let instantiateViewController = storyboard.instantiateViewController(withIdentifier: identifier) as? Self
@@ -182,68 +182,68 @@ public extension UIViewController {
 
 @objc extension UIViewController {
 
-    override public class func pd_initializeMethod() {
-        super.pd_initializeMethod()
+    override public class func xx_initializeMethod() {
+        super.xx_initializeMethod()
 
         if self == UIViewController.self {
             let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
-            DispatchQueue.pd_once(token: onceToken) {
+            DispatchQueue.xx_once(token: onceToken) {
   
                 let oriSel = #selector(viewDidLoad)
-                let repSel = #selector(pd_hook_viewDidLoad)
-                _ = self.pd_hookInstanceMethod(of: oriSel, with: repSel)
+                let repSel = #selector(xx_hook_viewDidLoad)
+                _ = self.xx_hookInstanceMethod(of: oriSel, with: repSel)
 
          
                 let oriSel1 = #selector(viewWillAppear(_:))
-                let repSel1 = #selector(pd_hook_viewWillAppear(animated:))
-                _ = self.pd_hookInstanceMethod(of: oriSel1, with: repSel1)
+                let repSel1 = #selector(xx_hook_viewWillAppear(animated:))
+                _ = self.xx_hookInstanceMethod(of: oriSel1, with: repSel1)
 
       
                 let oriSel2 = #selector(viewWillDisappear(_:))
-                let repSel2 = #selector(pd_hook_viewWillDisappear(animated:))
-                _ = self.pd_hookInstanceMethod(of: oriSel2, with: repSel2)
+                let repSel2 = #selector(xx_hook_viewWillDisappear(animated:))
+                _ = self.xx_hookInstanceMethod(of: oriSel2, with: repSel2)
 
          
                 let oriSelPresent = #selector(present(_:animated:completion:))
-                let repSelPresent = #selector(pd_hook_present(_:animated:completion:))
-                _ = self.pd_hookInstanceMethod(of: oriSelPresent, with: repSelPresent)
+                let repSelPresent = #selector(xx_hook_present(_:animated:completion:))
+                _ = self.xx_hookInstanceMethod(of: oriSelPresent, with: repSelPresent)
             }
         } else if self == UINavigationController.self {
             let onceToken = "Hook_\(NSStringFromClass(classForCoder()))"
-            DispatchQueue.pd_once(token: onceToken) {
+            DispatchQueue.xx_once(token: onceToken) {
            
                 let oriSel = #selector(UINavigationController.pushViewController(_:animated:))
-                let repSel = #selector(UINavigationController.pd_hook_pushViewController(_:animated:))
-                _ = self.pd_hookInstanceMethod(of: oriSel, with: repSel)
+                let repSel = #selector(UINavigationController.xx_hook_pushViewController(_:animated:))
+                _ = self.xx_hookInstanceMethod(of: oriSel, with: repSel)
             }
         }
     }
 
-    private func pd_hook_viewDidLoad(animated: Bool) {
-        self.pd_hook_viewDidLoad(animated: animated)
+    private func xx_hook_viewDidLoad(animated: Bool) {
+        self.xx_hook_viewDidLoad(animated: animated)
     }
 
-    private func pd_hook_viewWillAppear(animated: Bool) {
-        self.pd_hook_viewWillAppear(animated: animated)
+    private func xx_hook_viewWillAppear(animated: Bool) {
+        self.xx_hook_viewWillAppear(animated: animated)
     }
 
-    private func pd_hook_viewWillDisappear(animated: Bool) {
-        self.pd_hook_viewWillDisappear(animated: animated)
+    private func xx_hook_viewWillDisappear(animated: Bool) {
+        self.xx_hook_viewWillDisappear(animated: animated)
     }
 
-    private func pd_hook_present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+    private func xx_hook_present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if viewControllerToPresent.presentationController == nil {
             viewControllerToPresent.presentationController?.presentedViewController.dismiss(animated: false, completion: nil)
             print("viewControllerToPresent.presentationController not is nil")
             return
         }
-        pd_hook_present(viewControllerToPresent, animated: flag, completion: completion)
+        xx_hook_present(viewControllerToPresent, animated: flag, completion: completion)
     }
 }
 
 @objc public extension UINavigationController {
 
-    func pd_hook_pushViewController(_ viewController: UIViewController, animated: Bool) {
+    func xx_hook_pushViewController(_ viewController: UIViewController, animated: Bool) {
         if viewControllers.count <= 1 {
             Logger.info("root vc")
         }
@@ -252,7 +252,7 @@ public extension UIViewController {
             viewController.hidesBottomBarWhenPushed = true
         }
 
-        self.pd_hook_pushViewController(viewController, animated: animated)
+        self.xx_hook_pushViewController(viewController, animated: animated)
     }
 }
 
@@ -271,7 +271,7 @@ extension UIViewController {
 public extension UIViewController {
 
     @discardableResult
-    func pd_overrideUserInterfaceStyle(_ userInterfaceStyle: UIUserInterfaceStyle) -> Self {
+    func xx_overrideUserInterfaceStyle(_ userInterfaceStyle: UIUserInterfaceStyle) -> Self {
         if #available(iOS 13.0, *) {
             self.overrideUserInterfaceStyle = userInterfaceStyle
         }
@@ -279,13 +279,13 @@ public extension UIViewController {
     }
 
     @discardableResult
-    func pd_backgroundColor(_ backgroundColor: UIColor) -> Self {
+    func xx_backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.view.backgroundColor = backgroundColor
         return self
     }
 
     @discardableResult
-    func pd_automaticallyAdjustsScrollViewInsets(_ automaticallyAdjustsScrollViewInsets: Bool) -> Self {
+    func xx_automaticallyAdjustsScrollViewInsets(_ automaticallyAdjustsScrollViewInsets: Bool) -> Self {
         if #available(iOS 11, *) {} else {
             self.automaticallyAdjustsScrollViewInsets = automaticallyAdjustsScrollViewInsets
         }
@@ -293,7 +293,7 @@ public extension UIViewController {
     }
 
     @discardableResult
-    func pd_modalPresentationStyle(_ style: UIModalPresentationStyle) -> Self {
+    func xx_modalPresentationStyle(_ style: UIModalPresentationStyle) -> Self {
         self.modalPresentationStyle = style
         return self
     }

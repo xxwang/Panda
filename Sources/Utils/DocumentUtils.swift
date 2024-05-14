@@ -20,7 +20,7 @@ public extension DocumentUtils {
         let documentPickerViewController = UIDocumentPickerViewController(documentTypes: types, in: mode)
         documentPickerViewController.delegate = self
         documentPickerViewController.modalPresentationStyle = .fullScreen
-        UIWindow.pd_main?.rootViewController?.pd_present(viewController: documentPickerViewController)
+        UIWindow.xx_main?.rootViewController?.xx_present(viewController: documentPickerViewController)
     }
 }
 
@@ -33,11 +33,11 @@ extension DocumentUtils: UIDocumentPickerDelegate {
         if iCloudEnable {
             download(url) { fileData in self.completion?(true, fileData, fileName) }
         } else {
-            UIApplication.shared.pd_openSettings("Please allow the use of iCloud cloud storage",
+            UIApplication.shared.xx_openSettings("Please allow the use of iCloud cloud storage",
                                                  message: nil,
                                                  cancel: "Cancel",
                                                  confirm: "Confirm",
-                                                 parent: UIWindow.pd_main?.rootViewController)
+                                                 parent: UIWindow.xx_main?.rootViewController)
         }
     }
 

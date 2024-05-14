@@ -3,7 +3,7 @@ import QuartzCore
 import UIKit
 
 public extension CALayer {
-    func pd_image() -> UIImage? {
+    func xx_image() -> UIImage? {
         UIGraphicsBeginImageContext(frame.size)
         render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -11,7 +11,7 @@ public extension CALayer {
         return image
     }
 
-    func pd_image(scale: CGFloat = 0.0) -> UIImage? {
+    func xx_image(scale: CGFloat = 0.0) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, scale)
         defer { UIGraphicsEndImageContext() }
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
@@ -19,8 +19,8 @@ public extension CALayer {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 
-    func pd_uiColor() -> UIColor? {
-        if let image = self.pd_image() {
+    func xx_uiColor() -> UIColor? {
+        if let image = self.xx_image() {
             return UIColor(patternImage: image)
         }
         return nil
@@ -28,14 +28,14 @@ public extension CALayer {
 }
 
 public extension CALayer {
-    func pd_basicAnimationMovePoint(_ point: CGPoint,
+    func xx_basicAnimationMovePoint(_ point: CGPoint,
                                     duration: TimeInterval,
                                     delay: TimeInterval = 0,
                                     repeatCount: Float = 1,
                                     removedOnCompletion: Bool = false,
                                     option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseBasicAnimation(
+        self.xx_baseBasicAnimation(
             keyPath: "position",
             startValue: position,
             endValue: point,
@@ -47,14 +47,14 @@ public extension CALayer {
         )
     }
 
-    func pd_basicAnimationMoveX(_ moveValue: Any?,
+    func xx_basicAnimationMoveX(_ moveValue: Any?,
                                 duration: TimeInterval = 2.0,
                                 delay: TimeInterval = 0,
                                 repeatCount: Float = 1,
                                 removedOnCompletion: Bool = false,
                                 option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseBasicAnimation(
+        self.xx_baseBasicAnimation(
             keyPath: "transform.translation.x",
             startValue: position,
             endValue: moveValue,
@@ -66,14 +66,14 @@ public extension CALayer {
         )
     }
 
-    func pd_basicAnimationMoveY(_ moveValue: Any?,
+    func xx_basicAnimationMoveY(_ moveValue: Any?,
                                 duration: TimeInterval = 2.0,
                                 delay: TimeInterval = 0,
                                 repeatCount: Float = 1,
                                 removedOnCompletion: Bool = false,
                                 option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseBasicAnimation(
+        self.xx_baseBasicAnimation(
             keyPath: "transform.translation.y",
             startValue: position,
             endValue: moveValue,
@@ -85,14 +85,14 @@ public extension CALayer {
         )
     }
 
-    func pd_animationCornerRadius(_ cornerRadius: Any?,
+    func xx_animationCornerRadius(_ cornerRadius: Any?,
                                   duration: TimeInterval = 2.0,
                                   delay: TimeInterval = 0,
                                   repeatCount: Float = 1,
                                   removedOnCompletion: Bool = false,
                                   option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseBasicAnimation(
+        self.xx_baseBasicAnimation(
             keyPath: "cornerRadius",
             startValue: position,
             endValue: cornerRadius,
@@ -104,14 +104,14 @@ public extension CALayer {
         )
     }
 
-    func pd_animationScale(_ scaleValue: Any?,
+    func xx_animationScale(_ scaleValue: Any?,
                            duration: TimeInterval = 2.0,
                            delay: TimeInterval = 0,
                            repeatCount: Float = 1,
                            removedOnCompletion: Bool = true,
                            option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseBasicAnimation(
+        self.xx_baseBasicAnimation(
             keyPath: "transform.scale",
             startValue: 1,
             endValue: scaleValue,
@@ -123,14 +123,14 @@ public extension CALayer {
         )
     }
 
-    func pd_animationRotation(_ rotation: Any?,
+    func xx_animationRotation(_ rotation: Any?,
                               duration: TimeInterval = 2.0,
                               delay: TimeInterval = 0,
                               repeatCount: Float = 1,
                               removedOnCompletion: Bool = true,
                               option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseBasicAnimation(
+        self.xx_baseBasicAnimation(
             keyPath: "transform.rotation",
             startValue: nil,
             endValue: rotation,
@@ -142,7 +142,7 @@ public extension CALayer {
         )
     }
 
-    func pd_baseBasicAnimation(keyPath: String,
+    func xx_baseBasicAnimation(keyPath: String,
                                startValue: Any?,
                                endValue: Any?,
                                duration: TimeInterval = 2.0,
@@ -176,7 +176,7 @@ public extension CALayer {
 }
 
 public extension CALayer {
-    func pd_addKeyframeAnimationPosition(_ values: [Any],
+    func xx_addKeyframeAnimationPosition(_ values: [Any],
                                          keyTimes: [NSNumber]?,
                                          duration: TimeInterval = 2.0,
                                          delay: TimeInterval = 0,
@@ -184,7 +184,7 @@ public extension CALayer {
                                          removedOnCompletion: Bool = false,
                                          option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseKeyframeAnimation(
+        self.xx_baseKeyframeAnimation(
             keyPath: "position",
             values: values,
             keyTimes: keyTimes,
@@ -197,10 +197,10 @@ public extension CALayer {
         )
     }
 
-    func pd_addKeyframeAnimationRotation(_ values: [Any] = [
-        -5.pd_cgFloat().pd_radians(),
-        5.pd_cgFloat().pd_radians(),
-        -5.pd_cgFloat().pd_radians(),
+    func xx_addKeyframeAnimationRotation(_ values: [Any] = [
+        -5.xx_cgFloat().xx_radians(),
+        5.xx_cgFloat().xx_radians(),
+        -5.xx_cgFloat().xx_radians(),
     ],
     keyTimes: [NSNumber]?,
     duration: TimeInterval = 1.0,
@@ -208,7 +208,7 @@ public extension CALayer {
     repeatCount: Float = 1,
     removedOnCompletion: Bool = true,
     option: CAMediaTimingFunctionName = .default) {
-        self.pd_baseKeyframeAnimation(
+        self.xx_baseKeyframeAnimation(
             keyPath: "transform.rotation",
             values: values,
             keyTimes: keyTimes,
@@ -221,14 +221,14 @@ public extension CALayer {
         )
     }
 
-    func pd_addKeyframeAnimationPositionBezierPath(_ path: CGPath? = nil,
+    func xx_addKeyframeAnimationPositionBezierPath(_ path: CGPath? = nil,
                                                    duration: TimeInterval = 2.0,
                                                    delay: TimeInterval = 0,
                                                    repeatCount: Float = 1,
                                                    removedOnCompletion: Bool = false,
                                                    option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseKeyframeAnimation(
+        self.xx_baseKeyframeAnimation(
             keyPath: "position",
             duration: duration,
             delay: delay,
@@ -239,7 +239,7 @@ public extension CALayer {
         )
     }
 
-    func pd_baseKeyframeAnimation(keyPath: String,
+    func xx_baseKeyframeAnimation(keyPath: String,
                                   values: [Any]? = nil,
                                   keyTimes: [NSNumber]? = nil,
                                   duration: TimeInterval = 2.0,
@@ -283,7 +283,7 @@ public extension CALayer {
 }
 
 public extension CALayer {
-    func pd_addSpringAnimationBounds(_ toValue: Any?,
+    func xx_addSpringAnimationBounds(_ toValue: Any?,
                                      delay: TimeInterval = 0,
                                      mass: CGFloat = 10.0,
                                      stiffness: CGFloat = 5000,
@@ -293,7 +293,7 @@ public extension CALayer {
                                      removedOnCompletion: Bool = false,
                                      option: CAMediaTimingFunctionName = .default)
     {
-        self.pd_baseSpringAnimation(
+        self.xx_baseSpringAnimation(
             path: "bounds",
             toValue: toValue,
             mass: mass,
@@ -306,7 +306,7 @@ public extension CALayer {
         )
     }
 
-    func pd_baseSpringAnimation(path: String?,
+    func xx_baseSpringAnimation(path: String?,
                                 toValue: Any? = nil,
                                 delay: TimeInterval = 0,
                                 mass: CGFloat = 10.0,
@@ -333,7 +333,7 @@ public extension CALayer {
 }
 
 public extension CALayer {
-    func pd_baseAnimationGroup(animations: [CAAnimation]? = nil,
+    func xx_baseAnimationGroup(animations: [CAAnimation]? = nil,
                                duration: TimeInterval = 2.0,
                                delay: TimeInterval = 0,
                                repeatCount: Float = 1,
@@ -352,7 +352,7 @@ public extension CALayer {
 }
 
 public extension CALayer {
-    func pd_addTransition(_ type: CATransitionType,
+    func xx_addTransition(_ type: CATransitionType,
                           subtype: CATransitionSubtype?,
                           duration: CFTimeInterval = 2.0,
                           delay: TimeInterval = 0)
@@ -378,103 +378,103 @@ extension CALayer {
 
 public extension CALayer {
     @discardableResult
-    func pd_add2(_ superView: UIView) -> Self {
+    func xx_add2(_ superView: UIView) -> Self {
         superView.layer.addSublayer(self)
         return self
     }
 
     @discardableResult
-    func pd_add2(_ superLayer: CALayer) -> Self {
+    func xx_add2(_ superLayer: CALayer) -> Self {
         superLayer.addSublayer(self)
         return self
     }
 
     @discardableResult
-    func pd_frame(_ frame: CGRect) -> Self {
+    func xx_frame(_ frame: CGRect) -> Self {
         self.frame = frame
         return self
     }
 
     @discardableResult
-    func pd_backgroundColor(_ color: UIColor) -> Self {
+    func xx_backgroundColor(_ color: UIColor) -> Self {
         backgroundColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func pd_isHidden(_ isHidden: Bool) -> Self {
+    func xx_isHidden(_ isHidden: Bool) -> Self {
         self.isHidden = isHidden
         return self
     }
 
     @discardableResult
-    func pd_borderWidth(_ width: CGFloat) -> Self {
+    func xx_borderWidth(_ width: CGFloat) -> Self {
         borderWidth = width
         return self
     }
 
     @discardableResult
-    func pd_borderColor(_ color: UIColor) -> Self {
+    func xx_borderColor(_ color: UIColor) -> Self {
         borderColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func pd_shouldRasterize(_ rasterize: Bool) -> Self {
+    func xx_shouldRasterize(_ rasterize: Bool) -> Self {
         shouldRasterize = rasterize
         return self
     }
 
     @discardableResult
-    func pd_rasterizationScale(_ scale: CGFloat) -> Self {
+    func xx_rasterizationScale(_ scale: CGFloat) -> Self {
         rasterizationScale = scale
         return self
     }
 
     @discardableResult
-    func pd_shadowColor(_ color: UIColor) -> Self {
+    func xx_shadowColor(_ color: UIColor) -> Self {
         shadowColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func pd_shadowOpacity(_ opacity: Float) -> Self {
+    func xx_shadowOpacity(_ opacity: Float) -> Self {
         shadowOpacity = opacity
         return self
     }
 
     @discardableResult
-    func pd_shadowOffset(_ offset: CGSize) -> Self {
+    func xx_shadowOffset(_ offset: CGSize) -> Self {
         shadowOffset = offset
         return self
     }
 
     @discardableResult
-    func pd_shadowRadius(_ radius: CGFloat) -> Self {
+    func xx_shadowRadius(_ radius: CGFloat) -> Self {
         shadowRadius = radius
         return self
     }
 
     @discardableResult
-    func pd_shadowPath(_ path: CGPath) -> Self {
+    func xx_shadowPath(_ path: CGPath) -> Self {
         shadowPath = path
         return self
     }
 
     @discardableResult
-    func pd_masksToBounds(_ masksToBounds: Bool = true) -> Self {
+    func xx_masksToBounds(_ masksToBounds: Bool = true) -> Self {
         self.masksToBounds = masksToBounds
         return self
     }
 
     @discardableResult
-    func pd_cornerRadius(_ cornerRadius: CGFloat) -> Self {
+    func xx_cornerRadius(_ cornerRadius: CGFloat) -> Self {
         self.cornerRadius = cornerRadius
         return self
     }
 
     @discardableResult
-    func pd_corner(_ radius: CGFloat, corners: UIRectCorner = .allCorners) -> Self {
+    func xx_corner(_ radius: CGFloat, corners: UIRectCorner = .allCorners) -> Self {
         let maskPath = UIBezierPath(
             roundedRect: bounds,
             byRoundingCorners: corners,

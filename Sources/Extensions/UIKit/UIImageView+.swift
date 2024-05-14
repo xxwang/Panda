@@ -3,7 +3,7 @@ import UIKit
 
 public extension UIImageView {
 
-    func pd_blur(with style: UIBlurEffect.Style = .light) {
+    func xx_blur(with style: UIBlurEffect.Style = .light) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = bounds
@@ -12,7 +12,7 @@ public extension UIImageView {
     }
 
 
-    func pd_image(with color: UIColor) {
+    func xx_image(with color: UIColor) {
         self.image = image?.withRenderingMode(.alwaysTemplate)
         self.tintColor = color
     }
@@ -20,7 +20,7 @@ public extension UIImageView {
 
 public extension UIImageView {
 
-    func pd_loadImage(form url: URL,
+    func xx_loadImage(form url: URL,
                       contentMode: UIView.ContentMode = .scaleAspectFill,
                       placeholder: UIImage? = nil,
                       completionHandler: ((UIImage?) -> Void)? = nil)
@@ -39,36 +39,36 @@ public extension UIImageView {
                 return
             }
 
-            DispatchQueue.pd_async_execute_on_main {
+            DispatchQueue.xx_async_execute_on_main {
                 self.image = image
                 completionHandler?(image)
             }
         }.resume()
     }
 
-    func pd_loadGifWith(imageNamed: String) {
-        DispatchQueue.pd_async_execute_on_global {
-            let image = UIImage.pd_loadImageWithGif(name: imageNamed)
-            DispatchQueue.pd_async_execute_on_main {
+    func xx_loadGifWith(imageNamed: String) {
+        DispatchQueue.xx_async_execute_on_global {
+            let image = UIImage.xx_loadImageWithGif(name: imageNamed)
+            DispatchQueue.xx_async_execute_on_main {
                 self.image = image
             }
         }
     }
 
-    func pd_loadGifWith(asset: String) {
-        DispatchQueue.pd_async_execute_on_global {
-            let image = UIImage.pd_loadImageWithGif(asset: asset)
-            DispatchQueue.pd_async_execute_on_main {
+    func xx_loadGifWith(asset: String) {
+        DispatchQueue.xx_async_execute_on_global {
+            let image = UIImage.xx_loadImageWithGif(asset: asset)
+            DispatchQueue.xx_async_execute_on_main {
                 self.image = image
             }
         }
     }
 
     @available(iOS 9.0, *)
-    func pd_loadGifWith(url: String) {
-        DispatchQueue.pd_async_execute_on_global {
-            let image = UIImage.pd_loadImageWithGif(url: url)
-            DispatchQueue.pd_async_execute_on_main {
+    func xx_loadGifWith(url: String) {
+        DispatchQueue.xx_async_execute_on_global {
+            let image = UIImage.xx_loadImageWithGif(url: url)
+            DispatchQueue.xx_async_execute_on_main {
                 self.image = image
             }
         }
@@ -87,20 +87,20 @@ extension UIImageView {
 public extension UIImageView {
 
     @discardableResult
-    func pd_image(_ image: UIImage?) -> Self {
+    func xx_image(_ image: UIImage?) -> Self {
         self.image = image
         return self
     }
 
     @discardableResult
-    func pd_highlightedImage(_ image: UIImage?) -> Self {
+    func xx_highlightedImage(_ image: UIImage?) -> Self {
         self.highlightedImage = image
         return self
     }
 
     @discardableResult
-    func pd_blur(_ style: UIBlurEffect.Style = .light) -> Self {
-        self.pd_blur(with: style)
+    func xx_blur(_ style: UIBlurEffect.Style = .light) -> Self {
+        self.xx_blur(with: style)
         return self
     }
 }

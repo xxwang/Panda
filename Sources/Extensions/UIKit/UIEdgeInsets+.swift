@@ -3,11 +3,11 @@ import UIKit
 
 public extension UIEdgeInsets {
 
-    var pd_horizontal: CGFloat {
+    var xx_horizontal: CGFloat {
         return self.left + self.right
     }
 
-    var pd_vertical: CGFloat {
+    var xx_vertical: CGFloat {
         return self.top + self.bottom
     }
 }
@@ -34,32 +34,32 @@ public extension UIEdgeInsets {
 public extension UIEdgeInsets {
 
     @discardableResult
-    func pd_insetBy(top: CGFloat) -> Self {
+    func xx_insetBy(top: CGFloat) -> Self {
         return UIEdgeInsets(top: self.top + top, left: left, bottom: bottom, right: right)
     }
 
     @discardableResult
-    func pd_insetBy(left: CGFloat) -> Self {
+    func xx_insetBy(left: CGFloat) -> Self {
         return UIEdgeInsets(top: top, left: self.left + left, bottom: bottom, right: right)
     }
 
     @discardableResult
-    func pd_insetBy(bottom: CGFloat) -> Self {
+    func xx_insetBy(bottom: CGFloat) -> Self {
         return UIEdgeInsets(top: top, left: left, bottom: self.bottom + bottom, right: right)
     }
 
     @discardableResult
-    func pd_insetBy(right: CGFloat) -> Self {
+    func xx_insetBy(right: CGFloat) -> Self {
         return UIEdgeInsets(top: top, left: left, bottom: bottom, right: self.right + right)
     }
 
     @discardableResult
-    func pd_insetBy(horizontal: CGFloat) -> Self {
+    func xx_insetBy(horizontal: CGFloat) -> Self {
         return UIEdgeInsets(top: top, left: left + horizontal / 2, bottom: bottom, right: right + horizontal / 2)
     }
 
     @discardableResult
-    func pd_insetBy(vertical: CGFloat) -> Self {
+    func xx_insetBy(vertical: CGFloat) -> Self {
         return UIEdgeInsets(top: top + vertical / 2, left: left, bottom: bottom + vertical / 2, right: right)
     }
 }
