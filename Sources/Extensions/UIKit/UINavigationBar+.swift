@@ -3,17 +3,21 @@ import UIKit
 public extension UINavigationBar {
     static func pd_fitAllNavigationBar() {
         if #available(iOS 15.0, *) {
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.shadowColor = UIColor.clear
-            navigationBarAppearance.backgroundEffect = nil
-            navigationBarAppearance.titleTextAttributes = [
-                .foregroundColor: UIColor.black,
-                .font: UIFont.systemFont(ofSize: 14, weight: .bold),
-            ]
-            UINavigationBar.appearance().isTranslucent = false
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBar.appearance().standardAppearance
+//            let navigationBarAppearance = UINavigationBarAppearance()
+//            navigationBarAppearance.configureWithOpaqueBackground()
+//            navigationBarAppearance.shadowColor = UIColor.clear
+//            navigationBarAppearance.backgroundEffect = nil
+//            navigationBarAppearance.titleTextAttributes = [
+//                .foregroundColor: UIColor.black,
+//                .font: UIFont.systemFont(ofSize: 14, weight: .bold),
+//            ]
+//            UINavigationBar.appearance().isTranslucent = false
+//            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+//            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            
+            let navBarAppearance = UINavigationBarAppearance()
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         }
     }
 }
