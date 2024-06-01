@@ -1402,19 +1402,22 @@ public extension String {
 
 public extension String {
 
-    func pd_amountAsThousands(roundOff: Bool = true, or default: String = "") -> String {
+    func pd_amountAsThousands(maximumFractionDigits: Int = 2, or default: String = "") -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.roundingMode = .floor
-        formatter.maximumFractionDigits = 0
-        formatter.minimumFractionDigits = 0
+        
         if contains(".") {
-            formatter.maximumFractionDigits = roundOff ? 0 : 2
-            formatter.minimumFractionDigits = roundOff ? 0 : 2
+            formatter.maximumFractionDigits = maximumFractionDigits
+            formatter.minimumFractionDigits = 0
             formatter.minimumIntegerDigits = 1
+        } else {
+            formatter.maximumFractionDigits = 0
+            formatter.minimumFractionDigits = 0
         }
         var num = NSDecimalNumber(string: self)
-        if num.doubleValue.isNaN { num = NSDecimalNumber(string: "0") }
+        if num.doubleValue.isNaN {
+            num = NSDecimalNumber(string: "0")
+        }
         let result = formatter.string(from: num)
         return result ?? `default`
     }
