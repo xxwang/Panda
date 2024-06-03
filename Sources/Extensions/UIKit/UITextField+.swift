@@ -122,63 +122,6 @@ public extension UITextField {
         return self
     }
 
-    /// 设置占位符颜色
-    /// - Parameter color:颜色
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_placeholderColor(_ color: UIColor) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
-            attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .pd_addAttributes([.foregroundColor: color], for: holder.pd_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
-        }
-        return self
-    }
-
-    /// 设置占位符字体
-    /// - Parameter font:字体
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_placeholderFont(_ font: UIFont) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
-            attributes[.font] = font
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.string.pd_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .pd_addAttributes([.font: font], for: holder.pd_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
-        }
-        return self
-    }
-
-    /// 设置占位符的字体及颜色
-    /// - Parameters:
-    ///   - color:颜色
-    ///   - font:字体
-    /// - Returns:`Self`
-    @discardableResult
-    func pd_placeholder(_ color: UIColor, font: UIFont) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
-            attributes[.font] = font
-            attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .pd_addAttributes([.font: font, .foregroundColor: color], for: holder.pd_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
-        }
-        return self
-    }
-
     /// 设置文本格式
     /// - Parameter textAlignment:文本格式
     /// - Returns:`Self`
