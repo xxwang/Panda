@@ -82,52 +82,6 @@ public extension UITextField {
     }
 
     @discardableResult
-    func pd_placeholderColor(_ color: UIColor) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
-            attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .pd_addAttributes([.foregroundColor: color], for: holder.pd_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
-        }
-        return self
-    }
-
-    @discardableResult
-    func pd_placeholderFont(_ font: UIFont) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
-            attributes[.font] = font
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.string.pd_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .pd_addAttributes([.font: font], for: holder.pd_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
-        }
-        return self
-    }
-
-    @discardableResult
-    func pd_placeholder(_ color: UIColor, font: UIFont) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.pd_attributes()
-            attributes[.font] = font
-            attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.pd_mutable().pd_addAttributes(attributes, for: holder.pd_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .pd_addAttributes([.font: font, .foregroundColor: color], for: holder.pd_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
-        }
-        return self
-    }
-
-    @discardableResult
     func pd_textAlignment(_ textAlignment: NSTextAlignment) -> Self {
         self.textAlignment = textAlignment
         return self
