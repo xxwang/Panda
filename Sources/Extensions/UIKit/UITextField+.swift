@@ -71,7 +71,14 @@ public extension UITextField {
 
     @discardableResult
     func xx_placeholder(_ placeholder: String) -> Self {
-        self.placeholder = placeholder
+
+        if let attributes = self.attributedPlaceholder?.xx_attributes() {
+            let attPlaceholder = placeholder.xx_nsMutableAttributedString().xx_addAttributes(attributes)
+            self.attributedPlaceholder = attPlaceholder
+        } else {
+            self.placeholder = placeholder
+        }
+
         return self
     }
 
@@ -83,47 +90,86 @@ public extension UITextField {
 
     @discardableResult
     func xx_placeholderColor(_ color: UIColor) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.xx_attributes()
-            attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.xx_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .xx_addAttributes([.foregroundColor: color], for: holder.xx_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
+//        if let holder = attributedPlaceholder {
+//            var attributes = holder.xx_attributes()
+//            attributes[.foregroundColor] = color
+//            self.attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.xx_fullNSRange())
+//        } else {
+//            let holder = placeholder ?? ""
+//            let attributedPlaceholder = NSMutableAttributedString(string: holder)
+//            attributedPlaceholder
+//                .xx_addAttributes([.foregroundColor: color], for: holder.xx_fullNSRange())
+//            self.attributedPlaceholder = attributedPlaceholder
+//        }
+
+        var placeholderAttText: NSMutableAttributedString
+        if let attributedPlaceholder {
+            placeholderAttText = attributedPlaceholder.xx_mutable()
+        } else if let placeholder {
+            placeholderAttText = placeholder.xx_nsMutableAttributedString()
+        } else {
+            placeholderAttText = "".xx_nsMutableAttributedString()
         }
+        placeholderAttText.addAttributes([.foregroundColor: color], range: placeholderAttText.xx_fullNSRange())
+        self.attributedPlaceholder = placeholderAttText
+
         return self
     }
 
     @discardableResult
     func xx_placeholderFont(_ font: UIFont) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.xx_attributes()
-            attributes[.font] = font
-            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.string.xx_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .xx_addAttributes([.font: font], for: holder.xx_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
+//        if let holder = attributedPlaceholder {
+//            var attributes = holder.xx_attributes()
+//            attributes[.font] = font
+//            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.string.xx_fullNSRange())
+//        } else if let holder = placeholder {
+//            let attributedPlaceholder = NSMutableAttributedString(string: holder)
+//            attributedPlaceholder
+//                .xx_addAttributes([.font: font], for: holder.xx_fullNSRange())
+//            self.attributedPlaceholder = attributedPlaceholder
+//        }
+
+        var placeholderAttText: NSMutableAttributedString
+        if let attributedPlaceholder {
+            placeholderAttText = attributedPlaceholder.xx_mutable()
+        } else if let placeholder {
+            placeholderAttText = placeholder.xx_nsMutableAttributedString()
+        } else {
+            placeholderAttText = "".xx_nsMutableAttributedString()
         }
+        placeholderAttText.addAttributes([.font: font], range: placeholderAttText.xx_fullNSRange())
+        self.attributedPlaceholder = placeholderAttText
+
         return self
     }
 
     @discardableResult
     func xx_placeholder(_ color: UIColor, font: UIFont) -> Self {
-        if let holder = attributedPlaceholder, !holder.string.isEmpty {
-            var attributes = holder.xx_attributes()
-            attributes[.font] = font
-            attributes[.foregroundColor] = color
-            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.xx_fullNSRange())
-        } else if let holder = placeholder {
-            let attributedPlaceholder = NSMutableAttributedString(string: holder)
-            attributedPlaceholder
-                .xx_addAttributes([.font: font, .foregroundColor: color], for: holder.xx_fullNSRange())
-            self.attributedPlaceholder = attributedPlaceholder
+//        if let holder = attributedPlaceholder, !holder.string.isEmpty {
+//            var attributes = holder.xx_attributes()
+//            attributes[.font] = font
+//            attributes[.foregroundColor] = color
+//            attributedPlaceholder = holder.xx_mutable().xx_addAttributes(attributes, for: holder.xx_fullNSRange())
+//        } else if let holder = placeholder {
+//            let attributedPlaceholder = NSMutableAttributedString(string: holder)
+//            attributedPlaceholder
+//                .xx_addAttributes([.font: font, .foregroundColor: color], for: holder.xx_fullNSRange())
+//            self.attributedPlaceholder = attributedPlaceholder
+//        }
+
+        var placeholderAttText: NSMutableAttributedString
+        if let attributedPlaceholder {
+            placeholderAttText = attributedPlaceholder.xx_mutable()
+        } else if let placeholder {
+            placeholderAttText = placeholder.xx_nsMutableAttributedString()
+        } else {
+            placeholderAttText = "".xx_nsMutableAttributedString()
         }
+        placeholderAttText.addAttributes([
+            .font: font,
+            .foregroundColor: color
+        ], range: placeholderAttText.xx_fullNSRange())
+        self.attributedPlaceholder = placeholderAttText
         return self
     }
 
