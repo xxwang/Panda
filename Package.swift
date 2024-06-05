@@ -1,21 +1,17 @@
 // swift-tools-version: 5.8
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "Panda",
+    name: "PandaKit",
     platforms: [
         .iOS(.v12),
-        .macOS(.v12),
-        .tvOS(.v12),
-        .watchOS(.v5),
     ],
     products: [
-        .library(name: "Panda", targets: ["Panda"]),
+        .library(name: "PandaKit", targets: ["Sources"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "Panda", dependencies: [], path: "Sources"),
+        .target(name: "Sources", dependencies: [], path: "Sources"),
     ]
 )
