@@ -9,18 +9,18 @@ import UIKit
 
 public extension UIDevice {
 
-    static var xx_IDFV: String? {
+    static var sk_IDFV: String? {
         UIDevice.current.identifierForVendor?.uuidString
     }
 
-    static var xx_IDFA: String? {
+    static var sk_IDFA: String? {
         if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
             return ASIdentifierManager.shared().advertisingIdentifier.uuidString
         }
         return nil
     }
 
-    static var xx_UUID: String {
+    static var sk_UUID: String {
         let uuidRef = CFUUIDCreate(kCFAllocatorDefault)
         let strRef = CFUUIDCreateString(kCFAllocatorDefault, uuidRef)
         let uuidString = (strRef! as String).replacingOccurrences(of: "_", with: "")
@@ -31,7 +31,7 @@ public extension UIDevice {
 
 public extension UIDevice {
 
-    static var xx_isBreak: Bool {
+    static var sk_isBreak: Bool {
         if environment.isSimulator {
             return false
         }
@@ -47,7 +47,7 @@ public extension UIDevice {
             fclose(bash)
             return true
         }
-        let path = String(format: "/private/%@", xx_UUID)
+        let path = String(format: "/private/%@", sk_UUID)
         do {
             try "test".write(toFile: path, atomically: true, encoding: .utf8)
             try FileManager.default.removeItem(atPath: path)
@@ -58,7 +58,7 @@ public extension UIDevice {
         return false
     }
 
-    static func xx_isCanCallTel() -> Bool {
+    static func sk_isCanCallTel() -> Bool {
         if let url = URL(string: "tel://") {
             return UIApplication.shared.canOpenURL(url)
         }
@@ -67,37 +67,37 @@ public extension UIDevice {
 }
 
 public extension UIDevice {
-    static var xx_currentSystemVersion: String {
+    static var sk_currentSystemVersion: String {
         UIDevice.current.systemVersion
     }
 
-    static var xx_systemUpdateTime: Date {
+    static var sk_systemUpdateTime: Date {
         let time = ProcessInfo.processInfo.systemUptime
         return Date(timeIntervalSinceNow: 0 - time)
     }
 
 
-    static var xx_deviceModel: String {
+    static var sk_deviceModel: String {
         UIDevice.current.model
     }
 
-    static var xx_currentSystemName: String {
+    static var sk_currentSystemName: String {
         UIDevice.current.systemName
     }
 
-    static var xx_currentDeviceName: String {
+    static var sk_currentDeviceName: String {
         UIDevice.current.name
     }
 
-    static var xx_deviceLanguage: String {
+    static var sk_deviceLanguage: String {
         return Bundle.main.preferredLocalizations[0]
     }
 
-    static var xx_currentLocalizedModel: String {
+    static var sk_currentLocalizedModel: String {
         UIDevice.current.localizedModel
     }
 
-    static var xx_deviceCPUCount: Int {
+    static var sk_deviceCPUCount: Int {
         var ncpu = UInt(0)
         var len: size_t = MemoryLayout.size(ofValue: ncpu)
         sysctlbyname("hw.ncpu", &ncpu, &len, nil, 0)
@@ -106,7 +106,7 @@ public extension UIDevice {
 }
 
 public extension UIDevice {
-    static var xx_diskSpace: Int64 {
+    static var sk_diskSpace: Int64 {
         if let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()) {
             if let space: NSNumber = attrs[FileAttributeKey.systemSize] as? NSNumber {
                 if space.int64Value > 0 {
@@ -117,7 +117,7 @@ public extension UIDevice {
         return -1
     }
 
-    static var xx_diskSpaceFree: Int64 {
+    static var sk_diskSpaceFree: Int64 {
         if let attrs = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()) {
             if let space: NSNumber = attrs[FileAttributeKey.systemFreeSize] as? NSNumber {
                 if space.int64Value > 0 {
@@ -128,7 +128,7 @@ public extension UIDevice {
         return -1
     }
 
-    static var xx_freeDiskSpaceInBytes: Int64 {
+    static var sk_freeDiskSpaceInBytes: Int64 {
         if #available(iOS 11.0, *) {
             if let space = try? URL(fileURLWithPath: NSHomeDirectory() as String).resourceValues(forKeys: [URLResourceKey.volumeAvailableCapacityForImportantUsageKey]).volumeAvailableCapacityForImportantUsage {
                 return space
@@ -146,9 +146,9 @@ public extension UIDevice {
         }
     }
 
-    static var xx_diskSpaceUsed: Int64 {
-        let total = xx_diskSpace
-        let free = xx_diskSpaceFree
+    static var sk_diskSpaceUsed: Int64 {
+        let total = sk_diskSpace
+        let free = sk_diskSpaceFree
         guard total > 0, free > 0 else {
             return -1
         }
@@ -160,19 +160,19 @@ public extension UIDevice {
         return used
     }
 
-    static var xx_memoryTotal: UInt64 {
+    static var sk_memoryTotal: UInt64 {
         ProcessInfo.processInfo.physicalMemory
     }
 }
 
 public extension UIDevice {
 
-    static func xx_simCardInfos() -> [CTCarrier]? {
-        return xx_getCarriers()
+    static func sk_simCardInfos() -> [CTCarrier]? {
+        return sk_getCarriers()
     }
 
 
-    static func xx_currentRadioAccessTechnologys() -> [String]? {
+    static func sk_currentRadioAccessTechnologys() -> [String]? {
         guard !environment.isSimulator else {
             return nil
         }
@@ -182,7 +182,7 @@ public extension UIDevice {
             guard let currentRadioTechs = info.serviceCurrentRadioAccessTechnology else {
                 return nil
             }
-            return currentRadioTechs.xx_allValues()
+            return currentRadioTechs.sk_allValues()
         } else {
             guard let currentRadioTech = info.currentRadioAccessTechnology else {
                 return nil
@@ -191,49 +191,49 @@ public extension UIDevice {
         }
     }
 
-    static func xx_networkTypes() -> [String]? {
-        guard let currentRadioTechs = xx_currentRadioAccessTechnologys() else {
+    static func sk_networkTypes() -> [String]? {
+        guard let currentRadioTechs = sk_currentRadioAccessTechnologys() else {
             return nil
         }
-        return currentRadioTechs.compactMap { xx_getNetworkType(currentRadioTech: $0) }
+        return currentRadioTechs.compactMap { sk_getNetworkType(currentRadioTech: $0) }
     }
 
-    static func xx_carrierNames() -> [String]? {
-        guard let carriers = xx_getCarriers(), !carriers.isEmpty else {
+    static func sk_carrierNames() -> [String]? {
+        guard let carriers = sk_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.carrierName! }
     }
 
-    static func xx_mobileCountryCodes() -> [String]? {
-        guard let carriers = xx_getCarriers(), !carriers.isEmpty else {
+    static func sk_mobileCountryCodes() -> [String]? {
+        guard let carriers = sk_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.mobileCountryCode! }
     }
 
-    static func xx_mobileNetworkCodes() -> [String]? {
-        guard let carriers = xx_getCarriers(), !carriers.isEmpty else {
+    static func sk_mobileNetworkCodes() -> [String]? {
+        guard let carriers = sk_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.mobileNetworkCode! }
     }
 
-    static func xx_isoCountryCodes() -> [String]? {
-        guard let carriers = xx_getCarriers(), !carriers.isEmpty else {
+    static func sk_isoCountryCodes() -> [String]? {
+        guard let carriers = sk_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map { $0.isoCountryCode! }
     }
 
-    static func xx_isAllowsVOIPs() -> [Bool]? {
-        guard let carriers = xx_getCarriers(), !carriers.isEmpty else {
+    static func sk_isAllowsVOIPs() -> [Bool]? {
+        guard let carriers = sk_getCarriers(), !carriers.isEmpty else {
             return nil
         }
         return carriers.map(\.allowsVOIP)
     }
 
-    private static func xx_getCarriers() -> [CTCarrier]? {
+    private static func sk_getCarriers() -> [CTCarrier]? {
         guard !environment.isSimulator else {
             return nil
         }
@@ -242,7 +242,7 @@ public extension UIDevice {
             guard let providers = info.serviceSubscriberCellularProviders else {
                 return []
             }
-            return providers.filter { $0.value.carrierName != nil }.xx_allValues()
+            return providers.filter { $0.value.carrierName != nil }.sk_allValues()
         } else {
             guard let carrier = info.subscriberCellularProvider, carrier.carrierName != nil else {
                 return []
@@ -251,7 +251,7 @@ public extension UIDevice {
         }
     }
 
-    private static func xx_getNetworkType(currentRadioTech: String) -> String {
+    private static func sk_getNetworkType(currentRadioTech: String) -> String {
 
         if #available(iOS 14.1, *), currentRadioTech == CTRadioAccessTechnologyNRNSA || currentRadioTech == CTRadioAccessTechnologyNR {
             return "5G"
@@ -279,7 +279,7 @@ public extension UIDevice {
         return networkType
     }
 
-    static var xx_deviceSupplier: String {
+    static var sk_deviceSupplier: String {
         let info = CTTelephonyNetworkInfo()
         var supplier = ""
         if #available(iOS 12.0, *) {
@@ -318,7 +318,7 @@ public extension UIDevice {
 
 public extension UIDevice {
 
-    static var xx_flashIsOn: Bool {
+    static var sk_flashIsOn: Bool {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
             print("camera invalid, please check")
             return false
@@ -326,7 +326,7 @@ public extension UIDevice {
         return device.torchMode == .on ? true : false
     }
 
-    static func xx_flash(on: Bool) {
+    static func sk_flash(on: Bool) {
 
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
             print("camera invalid, please check")
@@ -352,7 +352,7 @@ public extension UIDevice {
 
 public extension UIDevice {
 
-    static var xx_WifiNameWithMac: (wifiName: String?, macIP: String?) {
+    static var sk_WifiNameWithMac: (wifiName: String?, macIP: String?) {
         guard let interfaces: NSArray = CNCopySupportedInterfaces() else {
             return (nil, nil)
         }
@@ -367,7 +367,7 @@ public extension UIDevice {
         return (ssid, mac)
     }
 
-    static var xx_ipAddress: String? {
+    static var sk_ipAddress: String? {
         var addresses = [String]()
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
         if getifaddrs(&ifaddr) == 0 {
@@ -396,7 +396,7 @@ public extension UIDevice {
         }
     }
 
-    static var xx_wifiIP: String? {
+    static var sk_wifiIP: String? {
         var address: String?
 
         var ifaddr: UnsafeMutablePointer<ifaddrs>?

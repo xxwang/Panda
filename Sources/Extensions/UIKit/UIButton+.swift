@@ -3,20 +3,20 @@ import UIKit
 
 public extension UIButton {
 
-    private var xx_states: [UIControl.State] {
+    private var sk_states: [UIControl.State] {
         [.normal, .selected, .highlighted, .disabled]
     }
 
-    func xx_setImageForAllStates(_ image: UIImage) {
-        xx_states.forEach { setImage(image, for: $0) }
+    func sk_setImageForAllStates(_ image: UIImage) {
+        sk_states.forEach { setImage(image, for: $0) }
     }
 
-    func xx_setTitleColorForAllStates(_ color: UIColor) {
-        xx_states.forEach { setTitleColor(color, for: $0) }
+    func sk_setTitleColorForAllStates(_ color: UIColor) {
+        sk_states.forEach { setTitleColor(color, for: $0) }
     }
 
-    func xx_setTitleForAllStates(_ title: String) {
-        xx_states.forEach { setTitle(title, for: $0) }
+    func sk_setTitleForAllStates(_ title: String) {
+        sk_states.forEach { setTitle(title, for: $0) }
     }
 }
 
@@ -28,7 +28,7 @@ public extension UIButton {
         case right
     }
 
-    func xx_changeLayout(_ spacing: CGFloat, style: LayoutStyle) {
+    func sk_changeLayout(_ spacing: CGFloat, style: LayoutStyle) {
         let imageRect: CGRect = imageView?.frame ?? .zero
         let titleRect: CGRect = titleLabel?.frame ?? .zero
         let buttonWidth: CGFloat = frame.size.width
@@ -91,7 +91,7 @@ public extension UIButton {
         }
     }
 
-    func xx_centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
+    func sk_centerTextAndImage(imageAboveText: Bool = false, spacing: CGFloat) {
         if imageAboveText {
             guard let imageSize = imageView?.image?.size else { return }
             guard let text = titleLabel?.text else { return }
@@ -115,7 +115,7 @@ public extension UIButton {
         }
     }
 
-    func xx_spacing(_ spacing: CGFloat) {
+    func sk_spacing(_ spacing: CGFloat) {
         let sp = spacing * 0.5
         imageEdgeInsets = UIEdgeInsets(top: 0, left: -sp, bottom: 0, right: sp)
         titleEdgeInsets = UIEdgeInsets(top: 0, left: sp, bottom: 0, right: -sp)
@@ -124,11 +124,11 @@ public extension UIButton {
 
 public extension UIButton {
 
-    func xx_titleSize(with lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+    func sk_titleSize(with lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         if let currentAttributedTitle {
-            return currentAttributedTitle.xx_attributedSize(lineWidth)
+            return currentAttributedTitle.sk_attributedSize(lineWidth)
         }
-        return titleLabel?.xx_textSize(lineWidth) ?? .zero
+        return titleLabel?.sk_textSize(lineWidth) ?? .zero
     }
 }
 
@@ -155,7 +155,7 @@ extension UIButton: AssociatedAttributes {
 
 public extension UIButton {
 
-    func xx_expandSize(size: CGFloat = 10) {
+    func sk_expandSize(size: CGFloat = 10) {
         AssociatedObject.set(self,
                              &AssociateKeys.ExpandSizeKey,
                              size,
@@ -200,43 +200,43 @@ extension UIButton {
 public extension UIButton {
 
     @discardableResult
-    func xx_title(_ text: String, for state: UIControl.State = .normal) -> Self {
+    func sk_title(_ text: String, for state: UIControl.State = .normal) -> Self {
         setTitle(text, for: state)
         return self
     }
 
-    func xx_attributedTitle(_ title: NSAttributedString?, for state: UIControl.State = .normal) -> Self {
+    func sk_attributedTitle(_ title: NSAttributedString?, for state: UIControl.State = .normal) -> Self {
         setAttributedTitle(title, for: state)
         return self
     }
 
     @discardableResult
-    func xx_titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
+    func sk_titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
         self.setTitleColor(color, for: state)
         return self
     }
 
     @discardableResult
-    func xx_font(_ font: UIFont) -> Self {
+    func sk_font(_ font: UIFont) -> Self {
         self.titleLabel?.font = font
         return self
     }
 
     @discardableResult
-    func xx_image(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
+    func sk_image(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         setImage(image, for: state)
         return self
     }
 
     @discardableResult
-    func xx_image(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
+    func sk_image(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
         setImage(image, for: state)
         return self
     }
 
     @discardableResult
-    func xx_image(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
+    func sk_image(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
         guard let path = Bundle(for: aClass).path(forResource: bundleName, ofType: "bundle") else {
             return self
         }
@@ -246,7 +246,7 @@ public extension UIButton {
     }
 
     @discardableResult
-    func xx_image(_ color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0), for state: UIControl.State = .normal) -> Self {
+    func sk_image(_ color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0), for state: UIControl.State = .normal) -> Self {
         let image = UIImage(with: color, size: size)
         setImage(image, for: state)
         return self
@@ -254,13 +254,13 @@ public extension UIButton {
 
 
     @discardableResult
-    func xx_backgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
+    func sk_backgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         setBackgroundImage(image, for: state)
         return self
     }
 
     @discardableResult
-    func xx_backgroundImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
+    func sk_backgroundImage(_ imageName: String, in bundleName: String, from aClass: AnyClass, for state: UIControl.State = .normal) -> Self {
         guard let path = Bundle(for: aClass).path(forResource: bundleName, ofType: "bundle") else {
             return self
         }
@@ -270,29 +270,29 @@ public extension UIButton {
     }
 
     @discardableResult
-    func xx_backgroundImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
+    func sk_backgroundImage(_ imageName: String, in bundle: Bundle? = nil, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
         setBackgroundImage(image, for: state)
         return self
     }
 
     @discardableResult
-    func xx_backgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
+    func sk_backgroundImage(_ color: UIColor, for state: UIControl.State = .normal) -> Self {
         let image = UIImage(with: color)
         setBackgroundImage(image, for: state)
         return self
     }
 
     @discardableResult
-    func xx_callback(_ callback: ((_ button: UIButton?) -> Void)?) -> Self {
+    func sk_callback(_ callback: ((_ button: UIButton?) -> Void)?) -> Self {
         self.callback = callback
         addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         return self
     }
 
     @discardableResult
-    func xx_expandClickArea(_ size: CGFloat = 10) -> Self {
-        self.xx_expandSize(size: size)
+    func sk_expandClickArea(_ size: CGFloat = 10) -> Self {
+        self.sk_expandSize(size: size)
         return self
     }
 }

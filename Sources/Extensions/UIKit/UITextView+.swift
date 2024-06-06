@@ -10,113 +10,113 @@ private class AssociateKeys {
 }
 
 public extension UITextView {
-    var xx_placeholder: String? {
+    var sk_placeholder: String? {
         get { AssociatedObject.get(self, &AssociateKeys.placeholder) as? String }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholder, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
 
-            guard let xx_placeholderLabel else {
-                self.xx_initPlaceholder(xx_placeholder!)
+            guard let sk_placeholderLabel else {
+                self.sk_initPlaceholder(sk_placeholder!)
                 return
             }
-            xx_placeholderLabel.xx_text(xx_placeholder)
-            self.xx_constraintPlaceholder()
+            sk_placeholderLabel.sk_text(sk_placeholder)
+            self.sk_constraintPlaceholder()
         }
     }
 
-    var xx_placeholderFont: UIFont? {
+    var sk_placeholderFont: UIFont? {
         get {
-            return (AssociatedObject.get(self, &AssociateKeys.placeholdFont) as? UIFont).xx_or(.systemFont(ofSize: 13))
+            return (AssociatedObject.get(self, &AssociateKeys.placeholdFont) as? UIFont).sk_or(.systemFont(ofSize: 13))
         }
         set {
             AssociatedObject.set(self, &AssociateKeys.placeholdFont, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard let xx_placeholderLabel = self.xx_placeholderLabel else { return }
-            xx_placeholderLabel.xx_font(xx_placeholderFont!)
-            self.xx_constraintPlaceholder()
+            guard let sk_placeholderLabel = self.sk_placeholderLabel else { return }
+            sk_placeholderLabel.sk_font(sk_placeholderFont!)
+            self.sk_constraintPlaceholder()
         }
     }
 
-    var xx_placeholderColor: UIColor? {
+    var sk_placeholderColor: UIColor? {
         get {
-            return (AssociatedObject.get(self, AssociateKeys.placeholdColor) as? UIColor).xx_or(.lightGray)
+            return (AssociatedObject.get(self, AssociateKeys.placeholdColor) as? UIColor).sk_or(.lightGray)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholdColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            xx_placeholderLabel?.textColor = xx_placeholderColor
+            sk_placeholderLabel?.textColor = sk_placeholderColor
         }
     }
 
-    var xx_placeholderOrigin: CGPoint? {
+    var sk_placeholderOrigin: CGPoint? {
         get {
-            return (AssociatedObject.get(self, AssociateKeys.placeholderOrigin) as? CGPoint).xx_or(.zero)
+            return (AssociatedObject.get(self, AssociateKeys.placeholderOrigin) as? CGPoint).sk_or(.zero)
         }
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderOrigin, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            guard let xx_placeholderLabel, let xx_placeholderOrigin else { return }
-            xx_placeholderLabel.frame.origin = xx_placeholderOrigin
+            guard let sk_placeholderLabel, let sk_placeholderOrigin else { return }
+            sk_placeholderLabel.frame.origin = sk_placeholderOrigin
         }
     }
 }
 
 private extension UITextView {
-    var xx_placeholderLabel: UILabel? {
+    var sk_placeholderLabel: UILabel? {
         set {
             AssociatedObject.set(self, AssociateKeys.placeholderLabel, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get { AssociatedObject.get(self, AssociateKeys.placeholderLabel) as? UILabel }
     }
 
-    func xx_initPlaceholder(_ placeholder: String) {
+    func sk_initPlaceholder(_ placeholder: String) {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(xx_textChangeHandler(_:)),
+                                               selector: #selector(sk_textChangeHandler(_:)),
                                                name: UITextView.textDidChangeNotification,
                                                object: self)
 
-        self.xx_placeholderLabel = UILabel.default()
-            .xx_text(xx_placeholder)
-            .xx_font(xx_placeholderFont ?? .systemFont(ofSize: 14))
-            .xx_textColor(xx_placeholderColor ?? .gray)
-            .xx_numberOfLines(0)
-            .xx_add2(self)
-            .xx_isHidden(text.count > 0)
-        self.xx_constraintPlaceholder()
+        self.sk_placeholderLabel = UILabel.default()
+            .sk_text(sk_placeholder)
+            .sk_font(sk_placeholderFont ?? .systemFont(ofSize: 14))
+            .sk_textColor(sk_placeholderColor ?? .gray)
+            .sk_numberOfLines(0)
+            .sk_add2(self)
+            .sk_isHidden(text.count > 0)
+        self.sk_constraintPlaceholder()
     }
 
-    func xx_constraintPlaceholder() {
-        guard let xx_placeholderLabel else { return }
-        let placeholderSize = xx_placeholderLabel.xx_textSize()
-        xx_placeholderLabel.xx_frame(CGRect(origin: self.xx_placeholderOrigin.xx_or(.zero), size: placeholderSize))
+    func sk_constraintPlaceholder() {
+        guard let sk_placeholderLabel else { return }
+        let placeholderSize = sk_placeholderLabel.sk_textSize()
+        sk_placeholderLabel.sk_frame(CGRect(origin: self.sk_placeholderOrigin.sk_or(.zero), size: placeholderSize))
     }
 
-    @objc func xx_textChangeHandler(_ notification: Notification) {
-        self.xx_placeholderLabel?.xx_isHidden(text.count > 0)
+    @objc func sk_textChangeHandler(_ notification: Notification) {
+        self.sk_placeholderLabel?.sk_isHidden(text.count > 0)
     }
 }
 
 public extension UITextView {
 
-    func xx_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
+    func sk_inputRestrictions(shouldChangeTextIn range: NSRange, replacementText text: String, maxCharacters: Int, regex: String?) -> Bool {
         guard !text.isEmpty else { return true }
         guard let oldContent = self.text else { return false }
 
         if let _ = markedTextRange {
             guard range.length != 0 else { return oldContent.count + 1 <= maxCharacters }
-            if let weakRegex = regex, !text.xx_isMatchRegexp(weakRegex) { return false }
-            let allContent = oldContent.xx_subString(to: range.location) + text
+            if let weakRegex = regex, !text.sk_isMatchRegexp(weakRegex) { return false }
+            let allContent = oldContent.sk_subString(to: range.location) + text
             if allContent.count > maxCharacters {
-                let newContent = allContent.xx_subString(to: maxCharacters)
+                let newContent = allContent.sk_subString(to: maxCharacters)
                 self.text = newContent
                 return false
             }
         } else {
-            guard !text.xx_isNineKeyBoard() else { return true }
-            if let weakRegex = regex, !text.xx_isMatchRegexp(weakRegex) { return false }
+            guard !text.sk_isNineKeyBoard() else { return true }
+            if let weakRegex = regex, !text.sk_isMatchRegexp(weakRegex) { return false }
             guard oldContent.count + text.count <= maxCharacters else { return false }
         }
         return true
     }
 
-    func xx_appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
+    func sk_appendLinkString(_ linkString: String, font: UIFont, linkAddr: String? = nil) {
         let addAttributes = [NSAttributedString.Key.font: font]
         let linkAttributedString = NSMutableAttributedString(string: linkString, attributes: addAttributes)
 
@@ -124,31 +124,31 @@ public extension UITextView {
             linkAttributedString.beginEditing()
             linkAttributedString.addAttribute(NSAttributedString.Key.link,
                                               value: linkAddr,
-                                              range: linkString.xx_fullNSRange())
+                                              range: linkString.sk_fullNSRange())
             linkAttributedString.endEditing()
         }
 
         attributedText = attributedText
-            .xx_mutable()
-            .xx_append(linkAttributedString)
+            .sk_mutable()
+            .sk_append(linkAttributedString)
     }
 
-    func xx_resolveHashTags() {
+    func sk_resolveHashTags() {
         let nsText: NSString = text! as NSString
 
-        let m_attributedText = (text ?? "").xx_nsMutableAttributedString().xx_font(font)
+        let m_attributedText = (text ?? "").sk_nsMutableAttributedString().sk_font(font)
 
         var bookmark = 0
         let charactersSet = CharacterSet(charactersIn: "@#")
         let sentences: [String] = text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
 
         for sentence in sentences {
-            if !sentence.xx_isValidUrl() {
+            if !sentence.sk_isValidUrl() {
                 let words: [String] = sentence.components(separatedBy: charactersSet)
                 var bookmark2 = bookmark
                 for i in 0 ..< words.count {
                     let word = words[i]
-                    let keyword = xx_chopOffNonAlphaNumericCharacters(word as String) ?? ""
+                    let keyword = sk_chopOffNonAlphaNumericCharacters(word as String) ?? ""
                     if keyword != "", i > 0 {
 
                         let remainingRangeLength = min(nsText.length - bookmark2 + 1, word.count + 2)
@@ -168,7 +168,7 @@ public extension UITextView {
         attributedText = m_attributedText
     }
 
-    private func xx_chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
+    private func sk_chopOffNonAlphaNumericCharacters(_ text: String) -> String? {
         let nonAlphaNumericCharacters = CharacterSet.alphanumerics.inverted
         return text.components(separatedBy: nonAlphaNumericCharacters).first
     }
@@ -187,105 +187,105 @@ public extension UITextView {
 public extension UITextView {
 
     @discardableResult
-    func xx_clear() -> Self {
+    func sk_clear() -> Self {
         self.text = ""
-        self.attributedText = "".xx_nsAttributedString()
+        self.attributedText = "".sk_nsAttributedString()
         return self
     }
 
     @discardableResult
-    func xx_text(_ text: String) -> Self {
+    func sk_text(_ text: String) -> Self {
         self.text = text
         return self
     }
 
     @discardableResult
-    func xx_attributedText(_ attributedText: NSAttributedString) -> Self {
+    func sk_attributedText(_ attributedText: NSAttributedString) -> Self {
         self.attributedText = attributedText
         return self
     }
 
     @discardableResult
-    func xx_textAlignment(_ textAlignment: NSTextAlignment) -> Self {
+    func sk_textAlignment(_ textAlignment: NSTextAlignment) -> Self {
         self.textAlignment = textAlignment
         return self
     }
 
     @discardableResult
-    func xx_textColor(_ textColor: UIColor) -> Self {
+    func sk_textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
         return self
     }
 
     @discardableResult
-    func xx_font(_ font: UIFont) -> Self {
+    func sk_font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
 
     @discardableResult
-    func xx_systemFont(_ fontSize: CGFloat) -> Self {
+    func sk_systemFont(_ fontSize: CGFloat) -> Self {
         font = UIFont.systemFont(ofSize: fontSize)
         return self
     }
 
     @discardableResult
-    func xx_delegate(_ delegate: UITextViewDelegate) -> Self {
+    func sk_delegate(_ delegate: UITextViewDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
     @discardableResult
-    func xx_keyboardType(_ keyboardType: UIKeyboardType) -> Self {
+    func sk_keyboardType(_ keyboardType: UIKeyboardType) -> Self {
         self.keyboardType = keyboardType
         return self
     }
 
     @discardableResult
-    func xx_returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self {
+    func sk_returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self {
         self.returnKeyType = returnKeyType
         return self
     }
 
     @discardableResult
-    func xx_enablesReturnKeyAutomatically(_ enable: Bool) -> Self {
+    func sk_enablesReturnKeyAutomatically(_ enable: Bool) -> Self {
         enablesReturnKeyAutomatically = enable
         return self
     }
 
     @discardableResult
-    func xx_textContainerInset(_ textContainerInset: UIEdgeInsets) -> Self {
+    func sk_textContainerInset(_ textContainerInset: UIEdgeInsets) -> Self {
         self.textContainerInset = textContainerInset
         return self
     }
 
     @discardableResult
-    func xx_lineFragmentPadding(_ lineFragmentPadding: CGFloat) -> Self {
+    func sk_lineFragmentPadding(_ lineFragmentPadding: CGFloat) -> Self {
         self.textContainer.lineFragmentPadding = lineFragmentPadding
         return self
     }
 
     @discardableResult
-    func xx_placeholder(_ placeholder: String) -> Self {
-        self.xx_placeholder = placeholder
+    func sk_placeholder(_ placeholder: String) -> Self {
+        self.sk_placeholder = placeholder
         return self
     }
 
     @discardableResult
-    func xx_placeholderColor(_ textColor: UIColor) -> Self {
-        xx_placeholderColor = textColor
+    func sk_placeholderColor(_ textColor: UIColor) -> Self {
+        sk_placeholderColor = textColor
         return self
     }
 
     @discardableResult
-    func xx_placeholderFont(_ font: UIFont) -> Self {
-        xx_placeholderFont = font
+    func sk_placeholderFont(_ font: UIFont) -> Self {
+        sk_placeholderFont = font
         return self
     }
     
     @discardableResult
-    func xx_placeholderOrigin(_ origin: CGPoint) -> Self {
-        xx_placeholderOrigin = origin
+    func sk_placeholderOrigin(_ origin: CGPoint) -> Self {
+        sk_placeholderOrigin = origin
         return self
     }
 

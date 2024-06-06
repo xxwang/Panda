@@ -2,7 +2,7 @@ import StoreKit
 
 public extension SKProduct {
 
-    func xx_localePrice() -> String? {
+    func sk_localePrice() -> String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = self.priceLocale

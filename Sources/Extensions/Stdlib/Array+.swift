@@ -25,17 +25,17 @@ public extension Array {
 
 public extension Array {
 
-    func xx_value(of index: Index) -> Element? {
+    func sk_value(of index: Index) -> Element? {
         indices.contains(index) ? self[index] : nil
     }
 
-    mutating func xx_append(_ elements: [Element]) {
+    mutating func sk_append(_ elements: [Element]) {
         for element in elements {
             self.append(element)
         }
     }
 
-    func xx_split(where condition: (Element, Element) -> Bool) -> [[Element]] {
+    func sk_split(where condition: (Element, Element) -> Bool) -> [[Element]] {
         var result: [[Element]] = self.isEmpty ? [] : [[self[0]]]
         for (previous, current) in zip(self, dropFirst()) {
             if condition(previous, current) {
@@ -47,7 +47,7 @@ public extension Array {
         return result
     }
 
-    func xx_split(size: Int) -> [[Element]] {
+    func sk_split(size: Int) -> [[Element]] {
         if self.count <= size {
             return [self]
         }
@@ -71,11 +71,11 @@ public extension Array {
         return superArray
     }
 
-    mutating func xx_prepend(_ newElement: Element) {
+    mutating func sk_prepend(_ newElement: Element) {
         self.insert(newElement, at: 0)
     }
 
-    mutating func xx_swap(from index: Index, to otherIndex: Index) {
+    mutating func sk_swap(from index: Index, to otherIndex: Index) {
         guard index != otherIndex else { return }
         guard startIndex ..< endIndex ~= index else { return }
         guard startIndex ..< endIndex ~= otherIndex else { return }
@@ -85,7 +85,7 @@ public extension Array {
 
 public extension Array {
 
-    func xx_sorted<T: Hashable>(like otherArray: [T], keyPath: KeyPath<Element, T>) -> [Element] {
+    func sk_sorted<T: Hashable>(like otherArray: [T], keyPath: KeyPath<Element, T>) -> [Element] {
         let dict = otherArray.enumerated().reduce(into: [:]) { $0[$1.element] = $1.offset }
         return sorted {
             guard let thisIndex = dict[$0[keyPath: keyPath]] else { return false }
@@ -97,14 +97,14 @@ public extension Array {
 
 public extension [String] {
 
-    func xx_string(separator: String = "") -> String {
+    func sk_string(separator: String = "") -> String {
         self.joined(separator: separator)
     }
 }
 
 public extension Array where Element: Equatable {
 
-    func xx_indexes(_ item: Element) -> [Int] {
+    func sk_indexes(_ item: Element) -> [Int] {
         var indexes = [Int]()
         for index in 0 ..< count where self[index] == item {
             indexes.append(index)
@@ -112,29 +112,29 @@ public extension Array where Element: Equatable {
         return indexes
     }
 
-    func xx_firstIndex(_ item: Element) -> Int? {
+    func sk_firstIndex(_ item: Element) -> Int? {
         for (index, value) in enumerated() where value == item {
             return index
         }
         return nil
     }
 
-    func xx_lastIndex(_ item: Element) -> Int? {
-        return self.xx_indexes(item).last
+    func sk_lastIndex(_ item: Element) -> Int? {
+        return self.sk_indexes(item).last
     }
 
-    func xx_last<T: Equatable>(where keyPath: KeyPath<Element, T>, equals value: T) -> Element? {
+    func sk_last<T: Equatable>(where keyPath: KeyPath<Element, T>, equals value: T) -> Element? {
         last { $0[keyPath: keyPath] == value }
     }
 
-    mutating func xx_remove(_ object: Element) {
-        for idx in self.xx_indexes(object).reversed() {
+    mutating func sk_remove(_ object: Element) {
+        for idx in self.sk_indexes(object).reversed() {
             remove(at: idx)
         }
     }
 
     @discardableResult
-    mutating func xx_remove(_ element: Element, isRepeat: Bool = true) -> Array {
+    mutating func sk_remove(_ element: Element, isRepeat: Bool = true) -> Array {
         var removeIndexs: [Int] = []
 
         for i in 0 ..< count {
@@ -151,41 +151,41 @@ public extension Array where Element: Equatable {
     }
 
     @discardableResult
-    mutating func xx_removeArray(_ elements: [Element], isRepeat: Bool = true) -> Array {
+    mutating func sk_removeArray(_ elements: [Element], isRepeat: Bool = true) -> Array {
         for element in elements {
-            if contains(element) { self.xx_remove(element, isRepeat: isRepeat) }
+            if contains(element) { self.sk_remove(element, isRepeat: isRepeat) }
         }
         return self
     }
 
     @discardableResult
-    mutating func xx_removeAll(_ item: Element) -> [Element] {
+    mutating func sk_removeAll(_ item: Element) -> [Element] {
         removeAll(where: { $0 == item })
         return self
     }
 
     @discardableResult
-    mutating func xx_removeAll(_ items: [Element]) -> [Element] {
+    mutating func sk_removeAll(_ items: [Element]) -> [Element] {
         guard !items.isEmpty else { return self }
         removeAll(where: { items.contains($0) })
         return self
     }
 
     @discardableResult
-    mutating func xx_removeDuplicates() -> [Element] {
+    mutating func sk_removeDuplicates() -> [Element] {
         self = reduce(into: [Element]()) {
             if !$0.contains($1) { $0.append($1) }
         }
         return self
     }
 
-    func xx_withoutDuplicates() -> [Element] {
+    func sk_withoutDuplicates() -> [Element] {
         reduce(into: [Element]()) {
             if !$0.contains($1) { $0.append($1) }
         }
     }
 
-    func xx_withoutDuplicates(keyPath path: KeyPath<Element, some Equatable>) -> [Element] {
+    func sk_withoutDuplicates(keyPath path: KeyPath<Element, some Equatable>) -> [Element] {
         reduce(into: [Element]()) { result, element in
             if !result.contains(where: { $0[keyPath: path] == element[keyPath: path] }) {
                 result.append(element)
@@ -193,7 +193,7 @@ public extension Array where Element: Equatable {
         }
     }
 
-    func xx_withoutDuplicates<E: Hashable>(keyPath path: KeyPath<Element, E>) -> [Element] {
+    func sk_withoutDuplicates<E: Hashable>(keyPath path: KeyPath<Element, E>) -> [Element] {
         var set = Set<E>()
         return filter { set.insert($0[keyPath: path]).inserted }
     }
@@ -201,7 +201,7 @@ public extension Array where Element: Equatable {
 
 public extension Array where Element: NSObjectProtocol {
     @discardableResult
-    mutating func xx_remove(object: NSObjectProtocol, isRepeat: Bool = true) -> Array {
+    mutating func sk_remove(object: NSObjectProtocol, isRepeat: Bool = true) -> Array {
         var removeIndexs: [Int] = []
         for i in 0 ..< count {
             if self[i].isEqual(object) {
@@ -216,10 +216,10 @@ public extension Array where Element: NSObjectProtocol {
     }
 
     @discardableResult
-    mutating func xx_removeArray(objects: [NSObjectProtocol], isRepeat: Bool = true) -> Array {
+    mutating func sk_removeArray(objects: [NSObjectProtocol], isRepeat: Bool = true) -> Array {
         for object in objects {
             if contains(where: { $0.isEqual(object) }) {
-                self.xx_remove(object: object, isRepeat: isRepeat)
+                self.sk_remove(object: object, isRepeat: isRepeat)
             }
         }
         return self
@@ -228,8 +228,8 @@ public extension Array where Element: NSObjectProtocol {
 
 public extension Array where Element: NSAttributedString {
 
-    func xx_joined(separator: NSAttributedString) -> NSAttributedString {
-        guard let firstElement = first else { return "".xx_nsAttributedString() }
+    func sk_joined(separator: NSAttributedString) -> NSAttributedString {
+        guard let firstElement = first else { return "".sk_nsAttributedString() }
         return dropFirst()
             .reduce(into: NSMutableAttributedString(attributedString: firstElement)) { result, element in
                 result.append(separator)
@@ -237,8 +237,8 @@ public extension Array where Element: NSAttributedString {
             }
     }
 
-    func xx_joined(separator: String) -> NSAttributedString {
+    func sk_joined(separator: String) -> NSAttributedString {
         let separator = NSAttributedString(string: separator)
-        return xx_joined(separator: separator)
+        return sk_joined(separator: separator)
     }
 }

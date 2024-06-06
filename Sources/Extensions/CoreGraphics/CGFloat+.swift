@@ -3,83 +3,83 @@ import CoreGraphics
 import Foundation
 
 public extension CGFloat {
-    func xx_int() -> Int {
-        return self.xx_nsNumber().intValue
+    func sk_int() -> Int {
+        return self.sk_nsNumber().intValue
     }
 
-    func xx_int64() -> Int64 {
-        return self.xx_nsNumber().int64Value
+    func sk_int64() -> Int64 {
+        return self.sk_nsNumber().int64Value
     }
 
-    func xx_uInt() -> UInt {
-        return self.xx_nsNumber().uintValue
+    func sk_uInt() -> UInt {
+        return self.sk_nsNumber().uintValue
     }
 
-    func xx_uInt64() -> UInt64 {
-        return self.xx_nsNumber().uint64Value
+    func sk_uInt64() -> UInt64 {
+        return self.sk_nsNumber().uint64Value
     }
 
-    func xx_float() -> Float {
-        return self.xx_nsNumber().floatValue
+    func sk_float() -> Float {
+        return self.sk_nsNumber().floatValue
     }
 
-    func xx_double() -> Double {
-        return self.xx_nsNumber().doubleValue
+    func sk_double() -> Double {
+        return self.sk_nsNumber().doubleValue
     }
 
-    func xx_nsNumber() -> NSNumber {
+    func sk_nsNumber() -> NSNumber {
         return NSNumber(value: Double(self))
     }
 
-    func xx_decimalNumber() -> NSDecimalNumber {
+    func sk_decimalNumber() -> NSDecimalNumber {
         return NSDecimalNumber(value: Double(self))
     }
 
-    func xx_decimal() -> Decimal {
-        return self.xx_decimalNumber().decimalValue
+    func sk_decimal() -> Decimal {
+        return self.sk_decimalNumber().decimalValue
     }
 
-    func xx_string() -> String {
-        return String(self.xx_double())
+    func sk_string() -> String {
+        return String(self.sk_double())
     }
 }
 
 public extension CGFloat {
-    func xx_radians() -> Double {
-        return self.xx_double() / 180.0 * Double.pi
+    func sk_radians() -> Double {
+        return self.sk_double() / 180.0 * Double.pi
     }
 
-    func xx_degrees() -> Double {
-        return self.xx_double() * (180.0 / Double.pi)
+    func sk_degrees() -> Double {
+        return self.sk_double() * (180.0 / Double.pi)
     }
 
-    func xx_abs() -> Self {
+    func sk_abs() -> Self {
         return Swift.abs(self)
     }
 
-    func xx_ceil() -> Self {
+    func sk_ceil() -> Self {
         return Foundation.ceil(self)
     }
 
-    func xx_floor() -> Self {
+    func sk_floor() -> Self {
         return Foundation.floor(self)
     }
 
-    func xx_lround() -> Int {
+    func sk_lround() -> Int {
         return Darwin.lround(Double(self))
     }
 
-    func xx_truncate(places: Int) -> Self {
-        let divisor = pow(10.0, places.xx_double())
-        return Self(self.xx_double() * divisor / divisor)
+    func sk_truncate(places: Int) -> Self {
+        let divisor = pow(10.0, places.sk_double())
+        return Self(self.sk_double() * divisor / divisor)
     }
 
-    func xx_round(_ places: Int) -> Self {
-        let divisor = pow(10.0, places.xx_double())
-        return Self((self.xx_double() * divisor).rounded() / divisor)
+    func sk_round(_ places: Int) -> Self {
+        let divisor = pow(10.0, places.sk_double())
+        return Self((self.sk_double() * divisor).rounded() / divisor)
     }
 
-    func xx_rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
+    func sk_rounded(_ places: Int, rule: FloatingPointRoundingRule) -> Self {
         let factor = Self(pow(10.0, Double(Swift.max(0, places))))
         return (self * factor).rounded(rule) / factor
     }

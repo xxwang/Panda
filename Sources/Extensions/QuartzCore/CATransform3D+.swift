@@ -3,15 +3,15 @@ import CoreGraphics
 import QuartzCore
 
 public extension CATransform3D {
-    var xx_isIdentity: Bool {
+    var sk_isIdentity: Bool {
         return CATransform3DIsIdentity(self)
     }
 
-    var xx_isAffine: Bool {
+    var sk_isAffine: Bool {
         return CATransform3DIsAffine(self)
     }
 
-    static var xx_identity: CATransform3D {
+    static var sk_identity: CATransform3D {
         return CATransform3DIdentity
     }
 }
@@ -34,47 +34,47 @@ public extension CATransform3D {
 }
 
 public extension CATransform3D {
-    func xx_cgAffineTransform() -> CGAffineTransform {
+    func sk_cgAffineTransform() -> CGAffineTransform {
         return CATransform3DGetAffineTransform(self)
     }
 
-    func xx_translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) -> CATransform3D {
+    func sk_translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) -> CATransform3D {
         return CATransform3DTranslate(self, tx, ty, tz)
     }
 
-    func xx_scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) -> CATransform3D {
+    func sk_scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) -> CATransform3D {
         return CATransform3DScale(self, sx, sy, sz)
     }
 
-    func xx_rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) -> CATransform3D {
+    func sk_rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) -> CATransform3D {
         return CATransform3DRotate(self, angle, x, y, z)
     }
 
-    func xx_inverted() -> CATransform3D {
+    func sk_inverted() -> CATransform3D {
         return CATransform3DInvert(self)
     }
 
-    func xx_concatenating(_ t2: CATransform3D) -> CATransform3D {
+    func sk_concatenating(_ t2: CATransform3D) -> CATransform3D {
         return CATransform3DConcat(self, t2)
     }
 
-    mutating func xx_translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) {
+    mutating func sk_translatedBy(tx: CGFloat, ty: CGFloat, tz: CGFloat) {
         self = CATransform3DTranslate(self, tx, ty, tz)
     }
 
-    mutating func xx_scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) {
+    mutating func sk_scaledBy(sx: CGFloat, sy: CGFloat, sz: CGFloat) {
         self = CATransform3DScale(self, sx, sy, sz)
     }
 
-    mutating func xx_rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) {
+    mutating func sk_rotated(angle: CGFloat, x: CGFloat, y: CGFloat, z: CGFloat) {
         self = CATransform3DRotate(self, angle, x, y, z)
     }
 
-    mutating func xx_inverted() {
+    mutating func sk_inverted() {
         self = CATransform3DInvert(self)
     }
 
-    mutating func xx_concatenating(_ t2: CATransform3D) {
+    mutating func sk_concatenating(_ t2: CATransform3D) {
         self = CATransform3DConcat(self, t2)
     }
 }

@@ -2,15 +2,15 @@
 import HealthKit
 
 public extension HKActivitySummary {
-    var xx_isCompleteStandHoursGoal: Bool {
+    var sk_isCompleteStandHoursGoal: Bool {
         appleStandHoursGoal.compare(appleStandHours) != .orderedDescending
     }
 
-    var xx_isCompleteExerciseTimeGoal: Bool {
+    var sk_isCompleteExerciseTimeGoal: Bool {
         appleExerciseTimeGoal.compare(appleExerciseTime) != .orderedDescending
     }
 
-    var xx_isCompleteActiveEnergyBurnedGoal: Bool {
+    var sk_isCompleteActiveEnergyBurnedGoal: Bool {
         activeEnergyBurnedGoal.compare(activeEnergyBurned) != .orderedDescending
     }
 }

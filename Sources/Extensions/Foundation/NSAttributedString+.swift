@@ -1,24 +1,24 @@
 import UIKit
 
 public extension NSAttributedString {
-    func xx_mutable() -> NSMutableAttributedString {
+    func sk_mutable() -> NSMutableAttributedString {
         return NSMutableAttributedString(attributedString: self)
     }
 
-    func xx_attributes() -> [NSAttributedString.Key: Any] {
+    func sk_attributes() -> [NSAttributedString.Key: Any] {
         guard length > 0 else { return [:] }
         return self.attributes(at: 0, effectiveRange: nil)
     }
 
-    func xx_fullNSRange() -> NSRange {
+    func sk_fullNSRange() -> NSRange {
         return NSRange(location: 0, length: length)
     }
 
-    func xx_nsRange(_ subStr: String) -> NSRange {
-        return string.xx_nsRange(subStr)
+    func sk_nsRange(_ subStr: String) -> NSRange {
+        return string.sk_nsRange(subStr)
     }
 
-    func xx_nsRanges(with texts: [String]) -> [NSRange] {
+    func sk_nsRanges(with texts: [String]) -> [NSRange] {
         var ranges = [NSRange]()
         for str in texts {
             if string.contains(str) {
@@ -38,14 +38,14 @@ public extension NSAttributedString {
         return ranges
     }
 
-    func xx_attributedSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
+    func sk_attributedSize(_ lineWidth: CGFloat = sizer.screen.width) -> CGSize {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
         let size = self.boundingRect(
             with: constraint,
             options: [.usesLineFragmentOrigin, .usesFontLeading],
             context: nil
         ).size
-        return CGSize(width: size.width.xx_ceil(), height: size.height.xx_ceil())
+        return CGSize(width: size.width.sk_ceil(), height: size.height.sk_ceil())
     }
 }
 

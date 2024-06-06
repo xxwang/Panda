@@ -41,13 +41,13 @@ public extension RangeReplaceableCollection {
 
 public extension RangeReplaceableCollection {
 
-    func xx_rotated(by places: Int) -> Self {
+    func sk_rotated(by places: Int) -> Self {
         var copy = self
-        return copy.xx_rotate(by: places)
+        return copy.sk_rotate(by: places)
     }
 
     @discardableResult
-    mutating func xx_rotate(by places: Int) -> Self {
+    mutating func sk_rotate(by places: Int) -> Self {
         guard places != 0 else { return self }
         let placesToMove = places % count
         if placesToMove > 0 {
@@ -65,35 +65,35 @@ public extension RangeReplaceableCollection {
     }
 
     @discardableResult
-    mutating func xx_removeFirst(where condition: (Element) throws -> Bool) rethrows -> Element? {
+    mutating func sk_removeFirst(where condition: (Element) throws -> Bool) rethrows -> Element? {
         guard let index = try self.firstIndex(where: condition) else { return nil }
         return self.remove(at: index)
     }
 
     @discardableResult
-    mutating func xx_removeRandomElement() -> Element? {
+    mutating func sk_removeRandomElement() -> Element? {
         guard let randomIndex = indices.randomElement() else { return nil }
         return self.remove(at: randomIndex)
     }
 
     @discardableResult
-    mutating func xx_keep(while condition: (Element) throws -> Bool) rethrows -> Self {
+    mutating func sk_keep(while condition: (Element) throws -> Bool) rethrows -> Self {
         if let idx = try self.firstIndex(where: { try !condition($0) }) {
             removeSubrange(idx...)
         }
         return self
     }
 
-    func xx_take(while condition: (Element) throws -> Bool) rethrows -> Self {
+    func sk_take(while condition: (Element) throws -> Bool) rethrows -> Self {
         try Self(self.prefix(while: condition))
     }
 
-    func xx_skip(while condition: (Element) throws -> Bool) rethrows -> Self {
+    func sk_skip(while condition: (Element) throws -> Bool) rethrows -> Self {
         guard let idx = try firstIndex(where: { try !condition($0) }) else { return Self() }
         return Self(self[idx...])
     }
 
-    mutating func xx_removeDuplicates(keyPath path: KeyPath<Element, some Equatable>) {
+    mutating func sk_removeDuplicates(keyPath path: KeyPath<Element, some Equatable>) {
         var items = [Element]()
         self.removeAll { element -> Bool in
             guard items.contains(where: { $0[keyPath: path] == element[keyPath: path] }) else {
@@ -104,17 +104,17 @@ public extension RangeReplaceableCollection {
         }
     }
 
-    mutating func xx_removeDuplicates<E: Hashable>(keyPath path: KeyPath<Element, E>) {
+    mutating func sk_removeDuplicates<E: Hashable>(keyPath path: KeyPath<Element, E>) {
         var set = Set<E>()
         removeAll { !set.insert($0[keyPath: path]).inserted }
     }
 
-    mutating func xx_appendIfNonNil(_ newElement: Element?) {
+    mutating func sk_appendIfNonNil(_ newElement: Element?) {
         guard let newElement else { return }
         self.append(newElement)
     }
 
-    mutating func xx_appendIfNonNil<S>(contentsOf newElements: S?) where Element == S.Element, S: Sequence {
+    mutating func sk_appendIfNonNil<S>(contentsOf newElements: S?) where Element == S.Element, S: Sequence {
         guard let newElements else { return }
         self.append(contentsOf: newElements)
     }

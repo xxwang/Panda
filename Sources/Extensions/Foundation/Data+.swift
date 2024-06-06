@@ -1,19 +1,19 @@
 import UIKit
 
 public extension Data {
-    func xx_image() -> UIImage? {
+    func sk_image() -> UIImage? {
         return UIImage(data: self)
     }
 
-    func xx_bytes() -> [UInt8] {
+    func sk_bytes() -> [UInt8] {
         return [UInt8](self)
     }
 
-    func xx_string(encoding: String.Encoding = .utf8) -> String? {
+    func sk_string(encoding: String.Encoding = .utf8) -> String? {
         return String(data: self, encoding: encoding)
     }
 
-    func xx_hexString() -> String {
+    func sk_hexString() -> String {
         let result = withUnsafeBytes { rawPointer -> String in
             let unsafeBufferPointer = rawPointer.bindMemory(to: UInt8.self)
             let bytes = unsafeBufferPointer.baseAddress!
@@ -23,7 +23,7 @@ public extension Data {
         return result
     }
 
-    func xx_subData(from: Int, len: Int) -> Data? {
+    func sk_subData(from: Int, len: Int) -> Data? {
         guard from >= 0, len >= 0 else { return nil }
         guard count >= from + len else { return nil }
 
@@ -35,17 +35,17 @@ public extension Data {
 }
 
 public extension Data {
-    func xx_base64Encoded() -> Data? {
+    func sk_base64Encoded() -> Data? {
         return self.base64EncodedData()
     }
 
-    func xx_base64Decoded() -> Data? {
+    func sk_base64Decoded() -> Data? {
         return Data(base64Encoded: self)
     }
 }
 
 public extension Data {
-    func xx_imageFormat() -> String {
+    func sk_imageFormat() -> String {
         let c = self[0]
         switch c {
         case 0xFF:

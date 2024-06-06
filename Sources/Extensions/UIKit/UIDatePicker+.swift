@@ -13,32 +13,32 @@ public extension UIDatePicker {
 public extension UIDatePicker {
 
     @discardableResult
-    func xx_timeZone(_ timeZone: TimeZone) -> Self {
+    func sk_timeZone(_ timeZone: TimeZone) -> Self {
         self.timeZone = timeZone
         return self
     }
 
     @discardableResult
-    func xx_datePickerMode(_ datePickerMode: Mode) -> Self {
+    func sk_datePickerMode(_ datePickerMode: Mode) -> Self {
         self.datePickerMode = datePickerMode
         return self
     }
 
     @discardableResult
     @available(iOS 13.4, *)
-    func xx_preferredDatePickerStyle(_ preferredDatePickerStyle: UIDatePickerStyle) -> Self {
+    func sk_preferredDatePickerStyle(_ preferredDatePickerStyle: UIDatePickerStyle) -> Self {
         self.preferredDatePickerStyle = preferredDatePickerStyle
         return self
     }
 
     @discardableResult
-    func xx_highlightsToday(_ highlightsToday: Bool) -> Self {
+    func sk_highlightsToday(_ highlightsToday: Bool) -> Self {
         setValue(highlightsToday, forKey: "highlightsToday")
         return self
     }
 
     @discardableResult
-    func xx_textColor(_ textColor: UIColor) -> Self {
+    func sk_textColor(_ textColor: UIColor) -> Self {
         setValue(textColor, forKeyPath: "textColor")
         return self
     }

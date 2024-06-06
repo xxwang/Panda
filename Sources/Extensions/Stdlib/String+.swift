@@ -3,7 +3,7 @@ import CoreLocation
 import UIKit
 
 public extension String {
-    var xx_localized: String {
+    var sk_localized: String {
         return NSLocalizedString(self, comment: "")
     }
 }
@@ -54,40 +54,40 @@ public extension String {
 
 public extension String {
 
-    func xx_int() -> Int {
+    func sk_int() -> Int {
         return Int(self) ?? 0
     }
 
-    func xx_int64() -> Int64 {
+    func sk_int64() -> Int64 {
         Int64(self) ?? 0
     }
 
-    func xx_uInt() -> UInt {
+    func sk_uInt() -> UInt {
         return UInt(self) ?? 0
     }
 
-    func xx_uInt64() -> UInt64 {
+    func sk_uInt64() -> UInt64 {
         return UInt64(self) ?? 0
     }
 
-    func xx_float() -> Float {
+    func sk_float() -> Float {
         return Float(self) ?? 0
     }
 
-    func xx_double() -> Double {
+    func sk_double() -> Double {
         return Double(self) ?? 0
     }
 
-    func xx_cgFloat() -> CGFloat {
-        CGFloat(xx_double())
+    func sk_cgFloat() -> CGFloat {
+        CGFloat(sk_double())
     }
 
-    func xx_nsNumber() -> NSNumber {
-        NSNumber(value: xx_double())
+    func sk_nsNumber() -> NSNumber {
+        NSNumber(value: sk_double())
     }
 
-    func xx_bool() -> Bool {
-        let trimmed = xx_trim().lowercased()
+    func sk_bool() -> Bool {
+        let trimmed = sk_trim().lowercased()
         switch trimmed {
         case "1", "t", "true", "y", "yes": return true
         case "0", "f", "false", "n", "no": return false
@@ -95,73 +95,73 @@ public extension String {
         }
     }
 
-    func xx_character() -> Character? {
+    func sk_character() -> Character? {
         guard let n = Int(self), let scalar = UnicodeScalar(n) else { return nil }
         return Character(scalar)
     }
 
-    func xx_characters() -> [Character] {
+    func sk_characters() -> [Character] {
         return Array(self)
     }
 
-    func xx_nsString() -> NSString {
+    func sk_nsString() -> NSString {
         return NSString(string: self)
     }
 
-    func xx_hexInt() -> Int {
+    func sk_hexInt() -> Int {
         return Int(self, radix: 16) ?? 0
     }
 
-    func xx_data() -> Data? {
+    func sk_data() -> Data? {
         return data(using: .utf8)
     }
 
-    func xx_hexColor() -> UIColor {
+    func sk_hexColor() -> UIColor {
         return UIColor(hex: self)
     }
 
-    func xx_image() -> UIImage? {
+    func sk_image() -> UIImage? {
         return UIImage(named: self)
     }
 
-    func xx_url() -> URL? {
+    func sk_url() -> URL? {
         if hasPrefix("http://") || hasPrefix("https://") {
             return URL(string: self)
         }
         return URL(fileURLWithPath: self)
     }
 
-    func xx_urlRequest() -> URLRequest? {
-        guard let url = xx_url() else {
+    func sk_urlRequest() -> URLRequest? {
+        guard let url = sk_url() else {
             return nil
         }
         return URLRequest(url: url)
     }
 
-    func xx_notificationName() -> Notification.Name {
+    func sk_notificationName() -> Notification.Name {
         return Notification.Name(self)
     }
 
-    func xx_nsAttributedString() -> NSAttributedString {
+    func sk_nsAttributedString() -> NSAttributedString {
         return NSAttributedString(string: self)
     }
 
-    func xx_nsMutableAttributedString() -> NSMutableAttributedString {
+    func sk_nsMutableAttributedString() -> NSMutableAttributedString {
         return NSMutableAttributedString(string: self)
     }
 }
 
 public extension String {
 
-    func xx_classNameToClass<T>(for name: T.Type = AnyClass.self) -> T.Type? {
+    func sk_classNameToClass<T>(for name: T.Type = AnyClass.self) -> T.Type? {
         guard let namespace = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else { return nil }
-        let classNameString = "\(namespace.xx_replace(" ", with: "_")).\(self)"
+        let classNameString = "\(namespace.sk_replace(" ", with: "_")).\(self)"
         guard let nameClass = NSClassFromString(classNameString) as? T.Type else { return nil }
         return nameClass
     }
 
-    func xx_classNameToInstance<T>(for name: T.Type = NSObject.self) -> T? where T: NSObject {
-        guard let nameClass = xx_classNameToClass(for: name) else {
+    func sk_classNameToInstance<T>(for name: T.Type = NSObject.self) -> T? where T: NSObject {
+        guard let nameClass = sk_classNameToClass(for: name) else {
             return nil
         }
         let object = nameClass.init()
@@ -171,31 +171,31 @@ public extension String {
 
 public extension String {
 
-    func xx_fullRange() -> Range<String.Index>? {
+    func sk_fullRange() -> Range<String.Index>? {
         return startIndex ..< endIndex
     }
 
-    func xx_range(_ nsRange: NSRange) -> Range<String.Index> {
+    func sk_range(_ nsRange: NSRange) -> Range<String.Index> {
         guard let range = Range(nsRange, in: self) else { fatalError("Failed to find range \(nsRange) in \(self)") }
         return range
     }
 
-    func xx_range(_ subString: String) -> Range<String.Index>? {
+    func sk_range(_ subString: String) -> Range<String.Index>? {
         range(of: subString)
     }
 }
 
 public extension String {
 
-    func xx_fullNSRange() -> NSRange {
+    func sk_fullNSRange() -> NSRange {
         return NSRange(startIndex ..< endIndex, in: self)
     }
 
-    func xx_nsRange(_ range: Range<String.Index>) -> NSRange {
+    func sk_nsRange(_ range: Range<String.Index>) -> NSRange {
         NSRange(range, in: self)
     }
 
-    func xx_nsRange(_ subStr: String) -> NSRange {
+    func sk_nsRange(_ subStr: String) -> NSRange {
         guard let range = range(of: subStr) else {
             return NSRange(location: 0, length: 0)
         }
@@ -205,7 +205,7 @@ public extension String {
 
 public extension String {
 
-    static func xx_loremIpsum(of length: Int = 445) -> String {
+    static func sk_loremIpsum(of length: Int = 445) -> String {
         guard length > 0 else { return "" }
 
         let loremIpsum = """
@@ -217,7 +217,7 @@ public extension String {
         return loremIpsum
     }
 
-    static func xx_random(of length: Int) -> String {
+    static func sk_random(of length: Int) -> String {
         guard length > 0 else { return "" }
         let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString = ""
@@ -231,15 +231,15 @@ public extension String {
 
 public extension String {
 
-    func xx_positionFirst(of subStr: String) -> Int {
-        return xx_position(of: subStr)
+    func sk_positionFirst(of subStr: String) -> Int {
+        return sk_position(of: subStr)
     }
 
-    func xx_positionLast(of subStr: String) -> Int {
-        return xx_position(of: subStr, backwards: true)
+    func sk_positionLast(of subStr: String) -> Int {
+        return sk_position(of: subStr, backwards: true)
     }
 
-    func xx_position(of subStr: String, backwards: Bool = false) -> Int {
+    func sk_position(of subStr: String, backwards: Bool = false) -> Int {
         var pos = -1
         if let range = range(of: subStr, options: backwards ? .backwards : .literal) {
             if !range.isEmpty { pos = distance(from: startIndex, to: range.lowerBound) }
@@ -249,63 +249,63 @@ public extension String {
 }
 
 public extension String {
-    func xx_indexString(index: Int) -> String {
-        return self.xx_slice(index ..< index + 1)
+    func sk_indexString(index: Int) -> String {
+        return self.sk_slice(index ..< index + 1)
     }
 
-    func xx_slice(_ range: CountableRange<Int>) -> String {
-        let startIndex = xx_validIndex(original: range.lowerBound)
-        let endIndex = xx_validIndex(original: range.upperBound)
+    func sk_slice(_ range: CountableRange<Int>) -> String {
+        let startIndex = sk_validIndex(original: range.lowerBound)
+        let endIndex = sk_validIndex(original: range.upperBound)
         guard startIndex < endIndex else {
             return ""
         }
         return String(self[startIndex ..< endIndex])
     }
 
-    func xx_subString(from: Int) -> String {
+    func sk_subString(from: Int) -> String {
         let end = count
         return self[safe: from ..< end] ?? ""
     }
 
-    func xx_subString(to: Int) -> String {
+    func sk_subString(to: Int) -> String {
         return self[safe: 0 ..< to] ?? ""
     }
 
-    func xx_subString(from: Int, length: Int) -> String {
+    func sk_subString(from: Int, length: Int) -> String {
         let end = from + length
         return self[safe: from ..< end] ?? ""
     }
 
-    func xx_subString(from: Int, to: Int) -> String {
+    func sk_subString(from: Int, to: Int) -> String {
         return self[safe: from ..< to] ?? ""
     }
 
-    func xx_subString(range: NSRange) -> String {
-        return self.xx_nsString().substring(with: range)
+    func sk_subString(range: NSRange) -> String {
+        return self.sk_nsString().substring(with: range)
     }
 
-    func xx_subString(range: Range<Int>) -> String {
+    func sk_subString(range: Range<Int>) -> String {
         return self[safe: range] ?? ""
     }
 
-    func xx_subString(range: Range<String.Index>) -> String {
+    func sk_subString(range: Range<String.Index>) -> String {
         let subString = self[range]
         return String(subString)
     }
 
-    func xx_truncate(len: Int) -> String {
+    func sk_truncate(len: Int) -> String {
         if self.count > len {
-            return self.xx_subString(to: len)
+            return self.sk_subString(to: len)
         }
         return self
     }
 
-    func xx_truncate(length: Int, trailing: String? = "...") -> String {
+    func sk_truncate(length: Int, trailing: String? = "...") -> String {
         guard 0 ..< count ~= length else { return self }
         return self[startIndex ..< index(startIndex, offsetBy: length)] + (trailing ?? "")
     }
 
-    func xx_truncate(_ length: Int, separator: String = "-") -> String {
+    func sk_truncate(_ length: Int, separator: String = "-") -> String {
         var newValue = ""
         for (i, char) in self.enumerated() {
             if i > (count - length) {
@@ -320,28 +320,28 @@ public extension String {
 
 public extension String {
 
-    func xx_hasLetters() -> Bool {
+    func sk_hasLetters() -> Bool {
         return rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil
     }
 
-    func xx_isAlphabetic() -> Bool {
+    func sk_isAlphabetic() -> Bool {
         let hasLetters = rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil
         let hasNumbers = rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil
         return hasLetters && !hasNumbers
     }
 
-    func xx_hasNumbers() -> Bool {
+    func sk_hasNumbers() -> Bool {
         rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil
     }
 
-    func xx_isAlphaNumeric() -> Bool {
+    func sk_isAlphaNumeric() -> Bool {
         let hasLetters = rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil
         let hasNumbers = rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil
         let comps = components(separatedBy: .alphanumerics)
         return comps.joined(separator: "").count == 0 && hasLetters && hasNumbers
     }
 
-    func xx_isSwiftNumeric() -> Bool {
+    func sk_isSwiftNumeric() -> Bool {
         let scanner = Scanner(string: self)
         scanner.locale = NSLocale.current
         if #available(iOS 13.0, *) {
@@ -351,7 +351,7 @@ public extension String {
         }
     }
 
-    func xx_isPureInt() -> Bool {
+    func sk_isPureInt() -> Bool {
         let scan = Scanner(string: self)
         if #available(iOS 13.0, *) {
             return (scan.scanInt() != nil) && scan.isAtEnd
@@ -360,15 +360,15 @@ public extension String {
         }
     }
 
-    func xx_isDigits() -> Bool {
+    func sk_isDigits() -> Bool {
         return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
     }
 
-    func xx_isWhitespace() -> Bool {
+    func sk_isWhitespace() -> Bool {
         return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
-    func xx_isSpelledCorrectly() -> Bool {
+    func sk_isSpelledCorrectly() -> Bool {
         let checker = UITextChecker()
         let range = NSRange(startIndex ..< endIndex, in: self)
 
@@ -382,7 +382,7 @@ public extension String {
         return misspelledRange.location == NSNotFound
     }
 
-    func xx_isPalindrome() -> Bool {
+    func sk_isPalindrome() -> Bool {
         let letters = filter(\.isLetter)
         guard !letters.isEmpty else { return false }
         let midIndex = letters.index(letters.startIndex, offsetBy: letters.count / 2)
@@ -391,7 +391,7 @@ public extension String {
         return !zip(firstHalf, secondHalf).contains(where: { $0.lowercased() != $1.lowercased() })
     }
 
-    func xx_hasUniqueCharacters() -> Bool {
+    func sk_hasUniqueCharacters() -> Bool {
         guard count > 0 else { return false }
         var uniqueChars = Set<String>()
         for char in self {
@@ -401,7 +401,7 @@ public extension String {
         return true
     }
 
-    func xx_isNineKeyBoard() -> Bool {
+    func sk_isNineKeyBoard() -> Bool {
         let other: NSString = "➋➌➍➎➏➐➑➒"
         let len = count
         for _ in 0 ..< len {
@@ -412,85 +412,85 @@ public extension String {
         return true
     }
 
-    func xx_isTelNumber() -> Bool {
+    func sk_isTelNumber() -> Bool {
         let pattern = "^1[3456789]\\d{9}$"
-        return xx_regexp(pattern)
+        return sk_regexp(pattern)
     }
 
-    func xx_isAlphanueric(minLen: Int, maxLen: Int) -> Bool {
+    func sk_isAlphanueric(minLen: Int, maxLen: Int) -> Bool {
         let pattern = "^[0-9a-zA-Z_]{\(minLen),\(maxLen)}$"
-        return xx_regexp(pattern)
+        return sk_regexp(pattern)
     }
 
-    func xx_isAlphanueric() -> Bool {
+    func sk_isAlphanueric() -> Bool {
         let pattern = "^[A-Za-z0-9]+$"
-        return xx_isMatchRegexp(pattern)
+        return sk_isMatchRegexp(pattern)
     }
 
-    func xx_isChinese() -> Bool {
+    func sk_isChinese() -> Bool {
         let pattern = "(^[\u{4e00}-\u{9fef}]+$)"
-        return xx_regexp(pattern)
+        return sk_regexp(pattern)
     }
 
-    func xx_isEmail1() -> Bool {
+    func sk_isEmail1() -> Bool {
         let pattern = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?"
-        return xx_regexp(pattern)
+        return sk_regexp(pattern)
     }
 
-    func xx_isEmai2() -> Bool {
+    func sk_isEmai2() -> Bool {
         let regex =
             "^(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[\\p{L}0-9-]*[\\p{L}0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$"
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 
-    func xx_isNickName() -> Bool {
+    func sk_isNickName() -> Bool {
         let rgex = "(^[\u{4e00}-\u{9faf}_a-zA-Z0-9]+$)"
-        return xx_regexp(rgex)
+        return sk_regexp(rgex)
     }
 
-    func xx_validateUserName() -> Bool {
+    func sk_validateUserName() -> Bool {
         let rgex = "^[a-zA-Z\\u4E00-\\u9FA5]{1,20}"
-        return xx_regexp(rgex)
+        return sk_regexp(rgex)
     }
 
-    func xx_password(_ complex: Bool = false) -> Bool {
+    func sk_password(_ complex: Bool = false) -> Bool {
         var pattern = "^(?![A-Z]+$)(?![a-z]+$)(?!\\d+$)(?![\\W_]+$)\\S{8,20}$"
         if complex {
             pattern = "^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\\W_]+$)(?![a-z0-9]+$)(?![a-z\\W_]+$)(?![0-9\\W_]+$)[a-zA-Z0-9\\W_]{8,20}$"
         }
-        return xx_regexp(pattern)
+        return sk_regexp(pattern)
     }
 
-    func xx_isNumberValue() -> Bool {
+    func sk_isNumberValue() -> Bool {
         guard !isEmpty else {
             return false
         }
         let rgex = "^[\\d]*$"
-        return xx_regexp(rgex)
+        return sk_regexp(rgex)
     }
 
-    func xx_isValidNumberAndDecimalPoint() -> Bool {
+    func sk_isValidNumberAndDecimalPoint() -> Bool {
         guard !isEmpty else {
             return false
         }
         let rgex = "^[\\d.]*$"
-        return xx_regexp(rgex)
+        return sk_regexp(rgex)
     }
 
-    func xx_isIDNumber() -> Bool {
+    func sk_isIDNumber() -> Bool {
         let pattern = "(^[0-9]{15}$)|([0-9]{17}([0-9]|[0-9a-zA-Z])$)"
-        return xx_regexp(pattern)
+        return sk_regexp(pattern)
     }
 
     var isValidIDNumber: Bool {
         let str = trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         let len = str.count
-        if !str.xx_isIDNumber() {
+        if !str.sk_isIDNumber() {
             return false
         }
 
         let areaArray = ["11", "12", "13", "14", "15", "21", "22", "23", "31", "32", "33", "34", "35", "36", "37", "41", "42", "43", "44", "45", "46", "50", "51", "52", "53", "54", "61", "62", "63", "64", "65", "71", "81", "82", "91"]
-        if !areaArray.contains(str.xx_subString(to: 2)) {
+        if !areaArray.contains(str.sk_subString(to: 2)) {
             return false
         }
         var regex = NSRegularExpression()
@@ -498,8 +498,8 @@ public extension String {
         var year = 0
         switch len {
         case 15:
-            year = Int(str.xx_subString(from: 6, length: 2))!
-            if xx_isLeapYear(year: year) {
+            year = Int(str.sk_subString(from: 6, length: 2))!
+            if sk_isLeapYear(year: year) {
                 do {
                     regex = try NSRegularExpression(pattern: "^[1-9][0-9]{5}[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}$", options: .caseInsensitive)
                 } catch {}
@@ -512,8 +512,8 @@ public extension String {
 
             if numberOfMatch > 0 { return true } else { return false }
         case 18:
-            year = Int(str.xx_subString(from: 6, length: 4))!
-            if xx_isLeapYear(year: year) {
+            year = Int(str.sk_subString(from: 6, length: 4))!
+            if sk_isLeapYear(year: year) {
                 do {
                     regex = try NSRegularExpression(pattern: "^[1-9][0-9]{5}19[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}[0-9Xx]$", options: .caseInsensitive)
                 } catch {}
@@ -527,7 +527,7 @@ public extension String {
                 var s = 0
                 let jiaoYan = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3]
                 for i in 0 ..< 17 {
-                    if let d = Int(str.xx_slice(i ..< (i + 1))) {
+                    if let d = Int(str.sk_slice(i ..< (i + 1))) {
                         s += d * jiaoYan[i % 10]
                     } else {
                         return false
@@ -535,8 +535,8 @@ public extension String {
                 }
                 let Y = s % 11
                 let JYM = "10X98765432"
-                let M = JYM.xx_subString(from: Y, length: 1)
-                if M == str.xx_subString(from: 17, length: 1) {
+                let M = JYM.sk_subString(from: Y, length: 1)
+                if M == str.sk_subString(from: 17, length: 1) {
                     return true
                 } else {
                     return false
@@ -549,7 +549,7 @@ public extension String {
         }
     }
 
-    private func xx_isLeapYear(year: Int) -> Bool {
+    private func sk_isLeapYear(year: Int) -> Bool {
         if year % 400 == 0 {
             return true
         } else if year % 100 == 0 {
@@ -561,52 +561,52 @@ public extension String {
         }
     }
 
-    func xx_isValidUrl() -> Bool {
+    func sk_isValidUrl() -> Bool {
         return URL(string: self) != nil
     }
 
-    func xx_isValidSchemedUrl() -> Bool {
+    func sk_isValidSchemedUrl() -> Bool {
         guard let url = URL(string: self) else { return false }
         return url.scheme != nil
     }
 
-    func xx_isValidHttpsUrl() -> Bool {
+    func sk_isValidHttpsUrl() -> Bool {
         guard let url = URL(string: self) else { return false }
         return url.scheme == "https"
     }
 
-    func xx_isValidHttpUrl() -> Bool {
+    func sk_isValidHttpUrl() -> Bool {
         guard let url = URL(string: self) else { return false }
         return url.scheme == "http"
     }
 
-    func xx_isValidFileUrl() -> Bool {
+    func sk_isValidFileUrl() -> Bool {
         URL(string: self)?.isFileURL ?? false
     }
 
-    func xx_contains(find: String) -> Bool {
-        self.xx_contains(find, caseSensitive: true)
+    func sk_contains(find: String) -> Bool {
+        self.sk_contains(find, caseSensitive: true)
     }
 
-    func xx_contains(_ string: String, caseSensitive: Bool = true) -> Bool {
+    func sk_contains(_ string: String, caseSensitive: Bool = true) -> Bool {
         if !caseSensitive {
             return range(of: string, options: .caseInsensitive) != nil
         }
         return range(of: string) != nil
     }
 
-    func xx_containsIgnoringCase(find: String) -> Bool {
-        return xx_contains(find, caseSensitive: false)
+    func sk_containsIgnoringCase(find: String) -> Bool {
+        return sk_contains(find, caseSensitive: false)
     }
 
-    func xx_starts(with prefix: String, caseSensitive: Bool = true) -> Bool {
+    func sk_starts(with prefix: String, caseSensitive: Bool = true) -> Bool {
         if !caseSensitive {
             return lowercased().hasPrefix(prefix.lowercased())
         }
         return hasPrefix(prefix)
     }
 
-    func xx_ends(with suffix: String, caseSensitive: Bool = true) -> Bool {
+    func sk_ends(with suffix: String, caseSensitive: Bool = true) -> Bool {
         if !caseSensitive {
             return lowercased().hasSuffix(suffix.lowercased())
         }
@@ -624,31 +624,31 @@ precedencegroup RegPrecedence {
 public extension String {
 
     static func =~ (lhs: String, rhs: String) -> Bool {
-        lhs.xx_regexp(rhs)
+        lhs.sk_regexp(rhs)
     }
 }
 
 public extension String {
 
-    func xx_regexEscaped() -> String {
+    func sk_regexEscaped() -> String {
         return NSRegularExpression.escapedPattern(for: self)
     }
 
-    func xx_matches(pattern: String) -> Bool {
+    func sk_matches(pattern: String) -> Bool {
         return range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil
     }
 
-    func xx_matches(regex: NSRegularExpression, options: NSRegularExpression.MatchingOptions = []) -> Bool {
+    func sk_matches(regex: NSRegularExpression, options: NSRegularExpression.MatchingOptions = []) -> Bool {
         let range = NSRange(startIndex ..< endIndex, in: self)
         return regex.firstMatch(in: self, options: options, range: range) != nil
     }
 
-    func xx_regexp(_ pattern: String) -> Bool {
+    func sk_regexp(_ pattern: String) -> Bool {
         let pred = NSPredicate(format: "SELF MATCHES %@", pattern)
         return pred.evaluate(with: self)
     }
 
-    func xx_isMatchRegexp(_ pattern: String) -> Bool {
+    func sk_isMatchRegexp(_ pattern: String) -> Bool {
         guard let regx = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
             return false
         }
@@ -656,19 +656,19 @@ public extension String {
         return !result.isEmpty
     }
 
-    func xx_regexpText(_ pattern: String, count: Int = 1) -> [String]? {
+    func sk_regexpText(_ pattern: String, count: Int = 1) -> [String]? {
         guard let regx = try? NSRegularExpression(pattern: pattern, options: []),
               let result = regx.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.count))
         else { return nil }
         var texts = [String]()
         for idx in 1 ... count {
-            let text = xx_nsString().substring(with: result.range(at: idx))
+            let text = sk_nsString().substring(with: result.range(at: idx))
             texts.append(text)
         }
         return texts
     }
 
-    func xx_matchRange(_ pattern: String) -> [NSRange] {
+    func sk_matchRange(_ pattern: String) -> [NSRange] {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
             return []
         }
@@ -684,7 +684,7 @@ public extension String {
 
 public extension String {
 
-    func xx_stringAsHtmlCharacterEntityReferences() -> String {
+    func sk_stringAsHtmlCharacterEntityReferences() -> String {
         var result = ""
         for scalar in utf16 {
             let tem = String().appendingFormat("%04x", scalar)
@@ -693,7 +693,7 @@ public extension String {
         return result
     }
 
-    func xx_htmlCharacterEntityReferencesAsString() -> String? {
+    func sk_htmlCharacterEntityReferencesAsString() -> String? {
         let attributedOptions: [NSAttributedString.DocumentReadingOptionKey: Any] = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
                                                                                      NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue]
         guard let encodedData = data(using: String.Encoding.utf8) else { return nil }
@@ -704,7 +704,7 @@ public extension String {
 
 public extension String {
 
-    func xx_htmlCodeToAttributedString(font: UIFont? = UIFont.systemFont(ofSize: 12),
+    func sk_htmlCodeToAttributedString(font: UIFont? = UIFont.systemFont(ofSize: 12),
                                        lineSpacing: CGFloat? = 10) -> NSMutableAttributedString
     {
         var htmlString: NSMutableAttributedString?
@@ -720,26 +720,26 @@ public extension String {
                 }
             }
         } catch {}
-        if let font { htmlString?.addAttributes([.font: font], range: xx_fullNSRange()) }
+        if let font { htmlString?.addAttributes([.font: font], range: sk_fullNSRange()) }
 
         if let weakLineSpacing = lineSpacing {
-            let paragraphStyle = NSMutableParagraphStyle.default().xx_lineSpacing(weakLineSpacing)
-            htmlString?.addAttribute(.paragraphStyle, value: paragraphStyle, range: xx_fullNSRange())
+            let paragraphStyle = NSMutableParagraphStyle.default().sk_lineSpacing(weakLineSpacing)
+            htmlString?.addAttribute(.paragraphStyle, value: paragraphStyle, range: sk_fullNSRange())
         }
-        return htmlString ?? xx_nsMutableAttributedString()
+        return htmlString ?? sk_nsMutableAttributedString()
     }
 
-    func xx_highlightSubString(keyword: String,
+    func sk_highlightSubString(keyword: String,
                                keywordCololor: UIColor,
                                otherColor: UIColor,
                                options: NSRegularExpression.Options = []) -> NSMutableAttributedString
     {
         let fullString = self
-        let attributedString = fullString.xx_nsMutableAttributedString().xx_addAttributes([
+        let attributedString = fullString.sk_nsMutableAttributedString().sk_addAttributes([
             NSAttributedString.Key.foregroundColor: otherColor,
         ])
 
-        let ranges = fullString.xx_matchRange(keyword)
+        let ranges = fullString.sk_matchRange(keyword)
 
         for range in ranges {
             attributedString.addAttributes([.foregroundColor: keywordCololor], range: range)
@@ -751,7 +751,7 @@ public extension String {
 public extension String {
 
     @discardableResult
-    mutating func xx_urlEncode() -> String {
+    mutating func sk_urlEncode() -> String {
         if let encoded = addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             self = encoded
         }
@@ -759,7 +759,7 @@ public extension String {
     }
 
     @discardableResult
-    mutating func xx_urlDecode() -> String {
+    mutating func sk_urlDecode() -> String {
         if let decoded = removingPercentEncoding { self = decoded }
         return self
     }
@@ -767,12 +767,12 @@ public extension String {
 
 public extension String {
 
-    func xx_base64Encoded() -> String? {
-        let plainData = xx_data()
+    func sk_base64Encoded() -> String? {
+        let plainData = sk_data()
         return plainData?.base64EncodedString()
     }
 
-    func xx_base64Decoded() -> String? {
+    func sk_base64Decoded() -> String? {
         if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
             return String(data: data, encoding: .utf8)
         }
@@ -792,7 +792,7 @@ public extension String {
 
 public extension String {
 
-    func xx_unicodeEncode() -> String {
+    func sk_unicodeEncode() -> String {
         var tempStr = String()
         for v in utf16 {
             if v < 128 {
@@ -806,7 +806,7 @@ public extension String {
         return tempStr
     }
 
-    func xx_unicodeDecode() -> String {
+    func sk_unicodeDecode() -> String {
         let tempStr1 = replacingOccurrences(of: "\\u", with: "\\U")
         let tempStr2 = tempStr1.replacingOccurrences(of: "\"", with: "\\\"")
         let tempStr3 = "\"".appending(tempStr2).appending("\"")
@@ -823,7 +823,7 @@ public extension String {
 
 public extension String {
 
-    func xx_date(with format: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    func sk_date(with format: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         dateFormatter.timeZone = .current
@@ -834,14 +834,14 @@ public extension String {
 
 public extension String {
 
-    func xx_locationEncode(completionHandler: @escaping CLGeocodeCompletionHandler) {
+    func sk_locationEncode(completionHandler: @escaping CLGeocodeCompletionHandler) {
         CLGeocoder().geocodeAddressString(self, completionHandler: completionHandler)
     }
 }
 
 public extension String {
 
-    func xx_urls() -> [String]? {
+    func sk_urls() -> [String]? {
         var urls = [String]()
         guard let dataDetector = try? NSDataDetector(types: NSTextCheckingTypes(NSTextCheckingResult.CheckingType.link.rawValue)) else {
             return nil
@@ -852,12 +852,12 @@ public extension String {
                                        range: NSRange(location: 0, length: count))
 
         for checkingRes in res {
-            urls.append(xx_nsString().substring(with: checkingRes.range))
+            urls.append(sk_nsString().substring(with: checkingRes.range))
         }
         return urls
     }
 
-    func xx_urlParamters() -> [String: Any] {
+    func sk_urlParamters() -> [String: Any] {
         guard let urlComponents = NSURLComponents(string: self),
               let queryItems = urlComponents.queryItems else { return [:] }
 
@@ -878,85 +878,85 @@ public extension String {
 
 public extension String {
 
-    func xx_lastPathComponent() -> String {
-        return self.xx_nsString().lastPathComponent
+    func sk_lastPathComponent() -> String {
+        return self.sk_nsString().lastPathComponent
     }
 
-    func xx_pathExtension() -> String {
-        return self.xx_nsString().pathExtension
+    func sk_pathExtension() -> String {
+        return self.sk_nsString().pathExtension
     }
 
-    func xx_deletingLastPathComponent() -> String {
-        return self.xx_nsString().deletingLastPathComponent
+    func sk_deletingLastPathComponent() -> String {
+        return self.sk_nsString().deletingLastPathComponent
     }
 
-    func xx_deletingPathExtension() -> String {
-        return self.xx_nsString().deletingPathExtension
+    func sk_deletingPathExtension() -> String {
+        return self.sk_nsString().deletingPathExtension
     }
 
-    func xx_pathComponents() -> [String] {
-        return self.xx_nsString().pathComponents
+    func sk_pathComponents() -> [String] {
+        return self.sk_nsString().pathComponents
     }
 
-    func xx_appendingPathComponent(_ str: String) -> String {
-        return self.xx_nsString().appendingPathComponent(str)
+    func sk_appendingPathComponent(_ str: String) -> String {
+        return self.sk_nsString().appendingPathComponent(str)
     }
 
-    func xx_appendingPathExtension(_ str: String) -> String? {
-        return self.xx_nsString().appendingPathExtension(str)
+    func sk_appendingPathExtension(_ str: String) -> String? {
+        return self.sk_nsString().appendingPathExtension(str)
     }
 }
 
 public extension String {
 
-    func xx_appendBySupport() -> String {
+    func sk_appendBySupport() -> String {
         let directory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
-        self.xx_createDirs(directory)
+        self.sk_createDirs(directory)
         return directory + "/\(self)"
     }
 
-    func xx_appendByDocument() -> String {
+    func sk_appendByDocument() -> String {
         let directory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        self.xx_createDirs(directory)
+        self.sk_createDirs(directory)
         return directory + "/\(self)"
     }
 
-    func xx_appendByCache() -> String {
+    func sk_appendByCache() -> String {
         let directory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        self.xx_createDirs(directory)
+        self.sk_createDirs(directory)
         return directory + "/\(self)"
     }
 
-    func xx_appendByTemp() -> String {
+    func sk_appendByTemp() -> String {
         let directory = NSTemporaryDirectory()
-        self.xx_createDirs(directory)
+        self.sk_createDirs(directory)
         return directory + "/\(self)"
     }
 }
 
 public extension String {
 
-    func xx_urlBySupport() -> URL {
-        _ = xx_appendByDocument()
+    func sk_urlBySupport() -> URL {
+        _ = sk_appendByDocument()
         let fileUrl = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         return fileUrl.appendingPathComponent(self)
     }
 
-    func xx_urlByDocument() -> URL {
-        _ = xx_appendByDocument()
+    func sk_urlByDocument() -> URL {
+        _ = sk_appendByDocument()
         let fileUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return fileUrl.appendingPathComponent(self)
     }
 
-    func xx_urlByCache() -> URL {
-        _ = xx_appendByCache()
+    func sk_urlByCache() -> URL {
+        _ = sk_appendByCache()
         let fileUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         return fileUrl.appendingPathComponent(self)
     }
 }
 
 public extension String {
-    func xx_removeFile() {
+    func sk_removeFile() {
         if FileManager.default.fileExists(atPath: self) {
             do {
                 try FileManager.default.removeItem(atPath: self)
@@ -966,7 +966,7 @@ public extension String {
         }
     }
 
-    func xx_createDirs(_ directory: String = NSHomeDirectory()) {
+    func sk_createDirs(_ directory: String = NSHomeDirectory()) {
         let path = contains(NSHomeDirectory()) ? self : "\(directory)/\(self)"
         let dirs = path.components(separatedBy: "/")
         let dir = dirs[0 ..< dirs.count - 1].joined(separator: "/")
@@ -982,7 +982,7 @@ public extension String {
 
 public extension String {
 
-    func xx_copyToPasteboard() {
+    func sk_copyToPasteboard() {
         #if os(iOS)
             UIPasteboard.general.string = self
         #elseif os(macOS)
@@ -994,36 +994,36 @@ public extension String {
 
 public extension String {
 
-    func xx_stringSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
+    func sk_stringSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
                        font: UIFont) -> CGSize
     {
         let constraint = CGSize(width: lineWidth, height: .greatestFiniteMagnitude)
 
-        let size = self.xx_nsString()
+        let size = self.sk_nsString()
             .boundingRect(with: constraint,
                           options: [.usesLineFragmentOrigin, .usesFontLeading],
                           attributes: [.font: font],
                           context: nil)
-        return CGSize(width: size.width.xx_ceil(), height: size.height.xx_ceil())
+        return CGSize(width: size.width.sk_ceil(), height: size.height.sk_ceil())
     }
 
-    func xx_attributedSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
+    func sk_attributedSize(_ lineWidth: CGFloat = UIScreen.main.bounds.width,
                            font: UIFont,
                            lineSpacing: CGFloat = 0,
                            wordSpacing: CGFloat = 0) -> CGSize
     {
         let paragraphStyle = NSMutableParagraphStyle.default()
-            .xx_lineBreakMode(.byCharWrapping)
-            .xx_alignment(.left)
-            .xx_lineSpacing(lineSpacing)
-            .xx_hyphenationFactor(1.0)
-            .xx_firstLineHeadIndent(0.0)
-            .xx_paragraphSpacingBefore(0.0)
-            .xx_headIndent(0)
-            .xx_tailIndent(0)
+            .sk_lineBreakMode(.byCharWrapping)
+            .sk_alignment(.left)
+            .sk_lineSpacing(lineSpacing)
+            .sk_hyphenationFactor(1.0)
+            .sk_firstLineHeadIndent(0.0)
+            .sk_paragraphSpacingBefore(0.0)
+            .sk_headIndent(0)
+            .sk_tailIndent(0)
 
-        let attributedString = self.xx_nsMutableAttributedString()
-            .xx_addAttributes([
+        let attributedString = self.sk_nsMutableAttributedString()
+            .sk_addAttributes([
                 .font: font,
                 .kern: wordSpacing,
                 .paragraphStyle: paragraphStyle,
@@ -1039,34 +1039,34 @@ public extension String {
                                                      .usesLineFragmentOrigin,
                                                      .usesFontLeading,
                                                  ], context: nil).size
-        return CGSize(width: size.width.xx_ceil(), height: size.height.xx_ceil())
+        return CGSize(width: size.width.sk_ceil(), height: size.height.sk_ceil())
     }
 }
 
 public extension String {
 
-    func xx_extractNumber() -> String {
+    func sk_extractNumber() -> String {
         return self.filter(\.isNumber)
     }
 
-    func xx_firstCharacter() -> String? {
-        guard let first = first?.xx_string() else { return nil }
+    func sk_firstCharacter() -> String? {
+        guard let first = first?.sk_string() else { return nil }
         return first
     }
 
-    func xx_lastCharacter() -> String? {
-        guard let last = last?.xx_string() else { return nil }
+    func sk_lastCharacter() -> String? {
+        guard let last = last?.sk_string() else { return nil }
         return last
     }
 
-    func xx_wordCount() -> Int {
+    func sk_wordCount() -> Int {
         let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
         let comps = components(separatedBy: chararacterSet)
         let words = comps.filter { !$0.isEmpty }
         return words.count
     }
 
-    func xx_numericCount() -> Int {
+    func sk_numericCount() -> Int {
         var count = 0
         for c in self where ("0" ... "9").contains(c) {
             count += 1
@@ -1074,13 +1074,13 @@ public extension String {
         return count
     }
 
-    func xx_countOfChars() -> Int {
+    func sk_countOfChars() -> Int {
         var count = 0
         guard !isEmpty else {
             return 0
         }
         for i in 0 ... self.count - 1 {
-            let c: unichar = self.xx_nsString().character(at: i)
+            let c: unichar = self.sk_nsString().character(at: i)
             if c >= 0x4E00 {
                 count += 2
             } else {
@@ -1090,20 +1090,20 @@ public extension String {
         return count
     }
 
-    func xx_count(of string: String, caseSensitive: Bool = true) -> Int {
+    func sk_count(of string: String, caseSensitive: Bool = true) -> Int {
         if !caseSensitive { return self.lowercased().components(separatedBy: string.lowercased()).count - 1 }
         return self.components(separatedBy: string).count - 1
     }
 
-    func xx_mostCommonCharacter() -> Character? {
-        let mostCommon = self.xx_withoutSpacesAndNewLines().reduce(into: [Character: Int]()) {
+    func sk_mostCommonCharacter() -> Character? {
+        let mostCommon = self.sk_withoutSpacesAndNewLines().reduce(into: [Character: Int]()) {
             let count = $0[$1] ?? 0
             $0[$1] = count + 1
         }.max { $0.1 < $1.1 }?.key
         return mostCommon
     }
 
-    func xx_validIndex(original: Int) -> String.Index {
+    func sk_validIndex(original: Int) -> String.Index {
         switch original {
         case ...startIndex.utf16Offset(in: self):
             return startIndex
@@ -1114,28 +1114,28 @@ public extension String {
         }
     }
 
-    func xx_unicodeArray() -> [Int] {
+    func sk_unicodeArray() -> [Int] {
         return self.unicodeScalars.map { Int($0.value) }
     }
 
-    func xx_words() -> [String] {
+    func sk_words() -> [String] {
         let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
         let comps = components(separatedBy: chararacterSet)
         return comps.filter { !$0.isEmpty }
     }
 
-    func xx_hrefText() -> (link: String, text: String)? {
+    func sk_hrefText() -> (link: String, text: String)? {
         let pattern = "<a href=\"(.*?)\"(.*?)>(.*?)</a>"
 
         guard let regx = try? NSRegularExpression(pattern: pattern, options: []),
               let result = regx.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count))
         else { return nil }
-        let link = xx_nsString().substring(with: result.range(at: 1))
-        let text = xx_nsString().substring(with: result.range(at: 3))
+        let link = sk_nsString().substring(with: result.range(at: 1))
+        let text = sk_nsString().substring(with: result.range(at: 3))
         return (link, text)
     }
 
-    func xx_linkRanges() -> [NSRange]? {
+    func sk_linkRanges() -> [NSRange]? {
         let patterns = ["[a-zA-Z]*://[a-zA-Z0-9/\\.]*", "#.*?#", "@[\\u4e00-\\u9fa5a-zA-Z0-9_-]*"]
         var ranges = [NSRange]()
 
@@ -1151,24 +1151,24 @@ public extension String {
         return ranges
     }
 
-    func xx_lines() -> [String] {
+    func sk_lines() -> [String] {
         var result = [String]()
         self.enumerateLines { line, _ in result.append(line) }
         return result
     }
 
-    func xx_lines(_ lineWidth: CGFloat, font: UIFont) -> [String] {
-        let style = NSMutableParagraphStyle.default().xx_lineBreakMode(.byCharWrapping)
+    func sk_lines(_ lineWidth: CGFloat, font: UIFont) -> [String] {
+        let style = NSMutableParagraphStyle.default().sk_lineBreakMode(.byCharWrapping)
         let cfFont = CTFontCreateWithName(font.fontName as CFString, font.pointSize, nil)
-        let attributedString = xx_nsMutableAttributedString()
-            .xx_addAttributes([
+        let attributedString = sk_nsMutableAttributedString()
+            .sk_addAttributes([
                 .paragraphStyle: style,
                 NSAttributedString.Key(kCTFontAttributeName as String): cfFont,
-            ], for: xx_fullNSRange())
+            ], for: sk_fullNSRange())
 
         let frameSetter = CTFramesetterCreateWithAttributedString(attributedString)
 
-        let path = CGMutablePath().xx_addRect(CGRect(x: 0, y: 0, width: lineWidth, height: 100_000))
+        let path = CGMutablePath().sk_addRect(CGRect(x: 0, y: 0, width: lineWidth, height: 100_000))
         let frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(CFIndex(0), CFIndex(0)), path, nil)
         let lines = CTFrameGetLines(frame) as? [AnyHashable]
 
@@ -1184,7 +1184,7 @@ public extension String {
         return result
     }
 
-    func xx_camelCase() -> String {
+    func sk_camelCase() -> String {
         let source = lowercased()
         let first = source[..<source.index(after: source.startIndex)]
         if source.contains(" ") {
@@ -1197,24 +1197,24 @@ public extension String {
         return first + rest
     }
 
-    func xx_pinYin(_ isTone: Bool = false) -> String {
+    func sk_pinYin(_ isTone: Bool = false) -> String {
         let mutableString = NSMutableString(string: self) as CFMutableString
         CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
         if !isTone { CFStringTransform(mutableString, nil, kCFStringTransformStripDiacritics, false) }
         return mutableString as String
     }
 
-    func xx_pinYinInitials(_ isUpper: Bool = true) -> String {
-        let pinYin = xx_pinYin(false).components(separatedBy: " ")
+    func sk_pinYinInitials(_ isUpper: Bool = true) -> String {
+        let pinYin = sk_pinYin(false).components(separatedBy: " ")
         let initials = pinYin.compactMap { String(format: "%c", $0.cString(using: .utf8)![0]) }
         return isUpper ? initials.joined().uppercased() : initials.joined()
     }
 
-    func xx_localized(comment: String = "") -> String {
+    func sk_localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }
 
-    func xx_slug() -> String {
+    func sk_slug() -> String {
         let lowercased = lowercased()
         let latinized = lowercased.folding(options: .diacriticInsensitive, locale: Locale.current)
         let withDashes = latinized.replacingOccurrences(of: " ", with: "-")
@@ -1226,10 +1226,10 @@ public extension String {
             return String($0).rangeOfCharacter(from: alphanumerics) != nil
         }
 
-        while filtered.xx_lastCharacter() == "-" {
+        while filtered.sk_lastCharacter() == "-" {
             filtered = String(filtered.dropLast())
         }
-        while filtered.xx_firstCharacter() == "-" {
+        while filtered.sk_firstCharacter() == "-" {
             filtered = String(filtered.dropFirst())
         }
 
@@ -1237,51 +1237,51 @@ public extension String {
     }
 
     @discardableResult
-    func xx_trim() -> String {
+    func sk_trim() -> String {
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    func xx_trimmedSpace() -> String {
+    func sk_trimmedSpace() -> String {
         let resultString = trimmingCharacters(in: CharacterSet.whitespaces)
         return resultString
     }
 
-    func xx_trimmedNewLines() -> String {
+    func sk_trimmedNewLines() -> String {
         let resultString = trimmingCharacters(in: CharacterSet.newlines)
         return resultString
     }
 
-    func xx_withoutSpaces() -> String {
+    func sk_withoutSpaces() -> String {
         return self.replacingOccurrences(of: " ", with: "")
     }
 
-    func xx_withoutNewLines() -> String {
+    func sk_withoutNewLines() -> String {
         return self.replacingOccurrences(of: "\n", with: "")
     }
 
-    func xx_withoutSpacesAndNewLines() -> String {
+    func sk_withoutSpacesAndNewLines() -> String {
         replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
     }
 
-    func xx_firstCharacterUppercased() -> String? {
+    func sk_firstCharacterUppercased() -> String? {
         guard let first else { return nil }
         return String(first).uppercased() + dropFirst()
     }
 
     @discardableResult
-    mutating func xx_reverse() -> String {
+    mutating func sk_reverse() -> String {
         let chars: [Character] = reversed()
         self = String(chars)
         return self
     }
 
-    func xx_split(with char: String) -> [String] {
+    func sk_split(with char: String) -> [String] {
         let components = self.components(separatedBy: char)
         return components != [""] ? components : []
     }
 
     @discardableResult
-    func xx_padStart(_ length: Int, with string: String = " ") -> String {
+    func sk_padStart(_ length: Int, with string: String = " ") -> String {
         guard count < length else { return self }
 
         let padLength = length - count
@@ -1297,7 +1297,7 @@ public extension String {
     }
 
     @discardableResult
-    func xx_padEnd(_ length: Int, with string: String = " ") -> String {
+    func sk_padEnd(_ length: Int, with string: String = " ") -> String {
         guard count < length else { return self }
 
         let padLength = length - count
@@ -1312,7 +1312,7 @@ public extension String {
         }
     }
 
-    func xx_replacingOccurrences(of regex: NSRegularExpression,
+    func sk_replacingOccurrences(of regex: NSRegularExpression,
                                  with template: String,
                                  options: NSRegularExpression.MatchingOptions = [],
                                  range searchRange: Range<String.Index>? = nil) -> String
@@ -1324,7 +1324,7 @@ public extension String {
                                               withTemplate: template)
     }
 
-    func xx_replacingOccurrences(of pattern: String,
+    func sk_replacingOccurrences(of pattern: String,
                                  with template: String,
                                  options: NSRegularExpression.Options = []) -> String
     {
@@ -1335,59 +1335,59 @@ public extension String {
                                               withTemplate: template)
     }
 
-    func xx_removePrefix(_ prefix: String) -> String {
+    func sk_removePrefix(_ prefix: String) -> String {
         guard hasPrefix(prefix) else { return self }
         return String(dropFirst(prefix.count))
     }
 
-    func xx_removeSuffix(_ suffix: String) -> String {
+    func sk_removeSuffix(_ suffix: String) -> String {
         guard hasSuffix(suffix) else { return self }
         return String(dropLast(suffix.count))
     }
 
-    func xx_withPrefix(_ prefix: String) -> String {
+    func sk_withPrefix(_ prefix: String) -> String {
         guard !hasPrefix(prefix) else { return self }
         return prefix + self
     }
 
-    func xx_withSuffix(_ suffix: String) -> String {
+    func sk_withSuffix(_ suffix: String) -> String {
         guard !hasSuffix(suffix) else { return self }
         return self + suffix
     }
 
-    func xx_insertString(content: String, locat: Int) -> String {
+    func sk_insertString(content: String, locat: Int) -> String {
         guard locat < count else {
             return self
         }
-        let str1 = self.xx_subString(to: locat)
-        let str2 = self.xx_subString(from: locat + 1)
+        let str1 = self.sk_subString(to: locat)
+        let str2 = self.sk_subString(from: locat + 1)
         return str1 + content + str2
     }
 
-    func xx_replace(_ string: String, with withString: String) -> String {
+    func sk_replace(_ string: String, with withString: String) -> String {
         return self.replacingOccurrences(of: string, with: withString)
     }
 
-    func xx_hideSensitiveContent(range: Range<Int>, replace: String = "****") -> String {
+    func sk_hideSensitiveContent(range: Range<Int>, replace: String = "****") -> String {
         if count < range.upperBound {
             return self
         }
         guard let subStr = self[safe: range] else {
             return self
         }
-        return self.xx_replace(subStr, with: replace)
+        return self.sk_replace(subStr, with: replace)
     }
 
-    func xx_repeat(_ count: Int) -> String {
+    func sk_repeat(_ count: Int) -> String {
         return String(repeating: self, count: count)
     }
 
-    func xx_removeCharacter(characterString: String) -> String {
+    func sk_removeCharacter(characterString: String) -> String {
         let characterSet = CharacterSet(charactersIn: characterString)
         return self.trimmingCharacters(in: characterSet)
     }
 
-    func xx_commonSuffix(with aString: String, options: CompareOptions = []) -> String {
+    func sk_commonSuffix(with aString: String, options: CompareOptions = []) -> String {
         return String(zip(reversed(), aString.reversed())
             .lazy
             .prefix(while: { (lhs: Character, rhs: Character) in
@@ -1402,7 +1402,7 @@ public extension String {
 
 public extension String {
 
-    func xx_amountAsThousands(maximumFractionDigits: Int = 2, or default: String = "") -> String {
+    func sk_amountAsThousands(maximumFractionDigits: Int = 2, or default: String = "") -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         
@@ -1422,7 +1422,7 @@ public extension String {
         return result ?? `default`
     }
 
-    func xx_deleteMoreThanZeroFromAfterDecimalPoint() -> String {
+    func sk_deleteMoreThanZeroFromAfterDecimalPoint() -> String {
         var rst = self
         var i = 1
         if contains(".") {
@@ -1437,7 +1437,7 @@ public extension String {
         } else { return self }
     }
 
-    func xx_keepDecimalPlaces(decimalPlaces: Int = 0, mode: NumberFormatter.RoundingMode = .floor) -> String {
+    func sk_keepDecimalPlaces(decimalPlaces: Int = 0, mode: NumberFormatter.RoundingMode = .floor) -> String {
 
         var decimalNumber = NSDecimalNumber(string: self)
         if decimalNumber.doubleValue.isNaN {
@@ -1466,7 +1466,7 @@ public extension String {
 
 public extension String {
 
-    func xx_adding(_ strNumber: String?) -> String {
+    func sk_adding(_ strNumber: String?) -> String {
         var ln = NSDecimalNumber(string: self)
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN { ln = .zero }
@@ -1475,7 +1475,7 @@ public extension String {
         return final.stringValue
     }
 
-    func xx_subtracting(_ strNumber: String?) -> String {
+    func sk_subtracting(_ strNumber: String?) -> String {
         var ln = NSDecimalNumber(string: self)
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN { ln = .zero }
@@ -1484,7 +1484,7 @@ public extension String {
         return final.stringValue
     }
 
-    func xx_multiplying(_ strNumber: String?) -> String {
+    func sk_multiplying(_ strNumber: String?) -> String {
         var ln = NSDecimalNumber(string: self)
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN { ln = .zero }
@@ -1493,7 +1493,7 @@ public extension String {
         return final.stringValue
     }
 
-    func xx_dividing(_ strNumber: String?) -> String {
+    func sk_dividing(_ strNumber: String?) -> String {
         var ln = NSDecimalNumber(string: self)
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN { ln = .zero }

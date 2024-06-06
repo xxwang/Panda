@@ -3,16 +3,16 @@ import MapKit
 
 public extension MKMapView {
     @available(iOS 11.0, tvOS 11.0, macOS 10.13, *)
-    func xx_register<T: MKAnnotationView>(annotationViewWithClass name: T.Type) {
+    func sk_register<T: MKAnnotationView>(annotationViewWithClass name: T.Type) {
         self.register(T.self, forAnnotationViewWithReuseIdentifier: String(describing: name))
     }
 
-    func xx_dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type) -> T? {
+    func sk_dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type) -> T? {
         self.dequeueReusableAnnotationView(withIdentifier: String(describing: name)) as? T
     }
 
     @available(iOS 11.0, tvOS 11.0, macOS 10.13, *)
-    func xx_dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type, for annotation: MKAnnotation) -> T? {
+    func sk_dequeueReusableAnnotationView<T: MKAnnotationView>(withClass name: T.Type, for annotation: MKAnnotation) -> T? {
         guard let annotationView = self.dequeueReusableAnnotationView(
             withIdentifier: String(describing: name),
             for: annotation
@@ -24,7 +24,7 @@ public extension MKMapView {
 }
 
 public extension MKMapView {
-    func xx_zoom(to coordinates: [CLLocationCoordinate2D], meter: Double, edgePadding: UIEdgeInsets, animated: Bool) {
+    func sk_zoom(to coordinates: [CLLocationCoordinate2D], meter: Double, edgePadding: UIEdgeInsets, animated: Bool) {
         guard !coordinates.isEmpty else { return }
 
         guard coordinates.count == 1 else {

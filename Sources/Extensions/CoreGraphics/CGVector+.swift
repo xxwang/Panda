@@ -3,11 +3,11 @@ import CoreGraphics
 import UIKit
 
 public extension CGVector {
-    var xx_angle: CGFloat {
+    var sk_angle: CGFloat {
         atan2(dy, dx)
     }
 
-    var xx_magnitude: CGFloat {
+    var sk_magnitude: CGFloat {
         sqrt((dx * dx) + (dy * dy))
     }
 }

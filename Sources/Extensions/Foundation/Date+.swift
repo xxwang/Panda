@@ -4,13 +4,13 @@ private let calendar = Calendar.current
 private let dateFormatter = DateFormatter()
 
 public extension Date {
-    var xx_calendar: Calendar {
+    var sk_calendar: Calendar {
         return Calendar(identifier: Calendar.current.identifier)
     }
 }
 
 public extension Date {
-    var xx_year: Int {
+    var sk_year: Int {
         get {
             return calendar.component(.year, from: self)
         }
@@ -23,7 +23,7 @@ public extension Date {
         }
     }
 
-    var xx_month: Int {
+    var sk_month: Int {
         get {
             return calendar.component(.month, from: self)
         }
@@ -38,7 +38,7 @@ public extension Date {
         }
     }
 
-    var xx_day: Int {
+    var sk_day: Int {
         get {
             return calendar.component(.day, from: self)
         }
@@ -53,7 +53,7 @@ public extension Date {
         }
     }
 
-    var xx_hour: Int {
+    var sk_hour: Int {
         get {
             return calendar.component(.hour, from: self)
         }
@@ -68,7 +68,7 @@ public extension Date {
         }
     }
 
-    var xx_minute: Int {
+    var sk_minute: Int {
         get {
             return calendar.component(.minute, from: self)
         }
@@ -84,7 +84,7 @@ public extension Date {
         }
     }
 
-    var xx_second: Int {
+    var sk_second: Int {
         get {
             return calendar.component(.second, from: self)
         }
@@ -99,7 +99,7 @@ public extension Date {
         }
     }
 
-    var xx_millisecond: Int {
+    var sk_millisecond: Int {
         get {
             return calendar.component(.nanosecond, from: self) / 1_000_000
         }
@@ -116,7 +116,7 @@ public extension Date {
         }
     }
 
-    var xx_nanosecond: Int {
+    var sk_nanosecond: Int {
         get {
             return calendar.component(.nanosecond, from: self)
         }
@@ -158,19 +158,19 @@ public extension Date {
 }
 
 public extension Date {
-    func xx_dateFromGMT() -> Date {
+    func sk_dateFromGMT() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return self.addingTimeInterval(secondFromGMT)
     }
 
-    func xx_dateToGMT() -> Date {
+    func sk_dateToGMT() -> Date {
         let secondFromGMT = TimeInterval(TimeZone.current.secondsFromGMT(for: self))
         return self.addingTimeInterval(-secondFromGMT)
     }
 }
 
 public extension Date {
-    func xx_string(with format: String = "yyyy-MM-dd HH:mm:ss",
+    func sk_string(with format: String = "yyyy-MM-dd HH:mm:ss",
                    isGMT: Bool = false) -> String
     {
         let dateFormatter = DateFormatter()
@@ -180,21 +180,21 @@ public extension Date {
         return dateFormatter.string(from: self)
     }
 
-    func xx_dateString(of style: DateFormatter.Style = .medium) -> String {
+    func sk_dateString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = style
         return dateFormatter.string(from: self)
     }
 
-    func xx_timeString(of style: DateFormatter.Style = .medium) -> String {
+    func sk_timeString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = .none
         return dateFormatter.string(from: self)
     }
 
-    func xx_dateTimeString(of style: DateFormatter.Style = .medium) -> String {
+    func sk_dateTimeString(of style: DateFormatter.Style = .medium) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = style
         dateFormatter.dateStyle = style
@@ -207,7 +207,7 @@ public extension Date {
         case full
     }
 
-    func xx_monthName(of style: Date.MonthNameStyle = .full) -> String {
+    func sk_monthName(of style: Date.MonthNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -229,7 +229,7 @@ public extension Date {
         case full
     }
 
-    func xx_dayName(of style: Date.DayNameStyle = .full) -> String {
+    func sk_dayName(of style: Date.DayNameStyle = .full) -> String {
         let dateFormatter = DateFormatter()
         var format: String {
             switch style {
@@ -245,27 +245,27 @@ public extension Date {
         return dateFormatter.string(from: self)
     }
 
-    func xx_daysSince(_ date: Date) -> Double {
+    func sk_daysSince(_ date: Date) -> Double {
         return self.timeIntervalSince(date) / (3600 * 24)
     }
 
-    func xx_hoursSince(_ date: Date) -> Double {
+    func sk_hoursSince(_ date: Date) -> Double {
         return self.timeIntervalSince(date) / 3600
     }
 
-    func xx_minutesSince(_ date: Date) -> Double {
+    func sk_minutesSince(_ date: Date) -> Double {
         return self.timeIntervalSince(date) / 60
     }
 
-    func xx_secondsSince(_ date: Date) -> Double {
+    func sk_secondsSince(_ date: Date) -> Double {
         return self.timeIntervalSince(date)
     }
 
-    func xx_distance(_ date: Date) -> TimeInterval {
+    func sk_distance(_ date: Date) -> TimeInterval {
         return self.timeIntervalSince(date)
     }
 
-    func xx_currentZoneDate() -> Date {
+    func sk_currentZoneDate() -> Date {
         let date = Date()
         let zone = NSTimeZone.system
         let time = zone.secondsFromGMT(for: date)
@@ -274,7 +274,7 @@ public extension Date {
         return dateNow
     }
 
-    func xx_iso8601String() -> String {
+    func sk_iso8601String() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
@@ -283,7 +283,7 @@ public extension Date {
         return dateFormatter.string(from: self).appending("Z")
     }
 
-    func xx_nearestFiveMinutes() -> Date {
+    func sk_nearestFiveMinutes() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 5 < 3 ? min - min % 5 : min + 5 - (min % 5)
@@ -292,7 +292,7 @@ public extension Date {
         return calendar.date(from: components)!
     }
 
-    func xx_nearestTenMinutes() -> Date {
+    func sk_nearestTenMinutes() -> Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
             from: self
@@ -304,7 +304,7 @@ public extension Date {
         return calendar.date(from: components)!
     }
 
-    func xx_nearestQuarterHour() -> Date {
+    func sk_nearestQuarterHour() -> Date {
         var components = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute, .second, .nanosecond],
             from: self
@@ -316,7 +316,7 @@ public extension Date {
         return calendar.date(from: components)!
     }
 
-    func xx_nearestHalfHour() -> Date {
+    func sk_nearestHalfHour() -> Date {
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: self)
         let min = components.minute!
         components.minute! = min % 30 < 15 ? min - min % 30 : min + 30 - (min % 30)
@@ -325,7 +325,7 @@ public extension Date {
         return calendar.date(from: components)!
     }
 
-    func xx_nearestHour() -> Date {
+    func sk_nearestHour() -> Date {
         let min = calendar.component(.minute, from: self)
         let components: Set<Calendar.Component> = [.year, .month, .day, .hour]
         let date = calendar.date(from: calendar.dateComponents(components, from: self))!
@@ -336,20 +336,20 @@ public extension Date {
         return calendar.date(byAdding: .hour, value: 1, to: date)!
     }
 
-    func xx_yesterday() -> Date {
+    func sk_yesterday() -> Date {
         return calendar.date(byAdding: .day, value: -1, to: self) ?? Date()
     }
 
-    func xx_tomorrow() -> Date {
+    func sk_tomorrow() -> Date {
         return calendar.date(byAdding: .day, value: 1, to: self) ?? Date()
     }
 
-    func xx_era() -> Int {
+    func sk_era() -> Int {
         return calendar.component(.era, from: self)
     }
 
     #if !os(Linux)
-        func xx_quarter() -> Int {
+        func sk_quarter() -> Int {
             let month = Double(calendar.component(.month, from: self))
             let numberOfMonths = Double(calendar.monthSymbols.count)
             let numberOfMonthsInQuarter = numberOfMonths / 4
@@ -357,26 +357,26 @@ public extension Date {
         }
     #endif
 
-    func xx_weekOfYear() -> Int {
+    func sk_weekOfYear() -> Int {
         return calendar.component(.weekOfYear, from: self)
     }
 
-    func xx_weekOfMonth() -> Int {
+    func sk_weekOfMonth() -> Int {
         return calendar.component(.weekOfMonth, from: self)
     }
 
-    func xx_weekday() -> Int {
+    func sk_weekday() -> Int {
         return calendar.component(.weekday, from: self)
     }
 
-    func xx_monthAsString() -> String {
+    func sk_monthAsString() -> String {
         dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
     }
 }
 
 public extension Date {
-    static func xx_now() -> Date {
+    static func sk_now() -> Date {
         if #available(iOS 15, *) {
             return Date.now
         } else {
@@ -384,38 +384,38 @@ public extension Date {
         }
     }
 
-    static func xx_todayDate() -> Date {
+    static func sk_todayDate() -> Date {
         return Date()
     }
 
-    static func xx_yesterDayDate() -> Date? {
+    static func sk_yesterDayDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: -1), to: Date())
     }
 
-    static func xx_tomorrowDate() -> Date? {
+    static func sk_tomorrowDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: 1), to: Date())
     }
 
-    static func xx_theDayBeforYesterDayDate() -> Date? {
+    static func sk_theDayBeforYesterDayDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: -2), to: Date())
     }
 
-    static func xx_theDayAfterYesterDayDate() -> Date? {
+    static func sk_theDayAfterYesterDayDate() -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: 2), to: Date())
     }
 
-    static func xx_secondStamp() -> String {
+    static func sk_secondStamp() -> String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         return "\(Int(timeInterval))"
     }
 
-    static func xx_milliStamp() -> String {
+    static func sk_milliStamp() -> String {
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         let millisecond = CLongLong(Darwin.round(timeInterval * 1000))
         return "\(millisecond)"
     }
 
-    static func xx_daysCount(year: Int, month: Int) -> Int {
+    static func sk_daysCount(year: Int, month: Int) -> Int {
         switch month {
         case 1, 3, 5, 7, 8, 10, 12:
             return 31
@@ -429,103 +429,103 @@ public extension Date {
         }
     }
 
-    static func xx_currentMonthDays() -> Int {
+    static func sk_currentMonthDays() -> Int {
         let date = Date()
-        return xx_daysCount(year: date.xx_year, month: date.xx_month)
+        return sk_daysCount(year: date.sk_year, month: date.sk_month)
     }
 }
 
 public extension Date {
-    func xx_timestamp(isUnix: Bool = true) -> Int {
+    func sk_timestamp(isUnix: Bool = true) -> Int {
         if isUnix { return Int(timeIntervalSince1970) }
         return Int(timeIntervalSince1970 * 1000)
     }
 
-    static func xx_timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let date = xx_timestampAsDate(timestamp: timestamp)
+    static func sk_timestampAsDateString(timestamp: String, format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let date = sk_timestampAsDate(timestamp: timestamp)
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: date)
     }
 
-    static func xx_timestampAsDate(timestamp: String) -> Date {
+    static func sk_timestampAsDate(timestamp: String) -> Date {
         guard timestamp.count == 10 || timestamp.count == 13 else {
             return Date()
         }
-        let timestampValue = timestamp.count == 10 ? timestamp.xx_int() : timestamp.xx_int() / 1000
+        let timestampValue = timestamp.count == 10 ? timestamp.sk_int() : timestamp.sk_int() / 1000
         let date = Date(timeIntervalSince1970: TimeInterval(timestampValue))
         return date
     }
 
-    func xx_dateAsTimestamp(isUnix: Bool = true) -> String {
+    func sk_dateAsTimestamp(isUnix: Bool = true) -> String {
         let interval = isUnix ? CLongLong(Int(timeIntervalSince1970)) : CLongLong(Darwin.round(timeIntervalSince1970 * 1000))
         return "\(interval)"
     }
 
-    func xx_secondStampFromGMT() -> Int {
+    func sk_secondStampFromGMT() -> Int {
         let offset = TimeZone.current.secondsFromGMT(for: self)
         return Int(timeIntervalSince1970) - offset
     }
 
-    func xx_secondStamp() -> Double {
+    func sk_secondStamp() -> Double {
         return timeIntervalSince1970
     }
 
-    func xx_milliStamp() -> Int {
+    func sk_milliStamp() -> Int {
         return Int(timeIntervalSince1970 * 1000)
     }
 }
 
 public extension Date {
-    func xx_isInFuture() -> Bool {
+    func sk_isInFuture() -> Bool {
         return self > Date()
     }
 
-    func xx_isInPast() -> Bool {
+    func sk_isInPast() -> Bool {
         return self < Date()
     }
 
-    func xx_isInToday() -> Bool {
+    func sk_isInToday() -> Bool {
         return calendar.isDateInToday(self)
     }
 
-    func xx_isInYesterday() -> Bool {
+    func sk_isInYesterday() -> Bool {
         return calendar.isDateInYesterday(self)
     }
 
-    func xx_isInTomorrow() -> Bool {
+    func sk_isInTomorrow() -> Bool {
         return calendar.isDateInTomorrow(self)
     }
 
-    func xx_isInWeekend() -> Bool {
+    func sk_isInWeekend() -> Bool {
         return calendar.isDateInWeekend(self)
     }
 
-    func xx_isWorkday() -> Bool {
+    func sk_isWorkday() -> Bool {
         return !calendar.isDateInWeekend(self)
     }
 
-    func xx_isInCurrentWeek() -> Bool {
+    func sk_isInCurrentWeek() -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: .weekOfYear)
     }
 
-    func xx_isInCurrentMonth() -> Bool {
+    func sk_isInCurrentMonth() -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: .month)
     }
 
-    func xx_isInCurrentYear() -> Bool {
+    func sk_isInCurrentYear() -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: .year)
     }
 
-    func xx_isLeapYear() -> Bool {
-        let year = self.xx_year
+    func sk_isLeapYear() -> Bool {
+        let year = self.sk_year
         return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0))
     }
 
-    func xx_isSameDay(date: Date) -> Bool {
+    func sk_isSameDay(date: Date) -> Bool {
         return Calendar.current.isDate(self, inSameDayAs: date)
     }
 
-    func xx_isSameYeaerMountDay(_ date: Date) -> Bool {
+    func sk_isSameYeaerMountDay(_ date: Date) -> Bool {
         let com = Calendar.current.dateComponents([.year, .month, .day], from: self)
         let comToday = Calendar.current.dateComponents([.year, .month, .day], from: date)
         return com.day == comToday.day
@@ -533,22 +533,22 @@ public extension Date {
             && com.year == comToday.year
     }
 
-    func xx_componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
+    func sk_componentCompare(from date: Date, unit: Set<Calendar.Component> = [.year, .month, .day]) -> DateComponents {
         return Calendar.current.dateComponents(unit, from: date, to: self)
     }
 
-    func xx_isInCurrent(_ component: Calendar.Component) -> Bool {
+    func sk_isInCurrent(_ component: Calendar.Component) -> Bool {
         return calendar.isDate(self, equalTo: Date(), toGranularity: component)
     }
 
-    func xx_isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
+    func sk_isBetween(_ startDate: Date, _ endDate: Date, includeBounds: Bool = false) -> Bool {
         if includeBounds {
             return startDate.compare(self).rawValue * compare(endDate).rawValue >= 0
         }
         return startDate.compare(self).rawValue * compare(endDate).rawValue > 0
     }
 
-    func xx_isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
+    func sk_isWithin(_ value: UInt, _ component: Calendar.Component, of date: Date) -> Bool {
         let components = calendar.dateComponents([component], from: self, to: date)
         let componentValue = components.value(for: component)!
         return Darwin.abs(Int32(componentValue)) <= value
@@ -556,21 +556,21 @@ public extension Date {
 }
 
 public extension Date {
-    static func xx_random(in range: Range<Date>) -> Date {
+    static func sk_random(in range: Range<Date>) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ..< range.upperBound
                     .timeIntervalSinceReferenceDate))
     }
 
-    static func xx_random(in range: ClosedRange<Date>) -> Date {
+    static func sk_random(in range: ClosedRange<Date>) -> Date {
         return Date(timeIntervalSinceReferenceDate:
             TimeInterval
                 .random(in: range.lowerBound.timeIntervalSinceReferenceDate ... range.upperBound
                     .timeIntervalSinceReferenceDate))
     }
 
-    static func xx_random(in range: Range<Date>,
+    static func sk_random(in range: Range<Date>,
                           using generator: inout some RandomNumberGenerator) -> Date
     {
         return Date(timeIntervalSinceReferenceDate:
@@ -580,7 +580,7 @@ public extension Date {
             ))
     }
 
-    static func xx_random(
+    static func sk_random(
         in range: ClosedRange<Date>,
         using generator: inout some RandomNumberGenerator
     ) -> Date {
@@ -593,31 +593,31 @@ public extension Date {
 }
 
 public extension Date {
-    func xx_numberOfDays(from date: Date) -> Int? {
-        return xx_componentCompare(from: date, unit: [.day]).day
+    func sk_numberOfDays(from date: Date) -> Int? {
+        return sk_componentCompare(from: date, unit: [.day]).day
     }
 
-    func xx_numberOfHours(from date: Date) -> Int? {
-        return xx_componentCompare(from: date, unit: [.hour]).hour
+    func sk_numberOfHours(from date: Date) -> Int? {
+        return sk_componentCompare(from: date, unit: [.hour]).hour
     }
 
-    func xx_numberOfMinutes(from date: Date) -> Int? {
-        return xx_componentCompare(from: date, unit: [.minute]).minute
+    func sk_numberOfMinutes(from date: Date) -> Int? {
+        return sk_componentCompare(from: date, unit: [.minute]).minute
     }
 
-    func xx_numberOfSeconds(from date: Date) -> Int? {
-        return xx_componentCompare(from: date, unit: [.second]).second
+    func sk_numberOfSeconds(from date: Date) -> Int? {
+        return sk_componentCompare(from: date, unit: [.second]).second
     }
 
-    func xx_adding(day: Int) -> Date? {
+    func sk_adding(day: Int) -> Date? {
         return Calendar.current.date(byAdding: DateComponents(day: day), to: self)
     }
 
-    func xx_adding(_ component: Calendar.Component, value: Int) -> Date {
+    func sk_adding(_ component: Calendar.Component, value: Int) -> Date {
         return Calendar.current.date(byAdding: component, value: value, to: self)!
     }
 
-    func xx_changing(_ component: Calendar.Component, value: Int) -> Date? {
+    func sk_changing(_ component: Calendar.Component, value: Int) -> Date? {
         switch component {
         case .nanosecond:
             #if targetEnvironment(macCatalyst)
@@ -678,7 +678,7 @@ public extension Date {
 
     #if !os(Linux)
 
-        func xx_beginning(of component: Calendar.Component) -> Date? {
+        func sk_beginning(of component: Calendar.Component) -> Date? {
             if component == .day { return calendar.startOfDay(for: self) }
 
             var components: Set<Calendar.Component> {
@@ -711,50 +711,50 @@ public extension Date {
         }
     #endif
 
-    func xx_end(of component: Calendar.Component) -> Date? {
+    func sk_end(of component: Calendar.Component) -> Date? {
         switch component {
         case .second:
-            var date = xx_adding(.second, value: 1)
+            var date = sk_adding(.second, value: 1)
             date = calendar.date(
                 from: calendar.dateComponents(
                     [.year, .month, .day, .hour, .minute, .second],
                     from: date
                 ))!
-            return date.xx_adding(.second, value: -1)
+            return date.sk_adding(.second, value: -1)
         case .minute:
-            var date = xx_adding(.minute, value: 1)
+            var date = sk_adding(.minute, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date))!
-            date = after.xx_adding(.second, value: -1)
+            date = after.sk_adding(.second, value: -1)
             return date
         case .hour:
-            var date = xx_adding(.hour, value: 1)
+            var date = sk_adding(.hour, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month, .day, .hour], from: date))!
-            date = after.xx_adding(.second, value: -1)
+            date = after.sk_adding(.second, value: -1)
             return date
         case .day:
-            var date = xx_adding(.day, value: 1)
+            var date = sk_adding(.day, value: 1)
             date = calendar.startOfDay(for: date)
-            return date.xx_adding(.second, value: -1)
+            return date.sk_adding(.second, value: -1)
         case .weekOfYear, .weekOfMonth:
             var date = self
             let beginningOfWeek = calendar.date(from:
                 calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date))!
-            date = beginningOfWeek.xx_adding(.day, value: 7).xx_adding(.second, value: -1)
+            date = beginningOfWeek.sk_adding(.day, value: 7).sk_adding(.second, value: -1)
             return date
         case .month:
-            var date = xx_adding(.month, value: 1)
+            var date = sk_adding(.month, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year, .month], from: date))!
-            date = after.xx_adding(.second, value: -1)
+            date = after.sk_adding(.second, value: -1)
             return date
 
         case .year:
-            var date = xx_adding(.year, value: 1)
+            var date = sk_adding(.year, value: 1)
             let after = calendar.date(from:
                 calendar.dateComponents([.year], from: date))!
-            date = after.xx_adding(.second, value: -1)
+            date = after.sk_adding(.second, value: -1)
             return date
 
         default:
@@ -765,48 +765,48 @@ public extension Date {
 
 extension Date {
     @discardableResult
-    mutating func xx_year(_ year: Int) -> Self {
-        self.xx_year = year
+    mutating func sk_year(_ year: Int) -> Self {
+        self.sk_year = year
         return self
     }
 
-    mutating func xx_month(_ month: Int) -> Self {
-        self.xx_month = month
+    mutating func sk_month(_ month: Int) -> Self {
+        self.sk_month = month
         return self
     }
 
-    mutating func xx_day(_ day: Int) -> Self {
-        self.xx_day = day
-        return self
-    }
-
-    @discardableResult
-    mutating func xx_hour(_ hour: Int) -> Self {
-        self.xx_hour = hour
+    mutating func sk_day(_ day: Int) -> Self {
+        self.sk_day = day
         return self
     }
 
     @discardableResult
-    mutating func xx_minute(_ minute: Int) -> Self {
-        self.xx_minute = minute
+    mutating func sk_hour(_ hour: Int) -> Self {
+        self.sk_hour = hour
         return self
     }
 
     @discardableResult
-    mutating func xx_second(_ second: Int) -> Self {
-        self.xx_second = second
+    mutating func sk_minute(_ minute: Int) -> Self {
+        self.sk_minute = minute
         return self
     }
 
     @discardableResult
-    mutating func xx_millisecond(_ millisecond: Int) -> Self {
-        self.xx_millisecond = millisecond
+    mutating func sk_second(_ second: Int) -> Self {
+        self.sk_second = second
         return self
     }
 
     @discardableResult
-    mutating func xx_nanosecond(_ nanosecond: Int) -> Self {
-        self.xx_nanosecond = nanosecond
+    mutating func sk_millisecond(_ millisecond: Int) -> Self {
+        self.sk_millisecond = millisecond
+        return self
+    }
+
+    @discardableResult
+    mutating func sk_nanosecond(_ nanosecond: Int) -> Self {
+        self.sk_nanosecond = nanosecond
         return self
     }
 }

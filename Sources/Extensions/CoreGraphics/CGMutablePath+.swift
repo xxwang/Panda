@@ -2,14 +2,14 @@
 import UIKit
 
 public extension CGMutablePath {
-    func xx_path() -> CGPath {
+    func sk_path() -> CGPath {
         self
     }
 }
 
 extension CGMutablePath {
     @discardableResult
-    func xx_addRect(_ rect: CGRect,
+    func sk_addRect(_ rect: CGRect,
                     transform: CGAffineTransform = .identity) -> Self
     {
         self.addRect(rect, transform: transform)
@@ -17,7 +17,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addRoundedRect(in rect: CGRect,
+    func sk_addRoundedRect(in rect: CGRect,
                            cornerWidth: CGFloat,
                            cornerHeight: CGFloat,
                            transform: CGAffineTransform = .identity) -> Self
@@ -30,7 +30,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addRects(_ rects: [CGRect],
+    func sk_addRects(_ rects: [CGRect],
                      transform: CGAffineTransform = .identity) -> Self
     {
         self.addRects(rects, transform: transform)
@@ -38,7 +38,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_move(to point: CGPoint,
+    func sk_move(to point: CGPoint,
                  transform: CGAffineTransform = .identity) -> Self
     {
         self.move(to: point, transform: transform)
@@ -46,7 +46,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addLine(to point: CGPoint,
+    func sk_addLine(to point: CGPoint,
                     transform: CGAffineTransform = .identity) -> Self
     {
         self.addLine(to: point, transform: transform)
@@ -54,7 +54,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addQuadCurve(to end: CGPoint,
+    func sk_addQuadCurve(to end: CGPoint,
                          control: CGPoint,
                          transform: CGAffineTransform = .identity) -> Self
     {
@@ -65,7 +65,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addCurve(to end: CGPoint,
+    func sk_addCurve(to end: CGPoint,
                      control1: CGPoint,
                      control2: CGPoint,
                      transform: CGAffineTransform = .identity) -> Self
@@ -78,7 +78,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addLines(between points: [CGPoint],
+    func sk_addLines(between points: [CGPoint],
                      transform: CGAffineTransform = .identity) -> Self
     {
         self.addLines(between: points, transform: transform)
@@ -86,7 +86,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addEllipse(in rect: CGRect,
+    func sk_addEllipse(in rect: CGRect,
                        transform: CGAffineTransform = .identity) -> Self
     {
         self.addEllipse(in: rect, transform: transform)
@@ -94,7 +94,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addRelativeArc(center: CGPoint,
+    func sk_addRelativeArc(center: CGPoint,
                            radius: CGFloat,
                            startAngle: CGFloat,
                            delta: CGFloat,
@@ -109,7 +109,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addArc(center: CGPoint,
+    func sk_addArc(center: CGPoint,
                    radius: CGFloat,
                    startAngle: CGFloat,
                    endAngle: CGFloat,
@@ -126,7 +126,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addArc(tangent1End: CGPoint,
+    func sk_addArc(tangent1End: CGPoint,
                    tangent2End: CGPoint,
                    radius: CGFloat,
                    transform: CGAffineTransform = .identity) -> Self
@@ -139,7 +139,7 @@ extension CGMutablePath {
     }
 
     @discardableResult
-    func xx_addPath(_ path: CGPath,
+    func sk_addPath(_ path: CGPath,
                     transform: CGAffineTransform = .identity) -> Self
     {
         self.addPath(path, transform: transform)

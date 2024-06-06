@@ -42,51 +42,51 @@ public extension UIBezierPath {
 
 public extension UIBezierPath {
 
-    func xx_addArc(startPoint: CGPoint, centerPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
-        let arcCenter = xx_getCircleCenter(pontA: startPoint, pontB: centerPoint, pontC: endPoint)
-        let radius = xx_getRadius(center: arcCenter, point: startPoint)
-        let startAngle = xx_getAngle(center: arcCenter, point: startPoint)
-        let endAngle = xx_getAngle(center: arcCenter, point: endPoint)
+    func sk_addArc(startPoint: CGPoint, centerPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
+        let arcCenter = sk_getCircleCenter(pontA: startPoint, pontB: centerPoint, pontC: endPoint)
+        let radius = sk_getRadius(center: arcCenter, point: startPoint)
+        let startAngle = sk_getAngle(center: arcCenter, point: startPoint)
+        let endAngle = sk_getAngle(center: arcCenter, point: endPoint)
         addArc(withCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
     }
 
-    func xx_addArc(arcCenter: CGPoint, startPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
-        let radius = xx_getRadius(center: arcCenter, point: startPoint)
-        let startAngle = xx_getAngle(center: arcCenter, point: startPoint)
-        let endAngle = xx_getAngle(center: arcCenter, point: endPoint)
+    func sk_addArc(arcCenter: CGPoint, startPoint: CGPoint, endPoint: CGPoint, clockwise: Bool) {
+        let radius = sk_getRadius(center: arcCenter, point: startPoint)
+        let startAngle = sk_getAngle(center: arcCenter, point: startPoint)
+        let endAngle = sk_getAngle(center: arcCenter, point: endPoint)
         addArc(withCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
     }
 }
 
 private extension UIBezierPath {
 
-    func xx_getCircleCenter(pontA: CGPoint, pontB: CGPoint, pontC: CGPoint) -> CGPoint {
-        let abCenter = xx_getCenterPoint(pontA: pontA, pontB: pontB)
-        let slopeAB = xx_getSlope(pontA: pontA, pontB: pontB)
+    func sk_getCircleCenter(pontA: CGPoint, pontB: CGPoint, pontC: CGPoint) -> CGPoint {
+        let abCenter = sk_getCenterPoint(pontA: pontA, pontB: pontB)
+        let slopeAB = sk_getSlope(pontA: pontA, pontB: pontB)
         let slopeABVertical = -1 / slopeAB
 
-        let bcCenter = xx_getCenterPoint(pontA: pontB, pontB: pontC)
-        let slopeBC = xx_getSlope(pontA: pontB, pontB: pontC)
+        let bcCenter = sk_getCenterPoint(pontA: pontB, pontB: pontC)
+        let slopeBC = sk_getSlope(pontA: pontB, pontB: pontC)
         let slopeBCVertical = -1 / slopeBC
 
-        return xx_getCircleCenter(slopeA: slopeABVertical, pointA: abCenter, slopeB: slopeBCVertical, pointB: bcCenter)
+        return sk_getCircleCenter(slopeA: slopeABVertical, pointA: abCenter, slopeB: slopeBCVertical, pointB: bcCenter)
     }
 
-    func xx_getCircleCenter(slopeA: CGFloat, pointA: CGPoint, slopeB: CGFloat, pointB: CGPoint) -> CGPoint {
+    func sk_getCircleCenter(slopeA: CGFloat, pointA: CGPoint, slopeB: CGFloat, pointB: CGPoint) -> CGPoint {
         let centerX = -(pointA.y - slopeA * pointA.x - pointB.y + slopeB * pointB.x) / (slopeA - slopeB)
         let centerY = pointA.y - slopeA * (pointA.x - centerX)
         return CGPoint(x: centerX, y: centerY)
     }
 
-    func xx_getCenterPoint(pontA: CGPoint, pontB: CGPoint) -> CGPoint {
+    func sk_getCenterPoint(pontA: CGPoint, pontB: CGPoint) -> CGPoint {
         CGPoint(x: (pontA.x + pontB.x) / 2, y: (pontA.y + pontB.y) / 2)
     }
 
-    func xx_getSlope(pontA: CGPoint, pontB: CGPoint) -> CGFloat {
+    func sk_getSlope(pontA: CGPoint, pontB: CGPoint) -> CGFloat {
         (pontB.y - pontA.y) / (pontB.x - pontA.x)
     }
 
-    func xx_getRadius(center: CGPoint, point: CGPoint) -> CGFloat {
+    func sk_getRadius(center: CGPoint, point: CGPoint) -> CGFloat {
         let a = Double(Swift.abs(point.x - center.x))
         let b = Double(Swift.abs(point.y - center.y))
         let radius = sqrtf(Float(a * a + b * b))
@@ -94,7 +94,7 @@ private extension UIBezierPath {
     }
 
 
-    func xx_getAngle(center: CGPoint, point: CGPoint) -> CGFloat {
+    func sk_getAngle(center: CGPoint, point: CGPoint) -> CGFloat {
         let pointX = point.x
         let pointY = point.y
 

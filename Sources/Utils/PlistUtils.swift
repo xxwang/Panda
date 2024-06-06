@@ -10,7 +10,7 @@ public extension PlistUtils {
 
     func parse(plistName: String?) -> Any? {
         guard let plistName else { return nil }
-        guard let plistPath = Bundle.xx_path(for: plistName) else { return nil }
+        guard let plistPath = Bundle.sk_path(for: plistName) else { return nil }
         return parse(plistPath: plistPath)
     }
 

@@ -39,41 +39,41 @@ public extension Dictionary {
 
 public extension Dictionary {
 
-    func xx_array<V>(_ map: (Key, Value) -> V) -> [V] {
+    func sk_array<V>(_ map: (Key, Value) -> V) -> [V] {
         self.map(map)
     }
 
-    func xx_allKeys() -> [Key] {
+    func sk_allKeys() -> [Key] {
         keys.shuffled()
     }
 
-    func xx_allValues() -> [Value] {
+    func sk_allValues() -> [Value] {
         values.shuffled()
     }
 
-    func xx_has(key: Key) -> Bool {
+    func sk_has(key: Key) -> Bool {
         index(forKey: key) != nil
     }
 
-    mutating func xx_removeAll(keys: some Sequence<Key>) {
+    mutating func sk_removeAll(keys: some Sequence<Key>) {
         keys.forEach { self.removeValue(forKey: $0) }
     }
 
     @discardableResult
-    mutating func xx_removeValueForRandomKey() -> Value? {
+    mutating func sk_removeValueForRandomKey() -> Value? {
         guard let randomKey = keys.randomElement() else { return nil }
         return self.removeValue(forKey: randomKey)
     }
 
-    func xx_mapKeysAndValues<K, V>(_ transform: ((key: Key, value: Value)) throws -> (K, V)) rethrows -> [K: V] {
+    func sk_mapKeysAndValues<K, V>(_ transform: ((key: Key, value: Value)) throws -> (K, V)) rethrows -> [K: V] {
         try [K: V](uniqueKeysWithValues: self.map(transform))
     }
 
-    func xx_compactMapKeysAndValues<K, V>(_ transform: ((key: Key, value: Value)) throws -> (K, V)?) rethrows -> [K: V] {
+    func sk_compactMapKeysAndValues<K, V>(_ transform: ((key: Key, value: Value)) throws -> (K, V)?) rethrows -> [K: V] {
         try [K: V](uniqueKeysWithValues: compactMap(transform))
     }
 
-    func xx_pick(keys: [Key]) -> [Key: Value] {
+    func sk_pick(keys: [Key]) -> [Key: Value] {
         return keys.reduce(into: [Key: Value]()) { result, item in
             result[item] = self[item]
         }
@@ -82,14 +82,14 @@ public extension Dictionary {
 
 public extension Dictionary where Value: Equatable {
 
-    func xx_keys(forValue value: Value) -> [Key] {
+    func sk_keys(forValue value: Value) -> [Key] {
         keys.filter { self[$0] == value }
     }
 }
 
 public extension Dictionary where Key: StringProtocol {
 
-    mutating func xx_lowercaseAllKeys() {
+    mutating func sk_lowercaseAllKeys() {
         for key in keys {
             if let lowercaseKey = String(describing: key).lowercased() as? Key {
                 self[lowercaseKey] = removeValue(forKey: key)
@@ -112,11 +112,11 @@ public extension Dictionary {
 
     static func - (lhs: [Key: Value], keys: some Sequence<Key>) -> [Key: Value] {
         var result = lhs
-        result.xx_removeAll(keys: keys)
+        result.sk_removeAll(keys: keys)
         return result
     }
 
     static func -= (lhs: inout [Key: Value], keys: some Sequence<Key>) {
-        lhs.xx_removeAll(keys: keys)
+        lhs.sk_removeAll(keys: keys)
     }
 }

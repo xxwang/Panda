@@ -8,39 +8,39 @@ public enum DecimalNumberHandlerOperator: String {
 }
 
 public extension NSDecimalNumberHandler {
-    static func xx_calculation(operator: DecimalNumberHandlerOperator,
+    static func sk_calculation(operator: DecimalNumberHandlerOperator,
                                valueA: Any,
                                valueB: Any) -> NSDecimalNumber
     {
-        return xx_decimalNumberCalculate(valueA: valueA,
+        return sk_decimalNumberCalculate(valueA: valueA,
                                          valueB: valueB,
                                          operator: `operator`,
                                          roundingMode: .down,
                                          scale: 30)
     }
 
-    static func xx_intFloor(valueA: Any, valueB: Any) -> Int {
-        return xx_decimalNumberCalculate(valueA: valueA,
+    static func sk_intFloor(valueA: Any, valueB: Any) -> Int {
+        return sk_decimalNumberCalculate(valueA: valueA,
                                          valueB: valueB,
                                          operator: .div,
                                          roundingMode: .down,
                                          scale: 0).intValue
     }
 
-    static func xx_isDivisible(valueA: Any, valueB: Any) -> Bool {
-        let value = xx_decimalNumberCalculate(valueA: valueA,
+    static func sk_isDivisible(valueA: Any, valueB: Any) -> Bool {
+        let value = sk_decimalNumberCalculate(valueA: valueA,
                                               valueB: valueB,
                                               operator: .div,
                                               roundingMode: .down,
                                               scale: 3).stringValue
-        let values = value.xx_split(with: ".")
+        let values = value.sk_split(with: ".")
         guard values.count > 1 else { return true }
         let decimalValue = values[1]
         guard decimalValue.count == 1, decimalValue == "0" else { return false }
         return true
     }
 
-    static func xx_decimalNumberCalculate(valueA: Any,
+    static func sk_decimalNumberCalculate(valueA: Any,
                                           valueB: Any,
                                           operator: DecimalNumberHandlerOperator,
                                           roundingMode: NSDecimalNumber.RoundingMode,

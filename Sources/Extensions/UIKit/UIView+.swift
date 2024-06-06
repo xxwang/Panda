@@ -3,13 +3,13 @@ import UIKit
 import WebKit
 
 public extension UIView {
-    var xx_writeDirection: UIUserInterfaceLayoutDirection {
+    var sk_writeDirection: UIUserInterfaceLayoutDirection {
         if #available(iOS 10.0, macCatalyst 13.0, tvOS 10.0, *) {
             return effectiveUserInterfaceLayoutDirection
         } else { return .leftToRight }
     }
 
-    var xx_controller: UIViewController? {
+    var sk_controller: UIViewController? {
         var nextResponder: UIResponder? = self
         repeat {
             nextResponder = nextResponder?.next
@@ -20,11 +20,11 @@ public extension UIView {
         return nil
     }
 
-    var xx_allSubViews: [UIView] {
+    var sk_allSubViews: [UIView] {
         var subViews = [UIView]()
         for subView in subviews {
             subViews.append(subView)
-            if !subView.subviews.isEmpty { subViews += subView.xx_allSubViews }
+            if !subView.subviews.isEmpty { subViews += subView.sk_allSubViews }
         }
         return subViews
     }
@@ -36,7 +36,7 @@ public extension UIView {
         case radians
     }
 
-    func xx_rotate(byAngle angle: CGFloat,
+    func sk_rotate(byAngle angle: CGFloat,
                    ofType type: AngleUnit,
                    animated: Bool = false,
                    duration: TimeInterval = 1,
@@ -49,7 +49,7 @@ public extension UIView {
         }, completion: completion)
     }
 
-    func xx_rotate(toAngle angle: CGFloat,
+    func sk_rotate(toAngle angle: CGFloat,
                    ofType type: AngleUnit,
                    animated: Bool = false,
                    duration: TimeInterval = 1,
@@ -62,7 +62,7 @@ public extension UIView {
         }, completion: completion)
     }
 
-    func xx_scale(by offset: CGPoint,
+    func sk_scale(by offset: CGPoint,
                   animated: Bool = false,
                   duration: TimeInterval = 1,
                   completion: ((Bool) -> Void)? = nil)
@@ -77,31 +77,31 @@ public extension UIView {
         }
     }
 
-    func xx_setRotation(_ angle: CGFloat, isInverted: Bool = false) {
+    func sk_setRotation(_ angle: CGFloat, isInverted: Bool = false) {
         transform = isInverted
             ? CGAffineTransform(rotationAngle: angle).inverted()
             : CGAffineTransform(rotationAngle: angle)
     }
 
-    func xx_set3DRotationX(_ angle: CGFloat) {
+    func sk_set3DRotationX(_ angle: CGFloat) {
         layer.transform = CATransform3DMakeRotation(angle, 1.0, 0.0, 0.0)
     }
 
-    func xx_set3DRotationY(_ angle: CGFloat) {
+    func sk_set3DRotationY(_ angle: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DRotate(transform, angle, 0.0, 1.0, 0.0)
         layer.transform = transform
     }
 
-    func xx_set3DRotationZ(_ angle: CGFloat) {
+    func sk_set3DRotationZ(_ angle: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DRotate(transform, angle, 0.0, 0.0, 1.0)
         layer.transform = transform
     }
 
-    func xx_setRotation(xAngle: CGFloat, yAngle: CGFloat, zAngle: CGFloat) {
+    func sk_setRotation(xAngle: CGFloat, yAngle: CGFloat, zAngle: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DRotate(transform, xAngle, 1.0, 0.0, 0.0)
@@ -110,7 +110,7 @@ public extension UIView {
         layer.transform = transform
     }
 
-    func xx_setScale(x: CGFloat, y: CGFloat) {
+    func sk_setScale(x: CGFloat, y: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DScale(transform, x, y, 1)
@@ -119,39 +119,39 @@ public extension UIView {
 }
 
 public extension UIView {
-    var xx_widthConstraint: NSLayoutConstraint? {
-        xx_findConstraint(attribute: .width, for: self)
+    var sk_widthConstraint: NSLayoutConstraint? {
+        sk_findConstraint(attribute: .width, for: self)
     }
 
-    var xx_heightConstraint: NSLayoutConstraint? {
-        xx_findConstraint(attribute: .height, for: self)
+    var sk_heightConstraint: NSLayoutConstraint? {
+        sk_findConstraint(attribute: .height, for: self)
     }
 
-    var xx_leadingConstraint: NSLayoutConstraint? {
-        xx_findConstraint(attribute: .leading, for: self)
+    var sk_leadingConstraint: NSLayoutConstraint? {
+        sk_findConstraint(attribute: .leading, for: self)
     }
 
-    var xx_trailingConstraint: NSLayoutConstraint? {
-        xx_findConstraint(attribute: .trailing, for: self)
+    var sk_trailingConstraint: NSLayoutConstraint? {
+        sk_findConstraint(attribute: .trailing, for: self)
     }
 
-    var xx_topConstraint: NSLayoutConstraint? {
-        xx_findConstraint(attribute: .top, for: self)
+    var sk_topConstraint: NSLayoutConstraint? {
+        sk_findConstraint(attribute: .top, for: self)
     }
 
-    var xx_bottomConstraint: NSLayoutConstraint? {
-        xx_findConstraint(attribute: .bottom, for: self)
+    var sk_bottomConstraint: NSLayoutConstraint? {
+        sk_findConstraint(attribute: .bottom, for: self)
     }
 
-    func xx_findConstraint(attribute: NSLayoutConstraint.Attribute, for view: UIView) -> NSLayoutConstraint? {
+    func sk_findConstraint(attribute: NSLayoutConstraint.Attribute, for view: UIView) -> NSLayoutConstraint? {
         let constraint = constraints.first {
             ($0.firstAttribute == attribute && $0.firstItem as? UIView == view) ||
                 ($0.secondAttribute == attribute && $0.secondItem as? UIView == view)
         }
-        return constraint ?? superview?.xx_findConstraint(attribute: attribute, for: view)
+        return constraint ?? superview?.sk_findConstraint(attribute: attribute, for: view)
     }
 
-    func xx_addConstraints(withFormat: String, views: UIView...) {
+    func sk_addConstraints(withFormat: String, views: UIView...) {
         var viewsDictionary: [String: UIView] = [:]
         for (index, view) in views.enumerated() {
             let key = "v\(index)"
@@ -166,7 +166,7 @@ public extension UIView {
         ))
     }
 
-    func xx_fillToSuperview() {
+    func sk_fillToSuperview() {
         translatesAutoresizingMaskIntoConstraints = false
         if let superview {
             let left = leftAnchor.constraint(equalTo: superview.leftAnchor)
@@ -177,19 +177,19 @@ public extension UIView {
         }
     }
 
-    func xx_anchorCenterSuperview() {
-        xx_anchorCenterXToSuperview()
-        xx_anchorCenterYToSuperview()
+    func sk_anchorCenterSuperview() {
+        sk_anchorCenterXToSuperview()
+        sk_anchorCenterYToSuperview()
     }
 
-    func xx_anchorCenterXToSuperview(constant: CGFloat = 0) {
+    func sk_anchorCenterXToSuperview(constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
         if let anchor = superview?.centerXAnchor {
             centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         }
     }
 
-    func xx_anchorCenterYToSuperview(constant: CGFloat = 0) {
+    func sk_anchorCenterYToSuperview(constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
         if let anchor = superview?.centerYAnchor {
             centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
@@ -197,7 +197,7 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_anchor(top: NSLayoutYAxisAnchor? = nil,
+    func sk_anchor(top: NSLayoutYAxisAnchor? = nil,
                    left: NSLayoutXAxisAnchor? = nil,
                    bottom: NSLayoutYAxisAnchor? = nil,
                    right: NSLayoutXAxisAnchor? = nil,
@@ -244,7 +244,7 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_roundCorners(radius: CGFloat, corners: UIRectCorner) {
+    func sk_roundCorners(radius: CGFloat, corners: UIRectCorner) {
         let maskPath = UIBezierPath(
             roundedRect: bounds,
             byRoundingCorners: corners,
@@ -259,7 +259,7 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_addShadow(
+    func sk_addShadow(
         ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
         radius: CGFloat = 3,
         offset: CGSize = .zero,
@@ -272,7 +272,7 @@ public extension UIView {
         layer.masksToBounds = false
     }
 
-    func xx_addCornerAndShadow(superview: UIView,
+    func sk_addCornerAndShadow(superview: UIView,
                                corners: UIRectCorner,
                                radius: CGFloat = 3,
                                shadowColor: UIColor,
@@ -280,7 +280,7 @@ public extension UIView {
                                shadowOpacity: Float,
                                shadowRadius: CGFloat = 3)
     {
-        xx_roundCorners(radius: radius, corners: corners)
+        sk_roundCorners(radius: radius, corners: corners)
         let subLayer = CALayer()
         let fixframe = frame
         subLayer.frame = fixframe
@@ -294,7 +294,7 @@ public extension UIView {
         superview.layer.insertSublayer(subLayer, below: layer)
     }
 
-    func xx_addInnerShadowLayer(shadowColor: UIColor,
+    func sk_addInnerShadowLayer(shadowColor: UIColor,
                                 shadowOffset: CGSize = CGSize(width: 0, height: 0),
                                 shadowOpacity: Float = 0.5, shadowRadius: CGFloat = 3,
                                 insetBySize: CGSize = CGSize(width: -42, height: -42))
@@ -323,28 +323,28 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_addBorder(borderWidth: CGFloat, borderColor: UIColor) {
+    func sk_addBorder(borderWidth: CGFloat, borderColor: UIColor) {
         layer.borderWidth = borderWidth
         layer.borderColor = borderColor.cgColor
     }
 
-    func xx_addBorderTop(borderWidth: CGFloat, borderColor: UIColor) {
-        xx_addBorderUtility(x: 0, y: 0, width: frame.width, height: borderWidth, color: borderColor)
+    func sk_addBorderTop(borderWidth: CGFloat, borderColor: UIColor) {
+        sk_addBorderUtility(x: 0, y: 0, width: frame.width, height: borderWidth, color: borderColor)
     }
 
-    func xx_addBorderBottom(borderWidth: CGFloat, borderColor: UIColor) {
-        xx_addBorderUtility(x: 0, y: frame.height - borderWidth, width: frame.width, height: borderWidth, color: borderColor)
+    func sk_addBorderBottom(borderWidth: CGFloat, borderColor: UIColor) {
+        sk_addBorderUtility(x: 0, y: frame.height - borderWidth, width: frame.width, height: borderWidth, color: borderColor)
     }
 
-    func xx_addBorderLeft(borderWidth: CGFloat, borderColor: UIColor) {
-        xx_addBorderUtility(x: 0, y: 0, width: borderWidth, height: frame.height, color: borderColor)
+    func sk_addBorderLeft(borderWidth: CGFloat, borderColor: UIColor) {
+        sk_addBorderUtility(x: 0, y: 0, width: borderWidth, height: frame.height, color: borderColor)
     }
 
-    func xx_addBorderRight(borderWidth: CGFloat, borderColor: UIColor) {
-        xx_addBorderUtility(x: frame.width - borderWidth, y: 0, width: borderWidth, height: frame.height, color: borderColor)
+    func sk_addBorderRight(borderWidth: CGFloat, borderColor: UIColor) {
+        sk_addBorderUtility(x: frame.width - borderWidth, y: 0, width: borderWidth, height: frame.height, color: borderColor)
     }
 
-    private func xx_addBorderUtility(x: CGFloat,
+    private func sk_addBorderUtility(x: CGFloat,
                                      y: CGFloat,
                                      width: CGFloat,
                                      height: CGFloat,
@@ -356,7 +356,7 @@ public extension UIView {
         layer.addSublayer(border)
     }
 
-    func xx_drawCircle(fillColor: UIColor, strokeColor: UIColor, strokeWidth: CGFloat) {
+    func sk_drawCircle(fillColor: UIColor, strokeColor: UIColor, strokeWidth: CGFloat) {
         let ciecleRadius = bounds.width > bounds.height
             ? bounds.height
             : bounds.width
@@ -369,7 +369,7 @@ public extension UIView {
         layer.addSublayer(shapeLayer)
     }
 
-    func xx_drawDashLine(strokeColor: UIColor, lineLength: Int = 4, lineSpacing: Int = 4, isHorizontal: Bool = true) {
+    func sk_drawDashLine(strokeColor: UIColor, lineLength: Int = 4, lineSpacing: Int = 4, isHorizontal: Bool = true) {
 
         let lineWidth = isHorizontal ? bounds.height : bounds.width
 
@@ -400,18 +400,18 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_drawDashLineBorder(lineWidth: CGFloat, lineColor: UIColor, lineLen: CGFloat, lineSpacing: CGFloat, radius: CGFloat) -> Self {
+    func sk_drawDashLineBorder(lineWidth: CGFloat, lineColor: UIColor, lineLen: CGFloat, lineSpacing: CGFloat, radius: CGFloat) -> Self {
         let frame = self.bounds.insetBy(dx: lineWidth / 2, dy: lineWidth / 2)
 
         let borderPath = UIBezierPath(roundedRect: frame, cornerRadius: radius).cgPath
         let borderLayer = CAShapeLayer.default()
-            .xx_frame(frame)
-            .xx_lineWidth(lineWidth)
-            .xx_strokeColor(lineColor)
-            .xx_fillColor(.clear)
-            .xx_lineDashPattern([lineLen.xx_nsNumber(), lineSpacing.xx_nsNumber()])
-            .xx_path(borderPath)
-            .xx_cornerRadius(10)
+            .sk_frame(frame)
+            .sk_lineWidth(lineWidth)
+            .sk_strokeColor(lineColor)
+            .sk_fillColor(.clear)
+            .sk_lineDashPattern([lineLen.sk_nsNumber(), lineSpacing.sk_nsNumber()])
+            .sk_path(borderPath)
+            .sk_cornerRadius(10)
         self.layer.addSublayer(borderLayer)
         return self
     }
@@ -419,7 +419,7 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_setLinearGradientBorder(_ size: CGSize,
+    func sk_setLinearGradientBorder(_ size: CGSize,
                                     colors: [UIColor],
                                     locations: [CGFloat] = [0, 1],
                                     start: CGPoint,
@@ -428,52 +428,52 @@ public extension UIView {
                                     roundingCorners: UIRectCorner = .allCorners,
                                     cornerRadii: CGFloat = 0)
     {
-        let gradientLayer = colors.xx_createLinearGradientLayer(size,
+        let gradientLayer = colors.sk_createLinearGradientLayer(size,
                                                                 locations: locations,
                                                                 start: start,
                                                                 end: end)
 
         let maskLayer = CAShapeLayer.default()
-            .xx_lineWidth(borderWidth)
-            .xx_path(UIBezierPath(
+            .sk_lineWidth(borderWidth)
+            .sk_path(UIBezierPath(
                 roundedRect: gradientLayer.bounds,
                 byRoundingCorners: roundingCorners,
                 cornerRadii: CGSize(width: cornerRadii, height: cornerRadii)
             ).cgPath)
-            .xx_fillColor(.clear)
-            .xx_strokeColor(.black)
+            .sk_fillColor(.clear)
+            .sk_strokeColor(.black)
 
         gradientLayer.mask = maskLayer
         layer.addSublayer(gradientLayer)
     }
 
-    func xx_setLinearGradientBackgroundLayer(_ size: CGSize,
+    func sk_setLinearGradientBackgroundLayer(_ size: CGSize,
                                              colors: [UIColor],
                                              locations: [CGFloat] = [0, 1],
                                              start: CGPoint,
                                              end: CGPoint)
     {
-        let gradientLayer = colors.xx_createLinearGradientLayer(size,
+        let gradientLayer = colors.sk_createLinearGradientLayer(size,
                                                                 locations: locations,
                                                                 start: start,
                                                                 end: end)
         layer.insertSublayer(gradientLayer, at: 0)
     }
 
-    func xx_setLinearGradientBackgroundColor(_ size: CGSize,
+    func sk_setLinearGradientBackgroundColor(_ size: CGSize,
                                              colors: [UIColor],
                                              locations: [CGFloat] = [0, 1],
                                              start: CGPoint,
                                              end: CGPoint)
     {
-        let gradientColor = colors.xx_createLinearGradientColor(size,
+        let gradientColor = colors.sk_createLinearGradientColor(size,
                                                                 locations: locations,
                                                                 start: start,
                                                                 end: end)
         backgroundColor = gradientColor
     }
 
-    func xx_linearGradientColorAnimation(_ size: CGSize,
+    func sk_linearGradientColorAnimation(_ size: CGSize,
                                          startColors: [UIColor],
                                          endColors: [UIColor],
                                          locations: [CGFloat],
@@ -481,13 +481,13 @@ public extension UIView {
                                          end: CGPoint,
                                          duration: CFTimeInterval = 1.0)
     {
-        let gradientLayer = startColors.xx_createLinearGradientLayer(size,
+        let gradientLayer = startColors.sk_createLinearGradientLayer(size,
                                                                      locations: locations,
                                                                      start: start,
                                                                      end: end)
         layer.insertSublayer(gradientLayer, at: 0)
 
-        xx_startLinearGradientColorAnimation(
+        sk_startLinearGradientColorAnimation(
             gradientLayer,
             startColors: startColors,
             endColors: endColors,
@@ -495,7 +495,7 @@ public extension UIView {
         )
     }
 
-    private func xx_startLinearGradientColorAnimation(_ gradientLayer: CAGradientLayer,
+    private func sk_startLinearGradientColorAnimation(_ gradientLayer: CAGradientLayer,
                                                       startColors: [UIColor],
                                                       endColors: [UIColor],
                                                       duration: CFTimeInterval = 1.0)
@@ -515,7 +515,7 @@ public extension UIView {
 
 public extension UIView {
 
-    final func xx_startWaterWaveAnimation(colors: [UIColor],
+    final func sk_startWaterWaveAnimation(colors: [UIColor],
                                           scale: CGFloat,
                                           duration: TimeInterval)
     {
@@ -529,11 +529,11 @@ public extension UIView {
         let delay = Double(duration) / Double(colors.count)
         for (index, color) in colors.enumerated() {
             let delay = delay * Double(index)
-            xx_setupAnimationView(animationView: animationView, color: color, scale: scale, delay: delay, duration: duration)
+            sk_setupAnimationView(animationView: animationView, color: color, scale: scale, delay: delay, duration: duration)
         }
     }
 
-    private func xx_setupAnimationView(animationView: UIView,
+    private func sk_setupAnimationView(animationView: UIView,
                                        color: UIColor,
                                        scale: CGFloat,
                                        delay: CFTimeInterval,
@@ -562,7 +562,7 @@ public extension UIView {
         }
     }
 
-    final func xx_stopWaterWaveAnimation() {
+    final func sk_stopWaterWaveAnimation() {
         if let view = superview?.viewWithTag(3257) {
             view.removeFromSuperview()
         }
@@ -571,28 +571,28 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_setupBadge(_ number: String) {
+    func sk_setupBadge(_ number: String) {
         var badgeLabel: UILabel? = viewWithTag(6202) as? UILabel
         if number == "0" {
-            xx_removeBadege()
+            sk_removeBadege()
             return
         }
 
         if badgeLabel == nil {
             badgeLabel = UILabel.default()
-                .xx_text(number)
-                .xx_textColor("#FFFFFF".xx_hexColor())
-                .xx_backgroundColor("#EE0565".xx_hexColor())
-                .xx_font(.system(.regular, size: 10))
-                .xx_textAlignment(.center)
-                .xx_tag(6202)
-                .xx_add2(self)
+                .sk_text(number)
+                .sk_textColor("#FFFFFF".sk_hexColor())
+                .sk_backgroundColor("#EE0565".sk_hexColor())
+                .sk_font(.system(.regular, size: 10))
+                .sk_textAlignment(.center)
+                .sk_tag(6202)
+                .sk_add2(self)
         }
 
         badgeLabel?
-            .xx_text((number.xx_int()) > 99 ? "99+" : number)
-            .xx_cornerRadius(2.5)
-            .xx_masksToBounds(true)
+            .sk_text((number.sk_int()) > 99 ? "99+" : number)
+            .sk_cornerRadius(2.5)
+            .sk_masksToBounds(true)
 
         badgeLabel?.translatesAutoresizingMaskIntoConstraints = false
         if number.isEmpty {
@@ -636,7 +636,7 @@ public extension UIView {
             )
             addConstraints([widthCons, heightCons, centerXCons, centerYCons])
         } else {
-            var textWidth = (badgeLabel?.xx_textSize().width ?? 0) + 10
+            var textWidth = (badgeLabel?.sk_textSize().width ?? 0) + 10
             textWidth = max(textWidth, 16)
 
             let widthCons = NSLayoutConstraint(
@@ -682,8 +682,8 @@ public extension UIView {
         }
     }
 
-    func xx_removeBadege() {
-        DispatchQueue.xx_async_execute_on_main {
+    func sk_removeBadege() {
+        DispatchQueue.sk_async_execute_on_main {
             let badge = self.viewWithTag(6202)
             badge?.removeFromSuperview()
         }
@@ -692,16 +692,16 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_addWatermark(
+    func sk_addWatermark(
         _ text: String,
         textColor: UIColor = UIColor.black,
         font: UIFont = UIFont.systemFont(ofSize: 12)
     ) {
 
-        let waterMark = text.xx_nsString()
+        let waterMark = text.sk_nsString()
         let textSize = waterMark.size(withAttributes: [NSAttributedString.Key.font: font])
         let rowNum = NSInteger(bounds.height * 3.5 / 80)
-        let colNum = NSInteger(bounds.width / text.xx_stringSize(bounds.width, font: font).width)
+        let colNum = NSInteger(bounds.width / text.sk_stringSize(bounds.width, font: font).width)
 
         for i in 0 ..< rowNum {
             for j in 0 ..< colNum {
@@ -732,7 +732,7 @@ public extension UIView {
         case easeInOut
     }
 
-    func xx_shake(shakeDirection: ShakeDirection = .horizontal,
+    func sk_shake(shakeDirection: ShakeDirection = .horizontal,
                   shakeAnimation: ShakeAnimation = .easeOut,
                   duration: TimeInterval = 1,
                   completion: (() -> Void)? = nil)
@@ -766,33 +766,33 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_addGestureRecognizers(_ recognizers: [UIGestureRecognizer]) {
+    func sk_addGestureRecognizers(_ recognizers: [UIGestureRecognizer]) {
         isUserInteractionEnabled = true
         for recognizer in recognizers {
             addGestureRecognizer(recognizer)
         }
     }
 
-    func xx_removeGestureRecognizers(_ recognizers: [UIGestureRecognizer]) {
+    func sk_removeGestureRecognizers(_ recognizers: [UIGestureRecognizer]) {
         for recognizer in recognizers {
             removeGestureRecognizer(recognizer)
         }
     }
 
-    func xx_removeGestureRecognizers() {
+    func sk_removeGestureRecognizers() {
         gestureRecognizers?.forEach(removeGestureRecognizer)
     }
 
     @discardableResult
-    func xx_addTapGestureRecognizer(
+    func sk_addTapGestureRecognizer(
         _ action: @escaping (_ recognizer: UITapGestureRecognizer) -> Void
     ) -> UITapGestureRecognizer {
         let obj = UITapGestureRecognizer(target: nil, action: nil)
         obj.numberOfTapsRequired = 1
         obj.numberOfTouchesRequired = 1
-        xx_addCommonGestureRecognizer(obj)
+        sk_addCommonGestureRecognizer(obj)
 
-        obj.xx_callback { recognizer in
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UITapGestureRecognizer {
                 action(recognizer)
             }
@@ -802,15 +802,15 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_addLongPressGestureRecognizer(
+    func sk_addLongPressGestureRecognizer(
         _ action: @escaping (_ recognizer: UILongPressGestureRecognizer) -> Void,
         for minimumPressDuration: TimeInterval
     ) -> UILongPressGestureRecognizer {
         let obj = UILongPressGestureRecognizer(target: nil, action: nil)
         obj.minimumPressDuration = minimumPressDuration
-        xx_addCommonGestureRecognizer(obj)
+        sk_addCommonGestureRecognizer(obj)
 
-        obj.xx_callback { recognizer in
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UILongPressGestureRecognizer {
                 action(recognizer)
             }
@@ -819,15 +819,15 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_addPanGestureRecognizer(
+    func sk_addPanGestureRecognizer(
         _ action: @escaping (_ recognizer: UIPanGestureRecognizer) -> Void
     ) -> UIPanGestureRecognizer {
         let obj = UIPanGestureRecognizer(target: nil, action: nil)
         obj.minimumNumberOfTouches = 1
         obj.maximumNumberOfTouches = 3
-        xx_addCommonGestureRecognizer(obj)
+        sk_addCommonGestureRecognizer(obj)
 
-        obj.xx_callback { recognizer in
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UIPanGestureRecognizer,
                let senderView = recognizer.view
             {
@@ -841,26 +841,26 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_addScreenEdgePanGestureRecognizer(
+    func sk_addScreenEdgePanGestureRecognizer(
         _ target: Any?,
         action: Selector?,
         for edgs: UIRectEdge
     ) -> UIScreenEdgePanGestureRecognizer {
         let obj = UIScreenEdgePanGestureRecognizer(target: target, action: action)
         obj.edges = edgs
-        xx_addCommonGestureRecognizer(obj)
+        sk_addCommonGestureRecognizer(obj)
         return obj
     }
 
     @discardableResult
-    func xx_addScreenEdgePanGestureRecognizer(
+    func sk_addScreenEdgePanGestureRecognizer(
         action: @escaping (_ recognizer: UIScreenEdgePanGestureRecognizer) -> Void,
         for edge: UIRectEdge
     ) -> UIScreenEdgePanGestureRecognizer {
         let obj = UIScreenEdgePanGestureRecognizer(target: nil, action: nil)
         obj.edges = edge
-        xx_addCommonGestureRecognizer(obj)
-        obj.xx_callback { recognizer in
+        sk_addCommonGestureRecognizer(obj)
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UIScreenEdgePanGestureRecognizer {
                 action(recognizer)
             }
@@ -869,25 +869,25 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_addSwipeGestureRecognizer(
+    func sk_addSwipeGestureRecognizer(
         _ target: Any?,
         action: Selector?,
         for direction: UISwipeGestureRecognizer.Direction
     ) -> UISwipeGestureRecognizer {
         let obj = UISwipeGestureRecognizer(target: target, action: action)
         obj.direction = direction
-        xx_addCommonGestureRecognizer(obj)
+        sk_addCommonGestureRecognizer(obj)
         return obj
     }
 
-    func xx_addSwipeGestureRecognizer(
+    func sk_addSwipeGestureRecognizer(
         _ action: @escaping (_ recognizer: UISwipeGestureRecognizer) -> Void,
         for direction: UISwipeGestureRecognizer.Direction
     ) -> UISwipeGestureRecognizer {
         let obj = UISwipeGestureRecognizer(target: nil, action: nil)
         obj.direction = direction
-        xx_addCommonGestureRecognizer(obj)
-        obj.xx_callback { recognizer in
+        sk_addCommonGestureRecognizer(obj)
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UISwipeGestureRecognizer {
                 action(recognizer)
             }
@@ -895,10 +895,10 @@ public extension UIView {
         return obj
     }
 
-    func xx_addPinchGestureRecognizer(_ action: @escaping (_ recognizer: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
+    func sk_addPinchGestureRecognizer(_ action: @escaping (_ recognizer: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
         let obj = UIPinchGestureRecognizer(target: nil, action: nil)
-        xx_addCommonGestureRecognizer(obj)
-        obj.xx_callback { recognizer in
+        sk_addCommonGestureRecognizer(obj)
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UIPinchGestureRecognizer {
                 let location = recognizer.location(in: recognizer.view!.superview)
                 recognizer.view!.center = location
@@ -914,12 +914,12 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_addRotationGestureRecognizer(
+    func sk_addRotationGestureRecognizer(
         _ action: @escaping (_ recognizer: UIRotationGestureRecognizer) -> Void
     ) -> UIRotationGestureRecognizer {
         let obj = UIRotationGestureRecognizer(target: nil, action: nil)
-        xx_addCommonGestureRecognizer(obj)
-        obj.xx_callback { recognizer in
+        sk_addCommonGestureRecognizer(obj)
+        obj.sk_callback { recognizer in
             if let recognizer = recognizer as? UIRotationGestureRecognizer {
                 recognizer.view!.transform = recognizer.view!.transform.rotated(by: recognizer.rotation)
                 recognizer.rotation = 0.0
@@ -929,7 +929,7 @@ public extension UIView {
         return obj
     }
 
-    private func xx_addCommonGestureRecognizer(_ recognizer: UIGestureRecognizer) {
+    private func sk_addCommonGestureRecognizer(_ recognizer: UIGestureRecognizer) {
         isUserInteractionEnabled = true
         isMultipleTouchEnabled = true
         addGestureRecognizer(recognizer)
@@ -958,27 +958,27 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_startEmitter(emitterImageNames: [String], style: EmitterStyle = EmitterStyle()) -> CAEmitterLayer {
+    func sk_startEmitter(emitterImageNames: [String], style: EmitterStyle = EmitterStyle()) -> CAEmitterLayer {
         let emitter = CAEmitterLayer()
         emitter.backgroundColor = UIColor.brown.cgColor
         emitter.emitterPosition = style.emitterPosition
         emitter.preservesDepth = style.preservesDepth
-        let cells = xx_createEmitterCell(emitterImageNames: emitterImageNames, style: style)
+        let cells = sk_createEmitterCell(emitterImageNames: emitterImageNames, style: style)
         emitter.emitterCells = cells
         layer.addSublayer(emitter)
 
-        DispatchQueue.xx_delay_execute(delay: 1) {
+        DispatchQueue.sk_delay_execute(delay: 1) {
             guard style.cellFireOnce else { return }
             emitter.birthRate = 0
 
-            DispatchQueue.xx_delay_execute(delay: 1) {
-                self.xx_stopEmitter()
+            DispatchQueue.sk_delay_execute(delay: 1) {
+                self.sk_stopEmitter()
             }
         }
         return emitter
     }
 
-    func xx_stopEmitter() {
+    func sk_stopEmitter() {
         _ = layer.sublayers?.filter {
             $0.isKind(of: CAEmitterLayer.self)
         }.map {
@@ -986,7 +986,7 @@ public extension UIView {
         }
     }
 
-    private func xx_createEmitterCell(emitterImageNames: [String], style: EmitterStyle) -> [CAEmitterCell] {
+    private func sk_createEmitterCell(emitterImageNames: [String], style: EmitterStyle) -> [CAEmitterCell] {
         var cells: [CAEmitterCell] = []
         for emitterImageName in emitterImageNames {
 
@@ -1012,74 +1012,74 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_findFirstResponder() -> UIView? {
+    func sk_findFirstResponder() -> UIView? {
         if isFirstResponder { return self }
         for subView in subviews {
-            if let firstResponder = subView.xx_findFirstResponder() { return firstResponder }
+            if let firstResponder = subView.sk_findFirstResponder() { return firstResponder }
         }
         return nil
     }
 
-    func xx_contains(_ point: CGPoint) -> Bool {
+    func sk_contains(_ point: CGPoint) -> Bool {
         point.x > frame.minX && point.x < frame.maxX && point.y > frame.minY && point.y < frame.maxY
     }
 
-    func xx_contains<T: UIView>(withClass name: T.Type) -> Bool {
+    func sk_contains<T: UIView>(withClass name: T.Type) -> Bool {
         if isKind(of: T.self) { return true }
         for subView in subviews {
-            if subView.xx_contains(withClass: T.self) { return true }
+            if subView.sk_contains(withClass: T.self) { return true }
         }
         return false
     }
 
-    func xx_findSuperview<T: UIView>(withClass name: T.Type) -> T? {
-        xx_findSuperview(where: { $0 is T }) as? T
+    func sk_findSuperview<T: UIView>(withClass name: T.Type) -> T? {
+        sk_findSuperview(where: { $0 is T }) as? T
     }
 
-    func xx_findSuperview(where predicate: (UIView?) -> Bool) -> UIView? {
+    func sk_findSuperview(where predicate: (UIView?) -> Bool) -> UIView? {
         if predicate(superview) { return superview }
-        return superview?.xx_findSuperview(where: predicate)
+        return superview?.sk_findSuperview(where: predicate)
     }
 
-    func xx_findSubview<T: UIView>(withClass name: T.Type) -> T? {
-        xx_findSubview(where: { $0 is T }) as? T
+    func sk_findSubview<T: UIView>(withClass name: T.Type) -> T? {
+        sk_findSubview(where: { $0 is T }) as? T
     }
 
-    func xx_findSubview(where predicate: (UIView?) -> Bool) -> UIView? {
+    func sk_findSubview(where predicate: (UIView?) -> Bool) -> UIView? {
         guard subviews.count > 0 else { return nil }
         for subView in subviews {
             if predicate(subView) { return subView }
-            return subView.xx_findSubview(where: predicate)
+            return subView.sk_findSubview(where: predicate)
         }
         return nil
     }
 
-    func xx_findSubviews<T: UIView>(withClass name: T.Type) -> [T] {
-        xx_findSubviews(where: { $0 is T }).map { view in view as! T }
+    func sk_findSubviews<T: UIView>(withClass name: T.Type) -> [T] {
+        sk_findSubviews(where: { $0 is T }).map { view in view as! T }
     }
 
-    func xx_findSubviews(where predicate: (UIView?) -> Bool) -> [UIView] {
+    func sk_findSubviews(where predicate: (UIView?) -> Bool) -> [UIView] {
         guard subviews.count > 0 else { return [] }
 
         var result: [UIView] = []
         for subView in subviews {
             if predicate(subView) { result.append(subView) }
-            result += subView.xx_findSubviews(where: predicate)
+            result += subView.sk_findSubviews(where: predicate)
         }
         return result
     }
 
-    func xx_removeSubviews() { subviews.forEach { $0.removeFromSuperview() }}
+    func sk_removeSubviews() { subviews.forEach { $0.removeFromSuperview() }}
 
-    func xx_removeLayer() {
+    func sk_removeLayer() {
         layer.mask = nil
         layer.borderWidth = 0
     }
 
-    func xx_hiddenKeyboard() { endEditing(true) }
+    func sk_hiddenKeyboard() { endEditing(true) }
 
     @discardableResult
-    func xx_relayout() -> Self {
+    func sk_relayout() -> Self {
         setNeedsLayout()
         layoutIfNeeded()
 
@@ -1089,7 +1089,7 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_stressView(_ borderWidth: CGFloat = 1, borderColor: UIColor = .xx_random, backgroundColor: UIColor = .xx_random) {
+    func sk_stressView(_ borderWidth: CGFloat = 1, borderColor: UIColor = .sk_random, backgroundColor: UIColor = .sk_random) {
         guard environment.isDebug else { return }
         guard subviews.count > 0 else { return }
 
@@ -1097,14 +1097,14 @@ public extension UIView {
             subview.layer.borderWidth = borderWidth
             subview.layer.borderColor = borderColor.cgColor
             subview.backgroundColor = backgroundColor
-            subview.xx_stressView(borderWidth, borderColor: borderColor, backgroundColor: backgroundColor)
+            subview.sk_stressView(borderWidth, borderColor: borderColor, backgroundColor: backgroundColor)
         }
     }
 }
 
 public extension UIView {
 
-    @objc func xx_captureScreenshot() -> UIImage? {
+    @objc func sk_captureScreenshot() -> UIImage? {
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(frame.size, false, scale)
         guard let context = UIGraphicsGetCurrentContext() else {
@@ -1120,11 +1120,11 @@ public extension UIView {
 
 public extension UIView {
 
-    class func xx_loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
+    class func sk_loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
         UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }
 
-    class func xx_loadFromNib<T: UIView>(withClass name: T.Type, bundle: Bundle? = nil) -> T {
+    class func sk_loadFromNib<T: UIView>(withClass name: T.Type, bundle: Bundle? = nil) -> T {
         let named = String(describing: name)
         guard let view = UINib(nibName: named, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? T else {
             fatalError("First element in xib file \(named) is not of type \(named)")
@@ -1135,12 +1135,12 @@ public extension UIView {
 
 public extension UIView {
 
-    func xx_fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func sk_fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if isHidden { isHidden = false }
         UIView.animate(withDuration: duration, animations: { self.alpha = 1 }, completion: completion)
     }
 
-    func xx_fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func sk_fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if isHidden { isHidden = false }
         UIView.animate(withDuration: duration, animations: { self.alpha = 0 }, completion: completion)
     }
@@ -1148,7 +1148,7 @@ public extension UIView {
 
 public extension UIView {
     @available(iOS 12.0, *)
-    static func xx_fitAllView(userInterfaceStyle: UIUserInterfaceStyle) {
+    static func sk_fitAllView(userInterfaceStyle: UIUserInterfaceStyle) {
         if #available(iOS 13.0, *) {
             UIView.appearance().overrideUserInterfaceStyle = .light
         }
@@ -1157,73 +1157,73 @@ public extension UIView {
 
 public extension UIView {
 
-    var xx_frame: CGRect {
+    var sk_frame: CGRect {
         get { frame }
         set { frame = newValue }
     }
 
-    var xx_bounds: CGRect {
+    var sk_bounds: CGRect {
         get { bounds }
         set { frame = CGRect(origin: .zero, size: newValue.size) }
     }
 
-    var xx_origin: CGPoint {
+    var sk_origin: CGPoint {
         get { frame.origin }
-        set { frame = CGRect(origin: newValue, size: xx_size) }
+        set { frame = CGRect(origin: newValue, size: sk_size) }
     }
 
-    var xx_x: CGFloat {
+    var sk_x: CGFloat {
         get { frame.origin.x }
-        set { frame = CGRect(origin: CGPoint(x: newValue, y: xx_origin.y), size: xx_size) }
+        set { frame = CGRect(origin: CGPoint(x: newValue, y: sk_origin.y), size: sk_size) }
     }
 
-    var xx_y: CGFloat {
+    var sk_y: CGFloat {
         get { frame.origin.y }
-        set { frame = CGRect(origin: CGPoint(x: xx_origin.x, y: newValue), size: xx_size) }
+        set { frame = CGRect(origin: CGPoint(x: sk_origin.x, y: newValue), size: sk_size) }
     }
 
-    var xx_maxX: CGFloat {
+    var sk_maxX: CGFloat {
         get { frame.maxX }
-        set { frame = CGRect(origin: CGPoint(x: newValue - xx_width, y: xx_y), size: xx_size) }
+        set { frame = CGRect(origin: CGPoint(x: newValue - sk_width, y: sk_y), size: sk_size) }
     }
 
-    var xx_maxY: CGFloat {
+    var sk_maxY: CGFloat {
         get { frame.maxY }
-        set { frame = CGRect(origin: CGPoint(x: xx_x, y: newValue - xx_height), size: xx_size) }
+        set { frame = CGRect(origin: CGPoint(x: sk_x, y: newValue - sk_height), size: sk_size) }
     }
 
-    var xx_size: CGSize {
+    var sk_size: CGSize {
         get { frame.size }
-        set { frame = CGRect(origin: xx_origin, size: newValue) }
+        set { frame = CGRect(origin: sk_origin, size: newValue) }
     }
 
-    var xx_width: CGFloat {
+    var sk_width: CGFloat {
         get { frame.width }
-        set { frame = CGRect(origin: xx_origin, size: CGSize(width: newValue, height: xx_size.height)) }
+        set { frame = CGRect(origin: sk_origin, size: CGSize(width: newValue, height: sk_size.height)) }
     }
 
-    var xx_height: CGFloat {
+    var sk_height: CGFloat {
         get { frame.height }
-        set { frame = CGRect(origin: xx_origin, size: CGSize(width: xx_size.width, height: newValue)) }
+        set { frame = CGRect(origin: sk_origin, size: CGSize(width: sk_size.width, height: newValue)) }
     }
 
-    var xx_middle: CGPoint {
-        CGPoint(x: xx_width / 2, y: xx_height / 2)
+    var sk_middle: CGPoint {
+        CGPoint(x: sk_width / 2, y: sk_height / 2)
     }
 
-    var xx_center: CGPoint {
+    var sk_center: CGPoint {
         get { center }
         set { center = newValue }
     }
 
-    var xx_centerX: CGFloat {
-        get { xx_center.x }
-        set { xx_center = CGPoint(x: newValue, y: xx_center.y) }
+    var sk_centerX: CGFloat {
+        get { sk_center.x }
+        set { sk_center = CGPoint(x: newValue, y: sk_center.y) }
     }
 
-    var xx_centerY: CGFloat {
-        get { xx_center.y }
-        set { xx_center = CGPoint(x: xx_center.x, y: newValue) }
+    var sk_centerY: CGFloat {
+        get { sk_center.y }
+        set { sk_center = CGPoint(x: sk_center.x, y: newValue) }
     }
 }
 
@@ -1240,81 +1240,81 @@ extension UIView {
 public extension UIView {
 
     @discardableResult
-    func xx_frame(_ frame: CGRect) -> Self {
-        xx_frame = frame
+    func sk_frame(_ frame: CGRect) -> Self {
+        sk_frame = frame
         return self
     }
 
     @discardableResult
-    func xx_origin(_ origin: CGPoint) -> Self {
-        xx_origin = origin
+    func sk_origin(_ origin: CGPoint) -> Self {
+        sk_origin = origin
         return self
     }
 
     @discardableResult
-    func xx_x(_ x: CGFloat) -> Self {
-        xx_x = x
+    func sk_x(_ x: CGFloat) -> Self {
+        sk_x = x
         return self
     }
 
     @discardableResult
-    func xx_y(_ y: CGFloat) -> Self {
-        xx_y = y
+    func sk_y(_ y: CGFloat) -> Self {
+        sk_y = y
         return self
     }
 
     @discardableResult
-    func xx_maxX(_ maxX: CGFloat) -> Self {
-        xx_maxX = maxX
+    func sk_maxX(_ maxX: CGFloat) -> Self {
+        sk_maxX = maxX
         return self
     }
 
     @discardableResult
-    func xx_maxY(_ maxY: CGFloat) -> Self {
-        xx_maxY = maxY
+    func sk_maxY(_ maxY: CGFloat) -> Self {
+        sk_maxY = maxY
         return self
     }
 
     @discardableResult
-    func xx_size(_ size: CGSize) -> Self {
-        xx_size = size
+    func sk_size(_ size: CGSize) -> Self {
+        sk_size = size
         return self
     }
 
     @discardableResult
-    func xx_width(_ width: CGFloat) -> Self {
-        xx_width = width
+    func sk_width(_ width: CGFloat) -> Self {
+        sk_width = width
         return self
     }
 
     @discardableResult
-    func xx_height(_ height: CGFloat) -> Self {
-        xx_height = height
+    func sk_height(_ height: CGFloat) -> Self {
+        sk_height = height
         return self
     }
 
     @discardableResult
-    func xx_center(_ center: CGPoint) -> Self {
-        xx_center = center
+    func sk_center(_ center: CGPoint) -> Self {
+        sk_center = center
         return self
     }
 
     @discardableResult
-    func xx_centerX(_ centerX: CGFloat) -> Self {
-        xx_centerX = centerX
+    func sk_centerX(_ centerX: CGFloat) -> Self {
+        sk_centerX = centerX
         return self
     }
 
     @discardableResult
-    func xx_centerY(_ centerY: CGFloat) -> Self {
-        xx_centerY = centerY
+    func sk_centerY(_ centerY: CGFloat) -> Self {
+        sk_centerY = centerY
         return self
     }
 }
 
 public extension UIView {
     @discardableResult
-    func xx_add2(_ superview: UIView?) -> Self {
+    func sk_add2(_ superview: UIView?) -> Self {
         if let superview {
             superview.addSubview(self)
         }
@@ -1322,134 +1322,134 @@ public extension UIView {
     }
 
     @discardableResult
-    func xx_addSubviews(_ subviews: [UIView]) -> Self {
+    func sk_addSubviews(_ subviews: [UIView]) -> Self {
         subviews.forEach { addSubview($0) }
         return self
     }
 
     @discardableResult
-    func xx_tag(_ tag: Int) -> Self {
+    func sk_tag(_ tag: Int) -> Self {
         self.tag = tag
         return self
     }
 
     @discardableResult
-    func xx_cornerRadius(_ cornerRadius: CGFloat) -> Self {
+    func sk_cornerRadius(_ cornerRadius: CGFloat) -> Self {
         layer.cornerRadius = cornerRadius
         return self
     }
 
     @discardableResult
-    func xx_masksToBounds(_ masksToBounds: Bool) -> Self {
+    func sk_masksToBounds(_ masksToBounds: Bool) -> Self {
         layer.masksToBounds = masksToBounds
         return self
     }
 
     @discardableResult
-    func xx_clipsToBounds(_ clipsToBounds: Bool) -> Self {
+    func sk_clipsToBounds(_ clipsToBounds: Bool) -> Self {
         self.clipsToBounds = clipsToBounds
         return self
     }
 
     @discardableResult
-    func xx_contentMode(_ mode: UIView.ContentMode) -> Self {
+    func sk_contentMode(_ mode: UIView.ContentMode) -> Self {
         contentMode = mode
         return self
     }
 
     @discardableResult
-    @objc func xx_backgroundColor(_ backgroundColor: UIColor) -> Self {
+    @objc func sk_backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.backgroundColor = backgroundColor
         return self
     }
 
     @discardableResult
-    func xx_isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
+    func sk_isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
         self.isUserInteractionEnabled = isUserInteractionEnabled
         return self
     }
 
     @discardableResult
-    func xx_isHidden(_ isHidden: Bool) -> Self {
+    func sk_isHidden(_ isHidden: Bool) -> Self {
         self.isHidden = isHidden
         return self
     }
 
     @discardableResult
-    func xx_alpha(_ alpha: CGFloat) -> Self {
+    func sk_alpha(_ alpha: CGFloat) -> Self {
         self.alpha = alpha
         return self
     }
 
     @discardableResult
-    @objc func xx_tintColor(_ tintColor: UIColor) -> Self {
+    @objc func sk_tintColor(_ tintColor: UIColor) -> Self {
         self.tintColor = tintColor
         return self
     }
 
     @discardableResult
-    func xx_borderColor(_ color: UIColor) -> Self {
+    func sk_borderColor(_ color: UIColor) -> Self {
         layer.borderColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func xx_borderWidth(_ width: CGFloat = 0.5) -> Self {
+    func sk_borderWidth(_ width: CGFloat = 0.5) -> Self {
         layer.borderWidth = width
         return self
     }
 
     @discardableResult
-    func xx_shouldRasterize(_ rasterize: Bool) -> Self {
+    func sk_shouldRasterize(_ rasterize: Bool) -> Self {
         layer.shouldRasterize = rasterize
         return self
     }
 
     @discardableResult
-    func xx_rasterizationScale(_ scale: CGFloat) -> Self {
+    func sk_rasterizationScale(_ scale: CGFloat) -> Self {
         layer.rasterizationScale = scale
         return self
     }
 
     @discardableResult
-    func xx_shadowColor(_ color: UIColor) -> Self {
+    func sk_shadowColor(_ color: UIColor) -> Self {
         layer.shadowColor = color.cgColor
         return self
     }
 
     @discardableResult
-    func xx_shadowOffset(_ offset: CGSize) -> Self {
+    func sk_shadowOffset(_ offset: CGSize) -> Self {
         layer.shadowOffset = offset
         return self
     }
 
     @discardableResult
-    func xx_shadowRadius(_ radius: CGFloat) -> Self {
+    func sk_shadowRadius(_ radius: CGFloat) -> Self {
         layer.shadowRadius = radius
         return self
     }
 
     @discardableResult
-    func xx_shadowOpacity(_ opacity: Float) -> Self {
+    func sk_shadowOpacity(_ opacity: Float) -> Self {
         layer.shadowOpacity = opacity
         return self
     }
 
     @discardableResult
-    func xx_shadowPath(_ path: CGPath) -> Self {
+    func sk_shadowPath(_ path: CGPath) -> Self {
         layer.shadowPath = path
         return self
     }
 
     @discardableResult
-    func xx_addTapGesture(_ target: Any, _ selector: Selector) -> Self {
+    func sk_addTapGesture(_ target: Any, _ selector: Selector) -> Self {
         isUserInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: target, action: selector))
         return self
     }
 
     @discardableResult
-    func xx_rasterize() -> Self {
+    func sk_rasterize() -> Self {
         layer.drawsAsynchronously = true
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale

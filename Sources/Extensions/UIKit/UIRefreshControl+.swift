@@ -3,7 +3,7 @@ import UIKit
 
 public extension UIRefreshControl {
 
-    func xx_beginRefreshing(in tableView: UITableView, animated: Bool, sendAction: Bool = false) {
+    func sk_beginRefreshing(in tableView: UITableView, animated: Bool, sendAction: Bool = false) {
         assert(superview == tableView, "Refresh control does not belong to the receiving table view")
 
         self.beginRefreshing()
@@ -15,7 +15,7 @@ public extension UIRefreshControl {
         }
     }
 
-    func xx_beginRefreshing(animated: Bool, sendAction: Bool = false) {
+    func sk_beginRefreshing(animated: Bool, sendAction: Bool = false) {
         guard let scrollView = superview as? UIScrollView else {
             assertionFailure("Refresh control does not belong to a scroll view")
             return

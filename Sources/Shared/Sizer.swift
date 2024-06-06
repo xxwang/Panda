@@ -12,7 +12,7 @@ public struct sizer {
     public struct safeArea {
         public static var insets: UIEdgeInsets {
             if #available(iOS 11.0, *) {
-                return UIWindow.xx_main?.safeAreaInsets ?? .zero
+                return UIWindow.sk_main?.safeAreaInsets ?? .zero
             }
             return .zero
         }
@@ -27,7 +27,7 @@ public struct sizer {
     public struct nav {
         public static var statusHeight: CGFloat {
             if #available(iOS 13.0, *) {
-                if let statusbar = UIWindow.xx_main?.windowScene?.statusBarManager {
+                if let statusbar = UIWindow.sk_main?.windowScene?.statusBarManager {
                     return statusbar.statusBarFrame.size.height
                 }
 
@@ -84,8 +84,8 @@ private extension sizer {
     static func format(from value: Any) -> CGFloat {
         if let value = value as? CGFloat { return value }
         if let value = value as? Double { return value }
-        if let value = value as? Float { return value.xx_cgFloat() }
-        if let value = value as? Int { return value.xx_cgFloat() }
+        if let value = value as? Float { return value.sk_cgFloat() }
+        if let value = value as? Int { return value.sk_cgFloat() }
         return 0
     }
 

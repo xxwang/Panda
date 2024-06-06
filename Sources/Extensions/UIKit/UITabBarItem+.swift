@@ -15,31 +15,31 @@ extension UITabBarItem {
 public extension UITabBarItem {
 
     @discardableResult
-    func xx_title(_ title: String) -> Self {
+    func sk_title(_ title: String) -> Self {
         self.title = title
         return self
     }
 
     @discardableResult
-    func xx_image(_ image: UIImage) -> Self {
+    func sk_image(_ image: UIImage) -> Self {
         self.image = image.withRenderingMode(.alwaysOriginal)
         return self
     }
 
     @discardableResult
-    func xx_selectedImage(_ image: UIImage) -> Self {
+    func sk_selectedImage(_ image: UIImage) -> Self {
         self.selectedImage = image
         return self
     }
 
     @discardableResult
-    func xx_badgeColor(_ color: UIColor) -> Self {
+    func sk_badgeColor(_ color: UIColor) -> Self {
         self.badgeColor = color
         return self
     }
 
     @discardableResult
-    func xx_badgeValue(_ value: String) -> Self {
+    func sk_badgeValue(_ value: String) -> Self {
         self.badgeValue = value
         return self
     }

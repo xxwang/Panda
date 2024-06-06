@@ -2,11 +2,11 @@ import Foundation
 
 public extension Bool {
 
-    func xx_int() -> Int {
+    func sk_int() -> Int {
         return self ? 1 : 0
     }
 
-    func xx_string() -> String {
+    func sk_string() -> String {
         return self ? "true" : "false"
     }
 }

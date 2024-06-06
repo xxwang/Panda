@@ -3,87 +3,87 @@ import Foundation
 
 public extension BinaryInteger {
 
-    func xx_nsNumber() -> NSNumber {
+    func sk_nsNumber() -> NSNumber {
         return NSNumber(value: Double(self))
     }
 
-    func xx_nsDecimalNumber() -> NSDecimalNumber {
+    func sk_nsDecimalNumber() -> NSDecimalNumber {
         return NSDecimalNumber(value: Double(self))
     }
 
-    func xx_decimal() -> Decimal {
-        return self.xx_nsDecimalNumber().decimalValue
+    func sk_decimal() -> Decimal {
+        return self.sk_nsDecimalNumber().decimalValue
     }
 
-    func xx_int() -> Int {
-        return self.xx_nsNumber().intValue
+    func sk_int() -> Int {
+        return self.sk_nsNumber().intValue
     }
 
-    func xx_int64() -> Int64 {
-        return self.xx_nsNumber().int64Value
+    func sk_int64() -> Int64 {
+        return self.sk_nsNumber().int64Value
     }
 
-    func xx_uInt() -> UInt {
-        return self.xx_nsNumber().uintValue
+    func sk_uInt() -> UInt {
+        return self.sk_nsNumber().uintValue
     }
 
-    func xx_uInt64() -> UInt64 {
-        return self.xx_nsNumber().uint64Value
+    func sk_uInt64() -> UInt64 {
+        return self.sk_nsNumber().uint64Value
     }
 
-    func xx_float() -> Float {
-        return self.xx_nsNumber().floatValue
+    func sk_float() -> Float {
+        return self.sk_nsNumber().floatValue
     }
 
-    func xx_double() -> Double {
-        return self.xx_nsNumber().doubleValue
+    func sk_double() -> Double {
+        return self.sk_nsNumber().doubleValue
     }
 
-    func xx_cgFloat() -> CGFloat {
-        return self.xx_double()
+    func sk_cgFloat() -> CGFloat {
+        return self.sk_double()
     }
 
-    func xx_string() -> String {
+    func sk_string() -> String {
         return String(self)
     }
 
-    func xx_character() -> Character? {
-        return Character(self.xx_string())
+    func sk_character() -> Character? {
+        return Character(self.sk_string())
     }
 
-    func xx_asciiCharacter() -> Character? {
+    func sk_asciiCharacter() -> Character? {
         guard let n = self as? Int,
               let scalar = UnicodeScalar(n) else { return nil }
         return Character(scalar)
     }
 
-    func xx_cgPoint() -> CGPoint {
-        return CGPoint(x: self.xx_cgFloat(), y: self.xx_cgFloat())
+    func sk_cgPoint() -> CGPoint {
+        return CGPoint(x: self.sk_cgFloat(), y: self.sk_cgFloat())
     }
 
-    func xx_cgSize() -> CGSize {
-        return CGSize(width: self.xx_cgFloat(), height: self.xx_cgFloat())
-    }
-}
-
-public extension BinaryInteger {
-
-    func xx_radians() -> Double {
-        return self.xx_double() / 180.0 * Double.pi
-    }
-
-    func xx_degrees() -> Double {
-        return self.xx_double() * (180.0 / Double.pi)
+    func sk_cgSize() -> CGSize {
+        return CGSize(width: self.sk_cgFloat(), height: self.sk_cgFloat())
     }
 }
 
 public extension BinaryInteger {
 
-    func xx_isOdd() -> Bool {
+    func sk_radians() -> Double {
+        return self.sk_double() / 180.0 * Double.pi
+    }
+
+    func sk_degrees() -> Double {
+        return self.sk_double() * (180.0 / Double.pi)
+    }
+}
+
+public extension BinaryInteger {
+
+    func sk_isOdd() -> Bool {
         return self % 2 != 0
     }
 
-    func xx_isEven() -> Bool {
+    func sk_isEven() -> Bool {
         return self % 2 == 0
     }
 }
@@ -91,19 +91,19 @@ public extension BinaryInteger {
 
 public extension BinaryInteger {
 
-    func xx_range() -> CountableRange<Int> {
+    func sk_range() -> CountableRange<Int> {
         let n = self as! Int
         return 0 ..< n
     }
 
-    func xx_romanNumeral() -> String? {
+    func sk_romanNumeral() -> String? {
         guard self > 0 else { return nil }
 
         let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         let arabicValues = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
 
         var romanValue = ""
-        var startingValue = self.xx_int()
+        var startingValue = self.sk_int()
 
         for (index, romanChar) in romanValues.enumerated() {
             let arabicValue = arabicValues[index]
@@ -116,7 +116,7 @@ public extension BinaryInteger {
         return romanValue
     }
 
-    func xx_bytes() -> [UInt8] {
+    func sk_bytes() -> [UInt8] {
         var result = [UInt8]()
         result.reserveCapacity(MemoryLayout<Self>.size)
         var value = self
@@ -127,8 +127,8 @@ public extension BinaryInteger {
         return result.reversed()
     }
 
-    func xx_storeUnit() -> String {
-        var value = self.xx_double()
+    func sk_storeUnit() -> String {
+        var value = self.sk_double()
         var index = 0
         let units = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
         while value > 1024 {
@@ -141,16 +141,16 @@ public extension BinaryInteger {
 
 public extension BinaryInteger {
 
-    func xx_date(isUnix: Bool = true) -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.xx_double() / (isUnix ? 1.0 : 1000.0)))
+    func sk_date(isUnix: Bool = true) -> Date {
+        return Date(timeIntervalSince1970: TimeInterval(self.sk_double() / (isUnix ? 1.0 : 1000.0)))
     }
 
-    func xx_mediaTimeString(component: Calendar.Component? = nil) -> String {
+    func sk_mediaTimeString(component: Calendar.Component? = nil) -> String {
         if self <= 0 { return "00:00" }
 
-        let second = self.xx_int() % 60
+        let second = self.sk_int() % 60
         if component == .second {
-            return String(format: "%02d", self.xx_int())
+            return String(format: "%02d", self.sk_int())
         }
 
         var minute = Int(self / 60)

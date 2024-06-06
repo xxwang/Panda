@@ -8,7 +8,7 @@ private class AssociateKeys {
 
 
 public extension UIGestureRecognizer {
-    var xx_functionName: String {
+    var sk_functionName: String {
         get {
             if let obj = AssociatedObject.get(self, &AssociateKeys.FunctionNameKey) as? String {
                 return obj
@@ -25,11 +25,11 @@ public extension UIGestureRecognizer {
 
 
 public extension UIGestureRecognizer {
-    func xx_remove() { view?.removeGestureRecognizer(self) }
+    func sk_remove() { view?.removeGestureRecognizer(self) }
 }
 
 public extension UIGestureRecognizer {
-    @objc private func xx_p_invoke() {
+    @objc private func sk_p_invoke() {
         if let callback = AssociatedObject.get(self, &AssociateKeys.CallbackKey) as? (_ recognizer: UIGestureRecognizer) -> Void {
             callback(self)
         }
@@ -49,14 +49,14 @@ extension UIGestureRecognizer {
 public extension UIGestureRecognizer {
 
     @discardableResult
-    func xx_callback(_ callback: @escaping (_ recognizer: UIGestureRecognizer) -> Void) -> Self {
-        addTarget(self, action: #selector(xx_p_invoke))
+    func sk_callback(_ callback: @escaping (_ recognizer: UIGestureRecognizer) -> Void) -> Self {
+        addTarget(self, action: #selector(sk_p_invoke))
         AssociatedObject.set(self, &AssociateKeys.CallbackKey, callback, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         return self
     }
 
     @discardableResult
-    func xx_addTarget(_ target: Any, action: Selector) -> Self {
+    func sk_addTarget(_ target: Any, action: Selector) -> Self {
         addTarget(target, action: action)
         return self
     }

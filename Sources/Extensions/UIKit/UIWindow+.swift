@@ -3,33 +3,33 @@ import UIKit
 
 public extension UIWindow {
 
-    static var xx_main: UIWindow? {
+    static var sk_main: UIWindow? {
         var targetWindow: UIWindow?
-        if let window = xx_delegateWindow { targetWindow = window }
-        if let window = xx_keyWindow { targetWindow = window }
-        if let window = xx_windows.last { targetWindow = window }
+        if let window = sk_delegateWindow { targetWindow = window }
+        if let window = sk_keyWindow { targetWindow = window }
+        if let window = sk_windows.last { targetWindow = window }
         if targetWindow?.windowLevel == .normal { return targetWindow }
-        xx_windows.forEach { if $0.windowLevel == .normal { targetWindow = $0 }}
+        sk_windows.forEach { if $0.windowLevel == .normal { targetWindow = $0 }}
 
         return targetWindow
     }
 
-    static var xx_keyWindow: UIWindow? {
+    static var sk_keyWindow: UIWindow? {
         if #available(iOS 13.0, *) {
-            return xx_windows.filter(\.isKeyWindow).last
+            return sk_windows.filter(\.isKeyWindow).last
         } else {
             if let window = UIApplication.shared.keyWindow { return window }
         }
         return nil
     }
 
-    static var xx_delegateWindow: UIWindow? {
+    static var sk_delegateWindow: UIWindow? {
         guard let delegateWindow = UIApplication.shared.delegate?.window else { return nil }
         guard let window = delegateWindow else { return nil }
         return window
     }
 
-    static var xx_windows: [UIWindow] {
+    static var sk_windows: [UIWindow] {
         var windows: [UIWindow] = []
         if #available(iOS 13.0, *) {
             for connectedScene in UIApplication.shared.connectedScenes {
@@ -48,7 +48,7 @@ public extension UIWindow {
 
 public extension UIWindow {
 
-    static func xx_changeOrientation(isLandscape: Bool) {
+    static func sk_changeOrientation(isLandscape: Bool) {
         if isLandscape {
             guard !environment.isLandscape else { return }
             let resetOrientationTargert = NSNumber(integerLiteral: UIInterfaceOrientation.unknown.rawValue)
@@ -68,24 +68,24 @@ public extension UIWindow {
 
 public extension UIWindow {
 
-    static func xx_rootViewController() -> UIViewController? {
-        return UIWindow.xx_main?.rootViewController
+    static func sk_rootViewController() -> UIViewController? {
+        return UIWindow.sk_main?.rootViewController
     }
 
-    static func xx_topViewController(_ root: UIViewController? = nil) -> UIViewController? {
-        var startViewController: UIViewController = self.xx_rootViewController()!
+    static func sk_topViewController(_ root: UIViewController? = nil) -> UIViewController? {
+        var startViewController: UIViewController = self.sk_rootViewController()!
         if let root { startViewController = root }
 
         if let navigationController = startViewController as? UINavigationController {
-            return xx_topViewController(navigationController.visibleViewController)
+            return sk_topViewController(navigationController.visibleViewController)
         }
 
         if let tabBarController = startViewController as? UITabBarController {
-            return xx_topViewController(tabBarController.selectedViewController)
+            return sk_topViewController(tabBarController.selectedViewController)
         }
 
         if let presentedViewController = startViewController.presentedViewController {
-            return xx_topViewController(presentedViewController.presentedViewController)
+            return sk_topViewController(presentedViewController.presentedViewController)
         }
 
         return startViewController
@@ -94,13 +94,13 @@ public extension UIWindow {
 
 public extension UIWindow {
 
-    static func xx_setupRootViewController(with rootViewController: UIViewController,
+    static func sk_setupRootViewController(with rootViewController: UIViewController,
                                            animated: Bool = true,
                                            duration: TimeInterval = 0.25,
                                            options: UIView.AnimationOptions = .transitionFlipFromRight,
                                            competion: (() -> Void)?)
     {
-        guard let window = UIWindow.xx_main else { return }
+        guard let window = UIWindow.sk_main else { return }
         if animated {
             UIView.transition(with: window, duration: duration, options: options) {
                 let oldState = UIView.areAnimationsEnabled
@@ -116,7 +116,7 @@ public extension UIWindow {
         }
     }
 
-    static func xx_setupRootViewController(with rootViewController: UIViewController,
+    static func sk_setupRootViewController(with rootViewController: UIViewController,
                                            animated: Bool = true,
                                            duration: TimeInterval = 0.25,
                                            animationType: CATransitionType = .fade,
@@ -124,7 +124,7 @@ public extension UIWindow {
                                            timingFunction: CAMediaTimingFunction? = CAMediaTimingFunction(name: .easeOut),
                                            competion: (() -> Void)? = nil)
     {
-        guard let window = UIWindow.xx_main else { return }
+        guard let window = UIWindow.sk_main else { return }
         if animated {
             let animation = CATransition()
             animation.type = animationType

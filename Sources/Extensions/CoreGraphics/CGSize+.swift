@@ -3,27 +3,27 @@ import CoreGraphics
 import UIKit
 
 public extension CGSize {
-    var xx_aspectRatio: CGFloat {
+    var sk_aspectRatio: CGFloat {
         guard height != 0 else { return 0 }
         return width / height
     }
 
-    var xx_maxDimension: CGFloat {
+    var sk_maxDimension: CGFloat {
         max(width, height)
     }
 
-    var xx_minDimension: CGFloat {
+    var sk_minDimension: CGFloat {
         min(width, height)
     }
 }
 
 public extension CGSize {
-    func xx_aspectFit(to size: CGSize) -> CGSize {
+    func sk_aspectFit(to size: CGSize) -> CGSize {
         let minRatio = min(size.width / width, size.height / height)
         return CGSize(width: width * minRatio, height: height * minRatio)
     }
 
-    func xx_aspectFill(to size: CGSize) -> CGSize {
+    func sk_aspectFill(to size: CGSize) -> CGSize {
         let maxRatio = max(size.width / width, size.height / height)
         let aWidth = min(width * maxRatio, size.width)
         let aHeight = min(height * maxRatio, size.height)

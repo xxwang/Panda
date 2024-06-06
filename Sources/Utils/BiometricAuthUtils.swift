@@ -63,7 +63,7 @@ extension BiometricAuthUtils {
         }
 
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReason) { success, evaluateError in
-            DispatchQueue.xx_async_execute_on_main {
+            DispatchQueue.sk_async_execute_on_main {
                 if success {
                     self.delegate?.biometricAuthResult(result: .success, mode: self.biometricMode)
                 } else {
@@ -94,7 +94,7 @@ extension BiometricAuthUtils {
                     delegate?.biometricAuthResult(result: .biometryNotEnrolled, mode: self.biometricMode)
                 } else if errorCode == LAError.biometryLockout.rawValue {
                     context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason, reply: { success, evaluateError in
-                        DispatchQueue.xx_async_execute_on_main {
+                        DispatchQueue.sk_async_execute_on_main {
                             if success {
                                 self.delegate?.biometricAuthResult(result: .success, mode: self.biometricMode)
                             } else {

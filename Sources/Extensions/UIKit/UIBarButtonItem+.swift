@@ -25,7 +25,7 @@ public extension UIBarButtonItem {
         if let titleColor { button.setTitleColor(titleColor, for: .normal) }
         if let highlightedTitleColor { button.setTitleColor(highlightedTitleColor, for: .highlighted) }
         if let target, let action { button.addTarget(target, action: action, for: .touchUpInside) }
-        button.xx_spacing(3)
+        button.sk_spacing(3)
 
         self.init(customView: button)
     }
@@ -60,46 +60,46 @@ extension UIBarButtonItem {
 public extension UIBarButtonItem {
 
     @discardableResult
-    func xx_image(_ image: UIImage?) -> Self {
+    func sk_image(_ image: UIImage?) -> Self {
         self.image = image
         return self
     }
 
     @discardableResult
-    func xx_title(_ title: String?) -> Self {
+    func sk_title(_ title: String?) -> Self {
         self.title = title
         return self
     }
 
     @discardableResult
-    func xx_width(_ width: CGFloat) -> Self {
+    func sk_width(_ width: CGFloat) -> Self {
         self.width = width
         return self
     }
 
     @discardableResult
-    func xx_addTarget(_ target: AnyObject, action: Selector) -> Self {
+    func sk_addTarget(_ target: AnyObject, action: Selector) -> Self {
         self.target = target
         self.action = action
         return self
     }
 
     @discardableResult
-    func xx_target(_ target: AnyObject) -> Self {
+    func sk_target(_ target: AnyObject) -> Self {
         self.target = target
         return self
     }
 
     @discardableResult
-    func xx_action(_ action: Selector) -> Self {
+    func sk_action(_ action: Selector) -> Self {
         self.action = action
         return self
     }
 
     @discardableResult
-    func xx_callback(_ callback: ((UIBarButtonItem?) -> Void)?) -> Self {
+    func sk_callback(_ callback: ((UIBarButtonItem?) -> Void)?) -> Self {
         self.callback = callback
-        xx_addTarget(self, action: #selector(eventHandler(_:)))
+        sk_addTarget(self, action: #selector(eventHandler(_:)))
         return self
     }
 }

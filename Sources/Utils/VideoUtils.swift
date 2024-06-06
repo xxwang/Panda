@@ -12,7 +12,7 @@ public class VideoUtils {
 public extension VideoUtils {
 
     func videoDuration(path: String?) -> Double {
-        guard let path, let url = path.xx_url() else { return 0 }
+        guard let path, let url = path.sk_url() else { return 0 }
         let asset = AVURLAsset(url: url)
         let time = asset.duration
         return Double(time.value / Int64(time.timescale))
@@ -106,7 +106,7 @@ public extension VideoUtils {
         guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetMediumQuality) else {
             return
         }
-        let output = "\(Date().xx_secondStamp()).mp4".xx_urlByCache()
+        let output = "\(Date().sk_secondStamp()).mp4".sk_urlByCache()
         exportSession.shouldOptimizeForNetworkUse = true
         exportSession.outputURL = output
         exportSession.outputFileType = .mp4

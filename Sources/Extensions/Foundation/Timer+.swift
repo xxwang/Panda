@@ -14,7 +14,7 @@ public extension Timer {
         } else {
             self.init(timeInterval: timeInterval,
                       target: Timer.self,
-                      selector: #selector(Timer.xx_timerCB(timer:)),
+                      selector: #selector(Timer.sk_timerCB(timer:)),
                       userInfo: block,
                       repeats: repeats)
         }
@@ -36,7 +36,7 @@ public extension Timer {
             self.init(fireAt: date,
                       interval: timeInterval,
                       target: Timer.self,
-                      selector: #selector(Timer.xx_timerCB(timer:)),
+                      selector: #selector(Timer.sk_timerCB(timer:)),
                       userInfo: block,
                       repeats: repeats)
         }
@@ -46,7 +46,7 @@ public extension Timer {
 
 public extension Timer {
     @discardableResult
-    static func xx_safeScheduledTimer(timeInterval: TimeInterval,
+    static func sk_safeScheduledTimer(timeInterval: TimeInterval,
                                       repeats: Bool,
                                       block: @escaping ((Timer) -> Void)) -> Timer
     {
@@ -57,13 +57,13 @@ public extension Timer {
         }
         return Timer.scheduledTimer(timeInterval: timeInterval,
                                     target: self,
-                                    selector: #selector(Timer.xx_timerCB(timer:)),
+                                    selector: #selector(Timer.sk_timerCB(timer:)),
                                     userInfo: block,
                                     repeats: repeats)
     }
 
     @discardableResult
-    static func xx_runThisEvery(timeInterval: TimeInterval,
+    static func sk_runThisEvery(timeInterval: TimeInterval,
                                 block: @escaping (Timer?) -> Void) -> Timer?
     {
         let fireDate = CFAbsoluteTimeGetCurrent()
@@ -84,7 +84,7 @@ public extension Timer {
 }
 
 private extension Timer {
-    @objc class func xx_timerCB(timer: Timer) {
+    @objc class func sk_timerCB(timer: Timer) {
         if let cb = timer.userInfo as? ((Timer) -> Void) {
             cb(timer)
         } else {

@@ -8,7 +8,7 @@ public extension URLRequest {
 }
 
 public extension URLRequest {
-    func xx_cURLString() -> String {
+    func sk_cURLString() -> String {
         guard let url else { return "" }
 
         var baseCommand = "curl \(url.absoluteString)"

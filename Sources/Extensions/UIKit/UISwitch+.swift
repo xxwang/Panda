@@ -15,7 +15,7 @@ public extension UISwitch {
 public extension UISwitch {
 
     @discardableResult
-    func xx_toggle(animated: Bool = true) -> Self {
+    func sk_toggle(animated: Bool = true) -> Self {
         setOn(!isOn, animated: animated)
         return self
     }

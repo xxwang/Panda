@@ -30,13 +30,13 @@ public extension WKWebView {
 public extension WKWebView {
 
     @discardableResult
-    func xx_navigationDelegate(_ delegate: WKNavigationDelegate?) -> Self {
+    func sk_navigationDelegate(_ delegate: WKNavigationDelegate?) -> Self {
         navigationDelegate = delegate
         return self
     }
 
     @discardableResult
-    func xx_uiDelegate(_ delegate: WKUIDelegate?) -> Self {
+    func sk_uiDelegate(_ delegate: WKUIDelegate?) -> Self {
         uiDelegate = delegate
         return self
     }
@@ -44,15 +44,15 @@ public extension WKWebView {
 
 public extension WKWebView {
     @discardableResult
-    func xx_load(_ string: String) -> Self {
+    func sk_load(_ string: String) -> Self {
         if let url = URL(string: string) {
-            self.xx_load(url)
+            self.sk_load(url)
         }
         return self
     }
 
     @discardableResult
-    func xx_load(_ url: URL) -> Self {
+    func sk_load(_ url: URL) -> Self {
         let request = URLRequest(url: url)
         self.load(request)
         return self
@@ -62,34 +62,34 @@ public extension WKWebView {
 public extension WKWebView {
 
     @discardableResult
-    func xx_injection(script: String) -> Self {
+    func sk_injection(script: String) -> Self {
         let userScript = WKUserScript(source: script, injectionTime: .atDocumentStart, forMainFrameOnly: false)
         self.configuration.userContentController.addUserScript(userScript)
         return self
     }
 
     @discardableResult
-    func xx_evaluate(script: String, completion: ((Any?, Error?) -> Void)? = nil) -> Self {
+    func sk_evaluate(script: String, completion: ((Any?, Error?) -> Void)? = nil) -> Self {
         self.evaluateJavaScript(script, completionHandler: completion)
         return self
     }
 
     @discardableResult
-    func xx_textSizeAdjust(_ ratio: CGFloat) -> Self {
+    func sk_textSizeAdjust(_ ratio: CGFloat) -> Self {
         let script = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '\(ratio)%'"
-        self.xx_evaluate(script: script)
+        self.sk_evaluate(script: script)
         return self
     }
 
     @discardableResult
-    func xx_fitMobile() -> Self {
+    func sk_fitMobile() -> Self {
         let script = """
         var meta = document.createElement('meta');
         meta.setAttribute('name', 'viewport');
         meta.setAttribute('content', 'width=device-width');
         document.getElementsByTagName('head')[0].appendChild(meta);
         """
-        self.xx_evaluate(script: script)
+        self.sk_evaluate(script: script)
         return self
     }
 }

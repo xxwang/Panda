@@ -3,7 +3,7 @@ import SpriteKit
 
 public extension SKNode {
 
-    var xx_center: CGPoint {
+    var sk_center: CGPoint {
         get {
             let contents = calculateAccumulatedFrame()
             return CGPoint(x: contents.midX, y: contents.midY)
@@ -14,7 +14,7 @@ public extension SKNode {
         }
     }
 
-    var xx_topLeft: CGPoint {
+    var sk_topLeft: CGPoint {
         get {
             let contents = calculateAccumulatedFrame()
             return CGPoint(x: contents.minX, y: contents.maxY)
@@ -25,7 +25,7 @@ public extension SKNode {
         }
     }
 
-    var xx_topRight: CGPoint {
+    var sk_topRight: CGPoint {
         get {
             let contents = calculateAccumulatedFrame()
             return CGPoint(x: contents.maxX, y: contents.maxY)
@@ -36,7 +36,7 @@ public extension SKNode {
         }
     }
 
-    var xx_bottomLeft: CGPoint {
+    var sk_bottomLeft: CGPoint {
         get {
             let contents = calculateAccumulatedFrame()
             return CGPoint(x: contents.minX, y: contents.minY)
@@ -47,7 +47,7 @@ public extension SKNode {
         }
     }
 
-    var xx_bottomRight: CGPoint {
+    var sk_bottomRight: CGPoint {
         get {
             let contents = calculateAccumulatedFrame()
             return CGPoint(x: contents.maxX, y: contents.minY)
@@ -61,9 +61,9 @@ public extension SKNode {
 
 public extension SKNode {
 
-    func xx_descendants() -> [SKNode] {
+    func sk_descendants() -> [SKNode] {
         var children = children
-        children.append(contentsOf: children.reduce(into: [SKNode]()) { $0.append(contentsOf: $1.xx_descendants()) })
+        children.append(contentsOf: children.reduce(into: [SKNode]()) { $0.append(contentsOf: $1.sk_descendants()) })
         return children
     }
 }

@@ -20,7 +20,7 @@ public extension UIStackView {
 
 public extension UIStackView {
 
-    func xx_addSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
+    func sk_addSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) {
         if #available(iOS 11.0, *) {
             self.setCustomSpacing(spacing, after: arrangedSubview)
         } else {
@@ -40,20 +40,20 @@ public extension UIStackView {
         }
     }
 
-    func xx_addArrangedSubviews(_ views: [UIView]) {
+    func sk_addArrangedSubviews(_ views: [UIView]) {
         for view in views {
             addArrangedSubview(view)
         }
     }
 
 
-    func xx_removeArrangedSubviews() {
+    func sk_removeArrangedSubviews() {
         for view in arrangedSubviews {
             removeArrangedSubview(view)
         }
     }
 
-    func xx_switch(_ view1: UIView, _ view2: UIView) {
+    func sk_switch(_ view1: UIView, _ view2: UIView) {
         guard let view1Index = arrangedSubviews.firstIndex(of: view1),
               let view2Index = arrangedSubviews.firstIndex(of: view2) else { return }
         removeArrangedSubview(view1)
@@ -63,7 +63,7 @@ public extension UIStackView {
         insertArrangedSubview(view2, at: view1Index)
     }
 
-    func xx_swap(_ view1: UIView, _ view2: UIView,
+    func sk_swap(_ view1: UIView, _ view2: UIView,
                  animated: Bool = false,
                  duration: TimeInterval = 0.25,
                  delay: TimeInterval = 0,
@@ -72,11 +72,11 @@ public extension UIStackView {
     {
         if animated {
             UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
-                self.xx_switch(view1, view2)
+                self.sk_switch(view1, view2)
                 self.layoutIfNeeded()
             }, completion: completion)
         } else {
-            self.xx_switch(view1, view2)
+            self.sk_switch(view1, view2)
         }
     }
 }
@@ -93,43 +93,43 @@ public extension UIStackView {
 public extension UIStackView {
 
     @discardableResult
-    func xx_isBaselineRelativeArrangement(_ arrangement: Bool) -> Self {
+    func sk_isBaselineRelativeArrangement(_ arrangement: Bool) -> Self {
         isBaselineRelativeArrangement = arrangement
         return self
     }
 
     @discardableResult
-    func xx_isLayoutMarginsRelativeArrangement(_ arrangement: Bool) -> Self {
+    func sk_isLayoutMarginsRelativeArrangement(_ arrangement: Bool) -> Self {
         isLayoutMarginsRelativeArrangement = arrangement
         return self
     }
 
     @discardableResult
-    func xx_axis(_ axis: NSLayoutConstraint.Axis) -> Self {
+    func sk_axis(_ axis: NSLayoutConstraint.Axis) -> Self {
         self.axis = axis
         return self
     }
 
     @discardableResult
-    func xx_distribution(_ distribution: UIStackView.Distribution) -> Self {
+    func sk_distribution(_ distribution: UIStackView.Distribution) -> Self {
         self.distribution = distribution
         return self
     }
 
     @discardableResult
-    func xx_alignment(_ alignment: UIStackView.Alignment) -> Self {
+    func sk_alignment(_ alignment: UIStackView.Alignment) -> Self {
         self.alignment = alignment
         return self
     }
 
     @discardableResult
-    func xx_spacing(_ spacing: CGFloat) -> Self {
+    func sk_spacing(_ spacing: CGFloat) -> Self {
         self.spacing = spacing
         return self
     }
 
     @discardableResult
-    func xx_addArrangedSubviews(_ items: UIView...) -> Self {
+    func sk_addArrangedSubviews(_ items: UIView...) -> Self {
         if items.isEmpty {
             return self
         }

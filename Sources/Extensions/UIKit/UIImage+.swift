@@ -10,26 +10,26 @@ private class AssociateKeys {
 }
 
 public extension UIImage {
-    var xx_size_bytes: Int {
+    var sk_size_bytes: Int {
         jpegData(compressionQuality: 1)?.count ?? 0
     }
 
-    var xx_size_kb: Int {
+    var sk_size_kb: Int {
         (jpegData(compressionQuality: 1)?.count ?? 0) / 1024
     }
 
-    var xx_original: UIImage {
+    var sk_original: UIImage {
         withRenderingMode(.alwaysOriginal)
     }
 
-    var xx_template: UIImage {
+    var sk_template: UIImage {
         withRenderingMode(.alwaysTemplate)
     }
 }
 
 public extension UIImage {
 
-    convenience init(with color: UIColor, size: CGSize = 1.xx_cgSize()) {
+    convenience init(with color: UIColor, size: CGSize = 1.sk_cgSize()) {
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
         defer { UIGraphicsEndImageContext() }
         color.setFill()
@@ -47,8 +47,8 @@ public extension UIImage {
     }
 
     convenience init(lightImageName: String, darkImageName: String? = nil) {
-        self.init(lightImage: lightImageName.xx_image(),
-                  darkImage: (darkImageName ?? lightImageName).xx_image())
+        self.init(lightImage: lightImageName.sk_image(),
+                  darkImage: (darkImageName ?? lightImageName).sk_image())
     }
 
     convenience init(lightImage: UIImage?, darkImage: UIImage?) {
@@ -72,11 +72,11 @@ public extension UIImage {
 }
 
 public extension UIImage {
-    static func xx_darkModeImage(_ lightImageName: String, darkImageName: String? = nil) -> UIImage? {
-        xx_darkModeImage(UIImage(named: lightImageName), darkImage: UIImage(named: darkImageName ?? lightImageName))
+    static func sk_darkModeImage(_ lightImageName: String, darkImageName: String? = nil) -> UIImage? {
+        sk_darkModeImage(UIImage(named: lightImageName), darkImage: UIImage(named: darkImageName ?? lightImageName))
     }
 
-    static func xx_darkModeImage(_ lightImage: UIImage?, darkImage: UIImage?) -> UIImage? {
+    static func sk_darkModeImage(_ lightImage: UIImage?, darkImage: UIImage?) -> UIImage? {
         if #available(iOS 13.0, *) {
             guard var lightImage else { return lightImage }
             guard let darkImage else { return lightImage }
@@ -98,11 +98,11 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_pngBase64String() -> String? {
+    func sk_pngBase64String() -> String? {
         pngData()?.base64EncodedString()
     }
 
-    func xx_jpegBase64String(compressionQuality: CGFloat) -> String? {
+    func sk_jpegBase64String(compressionQuality: CGFloat) -> String? {
         jpegData(compressionQuality: compressionQuality)?.base64EncodedString()
     }
 }
@@ -179,27 +179,27 @@ public extension UIImage {
         }
     }
 
-    func xx_compressed(quality: CGFloat = 0.5) -> UIImage? {
+    func sk_compressed(quality: CGFloat = 0.5) -> UIImage? {
         guard let data = jpegData(compressionQuality: quality) else { return nil }
         return UIImage(data: data)
     }
 
-    func xx_compressedData(quality: CGFloat = 0.5) -> Data? {
+    func sk_compressedData(quality: CGFloat = 0.5) -> Data? {
         jpegData(compressionQuality: quality)
     }
 
-    func xx_compress(mode: CompressionMode = .medium) -> Data? {
-        xx_resizeIO(resizeSize: mode.resize(size))?.xx_compressDataSize(maxSize: mode.maxDataSize)
+    func sk_compress(mode: CompressionMode = .medium) -> Data? {
+        sk_resizeIO(resizeSize: mode.resize(size))?.sk_compressDataSize(maxSize: mode.maxDataSize)
     }
 
-    func xx_asyncCompress(mode: CompressionMode = .medium, queue: DispatchQueue = DispatchQueue.global(), complete: @escaping (Data?, CGSize) -> Void) {
+    func sk_asyncCompress(mode: CompressionMode = .medium, queue: DispatchQueue = DispatchQueue.global(), complete: @escaping (Data?, CGSize) -> Void) {
         queue.async {
-            let data = self.xx_resizeIO(resizeSize: mode.resize(self.size))?.xx_compressDataSize(maxSize: mode.maxDataSize)
+            let data = self.sk_resizeIO(resizeSize: mode.resize(self.size))?.sk_compressDataSize(maxSize: mode.maxDataSize)
             DispatchQueue.main.async { complete(data, mode.resize(self.size)) }
         }
     }
 
-    func xx_compressDataSize(maxSize: Int = 1024 * 1024 * 2) -> Data? {
+    func sk_compressDataSize(maxSize: Int = 1024 * 1024 * 2) -> Data? {
         let maxSize = maxSize
         var quality: CGFloat = 0.8
         var data = jpegData(compressionQuality: quality)
@@ -215,7 +215,7 @@ public extension UIImage {
         return data
     }
 
-    func xx_resizeIO(resizeSize: CGSize) -> UIImage? {
+    func sk_resizeIO(resizeSize: CGSize) -> UIImage? {
         if size == resizeSize { return self }
         guard let imageData = pngData() else { return nil }
         guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }
@@ -232,7 +232,7 @@ public extension UIImage {
         return resizedImage
     }
 
-    func xx_resizeCG(resizeSize: CGSize) -> UIImage? {
+    func sk_resizeCG(resizeSize: CGSize) -> UIImage? {
         if size == resizeSize { return self }
         guard let cgImage else { return nil }
         guard let colorSpace = cgImage.colorSpace else { return nil }
@@ -249,7 +249,7 @@ public extension UIImage {
         return resizedImage
     }
 
-    func xx_compressImageSize(toByte maxLength: Int) -> UIImage {
+    func sk_compressImageSize(toByte maxLength: Int) -> UIImage {
         var compression: CGFloat = 1
 
         guard var data = jpegData(compressionQuality: compression) else { return self }
@@ -295,7 +295,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_cropWithCropRect(_ crop: CGRect) -> UIImage? {
+    func sk_cropWithCropRect(_ crop: CGRect) -> UIImage? {
         let cropRect = CGRect(x: crop.origin.x * scale,
                               y: crop.origin.y * scale,
                               width: crop.size.width * scale,
@@ -309,14 +309,14 @@ public extension UIImage {
         return image
     }
 
-    func xx_cropped(to rect: CGRect) -> UIImage {
+    func sk_cropped(to rect: CGRect) -> UIImage {
         guard rect.size.width <= size.width, rect.size.height <= size.height else { return self }
         let scaledRect = rect.applying(CGAffineTransform(scaleX: scale, y: scale))
         guard let image = cgImage?.cropping(to: scaledRect) else { return self }
         return UIImage(cgImage: image, scale: scale, orientation: imageOrientation)
     }
 
-    func xx_resize(to size: CGSize) -> UIImage {
+    func sk_resize(to size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 2)
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let result = UIGraphicsGetImageFromCurrentImageContext()
@@ -324,25 +324,25 @@ public extension UIImage {
         return result!
     }
 
-    func xx_solidTo(maxSize: CGSize) -> UIImage? {
+    func sk_solidTo(maxSize: CGSize) -> UIImage? {
         if size.height <= size.width {
             if size.width >= maxSize.width {
                 let scaleSize = CGSize(width: maxSize.width, height: maxSize.width * size.height / size.width)
-                return xx_fixOrientation().xx_scaleTo(size: scaleSize)
+                return sk_fixOrientation().sk_scaleTo(size: scaleSize)
             } else {
-                return xx_fixOrientation()
+                return sk_fixOrientation()
             }
         } else {
             if size.height >= maxSize.height {
                 let scaleSize = CGSize(width: maxSize.height * size.width / size.height, height: maxSize.height)
-                return xx_fixOrientation().xx_scaleTo(size: scaleSize)
+                return sk_fixOrientation().sk_scaleTo(size: scaleSize)
             } else {
-                return xx_fixOrientation()
+                return sk_fixOrientation()
             }
         }
     }
 
-    func xx_scaleTo(size: CGSize) -> UIImage? {
+    func sk_scaleTo(size: CGSize) -> UIImage? {
         if cgImage == nil { return nil }
         var w = CGFloat(cgImage!.width)
         var h = CGFloat(cgImage!.height)
@@ -365,7 +365,7 @@ public extension UIImage {
         return scaledImage
     }
 
-    func xx_scaleTo(scale: CGFloat) -> UIImage? {
+    func sk_scaleTo(scale: CGFloat) -> UIImage? {
         let w = size.width
         let h = size.height
         let scaledW = w * scale
@@ -377,7 +377,7 @@ public extension UIImage {
         return newImage
     }
 
-    func xx_scaleTo(newWidth: CGFloat, opaque: Bool = false) -> UIImage? {
+    func sk_scaleTo(newWidth: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = newWidth / size.width
         let newHeight = size.height * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), opaque, self.scale)
@@ -387,7 +387,7 @@ public extension UIImage {
         return newImage
     }
 
-    func xx_scaleTo(newHeight: CGFloat, opaque: Bool = false) -> UIImage? {
+    func sk_scaleTo(newHeight: CGFloat, opaque: Bool = false) -> UIImage? {
         let scale = newHeight / size.height
         let newWidth = size.width * scale
         UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), opaque, self.scale)
@@ -397,7 +397,7 @@ public extension UIImage {
         return newImage
     }
 
-    func xx_strechAsBubble() -> UIImage {
+    func sk_strechAsBubble() -> UIImage {
         let edgeInsets = UIEdgeInsets(
             top: size.height * 0.5,
             left: size.width * 0.5,
@@ -407,7 +407,7 @@ public extension UIImage {
         return resizableImage(withCapInsets: edgeInsets, resizingMode: .stretch)
     }
 
-    func xx_strechBubble(edgeInsets: UIEdgeInsets,
+    func sk_strechBubble(edgeInsets: UIEdgeInsets,
                          resizingMode: UIImage.ResizingMode = .stretch) -> UIImage
     {
         resizableImage(withCapInsets: edgeInsets, resizingMode: resizingMode)
@@ -416,7 +416,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_fixOrientation() -> UIImage {
+    func sk_fixOrientation() -> UIImage {
         if imageOrientation == .up { return self }
 
         var transform = CGAffineTransform.identity
@@ -465,12 +465,12 @@ public extension UIImage {
         return UIImage(cgImage: cgImage)
     }
 
-    func xx_rotatedTo(degree: CGFloat) -> UIImage? {
+    func sk_rotatedTo(degree: CGFloat) -> UIImage? {
         let radians = Double(degree) / 180 * Double.pi
-        return xx_rotatedTo(radians: CGFloat(radians))
+        return sk_rotatedTo(radians: CGFloat(radians))
     }
 
-    func xx_rotatedTo(radians: CGFloat) -> UIImage? {
+    func sk_rotatedTo(radians: CGFloat) -> UIImage? {
         guard let weakCGImage = cgImage else { return nil }
         let rotateViewBox = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
         let transform = CGAffineTransform(rotationAngle: radians)
@@ -491,7 +491,7 @@ public extension UIImage {
     }
 
     @available(tvOS 10.0, watchOS 3.0, *)
-    func xx_rotated(by angle: Measurement<UnitAngle>) -> UIImage? {
+    func sk_rotated(by angle: Measurement<UnitAngle>) -> UIImage? {
         let radians = CGFloat(angle.converted(to: .radians).value)
 
         let destRect = CGRect(origin: .zero, size: size)
@@ -515,7 +515,7 @@ public extension UIImage {
         return newImage
     }
 
-    func xx_rotated(by radians: CGFloat) -> UIImage? {
+    func sk_rotated(by radians: CGFloat) -> UIImage? {
         let destRect = CGRect(origin: .zero, size: size)
             .applying(CGAffineTransform(rotationAngle: radians))
         let roundedDestRect = CGRect(x: destRect.origin.x.rounded(),
@@ -537,35 +537,35 @@ public extension UIImage {
         return newImage
     }
 
-    func xx_flipHorizontal() -> UIImage? {
-        xx_rotate(orientation: .upMirrored)
+    func sk_flipHorizontal() -> UIImage? {
+        sk_rotate(orientation: .upMirrored)
     }
 
-    func xx_flipVertical() -> UIImage? {
-        xx_rotate(orientation: .downMirrored)
+    func sk_flipVertical() -> UIImage? {
+        sk_rotate(orientation: .downMirrored)
     }
 
-    func xx_flipDown() -> UIImage? {
-        xx_rotate(orientation: .down)
+    func sk_flipDown() -> UIImage? {
+        sk_rotate(orientation: .down)
     }
 
-    func xx_flipLeft() -> UIImage? {
-        xx_rotate(orientation: .left)
+    func sk_flipLeft() -> UIImage? {
+        sk_rotate(orientation: .left)
     }
 
-    func xx_flipLeftMirrored() -> UIImage? {
-        xx_rotate(orientation: .leftMirrored)
+    func sk_flipLeftMirrored() -> UIImage? {
+        sk_rotate(orientation: .leftMirrored)
     }
 
-    func xx_flipRight() -> UIImage? {
-        xx_rotate(orientation: .right)
+    func sk_flipRight() -> UIImage? {
+        sk_rotate(orientation: .right)
     }
 
-    func xx_flipRightMirrored() -> UIImage? {
-        xx_rotate(orientation: .rightMirrored)
+    func sk_flipRightMirrored() -> UIImage? {
+        sk_rotate(orientation: .rightMirrored)
     }
 
-    private func xx_rotate(orientation: UIImage.Orientation) -> UIImage? {
+    private func sk_rotate(orientation: UIImage.Orientation) -> UIImage? {
         guard let imageRef = cgImage else { return nil }
 
         let rect = CGRect(x: 0, y: 0, width: imageRef.width, height: imageRef.height)
@@ -585,20 +585,20 @@ public extension UIImage {
             transform = CGAffineTransform(translationX: 0, y: rect.size.height)
             transform = transform.scaledBy(x: 1, y: -1)
         case .left:
-            xx_swapWidthAndHeight(rect: &bounds)
+            sk_swapWidthAndHeight(rect: &bounds)
             transform = CGAffineTransform(translationX: 0, y: rect.size.width)
             transform = transform.rotated(by: CGFloat(Double.pi * 1.5))
         case .leftMirrored:
-            xx_swapWidthAndHeight(rect: &bounds)
+            sk_swapWidthAndHeight(rect: &bounds)
             transform = CGAffineTransform(translationX: rect.size.height, y: rect.size.width)
             transform = transform.scaledBy(x: -1, y: 1)
             transform = transform.rotated(by: CGFloat(Double.pi * 1.5))
         case .right:
-            xx_swapWidthAndHeight(rect: &bounds)
+            sk_swapWidthAndHeight(rect: &bounds)
             transform = CGAffineTransform(translationX: rect.size.height, y: 0)
             transform = transform.rotated(by: CGFloat(Double.pi / 2))
         case .rightMirrored:
-            xx_swapWidthAndHeight(rect: &bounds)
+            sk_swapWidthAndHeight(rect: &bounds)
             transform = transform.scaledBy(x: -1, y: 1)
             transform = transform.rotated(by: CGFloat(Double.pi / 2))
         default:
@@ -631,7 +631,7 @@ public extension UIImage {
         return newImage
     }
 
-    private func xx_swapWidthAndHeight(rect: inout CGRect) {
+    private func sk_swapWidthAndHeight(rect: inout CGRect) {
         let swap = rect.size.width
         rect.size.width = rect.size.height
         rect.size.height = swap
@@ -640,7 +640,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_roundCorners(radius: CGFloat? = nil) -> UIImage? {
+    func sk_roundCorners(radius: CGFloat? = nil) -> UIImage? {
         let maxRadius = min(size.width, size.height) / 2
         let cornerRadius: CGFloat
         if let radius, radius > 0, radius <= maxRadius {
@@ -660,7 +660,7 @@ public extension UIImage {
         return image
     }
 
-    func xx_roundCorners(size: CGSize?,
+    func sk_roundCorners(size: CGSize?,
                          radius: CGFloat,
                          corners: UIRectCorner = .allCorners) -> UIImage?
     {
@@ -685,7 +685,7 @@ public extension UIImage {
         return output
     }
 
-    func xx_roundCorners(size: CGSize,
+    func sk_roundCorners(size: CGSize,
                          radius: CGFloat,
                          corners: UIRectCorner = .allCorners,
                          borderWidth: CGFloat,
@@ -722,23 +722,23 @@ public extension UIImage {
 
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
 
-        DispatchQueue.xx_async_execute_on_main {
+        DispatchQueue.sk_async_execute_on_main {
             completion?(resultImage)
         }
         return resultImage!
     }
 
-    func xx_roundImage() -> UIImage? {
-        xx_roundCorners(size: size,
+    func sk_roundImage() -> UIImage? {
+        sk_roundCorners(size: size,
                         radius: (size.width < size.height ? size.width : size.height) / 2.0,
                         corners: .allCorners)
     }
 
-    static func xx_createImage(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
-        xx_createImage(with: color, size: size, corners: .allCorners, radius: 0)
+    static func sk_createImage(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+        sk_createImage(with: color, size: size, corners: .allCorners, radius: 0)
     }
 
-    static func xx_createImage(with color: UIColor,
+    static func sk_createImage(with color: UIColor,
                                size: CGSize,
                                corners: UIRectCorner,
                                radius: CGFloat) -> UIImage?
@@ -771,15 +771,15 @@ public extension UIImage {
         }
     }
 
-    func xx_colors(scaleDownSize: CGSize? = nil) -> (background: UIColor, primary: UIColor, secondary: UIColor, detail: UIColor) {
+    func sk_colors(scaleDownSize: CGSize? = nil) -> (background: UIColor, primary: UIColor, secondary: UIColor, detail: UIColor) {
         let cgImage: CGImage
 
         if let scaleDownSize {
-            cgImage = xx_resize(to: scaleDownSize).cgImage!
+            cgImage = sk_resize(to: scaleDownSize).cgImage!
         } else {
             let ratio = size.width / size.height
             let r_width: CGFloat = 250
-            cgImage = xx_resize(to: CGSize(width: r_width, height: r_width / ratio)).cgImage!
+            cgImage = sk_resize(to: CGSize(width: r_width, height: r_width / ratio)).cgImage!
         }
 
         let width = cgImage.width
@@ -861,7 +861,7 @@ public extension UIImage {
         for imageColor in imageColors {
             guard let imageColor = imageColor as? UIColor else { continue }
 
-            let color = imageColor.xx_color(minSaturation: 0.15)
+            let color = imageColor.sk_color(minSaturation: 0.15)
 
             if color.isDark == !isDarkBackgound {
                 let colorCount = imageColors.count(for: color)
@@ -877,19 +877,19 @@ public extension UIImage {
             let color = countedColor.color
 
             if primaryColor == nil,
-               color.xx_isContrasting(with: imageBackgroundColor)
+               color.sk_isContrasting(with: imageBackgroundColor)
             {
                 primaryColor = color
             } else if secondaryColor == nil,
                       primaryColor != nil,
-                      primaryColor!.xx_isDistinct(from: color),
-                      color.xx_isContrasting(with: imageBackgroundColor)
+                      primaryColor!.sk_isDistinct(from: color),
+                      color.sk_isContrasting(with: imageBackgroundColor)
             {
                 secondaryColor = color
             } else if secondaryColor != nil,
-                      secondaryColor!.xx_isDistinct(from: color),
-                      primaryColor!.xx_isDistinct(from: color),
-                      color.xx_isContrasting(with: imageBackgroundColor)
+                      secondaryColor!.sk_isDistinct(from: color),
+                      primaryColor!.sk_isDistinct(from: color),
+                      color.sk_isContrasting(with: imageBackgroundColor)
             {
                 detailColor = color
                 break
@@ -906,7 +906,7 @@ public extension UIImage {
         )
     }
 
-    func xx_themeColor(_ completion: @escaping (_ color: UIColor?) -> Void) {
+    func sk_themeColor(_ completion: @escaping (_ color: UIColor?) -> Void) {
         DispatchQueue.global().async {
             if self.cgImage == nil { DispatchQueue.main.async { completion(nil) }}
             let bitmapInfo = CGBitmapInfo(rawValue: 0).rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
@@ -954,7 +954,7 @@ public extension UIImage {
         }
     }
 
-    func xx_averageColor() -> UIColor? {
+    func sk_averageColor() -> UIColor? {
         guard let ciImage = ciImage ?? CIImage(image: self) else { return nil }
 
         let parameters = [kCIInputImageKey: ciImage, kCIInputExtentKey: CIVector(cgRect: ciImage.extent)]
@@ -978,7 +978,7 @@ public extension UIImage {
                        alpha: CGFloat(bitmap[3]) / 255.0)
     }
 
-    func xx_pixelColor(_ point: CGPoint) -> UIColor? {
+    func sk_pixelColor(_ point: CGPoint) -> UIColor? {
         if point.x < 0 || point.x > size.width || point.y < 0 || point.y > size.height {
             return nil
         }
@@ -998,7 +998,7 @@ public extension UIImage {
         return UIColor(red: r, green: g, blue: b, alpha: a)
     }
 
-    func xx_pixelColor(at point: CGPoint, completion: @escaping (UIColor?) -> Void) {
+    func sk_pixelColor(at point: CGPoint, completion: @escaping (UIColor?) -> Void) {
         let size = size
         let cgImage = cgImage
 
@@ -1025,7 +1025,7 @@ public extension UIImage {
         }
     }
 
-    func xx_imageAlpha(_ alpha: CGFloat) -> UIImage {
+    func sk_imageAlpha(_ alpha: CGFloat) -> UIImage {
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
         let area = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -1039,7 +1039,7 @@ public extension UIImage {
         return newImage ?? self
     }
 
-    func xx_filled(with color: UIColor) -> UIImage {
+    func sk_filled(with color: UIColor) -> UIImage {
         #if !os(watchOS)
             if #available(tvOS 10.0, *) {
                 let format = UIGraphicsImageRendererFormat()
@@ -1070,7 +1070,7 @@ public extension UIImage {
         return newImage
     }
 
-    func xx_setBackgroundColor(_ backgroundColor: UIColor) -> UIImage {
+    func sk_setBackgroundColor(_ backgroundColor: UIColor) -> UIImage {
         #if !os(watchOS)
             if #available(tvOS 10.0, *) {
                 let format = UIGraphicsImageRendererFormat()
@@ -1093,7 +1093,7 @@ public extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
 
-    func xx_tint(_ color: UIColor, blendMode: CGBlendMode, alpha: CGFloat = 1.0) -> UIImage {
+    func sk_tint(_ color: UIColor, blendMode: CGBlendMode, alpha: CGFloat = 1.0) -> UIImage {
         let drawRect = CGRect(origin: .zero, size: size)
 
         #if !os(watchOS)
@@ -1118,24 +1118,24 @@ public extension UIImage {
     }
 
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    func xx_tintColor(with color: UIColor, renderingMode: RenderingMode = .alwaysOriginal) -> UIImage {
+    func sk_tintColor(with color: UIColor, renderingMode: RenderingMode = .alwaysOriginal) -> UIImage {
         withTintColor(color, renderingMode: renderingMode)
     }
 }
 
 public extension UIImage {
 
-    func xx_imageByRemoveWhite() -> UIImage? {
+    func sk_imageByRemoveWhite() -> UIImage? {
         let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
-        return xx_transparentColor(colorMasking: colorMasking)
+        return sk_transparentColor(colorMasking: colorMasking)
     }
 
-    func xx_imageByRemoveBlack() -> UIImage? {
+    func sk_imageByRemoveBlack() -> UIImage? {
         let colorMasking: [CGFloat] = [0, 32, 0, 32, 0, 32]
-        return xx_transparentColor(colorMasking: colorMasking)
+        return sk_transparentColor(colorMasking: colorMasking)
     }
 
-    func xx_transparentColor(colorMasking: [CGFloat]) -> UIImage? {
+    func sk_transparentColor(colorMasking: [CGFloat]) -> UIImage? {
         defer { UIGraphicsEndImageContext() }
         guard let rawImageRef = cgImage else { return nil }
         guard let maskedImageRef = rawImageRef.copy(maskingColorComponents: colorMasking) else { return nil }
@@ -1150,15 +1150,15 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_blurImage(fuzzyValue: CGFloat = 20) -> UIImage? {
-        xx_blurredPicture(fuzzyValue: fuzzyValue, filterName: "CIGaussianBlur")
+    func sk_blurImage(fuzzyValue: CGFloat = 20) -> UIImage? {
+        sk_blurredPicture(fuzzyValue: fuzzyValue, filterName: "CIGaussianBlur")
     }
 
-    func xx_pixelImage(fuzzyValue: CGFloat = 20) -> UIImage? {
-        xx_blurredPicture(fuzzyValue: fuzzyValue, filterName: "CIPixellate")
+    func sk_pixelImage(fuzzyValue: CGFloat = 20) -> UIImage? {
+        sk_blurredPicture(fuzzyValue: fuzzyValue, filterName: "CIPixellate")
     }
 
-    private func xx_blurredPicture(fuzzyValue: CGFloat, filterName: String) -> UIImage? {
+    private func sk_blurredPicture(fuzzyValue: CGFloat, filterName: String) -> UIImage? {
         guard let ciImage = CIImage(image: self) else { return nil }
         guard let blurFilter = CIFilter(name: filterName) else { return nil }
         blurFilter.setValue(ciImage, forKey: kCIInputImageKey)
@@ -1176,7 +1176,7 @@ public extension UIImage {
         case CIPhotoEffectNoir
     }
 
-    func xx_useFilter(_ filterName: FilterName, alpha: CGFloat?) -> UIImage? {
+    func sk_useFilter(_ filterName: FilterName, alpha: CGFloat?) -> UIImage? {
         guard let imageData = pngData() else { return nil }
         let inputImage = CoreImage.CIImage(data: imageData)
         let context = CIContext(options: nil)
@@ -1191,7 +1191,7 @@ public extension UIImage {
         return UIImage(cgImage: outImage)
     }
 
-    func xx_pixAll(value: Int? = nil) -> UIImage? {
+    func sk_pixAll(value: Int? = nil) -> UIImage? {
         guard let filter = CIFilter(name: "CIPixellate") else { return nil }
         let context = CIContext(options: nil)
         let inputImage = CIImage(image: self)
@@ -1202,7 +1202,7 @@ public extension UIImage {
         return UIImage(cgImage: cgImage!)
     }
 
-    func xx_detectFace() -> [CGRect]? {
+    func sk_detectFace() -> [CGRect]? {
         guard let inputImage = CIImage(image: self) else { return nil }
         let context = CIContext(options: nil)
 
@@ -1229,7 +1229,7 @@ public extension UIImage {
         return rects
     }
 
-    func xx_detectAndPixFace() -> UIImage? {
+    func sk_detectAndPixFace() -> UIImage? {
         guard let inputImage = CIImage(image: self) else {
             return nil
         }
@@ -1314,25 +1314,25 @@ public extension UIImage {
         }
     }
 
-    static func xx_createGradient(_ hexsString: [String],
+    static func sk_createGradient(_ hexsString: [String],
                                   size: CGSize = CGSize(width: 1, height: 1),
                                   locations: [CGFloat]? = [0, 1],
                                   direction: GradientDirection = .horizontal) -> UIImage?
     {
-        xx_createGradient(hexsString.map { UIColor(hex: $0) }, size: size, locations: locations, direction: direction)
+        sk_createGradient(hexsString.map { UIColor(hex: $0) }, size: size, locations: locations, direction: direction)
     }
 
 
-    static func xx_createGradient(_ colors: [UIColor],
+    static func sk_createGradient(_ colors: [UIColor],
                                   size: CGSize = CGSize(width: 10, height: 10),
                                   locations: [CGFloat]? = [0, 1],
                                   direction: GradientDirection = .horizontal) -> UIImage?
     {
-        xx_createGradient(colors, size: size, radius: 0, locations: locations, direction: direction)
+        sk_createGradient(colors, size: size, radius: 0, locations: locations, direction: direction)
     }
 
 
-    static func xx_createGradient(_ colors: [UIColor],
+    static func sk_createGradient(_ colors: [UIColor],
                                   size: CGSize = CGSize(width: 10, height: 10),
                                   radius: CGFloat,
                                   locations: [CGFloat]? = [0, 1],
@@ -1340,7 +1340,7 @@ public extension UIImage {
     {
         if colors.count == 0 { return nil }
         if colors.count == 1 {
-            return xx_createImage(color: colors[0])
+            return sk_createImage(color: colors[0])
         }
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
@@ -1361,7 +1361,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    static func xx_loadImage(with image: String) -> UIImage? {
+    static func sk_loadImage(with image: String) -> UIImage? {
         if image.hasPrefix("http://") || image.hasPrefix("https://") {
             let imageUrl = URL(string: image)
             var imageData: Data?
@@ -1377,20 +1377,20 @@ public extension UIImage {
         return UIImage(named: image)!
     }
 
-    static func xx_loadImageWithGif(data: Data) -> UIImage? {
+    static func sk_loadImageWithGif(data: Data) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
             return nil
         }
-        return xx_animatedImageWithSource(source)
+        return sk_animatedImageWithSource(source)
     }
 
-    static func xx_loadImageWithGif(url: String) -> UIImage? {
+    static func sk_loadImageWithGif(url: String) -> UIImage? {
         guard let bundleURL = URL(string: url) else { return nil }
         guard let imageData = try? Data(contentsOf: bundleURL) else { return nil }
-        return xx_loadImageWithGif(data: imageData)
+        return sk_loadImageWithGif(data: imageData)
     }
 
-    static func xx_loadImageWithGif(name: String) -> UIImage? {
+    static func sk_loadImageWithGif(name: String) -> UIImage? {
         guard let bundleURL = Bundle.main
             .url(forResource: name, withExtension: "gif")
         else {
@@ -1398,24 +1398,24 @@ public extension UIImage {
         }
         guard let imageData = try? Data(contentsOf: bundleURL) else { return nil }
 
-        return xx_loadImageWithGif(data: imageData)
+        return sk_loadImageWithGif(data: imageData)
     }
 
     @available(iOS 9.0, *)
-    static func xx_loadImageWithGif(asset: String) -> UIImage? {
+    static func sk_loadImageWithGif(asset: String) -> UIImage? {
         guard let dataAsset = NSDataAsset(name: asset) else { return nil }
-        return xx_loadImageWithGif(data: dataAsset.data)
+        return sk_loadImageWithGif(data: dataAsset.data)
     }
 
-    static func xx_frameInfoWithGif(asset: String) -> (images: [UIImage]?, duration: TimeInterval?) {
+    static func sk_frameInfoWithGif(asset: String) -> (images: [UIImage]?, duration: TimeInterval?) {
         guard let dataAsset = NSDataAsset(name: asset) else { return (nil, nil) }
         guard let source = CGImageSourceCreateWithData(dataAsset.data as CFData, nil) else {
             return (nil, nil)
         }
-        return xx_animatedImageSources(source)
+        return sk_animatedImageSources(source)
     }
 
-    static func xx_frameInfoWithGif(name: String) -> (images: [UIImage]?, duration: TimeInterval?) {
+    static func sk_frameInfoWithGif(name: String) -> (images: [UIImage]?, duration: TimeInterval?) {
         guard let bundleURL = Bundle.main
             .url(forResource: name, withExtension: "gif")
         else {
@@ -1427,10 +1427,10 @@ public extension UIImage {
         guard let source = CGImageSourceCreateWithData(imageData as CFData, nil) else {
             return (nil, nil)
         }
-        return xx_animatedImageSources(source)
+        return sk_animatedImageSources(source)
     }
 
-    static func xx_frameInfoWithGif(url: String) -> (images: [UIImage]?, duration: TimeInterval?) {
+    static func sk_frameInfoWithGif(url: String) -> (images: [UIImage]?, duration: TimeInterval?) {
         guard let bundleURL = URL(string: url) else { return (nil, nil) }
         guard let imageData = try? Data(contentsOf: bundleURL) else {
             return (nil, nil)
@@ -1438,17 +1438,17 @@ public extension UIImage {
         guard let source = CGImageSourceCreateWithData(imageData as CFData, nil) else {
             return (nil, nil)
         }
-        return xx_animatedImageSources(source)
+        return sk_animatedImageSources(source)
     }
 
-    private static func xx_animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
-        let info = xx_animatedImageSources(source)
+    private static func sk_animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
+        let info = sk_animatedImageSources(source)
         guard let frames = info.images, let duration = info.duration else { return nil }
         let animation = UIImage.animatedImage(with: frames, duration: duration)
         return animation
     }
 
-    private static func xx_animatedImageSources(_ source: CGImageSource) -> (images: [UIImage]?, duration: TimeInterval?) {
+    private static func sk_animatedImageSources(_ source: CGImageSource) -> (images: [UIImage]?, duration: TimeInterval?) {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
@@ -1457,7 +1457,7 @@ public extension UIImage {
             if let image = CGImageSourceCreateImageAtIndex(source, index, nil) {
                 images.append(image)
             }
-            let delaySeconds = xx_delayForImageAtIndex(Int(index), source: source)
+            let delaySeconds = sk_delayForImageAtIndex(Int(index), source: source)
             delays.append(Int(delaySeconds * 1000.0))
         }
 
@@ -1483,7 +1483,7 @@ public extension UIImage {
         return (frames, Double(duration) / 1000.0)
     }
 
-    private static func xx_delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
+    private static func sk_delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
         let gifPropertiesPointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 0)
@@ -1555,17 +1555,17 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_drawWatermark(with text: String, attributes: [NSAttributedString.Key: Any]?, frame: CGRect) -> UIImage {
+    func sk_drawWatermark(with text: String, attributes: [NSAttributedString.Key: Any]?, frame: CGRect) -> UIImage {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        text.xx_nsString().draw(in: frame, withAttributes: attributes)
+        text.sk_nsString().draw(in: frame, withAttributes: attributes)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         return image!
     }
 
-    func xx_addImageWatermark(rect: CGRect, image: UIImage) -> UIImage? {
+    func sk_addImageWatermark(rect: CGRect, image: UIImage) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         image.draw(in: rect)
@@ -1574,13 +1574,13 @@ public extension UIImage {
         return newImage
     }
 
-    static func xx_textImage(_ text: String, fontSize: CGFloat = 16, size: (CGFloat, CGFloat), backgroundColor: UIColor = UIColor.orange, textColor: UIColor = UIColor.white, isCircle: Bool = true, isFirstChar: Bool = false) -> UIImage? {
+    static func sk_textImage(_ text: String, fontSize: CGFloat = 16, size: (CGFloat, CGFloat), backgroundColor: UIColor = UIColor.orange, textColor: UIColor = UIColor.white, isCircle: Bool = true, isFirstChar: Bool = false) -> UIImage? {
         if text.isEmpty { return nil }
         let letter = isFirstChar ? (text as NSString).substring(to: 1) : text
         let sise = CGSize(width: size.0, height: size.1)
         let rect = CGRect(origin: CGPoint.zero, size: sise)
 
-        let textsize = text.xx_stringSize(sizer.screen.width, font: .systemFont(ofSize: fontSize))
+        let textsize = text.sk_stringSize(sizer.screen.width, font: .systemFont(ofSize: fontSize))
 
         UIGraphicsBeginImageContext(sise)
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
@@ -1603,7 +1603,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_saveImageToPhotoAlbum(_ completion: ((Bool) -> Void)?) {
+    func sk_saveImageToPhotoAlbum(_ completion: ((Bool) -> Void)?) {
         saveBlock = completion
         UIImageWriteToSavedPhotosAlbum(self,
                                        self,
@@ -1611,7 +1611,7 @@ public extension UIImage {
                                        nil)
     }
 
-    func xx_savePhotosImageToAlbum(completion: @escaping ((Bool, Error?) -> Void)) {
+    func sk_savePhotosImageToAlbum(completion: @escaping ((Bool, Error?) -> Void)) {
         PHPhotoLibrary.shared().performChanges {
             PHAssetChangeRequest.creationRequestForAsset(from: self)
         } completionHandler: { (isSuccess: Bool, error: Error?) in
@@ -1637,7 +1637,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    func xx_imageTile(size: CGSize) -> UIImage? {
+    func sk_imageTile(size: CGSize) -> UIImage? {
         let tempView = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
         tempView.backgroundColor = UIColor(patternImage: self)
         UIGraphicsBeginImageContext(size)
@@ -1651,7 +1651,7 @@ public extension UIImage {
         return bgImage
     }
 
-    static func xx_imageSize(_ url: URL?, max: CGFloat? = nil) -> CGSize {
+    static func sk_imageSize(_ url: URL?, max: CGFloat? = nil) -> CGSize {
         guard let url else { return .zero }
         guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil) else { return .zero }
         guard let result = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [String: Any] else { return .zero }

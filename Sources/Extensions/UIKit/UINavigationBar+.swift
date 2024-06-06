@@ -1,7 +1,7 @@
 import UIKit
 
 public extension UINavigationBar {
-    static func xx_fitAllNavigationBar() {
+    static func sk_fitAllNavigationBar() {
         if #available(iOS 15.0, *) {
 //            let navigationBarAppearance = UINavigationBarAppearance()
 //            navigationBarAppearance.configureWithOpaqueBackground()
@@ -24,17 +24,17 @@ public extension UINavigationBar {
 
 public extension UINavigationBar {
 
-    func xx_setupTransparent(with tintColor: UIColor = .white) {
-        self.xx_isTranslucent(true)
-            .xx_backgroundColor(.clear)
-            .xx_backgroundImage(UIImage())
-            .xx_barTintColor(.clear)
-            .xx_tintColor(tintColor)
-            .xx_shadowImage(UIImage())
-            .xx_titleTextAttributes([.foregroundColor: tintColor])
+    func sk_setupTransparent(with tintColor: UIColor = .white) {
+        self.sk_isTranslucent(true)
+            .sk_backgroundColor(.clear)
+            .sk_backgroundImage(UIImage())
+            .sk_barTintColor(.clear)
+            .sk_tintColor(tintColor)
+            .sk_shadowImage(UIImage())
+            .sk_titleTextAttributes([.foregroundColor: tintColor])
     }
 
-    func xx_setupColors(background: UIColor, text: UIColor) {
+    func sk_setupColors(background: UIColor, text: UIColor) {
         self.isTranslucent = false
         self.backgroundColor = background
         self.barTintColor = background
@@ -43,9 +43,9 @@ public extension UINavigationBar {
         self.titleTextAttributes = [.foregroundColor: text]
     }
 
-    func xx_setupStatusBarBackgroundColor(with color: UIColor) {
-        guard self.xx_statusBar == nil else {
-            self.xx_statusBar?.backgroundColor = color
+    func sk_setupStatusBarBackgroundColor(with color: UIColor) {
+        guard self.sk_statusBar == nil else {
+            self.sk_statusBar?.backgroundColor = color
             return
         }
 
@@ -54,14 +54,14 @@ public extension UINavigationBar {
             y: -sizer.nav.statusHeight,
             width: sizer.screen.width,
             height: sizer.nav.statusHeight
-        )).xx_add2(self)
+        )).sk_add2(self)
         statusBar.backgroundColor = .clear
-        self.xx_statusBar = statusBar
+        self.sk_statusBar = statusBar
     }
 
-    func xx_clearStatusBar() {
-        self.xx_statusBar?.removeFromSuperview()
-        self.xx_statusBar = nil
+    func sk_clearStatusBar() {
+        self.sk_statusBar?.removeFromSuperview()
+        self.sk_statusBar = nil
     }
 }
 
@@ -70,7 +70,7 @@ private class AssociateKeys {
 }
 
 private extension UINavigationBar {
-    var xx_statusBar: UIView? {
+    var sk_statusBar: UIView? {
         get { AssociatedObject.get(self, &AssociateKeys.StatusBarKey) as? UIView }
         set { AssociatedObject.set(self, &AssociateKeys.StatusBarKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
@@ -88,18 +88,18 @@ public extension UINavigationBar {
 public extension UINavigationBar {
 
     @discardableResult
-    func xx_isTranslucent(_ isTranslucent: Bool) -> Self {
+    func sk_isTranslucent(_ isTranslucent: Bool) -> Self {
         self.isTranslucent = isTranslucent
         return self
     }
 
-    func xx_prefersLargeTitles(_ large: Bool) -> Self {
+    func sk_prefersLargeTitles(_ large: Bool) -> Self {
         prefersLargeTitles = large
         return self
     }
 
     @discardableResult
-    func xx_titleFont(_ font: UIFont) -> Self {
+    func sk_titleFont(_ font: UIFont) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.titleTextAttributes
@@ -118,7 +118,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_largeTitleFont(_ font: UIFont) -> Self {
+    func sk_largeTitleFont(_ font: UIFont) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.largeTitleTextAttributes
@@ -137,7 +137,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_titleColor(_ color: UIColor) -> Self {
+    func sk_titleColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.titleTextAttributes
@@ -156,7 +156,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_largeTitleColor(_ color: UIColor) -> Self {
+    func sk_largeTitleColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             var attributeds = appearance.largeTitleTextAttributes
@@ -175,19 +175,19 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_barTintColor(_ color: UIColor) -> Self {
+    func sk_barTintColor(_ color: UIColor) -> Self {
         barTintColor = color
         return self
     }
 
     @discardableResult
-    override func xx_tintColor(_ color: UIColor) -> Self {
+    override func sk_tintColor(_ color: UIColor) -> Self {
         tintColor = color
         return self
     }
 
     @discardableResult
-    override func xx_backgroundColor(_ color: UIColor) -> Self {
+    override func sk_backgroundColor(_ color: UIColor) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundColor = color
@@ -204,7 +204,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_backgroundImage(_ image: UIImage) -> Self {
+    func sk_backgroundImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.backgroundImage = image
@@ -220,7 +220,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_shadowImage(_ image: UIImage) -> Self {
+    func sk_shadowImage(_ image: UIImage) -> Self {
         if #available(iOS 13.0, *) {
             let appearance = self.standardAppearance
             appearance.shadowImage = image.withRenderingMode(.alwaysOriginal)
@@ -235,7 +235,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_scrollEdgeAppearance() -> Self {
+    func sk_scrollEdgeAppearance() -> Self {
         if #available(iOS 13.0, *) {
             let appearance = standardAppearance
             if #available(iOS 15.0, *) { self.scrollEdgeAppearance = appearance }
@@ -244,7 +244,7 @@ public extension UINavigationBar {
     }
 
     @discardableResult
-    func xx_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]) -> Self {
+    func sk_titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]) -> Self {
         titleTextAttributes = attributes
         return self
     }

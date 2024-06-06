@@ -3,31 +3,31 @@ import UIKit
 
 public extension UINavigationController {
 
-    func xx_push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func sk_push(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         pushViewController(viewController, animated: animated)
         CATransaction.commit()
     }
 
-    func xx_pop(animated: Bool = true, completion: (() -> Void)? = nil) {
+    func sk_pop(animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         popViewController(animated: animated)
         CATransaction.commit()
     }
 
-    func xx_transparent(with tintColor: UIColor = .white) {
-        navigationBar.xx_isTranslucent(true)
-            .xx_backgroundImage(UIImage())
-            .xx_backgroundColor(.clear)
-            .xx_shadowImage(UIImage())
-            .xx_tintColor(tintColor)
-            .xx_barTintColor(.clear)
-            .xx_titleTextAttributes([.foregroundColor: tintColor])
+    func sk_transparent(with tintColor: UIColor = .white) {
+        navigationBar.sk_isTranslucent(true)
+            .sk_backgroundImage(UIImage())
+            .sk_backgroundColor(.clear)
+            .sk_shadowImage(UIImage())
+            .sk_tintColor(tintColor)
+            .sk_barTintColor(.clear)
+            .sk_titleTextAttributes([.foregroundColor: tintColor])
     }
 
-    func xx_fullScreenBackGesture(_ isOpen: Bool) {
+    func sk_fullScreenBackGesture(_ isOpen: Bool) {
         if isOpen {
             guard let popGestureRecognizer = interactivePopGestureRecognizer,
                   let targets = popGestureRecognizer.value(forKey: "_targets") as? [NSObject]
@@ -44,7 +44,7 @@ public extension UINavigationController {
             view.gestureRecognizers?.filter { ges in
                 ges is UIPanGestureRecognizer
             }.forEach { ges in
-                ges.xx_remove()
+                ges.sk_remove()
             }
         }
     }
@@ -52,13 +52,13 @@ public extension UINavigationController {
 
 public extension UINavigationController {
     @discardableResult
-    func xx_delegate(_ delegate: UINavigationControllerDelegate) -> Self {
+    func sk_delegate(_ delegate: UINavigationControllerDelegate) -> Self {
         self.delegate = delegate
         return self
     }
 
     @discardableResult
-    func xx_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
+    func sk_setNavigationBarHidden(_ hidden: Bool, animated: Bool = false) -> Self {
         self.setNavigationBarHidden(hidden, animated: animated)
         return self
     }
